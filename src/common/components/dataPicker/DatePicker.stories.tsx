@@ -2,6 +2,12 @@ import type { Meta, StoryObj } from '@storybook/react'
 import { DatePicker } from './DatePicker'
 import { useState } from 'react'
 import { addToRange, DateRange } from 'react-day-picker'
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverAnchor,
+} from './../popover/Popover'
 
 const meta = {
   component: DatePicker,
@@ -79,6 +85,34 @@ export const Multiple: Story = {
             Вы выбрали: {selected.map((el) => el.toLocaleDateString() + ' ')}
           </p>
         )}
+      </>
+    )
+  },
+}
+export const PopoverDate: Story = {
+  render: () => {
+    const [meetingDate, setMeetingDate] = useState<Date | undefined>(undefined)
+
+    return (
+      <>
+        <Popover>
+          <PopoverTrigger asChild>
+            <button>
+              {meetingDate ? (
+                meetingDate.toLocaleDateString()
+              ) : (
+                <span>Pick a date</span>
+              )}
+            </button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <DatePicker
+              mode='single'
+              onSelect={setMeetingDate}
+              selected={meetingDate}
+            />
+          </PopoverContent>
+        </Popover>
       </>
     )
   },
