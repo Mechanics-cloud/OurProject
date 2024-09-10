@@ -12,7 +12,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
+      },     
       colors: {
         accent: {
           100: '#73A5FF',
@@ -56,7 +56,8 @@ const config: Config = {
           700: '#D5DAE0',
           900: '#8D9094',
         },
-      },
+      
+    },
     },
   },
   plugins: [],
