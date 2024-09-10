@@ -8,6 +8,23 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        inter: ['Inter', 'sans-serif']
+      },
+      fontSize: {
+        xs: '12px',
+        s: '14px',
+        m: '16px',
+        l: '18px',
+        xl: '20px',
+        xxl: '26px'
+      },
+      fontWeight: {
+        '400': '400',
+        '500': '500',
+        '600': '600',
+        '700': '700'
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
