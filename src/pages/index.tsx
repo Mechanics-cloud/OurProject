@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google'
 import { Button } from '@/common/components/button'
-import { typographyVariants } from '@/common/components/typography/Typography'
 import Link from 'next/link'
+import { typographyVariants } from '@/common/components/typography'
 
 const inter = Inter({ subsets: ['latin'] })
 
