@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 import { Card } from '@/common/components/card/Card'
 
 const meta = {
@@ -8,14 +8,13 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
+} satisfies Meta<typeof Card>
 
-} satisfies Meta<typeof Card>;
-
-export default meta;
-type Story = StoryObj<typeof meta>;
+export default meta
+type Story = StoryObj<typeof meta>
 
 export const BasicCard: Story = {
   args: {
-    children: 'Basic Card'
+    children: 'Basic Card',
   },
-};
+}

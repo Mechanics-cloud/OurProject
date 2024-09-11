@@ -14,11 +14,23 @@ export const typographyVariants = cva([], {
       bold14: ['text-s', 'font-700', 'leading-[24px]'],
       small: ['text-xs', 'font-400', 'leading-[16px]'],
       semiBoldSmall: ['text-xs', 'font-600', 'leading-[14px]'],
-      regularLink: ['text-s', 'font-400', 'leading-[26px]', 'text-accent-500', 'underline'],
-      smallLink: ['text-xs', 'font-400', 'leading-[16px]', 'text-accent-500', 'underline']
+      regularLink: [
+        'text-s',
+        'font-400',
+        'leading-[26px]',
+        'text-accent-500',
+        'underline',
+      ],
+      smallLink: [
+        'text-xs',
+        'font-400',
+        'leading-[16px]',
+        'text-accent-500',
+        'underline',
+      ],
     },
   },
   defaultVariants: {
     variant: 'reg16',
   },
-});
+})
