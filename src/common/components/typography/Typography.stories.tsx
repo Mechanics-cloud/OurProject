@@ -20,9 +20,9 @@ export const TypographyText: Story = {
     <div className={'flex flex-col gap-2.5'}>
       {typographyData.map(item => {
         return (
-          item.id === 'regularLink' || item.id === 'smallLink' ?
-            <Typography key={item.id} variant={item.id} href="#">Link text</Typography> :
-            <Typography key={item.id} variant={item.id}>Typography text</Typography>
+          item === 'regularLink' || item === 'smallLink' ?
+            <Typography key={item} variant={item} href="#">Link text</Typography> :
+            <Typography key={item} variant={item}>Typography text</Typography>
         )
       })}
     </div>
