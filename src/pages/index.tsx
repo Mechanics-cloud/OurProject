@@ -1,8 +1,19 @@
+import { Button } from '@/common/components/button'
+import { typographyVariants } from '@/common/components/typography'
 import { Inter } from 'next/font/google'
-import Image from 'next/image'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  return <div>test1</div>
+  return (
+    <div className={'flex justify-center items-center h-screen'}>
+      <Button
+        asChild
+        className={typographyVariants({ variant: 'h3' })}
+      >
+        <Link href={'/'}>test1</Link>
+      </Button>
+    </div>
+  )
 }
