@@ -1,5 +1,5 @@
-import { Typography, typographyVariants } from '@/common/components/typography/Typography'
 import { VariantProps } from 'class-variance-authority'
+import { typographyVariants } from '@/common/components/typography/typographyVariants'
 
 type TypographyVariant = VariantProps<typeof typographyVariants>['variant'];
 
