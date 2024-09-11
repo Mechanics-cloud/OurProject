@@ -1,9 +1,10 @@
 import { cn } from '@/common/utils/cn'
+import { Slot } from '@radix-ui/react-slot'
 import { cva, VariantProps } from 'class-variance-authority'
 import { ComponentProps } from 'react'
 
-const buttonVariants = cva(
-  ['rounded-sm px-6 py-1.5 inline-flex justify-center text-white h-9'],
+export const buttonVariants = cva(
+  ['rounded-sm px-6 py-1.5 inline-flex justify-center text-white'],
   {
     variants: {
       variant: {
@@ -28,7 +29,8 @@ const buttonVariants = cva(
           'border-accent-500',
           'hover:text-accent-100 hover:border-accent-100',
           'focus-within:border-accent-700',
-          'focus-within:outline focus-within:outline-2', 'focus-within:outline-accent-700',
+          'focus-within:outline focus-within:outline-2',
+          'focus-within:outline-accent-700',
           'focus-within:text-accent-700',
           'disabled:border-accent-900 disabled:text-accent-900',
         ],
@@ -36,9 +38,10 @@ const buttonVariants = cva(
           'text-accent-500',
           'active:text-accent-700',
           'hover:text-accent-100',
-          'focus-within:outline focus-within:outline-2', 'focus-within:outline-accent-700',
+          'focus-within:outline focus-within:outline-2',
+          'focus-within:outline-accent-700',
           'focus-within:text-accent-700',
-          'disabled:text-accent-900'
+          'disabled:text-accent-900',
         ],
       },
     },
@@ -49,11 +52,17 @@ const buttonVariants = cva(
 )
 
 type ButtonProps = ComponentProps<'button'> &
-  VariantProps<typeof buttonVariants>
+  VariantProps<typeof buttonVariants> & { asChild?: boolean }
 
-function Button({ variant = 'primary', className, ...props }: ButtonProps) {
+function Button({
+  variant = 'primary',
+  className,
+  asChild,
+  ...props
+}: ButtonProps) {
+  const Component = asChild ? Slot : 'button'
   return (
-    <button
+    <Component
       className={cn(buttonVariants({ variant }), className)}
       {...props}
     />
