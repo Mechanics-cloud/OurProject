@@ -1,14 +1,14 @@
-import { Meta, StoryObj } from '@storybook/react'
 import { Typography } from '@/common/components/typography/Typography'
 import { typographyData } from '@/common/components/typography/typographyData'
+import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  title: 'Component/Typography',
   component: Typography,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  title: 'Component/Typography',
 } satisfies Meta<typeof Typography>
 
 export default meta
@@ -21,9 +21,9 @@ export const TypographyText: Story = {
       {typographyData.map((item) => {
         return item === 'regularLink' || item === 'smallLink' ? (
           <Typography
+            href={'#'}
             key={item}
             variant={item}
-            href='#'
           >
             Link text
           </Typography>
