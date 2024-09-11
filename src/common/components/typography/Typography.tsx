@@ -1,6 +1,5 @@
-import { ComponentProps } from 'react';
+import { ComponentPropsWithoutRef, ElementType } from 'react'
 import { cva, VariantProps } from 'class-variance-authority';
-import { Slot } from '@radix-ui/react-slot';
 import { cn } from '@/common/utils/cn'
 
 export const typographyVariants = cva([], {
@@ -26,11 +25,26 @@ export const typographyVariants = cva([], {
   },
 });
 
-type Props = VariantProps<typeof typographyVariants> & ComponentProps<'p'> & {
-  asChild?: boolean
-}
+const typographyTags: Record<string, ElementType> = {
+  large: 'div',
+  h1: 'h1',
+  h2: 'h2',
+  h3: 'h3',
+  reg16: 'p',
+  bold16: 'p',
+  reg14: 'p',
+  med14: 'p',
+  bold14: 'p',
+  small: 'p',
+  semiBoldSmall: 'p',
+  regularLink: 'a',
+  smallLink: 'a',
+};
 
-export const Typography = ({ variant = 'reg16', className, asChild, ...props }: Props) => {
-  const Component = asChild ? Slot : 'p'
+type Props = VariantProps<typeof typographyVariants> &
+  ComponentPropsWithoutRef<ElementType>;
+
+export const Typography = ({ variant = 'reg16', className, ...props }: Props) => {
+  const Component = variant ? typographyTags[variant] : 'p';
   return <Component className={cn(typographyVariants({ variant }), className)} {...props} />;
 };
