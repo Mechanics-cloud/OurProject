@@ -1,14 +1,15 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { Button } from './Button'
+
 import { typographyVariants } from '../typography'
+import { Button } from './Button'
 
 const meta: Meta<typeof Button> = {
-  title: 'Component/Button',
   component: Button,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
+  title: 'Component/Button',
 }
 
 export default meta
@@ -17,10 +18,10 @@ type Story = StoryObj<typeof meta>
 export const Primary: Story = {
   args: {
     children: 'Button',
+    className: typographyVariants({ variant: 'h3' }),
+    disabled: false,
     onClick: () => alert('hello'),
     title: 'Click to alert hello',
-    disabled: false,
-    className: typographyVariants({ variant: 'h3' }),
   },
 }
 

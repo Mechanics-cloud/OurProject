@@ -1,13 +1,29 @@
+import { ComponentProps } from 'react'
+
 import { cn } from '@/common/utils/cn'
 import { Slot } from '@radix-ui/react-slot'
-import { cva, VariantProps } from 'class-variance-authority'
-import { ComponentProps } from 'react'
+import { VariantProps, cva } from 'class-variance-authority'
 
 export const buttonVariants = cva(
   ['rounded-sm px-6 py-1.5 inline-flex justify-center text-white'],
   {
+    defaultVariants: {
+      variant: 'primary',
+    },
     variants: {
       variant: {
+        outline: [
+          'text-accent-500',
+          'border',
+          'border-solid',
+          'border-accent-500',
+          'hover:text-accent-100 hover:border-accent-100',
+          'focus-within:border-accent-700',
+          'focus-within:outline focus-within:outline-2',
+          'focus-within:outline-accent-700',
+          'focus-within:text-accent-700',
+          'disabled:border-accent-900 disabled:text-accent-900',
+        ],
         primary: [
           'bg-accent-500',
           'active:bg-accent-700',
@@ -22,18 +38,6 @@ export const buttonVariants = cva(
           'focus-within:outline focus-within:outline-1 focus-within:outline-accent-300',
           'disabled:bg-dark-500 disabled:text-light-900',
         ],
-        outline: [
-          'text-accent-500',
-          'border',
-          'border-solid',
-          'border-accent-500',
-          'hover:text-accent-100 hover:border-accent-100',
-          'focus-within:border-accent-700',
-          'focus-within:outline focus-within:outline-2',
-          'focus-within:outline-accent-700',
-          'focus-within:text-accent-700',
-          'disabled:border-accent-900 disabled:text-accent-900',
-        ],
         text: [
           'text-accent-500',
           'active:text-accent-700',
@@ -45,22 +49,20 @@ export const buttonVariants = cva(
         ],
       },
     },
-    defaultVariants: {
-      variant: 'primary',
-    },
   }
 )
 
-type ButtonProps = ComponentProps<'button'> &
-  VariantProps<typeof buttonVariants> & { asChild?: boolean }
+type ButtonProps = { asChild?: boolean } & ComponentProps<'button'> &
+  VariantProps<typeof buttonVariants>
 
 function Button({
-  variant = 'primary',
-  className,
   asChild,
+  className,
+  variant = 'primary',
   ...props
 }: ButtonProps) {
   const Component = asChild ? Slot : 'button'
+
   return (
     <Component
       className={cn(buttonVariants({ variant }), className)}
