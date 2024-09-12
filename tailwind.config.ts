@@ -1,34 +1,18 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 const config: Config = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/common/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/common/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  plugins: [],
   theme: {
     extend: {
-      fontFamily: {
-        inter: ['Inter', 'sans-serif']
-      },
-      fontSize: {
-        xs: '12px',
-        s: '14px',
-        m: '16px',
-        l: '18px',
-        xl: '20px',
-        xxl: '26px'
-      },
-      fontWeight: {
-        '400': '400',
-        '500': '500',
-        '600': '600',
-        '700': '700'
-      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
       colors: {
         accent: {
@@ -38,26 +22,12 @@ const config: Config = {
           700: '#2F68CC',
           900: '#234E99',
         },
-        success: {
-          100: '#80FFBF',
-          300: '#22E584',
-          500: '#14CC70',
-          700: '#0F9954',
-          900: '#0A6638',
-        },
         danger: {
           100: '#FF8099',
           300: '#F23D61',
           500: '#CC1439',
           700: '#990F2B',
           900: '#660A1D',
-        },
-        warning: {
-          100: '#FFD073',
-          300: '#E5AC39',
-          500: '#D99000',
-          700: '#996600',
-          900: '#664400',
         },
         dark: {
           100: '#4C4C4C',
@@ -74,9 +44,40 @@ const config: Config = {
           700: '#D5DAE0',
           900: '#8D9094',
         },
+        success: {
+          100: '#80FFBF',
+          300: '#22E584',
+          500: '#14CC70',
+          700: '#0F9954',
+          900: '#0A6638',
+        },
+        warning: {
+          100: '#FFD073',
+          300: '#E5AC39',
+          500: '#D99000',
+          700: '#996600',
+          900: '#664400',
+        },
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
+      fontSize: {
+        l: '18px',
+        m: '16px',
+        s: '14px',
+        xl: '20px',
+        xs: '12px',
+        xxl: '26px',
+      },
+      fontWeight: {
+        '400': '400',
+        '500': '500',
+        '600': '600',
+        '700': '700',
       },
     },
   },
-  plugins: [],
-};
-export default config;
+}
+
+export default config

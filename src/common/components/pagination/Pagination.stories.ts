@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { useState } from 'react'
+
 import { Pagination } from './Pagination'
 
 const meta = {
@@ -261,4 +263,9 @@ export const BasicPagination: Story = {
   args: {
     children: 'Basic Pagination',
   },
+}
+
+const BasicPagination1 = () => {
+  const [page, setPage] = useState(1)
+  const [limit, setLimit] = useState(5)
 }
