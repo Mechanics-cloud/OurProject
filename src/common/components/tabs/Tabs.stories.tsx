@@ -20,7 +20,6 @@ type Story = StoryObj<typeof meta>
 
 const tabs: TabsType[] = [
   {
-    // eslint-disable-next-line react/no-unescaped-entities
     content: (
       <Typography variant={'reg16'}>Don&apos;t click forward</Typography>
     ),
@@ -55,9 +54,15 @@ const tabs: TabsType[] = [
     id: 'tab3',
     title: 'Always',
   },
+  {
+    content: <Typography variant={'reg16'}>Disabled</Typography>,
+    disabled: true,
+    id: 'tab4',
+    title: 'Never',
+  },
 ]
 
-export const BasicTabs1: Story = {
+export const BasicTabs: Story = {
   args: {
     tabsData: tabs,
   },
