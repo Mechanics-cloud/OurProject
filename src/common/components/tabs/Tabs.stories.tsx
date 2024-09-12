@@ -1,6 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './Tabs'
+import { Button } from '@/common/components/button'
+import { Typography } from '@/common/components/typography'
+import Image from 'next/image'
+
+import { Tabs, TabsType } from './Tabs'
 
 const meta = {
   component: Tabs,
@@ -14,21 +18,66 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const BasicTabs: Story = {
-  args: {
-    children: (
+const tabs: TabsType[] = [
+  {
+    // eslint-disable-next-line react/no-unescaped-entities
+    content: (
+      <Typography variant={'reg16'}>Don&apos;t click forward</Typography>
+    ),
+    id: 'tab1',
+    title: 'Today',
+  },
+  {
+    content: (
+      <div>
+        <p>I recommend you to stop</p>
+        <Button>Stop here</Button>
+      </div>
+    ),
+    id: 'tab2',
+    title: 'Tomorrow',
+  },
+
+  {
+    content: (
       <>
-        <TabsList>
-          <TabsTrigger value={'account'}>Account</TabsTrigger>
-          <TabsTrigger value={'password'}>Password</TabsTrigger>
-        </TabsList>
-        <TabsContent value={'account'}>
-          Make changes to your account here.
-        </TabsContent>
-        <TabsContent value={'password'}>Change your password here.</TabsContent>
+        So... It&apos;s too late for you
+        <Image
+          alt={'Picture'}
+          height={400}
+          src={
+            'https://www.georgeezell.com/wp-content/uploads/2020/10/image-8.jpeg'
+          }
+          width={300}
+        />
       </>
     ),
-    className: 'w-[400px]',
-    defaultValue: 'account',
+    id: 'tab3',
+    title: 'Always',
+  },
+]
+
+// export const BasicTabs: Story = {
+//   args: {
+//     children: (
+//       <>
+//         <TabsList>
+//           <TabsTrigger value={'account'}>Account</TabsTrigger>
+//           <TabsTrigger value={'password'}>Password</TabsTrigger>
+//         </TabsList>
+//         <TabsContent value={'account'}>
+//           Make changes to your account here.
+//         </TabsContent>
+//         <TabsContent value={'password'}>Change your password here.</TabsContent>
+//       </>
+//     ),
+//     className: 'w-[400px] bg-dark-700 p-4 rounded-s',
+//     defaultValue: 'account',
+//   },
+// }
+
+export const BasicTabs1: Story = {
+  args: {
+    tabsData: tabs,
   },
 }
