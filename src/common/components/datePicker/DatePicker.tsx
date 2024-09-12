@@ -115,6 +115,7 @@ export function DatePickerWithRange({ errorMessage, mode }: Props) {
         >
           {mode === 'single' ? (
             <Calendar
+              locale={ru}
               mode={'single'}
               month={month}
               onMonthChange={setMonth}

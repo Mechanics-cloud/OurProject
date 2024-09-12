@@ -17,7 +17,7 @@ export const Calendar = ({ ...restProps }: Props) => {
 
         caption_label: 'text-lg  font-bold',
         chevron: 'w-4 h-4 fill-light-100 ',
-        day: 'text-center w-9 h-9 [&:nth-last-child(-n+2)]:text-danger-300 rounded-full ', //td
+        day: `text-center w-9 h-9 [&:nth-last-child(-n+2)]:text-danger-300 rounded-full`, //td
         day_button: ` w-full h-full rounded-full  ${interactiveStyles} `,
 
         disabled: '1',
@@ -31,7 +31,7 @@ export const Calendar = ({ ...restProps }: Props) => {
 
         hidden: '6',
         month: '',
-        month_caption: 'mb-3 h-9 flex items-center ',
+        month_caption: 'ml-2 mb-3 h-9 flex items-center ',
         month_grid: 'border-collapse', //table
 
         months: 'relative',
@@ -61,6 +61,7 @@ export const Calendar = ({ ...restProps }: Props) => {
         weeks: 'before:block before:h-3', //tbody
         years_dropdown: '',
       }}
+      weekStartsOn={1}
     />
   )
 }
