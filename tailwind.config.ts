@@ -1,18 +1,12 @@
 import type { Config } from 'tailwindcss'
 
-import plugin from 'tailwindcss/plugin'
-
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/common/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  plugins: [
-    plugin(({ addVariant }) => {
-      addVariant('radix-state-active', ['&[data-state="active"]']);
-    }),
-  ],
+  plugins: [require('tailwindcss-radix')()],
   theme: {
     extend: {
       backgroundImage: {

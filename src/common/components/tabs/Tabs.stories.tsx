@@ -57,25 +57,6 @@ const tabs: TabsType[] = [
   },
 ]
 
-// export const BasicTabs: Story = {
-//   args: {
-//     children: (
-//       <>
-//         <TabsList>
-//           <TabsTrigger value={'account'}>Account</TabsTrigger>
-//           <TabsTrigger value={'password'}>Password</TabsTrigger>
-//         </TabsList>
-//         <TabsContent value={'account'}>
-//           Make changes to your account here.
-//         </TabsContent>
-//         <TabsContent value={'password'}>Change your password here.</TabsContent>
-//       </>
-//     ),
-//     className: 'w-[400px] bg-dark-700 p-4 rounded-s',
-//     defaultValue: 'account',
-//   },
-// }
-
 export const BasicTabs1: Story = {
   args: {
     tabsData: tabs,
