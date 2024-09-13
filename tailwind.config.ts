@@ -6,7 +6,7 @@ const config: Config = {
     './src/common/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  plugins: [],
+  plugins: [require('tailwindcss-radix')()],
   theme: {
     extend: {
       backgroundImage: {
@@ -76,6 +76,12 @@ const config: Config = {
         '600': '600',
         '700': '700',
       },
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ['radix-state-active'],
+      textColor: ['radix-state-active'],
     },
   },
 }
