@@ -28,3 +28,6 @@ jobs:
 
       - name: Validate lock file
         run: pnpm install --frozen-lockfile
+
+      - name: Check test
+        run: pnpm run test
