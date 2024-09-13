@@ -1,9 +1,9 @@
-name: Linter
+name: Tests
 
 on: [push, pull_request]
 
 jobs:
-  lint:
+  tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,8 +23,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run Linter
-        run: pnpm run lint
-
-      - name: Validate lock file
-        run: pnpm install --frozen-lockfile
+      - name: Check test
+        run: pnpm run test
