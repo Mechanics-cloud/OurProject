@@ -9,7 +9,7 @@
     "storybook": "storybook dev -p 6006",
     "sb": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "prettier --write src",
+    "format": "prettier --write ./",
     "lint:fix": "eslint src --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
     "lint": "eslint src --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern && stylelint src/{,*/}*.{scss,css} --allow-empty-input",
     "test": "jest -u",
