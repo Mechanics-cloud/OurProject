@@ -12,7 +12,7 @@
     "format": "prettier --write src",
     "lint:fix": "eslint src --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern --fix && stylelint --fix src/{,*/}*.{scss,css} --allow-empty-input",
     "lint": "eslint src --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern && stylelint src/{,*/}*.{scss,css} --allow-empty-input",
-    "test": "jest",
+    "test": "jest -u",
     "test:watch": "jest --watch"
   },
   "dependencies": {
