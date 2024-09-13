@@ -16,8 +16,6 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@babel/plugin-syntax-jsx": "^7.24.7",
-    "@babel/preset-react": "^7.24.7",
     "@fontsource/inter": "^5.0.21",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-scroll-area": "^1.1.0",

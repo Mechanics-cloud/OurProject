@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@babel/plugin-syntax-jsx':
-        specifier: ^7.24.7
-        version: 7.24.7(@babel/core@7.25.2)
-      '@babel/preset-react':
-        specifier: ^7.24.7
-        version: 7.24.7(@babel/core@7.25.2)
       '@fontsource/inter':
         specifier: ^5.0.21
         version: 5.0.21
