@@ -8,8 +8,8 @@ import { ru } from 'date-fns/locale'
 import { Calendar } from '../calendar/Calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '../popover/Popover'
 import { Typography } from '../typography'
-import { CalendarClosed } from './icons/CalendarClosed'
-import { CalendarOpen } from './icons/CalendarOpen'
+import CalendarClosed from './../../../assets/icons/Calendar'
+import CalendarOpen from './../../../assets/icons/CalendarOutline'
 
 type Props = {
   errorMessage?: string
@@ -90,13 +90,13 @@ export function DatePickerWithRange({ errorMessage, mode }: Props) {
             )}
             <CalendarOpen
               className={cn(
-                'absolute top-1/2 transform -translate-y-2/4 right-3 group-data-[state=open]:hidden fill-light-100',
-                errorMessage && 'fill-danger-500'
+                'absolute top-1/2 transform -translate-y-2/4 right-3 group-data-[state=open]:hidden text-light-100 w-6 h-6',
+                errorMessage && 'text-danger-500'
               )}
             />
             <CalendarClosed
               className={
-                'absolute top-1/2 transform -translate-y-2/4 right-3 group-data-[state=closed]:hidden fill-light-100'
+                'absolute top-1/2 transform -translate-y-2/4 right-3 group-data-[state=closed]:hidden text-light-100 w-6 h-6'
               }
             />
           </button>
