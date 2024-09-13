@@ -5,6 +5,7 @@ import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
 import { themes } from '@storybook/theming'
+import '../src/styles/globals.css'
 
 const preview: Preview = {
   parameters: {
