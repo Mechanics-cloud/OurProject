@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 
-import { Arrow } from '@/common/assets/icons/Arrow'
+import ArrowIosDownOutline from '@/assets/icons/ArrowIosDownOutline'
 import { typographyVariants } from '@/common/components/typography'
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
@@ -31,7 +31,7 @@ const SelectTrigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <Arrow className={'group-data-[state=open]:rotate-180'} />
+      <ArrowIosDownOutline className={'group-data-[state=open]:rotate-180'} />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ))
