@@ -16,5 +16,5 @@ type Story = StoryObj<typeof meta>
 export const HeaderIsAuthFalse: Story = {
   args: {
     isAuth: false,
-  }
+  },
 }
