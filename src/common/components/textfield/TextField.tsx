@@ -1,6 +1,10 @@
 import { ElementType, forwardRef, useState } from 'react'
 
-import { EyeOffOutline, EyeOutline, SearchOutline } from '@/assets/icons'
+import {
+  EyeOffOutline,
+  EyeOutline,
+  SearchOutline,
+} from '@/assets/icons/outlineIcons'
 import { Typography } from '@/common/components'
 import {
   PolymorphicRef,
