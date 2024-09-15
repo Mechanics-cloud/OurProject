@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 
-import ArrowIosDownOutline from '@/assets/icons/ArrowIosDownOutline'
+import ArrowIosDownOutline from '@/assets/icons/outlineIcons/ArrowIosDownOutline'
 import { typographyVariants } from '@/common/components/typography'
 import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
