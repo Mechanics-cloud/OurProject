@@ -8,7 +8,7 @@ const meta = {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'Component/Typography',
+  title: 'Design/Typography',
 } satisfies Meta<typeof Typography>
 
 export default meta
