@@ -21,7 +21,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     className={cn(
       'group flex h-9 w-full items-center justify-between rounded-sm border border-dark-300 bg-background px-3 py-1.5 focus:border-accent-500 focus:border-2 focus:outline-none disabled:border-dark-100 disabled:text-dark-100',
-      'data-[state=open]:border-light-100',
+      'data-[state=open]:border-light-100 data-[state=open]:bg-dark-500 [&>span]:flex [&>span]:items-center [&>span]:gap-2',
       'rounded-t-sm',
       typographyVariants({ variant: 'reg16' }),
       className
@@ -45,7 +45,7 @@ const SelectContent = React.forwardRef<
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       className={cn(
-        'relative z-50 max-h-96 overflow-hidden rounded-sm border',
+        'relative z-50 max-h-96 overflow-hidden rounded-sm border bg-dark-500',
         className
       )}
       position={position}
@@ -86,7 +86,7 @@ const SelectItem = React.forwardRef<
 >(({ children, className, ...props }, ref) => (
   <SelectPrimitive.Item
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm px-2.5 py-1.5 outline-none hover:bg-dark-300 hover:text-accent-500 focus:bg-accent focus:text-accent-500 data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'rounded-sm px-2.5 py-1.5 outline-none hover:bg-dark-300 hover:text-accent-500 focus:bg-accent focus:text-accent-500 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 min-w-[240px] [&>span]:flex [&>span]:items-center [&>span]:gap-2',
       typographyVariants({ variant: 'reg16' }),
       className
     )}
