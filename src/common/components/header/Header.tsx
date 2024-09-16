@@ -1,29 +1,28 @@
 import * as React from 'react'
 
-import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons'
+import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
 import { Typography } from '@/common/components/typography'
 
-import OutlineBell from '../../../assets/icons/OutlineBell'
+import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 import { Button } from '../button'
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from '../select/Select'
 
 type HeaderProps = {
-  isAuth: boolean
+  isAuth?: boolean
 }
 
-const Header = (props: HeaderProps) => {
-  const { isAuth } = props
-
+const Header = ({ isAuth }: HeaderProps) => {
   return (
     <header
       className={
-        'fixed top-0 left-0 w-full h-[60px] bg-gray-800 text-white flex items-center justify-between pr-16 border-b border-b-dark-300'
+        'fixed top-0 left-0 w-full h-[3.75rem] bg-dark-700 text-light-100 flex items-center justify-between pr-16 border-b border-b-dark-300'
       }
     >
       <Typography
@@ -32,7 +31,7 @@ const Header = (props: HeaderProps) => {
       >
         Inctagram
       </Typography>
-      <div className={'flex items-center space-x-4'}>
+      <div className={'flex items-center'}>
         {isAuth && (
           <OutlineBell
             className={'cursor-pointer w-6 h-6 mr-12'}
@@ -40,38 +39,38 @@ const Header = (props: HeaderProps) => {
           />
         )}
         <Select defaultValue={'en'}>
-          <SelectTrigger
-            className={
-              'bg-gray-700 text-white rounded px-2 py-3 w-[163px] h-9 mr-9'
-            }
-          >
-            <SelectValue placeholder={'Select-box'} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value={'en'}>
-              <span className={'flex items-center gap-3'}>
+          <SelectGroup className={'min-w-[10.1875rem] gap-3'}>
+            <SelectTrigger className={'[&>span]:gap-3'}>
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem
+                className={'[&>span]:gap-3'}
+                value={'en'}
+              >
                 <FlagUnitedKingdom />
                 English
-              </span>
-            </SelectItem>
-            <SelectItem value={'ru'}>
-              <span className={'flex items-center gap-3'}>
+              </SelectItem>
+              <SelectItem
+                className={'[&>span]:gap-3'}
+                value={'ru'}
+              >
                 <FlagRussia />
-                Русский
-              </span>
-            </SelectItem>
-          </SelectContent>
+                Russian
+              </SelectItem>
+            </SelectContent>
+          </SelectGroup>
         </Select>
         {!isAuth && (
-          <div>
+          <>
             <Button
-              className={'mr-6'}
+              className={'mr-6 ml-9'}
               variant={'text'}
             >
               Log in
             </Button>
             <Button>Sing up</Button>
-          </div>
+          </>
         )}
       </div>
     </header>
