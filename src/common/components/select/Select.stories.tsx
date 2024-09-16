@@ -1,3 +1,4 @@
+import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
 import {
   Select,
   SelectContent,
@@ -39,6 +40,30 @@ export const SelectExample: Story = {
         </SelectGroup>
       </>
     ),
+    disabled: true,
+  },
+}
+
+export const SelectWithIcons: Story = {
+  args: {
+    children: (
+      <>
+        <SelectTrigger className={'min-w-[240px]'}>
+          <SelectValue defaultValue={'ru'}></SelectValue>
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value={'ru'}>
+            <FlagRussia />
+            Russian
+          </SelectItem>
+          <SelectItem value={'en'}>
+            <FlagUnitedKingdom />
+            English
+          </SelectItem>
+        </SelectContent>
+      </>
+    ),
+    defaultValue: 'ru',
     disabled: true,
   },
 }
