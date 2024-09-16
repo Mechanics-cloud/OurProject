@@ -1,5 +1,4 @@
-import FlagRussia from '@/assets/icons/FlagRussia'
-import FlagUnitedKingdom from '@/assets/icons/FlagUnitedKingdom'
+import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
 import {
   Select,
   SelectContent,

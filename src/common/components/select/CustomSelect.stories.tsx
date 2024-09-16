@@ -1,5 +1,4 @@
-import FlagRussia from '@/assets/icons/FlagRussia'
-import FlagUnitedKingdom from '@/assets/icons/FlagUnitedKingdom'
+import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
 import { CustomSelect } from '@/common/components/select/CustomSelect'
 import { SelectItem } from '@/common/components/select/Select'
 import { Meta, StoryObj } from '@storybook/react'
