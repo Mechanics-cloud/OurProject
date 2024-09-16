@@ -2,8 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
-import * as console from 'node:console'
-
 import { Pagination } from './Pagination'
 
 const meta = {
@@ -217,62 +215,43 @@ const mockData = [
     id: 33,
     last_name: 'MacGibbon',
   },
-  {
-    email: 'ebargx@blogtalkradio.com',
-    first_name: 'Erie',
-    id: 34,
-    last_name: 'Barg',
-  },
-  {
-    email: 'amccrossany@jugem.jp',
-    first_name: 'Asa',
-    id: 35,
-    last_name: 'McCrossan',
-  },
-  {
-    email: 'cpetracchiz@nydailynews.com',
-    first_name: 'Charmine',
-    id: 36,
-    last_name: 'Petracchi',
-  },
-  {
-    email: 'esantori10@ehow.com',
-    first_name: 'Ede',
-    id: 37,
-    last_name: 'Santori',
-  },
-  {
-    email: 'dellery11@dagondesign.com',
-    first_name: 'Doreen',
-    id: 38,
-    last_name: 'Ellery',
-  },
-  {
-    email: 'hthormann12@dailymotion.com',
-    first_name: 'Hestia',
-    id: 39,
-    last_name: 'Thormann',
-  },
-  {
-    email: 'jdevo13@sun.com',
-    first_name: 'Jeanette',
-    id: 40,
-    last_name: 'Devo',
-  },
 ]
 
-export const BasicPagination: Story = {
+export const BasicPaginationStart: Story = {
   args: {
-    currentPage: 10,
+    currentPage: 1,
     onPageChange: () => {},
+    onPageSize: () => {},
     pageSize: 3,
     siblingCount: 1,
     totalItemsCount: 30,
   },
 }
 
-export const PaginationTest = () => {
-  const [pageSize, setPageSize] = useState(5)
+export const BasicPaginationEnd: Story = {
+  args: {
+    currentPage: 6,
+    onPageChange: () => {},
+    onPageSize: () => {},
+    pageSize: 5,
+    siblingCount: 1,
+    totalItemsCount: 30,
+  },
+}
+
+export const BasicPaginationLessData: Story = {
+  args: {
+    currentPage: 1,
+    onPageChange: () => {},
+    onPageSize: () => {},
+    pageSize: 10,
+    siblingCount: 1,
+    totalItemsCount: 11,
+  },
+}
+
+export const PaginationWithData = () => {
+  const [pageSize, setPageSize] = useState(10)
   const [currentPage, setCurrentPage] = useState(1)
 
   const onPageChange = (page: number) => {
@@ -285,7 +264,7 @@ export const PaginationTest = () => {
 
   const dataForPage = mockData.slice(
     pageSize * (currentPage - 1),
-    pageSize * currentPage - 1 + pageSize
+    pageSize * (currentPage - 1) + pageSize
   )
 
   return (
@@ -299,15 +278,14 @@ export const PaginationTest = () => {
       />
       <table className={'mt-4 w-full'}>
         {dataForPage.map((el) => (
-          <td
+          <tr
             className={'grid grid-cols-3 gap-8 mb-3'}
             key={el.id}
           >
-            <tr>{el.id}</tr>
-            <tr>{el.first_name}</tr>
-            <tr>{el.last_name}</tr>
-            <tr>{el.email}</tr>
-          </td>
+            <td>{el.first_name}</td>
+            <td>{el.last_name}</td>
+            <td>{el.email}</td>
+          </tr>
         ))}
       </table>
     </>

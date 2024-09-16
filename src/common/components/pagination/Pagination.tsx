@@ -18,7 +18,7 @@ import { PageButton } from './PageButton'
 type Props = {
   currentPage: number
   onPageChange: (page: number) => void
-  onPageSize: (page: number) => void
+  onPageSize: (value: number) => void
   pageSize: number
   siblingCount?: number
   totalItemsCount: number
@@ -51,6 +51,11 @@ export const Pagination = ({
 
   const onPrevious = () => {
     onPageChange(currentPage - 1)
+  }
+
+  const onPageSizeValue = (value: string) => {
+    onPageSize(+value)
+    onPageChange(1)
   }
 
   const lastPage = paginationRange[paginationRange.length - 1]
@@ -111,7 +116,7 @@ export const Pagination = ({
       </ul>
       <div className={'flex gap-1 text-sm items-center'}>
         <span>Show</span>
-        <Select>
+        <Select onValueChange={onPageSizeValue}>
           <SelectGroup>
             <SelectTrigger className={'min-w-[50px]'}>
               <SelectValue placeholder={pageSize} />
@@ -120,8 +125,7 @@ export const Pagination = ({
               {pageSizes.map((size, index) => (
                 <SelectItem
                   key={index}
-                  onSelect={(e) => onPageSize(e.currentTarget)}
-                  value={`select item-${size}`}
+                  value={`${size}`}
                 >
                   {size}
                 </SelectItem>
