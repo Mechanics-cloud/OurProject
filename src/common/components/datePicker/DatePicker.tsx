@@ -8,8 +8,8 @@ import { ru } from 'date-fns/locale'
 import { Calendar } from '../calendar/Calendar'
 import { Popover, PopoverContent, PopoverTrigger } from '../popover/Popover'
 import { Typography } from '../typography'
-import CalendarClosed from './../../../assets/icons/Calendar'
-import CalendarOpen from './../../../assets/icons/CalendarOutline'
+import CalendarClosed from './../../../assets/icons/filledIcons/Calendar'
+import CalendarOpen from './../../../assets/icons/outlineIcons/CalendarOutline'
 
 type Props = {
   errorMessage?: string

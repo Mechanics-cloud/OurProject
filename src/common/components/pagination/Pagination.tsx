@@ -1,12 +1,7 @@
 import * as React from 'react'
-import { Select } from 'react-day-picker'
 
-import {
-  ArrowBackOutline,
-  ArrowIosBackOutline,
-  ArrowIosForward,
-} from '@/assets/icons'
-import CalendarOpen from '@/assets/icons/CalendarOutline'
+import { ArrowIosForward } from '@/assets/icons/filledIcons'
+import { ArrowIosBackOutline } from '@/assets/icons/outlineIcons'
 import { usePagination } from '@/common/components/pagination/hooks/usePagination'
 import { cn } from '@/common/utils/cn'
 
