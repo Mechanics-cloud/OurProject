@@ -1,6 +1,11 @@
 import * as React from 'react'
+import { Select } from 'react-day-picker'
 
-import { ArrowBackOutline, ArrowIosBackOutline } from '@/assets/icons'
+import {
+  ArrowBackOutline,
+  ArrowIosBackOutline,
+  ArrowIosForward,
+} from '@/assets/icons'
 import CalendarOpen from '@/assets/icons/CalendarOutline'
 import { usePagination } from '@/common/components/pagination/hooks/usePagination'
 import { cn } from '@/common/utils/cn'
@@ -44,57 +49,56 @@ export const Pagination = ({
   }
 
   const lastPage = paginationRange[paginationRange.length - 1]
+  const isBackArrowDisabled = currentPage === 1
+  const isForwardArrowDisabled = currentPage === lastPage
 
   return (
-    // <div className={'flex gap-x-3'}>
-    //   <PageButton
-    //     onClick={() => {}}
-    //     page={1}
-    //   />
-    //   <PageButton
-    //     onClick={() => {}}
-    //     page={1}
-    //     selected
-    //   />
-    //   <PageButton
-    //     disabled
-    //     onClick={() => {}}
-    //     page={1}
-    //   />
-    // </div>
-    <ul className={'flex gap-x-3'}>
-      <li>
-        <PageButton
-          disabled={currentPage === 1}
-          onClick={onPrevious}
-        >
-          <ArrowIosBackOutline className={cn('w-5')} />
-        </PageButton>
-      </li>
-      {paginationRange.map((pageNumber) => {
-        if (pageNumber === DOTS) {
-          return <li>&#8230</li>
-        }
+    <div className={'flex gap-8'}>
+      <ul className={'flex gap-x-3 align-middle'}>
+        <li className={'flex align-middle'}>
+          <PageButton
+            disabled={isBackArrowDisabled}
+            onClick={onPrevious}
+          >
+            <ArrowIosBackOutline
+              className={cn(
+                `h-4 w-4 ${isBackArrowDisabled && 'text-dark-100'}`
+              )}
+            />
+          </PageButton>
+        </li>
+        {paginationRange.map((pageNumber, index) => {
+          if (pageNumber === DOTS) {
+            return <li key={index}>&#8230;</li>
+          }
 
-        return (
-          <li>
-            <PageButton
-              onClick={() => onPageChange(pageNumber)}
-              selected={pageNumber === currentPage}
-            >
-              {pageNumber}
-            </PageButton>
-          </li>
-        )
-      })}
-      <li>
-        <PageButton
-          disabled={currentPage === lastPage}
-          onClick={onNext}
-        >
-          Arrow
-        </PageButton>
-      </li>
-    </ul>
+          return (
+            <li>
+              <PageButton
+                onClick={() => onPageChange(pageNumber)}
+                selected={pageNumber === currentPage}
+              >
+                {pageNumber}
+              </PageButton>
+            </li>
+          )
+        })}
+        <li className={'flex align-middle'}>
+          <PageButton
+            disabled={isForwardArrowDisabled}
+            onClick={onNext}
+          >
+            <ArrowIosForward
+              className={cn(
+                `h-4 w-4 ${isForwardArrowDisabled && 'text-dark-100'}`
+              )}
+            />
+          </PageButton>
+        </li>
+      </ul>
+      <span className={'content-center'}>
+        Show <select></select> on page
+      </span>
+    </div>
   )
 }
