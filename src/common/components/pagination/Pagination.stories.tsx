@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import { useState } from 'react'
 
+import * as console from 'node:console'
+
 import { Pagination } from './Pagination'
 
 const meta = {
@@ -265,6 +267,49 @@ export const BasicPagination: Story = {
     onPageChange: () => {},
     pageSize: 3,
     siblingCount: 1,
-    totalCount: 30,
+    totalItemsCount: 30,
   },
+}
+
+export const PaginationTest = () => {
+  const [pageSize, setPageSize] = useState(5)
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page)
+  }
+
+  const onPageSize = (page: number) => {
+    setPageSize(page)
+  }
+
+  const dataForPage = mockData.slice(
+    pageSize * (currentPage - 1),
+    pageSize * currentPage - 1 + pageSize
+  )
+
+  return (
+    <>
+      <Pagination
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+        onPageSize={onPageSize}
+        pageSize={pageSize}
+        totalItemsCount={mockData.length}
+      />
+      <table className={'mt-4 w-full'}>
+        {dataForPage.map((el) => (
+          <td
+            className={'grid grid-cols-3 gap-8 mb-3'}
+            key={el.id}
+          >
+            <tr>{el.id}</tr>
+            <tr>{el.first_name}</tr>
+            <tr>{el.last_name}</tr>
+            <tr>{el.email}</tr>
+          </td>
+        ))}
+      </table>
+    </>
+  )
 }

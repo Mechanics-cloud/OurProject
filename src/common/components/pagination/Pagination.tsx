@@ -3,6 +3,14 @@ import * as React from 'react'
 import { ArrowIosForward } from '@/assets/icons/filledIcons'
 import { ArrowIosBackOutline } from '@/assets/icons/outlineIcons'
 import { usePagination } from '@/common/components/pagination/hooks/usePagination'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/common/components/select/Select'
 import { cn } from '@/common/utils/cn'
 
 import { PageButton } from './PageButton'
@@ -10,9 +18,10 @@ import { PageButton } from './PageButton'
 type Props = {
   currentPage: number
   onPageChange: (page: number) => void
+  onPageSize: (page: number) => void
   pageSize: number
   siblingCount?: number
-  totalCount: number
+  totalItemsCount: number
 }
 
 export const DOTS = 0
@@ -20,15 +29,16 @@ export const DOTS = 0
 export const Pagination = ({
   currentPage,
   onPageChange,
+  onPageSize,
   pageSize,
   siblingCount = 1,
-  totalCount,
+  totalItemsCount,
 }: Props) => {
   const paginationRange = usePagination({
     currentPage,
     pageSize,
     siblingCount,
-    totalCount,
+    totalItemsCount,
   })
 
   if (currentPage === 0 || paginationRange.length < 2) {
@@ -47,10 +57,15 @@ export const Pagination = ({
   const isBackArrowDisabled = currentPage === 1
   const isForwardArrowDisabled = currentPage === lastPage
 
+  const pageSizes = [10, 20, 30, 50, 100]
+
   return (
     <div className={'flex gap-8'}>
       <ul className={'flex gap-x-3 align-middle'}>
-        <li className={'flex align-middle'}>
+        <li
+          className={'flex align-middle'}
+          key={'arrowBack'}
+        >
           <PageButton
             disabled={isBackArrowDisabled}
             onClick={onPrevious}
@@ -68,7 +83,7 @@ export const Pagination = ({
           }
 
           return (
-            <li>
+            <li key={index}>
               <PageButton
                 onClick={() => onPageChange(pageNumber)}
                 selected={pageNumber === currentPage}
@@ -78,7 +93,10 @@ export const Pagination = ({
             </li>
           )
         })}
-        <li className={'flex align-middle'}>
+        <li
+          className={'flex align-middle'}
+          key={'arrowForward'}
+        >
           <PageButton
             disabled={isForwardArrowDisabled}
             onClick={onNext}
@@ -91,9 +109,28 @@ export const Pagination = ({
           </PageButton>
         </li>
       </ul>
-      <span className={'content-center'}>
-        Show <select></select> on page
-      </span>
+      <div className={'flex gap-1 text-sm items-center'}>
+        <span>Show</span>
+        <Select>
+          <SelectGroup>
+            <SelectTrigger className={'min-w-[50px]'}>
+              <SelectValue placeholder={pageSize} />
+            </SelectTrigger>
+            <SelectContent className={'text-sm'}>
+              {pageSizes.map((size, index) => (
+                <SelectItem
+                  key={index}
+                  onSelect={(e) => onPageSize(e.currentTarget)}
+                  value={`select item-${size}`}
+                >
+                  {size}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </SelectGroup>
+        </Select>
+        <span>on page</span>
+      </div>
     </div>
   )
 }

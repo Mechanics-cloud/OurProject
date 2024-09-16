@@ -6,17 +6,17 @@ type UsePaginationParamType = {
   currentPage: number
   pageSize: number
   siblingCount: number
-  totalCount: number
+  totalItemsCount: number
 }
 
 export const usePagination = ({
   currentPage,
   pageSize,
   siblingCount,
-  totalCount,
+  totalItemsCount,
 }: UsePaginationParamType): Array<number> => {
   return React.useMemo(() => {
-    const totalPageCount = Math.ceil(totalCount / pageSize)
+    const totalPageCount = Math.ceil(totalItemsCount / pageSize)
     const totalPageNumbers = siblingCount + 5
     const firstPageIndex = 1
     const lastPageIndex = totalPageCount
@@ -51,12 +51,10 @@ export const usePagination = ({
       return [firstPageIndex, DOTS, ...rightRange]
     }
 
-    //if (shouldShowLeftDots && shouldShowRightDots) {
     const middleRange = range(leftSiblingIndex, rightSiblingIndex)
 
     return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex]
-    //}
-  }, [totalCount, pageSize, siblingCount, currentPage])
+  }, [totalItemsCount, pageSize, siblingCount, currentPage])
 }
 
 function range(start: number, end: number) {

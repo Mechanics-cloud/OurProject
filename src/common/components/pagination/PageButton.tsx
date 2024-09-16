@@ -4,17 +4,10 @@ import { typographyVariants } from '@/common/components/typography'
 import { cn } from '@/common/utils/cn'
 
 type Props = {
-  disabled?: boolean
-  onClick: () => void
   selected?: boolean
 } & ComponentProps<'button'>
 
-export const PageButton = ({
-  children,
-  onClick,
-  selected,
-  ...props
-}: Props) => {
+export const PageButton = ({ children, selected, ...props }: Props) => {
   return (
     <button
       className={cn(
