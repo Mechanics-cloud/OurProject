@@ -261,11 +261,15 @@ const mockData = [
 
 export const BasicPagination: Story = {
   args: {
-    children: 'Basic Pagination',
+    currentPage: 3,
+    onPageChange: () => {},
+    pageSize: 5,
+    siblingCount: 1,
+    totalCount: 25,
   },
 }
 
-const BasicPagination1 = () => {
-  const [page, setPage] = useState(1)
-  const [limit, setLimit] = useState(5)
-}
+// const BasicPagination1 = () => {
+//   const [page, setPage] = useState(1)
+//   const [limit, setLimit] = useState(5)
+// }
