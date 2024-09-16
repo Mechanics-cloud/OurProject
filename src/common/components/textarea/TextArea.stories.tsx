@@ -1,23 +1,25 @@
-import { TextField } from '@/common/components'
+import { TextArea } from '@/common/components'
 import { Meta, StoryObj } from '@storybook/react'
 
-const meta: Meta<typeof TextField> = {
-  component: TextField,
+const meta: Meta<typeof TextArea> = {
+  component: TextArea,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
-  title: 'Component/TextField',
+  title: 'Component/TextArea',
 }
 
 export default meta
 type Story = StoryObj<typeof meta>
+
 export const Default: Story = {
   args: {
     label: 'Label',
     placeholder: 'Placeholder',
   },
 }
+
 export const Disabled: Story = {
   args: {
     disabled: true,
@@ -25,6 +27,7 @@ export const Disabled: Story = {
     placeholder: 'Placeholder',
   },
 }
+
 export const Error: Story = {
   args: {
     error: 'Error',
@@ -32,25 +35,11 @@ export const Error: Story = {
     placeholder: 'Placeholder',
   },
 }
+
 export const Required: Story = {
   args: {
     label: 'Label',
     placeholder: 'Placeholder',
     required: true,
-  },
-}
-export const Password: Story = {
-  args: {
-    label: 'Label',
-    placeholder: 'Placeholder',
-    type: 'password',
-    value: '123456',
-  },
-}
-export const Search: Story = {
-  args: {
-    label: 'Label',
-    placeholder: 'Input search',
-    type: 'search',
   },
 }
