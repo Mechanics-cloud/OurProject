@@ -55,7 +55,7 @@ const linksForMenu = [
 
 export const Menu = () => {
   const router = useRouter()
-  const path = String(router.asPath)
+  const path = router.asPath
 
   return (
     <nav className={'min-w-[360px] w-full bg-dark-00 border-t border-dark-300'}>
