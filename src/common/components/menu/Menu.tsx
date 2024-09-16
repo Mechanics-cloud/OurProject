@@ -1,3 +1,5 @@
+import React from 'react'
+
 import {
   Home,
   MessageCircle,
@@ -13,6 +15,7 @@ import {
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
 import { MenuItem } from '@/common/components/menu/MenuItem'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const PATHS = {
@@ -26,11 +29,6 @@ const PATHS = {
 export type PathsType = (typeof PATHS)[keyof typeof PATHS]
 
 const linksForMenu = [
-  {
-    iconFilled: Home,
-    iconOutlined: HomeOutline,
-    path: PATHS.HOME,
-  },
   {
     iconFilled: PlusSquare,
     iconOutlined: PlusSquareOutline,
@@ -55,11 +53,20 @@ const linksForMenu = [
 
 export const Menu = () => {
   const router = useRouter()
-  const path = router.asPath
+  const path = router.pathname
 
   return (
     <nav className={'min-w-[360px] w-full bg-dark-00 border-t border-dark-300'}>
       <ul className={'flex w-full justify-evenly py-[18px]'}>
+        <li key={'home'}>
+          <Link href={PATHS.HOME}>
+            {path === PATHS.HOME ? (
+              <Home className={'w-6 h-6 text-accent-500'} />
+            ) : (
+              <HomeOutline className={'w-6 h-6'} />
+            )}
+          </Link>
+        </li>
         {linksForMenu.map((link, index) => (
           <MenuItem
             currentPath={path}

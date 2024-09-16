@@ -36,8 +36,7 @@ export const MenuItem = ({
   return (
     <li>
       <Link href={path}>
-        {currentPath.indexOf(path) !== -1 &&
-        currentPath.length === path.length ? (
+        {currentPath.indexOf(path) !== -1 ? (
           <IconFilled className={'w-6 h-6 text-accent-500'} />
         ) : (
           <IconOutlined className={'w-6 h-6'} />
