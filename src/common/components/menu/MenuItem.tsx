@@ -1,6 +1,5 @@
 import React, {
   ComponentPropsWithoutRef,
-  ComponentType,
   ForwardRefExoticComponent,
   MemoExoticComponent,
   RefAttributes,
@@ -30,7 +29,6 @@ export const MenuItem = ({
   iconFilled,
   iconOutlined,
   path,
-  ...props
 }: Props) => {
   const IconFilled = iconFilled
   const IconOutlined = iconOutlined

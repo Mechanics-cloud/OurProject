@@ -13,7 +13,6 @@ import {
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
 import { MenuItem } from '@/common/components/menu/MenuItem'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const PATHS = {
