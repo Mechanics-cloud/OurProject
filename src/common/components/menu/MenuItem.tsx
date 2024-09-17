@@ -9,8 +9,12 @@ import React, {
 import { PathsType } from '@/common/components/menu/Menu'
 import Link from 'next/link'
 
-type Props = {
+type LinkProps = {
   currentPath: string
+  path: PathsType
+}
+
+type Props = {
   iconFilled: MemoExoticComponent<
     ForwardRefExoticComponent<
       Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
@@ -21,8 +25,8 @@ type Props = {
       Omit<SVGProps<SVGSVGElement>, 'ref'> & RefAttributes<SVGSVGElement>
     >
   >
-  path: PathsType
-} & ComponentPropsWithoutRef<'svg'>
+} & ComponentPropsWithoutRef<'svg'> &
+  LinkProps
 
 export const MenuItem = ({
   currentPath,

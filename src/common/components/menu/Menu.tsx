@@ -30,11 +30,6 @@ export type PathsType = (typeof PATHS)[keyof typeof PATHS]
 
 const linksForMenu = [
   {
-    iconFilled: PlusSquare,
-    iconOutlined: PlusSquareOutline,
-    path: PATHS.PUBLICATION,
-  },
-  {
     iconFilled: MessageCircle,
     iconOutlined: MessageCircleOutline,
     path: PATHS.MESSENGER,
@@ -66,6 +61,22 @@ export const Menu = () => {
               <HomeOutline className={'w-6 h-6'} />
             )}
           </Link>
+        </li>
+        <li
+          className={'group'}
+          key={'publication'}
+          onClick={() => {
+            alert('Hey!')
+          }}
+        >
+          <PlusSquareOutline
+            className={'w-6 h-6 group-hover:hidden group-active:hidden'}
+          />
+          <PlusSquare
+            className={
+              'w-6 h-6 hidden group-hover:block group-active:block text-accent-500'
+            }
+          />
         </li>
         {linksForMenu.map((link, index) => (
           <MenuItem
