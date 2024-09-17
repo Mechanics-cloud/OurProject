@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
 import { Typography } from '@/common/components/typography'
+import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 import { Button } from '../button'
@@ -29,14 +30,23 @@ const Header = ({ isAuth }: HeaderProps) => {
         className={'ml-14 py-3'}
         variant={'large'}
       >
-        Inctagram
+        <Link
+          href={'/'}
+          title={'Go Home'}
+        >
+          Inctagram
+        </Link>
       </Typography>
-      <div className={'flex items-center'}>
+
+      <div className={'flex items-center '}>
         {isAuth && (
-          <OutlineBell
-            className={'cursor-pointer w-6 h-6 mr-12'}
+          <button
+            className={'cursor-pointer mr-12'}
             onClick={() => alert('Картинка нажата!')}
-          />
+            type={'button'}
+          >
+            <OutlineBell className={' w-6 h-6'} />
+          </button>
         )}
         <Select defaultValue={'en'}>
           <SelectGroup className={'min-w-[10.1875rem] gap-3'}>
