@@ -65,18 +65,22 @@ export const Menu = () => {
         <li
           className={'group'}
           key={'publication'}
-          onClick={() => {
-            alert('Hey!')
-          }}
         >
-          <PlusSquareOutline
-            className={'w-6 h-6 group-hover:hidden group-active:hidden'}
-          />
-          <PlusSquare
-            className={
-              'w-6 h-6 hidden group-hover:block group-active:block text-accent-500'
-            }
-          />
+          <button
+            onClick={() => {
+              alert('Hey!')
+            }}
+            type={'button'}
+          >
+            <PlusSquareOutline
+              className={'w-6 h-6 group-hover:hidden group-active:hidden'}
+            />
+            <PlusSquare
+              className={
+                'w-6 h-6 hidden group-hover:block group-active:block text-accent-500'
+              }
+            />
+          </button>
         </li>
         {linksForMenu.map((link, index) => (
           <MenuItem
