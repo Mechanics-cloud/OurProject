@@ -30,3 +30,9 @@ export const DisabledRadioGroup: Story = {
     options,
   },
 }
+export const VerticalOrientationRadioGroup: Story = {
+  args: {
+    classNamesForGroup: 'flex flex-col items-start gap-4',
+    options,
+  },
+}
