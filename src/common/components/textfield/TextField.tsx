@@ -19,7 +19,6 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
   const [open, setOpen] = useState(false)
 
   const {
-    as: Component = 'input',
     className,
     disabled,
     error,
@@ -34,7 +33,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     error: 'text-danger-500',
     input: getInputClasses(Boolean(error), type, className),
     inputContainer: 'relative',
-    label: disabled ? 'text-dark-100 mb-1' : 'text-light-900 mb-1 ',
+    label: disabled ? 'text-dark-100 mb-1' : 'text-light-900 mb-1',
     leftIcon:
       'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 left-3',
     rightIcon:
@@ -57,7 +56,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
       )}
       <div className={cls.inputContainer}>
         {type === 'search' && <SearchOutline className={cls.leftIcon} />}
-        <Component
+        <input
           className={cls.input}
           disabled={disabled}
           ref={ref}
