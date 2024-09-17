@@ -19,7 +19,7 @@ const CheckboxField = React.forwardRef<
   >
     <CheckboxPrimitive.Root
       className={cn(
-        'peer h-[18px] w-[18px] shrink-0 rounded-sm border-2 border-light-500 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none data-[state=checked]:bg-light-100 data-[state=checked]:text-dark-900',
+        'peer h-[18px] w-[18px] shrink-0 rounded-sm border-2 enabled:border-light-500 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none enabled:data-[state=checked]:bg-light-100 data-[state=checked]:text-dark-900 enabled:data-[state=checked]:border-light-100 disabled:checked:bg-dark-100 disabled:border-dark-100',
         className
       )}
       ref={ref}
@@ -28,7 +28,12 @@ const CheckboxField = React.forwardRef<
       <CheckboxPrimitive.Indicator
         className={cn('flex items-center justify-center text-current')}
       >
-        <CheckmarkOutline className={'h-4 w-4'} />
+        <CheckmarkOutline
+          className={clsx(
+            'h-4 w-4',
+            props.disabled ? 'text-light-700' : 'text-current'
+          )}
+        />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
   </div>
@@ -52,6 +57,7 @@ const Checkbox = ({ checked, disabled, id, label }: Props) => {
     >
       <CheckboxField
         checked={checked}
+        className={checked && disabled ? 'bg-dark-100' : ''}
         disabled={disabled}
         id={id}
       />

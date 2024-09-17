@@ -17,7 +17,7 @@ type Story = StoryObj<typeof meta>
 export const CheckboxExample: Story = {
   args: {
     checked: true,
-    disabled: false,
+    disabled: true,
     id: 'checkbox',
     label: 'Check-box',
   },
