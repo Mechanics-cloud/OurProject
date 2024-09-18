@@ -14,11 +14,15 @@ type Story = StoryObj<typeof meta>
 
 export const Single: Story = {
   args: {
+    disabled: false,
+    label: 'Label',
     mode: 'single',
   },
 }
 export const Range: Story = {
   args: {
+    disabled: false,
+    label: 'Label',
     mode: 'range',
   },
 }
