@@ -1,4 +1,4 @@
-import ReCAPTCHA, { ReCAPTCHAProps } from 'react-google-recaptcha'
+import { ReCAPTCHA, ReCAPTCHAProps } from 'react-google-recaptcha'
 
 export const BaseReCAPTCHA = ({
   sitekey = '6Ld5J0gqAAAAAIO074PfmvJimeKugXCNtJoX0CHu',

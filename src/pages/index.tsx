@@ -1,5 +1,3 @@
-import ReCAPTCHA from 'react-google-recaptcha'
-
 import { Button } from '@/common/components/button'
 import { Menu } from '@/common/components/menu'
 import { BaseReCAPTCHA } from '@/common/components/reCaptcha/BaseReCAPTCHA'
