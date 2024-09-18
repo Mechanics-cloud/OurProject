@@ -73,7 +73,7 @@ export function DatePickerWithRange({
         >
           <button
             className={cn(
-              'bg-inherit text-light-100 px-3 py-1.5 relative group w-full cursor-pointer  focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-accent-700  focus-visible:outline-none text-left border border-dark-100 rounded-sm bg-dark-500',
+              'text-light-100 px-3 py-1.5 relative group w-full cursor-pointer  focus-visible:border-transparent focus-visible:ring-2 focus-visible:ring-accent-700  focus-visible:outline-none text-left border border-dark-100 rounded-sm bg-dark-500',
               errorMessage &&
                 'data-[state=closed]:border-danger-500 data-[state=closed]:text-danger-500 data-[state=closed]:focus-visible:border-transparent',
               disabled &&
