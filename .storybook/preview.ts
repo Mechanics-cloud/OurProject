@@ -6,6 +6,7 @@ import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 import { themes } from '@storybook/theming'
 import '../src/styles/globals.css'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 const preview: Preview = {
   parameters: {
@@ -26,6 +27,10 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'galaxys9',
     },
   },
 }
