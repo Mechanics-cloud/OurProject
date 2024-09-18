@@ -13,13 +13,14 @@ const CheckboxField = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
 >(({ className, ...props }, ref) => (
   <div
-    className={
-      'flex items-center justify-center h-[36px] w-[36px] rounded-full hover:border hover:border-dark-300 hover:bg-dark-300 active:border active:bg-dark-100 active:border-dark-100 focus:border focus:border-dark-500 focus:bg-dark-500 disabled:pointer-events-none'
-    }
+    className={clsx(
+      'flex items-center justify-center h-[36px] w-[36px] rounded-full hover:bg-dark-300 active:bg-dark-100 focus-visible:outline-none disabled:pointer-events-none',
+      'focus-within:bg-dark-500'
+    )}
   >
     <CheckboxPrimitive.Root
       className={cn(
-        'peer h-[18px] w-[18px] shrink-0 rounded-sm border-2 enabled:border-light-500 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none enabled:data-[state=checked]:bg-light-100 data-[state=checked]:text-dark-900 enabled:data-[state=checked]:border-light-100 disabled:checked:bg-dark-100 disabled:border-dark-100',
+        'peer h-[18px] w-[18px] shrink-0 rounded-sm border-2 enabled:border-light-500 ring-offset-background focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none enabled:data-[state=checked]:bg-light-100 data-[state=checked]:text-dark-900 enabled:data-[state=checked]:border-light-100 disabled:checked:bg-dark-100 disabled:border-dark-100',
         className
       )}
       ref={ref}
