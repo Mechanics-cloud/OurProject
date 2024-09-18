@@ -1,24 +1,21 @@
-import ReCAPTCHA from 'react-google-recaptcha'
-
+import { BaseReCAPTCHA } from '@/common/components/reCaptcha/BaseReCAPTCHA'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta = {
-  component: ReCAPTCHA,
+  component: BaseReCAPTCHA,
   parameters: {
     layout: 'centered',
   },
   tags: ['autodocs'],
   title: 'Component/ReCAPTCHA',
-} satisfies Meta<typeof ReCAPTCHA>
+} satisfies Meta<typeof BaseReCAPTCHA>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const BaseReCAPTCHA: Story = {
+export const ReCAPTCHA: Story = {
   args: {
     sitekey: '6Ld5J0gqAAAAAIO074PfmvJimeKugXCNtJoX0CHu',
-    style: { colorScheme: 'initial' },
-    theme: 'dark',
   },
 }
