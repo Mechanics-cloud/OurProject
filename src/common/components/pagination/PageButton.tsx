@@ -16,6 +16,7 @@ export const PageButton = ({ children, selected, ...props }: Props) => {
         !!selected && 'bg-white rounded-sm text-[14px] text-dark-900'
       )}
       {...props}
+      type={'button'}
     >
       {children}
     </button>
