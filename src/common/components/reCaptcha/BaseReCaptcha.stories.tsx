@@ -1,5 +1,6 @@
-import { BaseReCAPTCHA } from '@/common/components/reCaptcha/BaseReCAPTCHA'
 import { Meta, StoryObj } from '@storybook/react'
+
+import { BaseReCAPTCHA } from './BaseReCAPTCHA'
 
 const meta = {
   component: BaseReCAPTCHA,
@@ -14,8 +15,15 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const ReCAPTCHA: Story = {
+export const DarkVariantReCAPTCHA: Story = {
   args: {
-    sitekey: '6Ld5J0gqAAAAAIO074PfmvJimeKugXCNtJoX0CHu',
+    sitekey: '6LfYrkgqAAAAADyQy2eYU4aJ7pzeoBkeBtxkOa1R',
+  },
+}
+
+export const LightVariantReCAPTCHA: Story = {
+  args: {
+    sitekey: '6LfYrkgqAAAAADyQy2eYU4aJ7pzeoBkeBtxkOa1R',
+    theme: 'light',
   },
 }
