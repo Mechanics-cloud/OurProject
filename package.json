@@ -31,6 +31,7 @@
     "react": "^18",
     "react-day-picker": "^9.0.8",
     "react-dom": "^18",
+    "react-google-recaptcha": "^3.1.0",
     "tailwind-merge": "^2.5.2",
     "ts-node-dev": "^2.0.0"
   },
@@ -56,6 +57,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-google-recaptcha": "^2.1.9",
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.7",
     "eslint-plugin-jest": "^28.8.3",
