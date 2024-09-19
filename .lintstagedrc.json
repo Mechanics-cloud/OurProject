@@ -1,7 +1,8 @@
 {
   "*.{js,jsx,ts,tsx}": [
     "prettier --write",
-    "eslint --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern --fix"
+    "eslint --ext .jsx,.js,.tsx,.ts --no-error-on-unmatched-pattern --fix",
+    "jest -u"
   ],
   "*.{scss,css}": ["stylelint --fix --allow-empty-input", "prettier --write"]
 }
