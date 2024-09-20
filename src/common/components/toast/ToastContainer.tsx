@@ -8,7 +8,7 @@ import { Close } from '@/assets/icons/filledIcons'
 import { typographyVariants } from '@/common/components'
 import { getToastClassName } from '@/common/components/toast/helpers'
 
-export const ToastContainer = (args: ToastContainerProps) => (
+const ToastContainer = (args: ToastContainerProps) => (
   <Container
     autoClose={3000}
     bodyClassName={typographyVariants({ variant: 'reg16' })}
@@ -28,3 +28,5 @@ export const ToastContainer = (args: ToastContainerProps) => (
     {...args}
   />
 )
+
+export default ToastContainer

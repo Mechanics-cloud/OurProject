@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import { toastPositions } from '@/common/components/toast/helpers'
 import { Meta, StoryObj } from '@storybook/react'
 
-import { ToastContainer } from './ToastContainer'
+import ToastContainer from './ToastContainer'
 
 const meta: Meta<typeof ToastContainer> = {
   argTypes: {
@@ -22,8 +22,18 @@ const meta: Meta<typeof ToastContainer> = {
 
     return (
       <div className={'flex flex-col gap-10'}>
-        <button type="button" onClick={notifyError}>Error!</button>
-        <button type="button" onClick={notifySuccess}>Success!</button>
+        <button
+          onClick={notifyError}
+          type={'button'}
+        >
+          Error!
+        </button>
+        <button
+          onClick={notifySuccess}
+          type={'button'}
+        >
+          Success!
+        </button>
         <ToastContainer {...args} />
       </div>
     )
