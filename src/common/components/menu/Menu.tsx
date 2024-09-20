@@ -21,17 +21,21 @@ import { useRouter } from 'next/router'
 const PATHS = {
   HOME: '/',
   MESSENGER: '/messenger',
-  PROFILE: '/profile',
+  PROFILE: '/profile/[[...id]]',
   PUBLICATION: '/publication',
   SEARCH: '/search',
 } as const
 
-export type PathsType = (typeof PATHS)[keyof typeof PATHS]
-
 export const Menu = () => {
   const router = useRouter()
-  const href = router.pathname
+  const href = router.asPath
+
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  if (isModalOpen) {
+    setIsModalOpen(false)
+    alert('Hey')
+  }
 
   return (
     <nav className={'min-w-[360px] w-full bg-dark-00 border-t border-dark-300'}>
