@@ -20,10 +20,10 @@ import { useRouter } from 'next/router'
 
 const PATHS = {
   HOME: '/',
-  MESSENGER: '/messenger/*',
-  PROFILE: '/profile/*',
-  PUBLICATION: '/publication/*',
-  SEARCH: '/search/*',
+  MESSENGER: '/messenger',
+  PROFILE: '/profile',
+  PUBLICATION: '/publication',
+  SEARCH: '/search',
 } as const
 
 export type PathsType = (typeof PATHS)[keyof typeof PATHS]
@@ -43,6 +43,7 @@ export const Menu = () => {
             ) : (
               <HomeOutline className={'size-6'} />
             )}
+            <span className={'sr-only'}>Go to home page</span>
           </Link>
         </li>
         <li className={'group'}>
@@ -60,6 +61,7 @@ export const Menu = () => {
                 'size-6 hidden group-hover:block group-active:block text-accent-500'
               }
             />
+            <span className={'sr-only'}>Add new post</span>
           </button>
         </li>
         <li>
@@ -69,6 +71,7 @@ export const Menu = () => {
             ) : (
               <MessageCircleOutline className={'size-6'} />
             )}
+            <span className={'sr-only'}>Go to messages</span>
           </Link>
         </li>
         <li>
@@ -78,6 +81,7 @@ export const Menu = () => {
             ) : (
               <SearchOutline className={'size-6'} />
             )}
+            <span className={'sr-only'}>Search</span>
           </Link>
         </li>
         <li>
@@ -87,6 +91,7 @@ export const Menu = () => {
             ) : (
               <PersonOutline className={'size-6'} />
             )}
+            <span className={'sr-only'}>Go to profile</span>
           </Link>
         </li>
       </ul>
