@@ -32,6 +32,7 @@
     "react-day-picker": "^9.0.8",
     "react-dom": "^18",
     "react-google-recaptcha": "^3.1.0",
+    "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.5.2",
     "ts-node-dev": "^2.0.0"
   },
