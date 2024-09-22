@@ -8,8 +8,8 @@ import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { clsx } from 'clsx'
 
 type Option = {
-  id: string
   label: string
+  value: string
 }
 type Props = {
   classNamesForGroup?: string
@@ -32,16 +32,15 @@ export const RadioGroup = React.forwardRef<
       item: clsx(
         'aspect-square h-5 rounded-full border-2 border-light-100 flex items-center justify-center',
         'relative',
-        !disabled &&
+        !disabled && [
           'before:absolute before:w-8 before:h-8 before:rounded-full hover:before:bg-gray-700 before:z-[-1]',
-        !disabled &&
           'focus-visible:before:absolute focus-visible:before:w-8 focus-visible:before:h-8 focus-visible:before:rounded-full focus-visible:before:bg-dark-500 focus-visible:before:z-[-1]',
-        disabled && 'cursor-not-allowed'
+        ]
       ),
       itemContainer: clsx(
         'flex justify-center items-center gap-2',
         classNamesForItem,
-        disabled && 'opacity-50 cursor-not-allowed'
+        disabled && 'opacity-50'
       ),
       label: clsx(
         typographyVariants({ variant: 'reg14' }),
@@ -56,22 +55,22 @@ export const RadioGroup = React.forwardRef<
         disabled={disabled}
         ref={ref}
       >
-        {options.map(({ id, label }) => (
+        {options.map(({ label, value }) => (
           <div
             className={cls.itemContainer}
-            key={`radio-group-item-${id}`}
+            key={`radio-group-item-${value}`}
           >
             <RadioGroupPrimitive.Item
               className={cls.item}
               disabled={disabled}
-              id={id}
-              value={id}
+              id={value}
+              value={value}
             >
               <RadioGroupPrimitive.Indicator className={cls.indicator} />
             </RadioGroupPrimitive.Item>
             <label
               className={cls.label}
-              htmlFor={id}
+              htmlFor={value}
             >
               {label}
             </label>
