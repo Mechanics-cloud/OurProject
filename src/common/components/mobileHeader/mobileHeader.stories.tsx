@@ -7,7 +7,7 @@ const meta = {
   parameters: {
     layout: 'centered',
   },
-  title: 'Component/mobileHeader',
+  title: 'Component/MobileHeader',
 } satisfies Meta<typeof MobileHeader>
 
 export default meta

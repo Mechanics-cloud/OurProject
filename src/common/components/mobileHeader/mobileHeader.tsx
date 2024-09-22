@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
 import {
-  ArrowIosDownOutline,
   BookmarkOutline,
   LogOutOutline,
   MoreHorizontalOutline,
