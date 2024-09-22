@@ -1,1 +1,1 @@
-export * from './mobileHeader'
+export * from './MobileHeader'
