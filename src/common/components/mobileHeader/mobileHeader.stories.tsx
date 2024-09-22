@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { mobileHeader } from './mobileHeader'
+import { MobileHeader } from './MobileHeader'
 
 const meta = {
-  component: mobileHeader,
+  component: MobileHeader,
   parameters: {
     layout: 'centered',
   },
   title: 'Component/mobileHeader',
-} satisfies Meta<typeof mobileHeader>
+} satisfies Meta<typeof MobileHeader>
 
 export default meta
 type Story = StoryObj<typeof meta>
