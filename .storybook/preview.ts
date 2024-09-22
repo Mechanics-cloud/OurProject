@@ -7,6 +7,8 @@ import '@fontsource/inter/700.css'
 import { themes } from '@storybook/theming'
 import '../src/styles/globals.css'
 
+import 'react-toastify/dist/ReactToastify.css';
+
 const preview: Preview = {
   parameters: {
     docs: {
