@@ -40,6 +40,7 @@ const MobileHeader = ({ isAuth }: HeaderProps) => {
         variant={'large'}
       >
         <Link
+          aria-label={'переход на домашнюю страницу'}
           href={'/'}
           title={'Go Home'}
         >
@@ -69,14 +70,20 @@ const MobileHeader = ({ isAuth }: HeaderProps) => {
                 className={'sm:[&>span]:gap-3'}
                 value={'en'}
               >
-                <FlagUnitedKingdom className={'w-6 h-6'} />
+                <FlagUnitedKingdom
+                  aria-label={'английский язык'}
+                  className={'w-6 h-6'}
+                />
                 <span className={'hidden sm:inline'}>English</span>
               </SelectItem>
               <SelectItem
                 className={'[&>span]:gap-3'}
                 value={'ru'}
               >
-                <FlagRussia className={'w-6 h-6'} />
+                <FlagRussia
+                  aria-label={'русский язык'}
+                  className={'w-6 h-6'}
+                />
                 <span className={'hidden sm:inline'}>Russian</span>
               </SelectItem>
             </SelectContent>
@@ -101,6 +108,7 @@ const MobileHeader = ({ isAuth }: HeaderProps) => {
                 type={'button'}
               >
                 <MoreHorizontalOutline
+                  aria-label={'вызов настроек'}
                   className={
                     'w-6 h-6 active:text-accent-500 focus:text-accent-500'
                   }
