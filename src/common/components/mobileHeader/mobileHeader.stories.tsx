@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { MobileHeader } from 'src/common/components/mobileHeader/MobileHeader'
+import { MobileHeader } from './index'
 
 const meta = {
   component: MobileHeader,

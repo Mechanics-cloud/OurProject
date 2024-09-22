@@ -1,2 +1,2 @@
-export * from 'src/common/components/mobileHeader/MobileHeader'
+export * from './MobileHeader'
 //comment for run lint
