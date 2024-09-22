@@ -1,2 +1,1 @@
-export * from './MobileHeader'
-//comment for run lint
+export * from './mobileHeader'

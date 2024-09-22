@@ -28,7 +28,7 @@ type HeaderProps = {
   isAuth?: boolean
 }
 
-const MobileHeader = ({ isAuth }: HeaderProps) => {
+export const MobileHeader = ({ isAuth }: HeaderProps) => {
   return (
     <header
       className={
@@ -168,5 +168,3 @@ const MobileHeader = ({ isAuth }: HeaderProps) => {
     </header>
   )
 }
-
-export { MobileHeader }
