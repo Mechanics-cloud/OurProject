@@ -5,14 +5,19 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className={'flex flex-col justify-center items-center h-screen'}>
+    <div className={'flex flex-col justify-center items-center gap-5 h-screen'}>
       <Button
         asChild
         className={typographyVariants({ variant: 'h3' })}
       >
-        <Link href={'/'}>test1</Link>
+        <Link href={'/profile'}>profile</Link>
       </Button>
-      <Menu />
+      <Button
+        asChild
+        className={typographyVariants({ variant: 'h3' })}
+      >
+        <Link href={'/publication'}>publication</Link>
+      </Button>
     </div>
   )
 }

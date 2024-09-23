@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 :root {
+  --header-height: 3.75rem;
+
   font-family: Inter, sans-serif;
   color-scheme: dark;
 }
