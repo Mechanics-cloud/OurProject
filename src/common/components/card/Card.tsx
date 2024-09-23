@@ -11,7 +11,7 @@ export const Card = ({ asChild, children, className, ...props }: Props) => {
   return (
     <Component
       className={cn(
-        'bg-dark-500 rounded-sm border border-dark-300 px-6 py-4 text-light-100',
+        `bg-dark-500 rounded-sm border border-dark-300 px-6 py-4 text-light-100`,
         className
       )}
       {...props}
