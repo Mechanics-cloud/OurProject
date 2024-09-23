@@ -20,12 +20,14 @@
   "dependencies": {
     "@fontsource/inter": "^5.0.21",
     "@radix-ui/react-checkbox": "^1.1.1",
+    "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-popover": "^1.1.1",
     "@radix-ui/react-radio-group": "^1.2.0",
     "@radix-ui/react-scroll-area": "^1.1.0",
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
@@ -34,6 +36,7 @@
     "react-day-picker": "^9.0.8",
     "react-dom": "^18",
     "react-google-recaptcha": "^3.1.0",
+    "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.5.2",
     "ts-node-dev": "^2.0.0"
   },
