@@ -23,7 +23,7 @@ const Header = ({ isAuth }: HeaderProps) => {
   return (
     <header
       className={
-        'fixed top-0 left-0 w-full h-[3.75rem] bg-dark-700 text-light-100 flex items-center justify-between pr-16 border-b border-b-dark-300'
+        'fixed top-0 left-0 w-full h-[var(--header-height)] bg-dark-700 text-light-100 flex items-center justify-between pr-16 border-b border-b-dark-300'
       }
     >
       <Typography
