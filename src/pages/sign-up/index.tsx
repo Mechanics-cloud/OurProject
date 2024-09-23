@@ -2,7 +2,7 @@ import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
-import { Typography } from '@/common/components'
+import { TextField, Typography } from '@/common/components'
 import { Card } from '@/common/components/card'
 
 const SignUp = () => {
@@ -26,6 +26,10 @@ const SignUp = () => {
               width={36}
             />
           </div>
+          <TextField
+            label={'Username'}
+            placeholder={'Enter your username'}
+          />
         </form>
       </Card>
     </div>
