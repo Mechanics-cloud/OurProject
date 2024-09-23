@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/common/components/select/Select'
+import { Tooltip } from '@/common/components/tooltip'
 import { cn } from '@/common/utils/cn'
 
 import { PageButton } from './PageButton'
@@ -67,20 +68,20 @@ export const Pagination = ({
   return (
     <div className={'flex gap-8'}>
       <ul className={'flex gap-x-3 align-middle'}>
-        <li
-          className={'flex align-middle'}
-          key={'arrowBack'}
-        >
-          <PageButton
-            disabled={isBackArrowDisabled}
-            onClick={onPrevious}
-          >
-            <ArrowIosBackOutline
-              className={cn(
-                `h-4 w-4 ${isBackArrowDisabled && 'text-dark-100'}`
-              )}
-            />
-          </PageButton>
+        <li className={'flex align-middle'}>
+          <Tooltip title={'Go back'}>
+            <PageButton
+              disabled={isBackArrowDisabled}
+              onClick={onPrevious}
+            >
+              <ArrowIosBackOutline
+                className={cn(
+                  `h-4 w-4 ${isBackArrowDisabled && 'text-dark-100'}`
+                )}
+              />
+              <span className={'sr-only'}>Go back</span>
+            </PageButton>
+          </Tooltip>
         </li>
         {paginationRange.map((pageNumber, index) => {
           if (pageNumber === DOTS) {
@@ -89,29 +90,32 @@ export const Pagination = ({
 
           return (
             <li key={index}>
-              <PageButton
-                onClick={() => onPageChange(pageNumber)}
-                selected={pageNumber === currentPage}
-              >
-                {pageNumber}
-              </PageButton>
+              <Tooltip title={`Go to page ${pageNumber}`}>
+                <PageButton
+                  onClick={() => onPageChange(pageNumber)}
+                  selected={pageNumber === currentPage}
+                >
+                  {pageNumber}
+                  <span className={'sr-only'}>`Go to page ${pageNumber}`</span>
+                </PageButton>
+              </Tooltip>
             </li>
           )
         })}
-        <li
-          className={'flex align-middle'}
-          key={'arrowForward'}
-        >
-          <PageButton
-            disabled={isForwardArrowDisabled}
-            onClick={onNext}
-          >
-            <ArrowIosForward
-              className={cn(
-                `h-4 w-4 ${isForwardArrowDisabled && 'text-dark-100'}`
-              )}
-            />
-          </PageButton>
+        <li className={'flex align-middle'}>
+          <Tooltip title={'Go forward'}>
+            <PageButton
+              disabled={isForwardArrowDisabled}
+              onClick={onNext}
+            >
+              <ArrowIosForward
+                className={cn(
+                  `h-4 w-4 ${isForwardArrowDisabled && 'text-dark-100'}`
+                )}
+              />
+              <span className={'sr-only'}>Go forward</span>
+            </PageButton>
+          </Tooltip>
         </li>
       </ul>
       <div className={'flex gap-1 text-sm items-center'}>
