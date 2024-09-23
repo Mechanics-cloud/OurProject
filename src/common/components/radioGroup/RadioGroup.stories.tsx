@@ -15,8 +15,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const options = [
-  { id: 'one', label: 'First item' },
-  { id: 'two', label: 'Second item' },
+  { label: 'First item', value: 'one' },
+  { label: 'Second item', value: 'two' },
 ]
 
 export const BasicRadioGroup: Story = {

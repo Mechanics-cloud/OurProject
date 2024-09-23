@@ -15,8 +15,8 @@ export const PageButton = ({ children, selected, ...props }: Props) => {
         typographyVariants({ variant: 'reg14' }),
         !!selected && 'bg-white rounded-sm text-[14px] text-dark-900'
       )}
-      type={'button'}
       {...props}
+      type={'button'}
     >
       {children}
     </button>
