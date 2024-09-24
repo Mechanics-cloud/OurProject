@@ -146,4 +146,12 @@ const Select = ({
   )
 }
 
-export { Select, SelectGroup, SelectItem, SelectLabel, SelectTrigger }
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+}

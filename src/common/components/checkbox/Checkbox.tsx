@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { useId } from 'react'
 
 import { CheckmarkOutline } from '@/assets/icons/outlineIcons'
 import { typographyVariants } from '@/common/components'
@@ -58,6 +59,9 @@ export const Checkbox = ({
   label,
   typographyVariant = 'reg14',
 }: Props) => {
+  const generatedId = useId()
+  const checkboxId = id || generatedId
+
   return (
     <div
       className={clsx(
@@ -67,9 +71,8 @@ export const Checkbox = ({
     >
       <CheckboxField
         checked={checked}
-        // className={clsx(isCheckedAndDisabled, isDisabled)}
         disabled={disabled}
-        id={id}
+        id={checkboxId}
       />
       {label && (
         <label
@@ -78,7 +81,7 @@ export const Checkbox = ({
             typographyVariants({ variant: typographyVariant }),
             disabled ? 'text-light-900' : 'text-light-100'
           )}
-          htmlFor={id}
+          htmlFor={checkboxId}
         >
           {label}
         </label>
