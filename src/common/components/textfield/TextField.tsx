@@ -11,6 +11,7 @@ import {
   TextFieldProps,
 } from '@/common/components/textfield/TextField.types'
 import { getInputClasses } from '@/common/components/textfield/helper'
+import { cn } from '@/common/utils/cn'
 
 const TextFieldTemplate = <T extends ElementType = 'input'>(
   props: TextFieldProps,
@@ -29,9 +30,9 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
   } = props
 
   const cls = {
-    container: 'flex flex-col',
+    container: cn('flex flex-col', className),
     error: 'text-danger-500',
-    input: getInputClasses(Boolean(error), type, className),
+    input: getInputClasses(Boolean(error), type),
     inputContainer: 'relative',
     label: disabled ? 'text-dark-100 mb-1' : 'text-light-900 mb-1',
     leftIcon:
