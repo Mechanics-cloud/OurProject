@@ -69,12 +69,16 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           (open ? (
             <EyeOutline
               className={cls.rightIcon}
+              height={24}
               onClick={handleToggle}
+              width={24}
             />
           ) : (
             <EyeOffOutline
               className={cls.rightIcon}
+              height={24}
               onClick={handleToggle}
+              width={24}
             />
           ))}
       </div>
