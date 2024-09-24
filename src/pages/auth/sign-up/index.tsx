@@ -1,3 +1,5 @@
+import { useForm } from 'react-hook-form'
+
 import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
@@ -7,9 +9,32 @@ import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
 import { Checkbox } from '@/common/components/checkbox'
 import { cn } from '@/common/utils/cn'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { z } from 'zod'
+
+const signUpSchema = z.object({
+  agreesToTOS: z.literal(true),
+  email: z.string().email(),
+  password: z.string(),
+  passwordConfirmation: z.string(),
+  username: z.string(),
+})
+
+type SignUpFields = z.infer<typeof signUpSchema>
 
 const SignUp = () => {
+  const {
+    control,
+    formState: { errors },
+    handleSubmit,
+    register,
+  } = useForm<SignUpFields>({ resolver: zodResolver(signUpSchema) })
+
+  const onSubmit = handleSubmit((data) => {
+    console.log(data)
+  })
+
   return (
     <div className={'h-screen grid place-items-center'}>
       <Card className={'pt-6 pb-7'}>
@@ -21,7 +46,7 @@ const SignUp = () => {
         </Typography>
         <div className={'flex gap-14 mb-6 justify-center'}>
           <button
-            title={'Sing up with Google'}
+            title={'Sing Up with Google'}
             type={'button'}
           >
             <GoogleSvgrepoCom1
@@ -30,7 +55,7 @@ const SignUp = () => {
             />
           </button>
           <button
-            title={'Sing up with GitHub'}
+            title={'Sing Up with GitHub'}
             type={'button'}
           >
             <GithubSvgrepoCom31
@@ -40,30 +65,33 @@ const SignUp = () => {
           </button>
         </div>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <TextField
             className={'mb-6'}
             label={'Username'}
             placeholder={'Enter your username'}
-            type={'text'}
+            {...register('username')}
           />
           <TextField
             className={'mb-6'}
+            error={errors.email?.message}
             label={'Email'}
             placeholder={'Enter your email'}
-            type={'email'}
+            {...register('email')}
           />
           <TextField
             className={'mb-6'}
             label={'Password'}
             placeholder={'Enter a password'}
             type={'password'}
+            {...register('password')}
           />
           <TextField
             className={'mb-6'}
             label={'Password confirmation'}
             placeholder={'Confirm your password'}
             type={'password'}
+            {...register('passwordConfirmation')}
           />
           <div
             className={cn(
@@ -71,7 +99,10 @@ const SignUp = () => {
               `flex items-center gap-1 mb-3`
             )}
           >
-            <Checkbox label={`I agree to the`} />
+            <Checkbox
+              id={'agreement'}
+              label={`I agree to the`}
+            />
             <Typography
               href={''}
               variant={'smallLink'}
