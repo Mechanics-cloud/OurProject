@@ -2,35 +2,110 @@ import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
-import { TextField, Typography } from '@/common/components'
+import { TextField, Typography, typographyVariants } from '@/common/components'
+import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
+import { Checkbox } from '@/common/components/checkbox'
+import { cn } from '@/common/utils/cn'
+import Link from 'next/link'
 
 const SignUp = () => {
   return (
     <div className={'h-screen grid place-items-center'}>
-      <Card asChild>
-        <form>
-          <Typography
-            className={'text-center mb-3'}
-            variant={'h1'}
+      <Card className={'pt-6 pb-7'}>
+        <Typography
+          className={'text-center mb-3'}
+          variant={'h1'}
+        >
+          Sign Up
+        </Typography>
+        <div className={'flex gap-14 mb-6 justify-center'}>
+          <button
+            title={'Sing up with Google'}
+            type={'button'}
           >
-            Sign Up
-          </Typography>
-          <div className={'flex gap-14 mb-6'}>
             <GoogleSvgrepoCom1
               height={36}
               width={36}
             />
+          </button>
+          <button
+            title={'Sing up with GitHub'}
+            type={'button'}
+          >
             <GithubSvgrepoCom31
               height={36}
               width={36}
             />
-          </div>
+          </button>
+        </div>
+
+        <form>
           <TextField
+            className={'mb-6'}
             label={'Username'}
             placeholder={'Enter your username'}
+            type={'text'}
           />
+          <TextField
+            className={'mb-6'}
+            label={'Email'}
+            placeholder={'Enter your email'}
+            type={'email'}
+          />
+          <TextField
+            className={'mb-6'}
+            label={'Password'}
+            placeholder={'Enter a password'}
+            type={'password'}
+          />
+          <TextField
+            className={'mb-6'}
+            label={'Password confirmation'}
+            placeholder={'Confirm your password'}
+            type={'password'}
+          />
+          <div
+            className={cn(
+              typographyVariants({ variant: 'small' }),
+              `flex items-center gap-1 mb-3`
+            )}
+          >
+            <Checkbox label={`I agree to the`} />
+            <Typography
+              href={''}
+              variant={'smallLink'}
+            >
+              Terms of Service
+            </Typography>
+            and
+            <Typography
+              href={''}
+              variant={'smallLink'}
+            >
+              Privacy Policy
+            </Typography>
+          </div>
+          <Button
+            className={'w-full mb-[18px]'}
+            type={'submit'}
+          >
+            Sign Up
+          </Button>
         </form>
+
+        <div className={'flex flex-col gap-y-1.5 items-center'}>
+          <span>Do you have an account?</span>
+          <Link
+            className={cn(
+              typographyVariants({ variant: 'h3' }),
+              'grow text-accent-500 w-full text-center'
+            )}
+            href={''}
+          >
+            Sign in
+          </Link>
+        </div>
       </Card>
     </div>
   )
