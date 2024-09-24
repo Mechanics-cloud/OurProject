@@ -11,6 +11,9 @@ importers:
       '@fontsource/inter':
         specifier: ^5.0.21
         version: 5.0.21
+      '@hookform/resolvers':
+        specifier: ^3.9.0
+        version: 3.9.0(react-hook-form@7.53.0(react@18.3.1))
       '@radix-ui/react-checkbox':
         specifier: ^1.1.1
         version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1080,6 +1083,11 @@ packages:
 
   '@fontsource/inter@5.0.21':
     resolution: {integrity: sha512-Y4Ph0bYD5IfW8r9PSeiNjLvM6D/Bh5+YT9jOKiBqW3YS+AEBlmy8v74TpTNeZAvL3zHmikHCnzaKw7ob8LZiKQ==}
+
+  '@hookform/resolvers@3.9.0':
+    resolution: {integrity: sha512-bU0Gr4EepJ/EQsH/IwEzYLsT/PEj5C0ynLQ4m+GSHS+xKH4TfSelhluTgOaoc4kA5s7eCsQbM4wvZLzELmWzUg==}
+    peerDependencies:
+      react-hook-form: ^7.0.0
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -7707,6 +7715,10 @@ snapshots:
   '@floating-ui/utils@0.2.7': {}
 
   '@fontsource/inter@5.0.21': {}
+
+  '@hookform/resolvers@3.9.0(react-hook-form@7.53.0(react@18.3.1))':
+    dependencies:
+      react-hook-form: 7.53.0(react@18.3.1)
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
