@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { ReactNode } from 'react'
 
 import ArrowIosDownOutline from '@/assets/icons/outlineIcons/ArrowIosDownOutline'
 import { typographyVariants } from '@/common/components/typography'
@@ -8,7 +9,7 @@ import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
-const Select = SelectPrimitive.Root
+const SelectBasic = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
 
@@ -112,13 +113,37 @@ const SelectSeparator = React.forwardRef<
 
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
-export {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectSeparator,
-  SelectTrigger,
-  SelectValue,
+type Props = {
+  children: ReactNode
+  className?: string
+  defaultValue?: string
+  disabled?: boolean
+  label?: string
+  placeholder?: string
 }
+
+const Select = ({
+  children,
+  className,
+  defaultValue,
+  disabled,
+  label,
+  placeholder,
+}: Props) => {
+  return (
+    <SelectBasic
+      defaultValue={defaultValue}
+      disabled={disabled}
+    >
+      <SelectGroup className={className}>
+        {label && <SelectLabel>{label}</SelectLabel>}
+        <SelectTrigger>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>{children}</SelectContent>
+      </SelectGroup>
+    </SelectBasic>
+  )
+}
+
+export { Select, SelectGroup, SelectItem, SelectLabel, SelectTrigger }
