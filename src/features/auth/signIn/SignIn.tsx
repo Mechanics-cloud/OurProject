@@ -1,3 +1,5 @@
+import { useForm } from 'react-hook-form'
+
 import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
@@ -7,7 +9,24 @@ import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
 import Link from 'next/link'
 
+type LoginFormType = {
+  email: string
+  password: string
+}
+
 export const SignIn = () => {
+  const {
+    clearErrors,
+    formState: { errors },
+    handleSubmit,
+    register,
+    setError,
+  } = useForm<LoginFormType>({ mode: 'onBlur', reValidateMode: 'onChange' })
+
+  const onSubmit = (data: LoginFormType) => {
+    alert(JSON.stringify(data))
+  }
+
   return (
     <>
       <Card className={'flex flex-col items-center'}>
@@ -21,16 +40,35 @@ export const SignIn = () => {
           </button>
         </div>
         <form
-          action={''}
-          className={'flex flex-col gap-6 w-full'}
+          className={'flex flex-col gap-6 w-full h-full'}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <TextField
+            error={errors.email?.message}
             label={'Email'}
             type={'email'}
+            {...register('email', {
+              onChange: () => {
+                clearErrors('email')
+              },
+              pattern: {
+                message: 'Address entered incorrectly',
+                value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]/,
+              },
+              required: 'This field is required',
+            })}
           />
           <TextField
+            error={errors.password?.message}
             label={'Password'}
             type={'password'}
+            {...register('password', {
+              minLength: { message: 'Minimum 2 characters', value: 2 },
+              onChange: () => {
+                clearErrors('password')
+              },
+              required: 'This field is required',
+            })}
           />
 
           <Link
