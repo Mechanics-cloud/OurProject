@@ -9,19 +9,9 @@ import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
 import { Checkbox } from '@/common/components/checkbox'
 import { cn } from '@/common/utils/cn'
+import { SignUpFields, signUpSchema } from '@/pages/auth/sign-up/_singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { z } from 'zod'
-
-const signUpSchema = z.object({
-  agreesToTOS: z.literal(true),
-  email: z.string().email(),
-  password: z.string(),
-  passwordConfirmation: z.string(),
-  username: z.string(),
-})
-
-type SignUpFields = z.infer<typeof signUpSchema>
 
 const SignUp = () => {
   const {
@@ -68,6 +58,7 @@ const SignUp = () => {
         <form onSubmit={onSubmit}>
           <TextField
             className={'mb-6'}
+            error={errors.username?.message}
             label={'Username'}
             placeholder={'Enter your username'}
             {...register('username')}
@@ -81,6 +72,7 @@ const SignUp = () => {
           />
           <TextField
             className={'mb-6'}
+            error={errors.password?.message}
             label={'Password'}
             placeholder={'Enter a password'}
             type={'password'}
@@ -88,6 +80,7 @@ const SignUp = () => {
           />
           <TextField
             className={'mb-6'}
+            error={errors.passwordConfirmation?.message}
             label={'Password confirmation'}
             placeholder={'Confirm your password'}
             type={'password'}
