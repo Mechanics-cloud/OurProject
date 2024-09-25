@@ -1,9 +1,11 @@
 'use client'
 
 import * as React from 'react'
+import { useId } from 'react'
 
 import { CheckmarkOutline } from '@/assets/icons/outlineIcons'
 import { typographyVariants } from '@/common/components'
+import { Variant } from '@/common/components/typography/Typography'
 import { cn } from '@/common/utils/cn'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
 import { clsx } from 'clsx'
@@ -21,6 +23,7 @@ const CheckboxField = React.forwardRef<
     <CheckboxPrimitive.Root
       className={cn(
         'peer h-[18px] w-[18px] shrink-0 rounded-sm border-2 enabled:border-light-500 ring-offset-background focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50 disabled:pointer-events-none enabled:data-[state=checked]:bg-light-100 data-[state=checked]:text-dark-900 enabled:data-[state=checked]:border-none',
+        'data-[state=checked]:disabled:bg-dark-100 data-[state=checked]:disabled:border-none data-[state=unchecked]:disabled:border-light-900',
         className
       )}
       ref={ref}
@@ -47,10 +50,17 @@ type Props = {
   disabled?: boolean
   id?: string
   label?: string
+  typographyVariant?: Variant
 }
-export const Checkbox = ({ checked, disabled, id, label }: Props) => {
-  const isCheckedAndDisabled = checked && disabled && 'bg-dark-100 border-none'
-  const isDisabled = !checked && disabled && 'border-light-900'
+export const Checkbox = ({
+  checked,
+  disabled,
+  id,
+  label,
+  typographyVariant = 'reg14',
+}: Props) => {
+  const generatedId = useId()
+  const checkboxId = id || generatedId
 
   return (
     <div
@@ -61,18 +71,17 @@ export const Checkbox = ({ checked, disabled, id, label }: Props) => {
     >
       <CheckboxField
         checked={checked}
-        className={clsx(isCheckedAndDisabled, isDisabled)}
         disabled={disabled}
-        id={id}
+        id={checkboxId}
       />
       {label && (
         <label
           className={clsx(
             'peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-            typographyVariants({ variant: 'reg14' }),
+            typographyVariants({ variant: typographyVariant }),
             disabled ? 'text-light-900' : 'text-light-100'
           )}
-          htmlFor={id}
+          htmlFor={checkboxId}
         >
           {label}
         </label>
