@@ -31,7 +31,7 @@ export const useSignUp = () => {
   const confirm = watch('confirm')
 
   useEffect(() => {
-    if (touchedFields.confirm) {
+    if (touchedFields.confirm && password && confirm) {
       const isValid = signUpSchema.safeParse({ confirm, password }).success
 
       if (!isValid) {

@@ -2,13 +2,9 @@ import { z } from 'zod'
 
 export const signUpSchema = z
   .object({
-    agreesToTOS: z.literal(true, {
-      errorMap: () => ({
-        message: 'You have to accept our Terms of Service and Privacy Policy',
-      }),
-    }),
+    agreesToTOS: z.literal(true),
     confirm: z.string().min(6).max(20),
-    email: z.string().email(),
+    email: z.string({ required_error: 'Email is required' }).email(),
     password: z
       .string()
       .min(6)
