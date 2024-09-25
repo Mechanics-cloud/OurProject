@@ -1,61 +1,18 @@
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
-
 import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
-import { TextField, Typography, typographyVariants } from '@/common/components'
+import { Typography, typographyVariants } from '@/common/components'
 import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
 import { FormTextField } from '@/common/components/form/FormTextField'
 import { cn } from '@/common/utils/cn'
-import { SignUpFields, signUpSchema } from '@/pages/auth/sign-up/_singUpSchema'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { useSignUp } from '@/pages/auth/sign-up/_useSignUp'
 import Link from 'next/link'
 
 const SignUp = () => {
-  const {
-    clearErrors,
-    control,
-    formState: { errors, isValid, touchedFields },
-    handleSubmit,
-    register,
-    setError,
-    watch,
-  } = useForm<SignUpFields>({
-    defaultValues: {
-      confirm: '',
-      email: '',
-      password: '',
-      username: '',
-    },
-    mode: 'onChange',
-    resolver: zodResolver(signUpSchema),
-  })
-
-  const onSubmit = handleSubmit((data) => {
-    alert(data)
-  })
-
-  const password = watch('password')
-  const confirm = watch('confirm')
-
-  useEffect(() => {
-    if (touchedFields.confirm) {
-      const isValid = signUpSchema.safeParse({ confirm, password }).success
-
-      if (!isValid) {
-        setError('confirm', {
-          message: "Passwords don't match",
-          type: 'manual',
-        })
-      } else {
-        clearErrors('confirm')
-      }
-    }
-  }, [touchedFields.confirm, confirm, password, clearErrors, setError])
+  const { control, errors, isValid, onSubmit } = useSignUp()
 
   return (
     <div className={'h-screen grid place-items-center'}>
@@ -124,14 +81,6 @@ const SignUp = () => {
             placeholder={'Confirm your password'}
             type={'password'}
           />
-          {/*<TextField*/}
-          {/*  className={'mb-6'}*/}
-          {/*  error={errors.confirm?.message}*/}
-          {/*  label={'Password confirmation'}*/}
-          {/*  placeholder={'Confirm your password'}*/}
-          {/*  type={'password'}*/}
-          {/*  {...register('confirm')}*/}
-          {/*/>*/}
           <div
             className={cn(
               typographyVariants({ variant: 'small' }),
