@@ -55,7 +55,10 @@ const SignUp = () => {
           </button>
         </div>
 
-        <form onSubmit={onSubmit}>
+        <form
+          className={'min-w-80'}
+          onSubmit={onSubmit}
+        >
           <TextField
             className={'mb-6'}
             error={errors.username?.message}
@@ -86,30 +89,30 @@ const SignUp = () => {
             type={'password'}
             {...register('passwordConfirmation')}
           />
-          {/*<div*/}
-          {/*  className={cn(*/}
-          {/*    typographyVariants({ variant: 'small' }),*/}
-          {/*    `flex items-center gap-1 mb-3`*/}
-          {/*  )}*/}
-          {/*>*/}
-          {/*  <Checkbox*/}
-          {/*    id={'agreement'}*/}
-          {/*    label={`I agree to the`}*/}
-          {/*  />*/}
-          {/*  <Typography*/}
-          {/*    href={''}*/}
-          {/*    variant={'smallLink'}*/}
-          {/*  >*/}
-          {/*    Terms of Service*/}
-          {/*  </Typography>*/}
-          {/*  and*/}
-          {/*  <Typography*/}
-          {/*    href={''}*/}
-          {/*    variant={'smallLink'}*/}
-          {/*  >*/}
-          {/*    Privacy Policy*/}
-          {/*  </Typography>*/}
-          {/*</div>*/}
+          <div
+            className={cn(
+              typographyVariants({ variant: 'small' }),
+              `flex items-center gap-1 mb-3`
+            )}
+          >
+            <Checkbox
+              id={'agreement'}
+              label={`I agree to the`}
+            />
+            <Typography
+              href={''}
+              variant={'smallLink'}
+            >
+              Terms of Service
+            </Typography>
+            and
+            <Typography
+              href={''}
+              variant={'smallLink'}
+            >
+              Privacy Policy
+            </Typography>
+          </div>
           <Button
             className={'w-full mb-[18px]'}
             type={'submit'}

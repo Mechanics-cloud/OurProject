@@ -1,8 +1,8 @@
 import { z } from 'zod'
 
 export const signUpSchema = z.object({
-  // agreesToTOS: z.literal(true),
-  email: z.string({ required_error: 'Email is required' }).email(),
+  agreesToTOS: z.literal(true),
+  email: z.string().email(),
   password: z
     .string()
     .min(6)
@@ -12,7 +12,7 @@ export const signUpSchema = z.object({
     }),
   passwordConfirmation: z.string().min(6).max(20),
   username: z
-    .string({ required_error: 'Username is required' })
+    .string()
     .min(6)
     .max(30)
     .regex(/^[0-9A-Za-z_-]+$/, {
