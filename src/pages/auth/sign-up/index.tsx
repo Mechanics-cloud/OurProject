@@ -5,7 +5,7 @@ import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
-import { Typography, typographyVariants } from '@/common/components'
+import { TextField, Typography, typographyVariants } from '@/common/components'
 import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
@@ -21,9 +21,16 @@ const SignUp = () => {
     control,
     formState: { errors, isValid, touchedFields },
     handleSubmit,
+    register,
     setError,
     watch,
   } = useForm<SignUpFields>({
+    defaultValues: {
+      confirm: '',
+      email: '',
+      password: '',
+      username: '',
+    },
     mode: 'onChange',
     resolver: zodResolver(signUpSchema),
   })
@@ -117,6 +124,14 @@ const SignUp = () => {
             placeholder={'Confirm your password'}
             type={'password'}
           />
+          {/*<TextField*/}
+          {/*  className={'mb-6'}*/}
+          {/*  error={errors.confirm?.message}*/}
+          {/*  label={'Password confirmation'}*/}
+          {/*  placeholder={'Confirm your password'}*/}
+          {/*  type={'password'}*/}
+          {/*  {...register('confirm')}*/}
+          {/*/>*/}
           <div
             className={cn(
               typographyVariants({ variant: 'small' }),
