@@ -16,7 +16,7 @@ export const FormTextField = <T extends FieldValues>({
   ...props
 }: Props<T>) => {
   const {
-    field: { ...field },
+    field,
     fieldState: { error },
   } = useController({ control, name })
 

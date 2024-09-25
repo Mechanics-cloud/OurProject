@@ -1,13 +1,15 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
-import { TextField, Typography, typographyVariants } from '@/common/components'
+import { Typography, typographyVariants } from '@/common/components'
 import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
 import { FormCheckbox } from '@/common/components/form/FormCheckbox'
+import { FormTextField } from '@/common/components/form/FormTextField'
 import { cn } from '@/common/utils/cn'
 import { SignUpFields, signUpSchema } from '@/pages/auth/sign-up/_singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,22 +17,38 @@ import Link from 'next/link'
 
 const SignUp = () => {
   const {
+    clearErrors,
     control,
-    formState: { errors },
+    formState: { errors, isValid, touchedFields },
     handleSubmit,
-    register,
-  } = useForm<SignUpFields>({ resolver: zodResolver(signUpSchema) })
-
-  const onSubmit = handleSubmit((data) => {
-    console.log(data)
+    setError,
+    watch,
+  } = useForm<SignUpFields>({
+    mode: 'onChange',
+    resolver: zodResolver(signUpSchema),
   })
 
-  // const {
-  //   field: { onChange, value, ...field },
-  // } = useController({
-  //   control,
-  //   name: 'agreesToTOS',
-  // })
+  const onSubmit = handleSubmit((data) => {
+    alert(data)
+  })
+
+  const password = watch('password')
+  const confirm = watch('confirm')
+
+  useEffect(() => {
+    if (touchedFields.confirm) {
+      const isValid = signUpSchema.safeParse({ confirm, password }).success
+
+      if (!isValid) {
+        setError('confirm', {
+          message: "Passwords don't match",
+          type: 'manual',
+        })
+      } else {
+        clearErrors('confirm')
+      }
+    }
+  }, [touchedFields.confirm, confirm, password, clearErrors, setError])
 
   return (
     <div className={'h-screen grid place-items-center'}>
@@ -66,35 +84,38 @@ const SignUp = () => {
           className={'min-w-80'}
           onSubmit={onSubmit}
         >
-          <TextField
+          <FormTextField
             className={'mb-6'}
-            error={errors.username?.message}
+            control={control}
             label={'Username'}
+            name={'username'}
             placeholder={'Enter your username'}
-            {...register('username')}
           />
-          <TextField
+          <FormTextField
             className={'mb-6'}
+            control={control}
             error={errors.email?.message}
             label={'Email'}
+            name={'email'}
             placeholder={'Enter your email'}
-            {...register('email')}
           />
-          <TextField
+          <FormTextField
             className={'mb-6'}
+            control={control}
             error={errors.password?.message}
             label={'Password'}
+            name={'password'}
             placeholder={'Enter a password'}
             type={'password'}
-            {...register('password')}
           />
-          <TextField
+          <FormTextField
             className={'mb-6'}
+            control={control}
             error={errors.confirm?.message}
             label={'Password confirmation'}
+            name={'confirm'}
             placeholder={'Confirm your password'}
             type={'password'}
-            {...register('confirm')}
           />
           <div
             className={cn(
@@ -125,6 +146,7 @@ const SignUp = () => {
           </div>
           <Button
             className={'w-full mb-[18px]'}
+            disabled={!isValid}
             type={'submit'}
           >
             Sign Up
