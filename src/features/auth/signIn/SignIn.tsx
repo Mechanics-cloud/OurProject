@@ -21,7 +21,7 @@ export const SignIn = () => {
     handleSubmit,
     register,
     setError,
-  } = useForm<LoginFormType>({ mode: 'onBlur', reValidateMode: 'onChange' })
+  } = useForm<LoginFormType>({ mode: 'onBlur', reValidateMode: 'onBlur' })
 
   const onSubmit = (data: LoginFormType) => {
     alert(JSON.stringify(data))
@@ -29,7 +29,7 @@ export const SignIn = () => {
 
   return (
     <>
-      <Card className={'flex flex-col items-center'}>
+      <Card className={'flex flex-col items-center w-[378px]'}>
         <Typography variant={'h1'}>Sign In</Typography>
         <div className={'flex gap-[60px] [&_svg]:w-9 [&_svg]:h-9 mt-3 mb-6'}>
           <button type={'button'}>
@@ -40,45 +40,49 @@ export const SignIn = () => {
           </button>
         </div>
         <form
-          className={'flex flex-col gap-6 w-full h-full'}
+          className={'flex flex-col  w-full h-full'}
+          noValidate
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextField
-            error={errors.email?.message}
-            label={'Email'}
-            type={'email'}
-            {...register('email', {
-              onChange: () => {
-                clearErrors('email')
-              },
-              pattern: {
-                message: 'Address entered incorrectly',
-                value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]/,
-              },
-              required: 'This field is required',
-            })}
-          />
-          <TextField
-            error={errors.password?.message}
-            label={'Password'}
-            type={'password'}
-            {...register('password', {
-              minLength: { message: 'Minimum 2 characters', value: 2 },
-              onChange: () => {
-                clearErrors('password')
-              },
-              required: 'This field is required',
-            })}
-          />
-
+          <div className={'h-[90px]'}>
+            <TextField
+              error={errors.email?.message}
+              label={'Email'}
+              type={'email'}
+              {...register('email', {
+                onChange: () => {
+                  clearErrors('email')
+                },
+                pattern: {
+                  message: 'Address entered incorrectly',
+                  value: /[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]/,
+                },
+                required: 'This field is required',
+              })}
+            />
+          </div>
+          <div className={'h-[90px]'}>
+            <TextField
+              error={errors.password?.message}
+              label={'Password'}
+              type={'password'}
+              {...register('password', {
+                minLength: { message: 'Minimum 5 characters', value: 5 },
+                onChange: () => {
+                  clearErrors('password')
+                },
+                required: 'This field is required',
+              })}
+            />
+          </div>
           <Link
-            className={'self-end mt-3'}
+            className={'self-end mt-3 mb-6'}
             href={'/*'}
           >
             Forgot Password
           </Link>
 
-          <Button>Sign In</Button>
+          <Button type={'submit'}>Sign In</Button>
         </form>
         <Typography
           className={'mt-4'}
