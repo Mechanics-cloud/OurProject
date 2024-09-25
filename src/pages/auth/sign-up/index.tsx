@@ -7,7 +7,7 @@ import {
 import { TextField, Typography, typographyVariants } from '@/common/components'
 import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
-import { Checkbox } from '@/common/components/checkbox'
+import { FormCheckbox } from '@/common/components/form/FormCheckbox'
 import { cn } from '@/common/utils/cn'
 import { SignUpFields, signUpSchema } from '@/pages/auth/sign-up/_singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -24,6 +24,13 @@ const SignUp = () => {
   const onSubmit = handleSubmit((data) => {
     console.log(data)
   })
+
+  // const {
+  //   field: { onChange, value, ...field },
+  // } = useController({
+  //   control,
+  //   name: 'agreesToTOS',
+  // })
 
   return (
     <div className={'h-screen grid place-items-center'}>
@@ -83,11 +90,11 @@ const SignUp = () => {
           />
           <TextField
             className={'mb-6'}
-            error={errors.passwordConfirmation?.message}
+            error={errors.confirm?.message}
             label={'Password confirmation'}
             placeholder={'Confirm your password'}
             type={'password'}
-            {...register('passwordConfirmation')}
+            {...register('confirm')}
           />
           <div
             className={cn(
@@ -95,9 +102,12 @@ const SignUp = () => {
               `flex items-center gap-1 mb-3`
             )}
           >
-            <Checkbox
+            <FormCheckbox
+              control={control}
               id={'agreement'}
               label={`I agree to the`}
+              name={'agreesToTOS'}
+              typographyVariant={'small'}
             />
             <Typography
               href={''}
