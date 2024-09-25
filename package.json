@@ -30,6 +30,8 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
+    "mobx": "^6.13.2",
+    "mobx-react-lite": "^4.0.7",
     "next": "14.2.7",
     "react": "^18",
     "react-day-picker": "^9.0.8",
