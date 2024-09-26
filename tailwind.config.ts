@@ -62,14 +62,6 @@ const config: Config = {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
-      fontSize: {
-        l: '18px',
-        m: '16px',
-        s: '14px',
-        xl: '20px',
-        xs: '12px',
-        xxl: '26px',
-      },
       fontWeight: {
         '400': '400',
         '500': '500',
