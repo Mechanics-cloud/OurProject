@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { signUpApi } from '@/features/signUp/api/signUpAPI'
 import { SignUpFields, signUpSchema } from '@/pages/auth/sign-up/_singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -23,8 +24,13 @@ export const useSignUp = () => {
     resolver: zodResolver(signUpSchema),
   })
 
-  const onSubmit = handleSubmit((data) => {
-    alert(data)
+  const onSubmit = handleSubmit(async (data) => {
+    const { agreesToTOS, confirm, ...restData } = data
+    const baseUrl = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL as string
+
+    const res = await signUpApi.signUp({ ...restData, baseUrl })
+
+    console.log(res)
   })
 
   const password = watch('password')
@@ -32,9 +38,9 @@ export const useSignUp = () => {
 
   useEffect(() => {
     if (touchedFields.confirm && password && confirm) {
-      const isValid = signUpSchema.safeParse({ confirm, password }).success
+      const isSame = signUpSchema.safeParse({ confirm, password }).success
 
-      if (!isValid) {
+      if (!isSame) {
         setError('confirm', {
           message: "Passwords don't match",
           type: 'manual',
