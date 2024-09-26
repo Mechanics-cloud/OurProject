@@ -3,14 +3,7 @@ import * as React from 'react'
 import { ArrowIosForward } from '@/assets/icons/filledIcons'
 import { ArrowIosBackOutline } from '@/assets/icons/outlineIcons'
 import { usePagination } from '@/common/components/pagination/hooks/usePagination'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/common/components/select/Select'
+import { Select, SelectItem } from '@/common/components/select/Select'
 import { Tooltip } from '@/common/components/tooltip'
 import { cn } from '@/common/utils/cn'
 
@@ -120,22 +113,18 @@ export const Pagination = ({
       </ul>
       <div className={'flex gap-1 text-sm items-center'}>
         <span>Show</span>
-        <Select onValueChange={onPageSizeValue}>
-          <SelectGroup>
-            <SelectTrigger className={'min-w-[50px]'}>
-              <SelectValue placeholder={pageSize} />
-            </SelectTrigger>
-            <SelectContent className={'text-sm'}>
-              {pageSizes.map((size, index) => (
-                <SelectItem
-                  key={index}
-                  value={`${size}`}
-                >
-                  {size}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </SelectGroup>
+        <Select
+          onValueChange={onPageSizeValue}
+          placeholder={pageSize}
+        >
+          {pageSizes.map((size, index) => (
+            <SelectItem
+              key={index}
+              value={`${size}`}
+            >
+              {size}
+            </SelectItem>
+          ))}
         </Select>
         <span>on page</span>
       </div>
