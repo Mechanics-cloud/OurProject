@@ -45,47 +45,61 @@ const CheckboxField = React.forwardRef<
 
 CheckboxField.displayName = CheckboxPrimitive.Root.displayName
 
-type Props = {
+export type CheckboxProps = {
   checked?: boolean
   disabled?: boolean
   id?: string
-  label?: string
+  label?: React.ReactNode
   typographyVariant?: Variant
-}
-export const Checkbox = ({
-  checked,
-  disabled,
-  id,
-  label,
-  typographyVariant = 'reg14',
-}: Props) => {
-  const generatedId = useId()
-  const checkboxId = id || generatedId
+} & React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
 
-  return (
-    <div
-      className={clsx(
-        'flex items-center gap-0.5',
-        disabled && 'pointer-events-none'
-      )}
-    >
-      <CheckboxField
-        checked={checked}
-        disabled={disabled}
-        id={checkboxId}
-      />
-      {label && (
-        <label
-          className={clsx(
-            'peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-            typographyVariants({ variant: typographyVariant }),
-            disabled ? 'text-light-900' : 'text-light-100'
-          )}
-          htmlFor={checkboxId}
-        >
-          {label}
-        </label>
-      )}
-    </div>
-  )
-}
+export const Checkbox = React.forwardRef<
+  React.ElementRef<typeof CheckboxPrimitive.Root>,
+  CheckboxProps
+>(
+  (
+    {
+      checked,
+      disabled,
+      id,
+      label,
+      typographyVariant = 'reg14',
+      ...props
+    }: CheckboxProps,
+    ref
+  ) => {
+    const generatedId = useId()
+    const checkboxId = id || generatedId
+
+    return (
+      <div
+        className={clsx(
+          'flex items-center gap-0.5',
+          disabled && 'pointer-events-none'
+        )}
+      >
+        <CheckboxField
+          checked={checked}
+          disabled={disabled}
+          id={checkboxId}
+          ref={ref}
+          {...props}
+        />
+        {label && (
+          <label
+            className={clsx(
+              'peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+              typographyVariants({ variant: typographyVariant }),
+              disabled ? 'text-light-900' : 'text-light-100'
+            )}
+            htmlFor={checkboxId}
+          >
+            {label}
+          </label>
+        )}
+      </div>
+    )
+  }
+)
+
+Checkbox.displayName = 'Checkbox'

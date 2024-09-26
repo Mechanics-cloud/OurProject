@@ -1,5 +1,4 @@
 import { Button } from '@/common/components/button'
-import { Menu } from '@/common/components/menu'
 import { typographyVariants } from '@/common/components/typography'
 import Link from 'next/link'
 
