@@ -10,8 +10,8 @@ type Props = {
 }
 export const TermsPolicyLayout = ({ children, title }: Props) => {
   return (
-    <div className={'size-full mt-6 mb-6'}>
-      <div className={'flex gap-3 items-center w-full'}>
+    <div className={'size-full'}>
+      <div className={'flex gap-3 items-center w-full mt-6 mb-6'}>
         <ArrowBackOutline />
         <Link href={'/auth/sign-up'}>Back to Sign-Up</Link>
       </div>
