@@ -6,14 +6,7 @@ import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 import { Button } from '../button'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../select/Select'
+import { Select, SelectItem } from '../select/Select'
 
 type HeaderProps = {
   isAuth?: boolean
@@ -23,7 +16,7 @@ const Header = ({ isAuth }: HeaderProps) => {
   return (
     <header
       className={
-        'fixed top-0 left-0 w-full h-[var(--header-height)] bg-dark-700 text-light-100 flex items-center justify-between pr-16 border-b border-b-dark-300'
+        'fixed z-50 top-0 left-0 w-full h-[var(--header-height)] bg-dark-700 text-light-100 flex items-center justify-between pr-16 border-b border-b-dark-300'
       }
     >
       <Typography
@@ -48,28 +41,27 @@ const Header = ({ isAuth }: HeaderProps) => {
             <OutlineBell className={' w-6 h-6'} />
           </button>
         )}
-        <Select defaultValue={'en'}>
-          <SelectGroup className={'min-w-[10.1875rem] gap-3'}>
-            <SelectTrigger className={'[&>span]:gap-3'}>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem
-                className={'[&>span]:gap-3'}
-                value={'en'}
-              >
-                <FlagUnitedKingdom />
-                English
-              </SelectItem>
-              <SelectItem
-                className={'[&>span]:gap-3'}
-                value={'ru'}
-              >
-                <FlagRussia />
-                Russian
-              </SelectItem>
-            </SelectContent>
-          </SelectGroup>
+        <Select defaultValue={'ru'}>
+          <SelectItem
+            className={'sm:[&>span]:gap-3'}
+            value={'en'}
+          >
+            <FlagUnitedKingdom
+              aria-label={'английский язык'}
+              className={'w-6 h-6'}
+            />
+            <span className={'hidden sm:inline'}>English</span>
+          </SelectItem>
+          <SelectItem
+            className={'[&>span]:gap-3'}
+            value={'ru'}
+          >
+            <FlagRussia
+              aria-label={'русский язык'}
+              className={'w-6 h-6'}
+            />
+            <span className={'hidden sm:inline'}>Russian</span>
+          </SelectItem>
         </Select>
         {!isAuth && (
           <>
