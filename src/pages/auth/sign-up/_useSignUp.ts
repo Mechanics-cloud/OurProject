@@ -11,6 +11,7 @@ export const useSignUp = () => {
     control,
     formState: { errors, isValid, touchedFields },
     handleSubmit,
+    reset,
     setError,
     watch,
   } = useForm<SignUpFields>({
@@ -29,9 +30,10 @@ export const useSignUp = () => {
     const baseUrl = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL as string
 
     const res = await signUpApi.signUp({ ...restData, baseUrl })
-    //
-    // if (!res.data) {
-    // }
+
+    if (!res.data) {
+      reset({ agreesToTOS: undefined })
+    }
   })
 
   const password = watch('password')

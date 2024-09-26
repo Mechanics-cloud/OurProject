@@ -128,7 +128,10 @@ const SignUp = () => {
               >
                 Sign Up
               </DialogTrigger>
-              <DialogContent className={'w-96'}>
+              <DialogContent
+                className={'w-96'}
+                crossOff
+              >
                 <DialogHeader>
                   <DialogTitle>Email sent</DialogTitle>
                 </DialogHeader>

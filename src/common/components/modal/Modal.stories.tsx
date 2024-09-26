@@ -71,16 +71,13 @@ export const ModalWithoutCross: Story = {
               Click me!
             </Button>
           </DialogTrigger>
-          <DialogContent crossOff>
+          <DialogContent>
             <DialogHeader>
               <DialogTitle>Title in Header</DialogTitle>
             </DialogHeader>
             <DialogDescription>
               Dialog description dialog description dialog description.
             </DialogDescription>
-
-            {/* <div className='p-3'>DIALOG-CONTENT</div> */}
-
             <DialogFooter>
               <Button
                 className={'w-full'}
