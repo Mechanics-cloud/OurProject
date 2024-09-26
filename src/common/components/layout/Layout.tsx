@@ -1,30 +1,28 @@
 import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
 
 import { cn } from '@/common/utils/cn'
-import { Slot } from '@radix-ui/react-slot'
 
 import { Header } from '../header'
+import { ScrollArea } from '../scrollbar'
 
-type Props = { asChild?: boolean } & ComponentPropsWithRef<'div'>
+type Props = ComponentPropsWithRef<'div'>
 
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
-  ({ asChild, children, className, ...rest }, ref) => {
-    const Component = asChild ? Slot : 'div'
-
+  ({ children, className, ...rest }, ref) => {
     return (
       <div
+        className={'w-screen h-screen'}
         ref={ref}
         {...rest}
       >
         <Header />
-        <main
-          className={cn(
-            'mt-[var(--header-height)] px-14 flex justify-center items-center',
-            className
-          )}
-        >
-          {children}
-        </main>
+        <ScrollArea className={'w-full h-full'}>
+          <main
+            className={cn('px-14 flex justify-center items-center', className)}
+          >
+            {children}
+          </main>
+        </ScrollArea>
       </div>
     )
   }
