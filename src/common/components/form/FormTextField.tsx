@@ -20,9 +20,19 @@ export const FormTextField = <T extends FieldValues>({
     fieldState: { error },
   } = useController({ control, name })
 
+  const errorToShow = errorMessage ?? error?.message
+  let style = ''
+
+  if (errorToShow) {
+    const margin = `${Math.ceil(errorToShow.length / 50) * 24}px`
+
+    style = errorToShow.length > 50 ? `mb-[${margin}]` : ''
+  }
+
   return (
     <TextField
-      error={errorMessage ?? error?.message}
+      className={style}
+      error={errorToShow}
       {...props}
       {...field}
     />
