@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import {
   Button,
   Dialog,
@@ -11,19 +13,14 @@ import {
 } from '@/common'
 
 type Props = {
-  children: string
-  isValid: boolean
+  children: ReactNode
   userEmail: string
 }
-export const ConfirmSignUpModal = ({ children, isValid, userEmail }: Props) => {
+export const ConfirmSignUpModal = ({ children, userEmail }: Props) => {
   return (
     <Dialog>
-      <DialogTrigger
-        className={'w-full mb-[18px]'}
-        disabled={!isValid}
-        type={'submit'}
-      >
-        {children}
+      <DialogTrigger asChild>
+        <div>{children}</div>
       </DialogTrigger>
       <DialogContent className={'w-96'}>
         <DialogHeader>
