@@ -48,7 +48,7 @@ const SignUp = () => {
         </div>
 
         <form
-          className={'min-w-80 flex flex-col gap-6'}
+          className={'min-w-80'}
           onSubmit={onSubmit}
         >
           <FormTextField
@@ -80,42 +80,40 @@ const SignUp = () => {
             placeholder={'Confirm your password'}
             type={'password'}
           />
-          <div>
-            <div
-              className={cn(
-                typographyVariants({ variant: 'small' }),
-                `flex items-center gap-1 mb-3`
-              )}
+          <div
+            className={cn(
+              typographyVariants({ variant: 'small' }),
+              `flex items-center gap-1 mb-3`
+            )}
+          >
+            <FormCheckbox
+              control={control}
+              id={'agreement'}
+              label={`I agree to the`}
+              name={'agreesToTOS'}
+              typographyVariant={'small'}
+            />
+            <Typography
+              href={''}
+              variant={'smallLink'}
             >
-              <FormCheckbox
-                control={control}
-                id={'agreement'}
-                label={`I agree to the`}
-                name={'agreesToTOS'}
-                typographyVariant={'small'}
-              />
-              <Typography
-                href={''}
-                variant={'smallLink'}
-              >
-                Terms of Service
-              </Typography>
-              and
-              <Typography
-                href={''}
-                variant={'smallLink'}
-              >
-                Privacy Policy
-              </Typography>
-            </div>
-            <Button
-              className={'w-full mb-[18px]'}
-              disabled={!isValid}
-              type={'submit'}
+              Terms of Service
+            </Typography>
+            and
+            <Typography
+              href={''}
+              variant={'smallLink'}
             >
-              Sign Up
-            </Button>
+              Privacy Policy
+            </Typography>
           </div>
+          <Button
+            className={'w-full mb-[18px]'}
+            disabled={!isValid}
+            type={'submit'}
+          >
+            Sign Up
+          </Button>
         </form>
 
         <div className={'flex flex-col gap-y-1.5 items-center'}>
