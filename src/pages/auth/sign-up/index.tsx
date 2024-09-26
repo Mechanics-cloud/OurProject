@@ -3,7 +3,6 @@ import {
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
 import {
-  Button,
   Card,
   FormCheckbox,
   FormTextField,
@@ -109,14 +108,11 @@ const SignUp = () => {
             </Typography>
           </div>
 
-          <ConfirmSignUpModal userEmail={userEmail}>
-            <Button
-              className={'w-full mb-[18px]'}
-              disabled={!isValid}
-              type={'submit'}
-            >
-              Sign Up
-            </Button>
+          <ConfirmSignUpModal
+            isValid={isValid}
+            userEmail={userEmail}
+          >
+            Sign Up
           </ConfirmSignUpModal>
         </form>
 
