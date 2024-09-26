@@ -38,6 +38,7 @@ export const useSignUp = () => {
 
   const password = watch('password')
   const confirm = watch('confirm')
+  const userEmail = watch('email')
 
   useEffect(() => {
     if (touchedFields.confirm && password && confirm) {
@@ -59,5 +60,6 @@ export const useSignUp = () => {
     errors,
     isValid,
     onSubmit,
+    userEmail,
   }
 }

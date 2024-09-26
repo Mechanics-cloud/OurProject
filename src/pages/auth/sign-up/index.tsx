@@ -3,7 +3,6 @@ import {
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
 import {
-  Button,
   Card,
   FormCheckbox,
   FormTextField,
@@ -16,7 +15,7 @@ import { useSignUp } from '@/pages/auth/sign-up/_useSignUp'
 import Link from 'next/link'
 
 const SignUp = () => {
-  const { control, errors, isValid, onSubmit } = useSignUp()
+  const { control, errors, isValid, onSubmit, userEmail } = useSignUp()
 
   return (
     <div className={'h-screen grid place-items-center'}>
@@ -109,14 +108,11 @@ const SignUp = () => {
             </Typography>
           </div>
 
-          <ConfirmSignUpModal>
-            <Button
-              className={'w-full mb-[18px]'}
-              disabled={!isValid}
-              type={'submit'}
-            >
-              Sign Up
-            </Button>
+          <ConfirmSignUpModal
+            isValid={isValid}
+            userEmail={userEmail}
+          >
+            Sign Up
           </ConfirmSignUpModal>
         </form>
 

@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-
 import {
   Button,
   Dialog,
@@ -13,18 +11,26 @@ import {
 } from '@/common'
 
 type Props = {
-  children: ReactNode
+  children: string
+  isValid: boolean
+  userEmail: string
 }
-export const ConfirmSignUpModal = ({ children }: Props) => {
+export const ConfirmSignUpModal = ({ children, isValid, userEmail }: Props) => {
   return (
     <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
+      <DialogTrigger
+        className={'w-full mb-[18px]'}
+        disabled={!isValid}
+        type={'submit'}
+      >
+        {children}
+      </DialogTrigger>
       <DialogContent className={'w-96'}>
         <DialogHeader>
           <DialogTitle>Email sent</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          We have sent a link to confirm your email to epam@epam.com.
+          We have sent a link to confirm your email to {userEmail}.
         </DialogDescription>
 
         <DialogFooter>
