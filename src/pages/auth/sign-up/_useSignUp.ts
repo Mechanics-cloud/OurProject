@@ -18,7 +18,7 @@ export const useSignUp = () => {
       confirm: '',
       email: '',
       password: '',
-      username: '',
+      userName: '',
     },
     mode: 'onChange',
     resolver: zodResolver(signUpSchema),
@@ -29,8 +29,9 @@ export const useSignUp = () => {
     const baseUrl = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL as string
 
     const res = await signUpApi.signUp({ ...restData, baseUrl })
-
-    console.log(res)
+    //
+    // if (!res.data) {
+    // }
   })
 
   const password = watch('password')
@@ -38,11 +39,11 @@ export const useSignUp = () => {
 
   useEffect(() => {
     if (touchedFields.confirm && password && confirm) {
-      const isSame = signUpSchema.safeParse({ confirm, password }).success
+      const isSame = password === confirm
 
       if (!isSame) {
         setError('confirm', {
-          message: "Passwords don't match",
+          message: 'Passwords must match',
           type: 'manual',
         })
       } else {

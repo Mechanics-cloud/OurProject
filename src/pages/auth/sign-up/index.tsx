@@ -5,9 +5,17 @@ import {
 import {
   Button,
   Card,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
   FormCheckbox,
   FormTextField,
   Typography,
+  buttonVariants,
   typographyVariants,
 } from '@/common'
 import { cn } from '@/common/utils/cn'
@@ -54,7 +62,7 @@ const SignUp = () => {
           <FormTextField
             control={control}
             label={'Username'}
-            name={'username'}
+            name={'userName'}
             placeholder={'Enter your username'}
           />
           <FormTextField
@@ -107,13 +115,46 @@ const SignUp = () => {
               Privacy Policy
             </Typography>
           </div>
-          <Button
-            className={'w-full mb-[18px]'}
-            disabled={!isValid}
-            type={'submit'}
-          >
-            Sign Up
-          </Button>
+
+          <>
+            <Dialog>
+              <DialogTrigger
+                className={cn(
+                  'w-full mb-[18px]',
+                  buttonVariants({ variant: 'primary' })
+                )}
+                disabled={!isValid}
+                type={'submit'}
+              >
+                Sign Up
+              </DialogTrigger>
+              <DialogContent className={'w-96'}>
+                <DialogHeader>
+                  <DialogTitle>Email sent</DialogTitle>
+                </DialogHeader>
+                <DialogDescription>
+                  We have sent a link to confirm your email to epam@epam.com.
+                </DialogDescription>
+
+                <DialogFooter>
+                  <Button
+                    className={'w-full'}
+                    type={'button'}
+                  >
+                    Ok
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </>
+
+          {/*<Button*/}
+          {/*  className={'w-full mb-[18px]'}*/}
+          {/*  disabled={!isValid}*/}
+          {/*  type={'submit'}*/}
+          {/*>*/}
+          {/*  Sign Up*/}
+          {/*</Button>*/}
         </form>
 
         <div className={'flex flex-col gap-y-1.5 items-center'}>

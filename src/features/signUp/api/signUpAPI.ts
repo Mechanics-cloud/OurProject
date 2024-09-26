@@ -7,9 +7,7 @@ class SignUpApi {
   public async signUp<SignUpResponseType>(
     registrationData: SignUpRequestData
   ): Promise<AxiosResponse> {
-    return this.instance
-      .post('/v1/auth/registration', registrationData)
-      .then((res) => res.data)
+    return this.instance.post('/v1/auth/registration', registrationData)
   }
 }
 
