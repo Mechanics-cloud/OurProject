@@ -1,16 +1,8 @@
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/common/components/select/Select'
+import { Select, SelectItem } from '@/common/components/select/Select'
 import { Meta, StoryObj } from '@storybook/react'
 
-const meta = {
+const meta: Meta<typeof Select> = {
   component: Select,
   parameters: {
     layout: 'centered',
@@ -23,47 +15,37 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const SelectExample: Story = {
+export const CustomSelectStory: Story = {
   args: {
     children: (
       <>
-        <SelectGroup>
-          <SelectLabel>Select-box</SelectLabel>
-          <SelectTrigger className={'min-w-[240px]'}>
-            <SelectValue placeholder={'Select-box'} />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value={'select item 1'}>Select-item-1</SelectItem>
-            <SelectItem value={'select item 2'}>Select-item-2</SelectItem>
-            <SelectItem value={'select item 3'}>Select-item-3</SelectItem>
-          </SelectContent>
-        </SelectGroup>
+        <SelectItem value={'select-item1'}>Select-item-1</SelectItem>
+        <SelectItem value={'select-item-2'}>Select-item-2</SelectItem>
+        <SelectItem value={'select-item-3'}>Select-item-3</SelectItem>
       </>
     ),
+    className: 'min-w-[240px]',
     disabled: true,
+    label: 'Select-box',
+    placeholder: 'Select item',
   },
 }
 
-export const SelectWithIcons: Story = {
+export const CustomSelectStoryWithIcons: Story = {
   args: {
     children: (
       <>
-        <SelectTrigger className={'min-w-[240px]'}>
-          <SelectValue defaultValue={'ru'}></SelectValue>
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={'ru'}>
-            <FlagRussia />
-            Russian
-          </SelectItem>
-          <SelectItem value={'en'}>
-            <FlagUnitedKingdom />
-            English
-          </SelectItem>
-        </SelectContent>
+        <SelectItem value={'ru'}>
+          <FlagRussia />
+          Russian
+        </SelectItem>
+        <SelectItem value={'en'}>
+          <FlagUnitedKingdom />
+          English
+        </SelectItem>
       </>
     ),
+    className: 'min-w-[240px]',
     defaultValue: 'ru',
-    disabled: true,
   },
 }
