@@ -1,6 +1,5 @@
+import { SideBar } from '@/common'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { SideBar } from './SideBar'
 
 const meta = {
   component: SideBar,
