@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:production": "npm run build",
     "start": "next start",
     "storybook": "storybook dev -p 6006",
     "sb": "storybook dev -p 6006",
@@ -19,6 +20,7 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.21",
+    "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-checkbox": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-popover": "^1.1.1",
@@ -27,6 +29,7 @@
     "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-tabs": "^1.1.0",
+    "@radix-ui/react-tooltip": "^1.1.2",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -41,7 +44,8 @@
     "react-hook-form": "^7.53.0",
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.5.2",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "1.8.0",
@@ -52,6 +56,7 @@
     "@storybook/addon-interactions": "^8.2.9",
     "@storybook/addon-links": "^8.2.9",
     "@storybook/addon-onboarding": "^8.2.9",
+    "@storybook/addon-viewport": "^8.3.1",
     "@storybook/blocks": "^8.2.9",
     "@storybook/manager-api": "^8.2.9",
     "@storybook/nextjs": "^8.2.9",

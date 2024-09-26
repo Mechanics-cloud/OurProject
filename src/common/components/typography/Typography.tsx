@@ -4,7 +4,9 @@ import { typographyVariants } from '@/common/components/typography/typographyVar
 import { cn } from '@/common/utils/cn'
 import { VariantProps } from 'class-variance-authority'
 
-type Variant = NonNullable<VariantProps<typeof typographyVariants>['variant']>
+export type Variant = NonNullable<
+  VariantProps<typeof typographyVariants>['variant']
+>
 
 const typographyTags: Record<Variant, ElementType> = {
   bold14: 'p',

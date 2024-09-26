@@ -6,6 +6,7 @@ import '@fontsource/inter/600.css'
 import '@fontsource/inter/700.css'
 import { themes } from '@storybook/theming'
 import '../src/styles/globals.css'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -28,6 +29,9 @@ const preview: Preview = {
         color: /(background|color)$/i,
         date: /Date$/i,
       },
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
     },
   },
 }
