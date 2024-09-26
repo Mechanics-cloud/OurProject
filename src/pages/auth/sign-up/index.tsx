@@ -94,14 +94,14 @@ const SignUp = () => {
               typographyVariant={'small'}
             />
             <Typography
-              href={''}
+              href={'/auth/terms-of-service'}
               variant={'smallLink'}
             >
               Terms of Service
             </Typography>
             and
             <Typography
-              href={''}
+              href={'/auth/privacy-policy'}
               variant={'smallLink'}
             >
               Privacy Policy
