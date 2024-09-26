@@ -7,14 +7,20 @@ import {
 import { TextField, Typography } from '@/common/components'
 import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
+import Router from 'next/router'
 
-type LoginFormType = {
+import signInStore from '../model/signInStore'
+
+export type LoginFormType = {
   email: string
   password: string
 }
 
-export const SignIn = () => {
+export const SignIn = observer(() => {
+  const { getToken } = signInStore
+
   const {
     clearErrors,
     formState: { errors },
@@ -23,8 +29,16 @@ export const SignIn = () => {
     setError,
   } = useForm<LoginFormType>({ mode: 'onBlur', reValidateMode: 'onBlur' })
 
-  const onSubmit = (data: LoginFormType) => {
-    alert(JSON.stringify(data))
+  const onSubmit = async (data: LoginFormType) => {
+    try {
+      await getToken(data)
+      Router.push('/')
+    } catch (error: any) {
+      setError('email', {
+        message: error.response.data.messages,
+        type: 'manual',
+      })
+    }
   }
 
   return (
@@ -94,4 +108,4 @@ export const SignIn = () => {
       </Card>
     </>
   )
-}
+})
