@@ -26,7 +26,7 @@ export const FormTextField = <T extends FieldValues>({
   if (errorToShow) {
     const margin = `${Math.ceil(errorToShow.length / 50) * 24}px`
 
-    style = errorToShow.length > 50 ? `mb-[${margin}]` : ''
+    style = errorToShow.length > 50 ? `mb-[${margin}]` : ' '
   }
 
   return (
