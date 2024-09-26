@@ -4,7 +4,7 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 
 class SignUpApi {
   constructor(private instance: AxiosInstance) {}
-  public async signUp<SignUpResponseType>(
+  public async signUp(
     registrationData: SignUpRequestData
   ): Promise<AxiosResponse> {
     return this.instance.post('/v1/auth/registration', registrationData)
