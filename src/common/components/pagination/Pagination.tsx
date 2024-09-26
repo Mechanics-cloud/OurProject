@@ -2,9 +2,8 @@ import * as React from 'react'
 
 import { ArrowIosForward } from '@/assets/icons/filledIcons'
 import { ArrowIosBackOutline } from '@/assets/icons/outlineIcons'
+import { Select, SelectItem, Tooltip } from '@/common'
 import { usePagination } from '@/common/components/pagination/hooks/usePagination'
-import { Select, SelectItem } from '@/common/components/select/Select'
-import { Tooltip } from '@/common/components/tooltip'
 import { cn } from '@/common/utils/cn'
 
 import { PageButton } from './PageButton'
