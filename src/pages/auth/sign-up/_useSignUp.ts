@@ -16,6 +16,7 @@ export const useSignUp = () => {
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
+      agreesToTOS: false,
       confirm: '',
       email: '',
       password: '',
@@ -26,13 +27,13 @@ export const useSignUp = () => {
   })
 
   const onSubmit = handleSubmit(async (data) => {
-    const { agreesToTOS, confirm, ...restData } = data
+    const { confirm, ...restData } = data
     const baseUrl = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL as string
 
     const res = await signUpApi.signUp({ ...restData, baseUrl })
 
     if (!res.data) {
-      reset({ agreesToTOS: undefined })
+      reset()
     }
   })
 

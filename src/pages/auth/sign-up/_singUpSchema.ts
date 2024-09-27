@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 export const signUpSchema = z
   .object({
-    agreesToTOS: z.literal(true),
+    agreesToTOS: z.literal<boolean>(true),
     confirm: z.string().min(6).max(20),
     email: z.string({ required_error: 'Email is required' }).email({
       message: 'The email must match the format example@example.com',
