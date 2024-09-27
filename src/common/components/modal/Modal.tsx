@@ -6,7 +6,7 @@ import { Close } from '@/assets/icons/filledIcons'
 import { cn } from '@/common/utils/cn'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 
-import { Typography } from '../typography'
+import { Typography, typographyVariants } from '../typography'
 
 const Dialog = DialogPrimitive.Root
 
@@ -103,12 +103,13 @@ const DialogTitle = React.forwardRef<
   <DialogPrimitive.Title
     className={cn(
       'text-lg font-semibold leading-none tracking-tight',
+      typographyVariants({ variant: 'h1' }),
       className
     )}
     ref={ref}
     {...props}
   >
-    <Typography variant={'h1'}>{children}</Typography>
+    {children}
   </DialogPrimitive.Title>
 ))
 
@@ -119,11 +120,15 @@ const DialogDescription = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ children, className, ...props }, ref) => (
   <DialogPrimitive.Description
-    className={cn('px-3 text-sm text-muted-foreground', className)}
+    className={cn(
+      'px-3 text-sm text-muted-foreground',
+      typographyVariants({ variant: 'reg16' }),
+      className
+    )}
     ref={ref}
     {...props}
   >
-    <Typography variant={'reg16'}>{children}</Typography>
+    {children}
   </DialogPrimitive.Description>
 ))
 
