@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        loader: 'animationLoader 2s linear infinite',
+        loader: 'animationLoader 1s ease-in-out infinite',
       },
       backgroundImage: {
         'gradient-conic':
@@ -73,10 +73,8 @@ const config: Config = {
       },
       keyframes: {
         animationLoader: {
-          // '0%': { left: '0', transform: 'translateX(-100%)' },
-          // '100%': { left: '100', transform: 'translateX(0%)' },
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(1000%)' },
+          '0%': { left: '0', transform: 'translateX(-100%)' },
+          '100%': { left: '100%', transform: 'translateX(0%)' },
         },
       },
     },

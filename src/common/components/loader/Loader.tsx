@@ -5,7 +5,7 @@ export const Loader = () => {
     <div
       className={cn(
         'w-full h-1 relative bg-light-300 overflow-hidden',
-        'after:block after:w-36 after:h-1 after:bg-accent-500 after:top-0 after:left-0 after:animationLoader'
+        'after:absolute after:w-36 after:h-1 after:bg-accent-500 after:top-0 after:left-0 after:animate-loader'
       )}
     ></div>
   )
