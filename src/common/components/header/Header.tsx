@@ -1,19 +1,19 @@
 import * as React from 'react'
 
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
-import { Typography } from '@/common/components/typography'
-import Link from 'next/link'
-
-import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
-import { Button } from '../button'
 import {
+  Button,
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '../select/Select'
+} from '@/common'
+import { Typography } from '@/common/components/typography'
+import Link from 'next/link'
+
+import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
 type HeaderProps = {
   isAuth?: boolean
@@ -79,7 +79,9 @@ const Header = ({ isAuth }: HeaderProps) => {
             >
               Log in
             </Button>
-            <Button>Sing up</Button>
+            <Button asChild>
+              <Link href={'/auth/sign-up'}>Sing up</Link>
+            </Button>
           </>
         )}
       </div>

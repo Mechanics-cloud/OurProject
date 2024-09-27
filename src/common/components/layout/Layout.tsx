@@ -1,9 +1,9 @@
 import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
 
+import { Header } from '@/common'
 import { cn } from '@/common/utils/cn'
 import { Slot } from '@radix-ui/react-slot'
-
-import { Header } from '../header'
+import NextTopLoader from 'nextjs-toploader'
 
 type Props = { asChild?: boolean } & ComponentPropsWithRef<'div'>
 
@@ -16,6 +16,10 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         ref={ref}
         {...rest}
       >
+        <NextTopLoader
+          color={'#397DF6'}
+          showSpinner={false}
+        />
         <Header />
         <main
           className={cn(
