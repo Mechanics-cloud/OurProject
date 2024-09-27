@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { signUpApi } from '@/features/signUp/api/signUpAPI'
@@ -25,17 +25,26 @@ export const useSignUp = () => {
     mode: 'onChange',
     resolver: zodResolver(signUpSchema),
   })
+  const [isLoading, setIsLoading] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const onSubmit = handleSubmit(async (data) => {
     const { confirm, ...restData } = data
     const baseUrl = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL as string
 
+    setIsLoading(true)
     const res = await signUpApi.signUp({ ...restData, baseUrl })
 
+    setIsLoading(false)
     if (!res.data) {
-      reset()
+      setIsOpen(true)
     }
   })
+
+  const onModalClose = () => {
+    setIsOpen(false)
+    reset()
+  }
 
   const password = watch('password')
   const confirm = watch('confirm')
@@ -59,7 +68,10 @@ export const useSignUp = () => {
   return {
     control,
     errors,
+    isLoading,
+    isOpen,
     isValid,
+    onModalClose,
     onSubmit,
     userEmail,
   }

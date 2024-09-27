@@ -1,8 +1,11 @@
+import { useState } from 'react'
+
 import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
 import {
+  Button,
   Card,
   FormCheckbox,
   FormTextField,
@@ -15,7 +18,16 @@ import { useSignUp } from '@/pages/auth/sign-up/_useSignUp'
 import Link from 'next/link'
 
 const SignUp = () => {
-  const { control, errors, isValid, onSubmit, userEmail } = useSignUp()
+  const {
+    control,
+    errors,
+    isLoading,
+    isOpen,
+    isValid,
+    onModalClose,
+    onSubmit,
+    userEmail,
+  } = useSignUp()
 
   return (
     <div className={'h-screen grid place-items-center'}>
@@ -108,12 +120,18 @@ const SignUp = () => {
             </Typography>
           </div>
 
-          <ConfirmSignUpModal
-            isValid={isValid}
-            userEmail={userEmail}
+          <Button
+            className={'w-full mb-[18px]'}
+            disabled={!isValid || isLoading}
+            type={'submit'}
           >
             Sign Up
-          </ConfirmSignUpModal>
+          </Button>
+          <ConfirmSignUpModal
+            isOpen={isOpen}
+            onModalClose={onModalClose}
+            userEmail={userEmail}
+          />
         </form>
 
         <div className={'flex flex-col gap-y-1.5 items-center'}>

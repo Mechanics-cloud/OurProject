@@ -3,10 +3,9 @@
 import * as React from 'react'
 
 import { Close } from '@/assets/icons/filledIcons'
+import { typographyVariants } from '@/common'
 import { cn } from '@/common/utils/cn'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-
-import { Typography, typographyVariants } from '../typography'
 
 const Dialog = DialogPrimitive.Root
 

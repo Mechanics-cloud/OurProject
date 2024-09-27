@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import * as React from 'react'
 
 import {
   Button,
@@ -7,35 +7,27 @@ import {
   DialogContent,
   DialogDescription,
   DialogFooter,
-  DialogHeader,
   DialogTitle,
-  DialogTrigger,
-  buttonVariants,
 } from '@/common'
-import { cn } from '@/common/utils/cn'
 
 type Props = {
-  children: ReactNode
-  isValid: boolean
+  isOpen: boolean
+  onModalClose: () => void
   userEmail: string
 }
-export const ConfirmSignUpModal = ({ children, isValid, userEmail }: Props) => {
+
+export const ConfirmSignUpModal = ({
+  isOpen,
+  onModalClose,
+  userEmail,
+}: Props) => {
   return (
-    <Dialog>
-      <DialogTrigger
-        className={cn(
-          'w-full mb-[18px]',
-          buttonVariants({ variant: 'primary' })
-        )}
-        disabled={!isValid}
-        type={'submit'}
-      >
-        {children}
-      </DialogTrigger>
+    <Dialog
+      onOpenChange={onModalClose}
+      open={isOpen}
+    >
       <DialogContent className={'w-96'}>
-        <DialogHeader>
-          <DialogTitle>Email sent</DialogTitle>
-        </DialogHeader>
+        <DialogTitle>Email sent</DialogTitle>
         <DialogDescription>
           We have sent a link to confirm your email to {userEmail}.
         </DialogDescription>
