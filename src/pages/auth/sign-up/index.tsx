@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
@@ -9,6 +7,7 @@ import {
   Card,
   FormCheckbox,
   FormTextField,
+  Tooltip,
   Typography,
   typographyVariants,
 } from '@/common'
@@ -39,24 +38,23 @@ const SignUp = () => {
           Sign Up
         </Typography>
         <div className={'flex gap-14 mb-6 justify-center'}>
-          <button
-            title={'Sing Up with Google'}
-            type={'button'}
-          >
-            <GoogleSvgrepoCom1
-              height={36}
-              width={36}
-            />
-          </button>
-          <button
-            title={'Sing Up with GitHub'}
-            type={'button'}
-          >
-            <GithubSvgrepoCom31
-              height={36}
-              width={36}
-            />
-          </button>
+          <Tooltip title={'Sing Up with Google'}>
+            <button type={'button'}>
+              <GoogleSvgrepoCom1
+                height={36}
+                width={36}
+              />
+            </button>
+          </Tooltip>
+
+          <Tooltip title={'Sing Up with GitHub'}>
+            <button type={'button'}>
+              <GithubSvgrepoCom31
+                height={36}
+                width={36}
+              />
+            </button>
+          </Tooltip>
         </div>
 
         <form
