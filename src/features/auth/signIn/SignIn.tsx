@@ -19,7 +19,7 @@ export type LoginFormType = {
 }
 
 export const SignIn = observer(() => {
-  const { getToken } = signInStore
+  const { getToken, me, updateToken } = signInStore
 
   const {
     clearErrors,
@@ -34,6 +34,7 @@ export const SignIn = observer(() => {
       await getToken(data)
       Router.push('/')
     } catch (error: any) {
+      debugger
       setError('email', {
         message: error.response.data.messages,
         type: 'manual',
@@ -43,6 +44,12 @@ export const SignIn = observer(() => {
 
   return (
     <>
+      <button
+        onClick={() => me()}
+        type={'button'}
+      >
+        qwe
+      </button>
       <Card className={'flex flex-col items-center w-[378px]'}>
         <Typography variant={'h1'}>Sign In</Typography>
         <div className={'flex gap-[60px] [&_svg]:w-9 [&_svg]:h-9 mt-3 mb-6'}>

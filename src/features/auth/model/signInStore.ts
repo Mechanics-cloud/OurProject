@@ -1,17 +1,28 @@
 import axios from 'axios'
 import { makeAutoObservable } from 'mobx'
 
+import { authApi } from '../api/instanceApi'
 import { LoginFormType } from '../signIn/SignIn'
+
+const inst = axios.create({
+  baseURL: 'https://inctagram.work/api/v1/',
+  withCredentials: true,
+})
 
 class SignInStore {
   getToken = async (data: LoginFormType) => {
-    const a = await axios
-      .post('https://inctagram.work/api/v1/auth/login', data)
-      .then((res) => res.data)
+    const accessToken = await authApi.login(data)
 
-    this.token = a
+    sessionStorage.setItem('accessToken', accessToken)
   }
-  token = {}
+  me = async () => {
+    const c = await authApi.me()
+  }
+  updateToken = async () => {
+    const b = await authApi.updateToken()
+
+    sessionStorage.setItem('accessToken', b)
+  }
 
   constructor() {
     makeAutoObservable(this)

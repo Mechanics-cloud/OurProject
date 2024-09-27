@@ -6,6 +6,7 @@ import Link from 'next/link'
 export default function Home() {
   return (
     <div className={'flex flex-col justify-center items-center gap-5 h-screen'}>
+      <SignIn />
       <Button
         asChild
         className={typographyVariants({ variant: 'h3' })}
