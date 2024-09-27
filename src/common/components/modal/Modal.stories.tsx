@@ -71,7 +71,7 @@ export const ModalWithoutCross: Story = {
               Click me!
             </Button>
           </DialogTrigger>
-          <DialogContent>
+          <DialogContent crossOff>
             <DialogHeader>
               <DialogTitle>Title in Header</DialogTitle>
             </DialogHeader>
