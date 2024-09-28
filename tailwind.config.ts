@@ -68,6 +68,9 @@ const config: Config = {
         '600': '600',
         '700': '700',
       },
+      height: {
+        headCalc: 'calc(100vh - var(--header-height))',
+      },
     },
   },
   variants: {

@@ -18,7 +18,10 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         <Header />
         <ScrollArea className={'w-full h-full'}>
           <main
-            className={cn('px-14 flex justify-center items-center', className)}
+            className={cn(
+              'px-14 mt-[var(--header-height)] h-headCalc',
+              className
+            )}
           >
             {children}
           </main>
