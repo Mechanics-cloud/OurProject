@@ -1,8 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { signUpApi } from '@/features/signUp/api/signUpAPI'
-import { SignUpFields, signUpSchema } from '@/pages/auth/sign-up/_singUpSchema'
+import {
+  SignUpFields,
+  signUpSchema,
+} from '@/features/signUp/model/singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useSignUp = () => {
@@ -33,12 +37,17 @@ export const useSignUp = () => {
     const baseUrl = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL as string
 
     setIsLoading(true)
-    const res = await signUpApi.signUp({ ...restData, baseUrl })
+    try {
+      const res = await signUpApi.signUp({ ...restData, baseUrl })
 
-    setIsLoading(false)
-    if (!res.data) {
-      setIsOpen(true)
+      if (!res.data) {
+        setIsOpen(true)
+      }
+    } catch (e: any) {
+      console.log('err')
+      toast.error(e.message ?? 'Something went wrong')
     }
+    setIsLoading(false)
   })
 
   const onModalClose = () => {

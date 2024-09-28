@@ -12,8 +12,8 @@ import {
   typographyVariants,
 } from '@/common'
 import { cn } from '@/common/utils/cn'
+import { useSignUp } from '@/features/signUp/model/useSignUp'
 import { ConfirmSignUpModal } from '@/features/signUp/ui/ConfirmSignUpModal'
-import { useSignUp } from '@/pages/auth/sign-up/_useSignUp'
 import Link from 'next/link'
 
 const SignUp = () => {
