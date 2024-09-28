@@ -44,7 +44,6 @@ export const useSignUp = () => {
         setIsOpen(true)
       }
     } catch (e: any) {
-      console.log('err')
       toast.error(e.message ?? 'Something went wrong')
     }
     setIsLoading(false)

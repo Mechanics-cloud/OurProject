@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
 
-import { Header } from '@/common'
+import { Header, ToastContainer } from '@/common'
 import { cn } from '@/common/utils/cn'
 import { Slot } from '@radix-ui/react-slot'
 import NextTopLoader from 'nextjs-toploader'
@@ -12,7 +12,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     const Component = asChild ? Slot : 'div'
 
     return (
-      <div
+      <Component
         ref={ref}
         {...rest}
       >
@@ -28,8 +28,9 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
           )}
         >
           {children}
+          <ToastContainer />
         </main>
-      </div>
+      </Component>
     )
   }
 )
