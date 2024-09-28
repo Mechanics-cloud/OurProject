@@ -14,9 +14,10 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const BasicTooltipWithProps: Story = {
-  args: {
-    children: 'Hover',
-    title: 'Add to library',
-  },
+export const BasicTooltip = () => {
+  return (
+    <Tooltip title={'You did it!'}>
+      <p>Hover it</p>
+    </Tooltip>
+  )
 }
