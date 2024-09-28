@@ -10,7 +10,7 @@ const config: Config = {
   theme: {
     extend: {
       animation: {
-        loader: 'animationLoader 1s ease-in-out infinite',
+        loader: 'animationLoader 2s ease-in-out infinite',
       },
       backgroundImage: {
         'gradient-conic':
