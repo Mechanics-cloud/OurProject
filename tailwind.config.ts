@@ -9,6 +9,9 @@ const config: Config = {
   plugins: [require('tailwindcss-radix')()],
   theme: {
     extend: {
+      animation: {
+        loader: 'animationLoader 2s ease-in-out infinite',
+      },
       backgroundImage: {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
@@ -62,19 +65,17 @@ const config: Config = {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
-      fontSize: {
-        l: '18px',
-        m: '16px',
-        s: '14px',
-        xl: '20px',
-        xs: '12px',
-        xxl: '26px',
-      },
       fontWeight: {
         '400': '400',
         '500': '500',
         '600': '600',
         '700': '700',
+      },
+      keyframes: {
+        animationLoader: {
+          '0%': { left: '0', transform: 'translateX(-100%)' },
+          '100%': { left: '100%', transform: 'translateX(0%)' },
+        },
       },
     },
   },
