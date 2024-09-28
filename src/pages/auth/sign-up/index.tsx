@@ -7,6 +7,7 @@ import {
   Card,
   FormCheckbox,
   FormTextField,
+  Loader,
   Tooltip,
   Typography,
   typographyVariants,
@@ -30,6 +31,7 @@ const SignUp = () => {
 
   return (
     <div className={'h-screen grid place-items-center'}>
+      {isLoading && <Loader />}
       <Card className={'pt-6 pb-7'}>
         <Typography
           className={'text-center mb-3'}
