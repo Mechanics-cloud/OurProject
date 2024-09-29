@@ -77,6 +77,9 @@ const config: Config = {
           '100%': { left: '100%', transform: 'translateX(0%)' },
         },
       },
+      height: {
+        headCalc: 'calc(100vh - var(--header-height))',
+      },
     },
   },
   variants: {
