@@ -9,6 +9,9 @@ const config: Config = {
   plugins: [require('tailwindcss-radix')()],
   theme: {
     extend: {
+      animation: {
+        loader: 'animationLoader 2s ease-in-out infinite',
+      },
       backgroundImage: {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
@@ -67,6 +70,12 @@ const config: Config = {
         '500': '500',
         '600': '600',
         '700': '700',
+      },
+      keyframes: {
+        animationLoader: {
+          '0%': { left: '0', transform: 'translateX(-100%)' },
+          '100%': { left: '100%', transform: 'translateX(0%)' },
+        },
       },
       height: {
         headCalc: 'calc(100vh - var(--header-height))',
