@@ -38,17 +38,17 @@ const Header = ({ isAuth }: HeaderProps) => {
             onClick={() => alert('Картинка нажата!')}
             type={'button'}
           >
-            <OutlineBell className={' w-6 h-6'} />
+            <OutlineBell className={'size-6'} />
           </button>
         )}
         <Select defaultValue={'ru'}>
           <SelectItem
-            className={'sm:[&>span]:gap-3'}
+            className={'[&>span]:gap-3'}
             value={'en'}
           >
             <FlagUnitedKingdom
               aria-label={'английский язык'}
-              className={'w-6 h-6'}
+              className={'size-6'}
             />
             <span>English</span>
           </SelectItem>
@@ -58,7 +58,7 @@ const Header = ({ isAuth }: HeaderProps) => {
           >
             <FlagRussia
               aria-label={'русский язык'}
-              className={'w-6 h-6'}
+              className={'size-6'}
             />
             <span>Russian</span>
           </SelectItem>
