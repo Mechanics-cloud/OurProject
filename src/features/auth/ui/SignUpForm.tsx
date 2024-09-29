@@ -3,7 +3,7 @@ import { FormCheckbox, FormTextField } from '@/common/form'
 import { cn } from '@/common/utils/cn'
 import { useSignUp } from '@/features/auth/model/useSignUp'
 import { ConfirmSignUpModal } from '@/features/auth/ui/ConfirmSignUpModal'
-import { ExternalServicesRegistration } from '@/features/auth/ui/RegistrationWithOuterServices'
+import { ExternalServicesRegistration } from '@/features/auth/ui/ExternalServicesRegistration'
 import Link from 'next/link'
 
 export const SignUpForm = () => {
@@ -19,13 +19,19 @@ export const SignUpForm = () => {
   } = useSignUp()
 
   return (
-    <div className={'h-full grid place-items-center'}>
+    <>
       {isLoading && <Loader />}
-      <Card className={'pt-6 pb-7'}>
-        <ExternalServicesRegistration title={'Sign Up'} />
+      <Card>
+        <Typography
+          className={'text-center mb-3'}
+          variant={'h1'}
+        >
+          Sign Up
+        </Typography>
+        <ExternalServicesRegistration />
 
         <form
-          className={'min-w-80'}
+          className={'min-w-80 mb-5'}
           onSubmit={onSubmit}
         >
           <FormTextField
@@ -99,19 +105,24 @@ export const SignUpForm = () => {
           />
         </form>
 
-        <div className={'flex flex-col gap-y-1.5 items-center'}>
+        <div className={'flex flex-col gap-1.5 items-center'}>
           <span>Do you have an account?</span>
-          <Link
-            className={cn(
-              typographyVariants({ variant: 'h3' }),
-              'grow text-accent-500 w-full text-center'
-            )}
-            href={''}
+          <Button
+            asChild
+            variant={'text'}
           >
-            Sign in
-          </Link>
+            <Link
+              className={cn(
+                typographyVariants({ variant: 'h3' }),
+                'grow text-accent-500 w-full text-center'
+              )}
+              href={''}
+            >
+              Sign in
+            </Link>
+          </Button>
         </div>
       </Card>
-    </div>
+    </>
   )
 }

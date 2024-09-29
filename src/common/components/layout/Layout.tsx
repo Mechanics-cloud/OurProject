@@ -1,4 +1,9 @@
-import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
+import {
+  ComponentPropsWithRef,
+  ElementRef,
+  ReactElement,
+  forwardRef,
+} from 'react'
 
 import { Header, ToastContainer } from '@/common'
 import { cn } from '@/common/utils/cn'
@@ -23,7 +28,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         <Header />
         <main
           className={cn(
-            'mt-[var(--header-height)] px-14 flex justify-center items-center',
+            'mt-[var(--header-height)] px-14 flex justify-center items-center h-screen',
             className
           )}
         >
@@ -34,3 +39,6 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     )
   }
 )
+export function getLayout(page: ReactElement) {
+  return <Layout>{page}</Layout>
+}
