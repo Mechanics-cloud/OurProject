@@ -6,7 +6,7 @@ import { Tooltip } from '@/common'
 
 export const ExternalServicesRegistration = () => {
   return (
-    <div className={'flex gap-14 justify-center'}>
+    <div className={'flex gap-14 justify-center mb-6 mt-4'}>
       <Tooltip title={'Sing Up with Google'}>
         <button type={'button'}>
           <GoogleSvgrepoCom1

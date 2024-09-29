@@ -21,7 +21,7 @@ export const SignUpForm = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <Card>
+      <Card className={'pt-6 pb-7'}>
         <Typography
           className={'text-center mb-3'}
           variant={'h1'}
@@ -31,7 +31,7 @@ export const SignUpForm = () => {
         <ExternalServicesRegistration />
 
         <form
-          className={'min-w-80 mb-5'}
+          className={'min-w-80'}
           onSubmit={onSubmit}
         >
           <FormTextField
@@ -90,22 +90,22 @@ export const SignUpForm = () => {
               Privacy Policy
             </Typography>
           </div>
-
           <Button
             className={'w-full mb-[18px]'}
-            disabled={!isValid || isLoading}
+            disabled={!isValid}
             type={'submit'}
           >
             Sign Up
           </Button>
-          <ConfirmSignUpModal
-            isOpen={isOpen}
-            onModalClose={onModalClose}
-            userEmail={userEmail}
-          />
         </form>
 
-        <div className={'flex flex-col gap-1.5 items-center'}>
+        <ConfirmSignUpModal
+          isOpen={isOpen}
+          onModalClose={onModalClose}
+          userEmail={userEmail}
+        />
+
+        <div className={'flex flex-col gap-4 items-center'}>
           <span>Do you have an account?</span>
           <Button
             asChild

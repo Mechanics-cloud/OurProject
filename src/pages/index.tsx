@@ -1,6 +1,5 @@
 import { Button } from '@/common/components/button'
 import { typographyVariants } from '@/common/components/typography'
-import { ExternalServicesRegistration } from '@/features/auth/ui/ExternalServicesRegistration'
 import Link from 'next/link'
 
 export default function Home() {
