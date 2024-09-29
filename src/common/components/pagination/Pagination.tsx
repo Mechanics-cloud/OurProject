@@ -1,9 +1,9 @@
-import * as React from 'react'
-
 import { ArrowIosForward } from '@/assets/icons/filledIcons'
 import { ArrowIosBackOutline } from '@/assets/icons/outlineIcons'
-import { Select, SelectItem, Tooltip } from '@/common'
-import { usePagination } from '@/common/components/pagination/hooks/usePagination'
+import { Tooltip } from '@/common'
+import { CountToShow } from '@/common/components/pagination/CountToShow'
+import { PaginationRangeButtons } from '@/common/components/pagination/PaginationRangeButtons'
+import { usePaginationRange } from '@/common/components/pagination/hooks/usePaginationRange'
 import { cn } from '@/common/utils/cn'
 
 import { PageButton } from './PageButton'
@@ -17,8 +17,6 @@ type Props = {
   totalItemsCount: number
 }
 
-export const DOTS = 0
-
 export const Pagination = ({
   currentPage,
   onPageChange,
@@ -27,7 +25,7 @@ export const Pagination = ({
   siblingCount = 1,
   totalItemsCount,
 }: Props) => {
-  const paginationRange = usePagination({
+  const paginationRange = usePaginationRange({
     currentPage,
     pageSize,
     siblingCount,
@@ -55,8 +53,6 @@ export const Pagination = ({
   const isBackArrowDisabled = currentPage === 1
   const isForwardArrowDisabled = currentPage === lastPage
 
-  const pageSizes = [10, 20, 30, 50, 100]
-
   return (
     <div className={'flex gap-8'}>
       <ul className={'flex gap-x-3 align-middle'}>
@@ -75,25 +71,11 @@ export const Pagination = ({
             </PageButton>
           </Tooltip>
         </li>
-        {paginationRange.map((pageNumber, index) => {
-          if (pageNumber === DOTS) {
-            return <li key={index}>&#8230;</li>
-          }
-
-          return (
-            <li key={index}>
-              <Tooltip title={`Go to page ${pageNumber}`}>
-                <PageButton
-                  onClick={() => onPageChange(pageNumber)}
-                  selected={pageNumber === currentPage}
-                >
-                  {pageNumber}
-                  <span className={'sr-only'}>`Go to page ${pageNumber}`</span>
-                </PageButton>
-              </Tooltip>
-            </li>
-          )
-        })}
+        <PaginationRangeButtons
+          currentPage={currentPage}
+          onPageChange={onPageChange}
+          paginationRange={paginationRange}
+        />
         <li className={'flex align-middle'}>
           <Tooltip title={'Go forward'}>
             <PageButton
@@ -110,23 +92,10 @@ export const Pagination = ({
           </Tooltip>
         </li>
       </ul>
-      <div className={'flex gap-1 text-sm items-center'}>
-        <span>Show</span>
-        <Select
-          onValueChange={onPageSizeValue}
-          placeholder={pageSize}
-        >
-          {pageSizes.map((size, index) => (
-            <SelectItem
-              key={index}
-              value={`${size}`}
-            >
-              {size}
-            </SelectItem>
-          ))}
-        </Select>
-        <span>on page</span>
-      </div>
+      <CountToShow
+        onPageSizeValue={onPageSizeValue}
+        pageSize={pageSize}
+      />
     </div>
   )
 }
