@@ -1,19 +1,11 @@
 import * as React from 'react'
 
-import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
+import { LangSelect } from '@/common'
+import { Button } from '@/common'
 import { Typography } from '@/common/components/typography'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
-import { Button } from '../button'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../select/Select'
 
 type HeaderProps = {
   isAuth?: boolean
@@ -48,29 +40,7 @@ const Header = ({ isAuth }: HeaderProps) => {
             <OutlineBell className={' w-6 h-6'} />
           </button>
         )}
-        <Select defaultValue={'en'}>
-          <SelectGroup className={'min-w-[10.1875rem] gap-3'}>
-            <SelectTrigger className={'[&>span]:gap-3'}>
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem
-                className={'[&>span]:gap-3'}
-                value={'en'}
-              >
-                <FlagUnitedKingdom />
-                English
-              </SelectItem>
-              <SelectItem
-                className={'[&>span]:gap-3'}
-                value={'ru'}
-              >
-                <FlagRussia />
-                Russian
-              </SelectItem>
-            </SelectContent>
-          </SelectGroup>
-        </Select>
+        <LangSelect />
         {!isAuth && (
           <>
             <Button

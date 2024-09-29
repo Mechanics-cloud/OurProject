@@ -1,6 +1,10 @@
+import { LangSelect } from '@/common'
 import { Button } from '@/common/components/button'
 import { typographyVariants } from '@/common/components/typography'
+import { en } from 'locales/en'
+import { ru } from 'locales/ru'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function Home() {
   return (
