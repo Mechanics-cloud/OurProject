@@ -1,7 +1,4 @@
-import { useState } from 'react'
-
 import { Button } from '@/common/components/button'
-import { LogOutModal } from '@/common/components/logOutModal'
 import { typographyVariants } from '@/common/components/typography'
 import Link from 'next/link'
 
