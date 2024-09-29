@@ -17,9 +17,9 @@ type Story = StoryObj<typeof meta>
 
 export const BaseLogOutModal: Story = {
   args: {
-    triggerButton: <Button type={'button'}>{}Log out</Button>,
-    yesHandler: () => {
+    logOutModalHandler: () => {
       alert('You are logged out!')
     },
+    triggerButton: <Button type={'button'}>Log out</Button>,
   },
 }

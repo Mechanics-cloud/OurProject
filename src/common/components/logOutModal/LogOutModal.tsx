@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ReactNode } from 'react'
+import { ChangeEvent, ReactNode } from 'react'
 
 import {
   Button,
@@ -13,10 +13,10 @@ import {
 } from '@/common'
 
 type Props = {
+  logOutModalHandler: () => void
   triggerButton: ReactNode
-  yesHandler: () => void
 }
-export const LogOutModal = ({ triggerButton, yesHandler }: Props) => {
+export const LogOutModal = ({ logOutModalHandler, triggerButton }: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{triggerButton}</DialogTrigger>
@@ -30,7 +30,7 @@ export const LogOutModal = ({ triggerButton, yesHandler }: Props) => {
           <DialogClose className={'w-full'}>
             <Button
               className={'w-full'}
-              onClick={yesHandler}
+              onClick={logOutModalHandler}
               type={'button'}
             >
               Yes
