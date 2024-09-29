@@ -6,6 +6,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -15,30 +16,38 @@ import {
 type Props = {
   logOutModalHandler: () => void
   triggerButton: ReactNode
+  userEmail: string
 }
-export const LogOutModal = ({ logOutModalHandler, triggerButton }: Props) => {
+export const LogOutModal = ({
+  logOutModalHandler,
+  triggerButton,
+  userEmail,
+}: Props) => {
   return (
     <Dialog>
       <DialogTrigger asChild>{triggerButton}</DialogTrigger>
-      <DialogContent crossOff>
+      <DialogContent className={'gap-[30px] max-w-[440px]'}>
         <DialogHeader>
-          <DialogTitle className={'flex justify-center items-center'}>
-            Do you really want to log out?
-          </DialogTitle>
+          <DialogTitle>Log Out</DialogTitle>
         </DialogHeader>
-        <DialogFooter className={'flex gap-3'}>
-          <DialogClose className={'w-full'}>
+        <DialogDescription className={'text-left my-0'}>
+          Are you really want to log out of your account &quot;{userEmail}
+          &quot;?
+        </DialogDescription>
+        <DialogFooter className={'flex justify-end gap-6'}>
+          <DialogClose>
             <Button
-              className={'w-full'}
+              className={'w-[96px]'}
               onClick={logOutModalHandler}
               type={'button'}
+              variant={'outline'}
             >
               Yes
             </Button>
           </DialogClose>
-          <DialogClose className={'w-full'}>
+          <DialogClose>
             <Button
-              className={'w-full'}
+              className={'w-[96px]'}
               type={'button'}
             >
               No

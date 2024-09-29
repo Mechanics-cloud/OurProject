@@ -21,5 +21,6 @@ export const BaseLogOutModal: Story = {
       alert('You are logged out!')
     },
     triggerButton: <Button type={'button'}>Log out</Button>,
+    userEmail: 'some@email.com',
   },
 }
