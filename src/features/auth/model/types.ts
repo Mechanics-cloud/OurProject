@@ -1,4 +1,4 @@
-import { SignUpFields } from '@/features/signUp/model/singUpSchema'
+import { SignUpFields } from '@/features/auth/model/singUpSchema'
 
 export type SignUpRequestData = {
   baseUrl: string

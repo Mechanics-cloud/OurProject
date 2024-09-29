@@ -2,11 +2,8 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { signUpApi } from '@/features/signUp/api/signUpAPI'
-import {
-  SignUpFields,
-  signUpSchema,
-} from '@/features/signUp/model/singUpSchema'
+import { signUpApi } from '@/features/auth/api/signUpAPI'
+import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useSignUp = () => {

@@ -1,5 +1,5 @@
-import { instance } from '@/features/signUp/api/instances'
-import { SignUpRequestData } from '@/features/signUp/model/types'
+import { instance } from '@/features/auth/api/instances'
+import { SignUpRequestData } from '@/features/auth/model/types'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
 class SignUpApi {
