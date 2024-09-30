@@ -35,7 +35,7 @@ export const LogOutModal = ({
           &quot;?
         </DialogDescription>
         <DialogFooter className={'flex justify-end gap-6'}>
-          <DialogClose>
+          <DialogClose asChild>
             <Button
               className={'w-[96px]'}
               onClick={logOutModalHandler}
@@ -45,7 +45,7 @@ export const LogOutModal = ({
               Yes
             </Button>
           </DialogClose>
-          <DialogClose>
+          <DialogClose asChild>
             <Button
               className={'w-[96px]'}
               type={'button'}

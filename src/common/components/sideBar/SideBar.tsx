@@ -99,6 +99,9 @@ export const SideBar = () => {
 
         <ul className={'mb-9'}>
           <LogOutModal
+            logOutModalHandler={() => {
+              alert('You are logged out!')
+            }}
             triggerButton={
               <NavLink
                 ActiveIcon={LogOut}
@@ -108,9 +111,7 @@ export const SideBar = () => {
                 Log Out
               </NavLink>
             }
-            yesHandler={() => {
-              alert('You are logged out!')
-            }}
+            userEmail={'__email__'}
           />
         </ul>
       </nav>
