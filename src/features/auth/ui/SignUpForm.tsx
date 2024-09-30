@@ -116,7 +116,7 @@ export const SignUpForm = () => {
                 typographyVariants({ variant: 'h3' }),
                 'grow text-accent-500 w-full text-center'
               )}
-              href={''}
+              href={'/auth/sign-in'}
             >
               Sign in
             </Link>

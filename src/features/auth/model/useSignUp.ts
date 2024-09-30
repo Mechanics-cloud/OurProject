@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { Environments } from '@/common/enviroments'
 import { signUpApi } from '@/features/auth/api/signUpAPI'
 import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -31,7 +32,7 @@ export const useSignUp = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     const { confirm, ...restData } = data
-    const baseUrl = process.env.NEXT_PUBLIC_INCTAGRAM_BASE_URL as string
+    const baseUrl = Environments.BASE_URL as string
 
     setIsLoading(true)
     try {
