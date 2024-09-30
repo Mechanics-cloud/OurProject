@@ -2,7 +2,6 @@
 
 import * as React from 'react'
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
-import { ChangeEvent, ReactNode } from 'react'
 
 import ArrowIosDownOutline from '@/assets/icons/outlineIcons/ArrowIosDownOutline'
 import { typographyVariants } from '@/common/components/typography'
