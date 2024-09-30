@@ -1,14 +1,11 @@
 import * as React from 'react'
 
-import { LangSelect } from '@/common'
-import { Button } from '@/common'
+import { Button, LangSelect } from '@/common'
 import { Typography } from '@/common/components/typography'
 import Link from 'next/link'
 
 import { useTranslation } from '../../../../hooks/useTranslation'
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
-import { Button } from '../button'
-import { Select, SelectItem } from '../select/Select'
 
 type HeaderProps = {
   isAuth?: boolean

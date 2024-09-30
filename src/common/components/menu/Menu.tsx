@@ -45,19 +45,19 @@ export const Menu = () => {
     <nav className={'min-w-[360px] w-full bg-dark-00 border-t border-dark-300'}>
       <ul className={'flex w-full justify-evenly py-[18px]'}>
         <li>
-          <Tooltip title={t.menu.goToHome}>
+          <Tooltip title={t.menu.home}>
             <Link href={PATHS.HOME}>
               {matchesPathname(href, PATHS.HOME) ? (
                 <Home className={'size-6 text-accent-500'} />
               ) : (
                 <HomeOutline className={'size-6'} />
               )}
-              <span className={'sr-only'}>{t.menu.goToHome}</span>
+              <span className={'sr-only'}>{t.menu.home}</span>
             </Link>
           </Tooltip>
         </li>
         <li className={'group'}>
-          <Tooltip title={t.menu.addNewPost}>
+          <Tooltip title={t.menu.create}>
             <button
               onClick={() => {
                 setIsModalOpen(true)
@@ -72,19 +72,19 @@ export const Menu = () => {
                   'size-6 hidden group-hover:block group-active:block text-accent-500'
                 }
               />
-              <span className={'sr-only'}>{t.menu.addNewPost}</span>
+              <span className={'sr-only'}>{t.menu.create}</span>
             </button>
           </Tooltip>
         </li>
         <li>
-          <Tooltip title={t.menu.goToMessages}>
+          <Tooltip title={t.menu.messenger}>
             <Link href={PATHS.MESSENGER}>
               {matchesPathname(href, PATHS.MESSENGER) ? (
                 <MessageCircle className={'size-6 text-accent-500'} />
               ) : (
                 <MessageCircleOutline className={'size-6'} />
               )}
-              <span className={'sr-only'}>{t.menu.goToMessages}</span>
+              <span className={'sr-only'}>{t.menu.messenger}</span>
             </Link>
           </Tooltip>
         </li>
@@ -101,14 +101,14 @@ export const Menu = () => {
           </Tooltip>
         </li>
         <li>
-          <Tooltip title={t.menu.goToProfile}>
+          <Tooltip title={t.menu.profile}>
             <Link href={PATHS.PROFILE}>
               {matchesPathname(href, PATHS.PROFILE) ? (
                 <Person className={'size-6 text-accent-500'} />
               ) : (
                 <PersonOutline className={'size-6'} />
               )}
-              <span className={'sr-only'}>{t.menu.goToProfile}</span>
+              <span className={'sr-only'}>{t.menu.profile}</span>
             </Link>
           </Tooltip>
         </li>

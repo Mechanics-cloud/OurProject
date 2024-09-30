@@ -20,10 +20,12 @@ import {
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
 
+import { useTranslation } from '../../../../hooks/useTranslation'
 import { NavLink } from './navLink/NavLink'
 
 export const SideBar = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const { t } = useTranslation()
 
   const handelCreate = () => {
     setModalIsOpen(true)
@@ -40,7 +42,7 @@ export const SideBar = () => {
             DefaultIcon={HomeOutline}
             href={'/'}
           >
-            Home
+            {t.menu.home}
           </NavLink>
 
           <NavLink
@@ -50,7 +52,7 @@ export const SideBar = () => {
             iconTrigger={modalIsOpen}
             onClick={handelCreate}
           >
-            Create
+            {t.menu.create}
           </NavLink>
 
           <NavLink
@@ -58,7 +60,7 @@ export const SideBar = () => {
             DefaultIcon={PersonOutline}
             href={'/profile'}
           >
-            My Profile
+            {t.menu.profile}
           </NavLink>
 
           <NavLink
@@ -66,7 +68,7 @@ export const SideBar = () => {
             DefaultIcon={MessageCircleOutline}
             href={'/messenger'}
           >
-            Messenger
+            {t.menu.messenger}
           </NavLink>
 
           <NavLink
@@ -74,7 +76,7 @@ export const SideBar = () => {
             DefaultIcon={SearchOutline}
             href={'/search'}
           >
-            Search
+            {t.menu.search}
           </NavLink>
         </ul>
 
@@ -84,7 +86,7 @@ export const SideBar = () => {
             DefaultIcon={TrendingUpOutline}
             href={'/statistics'}
           >
-            Statistics
+            {t.menu.statistics}
           </NavLink>
 
           <NavLink
@@ -92,7 +94,7 @@ export const SideBar = () => {
             DefaultIcon={BookmarkOutline}
             href={'/favorites'}
           >
-            Favorites
+            {t.menu.favorites}
           </NavLink>
         </ul>
 
@@ -102,7 +104,7 @@ export const SideBar = () => {
             DefaultIcon={LogOut}
             as={'button'}
           >
-            Log Out
+            {t.menu.logOut}
           </NavLink>
         </ul>
       </nav>

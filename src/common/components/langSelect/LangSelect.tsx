@@ -1,41 +1,71 @@
+import * as React from 'react'
+
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
-import {
-  SelectBasic,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/common'
+import { Select, SelectItem } from '@/common'
 import { useRouter } from 'next/router'
+
+import { useTranslation } from '../../../../hooks/useTranslation'
 
 export const LangSelect = () => {
   const { asPath, locale, locales, pathname, push, query } = useRouter()
+  const { t } = useTranslation()
 
   const changeLangHandler = (locale: string) => {
-    push({ pathname, query }, asPath, { locale })
+    push({ pathname, query }, asPath, { locale: locale ? locale : 'ru' })
   }
 
   return (
-    <SelectBasic
-      defaultValue={locale}
-      onValueChange={changeLangHandler}
+    <Select
+      className={'[&>button]:border-none'}
+      defaultValue={locale ? locale : 'ru'}
+      onChange={changeLangHandler}
     >
-      <SelectGroup className={'min-w-[10.1875rem] gap-3'}>
-        <SelectTrigger className={'[&>span]:gap-3'}>
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={'en'}>
-            <FlagUnitedKingdom />
-            English
-          </SelectItem>
-          <SelectItem value={'ru'}>
-            <FlagRussia />
-            Russian
-          </SelectItem>
-        </SelectContent>
-      </SelectGroup>
-    </SelectBasic>
+      <SelectItem
+        className={'[&>span]:gap-3'}
+        value={'en'}
+      >
+        <FlagUnitedKingdom
+          aria-label={'английский язык'}
+          className={'size-6'}
+        />
+        <span className={'hidden sm:inline'}>English</span>
+      </SelectItem>
+      <SelectItem
+        className={'[&>span]:gap-3'}
+        value={'ru'}
+      >
+        <FlagRussia
+          aria-label={'русский язык'}
+          className={'size-6'}
+        />
+        <span className={'hidden sm:inline'}>Русский</span>
+      </SelectItem>
+    </Select>
+
+    // <Select
+    //   className={'[&>button]:border-none'}
+    //   defaultValue={'ru'}
+    // >
+    //   <SelectItem
+    //     className={'sm:[&>span]:gap-3'}
+    //     value={'en'}
+    //   >
+    //     <FlagUnitedKingdom
+    //       aria-label={'английский язык'}
+    //       className={'w-6 h-6'}
+    //     />
+    //     <span className={'hidden sm:inline'}>English</span>
+    //   </SelectItem>
+    //   <SelectItem
+    //     className={'[&>span]:gap-3'}
+    //     value={'ru'}
+    //   >
+    //     <FlagRussia
+    //       aria-label={'русский язык'}
+    //       className={'w-6 h-6'}
+    //     />
+    //     <span className={'hidden sm:inline'}>Russian</span>
+    //   </SelectItem>
+    // </Select>
   )
 }

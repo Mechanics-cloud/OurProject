@@ -14,8 +14,11 @@ import { cn } from '@/common/utils/cn'
 import { useSignUp } from '@/pages/auth/sign-up/_useSignUp'
 import Link from 'next/link'
 
+import { useTranslation } from '../../../../hooks/useTranslation'
+
 const SignUp = () => {
   const { control, errors, isValid, onSubmit } = useSignUp()
+  const { t } = useTranslation()
 
   return (
     <div className={'h-screen grid place-items-center'}>
@@ -24,7 +27,7 @@ const SignUp = () => {
           className={'text-center mb-3'}
           variant={'h1'}
         >
-          Sign Up
+          {t.signUpForm.title}
         </Typography>
         <div className={'flex gap-14 mb-6 justify-center'}>
           <button
@@ -53,16 +56,16 @@ const SignUp = () => {
         >
           <FormTextField
             control={control}
-            label={'Username'}
+            label={t.signUpForm.labels.userName}
             name={'username'}
-            placeholder={'Enter your username'}
+            placeholder={t.signUpForm.placeholders.userName}
           />
           <FormTextField
             control={control}
             error={errors.email?.message}
             label={'Email'}
-            name={'email'}
-            placeholder={'Enter your email'}
+            name={t.signUpForm.labels.email}
+            placeholder={}
           />
           <FormTextField
             control={control}
