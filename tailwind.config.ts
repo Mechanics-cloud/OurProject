@@ -5,6 +5,7 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/common/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   plugins: [require('tailwindcss-radix')()],
   theme: {
@@ -70,6 +71,9 @@ const config: Config = {
         '500': '500',
         '600': '600',
         '700': '700',
+      },
+      height: {
+        headCalc: 'calc(100vh - var(--header-height))',
       },
       keyframes: {
         animationLoader: {

@@ -9,20 +9,18 @@ import {
   SettingsOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Select,
+  SelectItem,
+} from '@/common'
 import { Typography } from '@/common/components/typography'
 import Link from 'next/link'
 
-import { Button } from '../button'
 import { Card } from '../card'
-import { Popover, PopoverContent, PopoverTrigger } from '../popover/Popover'
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '../select'
 
 type HeaderProps = {
   isAuth?: boolean
@@ -32,7 +30,7 @@ export const MobileHeader = ({ isAuth }: HeaderProps) => {
   return (
     <header
       className={
-        'fixed top-0 left-0 w-full h-[3.75rem] bg-dark-700 text-light-100 flex items-center justify-between px-4 sm:p-0 sm:pr-16 border-b border-b-dark-300'
+        'fixed z-40 top-0 left-0 w-full h-[3.75rem] bg-dark-700 text-light-100 flex items-center justify-between px-4 sm:p-0 sm:pr-16 border-b border-b-dark-300'
       }
     >
       <Typography
@@ -58,36 +56,30 @@ export const MobileHeader = ({ isAuth }: HeaderProps) => {
             <OutlineBell className={'hidden sm:block w-6 h-6 '} />
           </button>
         )}
-        <Select defaultValue={'ru'}>
-          <SelectGroup className={'sm:w-[10.1875rem] gap-3'}>
-            <SelectTrigger
-              className={'[&>span]:gap-3 border-transparent sm:border-dark-300'}
-            >
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem
-                className={'sm:[&>span]:gap-3'}
-                value={'en'}
-              >
-                <FlagUnitedKingdom
-                  aria-label={'английский язык'}
-                  className={'w-6 h-6'}
-                />
-                <span className={'hidden sm:inline'}>English</span>
-              </SelectItem>
-              <SelectItem
-                className={'[&>span]:gap-3'}
-                value={'ru'}
-              >
-                <FlagRussia
-                  aria-label={'русский язык'}
-                  className={'w-6 h-6'}
-                />
-                <span className={'hidden sm:inline'}>Russian</span>
-              </SelectItem>
-            </SelectContent>
-          </SelectGroup>
+        <Select
+          className={'[&>button]:border-none'}
+          defaultValue={'ru'}
+        >
+          <SelectItem
+            className={'sm:[&>span]:gap-3'}
+            value={'en'}
+          >
+            <FlagUnitedKingdom
+              aria-label={'английский язык'}
+              className={'w-6 h-6'}
+            />
+            <span className={'hidden sm:inline'}>English</span>
+          </SelectItem>
+          <SelectItem
+            className={'[&>span]:gap-3'}
+            value={'ru'}
+          >
+            <FlagRussia
+              aria-label={'русский язык'}
+              className={'w-6 h-6'}
+            />
+            <span className={'hidden sm:inline'}>Russian</span>
+          </SelectItem>
         </Select>
         {!isAuth && (
           <>
@@ -115,7 +107,7 @@ export const MobileHeader = ({ isAuth }: HeaderProps) => {
                 />
               </button>
             </PopoverTrigger>
-            <PopoverContent>
+            <PopoverContent className={'z-50'}>
               <Card
                 asChild
                 className={'w-[160px] h-[200px] mr-4 mt-0.25 px-3'}

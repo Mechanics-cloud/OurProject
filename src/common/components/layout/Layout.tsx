@@ -1,30 +1,35 @@
 import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
 
+import { Header, ScrollArea, ToastContainer } from '@/common'
 import { cn } from '@/common/utils/cn'
-import { Slot } from '@radix-ui/react-slot'
+import NextTopLoader from 'nextjs-toploader'
 
-import { Header } from '../header'
-
-type Props = { asChild?: boolean } & ComponentPropsWithRef<'div'>
+type Props = ComponentPropsWithRef<'div'>
 
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
-  ({ asChild, children, className, ...rest }, ref) => {
-    const Component = asChild ? Slot : 'div'
-
+  ({ children, className, ...rest }, ref) => {
     return (
       <div
+        className={'w-screen h-screen'}
         ref={ref}
         {...rest}
       >
+        <NextTopLoader
+          color={'#397DF6'}
+          showSpinner={false}
+        />
+        <ToastContainer />
         <Header />
-        <main
-          className={cn(
-            'mt-[var(--header-height)] px-14 flex justify-center items-center',
-            className
-          )}
-        >
-          {children}
-        </main>
+        <ScrollArea className={'w-full h-full'}>
+          <main
+            className={cn(
+              'px-14 mt-[var(--header-height)] h-headCalc',
+              className
+            )}
+          >
+            {children}
+          </main>
+        </ScrollArea>
       </div>
     )
   }

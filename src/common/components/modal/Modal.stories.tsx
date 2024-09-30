@@ -76,9 +76,6 @@ export const ModalWithoutCross: Story = {
             <DialogDescription>
               Dialog description dialog description dialog description.
             </DialogDescription>
-
-            {/* <div className='p-3'>DIALOG-CONTENT</div> */}
-
             <DialogFooter>
               <Button
                 className={'w-full'}

@@ -1,4 +1,5 @@
-import { ComponentProps } from 'react'
+import * as React from 'react'
+import { ComponentPropsWithoutRef } from 'react'
 
 import { cn } from '@/common/utils/cn'
 import { Slot } from '@radix-ui/react-slot'
@@ -52,23 +53,23 @@ export const buttonVariants = cva(
   }
 )
 
-type ButtonProps = { asChild?: boolean } & ComponentProps<'button'> &
+type ButtonProps = { asChild?: boolean } & ComponentPropsWithoutRef<'button'> &
   VariantProps<typeof buttonVariants>
 
-function Button({
-  asChild,
-  className,
-  variant = 'primary',
-  ...props
-}: ButtonProps) {
-  const Component = asChild ? Slot : 'button'
+const Button = React.forwardRef<React.ElementRef<'button'>, ButtonProps>(
+  ({ asChild, className, variant = 'primary', ...props }, ref) => {
+    const Component = asChild ? Slot : 'button'
 
-  return (
-    <Component
-      className={cn(buttonVariants({ variant }), className)}
-      {...props}
-    />
-  )
-}
+    return (
+      <Component
+        className={cn(buttonVariants({ variant }), className)}
+        {...ref}
+        {...props}
+      />
+    )
+  }
+)
+
+Button.displayName = 'Button'
 
 export { Button }

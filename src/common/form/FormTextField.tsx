@@ -22,7 +22,7 @@ export const FormTextField = <T extends FieldValues>({
 
   return (
     <TextField
-      error={errorMessage ?? error?.message}
+      error={errorMessage || error?.message}
       {...props}
       {...field}
     />
