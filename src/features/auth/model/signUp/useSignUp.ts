@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { Environments } from '@/common/enviroments'
-import { signUpApi } from '@/features/auth/api/signUpAPI'
-import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
+import { Environments } from '@/common'
+import { authApi } from '@/features/auth'
+import {
+  SignUpFields,
+  signUpSchema,
+} from '@/features/auth/model/signUp/singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useSignUp = () => {
@@ -36,7 +39,7 @@ export const useSignUp = () => {
 
     setIsLoading(true)
     try {
-      const res = await signUpApi.signUp({ ...restData, baseUrl })
+      const res = await authApi.signUp({ ...restData, baseUrl })
 
       if (!res.data) {
         setIsOpen(true)

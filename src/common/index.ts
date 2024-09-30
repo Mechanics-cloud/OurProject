@@ -1,1 +1,6 @@
-export * from './components/index'
+export * from './components'
+export * from './enviroments'
+export * from './form'
+export * from './paths'
+export * from './types'
+export * from './utils'

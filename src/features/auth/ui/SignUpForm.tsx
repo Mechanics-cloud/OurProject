@@ -1,8 +1,15 @@
-import { Button, Card, Loader, Typography, typographyVariants } from '@/common'
-import { FormCheckbox, FormTextField } from '@/common/form'
-import { Paths } from '@/common/paths'
-import { cn } from '@/common/utils/cn'
-import { useSignUp } from '@/features/auth/model/useSignUp'
+import {
+  Button,
+  Card,
+  FormCheckbox,
+  FormTextField,
+  Loader,
+  Paths,
+  Typography,
+  cn,
+  typographyVariants,
+} from '@/common'
+import { useSignUp } from '@/features/auth/model/signUp/useSignUp'
 import { ConfirmSignUpModal } from '@/features/auth/ui/ConfirmSignUpModal'
 import { ExternalServicesRegistration } from '@/features/auth/ui/ExternalServicesRegistration'
 import Link from 'next/link'

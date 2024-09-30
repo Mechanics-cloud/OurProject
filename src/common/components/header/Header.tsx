@@ -1,9 +1,7 @@
 import * as React from 'react'
 
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
-import { Button, Select, SelectItem } from '@/common'
-import { Typography } from '@/common/components/typography'
-import { Paths } from '@/common/paths'
+import { Button, Paths, Select, SelectItem, Typography } from '@/common'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
