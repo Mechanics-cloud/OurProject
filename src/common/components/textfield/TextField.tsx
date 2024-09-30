@@ -29,6 +29,14 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     ...rest
   } = props
 
+  let marginForError = '24px'
+
+  if (error) {
+    const margin = `${Math.ceil(error.length / 50) * 24}px`
+
+    marginForError = error.length > 50 ? margin : marginForError
+  }
+
   const cls = {
     container: cn('flex flex-col relative mb-6', className),
     error: 'text-danger-500 absolute top-[100%] leading-1',
@@ -45,7 +53,10 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
   const handleToggle = () => setOpen((prev) => !prev)
 
   return (
-    <label className={cls.container}>
+    <label
+      className={cls.container}
+      style={{ marginBottom: marginForError }}
+    >
       {label && (
         <Typography
           className={cls.label}

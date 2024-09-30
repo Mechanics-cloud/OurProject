@@ -31,7 +31,7 @@ const Tooltip = ({ children, title }: Props) => {
   return (
     <TooltipPrimitive.Provider>
       <TooltipPrimitive.Root>
-        <TooltipTrigger>{children}</TooltipTrigger>
+        <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent>
           <p>{title}</p>
         </TooltipContent>

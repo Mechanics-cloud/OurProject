@@ -1,12 +1,12 @@
 import * as React from 'react'
 
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
+import { Button, Select, SelectItem } from '@/common'
 import { Typography } from '@/common/components/typography'
+import { Paths } from '@/common/paths'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
-import { Button } from '../button'
-import { Select, SelectItem } from '../select/Select'
 
 type HeaderProps = {
   isAuth?: boolean
@@ -24,7 +24,7 @@ const Header = ({ isAuth }: HeaderProps) => {
         variant={'large'}
       >
         <Link
-          href={'/'}
+          href={Paths.home}
           title={'Go Home'}
         >
           Inctagram
@@ -47,7 +47,7 @@ const Header = ({ isAuth }: HeaderProps) => {
             value={'en'}
           >
             <FlagUnitedKingdom
-              aria-label={'английский язык'}
+              aria-label={'Английский язык'}
               className={'size-6'}
             />
             <span>English</span>
@@ -57,7 +57,7 @@ const Header = ({ isAuth }: HeaderProps) => {
             value={'ru'}
           >
             <FlagRussia
-              aria-label={'русский язык'}
+              aria-label={'Русский язык'}
               className={'size-6'}
             />
             <span>Russian</span>
@@ -69,9 +69,11 @@ const Header = ({ isAuth }: HeaderProps) => {
               className={'mr-6 ml-9'}
               variant={'text'}
             >
-              Log in
+              <Link href={Paths.signIn}>Log in</Link>
             </Button>
-            <Button>Sing up</Button>
+            <Button asChild>
+              <Link href={Paths.signUp}>Sing up</Link>
+            </Button>
           </>
         )}
       </div>

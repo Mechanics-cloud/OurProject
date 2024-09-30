@@ -9,13 +9,18 @@ import {
   SettingsOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
+import {
+  Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Select,
+  SelectItem,
+} from '@/common'
 import { Typography } from '@/common/components/typography'
 import Link from 'next/link'
 
-import { Button } from '../button'
 import { Card } from '../card'
-import { Popover, PopoverContent, PopoverTrigger } from '../popover/Popover'
-import { Select, SelectItem } from '../select'
 
 type HeaderProps = {
   isAuth?: boolean
