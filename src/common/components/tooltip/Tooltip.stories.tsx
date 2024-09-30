@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta } from '@storybook/react'
 
 import { Tooltip } from '@/common/components/tooltip/Tooltip'
 
@@ -12,11 +12,11 @@ const meta = {
 } satisfies Meta<typeof Tooltip>
 
 export default meta
-type Story = StoryObj<typeof meta>
 
-export const BasicTooltipWithProps: Story = {
-  args: {
-    children: 'Hover',
-    title: 'Add to library',
-  },
+export const BasicTooltip = () => {
+  return (
+    <Tooltip title={'You did it!'}>
+      <p>Hover it</p>
+    </Tooltip>
+  )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { ComponentPropsWithoutRef, ReactNode } from 'react'
 import { ChangeEvent, ReactNode } from 'react'
 
 import ArrowIosDownOutline from '@/assets/icons/outlineIcons/ArrowIosDownOutline'
@@ -116,28 +117,19 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 type Props = {
   children: ReactNode
   className?: string
-  defaultValue?: string
-  disabled?: boolean
   label?: string
-  onChange?: (s: string) => void
-  placeholder?: string
-}
+  placeholder?: number | string
+} & ComponentPropsWithoutRef<typeof SelectPrimitive.Root>
 
 const Select = ({
   children,
   className,
-  defaultValue,
-  disabled,
   label,
-  onChange,
   placeholder,
+  ...props
 }: Props) => {
   return (
-    <SelectBasic
-      defaultValue={defaultValue}
-      disabled={disabled}
-      onValueChange={onChange}
-    >
+    <SelectBasic {...props}>
       <SelectGroup className={className}>
         {label && <SelectLabel>{label}</SelectLabel>}
         <SelectTrigger>
@@ -151,7 +143,6 @@ const Select = ({
 
 export {
   Select,
-  SelectBasic,
   SelectContent,
   SelectGroup,
   SelectItem,
