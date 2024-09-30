@@ -7,6 +7,8 @@ import Link from 'next/link'
 
 import { useTranslation } from '../../../../hooks/useTranslation'
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
+import { Button } from '../button'
+import { Select, SelectItem } from '../select/Select'
 
 type HeaderProps = {
   isAuth?: boolean
@@ -18,7 +20,7 @@ const Header = ({ isAuth }: HeaderProps) => {
   return (
     <header
       className={
-        'fixed top-0 left-0 w-full h-[var(--header-height)] bg-dark-700 text-light-100 flex items-center justify-between pr-16 border-b border-b-dark-300'
+        'fixed z-50 top-0 left-0 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 flex items-center justify-between pr-16 border-b border-b-dark-300'
       }
     >
       <Typography
@@ -40,10 +42,32 @@ const Header = ({ isAuth }: HeaderProps) => {
             onClick={() => alert('Картинка нажата!')}
             type={'button'}
           >
-            <OutlineBell className={' w-6 h-6'} />
+            <OutlineBell className={'size-6'} />
           </button>
         )}
         <LangSelect />
+        <Select defaultValue={'ru'}>
+          <SelectItem
+            className={'[&>span]:gap-3'}
+            value={'en'}
+          >
+            <FlagUnitedKingdom
+              aria-label={'английский язык'}
+              className={'size-6'}
+            />
+            <span>English</span>
+          </SelectItem>
+          <SelectItem
+            className={'[&>span]:gap-3'}
+            value={'ru'}
+          >
+            <FlagRussia
+              aria-label={'русский язык'}
+              className={'size-6'}
+            />
+            <span>Russian</span>
+          </SelectItem>
+        </Select>
         {!isAuth && (
           <>
             <Button
