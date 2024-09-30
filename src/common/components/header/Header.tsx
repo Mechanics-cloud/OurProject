@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Button, LangSelect, Select, SelectItem } from '@/common'
+import { Button, LangSelect } from '@/common'
 import { Typography } from '@/common/components/typography'
 import { Paths } from '@/common/paths'
 import { useTranslation } from '@hooks/useTranslation'
