@@ -1,5 +1,6 @@
 import { Button, Card, Loader, Typography, typographyVariants } from '@/common'
 import { FormCheckbox, FormTextField } from '@/common/form'
+import { Paths } from '@/common/paths'
 import { cn } from '@/common/utils/cn'
 import { useSignUp } from '@/features/auth/model/useSignUp'
 import { ConfirmSignUpModal } from '@/features/auth/ui/ConfirmSignUpModal'
@@ -77,14 +78,14 @@ export const SignUpForm = () => {
               typographyVariant={'small'}
             />
             <Typography
-              href={'/auth/terms-of-service'}
+              href={Paths.termsOfService}
               variant={'smallLink'}
             >
               Terms of Service
             </Typography>
             and
             <Typography
-              href={'/auth/privacy-policy'}
+              href={Paths.privacyPolicy}
               variant={'smallLink'}
             >
               Privacy Policy
@@ -116,7 +117,7 @@ export const SignUpForm = () => {
                 typographyVariants({ variant: 'h3' }),
                 'grow text-accent-500 w-full text-center'
               )}
-              href={'/auth/sign-in'}
+              href={Paths.signIn}
             >
               Sign in
             </Link>

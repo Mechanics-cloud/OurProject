@@ -3,6 +3,7 @@ import * as React from 'react'
 import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
 import { Button, Select, SelectItem } from '@/common'
 import { Typography } from '@/common/components/typography'
+import { Paths } from '@/common/paths'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
@@ -23,7 +24,7 @@ const Header = ({ isAuth }: HeaderProps) => {
         variant={'large'}
       >
         <Link
-          href={'/'}
+          href={Paths.home}
           title={'Go Home'}
         >
           Inctagram
@@ -68,10 +69,10 @@ const Header = ({ isAuth }: HeaderProps) => {
               className={'mr-6 ml-9'}
               variant={'text'}
             >
-              <Link href={'/auth/sign-in'}>Log in</Link>
+              <Link href={Paths.signIn}>Log in</Link>
             </Button>
             <Button asChild>
-              <Link href={'/auth/sign-up'}>Sing up</Link>
+              <Link href={Paths.signUp}>Sing up</Link>
             </Button>
           </>
         )}
