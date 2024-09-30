@@ -16,10 +16,9 @@ import {
 } from '@/assets/icons/outlineIcons'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
+import useTranslation from '@hooks/useTranslation'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-import { useTranslation } from '../../../../hooks/useTranslation'
 
 const PATHS = {
   HOME: '/',

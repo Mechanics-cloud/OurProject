@@ -8,13 +8,13 @@ export const LangSelect = () => {
   const { asPath, locale, locales, pathname, push, query } = useRouter()
 
   const changeLangHandler = (locale: string) => {
-    push({ pathname, query }, asPath, { locale: locale ? locale : 'ru' })
+    push({ pathname, query }, asPath, { locale: locale ?? 'ru' })
   }
 
   return (
     <Select
       className={'[&>button]:border-none'}
-      defaultValue={locale ? locale : 'ru'}
+      defaultValue={locale ?? 'ru'}
       onValueChange={changeLangHandler}
     >
       <SelectItem

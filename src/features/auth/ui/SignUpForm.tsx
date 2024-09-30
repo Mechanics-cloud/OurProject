@@ -5,9 +5,8 @@ import { cn } from '@/common/utils/cn'
 import { useSignUp } from '@/features/auth/model/useSignUp'
 import { ConfirmSignUpModal } from '@/features/auth/ui/ConfirmSignUpModal'
 import { ExternalServicesRegistration } from '@/features/auth/ui/ExternalServicesRegistration'
+import { useTranslation } from '@hooks/useTranslation'
 import Link from 'next/link'
-
-import { useTranslation } from '../../../../hooks/useTranslation'
 
 export const SignUpForm = () => {
   const { t } = useTranslation()

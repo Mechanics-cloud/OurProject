@@ -1,5 +1,3 @@
-import { ConfirmSignUpModal } from '@/features/auth'
-
 export const ru = {
   logIn: 'Вход',
   menu: {

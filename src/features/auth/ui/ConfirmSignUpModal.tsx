@@ -9,8 +9,7 @@ import {
   DialogFooter,
   DialogTitle,
 } from '@/common'
-
-import { useTranslation } from '../../../../hooks/useTranslation'
+import { useTranslation } from '@hooks/useTranslation'
 
 type Props = {
   isOpen: boolean

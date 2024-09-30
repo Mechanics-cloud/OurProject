@@ -3,8 +3,7 @@ import {
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
 import { Tooltip } from '@/common'
-
-import { useTranslation } from '../../../../hooks/useTranslation'
+import { useTranslation } from '@hooks/useTranslation'
 
 export const ExternalServicesRegistration = () => {
   const { t } = useTranslation()

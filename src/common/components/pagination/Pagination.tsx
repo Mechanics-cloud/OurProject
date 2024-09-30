@@ -5,8 +5,8 @@ import { CountToShow } from '@/common/components/pagination/CountToShow'
 import { PaginationRangeButtons } from '@/common/components/pagination/PaginationRangeButtons'
 import { usePaginationRange } from '@/common/components/pagination/hooks/usePaginationRange'
 import { cn } from '@/common/utils/cn'
+import { useTranslation } from '@hooks/useTranslation'
 
-import { useTranslation } from '../../../../hooks/useTranslation'
 import { PageButton } from './PageButton'
 
 type Props = {

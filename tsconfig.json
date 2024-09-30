@@ -15,10 +15,12 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@hooks/*": ["hooks/*"],
+      "@locales/*": ["locales/*"]
     },
     "allowImportingTsExtensions": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "hooks", "src"],
   "exclude": ["node_modules"]
 }

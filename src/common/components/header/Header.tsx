@@ -3,9 +3,9 @@ import * as React from 'react'
 import { Button, LangSelect, Select, SelectItem } from '@/common'
 import { Typography } from '@/common/components/typography'
 import { Paths } from '@/common/paths'
+import { useTranslation } from '@hooks/useTranslation'
 import Link from 'next/link'
 
-import { useTranslation } from '../../../../hooks/useTranslation'
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
 type HeaderProps = {

@@ -2,9 +2,8 @@ import { ReactNode } from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons/outlineIcons'
 import { Typography } from '@/common/components'
+import { useTranslation } from '@hooks/useTranslation'
 import Link from 'next/link'
-
-import { useTranslation } from '../../../../hooks/useTranslation'
 
 type Props = {
   children: ReactNode

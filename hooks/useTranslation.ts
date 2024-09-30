@@ -1,6 +1,5 @@
+import { en, ru } from '@locales/index'
 import { useRouter } from 'next/router'
-
-import { en, ru } from '../locales'
 
 export const useTranslation = () => {
   const router = useRouter()
