@@ -72,6 +72,9 @@ const config: Config = {
         '600': '600',
         '700': '700',
       },
+      height: {
+        headCalc: 'calc(100vh - var(--header-height))',
+      },
       keyframes: {
         animationLoader: {
           '0%': { left: '0', transform: 'translateX(-100%)' },
