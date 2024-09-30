@@ -46,28 +46,6 @@ const Header = ({ isAuth }: HeaderProps) => {
           </button>
         )}
         <LangSelect />
-        <Select defaultValue={'ru'}>
-          <SelectItem
-            className={'[&>span]:gap-3'}
-            value={'en'}
-          >
-            <FlagUnitedKingdom
-              aria-label={'английский язык'}
-              className={'size-6'}
-            />
-            <span>English</span>
-          </SelectItem>
-          <SelectItem
-            className={'[&>span]:gap-3'}
-            value={'ru'}
-          >
-            <FlagRussia
-              aria-label={'русский язык'}
-              className={'size-6'}
-            />
-            <span>Russian</span>
-          </SelectItem>
-        </Select>
         {!isAuth && (
           <>
             <Button
