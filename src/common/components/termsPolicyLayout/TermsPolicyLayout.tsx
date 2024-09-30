@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons/outlineIcons'
+import { useTranslation } from '@/common'
 import { Typography } from '@/common/components'
-import { useTranslation } from '@hooks/useTranslation'
 import Link from 'next/link'
 
 type Props = {

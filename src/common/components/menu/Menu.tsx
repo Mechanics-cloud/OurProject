@@ -14,9 +14,9 @@ import {
   PlusSquareOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
+import { useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
-import { useTranslation } from '@hooks/useTranslation'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

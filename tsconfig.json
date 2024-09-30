@@ -16,11 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@hooks/*": ["hooks/*"],
       "@locales/*": ["locales/*"]
     },
     "allowImportingTsExtensions": false
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "hooks", "src"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

@@ -8,8 +8,8 @@ import {
   DialogDescription,
   DialogFooter,
   DialogTitle,
+  useTranslation,
 } from '@/common'
-import { useTranslation } from '@hooks/useTranslation'
 
 type Props = {
   isOpen: boolean

@@ -1,11 +1,10 @@
 import { ArrowIosForward } from '@/assets/icons/filledIcons'
 import { ArrowIosBackOutline } from '@/assets/icons/outlineIcons'
-import { Tooltip } from '@/common'
+import { Tooltip, useTranslation } from '@/common'
 import { CountToShow } from '@/common/components/pagination/CountToShow'
 import { PaginationRangeButtons } from '@/common/components/pagination/PaginationRangeButtons'
 import { usePaginationRange } from '@/common/components/pagination/hooks/usePaginationRange'
 import { cn } from '@/common/utils/cn'
-import { useTranslation } from '@hooks/useTranslation'
 
 import { PageButton } from './PageButton'
 

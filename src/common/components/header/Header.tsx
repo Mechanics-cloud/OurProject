@@ -1,9 +1,8 @@
 import * as React from 'react'
 
-import { Button, LangSelect } from '@/common'
+import { Button, LangSelect, useTranslation } from '@/common'
 import { Typography } from '@/common/components/typography'
 import { Paths } from '@/common/paths'
-import { useTranslation } from '@hooks/useTranslation'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'

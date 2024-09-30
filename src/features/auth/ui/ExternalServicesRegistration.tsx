@@ -2,8 +2,7 @@ import {
   GithubSvgrepoCom31,
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
-import { Tooltip } from '@/common'
-import { useTranslation } from '@hooks/useTranslation'
+import { Tooltip, useTranslation } from '@/common'
 
 export const ExternalServicesRegistration = () => {
   const { t } = useTranslation()

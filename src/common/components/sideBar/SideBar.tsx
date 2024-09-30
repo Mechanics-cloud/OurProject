@@ -19,7 +19,7 @@ import {
   SearchOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
-import { useTranslation } from '@hooks/useTranslation'
+import { useTranslation } from '@/common'
 
 import { NavLink } from './navLink/NavLink'
 
