@@ -65,7 +65,7 @@ const SignUp = () => {
             error={errors.email?.message}
             label={'Email'}
             name={t.signUpForm.labels.email}
-            placeholder={}
+            placeholder={''}
           />
           <FormTextField
             control={control}
