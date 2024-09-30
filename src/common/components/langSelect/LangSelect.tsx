@@ -4,11 +4,8 @@ import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
 import { Select, SelectItem } from '@/common'
 import { useRouter } from 'next/router'
 
-import { useTranslation } from '../../../../hooks/useTranslation'
-
 export const LangSelect = () => {
   const { asPath, locale, locales, pathname, push, query } = useRouter()
-  const { t } = useTranslation()
 
   const changeLangHandler = (locale: string) => {
     push({ pathname, query }, asPath, { locale: locale ? locale : 'ru' })
@@ -18,7 +15,7 @@ export const LangSelect = () => {
     <Select
       className={'[&>button]:border-none'}
       defaultValue={locale ? locale : 'ru'}
-      onChange={changeLangHandler}
+      onValueChange={changeLangHandler}
     >
       <SelectItem
         className={'[&>span]:gap-3'}
@@ -41,31 +38,5 @@ export const LangSelect = () => {
         <span className={'hidden sm:inline'}>Русский</span>
       </SelectItem>
     </Select>
-
-    // <Select
-    //   className={'[&>button]:border-none'}
-    //   defaultValue={'ru'}
-    // >
-    //   <SelectItem
-    //     className={'sm:[&>span]:gap-3'}
-    //     value={'en'}
-    //   >
-    //     <FlagUnitedKingdom
-    //       aria-label={'английский язык'}
-    //       className={'w-6 h-6'}
-    //     />
-    //     <span className={'hidden sm:inline'}>English</span>
-    //   </SelectItem>
-    //   <SelectItem
-    //     className={'[&>span]:gap-3'}
-    //     value={'ru'}
-    //   >
-    //     <FlagRussia
-    //       aria-label={'русский язык'}
-    //       className={'w-6 h-6'}
-    //     />
-    //     <span className={'hidden sm:inline'}>Russian</span>
-    //   </SelectItem>
-    // </Select>
   )
 }

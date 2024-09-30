@@ -17,7 +17,7 @@ export const TermsPolicyLayout = ({ children, title }: Props) => {
     <div className={'size-full'}>
       <div className={'flex gap-3 items-center w-full mt-6 mb-6'}>
         <ArrowBackOutline />
-        <Link href={'/auth/sign-up'}>{t.termsPolicy.back}</Link>
+        <Link href={'/auth/sign-up'}>{t.termsPolicyPage.back}</Link>
       </div>
       <Typography
         className={'text-center mb-5'}

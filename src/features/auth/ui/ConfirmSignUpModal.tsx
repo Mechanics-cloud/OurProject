@@ -10,6 +10,8 @@ import {
   DialogTitle,
 } from '@/common'
 
+import { useTranslation } from '../../../../hooks/useTranslation'
+
 type Props = {
   isOpen: boolean
   onModalClose: () => void
@@ -21,15 +23,17 @@ export const ConfirmSignUpModal = ({
   onModalClose,
   userEmail,
 }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Dialog
       onOpenChange={onModalClose}
       open={isOpen}
     >
       <DialogContent className={'w-96'}>
-        <DialogTitle>Email sent</DialogTitle>
+        <DialogTitle>{t.signUpForm.confirmSignUpModal.title}</DialogTitle>
         <DialogDescription>
-          We have sent a link to confirm your email to {userEmail}.
+          {t.signUpForm.confirmSignUpModal.getDescription(userEmail)}
         </DialogDescription>
 
         <DialogFooter>
