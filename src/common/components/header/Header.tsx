@@ -5,6 +5,7 @@ import { Button } from '@/common'
 import { Typography } from '@/common/components/typography'
 import Link from 'next/link'
 
+import { useTranslation } from '../../../../hooks/useTranslation'
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
 type HeaderProps = {
@@ -12,6 +13,8 @@ type HeaderProps = {
 }
 
 const Header = ({ isAuth }: HeaderProps) => {
+  const { t } = useTranslation()
+
   return (
     <header
       className={
@@ -47,9 +50,9 @@ const Header = ({ isAuth }: HeaderProps) => {
               className={'mr-6 ml-9'}
               variant={'text'}
             >
-              Log in
+              {t.header.logIn}
             </Button>
-            <Button>Sing up</Button>
+            <Button>{t.header.signUp}</Button>
           </>
         )}
       </div>

@@ -14,6 +14,7 @@ import {
 import { Tooltip } from '@/common/components/tooltip'
 import { cn } from '@/common/utils/cn'
 
+import { useTranslation } from '../../../../hooks/useTranslation'
 import { PageButton } from './PageButton'
 
 type Props = {
@@ -41,6 +42,7 @@ export const Pagination = ({
     siblingCount,
     totalItemsCount,
   })
+  const { t } = useTranslation()
 
   if (currentPage === 0 || paginationRange.length < 2) {
     return null
@@ -69,7 +71,7 @@ export const Pagination = ({
     <div className={'flex gap-8'}>
       <ul className={'flex gap-x-3 align-middle'}>
         <li className={'flex align-middle'}>
-          <Tooltip title={'Go back'}>
+          <Tooltip title={t.pagination.goBack}>
             <PageButton
               disabled={isBackArrowDisabled}
               onClick={onPrevious}
@@ -79,7 +81,7 @@ export const Pagination = ({
                   `h-4 w-4 ${isBackArrowDisabled && 'text-dark-100'}`
                 )}
               />
-              <span className={'sr-only'}>Go back</span>
+              <span className={'sr-only'}>{t.pagination.goBack}</span>
             </PageButton>
           </Tooltip>
         </li>
@@ -103,7 +105,7 @@ export const Pagination = ({
           )
         })}
         <li className={'flex align-middle'}>
-          <Tooltip title={'Go forward'}>
+          <Tooltip title={t.pagination.goForward}>
             <PageButton
               disabled={isForwardArrowDisabled}
               onClick={onNext}
@@ -113,7 +115,7 @@ export const Pagination = ({
                   `h-4 w-4 ${isForwardArrowDisabled && 'text-dark-100'}`
                 )}
               />
-              <span className={'sr-only'}>Go forward</span>
+              <span className={'sr-only'}>{t.pagination.goForward}</span>
             </PageButton>
           </Tooltip>
         </li>

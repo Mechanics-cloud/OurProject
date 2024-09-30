@@ -8,7 +8,7 @@ import { themes } from '@storybook/theming'
 import '../src/styles/globals.css'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'
 
 const preview: Preview = {
   parameters: {
