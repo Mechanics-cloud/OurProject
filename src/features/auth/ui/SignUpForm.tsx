@@ -86,7 +86,7 @@ export const SignUpForm = () => {
           </div>
           <Button
             className={'w-full mb-[18px]'}
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
             type={'submit'}
           >
             {t.signUp}
