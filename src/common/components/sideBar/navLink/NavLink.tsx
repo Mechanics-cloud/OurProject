@@ -32,7 +32,17 @@ export const NavLink = <T extends ElementType = typeof Link>({
 
   const { pathname } = useRouter()
 
-  const isActive = Component === Link ? pathname.includes(href) : iconTrigger
+  let isActive = false
+
+  if (Component === Link) {
+    if (href === '/') {
+      isActive = pathname === href
+    } else {
+      isActive = pathname.startsWith(href)
+    }
+  } else {
+    isActive = !!iconTrigger
+  }
 
   return (
     <li>
