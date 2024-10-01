@@ -1,5 +1,5 @@
 import { Button, Typography } from '@/common'
-import { getLayoutWithSidebar } from '@/common/components/profileLayout/ProfileLayout'
+import { getLayoutWithSidebar } from '@/common/components/layoutWithSidebar/LayoutWithSidebar'
 import Image from 'next/image'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
