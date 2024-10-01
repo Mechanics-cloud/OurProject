@@ -3,9 +3,11 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { Environments } from '@/common/enviroments'
+import { ErrorResponse } from '@/common/types'
 import { signUpApi } from '@/features/auth/api/signUpAPI'
 import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { isAxiosError } from 'axios'
 
 export const useSignUp = () => {
   const {
@@ -41,10 +43,19 @@ export const useSignUp = () => {
       if (!res.data) {
         setIsOpen(true)
       }
-    } catch (e: any) {
-      toast.error(e.message ?? 'Something went wrong')
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.data?.messages) {
+        const errorData = error.response?.data as ErrorResponse
+
+        errorData.messages.forEach(({ field, message }) => {
+          toast.error(message)
+          setError(field as keyof SignUpFields, { message })
+        })
+        setIsLoading(false)
+      } else {
+        toast.error((error as Error).message ?? 'Something went wrong')
+      }
     }
-    setIsLoading(false)
   })
 
   const onModalClose = () => {
