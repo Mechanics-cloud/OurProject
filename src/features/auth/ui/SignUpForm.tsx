@@ -9,9 +9,12 @@ import {
 import { FormCheckbox, FormTextField } from '@/common/form'
 import { Paths } from '@/common/paths'
 import { cn } from '@/common/utils/cn'
-import { useSignUp } from '@/features/auth/model/useSignUp'
-import { ConfirmSignUpModal } from '@/features/auth/ui/ConfirmSignUpModal'
-import { ExternalServicesRegistration } from '@/features/auth/ui/ExternalServicesRegistration'
+import {
+  AgreementWithTheTerms,
+  ConfirmSignUpModal,
+  ExternalServicesRegistration,
+} from '@/features/auth'
+import { useSignUp } from '@/features/auth/model'
 import Link from 'next/link'
 
 export const SignUpForm = () => {
@@ -30,7 +33,7 @@ export const SignUpForm = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <Card className={'pt-6 pb-7'}>
+      <Card className={'pt-6 pb-7 contents md:block'}>
         <Typography
           className={'text-center mb-3'}
           variant={'h1'}
@@ -72,32 +75,14 @@ export const SignUpForm = () => {
             placeholder={t.signUpForm.placeholders.confirm}
             type={'password'}
           />
-          <div
-            className={cn(
-              typographyVariants({ variant: 'small' }),
-              `flex items-center gap-1 mb-3`
-            )}
-          >
+          <div className={'mb-3'}>
             <FormCheckbox
               control={control}
               id={'agreement'}
-              label={t.signUpForm.labels.agree}
+              label={<AgreementWithTheTerms />}
               name={'agreesToTOS'}
               typographyVariant={'small'}
             />
-            <Typography
-              href={Paths.termsOfService}
-              variant={'smallLink'}
-            >
-              {t.signUpForm.terms}
-            </Typography>
-            {t.signUpForm.labels.and}
-            <Typography
-              href={Paths.privacyPolicy}
-              variant={'smallLink'}
-            >
-              {t.signUpForm.policy}
-            </Typography>
           </div>
           <Button
             className={'w-full mb-[18px]'}
