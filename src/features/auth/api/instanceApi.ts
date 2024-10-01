@@ -1,55 +1,59 @@
 import axios, { isAxiosError } from 'axios'
+import Router from 'next/router'
 
-import { LoginFormType } from '../signIn/SignIn'
+import authStore from '../model/authStore'
+
 export const instance = axios.create({
   baseURL: 'https://inctagram.work/api/v1/',
   headers: {},
   withCredentials: true,
-  //header с авторизацией
 })
-
-class Auth {
-  async login(data: LoginFormType) {
-    return await instance.post('auth/login', data).then((res) => {
-      return res.data.accessToken
-    })
-  }
-  async me() {
-    return await instance.get('auth/me')
-  }
-  async updateToken() {
-    return await instance.post('auth/update-tokens').then((res) => {
-      return res.data.accessToken
-    })
-  }
-}
-export const authApi = new Auth()
 
 instance.interceptors.response.use(
   (res) => {
     return res
   },
-  (error) => {
+  async (error) => {
     if (isAxiosError(error)) {
+      const originalRequest = error.config
+
       if (error.response?.status === 401) {
-        authApi.updateToken()
+        if (error.config?.url === 'auth/update-tokens') {
+          Router.push('/auth/sign-in')
+        } else {
+          authStore
+            .updateToken()
+            .then((res) => {
+              if (originalRequest) {
+                const accessToken = localStorage.getItem('accessToken')
+
+                originalRequest.headers.Authorization = `Bearer ${accessToken}`
+
+                return axios(originalRequest)
+              }
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+        }
       }
     }
+
+    return Promise.reject(error)
   }
 )
 
 instance.interceptors.request.use(
   (config) => {
-    const accessToken = sessionStorage.getItem('accessToken')
+    const accessToken = localStorage.getItem('accessToken')
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`
-      debugger
     }
 
     return config
   },
   (error) => {
-    return
+    return Promise.reject(error)
   }
 )

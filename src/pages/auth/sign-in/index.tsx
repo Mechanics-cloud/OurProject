@@ -7,20 +7,17 @@ import {
 import { TextField, Typography } from '@/common/components'
 import { Button } from '@/common/components/button'
 import { Card } from '@/common/components/card'
+import authStore from '@/features/auth/model/authStore'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import Router from 'next/router'
-
-import signInStore from '../model/signInStore'
 
 export type LoginFormType = {
   email: string
   password: string
 }
 
-export const SignIn = observer(() => {
-  const { getToken, me, updateToken } = signInStore
-
+const SignIn = observer(() => {
   const {
     clearErrors,
     formState: { errors },
@@ -31,10 +28,9 @@ export const SignIn = observer(() => {
 
   const onSubmit = async (data: LoginFormType) => {
     try {
-      await getToken(data)
+      await authStore.login(data)
       Router.push('/')
     } catch (error: any) {
-      debugger
       setError('email', {
         message: error.response.data.messages,
         type: 'manual',
@@ -43,20 +39,20 @@ export const SignIn = observer(() => {
   }
 
   return (
-    <>
-      <button
-        onClick={() => me()}
-        type={'button'}
-      >
-        qwe
-      </button>
+    <div className={'flex items-center justify-center w-full h-full'}>
       <Card className={'flex flex-col items-center w-[378px]'}>
         <Typography variant={'h1'}>Sign In</Typography>
         <div className={'flex gap-[60px] [&_svg]:w-9 [&_svg]:h-9 mt-3 mb-6'}>
-          <button type={'button'}>
+          <button
+            onClick={() => {}}
+            type={'button'}
+          >
             <GoogleSvgrepoCom1 />
           </button>
-          <button type={'button'}>
+          <button
+            onClick={() => {}}
+            type={'button'}
+          >
             <GithubSvgrepoCom31 />
           </button>
         </div>
@@ -67,6 +63,7 @@ export const SignIn = observer(() => {
         >
           <div className={'h-[90px]'}>
             <TextField
+              disabled={authStore.isLoading}
               error={errors.email?.message}
               label={'Email'}
               type={'email'}
@@ -84,6 +81,7 @@ export const SignIn = observer(() => {
           </div>
           <div className={'h-[90px]'}>
             <TextField
+              disabled={authStore.isLoading}
               error={errors.password?.message}
               label={'Password'}
               type={'password'}
@@ -103,7 +101,12 @@ export const SignIn = observer(() => {
             Forgot Password
           </Link>
 
-          <Button type={'submit'}>Sign In</Button>
+          <Button
+            disabled={authStore.isLoading}
+            type={'submit'}
+          >
+            Sign In
+          </Button>
         </form>
         <Typography
           className={'mt-4'}
@@ -111,8 +114,15 @@ export const SignIn = observer(() => {
         >
           Don’t have an account?
         </Typography>
-        <Button variant={'text'}>Sign Up</Button>
+        <Button
+          asChild
+          variant={'text'}
+        >
+          <Link href={'/auth/sign-in'}>Sign Up</Link>
+        </Button>
       </Card>
-    </>
+    </div>
   )
 })
+
+export default SignIn
