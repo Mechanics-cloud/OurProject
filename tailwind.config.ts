@@ -6,6 +6,7 @@ const config: Config = {
     './src/common/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   plugins: [require('tailwindcss-radix')()],
   theme: {
@@ -72,14 +73,14 @@ const config: Config = {
         '600': '600',
         '700': '700',
       },
+      height: {
+        headCalc: 'calc(100vh - var(--header-height))',
+      },
       keyframes: {
         animationLoader: {
           '0%': { left: '0', transform: 'translateX(-100%)' },
           '100%': { left: '100%', transform: 'translateX(0%)' },
         },
-      },
-      height: {
-        headCalc: 'calc(100vh - var(--header-height))',
       },
     },
   },

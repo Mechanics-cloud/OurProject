@@ -19,11 +19,14 @@ import {
   SearchOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
+import { useTranslation } from '@/common'
+import { LogOutModal } from '@/common/components/logOutModal'
 
 import { NavLink } from './navLink/NavLink'
 
 export const SideBar = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const { t } = useTranslation()
 
   const handelCreate = () => {
     setModalIsOpen(true)
@@ -40,7 +43,7 @@ export const SideBar = () => {
             DefaultIcon={HomeOutline}
             href={'/'}
           >
-            Home
+            {t.menu.home}
           </NavLink>
 
           <NavLink
@@ -50,7 +53,7 @@ export const SideBar = () => {
             iconTrigger={modalIsOpen}
             onClick={handelCreate}
           >
-            Create
+            {t.menu.create}
           </NavLink>
 
           <NavLink
@@ -58,7 +61,7 @@ export const SideBar = () => {
             DefaultIcon={PersonOutline}
             href={'/profile'}
           >
-            My Profile
+            {t.menu.profile}
           </NavLink>
 
           <NavLink
@@ -66,7 +69,7 @@ export const SideBar = () => {
             DefaultIcon={MessageCircleOutline}
             href={'/messenger'}
           >
-            Messenger
+            {t.menu.messenger}
           </NavLink>
 
           <NavLink
@@ -74,7 +77,7 @@ export const SideBar = () => {
             DefaultIcon={SearchOutline}
             href={'/search'}
           >
-            Search
+            {t.menu.search}
           </NavLink>
         </ul>
 
@@ -84,7 +87,7 @@ export const SideBar = () => {
             DefaultIcon={TrendingUpOutline}
             href={'/statistics'}
           >
-            Statistics
+            {t.menu.statistics}
           </NavLink>
 
           <NavLink
@@ -92,18 +95,26 @@ export const SideBar = () => {
             DefaultIcon={BookmarkOutline}
             href={'/favorites'}
           >
-            Favorites
+            {t.menu.favorites}
           </NavLink>
         </ul>
 
         <ul className={'mb-9'}>
-          <NavLink
-            ActiveIcon={LogOut}
-            DefaultIcon={LogOut}
-            as={'button'}
-          >
-            Log Out
-          </NavLink>
+          <LogOutModal
+            logOutModalHandler={() => {
+              alert('You are logged out!')
+            }}
+            triggerButton={
+              <NavLink
+                ActiveIcon={LogOut}
+                DefaultIcon={LogOut}
+                as={'button'}
+              >
+                {t.menu.logOut}
+              </NavLink>
+            }
+            userEmail={'__email__'}
+          />
         </ul>
       </nav>
     </aside>

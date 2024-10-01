@@ -1,18 +1,19 @@
 import * as React from 'react'
 
-import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons/filledIcons'
+import { Button, LangSelect, useTranslation } from '@/common'
 import { Typography } from '@/common/components/typography'
+import { Paths } from '@/common/paths'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
-import { Button } from '../button'
-import { Select, SelectItem } from '../select/Select'
 
 type HeaderProps = {
   isAuth?: boolean
 }
 
 const Header = ({ isAuth }: HeaderProps) => {
+  const { t } = useTranslation()
+
   return (
     <header
       className={
@@ -24,7 +25,7 @@ const Header = ({ isAuth }: HeaderProps) => {
         variant={'large'}
       >
         <Link
-          href={'/'}
+          href={Paths.home}
           title={'Go Home'}
         >
           Inctagram
@@ -41,37 +42,18 @@ const Header = ({ isAuth }: HeaderProps) => {
             <OutlineBell className={'size-6'} />
           </button>
         )}
-        <Select defaultValue={'ru'}>
-          <SelectItem
-            className={'[&>span]:gap-3'}
-            value={'en'}
-          >
-            <FlagUnitedKingdom
-              aria-label={'английский язык'}
-              className={'size-6'}
-            />
-            <span>English</span>
-          </SelectItem>
-          <SelectItem
-            className={'[&>span]:gap-3'}
-            value={'ru'}
-          >
-            <FlagRussia
-              aria-label={'русский язык'}
-              className={'size-6'}
-            />
-            <span>Russian</span>
-          </SelectItem>
-        </Select>
+        <LangSelect />
         {!isAuth && (
           <>
             <Button
               className={'mr-6 ml-9'}
               variant={'text'}
             >
-              Log in
+              <Link href={Paths.signIn}>{t.logIn}</Link>
             </Button>
-            <Button>Sing up</Button>
+            <Button asChild>
+              <Link href={Paths.signUp}>{t.signUp}</Link>
+            </Button>
           </>
         )}
       </div>

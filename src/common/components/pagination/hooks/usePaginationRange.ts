@@ -1,21 +1,21 @@
-import * as React from 'react'
+import { useMemo } from 'react'
 
-import { DOTS } from '@/common/components/pagination/Pagination'
-
-type UsePaginationParamType = {
+type UsePaginationRangeParamType = {
   currentPage: number
   pageSize: number
   siblingCount: number
   totalItemsCount: number
 }
 
-export const usePagination = ({
+export const DOTS = 0
+
+export const usePaginationRange = ({
   currentPage,
   pageSize,
   siblingCount,
   totalItemsCount,
-}: UsePaginationParamType): Array<number> => {
-  return React.useMemo(() => {
+}: UsePaginationRangeParamType): Array<number> => {
+  return useMemo(() => {
     const totalPageCount = Math.ceil(totalItemsCount / pageSize)
     const totalPageNumbers = siblingCount + 5
     const firstPageIndex = 1

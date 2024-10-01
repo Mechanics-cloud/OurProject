@@ -14,6 +14,7 @@ import {
   PlusSquareOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
+import { useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
 import Link from 'next/link'
@@ -29,6 +30,7 @@ const PATHS = {
 
 export const Menu = () => {
   const router = useRouter()
+  const { t } = useTranslation()
   const href = router.asPath
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -42,19 +44,19 @@ export const Menu = () => {
     <nav className={'min-w-[360px] w-full bg-dark-00 border-t border-dark-300'}>
       <ul className={'flex w-full justify-evenly py-[18px]'}>
         <li>
-          <Tooltip title={'Go to home page'}>
+          <Tooltip title={t.menu.home}>
             <Link href={PATHS.HOME}>
               {matchesPathname(href, PATHS.HOME) ? (
                 <Home className={'size-6 text-accent-500'} />
               ) : (
                 <HomeOutline className={'size-6'} />
               )}
-              <span className={'sr-only'}>Go to home page</span>
+              <span className={'sr-only'}>{t.menu.home}</span>
             </Link>
           </Tooltip>
         </li>
         <li className={'group'}>
-          <Tooltip title={'Add new post'}>
+          <Tooltip title={t.menu.create}>
             <button
               onClick={() => {
                 setIsModalOpen(true)
@@ -69,43 +71,43 @@ export const Menu = () => {
                   'size-6 hidden group-hover:block group-active:block text-accent-500'
                 }
               />
-              <span className={'sr-only'}>Add new post</span>
+              <span className={'sr-only'}>{t.menu.create}</span>
             </button>
           </Tooltip>
         </li>
         <li>
-          <Tooltip title={'Go to messages'}>
+          <Tooltip title={t.menu.messenger}>
             <Link href={PATHS.MESSENGER}>
               {matchesPathname(href, PATHS.MESSENGER) ? (
                 <MessageCircle className={'size-6 text-accent-500'} />
               ) : (
                 <MessageCircleOutline className={'size-6'} />
               )}
-              <span className={'sr-only'}>Go to messages</span>
+              <span className={'sr-only'}>{t.menu.messenger}</span>
             </Link>
           </Tooltip>
         </li>
         <li>
-          <Tooltip title={'Search'}>
+          <Tooltip title={t.menu.search}>
             <Link href={PATHS.SEARCH}>
               {matchesPathname(href, PATHS.SEARCH) ? (
                 <Search className={'size-6 text-accent-500'} />
               ) : (
                 <SearchOutline className={'size-6'} />
               )}
-              <span className={'sr-only'}>Search</span>
+              <span className={'sr-only'}>{t.menu.search}</span>
             </Link>
           </Tooltip>
         </li>
         <li>
-          <Tooltip title={'Go to profile'}>
+          <Tooltip title={t.menu.profile}>
             <Link href={PATHS.PROFILE}>
               {matchesPathname(href, PATHS.PROFILE) ? (
                 <Person className={'size-6 text-accent-500'} />
               ) : (
                 <PersonOutline className={'size-6'} />
               )}
-              <span className={'sr-only'}>Go to profile</span>
+              <span className={'sr-only'}>{t.menu.profile}</span>
             </Link>
           </Tooltip>
         </li>

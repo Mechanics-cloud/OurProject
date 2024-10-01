@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react'
-import { ReactNode } from 'react'
+import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import ArrowIosDownOutline from '@/assets/icons/outlineIcons/ArrowIosDownOutline'
 import { typographyVariants } from '@/common/components/typography'
@@ -87,7 +87,7 @@ const SelectItem = React.forwardRef<
 >(({ children, className, ...props }, ref) => (
   <SelectPrimitive.Item
     className={cn(
-      'rounded-sm px-2.5 py-1.5 outline-none hover:bg-dark-300 hover:text-accent-500 focus:bg-accent focus:text-accent-500 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 min-w-[240px] [&>span]:flex [&>span]:items-center [&>span]:gap-2',
+      'rounded-sm px-2.5 py-1.5 outline-none hover:bg-dark-300 hover:text-accent-500 focus:bg-accent focus:text-accent-500 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>span]:flex [&>span]:items-center [&>span]:gap-2 cursor-pointer',
       typographyVariants({ variant: 'reg16' }),
       className
     )}
@@ -116,25 +116,19 @@ SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 type Props = {
   children: ReactNode
   className?: string
-  defaultValue?: string
-  disabled?: boolean
   label?: string
-  placeholder?: string
-}
+  placeholder?: number | string
+} & ComponentPropsWithoutRef<typeof SelectPrimitive.Root>
 
 const Select = ({
   children,
   className,
-  defaultValue,
-  disabled,
   label,
   placeholder,
+  ...props
 }: Props) => {
   return (
-    <SelectBasic
-      defaultValue={defaultValue}
-      disabled={disabled}
-    >
+    <SelectBasic {...props}>
       <SelectGroup className={className}>
         {label && <SelectLabel>{label}</SelectLabel>}
         <SelectTrigger>
