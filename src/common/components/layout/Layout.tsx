@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
 
-import { Header, ScrollArea, ToastContainer } from '@/common'
+import { Header, ScrollArea, SideBar, ToastContainer } from '@/common'
 import { cn } from '@/common/utils/cn'
 import NextTopLoader from 'nextjs-toploader'
 
