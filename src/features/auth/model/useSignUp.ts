@@ -51,11 +51,11 @@ export const useSignUp = () => {
           toast.error(message)
           setError(field as keyof SignUpFields, { message })
         })
-        setIsLoading(false)
       } else {
         toast.error((error as Error).message ?? 'Something went wrong')
       }
     }
+    setIsLoading(false)
   })
 
   const onModalClose = () => {

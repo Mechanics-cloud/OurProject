@@ -1,16 +1,22 @@
-import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
+import React, { ElementRef, ReactElement, forwardRef } from 'react'
+import { ToastContainer } from 'react-toastify'
 
-import { Header, ScrollArea, ToastContainer } from '@/common'
+import { Header, ScrollArea } from '@/common'
 import { cn } from '@/common/utils/cn'
 import NextTopLoader from 'nextjs-toploader'
 
-type Props = ComponentPropsWithRef<'div'>
+type Props = {
+  children: React.ReactNode
+  className?: string
+}
 
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
   ({ children, className, ...rest }, ref) => {
     return (
       <div
-        className={'w-screen h-screen'}
+        className={
+          'w-[1440px] h-screen flex flex-col items-center justify-center'
+        }
         ref={ref}
         {...rest}
       >
@@ -34,3 +40,9 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     )
   }
 )
+
+Layout.displayName = 'Layout'
+
+export const getBaseLayout = (page: ReactElement) => {
+  return <Layout>{page}</Layout>
+}
