@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import { Layout } from '@/common'
+import { Layout, getBaseLayout } from '@/common'
 import { Button } from '@/common/components/button'
 import { typographyVariants } from '@/common/components/typography'
 import Link from 'next/link'
@@ -24,7 +24,5 @@ function Home() {
   )
 }
 
-Home.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>
-}
+Home.getLayout = getBaseLayout
 export default Home

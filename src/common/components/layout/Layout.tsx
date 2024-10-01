@@ -1,6 +1,11 @@
-import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
+import {
+  ComponentPropsWithRef,
+  ElementRef,
+  ReactElement,
+  forwardRef,
+} from 'react'
 
-import { Header, ScrollArea, SideBar, ToastContainer } from '@/common'
+import { Header, ScrollArea, ToastContainer } from '@/common'
 import { cn } from '@/common/utils/cn'
 import NextTopLoader from 'nextjs-toploader'
 
@@ -34,3 +39,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     )
   }
 )
+
+export const getBaseLayout = (page: ReactElement) => {
+  return <Layout>{page}</Layout>
+}

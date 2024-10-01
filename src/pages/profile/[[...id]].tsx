@@ -10,7 +10,7 @@ import image4 from '../../assets/images/image4.jpg'
 
 function Profile() {
   return (
-    <div className={'flex w-full'}>
+    <div className={'flex ml-[220px]'}>
       <div className={'flex flex-col pl-9'}>
         <div className={'mt-9 flex items-start gap-[38px] w-full mb-[53px]'}>
           <Image
@@ -116,11 +116,4 @@ function Profile() {
   )
 }
 Profile.getLayout = getLayoutWithSidebar
-// Profile.getLayout = function getLayout(page: ReactElement) {
-//   return (
-//     <Layout>
-//       <NestedLayout>{page}</NestedLayout>
-//     </Layout>
-//   )
-// }
 export default Profile
