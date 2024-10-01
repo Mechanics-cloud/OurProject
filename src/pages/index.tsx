@@ -1,8 +1,11 @@
+import { ReactElement } from 'react'
+
+import { Layout, getBaseLayout } from '@/common'
 import { Button } from '@/common/components/button'
 import { typographyVariants } from '@/common/components/typography'
 import Link from 'next/link'
 
-export default function Home() {
+function Home() {
   return (
     <div className={'flex flex-col justify-center items-center gap-5 h-full'}>
       <Button
@@ -20,3 +23,6 @@ export default function Home() {
     </div>
   )
 }
+
+Home.getLayout = getBaseLayout
+export default Home
