@@ -31,7 +31,7 @@ export const SignUpForm = () => {
   return (
     <>
       {isLoading && <Loader />}
-      <Card className={'pt-6 pb-7'}>
+      <Card className={'pt-6 pb-7 contents md:block'}>
         <Typography
           className={'text-center mb-3'}
           variant={'h1'}
