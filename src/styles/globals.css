@@ -9,6 +9,11 @@
   color-scheme: dark;
 }
 
+body {
+  display: flex;
+  justify-content: center;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
