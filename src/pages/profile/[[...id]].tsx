@@ -1,3 +1,4 @@
+import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Typography } from '@/common'
 import { getLayoutWithSidebar } from '@/common/components/layoutWithSidebar/LayoutWithSidebar'
 import Image from 'next/image'
@@ -36,11 +37,13 @@ function Profile() {
               className={'flex items-center justify-between w-full mb-[19px]'}
             >
               <Typography
-                className={'text-light-100'}
+                className={'text-light-100 flex items-center gap-3'}
                 variant={'h1'}
               >
                 URL Profile
+                <Paid />
               </Typography>
+
               <Button variant={'secondary'}>Profile Settings</Button>
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
