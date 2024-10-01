@@ -9,10 +9,12 @@ import {
 import { FormCheckbox, FormTextField } from '@/common/form'
 import { Paths } from '@/common/paths'
 import { cn } from '@/common/utils/cn'
-import { useSignUp } from '@/features/auth/model/useSignUp'
-import { AgreementWithTheTerms } from '@/features/auth/ui/AgreementWithTheTerms'
-import { ConfirmSignUpModal } from '@/features/auth/ui/ConfirmSignUpModal'
-import { ExternalServicesRegistration } from '@/features/auth/ui/ExternalServicesRegistration'
+import {
+  AgreementWithTheTerms,
+  ConfirmSignUpModal,
+  ExternalServicesRegistration,
+} from '@/features/auth'
+import { useSignUp } from '@/features/auth/model'
 import Link from 'next/link'
 
 export const SignUpForm = () => {
