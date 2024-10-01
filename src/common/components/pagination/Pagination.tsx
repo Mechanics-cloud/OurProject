@@ -1,6 +1,6 @@
 import { ArrowIosForward } from '@/assets/icons/filledIcons'
 import { ArrowIosBackOutline } from '@/assets/icons/outlineIcons'
-import { Tooltip } from '@/common'
+import { Tooltip, useTranslation } from '@/common'
 import { CountToShow } from '@/common/components/pagination/CountToShow'
 import { PaginationRangeButtons } from '@/common/components/pagination/PaginationRangeButtons'
 import { usePaginationRange } from '@/common/components/pagination/hooks/usePaginationRange'
@@ -31,6 +31,7 @@ export const Pagination = ({
     siblingCount,
     totalItemsCount,
   })
+  const { t } = useTranslation()
 
   if (currentPage === 0 || paginationRange.length < 2) {
     return null
@@ -57,7 +58,7 @@ export const Pagination = ({
     <div className={'flex gap-8'}>
       <ul className={'flex gap-x-3 align-middle'}>
         <li className={'flex align-middle'}>
-          <Tooltip title={'Go back'}>
+          <Tooltip title={t.pagination.goBack}>
             <PageButton
               disabled={isBackArrowDisabled}
               onClick={onPrevious}
@@ -67,7 +68,7 @@ export const Pagination = ({
                   `h-4 w-4 ${isBackArrowDisabled && 'text-dark-100'}`
                 )}
               />
-              <span className={'sr-only'}>Go back</span>
+              <span className={'sr-only'}>{t.pagination.goBack}</span>
             </PageButton>
           </Tooltip>
         </li>
@@ -77,7 +78,7 @@ export const Pagination = ({
           paginationRange={paginationRange}
         />
         <li className={'flex align-middle'}>
-          <Tooltip title={'Go forward'}>
+          <Tooltip title={t.pagination.goForward}>
             <PageButton
               disabled={isForwardArrowDisabled}
               onClick={onNext}
@@ -87,7 +88,7 @@ export const Pagination = ({
                   `h-4 w-4 ${isForwardArrowDisabled && 'text-dark-100'}`
                 )}
               />
-              <span className={'sr-only'}>Go forward</span>
+              <span className={'sr-only'}>{t.pagination.goForward}</span>
             </PageButton>
           </Tooltip>
         </li>

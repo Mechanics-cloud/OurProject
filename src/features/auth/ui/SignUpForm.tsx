@@ -1,4 +1,11 @@
-import { Button, Card, Loader, Typography, typographyVariants } from '@/common'
+import {
+  Button,
+  Card,
+  Loader,
+  Typography,
+  typographyVariants,
+  useTranslation,
+} from '@/common'
 import { FormCheckbox, FormTextField } from '@/common/form'
 import { Paths } from '@/common/paths'
 import { cn } from '@/common/utils/cn'
@@ -8,6 +15,7 @@ import { ExternalServicesRegistration } from '@/features/auth/ui/ExternalService
 import Link from 'next/link'
 
 export const SignUpForm = () => {
+  const { t } = useTranslation()
   const {
     control,
     errors,
@@ -27,7 +35,7 @@ export const SignUpForm = () => {
           className={'text-center mb-3'}
           variant={'h1'}
         >
-          Sign Up
+          {t.signUpForm.title}
         </Typography>
         <ExternalServicesRegistration />
 
@@ -37,31 +45,31 @@ export const SignUpForm = () => {
         >
           <FormTextField
             control={control}
-            label={'Username'}
+            label={t.signUpForm.labels.userName}
             name={'userName'}
-            placeholder={'Enter your username'}
+            placeholder={t.signUpForm.placeholders.userName}
           />
           <FormTextField
             control={control}
             error={errors.email?.message}
-            label={'Email'}
+            label={t.signUpForm.labels.email}
             name={'email'}
-            placeholder={'Enter your email'}
+            placeholder={t.signUpForm.placeholders.email}
           />
           <FormTextField
             control={control}
             error={errors.password?.message}
-            label={'Password'}
+            label={t.signUpForm.labels.password}
             name={'password'}
-            placeholder={'Enter a password'}
+            placeholder={t.signUpForm.placeholders.password}
             type={'password'}
           />
           <FormTextField
             control={control}
             error={errors.confirm?.message}
-            label={'Password confirmation'}
+            label={t.signUpForm.labels.confirm}
             name={'confirm'}
-            placeholder={'Confirm your password'}
+            placeholder={t.signUpForm.placeholders.confirm}
             type={'password'}
           />
           <div
@@ -73,7 +81,7 @@ export const SignUpForm = () => {
             <FormCheckbox
               control={control}
               id={'agreement'}
-              label={`I agree to the`}
+              label={t.signUpForm.labels.agree}
               name={'agreesToTOS'}
               typographyVariant={'small'}
             />
@@ -81,14 +89,14 @@ export const SignUpForm = () => {
               href={Paths.termsOfService}
               variant={'smallLink'}
             >
-              Terms of Service
+              {t.signUpForm.terms}
             </Typography>
-            and
+            {t.signUpForm.labels.and}
             <Typography
               href={Paths.privacyPolicy}
               variant={'smallLink'}
             >
-              Privacy Policy
+              {t.signUpForm.policy}
             </Typography>
           </div>
           <Button
@@ -96,7 +104,7 @@ export const SignUpForm = () => {
             disabled={!isValid}
             type={'submit'}
           >
-            Sign Up
+            {t.signUp}
           </Button>
         </form>
 
@@ -107,7 +115,7 @@ export const SignUpForm = () => {
         />
 
         <div className={'flex flex-col gap-4 items-center'}>
-          <span>Do you have an account?</span>
+          <span>{t.signUpForm.text}</span>
           <Button
             asChild
             variant={'text'}
@@ -119,7 +127,7 @@ export const SignUpForm = () => {
               )}
               href={Paths.signIn}
             >
-              Sign in
+              {t.signIn}
             </Link>
           </Button>
         </div>
