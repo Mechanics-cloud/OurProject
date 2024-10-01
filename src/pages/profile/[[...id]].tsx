@@ -11,7 +11,7 @@ import image4 from '../../assets/images/image4.jpg'
 function Profile() {
   return (
     <div className={'flex ml-[220px]'}>
-      <div className={'flex flex-col pl-9'}>
+      <div className={'flex flex-col flex-wrap pl-9'}>
         <div className={'mt-9 flex items-start gap-[38px] w-full mb-[53px]'}>
           <Image
             alt={'avatar'}
@@ -20,7 +20,7 @@ function Profile() {
             src={avatarPlaceholder}
             width={200}
           />
-          <div className={'flex flex-col w-full'}>
+          <div className={'flex flex-col flex-wrap w-full'}>
             <div
               className={'flex items-center justify-between w-full mb-[19px]'}
             >
@@ -32,7 +32,7 @@ function Profile() {
               </Typography>
               <Button variant={'secondary'}>Profile Settings</Button>
             </div>
-            <div className={'flex gap-[100px]'}>
+            <div className={'flex gap-[100px] flex-wrap'}>
               <div className={'flex flex-col'}>
                 <Typography variant={'reg14'}>2218</Typography>
                 <Typography variant={'reg14'}> Following</Typography>

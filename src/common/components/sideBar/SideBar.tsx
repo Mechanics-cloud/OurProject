@@ -30,8 +30,12 @@ export const SideBar = () => {
   }
 
   return (
-    <aside className={'flex border-r-2 border-dark-300 min-w-56 fixed'}>
-      <nav className={'pt-[72px] '}>
+    <aside
+      className={
+        'flex flex-col border-r-2 border-dark-300 min-w-56 fixed h-screen'
+      }
+    >
+      <nav className={'pt-[72px]'}>
         <ul className={`mb-[60px] [&_li]:mb-6`}>
           <NavLink
             ActiveIcon={Home}
