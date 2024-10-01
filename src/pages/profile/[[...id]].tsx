@@ -1,7 +1,10 @@
 import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Typography } from '@/common'
 import { getLayoutWithSidebar } from '@/common/components/layoutWithSidebar/LayoutWithSidebar'
+import { cn } from '@/common/utils/cn'
 import Image from 'next/image'
+
+import styles from './Profile.module.css'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
 import image1 from '../../assets/images/image1.jpg'
@@ -23,7 +26,7 @@ const placeholderImages = [
 function Profile() {
   return (
     <div className={'flex ml-[220px]'}>
-      <div className={'flex flex-col flex-wrap pl-9'}>
+      <div className={'flex flex-col pl-9'}>
         <div className={'mt-9 flex items-start gap-[38px] w-full mb-[53px]'}>
           <Image
             alt={'avatar'}
@@ -75,7 +78,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className={'grid grid-cols-4 grid-rows-auto gap-x-3 gap-y-3'}>
+        <div className={cn('grid gap-x-3 gap-y-3', styles.gridAutoFit)}>
           {placeholderImages.map((image) => (
             <Image
               alt={'image'}
