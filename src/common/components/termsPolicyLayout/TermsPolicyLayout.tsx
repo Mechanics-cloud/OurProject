@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons/outlineIcons'
+import { useTranslation } from '@/common'
 import { Typography } from '@/common/components'
 import Link from 'next/link'
 
@@ -9,11 +10,13 @@ type Props = {
   title: string
 }
 export const TermsPolicyLayout = ({ children, title }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div className={'size-full'}>
       <div className={'flex gap-3 items-center w-full mt-6 mb-6'}>
         <ArrowBackOutline />
-        <Link href={'/auth/sign-up'}>Back to Sign-Up</Link>
+        <Link href={'/auth/sign-up'}>{t.termsPolicyPage.back}</Link>
       </div>
       <Typography
         className={'text-center mb-5'}

@@ -1,4 +1,3 @@
-import { SideBar } from '@/common'
 import { Button } from '@/common/components/button'
 import { typographyVariants } from '@/common/components/typography'
 import Link from 'next/link'
@@ -18,7 +17,6 @@ export default function Home() {
       >
         <Link href={'/publication'}>publication</Link>
       </Button>
-      <SideBar />
     </div>
   )
 }

@@ -1,6 +1,5 @@
+import { BaseReCAPTCHA } from '@/common'
 import { Meta, StoryObj } from '@storybook/react'
-
-import { BaseReCAPTCHA } from './BaseReCAPTCHA'
 
 const meta = {
   component: BaseReCAPTCHA,
