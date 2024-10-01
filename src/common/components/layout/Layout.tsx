@@ -23,7 +23,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         <ScrollArea className={'w-full h-full'}>
           <main
             className={cn(
-              'px-14 mt-[var(--header-height)] h-headCalc',
+              'px-14 mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent',
               className
             )}
           >
