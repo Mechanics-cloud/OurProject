@@ -1,3 +1,4 @@
+import { getBaseLayout } from '@/common'
 import { SignUpForm } from '@/features/auth'
 
 const SignUp = () => {
@@ -11,5 +12,7 @@ const SignUp = () => {
     </div>
   )
 }
+
+SignUp.getLayout = getBaseLayout
 
 export default SignUp
