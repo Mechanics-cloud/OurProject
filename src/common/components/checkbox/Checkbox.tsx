@@ -17,7 +17,7 @@ const CheckboxField = React.forwardRef<
   <div
     className={clsx(
       'flex items-center justify-center h-[36px] w-[36px] rounded-full hover:bg-dark-300 active:bg-dark-100 focus-visible:outline-none disabled:pointer-events-none',
-      'focus-within:bg-dark-500'
+      'focus-within:bg-dark-500 flex-shrink-0'
     )}
   >
     <CheckboxPrimitive.Root

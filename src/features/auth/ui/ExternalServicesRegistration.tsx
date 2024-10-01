@@ -9,7 +9,7 @@ export const ExternalServicesRegistration = () => {
 
   return (
     <div className={'flex gap-14 justify-center mb-6 mt-4'}>
-      <Tooltip title={t.signUpForm.signUpGithub}>
+      <Tooltip title={t.signUpForm.signUpGoogle}>
         <button type={'button'}>
           <GoogleSvgrepoCom1
             height={36}

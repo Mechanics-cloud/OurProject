@@ -1,9 +1,4 @@
-import {
-  ComponentPropsWithRef,
-  ElementRef,
-  ReactElement,
-  forwardRef,
-} from 'react'
+import { ComponentPropsWithRef, ElementRef, forwardRef } from 'react'
 
 import { Header, ScrollArea, ToastContainer } from '@/common'
 import { cn } from '@/common/utils/cn'
@@ -25,10 +20,10 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         />
         <ToastContainer />
         <Header />
-        <ScrollArea className={'w-full h-full'}>
+        <ScrollArea className={'w-full h-full contents md:block'}>
           <main
             className={cn(
-              'pl-14 mt-[var(--header-height)] h-headCalc pr-12',
+              'px-4 md:px-14 mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent',
               className
             )}
           >
@@ -39,7 +34,3 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     )
   }
 )
-
-export const getBaseLayout = (page: ReactElement) => {
-  return <Layout>{page}</Layout>
-}
