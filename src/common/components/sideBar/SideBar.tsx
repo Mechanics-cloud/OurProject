@@ -19,6 +19,7 @@ import {
   SearchOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
+import { LogOutModal } from '@/common/components/logOutModal'
 import { useTranslation } from '@/common'
 
 import { NavLink } from './navLink/NavLink'
@@ -106,6 +107,21 @@ export const SideBar = () => {
           >
             {t.menu.logOut}
           </NavLink>
+          <LogOutModal
+            logOutModalHandler={() => {
+              alert('You are logged out!')
+            }}
+            triggerButton={
+              <NavLink
+                ActiveIcon={LogOut}
+                DefaultIcon={LogOut}
+                as={'button'}
+              >
+                Log Out
+              </NavLink>
+            }
+            userEmail={'__email__'}
+          />
         </ul>
       </nav>
     </aside>
