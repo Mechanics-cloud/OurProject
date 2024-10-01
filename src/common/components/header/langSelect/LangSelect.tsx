@@ -5,7 +5,7 @@ import { Select, SelectItem } from '@/common'
 import { useRouter } from 'next/router'
 
 export const LangSelect = () => {
-  const { asPath, locale, locales, pathname, push, query } = useRouter()
+  const { asPath, locale, pathname, push, query } = useRouter()
 
   const changeLangHandler = (locale: string) => {
     push({ pathname, query }, asPath, { locale: locale ?? 'ru' })

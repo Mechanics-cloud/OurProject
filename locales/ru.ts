@@ -5,6 +5,14 @@ export const ru = {
     favorites: 'Избранное',
     home: 'Домой',
     logOut: 'Выход',
+    logOutModal: {
+      getText: (userEmail: string) => {
+        return `Вы действительно хотите выйти из своей учетной записи "${userEmail}"?`
+      },
+      no: 'Нет',
+      title: 'Выход',
+      yes: 'Да',
+    },
     messenger: 'Сообщения',
     profile: 'Профиль',
     search: 'Поиск',

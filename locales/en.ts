@@ -7,6 +7,14 @@ export const en: LocaleType = {
     favorites: 'Favorites',
     home: 'Home',
     logOut: 'Log Out',
+    logOutModal: {
+      getText: (userEmail: string) => {
+        return `Are you really want to log out of your account "${userEmail}"?`
+      },
+      no: 'No',
+      title: 'Log Out',
+      yes: 'Yes',
+    },
     messenger: 'Messenger',
     profile: 'Profile',
     search: 'Search',

@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  useTranslation,
 } from '@/common'
 
 type Props = {
@@ -23,16 +24,17 @@ export const LogOutModal = ({
   triggerButton,
   userEmail,
 }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <Dialog>
       <DialogTrigger asChild>{triggerButton}</DialogTrigger>
       <DialogContent className={'gap-[30px] max-w-[440px]'}>
         <DialogHeader>
-          <DialogTitle>Log Out</DialogTitle>
+          <DialogTitle>{t.menu.logOutModal.title}</DialogTitle>
         </DialogHeader>
         <DialogDescription className={'text-left my-0'}>
-          Are you really want to log out of your account &quot;{userEmail}
-          &quot;?
+          {t.menu.logOutModal.getText(userEmail)}
         </DialogDescription>
         <DialogFooter className={'flex justify-end gap-6'}>
           <DialogClose asChild>
@@ -42,7 +44,7 @@ export const LogOutModal = ({
               type={'button'}
               variant={'outline'}
             >
-              Yes
+              {t.menu.logOutModal.yes}
             </Button>
           </DialogClose>
           <DialogClose asChild>
@@ -50,7 +52,7 @@ export const LogOutModal = ({
               className={'w-[96px]'}
               type={'button'}
             >
-              No
+              {t.menu.logOutModal.no}
             </Button>
           </DialogClose>
         </DialogFooter>
