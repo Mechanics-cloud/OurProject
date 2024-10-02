@@ -28,4 +28,32 @@ body {
   }
 }
 
-/* test */
+
+.swiper-button-prev, .swiper-button-next {
+  color: #fff !important;
+}
+
+.swiper-button-prev {
+  background-image: url('/Vector.svg') !important;
+  background-repeat: no-repeat;
+  background-position: center !important;
+  background-size: auto !important;
+}
+
+.swiper-button-next {
+  transform: rotate(180deg);
+
+  background-image: url('/Vector.svg') !important;
+  background-repeat: no-repeat;
+  background-position: center !important;
+  background-size: auto !important;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%) hue-rotate(199deg) brightness(103%) contrast(101%);}
+  
+.swiper-button-prev::after,
+.swiper-button-next::after  {
+  content: '' !important;
+}
