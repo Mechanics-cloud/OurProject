@@ -1,6 +1,5 @@
 import type { StoryObj } from '@storybook/react'
 
-// import * as filledIcons from '../../../assets/icons/outlineIcons'
 import * as filledIcons from '../../../assets/icons/filledIcons'
 import * as outlineIcons from '../../../assets/icons/outlineIcons'
 
@@ -13,7 +12,6 @@ const meta = {
 }
 
 export default meta
-type Story = StoryObj<typeof meta>
 
 export const FilledIcons = () => (
   <div className={'flex flex-wrap mx-12'}>
