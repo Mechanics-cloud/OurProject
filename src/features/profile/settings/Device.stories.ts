@@ -5,7 +5,7 @@ import { Device } from '@/features/profile/settings/Device'
 const meta = {
   component: Device,
   parameters: {
-    // layout: 'centered',
+    layout: 'centered',
   },
   tags: ['autodocs'],
   title: 'Component/Device',
