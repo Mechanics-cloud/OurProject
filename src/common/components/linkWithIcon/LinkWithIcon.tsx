@@ -10,7 +10,7 @@ const styles = {
 }
 
 type Props<T extends ElementType = typeof Link> = {
-  ActiveIcon: ElementType
+  ActiveIcon?: ElementType
   DefaultIcon: ElementType
   as?: T
   disabled?: boolean
