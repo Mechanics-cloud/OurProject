@@ -28,7 +28,9 @@ const Confirmation = () => {
         <Image
           alt={'Congratulations!'}
           className={'md:mb-0 mb-11'}
+          height={300}
           src={congratulationImage}
+          width={432}
         />
         <Button
           asChild

@@ -17,7 +17,7 @@ const Expired = () => {
         Email verification link expired
       </Typography>
       <Typography
-        className={'md:mb-14 mb-16'}
+        className={'md:mb-14 mb-16 text-center'}
         variant={'reg16'}
       >
         Looks like the verification link has expired. Not to worry, we can send
@@ -27,7 +27,9 @@ const Expired = () => {
         <Image
           alt={'Congratulations!'}
           className={'md:mb-0 mb-11'}
+          height={352}
           src={expiredImage}
+          width={473}
         />
         <Button className={'md:mb-[72px] mb-0 self-stretch md:self-auto'}>
           Resend verification link
