@@ -24,6 +24,14 @@ export const en: LocaleType = {
     goBack: 'Go Back',
     goForward: 'Go forward',
   },
+  session: {
+    activeSession: 'Active session',
+    currentDevice: 'Current device',
+    devices: 'Devices',
+    lastVisit: 'Last visit',
+    logOut: 'Log out',
+    terminateAll: 'Terminate all other session',
+  },
   signIn: 'Sign In',
   signUp: 'Sign Up',
   signUpForm: {

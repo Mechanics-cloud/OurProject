@@ -22,6 +22,14 @@ export const ru = {
     goBack: 'Назад',
     goForward: 'Вперед',
   },
+  session: {
+    activeSession: 'Активные сессии',
+    currentDevice: 'Текущее устройство',
+    devices: 'Устройства',
+    lastVisit: 'Последнее посещение',
+    logOut: 'Выйти',
+    terminateAll: 'Завершить все остальные сеансы',
+  },
   signIn: 'Вход',
   signUp: 'Регистрация',
   signUpForm: {
