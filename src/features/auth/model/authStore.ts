@@ -1,4 +1,7 @@
+import { toast } from 'react-toastify'
+
 import { LoginFormType } from '@/pages/auth/sign-in'
+import { isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { authApi } from '../api/authApi'
@@ -20,8 +23,8 @@ class AuthStore {
       localStorage.setItem('accessToken', accessToken)
 
       await this.me()
-    } catch (e) {
-      return Promise.reject(e)
+    } catch (error) {
+      return Promise.reject(error)
     } finally {
       runInAction(() => {
         this.isLoading = false
@@ -33,8 +36,12 @@ class AuthStore {
       const c = await authApi.logout()
 
       localStorage.removeItem('accessToken')
-    } catch (e) {
-      console.log(e)
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.data?.messages) {
+        toast.error(error.response.data.messages[0].message)
+      } else {
+        toast.error('Something went wrong')
+      }
     }
   }
 
@@ -45,8 +52,12 @@ class AuthStore {
       runInAction(() => {
         this.profile = profile
       })
-    } catch (e) {
-      console.log(e)
+    } catch (error: unknown) {
+      if (isAxiosError(error) && error.response?.data?.messages) {
+        toast.error(error.response.data.messages[0].message)
+      } else {
+        toast.error('Something went wrong')
+      }
     }
   }
 
@@ -55,8 +66,8 @@ class AuthStore {
       const newToken = await authApi.updateToken()
 
       localStorage.setItem('accessToken', newToken)
-    } catch (e) {
-      return Promise.reject('Unauthorized')
+    } catch (error: unknown) {
+      toast.error('"Unauthorized"')
     }
   }
 }

@@ -25,6 +25,14 @@ export const en: LocaleType = {
     goForward: 'Go forward',
   },
   signIn: 'Sign In',
+  signInForm: {
+    labelEmail: 'Email',
+    labelPassword: 'Password',
+    passwordRecovery: 'Forgot Password',
+    signUpTitle: 'Sign Up',
+    text: 'Don’t have an account?',
+    title: 'Sign In',
+  },
   signUp: 'Sign Up',
   signUpForm: {
     confirmSignUpModal: {

@@ -23,6 +23,15 @@ export const ru = {
     goForward: 'Вперед',
   },
   signIn: 'Вход',
+  signInForm: {
+    labelEmail: 'Электронная почта',
+    labelPassword: 'Пароль',
+    passwordRecovery: 'Забыли пароль',
+    signUpTitle: 'Зарегистрироваться',
+
+    text: 'У вас нет учетной записи?',
+    title: 'Вход',
+  },
   signUp: 'Регистрация',
   signUpForm: {
     confirmSignUpModal: {
