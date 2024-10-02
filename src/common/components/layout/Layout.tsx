@@ -15,7 +15,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     return (
       <div
         className={
-          'w-[1440px] h-screen flex flex-col items-center justify-center'
+          'w-max-[1440px] w-full h-screen flex flex-col items-center justify-center'
         }
         ref={ref}
         {...rest}
