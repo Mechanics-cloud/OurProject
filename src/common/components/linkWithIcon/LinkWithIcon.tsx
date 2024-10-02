@@ -17,7 +17,7 @@ type Props<T extends ElementType = typeof Link> = {
   iconTrigger?: boolean | string
 } & ComponentPropsWithoutRef<T>
 
-export const NavLink = React.forwardRef<HTMLElement, Props<ElementType>>(
+export const LinkWithIcon = React.forwardRef<HTMLElement, Props<ElementType>>(
   function NavLink(
     {
       ActiveIcon,
@@ -35,7 +35,7 @@ export const NavLink = React.forwardRef<HTMLElement, Props<ElementType>>(
     const Component = as || Link
     const { pathname } = useRouter()
 
-    let isActive = false
+    let isActive: boolean
 
     if (Component === Link) {
       if (href === '/') {
@@ -48,26 +48,24 @@ export const NavLink = React.forwardRef<HTMLElement, Props<ElementType>>(
     }
 
     return (
-      <li>
-        <Component
-          href={href}
-          {...rest}
-          aria-disabled={disabled}
-          className={cn(
-            className,
-            styles.link,
-            isActive && styles.activeLink,
-            disabled && 'pointer-events-none text-dark-100'
-          )}
-          ref={ref}
-          tabIndex={disabled ? -1 : undefined}
-        >
-          {isActive ? <ActiveIcon /> : <DefaultIcon />}
-          {children}
-        </Component>
-      </li>
+      <Component
+        href={href}
+        {...rest}
+        aria-disabled={disabled}
+        className={cn(
+          className,
+          styles.link,
+          isActive && styles.activeLink,
+          disabled && 'pointer-events-none text-dark-100'
+        )}
+        ref={ref}
+        tabIndex={disabled ? -1 : undefined}
+      >
+        {isActive ? <ActiveIcon /> : <DefaultIcon />}
+        {children}
+      </Component>
     )
   }
 )
 
-NavLink.displayName = 'NavLink'
+LinkWithIcon.displayName = 'LinkWithIcon'

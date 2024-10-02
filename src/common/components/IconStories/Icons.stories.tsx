@@ -1,5 +1,3 @@
-import type { StoryObj } from '@storybook/react'
-
 import * as filledIcons from '../../../assets/icons/filledIcons'
 import * as outlineIcons from '../../../assets/icons/outlineIcons'
 
