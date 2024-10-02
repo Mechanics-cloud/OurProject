@@ -3,13 +3,13 @@ import { Paths } from '@/common/paths'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import congratulation from '../../../assets/images/registration/congratulation.png'
+import congratulationImage from '../../../assets/images/registration/congratulation.png'
 
 const Confirmation = () => {
   return (
     <div
       className={
-        'md:mt-9 mt-4 mx-auto box-border border-transparent flex flex-col items-center'
+        'md:mt-9 mt-4 box-border border-transparent flex flex-col items-center'
       }
     >
       <Typography
@@ -24,11 +24,11 @@ const Confirmation = () => {
       >
         Your email has been confirmed
       </Typography>
-      <div className={'flex flex-col md:flex-col-reverse items-center '}>
+      <div className={'flex flex-col md:flex-col-reverse items-center w-full'}>
         <Image
           alt={'Congratulations!'}
           className={'md:mb-0 mb-11'}
-          src={congratulation}
+          src={congratulationImage}
         />
         <Button
           asChild
