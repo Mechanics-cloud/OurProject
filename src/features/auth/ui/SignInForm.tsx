@@ -48,7 +48,7 @@ const SignIn = observer(() => {
   return (
     <div className={'flex items-center justify-center w-full h-full'}>
       <Card className={'flex flex-col items-center w-[378px]'}>
-        <Typography variant={'h1'}>{t.signInForm.title}</Typography>{' '}
+        <Typography variant={'h1'}>{t.signInForm.title}</Typography>
         <ExternalServicesRegistration />
         <form
           className={'flex flex-col  w-full h-full'}
