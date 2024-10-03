@@ -1,9 +1,10 @@
-import congratulationImage from '@/assets/images/registration/congratulation.png'
 import { Button, RegistrationResult, useTranslation } from '@/common'
 import { Paths } from '@/common/paths'
 import { useRegistrationConfirmation } from '@/features/auth/model/signUp/useRegistrationConfirmation'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import congratulationImage from '../../../../assets/images/registration/congratulation.webp'
 
 export const RegistrationConfirmation = () => {
   const { t } = useTranslation()
