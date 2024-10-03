@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { Environments } from '@/common/enviroments'
+import { generalStore } from '@/common/modal/store'
 import { ErrorResponse } from '@/common/types'
 import { signUpApi } from '@/features/auth/api/signUpAPI'
 import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
@@ -29,14 +30,14 @@ export const useSignUp = () => {
     mode: 'onChange',
     resolver: zodResolver(signUpSchema),
   })
-  const [isLoading, setIsLoading] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const isLoadingStore = generalStore
 
   const onSubmit = handleSubmit(async (data) => {
     const { confirm, ...restData } = data
     const baseUrl = Environments.BASE_URL as string
 
-    setIsLoading(true)
+    isLoadingStore.turnOnLoading()
     try {
       const res = await signUpApi.signUp({ ...restData, baseUrl })
 
@@ -55,7 +56,7 @@ export const useSignUp = () => {
         toast.error((error as Error).message ?? 'Something went wrong')
       }
     }
-    setIsLoading(false)
+    isLoadingStore.turnOffLoading()
   })
 
   const onModalClose = () => {
@@ -85,7 +86,7 @@ export const useSignUp = () => {
   return {
     control,
     errors,
-    isLoading,
+    isLoading: isLoadingStore.isLoading,
     isOpen,
     isValid,
     onModalClose,
