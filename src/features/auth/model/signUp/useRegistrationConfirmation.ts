@@ -28,6 +28,7 @@ export const useRegistrationConfirmation = () => {
         })
         .catch((error) => {
           responseErrorHandler(error)
+          push(Paths.registrationEmailResending)
         })
     } catch (error) {
       responseErrorHandler(error)
