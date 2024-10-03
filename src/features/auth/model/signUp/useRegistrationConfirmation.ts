@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { Paths } from '@/common/paths'
@@ -8,11 +8,10 @@ import { useRouter } from 'next/router'
 
 export const useRegistrationConfirmation = () => {
   const { push, query } = useRouter()
+  const [isConfirm, setIsConfirm] = useState(false)
 
   useEffect(() => {
     if (!query.code || !query.email) {
-      push(Paths.signUp)
-
       return
     }
     const controller = new AbortController()
@@ -24,11 +23,15 @@ export const useRegistrationConfirmation = () => {
       authApi
         .emailConfirmation({ confirmationCode, email })
         .then((res) => {
+          setIsConfirm(true)
           toast(res.status)
         })
         .catch((error) => {
           responseErrorHandler(error)
-          push(Paths.registrationEmailResending)
+          push({
+            pathname: Paths.registrationEmailResending,
+            query: { code: confirmationCode, email },
+          })
         })
     } catch (error) {
       responseErrorHandler(error)
@@ -38,4 +41,8 @@ export const useRegistrationConfirmation = () => {
       controller.abort()
     }
   }, [query.code, query.email, push])
+
+  return {
+    isConfirm,
+  }
 }

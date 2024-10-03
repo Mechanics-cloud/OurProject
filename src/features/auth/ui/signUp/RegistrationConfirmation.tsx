@@ -9,7 +9,11 @@ import congratulationImage from '../../../../assets/images/registration/congratu
 export const RegistrationConfirmation = () => {
   const { t } = useTranslation()
 
-  useRegistrationConfirmation()
+  const { isConfirm } = useRegistrationConfirmation()
+
+  if (!isConfirm) {
+    return
+  }
 
   return (
     <>
