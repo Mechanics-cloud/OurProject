@@ -1,9 +1,49 @@
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+
 import { Button, Typography, getBaseLayout } from '@/common'
+import { Environments } from '@/common/enviroments'
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { signUpApi } from '@/features/auth/api'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { z } from 'zod'
 
 import expiredImage from '../../../assets/images/registration/expired.webp'
 
 const Expired = () => {
+  const { query } = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
+
+  const emailCheck = z.string().email()
+
+  const onResendHandler = () => {
+    if (!query.email) {
+      toast.error('Something went wrong')
+    }
+    try {
+      const email = emailCheck.parse(query.email)
+      const baseUrl = Environments.BASE_URL as string
+
+      signUpApi
+        .emailResending({ baseUrl, email })
+        .then((res) => {
+          toast.error('Ok')
+        })
+        .catch((error) => {
+          responseErrorHandler(error)
+        })
+
+      console.log('Valid email:', email)
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        toast.error(error.errors[0].message)
+      } else {
+        toast.error((error as Error).message)
+      }
+    }
+  }
+
   return (
     <div className={'md:mt-9 mt-4'}>
       <Typography
@@ -27,7 +67,10 @@ const Expired = () => {
           src={expiredImage}
           width={473}
         />
-        <Button className={'md:mb-[72px] mb-0 self-stretch md:self-auto'}>
+        <Button
+          className={'md:mb-[72px] mb-0 self-stretch md:self-auto'}
+          onClick={onResendHandler}
+        >
           Resend verification link
         </Button>
       </div>

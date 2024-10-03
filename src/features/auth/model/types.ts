@@ -1,5 +1,10 @@
 import { SignUpFields } from '@/features/auth/model/singUpSchema'
 
-export type SignUpRequestData = {
+type BaseUrl = {
   baseUrl: string
-} & Omit<SignUpFields, 'agreesToTOS' | 'confirm'>
+}
+
+export type SignUpRequestData = BaseUrl &
+  Omit<SignUpFields, 'agreesToTOS' | 'confirm'>
+
+export type EmailResendRequestData = { email: string } & BaseUrl
