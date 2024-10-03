@@ -1,4 +1,4 @@
-export type ProfileType = {
+export type Profile = {
   email: string
   siBlocked: boolean
   userId: number

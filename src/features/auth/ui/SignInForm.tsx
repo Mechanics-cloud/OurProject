@@ -1,6 +1,8 @@
 import { useForm } from 'react-hook-form'
 
-import { Button, Card, TextField, Typography, useTranslation } from '@/common'
+import { Button, Card, Typography, useTranslation } from '@/common'
+import { FormTextField } from '@/common/form'
+import { Paths } from '@/common/paths'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
@@ -10,7 +12,7 @@ import authStore from '../model/authStore'
 import { signInSchema } from '../model/singInSchemma'
 import { ExternalServicesRegistration } from './ExternalServicesRegistration'
 
-export type LoginFormType = {
+export type LoginForm = {
   email: string
   password: string
 }
@@ -19,24 +21,27 @@ const SignIn = observer(() => {
   const { t } = useTranslation()
 
   const {
-    formState: { errors, isValid },
+    control,
+    formState: { isValid },
     handleSubmit,
-    register,
     setError,
-  } = useForm<LoginFormType>({
+    setFocus,
+  } = useForm<LoginForm>({
+    defaultValues: { email: '', password: '' },
     mode: 'onTouched',
     resolver: zodResolver(signInSchema),
   })
 
-  const onSubmit = async (data: LoginFormType) => {
+  const onSubmit = async (data: LoginForm) => {
     try {
       await authStore.login(data)
-      Router.push('/')
+      Router.push(Paths.home)
     } catch (error: any) {
       setError('email', {
-        message: 'The email or password are incorrect. Try again please',
+        message: t.signInForm.errorResponse,
         type: 'manual',
-      })
+      }),
+        setFocus('email')
     }
   }
 
@@ -50,23 +55,23 @@ const SignIn = observer(() => {
           noValidate
           onSubmit={handleSubmit(onSubmit)}
         >
-          <TextField
+          <FormTextField
+            control={control}
             disabled={authStore.isLoading}
-            error={errors.email?.message}
             label={t.signInForm.labelEmail}
+            name={'email'}
             placeholder={'Epam@epam.com'}
             type={'email'}
-            {...register('email')}
           />
-
-          <TextField
+          <FormTextField
+            control={control}
             disabled={authStore.isLoading}
-            error={errors.password?.message}
             label={t.signInForm.labelPassword}
+            name={'password'}
             placeholder={'**********'}
             type={'password'}
-            {...register('password')}
           />
+
           <Link
             className={'self-end mt-3 mb-6 text-light-900'}
             href={'/*'}
@@ -91,7 +96,7 @@ const SignIn = observer(() => {
           asChild
           variant={'text'}
         >
-          <Link href={'/auth/sign-up'}>{t.signInForm.signUpTitle}</Link>
+          <Link href={Paths.signUp}>{t.signInForm.signUpTitle}</Link>
         </Button>
       </Card>
     </div>

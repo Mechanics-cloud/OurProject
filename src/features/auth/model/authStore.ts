@@ -1,26 +1,26 @@
-import { toast } from 'react-toastify'
-
-import { LoginFormType } from '@/pages/auth/sign-in'
-import { isAxiosError } from 'axios'
+import { StorageKeys } from '@/common/enums'
+import { handleServerError } from '@/common/utils/handleServerError'
+import axios, { InternalAxiosRequestConfig } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { authApi } from '../api/authApi'
-import { ProfileType } from '../api/authApi.types'
+import { Profile } from '../api/authApi.types'
+import { LoginForm } from '../ui/SignInForm'
 
 class AuthStore {
   isLoading = false
-  profile: ProfileType | undefined
+  profile: Profile | undefined
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  async login(data: LoginFormType) {
+  async login(data: LoginForm) {
     this.isLoading = true
     try {
       const accessToken = await authApi.login(data)
 
-      localStorage.setItem('accessToken', accessToken)
+      localStorage.setItem(StorageKeys.AccessToken, accessToken)
 
       await this.me()
     } catch (error) {
@@ -33,15 +33,11 @@ class AuthStore {
   }
   async logout() {
     try {
-      const c = await authApi.logout()
+      await authApi.logout()
 
-      localStorage.removeItem('accessToken')
-    } catch (error: unknown) {
-      if (isAxiosError(error) && error.response?.data?.messages) {
-        toast.error(error.response.data.messages[0].message)
-      } else {
-        toast.error('Something went wrong')
-      }
+      localStorage.removeItem(StorageKeys.AccessToken)
+    } catch (error) {
+      handleServerError(error)
     }
   }
 
@@ -52,22 +48,23 @@ class AuthStore {
       runInAction(() => {
         this.profile = profile
       })
-    } catch (error: unknown) {
-      if (isAxiosError(error) && error.response?.data?.messages) {
-        toast.error(error.response.data.messages[0].message)
-      } else {
-        toast.error('Something went wrong')
-      }
+    } catch (error) {
+      handleServerError(error)
     }
   }
 
-  async updateToken() {
+  async updateToken(previousRequest: InternalAxiosRequestConfig | undefined) {
     try {
       const newToken = await authApi.updateToken()
 
-      localStorage.setItem('accessToken', newToken)
-    } catch (error: unknown) {
-      toast.error('"Unauthorized"')
+      localStorage.setItem(StorageKeys.AccessToken, newToken)
+      if (previousRequest) {
+        previousRequest.headers.Authorization = `Bearer ${newToken}`
+
+        return axios(previousRequest)
+      }
+    } catch (error) {
+      handleServerError(error)
     }
   }
 }

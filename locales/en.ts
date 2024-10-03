@@ -26,6 +26,7 @@ export const en: LocaleType = {
   },
   signIn: 'Sign In',
   signInForm: {
+    errorResponse: 'The email or password are incorrect. Try again please',
     labelEmail: 'Email',
     labelPassword: 'Password',
     passwordRecovery: 'Forgot Password',
