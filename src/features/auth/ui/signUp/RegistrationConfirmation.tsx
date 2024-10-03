@@ -1,7 +1,7 @@
 import congratulationImage from '@/assets/images/registration/congratulation.webp'
 import { Button, RegistrationResult, useTranslation } from '@/common'
 import { Paths } from '@/common/paths'
-import { useRegistrationConfirmation } from '@/features/auth/model/useRegistrationConfirmation'
+import { useRegistrationConfirmation } from '@/features/auth/model/signUp/useRegistrationConfirmation'
 import Image from 'next/image'
 import Link from 'next/link'
 

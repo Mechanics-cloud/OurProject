@@ -1,10 +1,9 @@
 import { Button, RegistrationResult } from '@/common'
 import { ConfirmSignUpModal } from '@/features/auth'
-import { useRegistrationExpired } from '@/features/auth/model/useRegistrationExpired'
+import { useRegistrationExpired } from '@/features/auth/model/signUp/useRegistrationExpired'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
-
-import expiredImage from '../../../assets/images/registration/expired.webp'
+import expiredImage from 'src/assets/images/registration/expired.webp'
 
 const RegistrationExpired = observer(() => {
   const { isOpen, onModalClose, onResendHandler, t, userEmail } =

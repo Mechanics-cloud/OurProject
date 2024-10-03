@@ -1,5 +1,5 @@
 import { getBaseLayout } from '@/common'
-import RegistrationExpired from '@/features/auth/ui/RegistrationExpired'
+import RegistrationExpired from '@/features/auth/ui/signUp/RegistrationExpired'
 
 const Expired = () => {
   return (

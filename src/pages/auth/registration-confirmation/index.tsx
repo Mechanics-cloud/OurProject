@@ -1,5 +1,5 @@
 import { getBaseLayout } from '@/common'
-import { RegistrationConfirmation } from '@/features/auth/ui/RegistrationConfirmation'
+import { RegistrationConfirmation } from '@/features/auth/ui/signUp/RegistrationConfirmation'
 
 const Confirmation = () => {
   return (
