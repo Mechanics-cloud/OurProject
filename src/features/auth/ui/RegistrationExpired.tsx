@@ -1,7 +1,6 @@
-import { Button, Typography } from '@/common'
+import { Button, RegistrationResult } from '@/common'
 import { ConfirmSignUpModal } from '@/features/auth'
 import { useRegistrationExpired } from '@/features/auth/model/useRegistrationExpired'
-import { RegistrationResult } from '@/features/auth/ui/RegistrationResult'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 
