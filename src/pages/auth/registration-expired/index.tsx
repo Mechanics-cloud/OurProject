@@ -1,7 +1,7 @@
 import { Button, Typography, getBaseLayout } from '@/common'
 import Image from 'next/image'
 
-import expiredImage from '../../../assets/images/registration/expired.png'
+import expiredImage from '../../../assets/images/registration/expired.webp'
 
 const Expired = () => {
   return (
