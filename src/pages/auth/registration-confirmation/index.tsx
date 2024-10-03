@@ -7,19 +7,15 @@ import congratulationImage from '../../../assets/images/registration/congratulat
 
 const Confirmation = () => {
   return (
-    <div
-      className={
-        'md:mt-9 mt-4 box-border border-transparent flex flex-col items-center'
-      }
-    >
+    <div className={'md:mt-9 mt-4'}>
       <Typography
-        className={'md:mb-5 mb-3'}
+        className={'md:mb-5 mb-3 text-center'}
         variant={'h1'}
       >
         Congratulations!
       </Typography>
       <Typography
-        className={'md:mb-14 mb-16'}
+        className={'md:mb-14 mb-16 text-center'}
         variant={'reg16'}
       >
         Your email has been confirmed

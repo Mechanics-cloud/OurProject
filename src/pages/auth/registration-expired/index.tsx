@@ -5,13 +5,9 @@ import expiredImage from '../../../assets/images/registration/expired.png'
 
 const Expired = () => {
   return (
-    <div
-      className={
-        'md:mt-9 mt-4 mx-auto box-border border-transparent flex flex-col items-center'
-      }
-    >
+    <div className={'md:mt-9 mt-4'}>
       <Typography
-        className={'md:mb-5 mb-3'}
+        className={'md:mb-5 mb-3 text-center'}
         variant={'h1'}
       >
         Email verification link expired
