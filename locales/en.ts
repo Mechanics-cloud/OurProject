@@ -1,6 +1,7 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  basicError: 'Something went wrong',
   logIn: 'Log In',
   menu: {
     create: 'Create',
@@ -23,6 +24,18 @@ export const en: LocaleType = {
   pagination: {
     goBack: 'Go Back',
     goForward: 'Go forward',
+  },
+  registration: {
+    confirmation: {
+      buttonTitle: 'Sign in',
+      text: 'Your email has been confirmed',
+      title: 'Congratulations!',
+    },
+    expired: {
+      buttonTitle: 'Resend verification link',
+      text: 'Looks like the verification link has expired. Not to worry, we can send the link again',
+      title: 'Email verification link expired',
+    },
   },
   signIn: 'Sign In',
   signUp: 'Sign Up',

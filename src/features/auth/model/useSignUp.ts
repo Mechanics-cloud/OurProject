@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Environments } from '@/common/enviroments'
 import { generalStore } from '@/common/modal/store'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { signUpApi } from '@/features/auth/api/signUpAPI'
+import { authApi } from '@/features/auth/api/authAPI'
 import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -37,7 +37,7 @@ export const useSignUp = () => {
 
     isLoadingStore.turnOnLoading()
     try {
-      const res = await signUpApi.signUp({ ...restData, baseUrl })
+      const res = await authApi.signUp({ ...restData, baseUrl })
 
       if (!res.data) {
         setIsOpen(true)

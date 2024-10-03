@@ -1,13 +1,19 @@
 import { Endpoints } from '@/features/auth/api/auth.endpoints'
 import { instance } from '@/features/auth/api/instances'
 import {
+  EmailConfirmationRequestData,
   EmailResendRequestData,
   SignUpRequestData,
 } from '@/features/auth/model/types'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
-class SignUpApi {
+class AuthAPI {
   constructor(private instance: AxiosInstance) {}
+  public async emailConfirmation(
+    emailConfirmation: EmailConfirmationRequestData
+  ): Promise<AxiosResponse> {
+    return this.instance.post(Endpoints.EmailResending, emailConfirmation)
+  }
   public async emailResending(
     emailResendData: EmailResendRequestData
   ): Promise<AxiosResponse> {
@@ -20,4 +26,4 @@ class SignUpApi {
   }
 }
 
-export const signUpApi = new SignUpApi(instance)
+export const authApi = new AuthAPI(instance)
