@@ -1,4 +1,4 @@
-import congratulationImage from '@/assets/images/registration/congratulation.webp'
+import congratulationImage from '@/assets/images/registration/congratulation.png'
 import { Button, RegistrationResult, useTranslation } from '@/common'
 import { Paths } from '@/common/paths'
 import { useRegistrationConfirmation } from '@/features/auth/model/signUp/useRegistrationConfirmation'
