@@ -5,6 +5,11 @@ import { SignUpFields } from '@/features/auth/model'
 import { isAxiosError } from 'axios'
 import { z } from 'zod'
 
+/**
+ *
+ * @param error - Some error (zod, axios or code)
+ * @param setError - Unnecessary parameter for from error handling
+ */
 export const responseErrorHandler = (error: unknown, setError?: Function) => {
   const basicErrorMessage = 'Something went wrong'
 
