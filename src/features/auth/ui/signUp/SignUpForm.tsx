@@ -18,6 +18,7 @@ import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 export const SignUpForm = observer(() => {
+  //todo redirect auth user to home page
   const { t } = useTranslation()
   const {
     control,

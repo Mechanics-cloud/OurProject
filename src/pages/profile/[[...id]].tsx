@@ -1,6 +1,5 @@
 import { Paid } from '@/assets/icons/filledIcons'
-import { Button, Typography } from '@/common'
-import { getLayoutWithSidebar } from '@/common/layout/layoutWithSidebar/LayoutWithSidebar'
+import { Button, Typography, getLayoutWithSidebar } from '@/common'
 import { cn } from '@/common/utils/cn'
 import Image from 'next/image'
 
