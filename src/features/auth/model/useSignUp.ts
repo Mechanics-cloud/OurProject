@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 
 import { Environments } from '@/common/enviroments'
 import { generalStore } from '@/common/modal/store'
-import { ErrorResponse } from '@/common/types'
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { signUpApi } from '@/features/auth/api/signUpAPI'
 import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { isAxiosError } from 'axios'
 
 export const useSignUp = () => {
   const {
@@ -45,16 +43,7 @@ export const useSignUp = () => {
         setIsOpen(true)
       }
     } catch (error: unknown) {
-      if (isAxiosError(error) && error.response?.data?.messages) {
-        const errorData = error.response?.data as ErrorResponse
-
-        errorData.messages.forEach(({ field, message }) => {
-          toast.error(message)
-          setError(field as keyof SignUpFields, { message })
-        })
-      } else {
-        toast.error((error as Error).message ?? 'Something went wrong')
-      }
+      responseErrorHandler(error, setError)
     }
     isLoadingStore.turnOffLoading()
   })

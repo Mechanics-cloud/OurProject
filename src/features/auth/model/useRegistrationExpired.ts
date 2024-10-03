@@ -36,7 +36,7 @@ export const useRegistrationExpired = () => {
       isLoadingStore.turnOnLoading()
       signUpApi
         .emailResending({ baseUrl, email })
-        .then((res) => {
+        .then(() => {
           setIsOpen(true)
         })
         .catch((error) => {
@@ -46,11 +46,7 @@ export const useRegistrationExpired = () => {
           isLoadingStore.turnOffLoading()
         })
     } catch (error) {
-      if (error instanceof z.ZodError) {
-        toast.error(error.errors[0].message)
-      } else {
-        toast.error((error as Error).message)
-      }
+      responseErrorHandler(error)
     }
   }
 
