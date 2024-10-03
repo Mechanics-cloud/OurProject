@@ -2,6 +2,14 @@ import { LocaleType } from './ru'
 
 export const en: LocaleType = {
   basicError: 'Something went wrong',
+  forgotPassword: {
+    buttonTitle: 'Send Link',
+    description:
+      'Enter your email address and we will send you further instructions',
+    emailPlaceholder: 'Enter your email address',
+    link: 'Back to Sign In',
+    title: 'Forgot Password',
+  },
   logIn: 'Log In',
   menu: {
     create: 'Create',

@@ -3,14 +3,14 @@ import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { Environments, ErrorResponse, Nullable } from '@/common'
+import { Environments, Nullable } from '@/common'
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import {
   ForgotPasswordFields,
   authApi,
   forgotPasswordSchema,
 } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as axios from 'axios'
 
 export const useForgotPassword = () => {
   const recaptchaRef = useRef<Nullable<ReCAPTCHA>>(null)
@@ -51,16 +51,7 @@ export const useForgotPassword = () => {
       toast.success('Success! Check your email')
     } catch (error: unknown) {
       onResetRecaptcha()
-      if (axios.isAxiosError(error) && error.response?.data?.messages) {
-        const errorData = error.response?.data as ErrorResponse
-
-        errorData.messages.forEach(({ field, message }) => {
-          toast.error(message)
-          setError(field as keyof ForgotPasswordFields, { message })
-        })
-      } else {
-        toast.error((error as Error).message ?? 'Something went wrong')
-      }
+      responseErrorHandler(error, setError)
     }
   })
 

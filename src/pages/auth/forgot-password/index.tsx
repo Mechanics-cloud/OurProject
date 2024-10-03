@@ -1,7 +1,7 @@
-import { Card } from '@/common'
+import { Card, getBaseLayout } from '@/common'
 import { ForgotPasswordForm } from '@/features/auth'
 
-export default function ForgotPassword() {
+function ForgotPassword() {
   return (
     <Card
       className={
@@ -12,3 +12,7 @@ export default function ForgotPassword() {
     </Card>
   )
 }
+
+ForgotPassword.getLayout = getBaseLayout
+
+export default ForgotPassword
