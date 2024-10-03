@@ -1,4 +1,5 @@
 import { Button, Typography } from '@/common'
+import { ConfirmSignUpModal } from '@/features/auth'
 import { useRegistrationExpired } from '@/features/auth/model/useRegistrationExpired'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -6,7 +7,8 @@ import Image from 'next/image'
 import expiredImage from '../../../assets/images/registration/expired.webp'
 
 const RegistrationExpired = observer(() => {
-  const { onResendHandler } = useRegistrationExpired()
+  const { isOpen, onModalClose, onResendHandler, userEmail } =
+    useRegistrationExpired()
 
   return (
     <>
@@ -38,6 +40,11 @@ const RegistrationExpired = observer(() => {
           Resend verification link
         </Button>
       </div>
+      <ConfirmSignUpModal
+        isOpen={isOpen}
+        onModalClose={onModalClose}
+        userEmail={userEmail}
+      />
     </>
   )
 })
