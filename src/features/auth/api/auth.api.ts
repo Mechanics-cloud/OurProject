@@ -3,11 +3,12 @@ import { instance } from '@/features/auth/api/instances'
 import {
   EmailConfirmationRequestData,
   EmailResendRequestData,
+  RecoveryPasswordData,
   SignUpRequestData,
 } from '@/features/auth/model/types'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
-class AuthAPI {
+class AuthApi {
   constructor(private instance: AxiosInstance) {}
   public async emailConfirmation(
     emailConfirmation: EmailConfirmationRequestData
@@ -19,11 +20,14 @@ class AuthAPI {
   ): Promise<AxiosResponse> {
     return this.instance.post(Endpoints.EmailResending, emailResendData)
   }
-  public async signUp(
-    registrationData: SignUpRequestData
+  public async recoverPassword(
+    data: RecoveryPasswordData
   ): Promise<AxiosResponse> {
-    return this.instance.post(Endpoints.SignUp, registrationData)
+    return this.instance.post(Endpoints.RecoveryPassword, data)
+  }
+  public async signUp(data: SignUpRequestData): Promise<AxiosResponse> {
+    return this.instance.post(Endpoints.SignUp, data)
   }
 }
 
-export const authApi = new AuthAPI(instance)
+export const authApi = new AuthApi(instance)

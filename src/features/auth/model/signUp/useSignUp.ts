@@ -4,8 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Environments } from '@/common/enviroments'
 import { generalStore } from '@/common/modal/store'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { authApi } from '@/features/auth/api/authAPI'
-import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
+import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useSignUp = () => {
