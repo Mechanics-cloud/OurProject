@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { generalStore } from '@/app/store'
 import { Environments } from '@/common/enviroments'
-import { generalStore } from '@/common/modal/store'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'

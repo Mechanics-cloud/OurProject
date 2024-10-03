@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { generalStore } from '@/app/store'
 import { useTranslation } from '@/common'
 import { Environments } from '@/common/enviroments'
-import { generalStore } from '@/common/modal/store'
 import { Paths } from '@/common/paths'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { authApi } from '@/features/auth/api'
