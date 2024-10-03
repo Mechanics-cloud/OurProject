@@ -3,9 +3,14 @@ import {
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
 import { Tooltip, useTranslation } from '@/common'
+import { Environments } from '@/common/enviroments'
 
 export const ExternalServicesRegistration = () => {
   const { t } = useTranslation()
+
+  const handleLoginWithGithub = () => {
+    window.location.assign(`${Environments.BASE_URL}/v1/auth/github/login`)
+  }
 
   return (
     <div className={'flex gap-14 justify-center mb-6 mt-4'}>
@@ -19,7 +24,10 @@ export const ExternalServicesRegistration = () => {
       </Tooltip>
 
       <Tooltip title={t.signUpForm.signUpGithub}>
-        <button type={'button'}>
+        <button
+          onClick={handleLoginWithGithub}
+          type={'button'}
+        >
           <GithubSvgrepoCom31
             height={36}
             width={36}
