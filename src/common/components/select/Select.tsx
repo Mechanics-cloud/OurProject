@@ -1,6 +1,7 @@
 'use client'
 
 import * as React from 'react'
+import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
 import ArrowIosDownOutline from '@/assets/icons/outlineIcons/ArrowIosDownOutline'
 import { typographyVariants } from '@/common/components/typography'
@@ -8,7 +9,7 @@ import { cn } from '@/common/utils/cn'
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { clsx } from 'clsx'
 
-const Select = SelectPrimitive.Root
+const SelectBasic = SelectPrimitive.Root
 
 const SelectGroup = SelectPrimitive.Group
 
@@ -86,7 +87,7 @@ const SelectItem = React.forwardRef<
 >(({ children, className, ...props }, ref) => (
   <SelectPrimitive.Item
     className={cn(
-      'rounded-sm px-2.5 py-1.5 outline-none hover:bg-dark-300 hover:text-accent-500 focus:bg-accent focus:text-accent-500 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 min-w-[240px] [&>span]:flex [&>span]:items-center [&>span]:gap-2',
+      'rounded-sm px-2.5 py-1.5 outline-none hover:bg-dark-300 hover:text-accent-500 focus:bg-accent focus:text-accent-500 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&>span]:flex [&>span]:items-center [&>span]:gap-2 cursor-pointer',
       typographyVariants({ variant: 'reg16' }),
       className
     )}
@@ -112,13 +113,39 @@ const SelectSeparator = React.forwardRef<
 
 SelectSeparator.displayName = SelectPrimitive.Separator.displayName
 
+type Props = {
+  children: ReactNode
+  className?: string
+  label?: string
+  placeholder?: number | string
+} & ComponentPropsWithoutRef<typeof SelectPrimitive.Root>
+
+const Select = ({
+  children,
+  className,
+  label,
+  placeholder,
+  ...props
+}: Props) => {
+  return (
+    <SelectBasic {...props}>
+      <SelectGroup className={className}>
+        {label && <SelectLabel>{label}</SelectLabel>}
+        <SelectTrigger>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent>{children}</SelectContent>
+      </SelectGroup>
+    </SelectBasic>
+  )
+}
+
 export {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectLabel,
-  SelectSeparator,
   SelectTrigger,
   SelectValue,
 }

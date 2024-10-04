@@ -11,6 +11,7 @@ import {
   TextFieldProps,
 } from '@/common/components/textfield/TextField.types'
 import { getInputClasses } from '@/common/components/textfield/helper'
+import { cn } from '@/common/utils/cn'
 
 const TextFieldTemplate = <T extends ElementType = 'input'>(
   props: TextFieldProps,
@@ -28,10 +29,18 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     ...rest
   } = props
 
+  let marginForError = '24px'
+
+  if (error) {
+    const margin = `${Math.ceil(error.length / 50) * 24}px`
+
+    marginForError = error.length > 50 ? margin : marginForError
+  }
+
   const cls = {
-    container: 'flex flex-col',
-    error: 'text-danger-500',
-    input: getInputClasses(Boolean(error), type, className),
+    container: cn('flex flex-col relative mb-6', className),
+    error: 'text-danger-500 absolute top-[100%] leading-1',
+    input: getInputClasses(Boolean(error), type),
     inputContainer: 'relative',
     label: disabled ? 'text-dark-100 mb-1' : 'text-light-900 mb-1',
     leftIcon:
@@ -44,7 +53,10 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
   const handleToggle = () => setOpen((prev) => !prev)
 
   return (
-    <label className={cls.container}>
+    <label
+      className={cls.container}
+      style={{ marginBottom: marginForError }}
+    >
       {label && (
         <Typography
           className={cls.label}
@@ -68,12 +80,16 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           (open ? (
             <EyeOutline
               className={cls.rightIcon}
+              height={24}
               onClick={handleToggle}
+              width={24}
             />
           ) : (
             <EyeOffOutline
               className={cls.rightIcon}
+              height={24}
               onClick={handleToggle}
+              width={24}
             />
           ))}
       </div>

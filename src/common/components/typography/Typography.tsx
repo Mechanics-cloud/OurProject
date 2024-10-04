@@ -3,8 +3,11 @@ import { ComponentPropsWithoutRef, ElementType } from 'react'
 import { typographyVariants } from '@/common/components/typography/typographyVariants'
 import { cn } from '@/common/utils/cn'
 import { VariantProps } from 'class-variance-authority'
+import Link from 'next/link'
 
-type Variant = NonNullable<VariantProps<typeof typographyVariants>['variant']>
+export type Variant = NonNullable<
+  VariantProps<typeof typographyVariants>['variant']
+>
 
 const typographyTags: Record<Variant, ElementType> = {
   bold14: 'p',
@@ -16,10 +19,10 @@ const typographyTags: Record<Variant, ElementType> = {
   med14: 'p',
   reg14: 'p',
   reg16: 'p',
-  regularLink: 'a',
+  regularLink: Link,
   semiBoldSmall: 'p',
   small: 'p',
-  smallLink: 'a',
+  smallLink: Link,
 }
 
 type Props = ComponentPropsWithoutRef<ElementType> &
