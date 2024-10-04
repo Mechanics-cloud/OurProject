@@ -4,8 +4,7 @@ import { toast } from 'react-toastify'
 
 import { Environments } from '@/common/enviroments'
 import { ErrorResponse } from '@/common/types'
-import { signUpApi } from '@/features/auth/api/signUpAPI'
-import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
+import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { isAxiosError } from 'axios'
 
@@ -38,7 +37,7 @@ export const useSignUp = () => {
 
     setIsLoading(true)
     try {
-      const res = await signUpApi.signUp({ ...restData, baseUrl })
+      const res = await authApi.signUp({ ...restData, baseUrl })
 
       if (!res.data) {
         setIsOpen(true)
