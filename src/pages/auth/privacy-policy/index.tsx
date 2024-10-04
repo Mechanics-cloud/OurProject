@@ -1,7 +1,8 @@
+import { getBaseLayout } from '@/common'
 import { Typography } from '@/common/components'
 import { TermsPolicyLayout } from '@/common/components/termsPolicyLayout'
 
-export default function PrivacyPolicy() {
+function PrivacyPolicy() {
   return (
     <TermsPolicyLayout title={'Privacy Policy'}>
       <Typography variant={'reg14'}>
@@ -93,3 +94,6 @@ export default function PrivacyPolicy() {
     </TermsPolicyLayout>
   )
 }
+
+PrivacyPolicy.getLayout = getBaseLayout
+export default PrivacyPolicy

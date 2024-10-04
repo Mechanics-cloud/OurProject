@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from './Modal'
+} from './BaseModal'
 
 const meta = {
   component: Dialog,
