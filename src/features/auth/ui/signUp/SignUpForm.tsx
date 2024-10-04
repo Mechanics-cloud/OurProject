@@ -24,7 +24,7 @@ export const SignUpForm = observer(() => {
     control,
     errors,
     isLoading,
-    isOpen,
+    isModalOpen,
     isValid,
     onModalClose,
     onSubmit,
@@ -94,7 +94,7 @@ export const SignUpForm = observer(() => {
         </form>
 
         <ConfirmSignUpModal
-          isOpen={isOpen}
+          isOpen={isModalOpen}
           onModalClose={onModalClose}
           userEmail={userEmail}
         />

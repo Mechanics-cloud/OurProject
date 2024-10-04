@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { generalStore } from '@/app/store'
-import { useTranslation } from '@/common'
+import { useModal, useTranslation } from '@/common'
 import { Environments } from '@/common/enviroments'
 import { Paths } from '@/common/paths'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
@@ -14,16 +14,14 @@ export const useRegistrationExpired = () => {
   const { t } = useTranslation()
   const { query } = useRouter()
   const isLoadingStore = generalStore
-  const [isOpen, setIsOpen] = useState(false)
   const [userEmail, setUserEmail] = useState('')
   const router = useRouter()
 
-  const emailCheck = z.string().email()
-
-  const onModalClose = () => {
-    setIsOpen(false)
+  const { isModalOpen, onModalClose, openModal } = useModal(() => {
     router.push(Paths.signIn)
-  }
+  })
+
+  const emailCheck = z.string().email()
 
   const onResendHandler = async () => {
     if (!query.email) {
@@ -37,7 +35,7 @@ export const useRegistrationExpired = () => {
       const baseUrl = Environments.BASE_URL as string
 
       await authApi.emailResending({ baseUrl, email })
-      setIsOpen(true)
+      openModal()
     } catch (error) {
       responseErrorHandler(error)
     } finally {
@@ -46,7 +44,7 @@ export const useRegistrationExpired = () => {
   }
 
   return {
-    isOpen,
+    isModalOpen,
     onModalClose,
     onResendHandler,
     t,

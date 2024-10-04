@@ -7,7 +7,7 @@ import Image from 'next/image'
 import expiredImage from '../../../../assets/images/registration/expired.webp'
 
 const RegistrationExpired = observer(() => {
-  const { isOpen, onModalClose, onResendHandler, t, userEmail } =
+  const { isModalOpen, onModalClose, onResendHandler, t, userEmail } =
     useRegistrationExpired()
 
   return (
@@ -31,7 +31,7 @@ const RegistrationExpired = observer(() => {
         </Button>
       </RegistrationResult>
       <ConfirmSignUpModal
-        isOpen={isOpen}
+        isOpen={isModalOpen}
         onModalClose={onModalClose}
         userEmail={userEmail}
       />

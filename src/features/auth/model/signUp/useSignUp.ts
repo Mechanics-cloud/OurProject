@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { generalStore } from '@/app/store'
+import { useModal } from '@/common'
 import { Environments } from '@/common/enviroments'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
@@ -27,8 +28,10 @@ export const useSignUp = () => {
     mode: 'onChange',
     resolver: zodResolver(signUpSchema),
   })
-  const [isOpen, setIsOpen] = useState(false)
   const isLoadingStore = generalStore
+  const { isModalOpen, onModalClose, openModal } = useModal(() => {
+    reset()
+  })
 
   const onSubmit = handleSubmit(async (data) => {
     const { confirm, ...restData } = data
@@ -39,18 +42,13 @@ export const useSignUp = () => {
       const res = await authApi.signUp({ ...restData, baseUrl })
 
       if (!res.data) {
-        setIsOpen(true)
+        openModal()
       }
     } catch (error: unknown) {
       responseErrorHandler(error, setError)
     }
     isLoadingStore.turnOffLoading()
   })
-
-  const onModalClose = () => {
-    setIsOpen(false)
-    reset()
-  }
 
   const password = watch('password')
   const confirm = watch('confirm')
@@ -75,7 +73,7 @@ export const useSignUp = () => {
     control,
     errors,
     isLoading: isLoadingStore.isLoading,
-    isOpen,
+    isModalOpen,
     isValid,
     onModalClose,
     onSubmit,
