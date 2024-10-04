@@ -10,6 +10,9 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 
 class AuthApi {
   constructor(private instance: AxiosInstance) {}
+  public async authWithGoogle(code: string): Promise<AxiosResponse> {
+    return this.instance.post(Endpoints.AuthWithGoogle, { code })
+  }
   public async emailConfirmation(
     emailConfirmation: EmailConfirmationRequestData
   ): Promise<AxiosResponse> {
