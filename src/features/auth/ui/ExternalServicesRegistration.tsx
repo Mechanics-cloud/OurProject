@@ -5,7 +5,6 @@ import {
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
 import { Tooltip, useTranslation } from '@/common'
-import { Environments } from '@/common/enviroments'
 import { fetchUser } from '@/pages/github'
 import { useGoogleLogin } from '@react-oauth/google'
 import axios from 'axios'
@@ -13,13 +12,13 @@ import { useRouter } from 'next/router'
 
 const getAuthWithGoogle = async (code: string) => {
   const response = await axios.post(
-    `${Environments.BASE_URL}/v1/auth/google/login`,
+    `${process.env.NEXT_PUBLIC_INCTAGRAM_API_URL}/v1/auth/google/login`,
     { code: code }
   )
 
   return response
 }
-//
+
 const GoogleLoginButton = () => {
   const router = useRouter()
 
@@ -28,16 +27,20 @@ const GoogleLoginButton = () => {
     onError: () => {
       console.log('Error')
     },
-    onSuccess: (credentialResponse) => {
+    onSuccess: async (credentialResponse) => {
       console.log('Login Success', credentialResponse)
       if (credentialResponse.code) {
-        getAuthWithGoogle(credentialResponse.code).then((res) => {
-          // fetchUser(res.data.accessToken).then((res) => {
-          //   console.log(res)
-          //   router.push('/profile')
-          // })
-          console.log(res)
-        })
+        try {
+          const res = await getAuthWithGoogle(credentialResponse.code)
+
+          localStorage.setItem('acessToken', res.data.accessToken)
+          const userData = await fetchUser(res.data.accessToken)
+
+          console.log(userData)
+          router.push('/profile')
+        } catch (error) {
+          console.log(error)
+        }
       }
     },
   })
@@ -62,7 +65,9 @@ export const ExternalServicesRegistration = () => {
   const { t } = useTranslation()
 
   const handleLoginWithGithub = () => {
-    window.location.assign(`${Environments.BASE_URL}/v1/auth/github/login`)
+    window.location.assign(
+      `${process.env.NEXT_PUBLIC_INCTAGRAM_API_URL}/v1/auth/github/login`
+    )
   }
 
   return (

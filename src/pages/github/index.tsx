@@ -6,7 +6,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 
 export const fetchUser = async (accessToken: string) => {
-  return axios.get(`${Environments.BASE_URL}/v1/auth/me`, {
+  return axios.get(`${process.env.NEXT_PUBLIC_INCTAGRAM_API_URL}/v1/auth/me`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
