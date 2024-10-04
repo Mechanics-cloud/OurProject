@@ -17,7 +17,7 @@ const getAuthWithGoogle = async (code: string) => {
   )
 }
 
-const GoogleLoginButton = () => {
+const GoogleLoginButton = React.forwardRef<HTMLButtonElement>((_, ref) => {
   const router = useRouter()
 
   const login = useGoogleLogin({
@@ -28,7 +28,7 @@ const GoogleLoginButton = () => {
         try {
           const res = await getAuthWithGoogle(credentialResponse.code)
 
-          localStorage.setItem('acessToken', res.data.accessToken)
+          localStorage.setItem('accessToken', res.data.accessToken)
           await fetchUser(res.data.accessToken)
 
           router.push('/profile')
@@ -41,9 +41,8 @@ const GoogleLoginButton = () => {
 
   return (
     <button
-      onClick={() => {
-        login()
-      }}
+      onClick={() => login()}
+      ref={ref}
       type={'button'}
     >
       <GoogleSvgrepoCom1
@@ -52,7 +51,44 @@ const GoogleLoginButton = () => {
       />
     </button>
   )
-}
+})
+
+// const GoogleLoginButton = () => {
+//   const router = useRouter()
+//
+//   const login = useGoogleLogin({
+//     flow: 'auth-code',
+//     onError: () => {},
+//     onSuccess: async (credentialResponse) => {
+//       if (credentialResponse.code) {
+//         try {
+//           const res = await getAuthWithGoogle(credentialResponse.code)
+//
+//           localStorage.setItem('acessToken', res.data.accessToken)
+//           await fetchUser(res.data.accessToken)
+//
+//           router.push('/profile')
+//         } catch (error) {
+//           /* empty */
+//         }
+//       }
+//     },
+//   })
+//
+//   return (
+//     <button
+//       onClick={() => {
+//         login()
+//       }}
+//       type={'button'}
+//     >
+//       <GoogleSvgrepoCom1
+//         height={36}
+//         width={36}
+//       />
+//     </button>
+//   )
+// }
 
 export const ExternalServicesRegistration = () => {
   const { t } = useTranslation()
