@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 
 import { Loader } from '@/common'
-import { Environments } from '@/common/enviroments'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
@@ -19,12 +18,11 @@ const GitHubCallback = () => {
 
   useEffect(() => {
     if (router.query.accessToken) {
-      const { accessToken, email } = router.query
+      const { accessToken } = router.query
 
       if (accessToken) {
         localStorage.setItem('accessToken', accessToken as string)
-        fetchUser(accessToken as string).then((res) => {
-          console.log(res)
+        fetchUser(accessToken as string).then(() => {
           router.push('/profile')
         })
       } else {

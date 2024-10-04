@@ -11,12 +11,10 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 
 const getAuthWithGoogle = async (code: string) => {
-  const response = await axios.post(
+  return await axios.post(
     `${process.env.NEXT_PUBLIC_INCTAGRAM_API_URL}/v1/auth/google/login`,
     { code: code }
   )
-
-  return response
 }
 
 const GoogleLoginButton = () => {
@@ -24,22 +22,18 @@ const GoogleLoginButton = () => {
 
   const login = useGoogleLogin({
     flow: 'auth-code',
-    onError: () => {
-      console.log('Error')
-    },
+    onError: () => {},
     onSuccess: async (credentialResponse) => {
-      console.log('Login Success', credentialResponse)
       if (credentialResponse.code) {
         try {
           const res = await getAuthWithGoogle(credentialResponse.code)
 
           localStorage.setItem('acessToken', res.data.accessToken)
-          const userData = await fetchUser(res.data.accessToken)
+          await fetchUser(res.data.accessToken)
 
-          console.log(userData)
           router.push('/profile')
         } catch (error) {
-          console.log(error)
+          /* empty */
         }
       }
     },
@@ -48,7 +42,6 @@ const GoogleLoginButton = () => {
   return (
     <button
       onClick={() => {
-        console.log('Google button clicked')
         login()
       }}
       type={'button'}
