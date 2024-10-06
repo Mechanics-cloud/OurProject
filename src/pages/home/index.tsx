@@ -5,8 +5,8 @@ import {
   MoreHorizontalOutline,
   PaperPlaneOutline,
 } from '@/assets/icons/outlineIcons'
+import { getLayoutWithSidebar } from '@/common'
 import { Button } from '@/common/components/button'
-import { getLayoutWithSidebar } from '@/common/components/layoutWithSidebar/LayoutWithSidebar'
 import Slider from '@/common/components/slider/Slider'
 import { Typography, typographyVariants } from '@/common/components/typography'
 import Image from 'next/image'
@@ -35,21 +35,29 @@ function Home() {
   return (
     <div
       className={
-        'w-[491px] h-[816px] ml-[175px] border-b mt-[24px] flex flex-col'
+        'w-[491px] h-[816px] border-b mt-[24px] ml-[395px] flex flex-col'
       }
     >
-      <div className={'w-full h-12 flex  items-center justify-between'}>
+      <div className={'w-full h-9 mb-3 flex  items-center justify-between'}>
         <span className={'flex  items-center space-x-2'}>
           <Image
             alt={'Avatar'}
-            className={'w-6 h-6 rounded-full'}
+            className={'w-9 h-9 rounded-full'}
             src={four}
           />
-
-          <span>URLProfile</span>
-
-          <span className={'w-1.5 h-1.5 bg-gray-500 rounded-full'}></span>
-          <span>22 Minutes ago</span>
+          <div className={'flex items-center space-x-2 pl-1'}>
+            <span>URLProfile</span>
+            <span className={'w-1.5 h-1.5 bg-light-100 rounded-full'}></span>
+            <div className={'h-[20px] flex items-end'}>
+              <span
+                className={
+                  'font-normal leading-[16px] text-[12px] text-light-900'
+                }
+              >
+                22 Minutes ago
+              </span>
+            </div>
+          </div>
         </span>
         <button type={'button'}>
           <MoreHorizontalOutline
@@ -58,33 +66,35 @@ function Home() {
           />
         </button>
       </div>
-      <section className={'h-[504px]'}>
+      <section className={'h-[504px] mb-3'}>
         {images.length > 0 ? <Slider images={images} /> : 'Нет картинок!'}
       </section>
-      <div className={'w-full h-10 flex items-center justify-between'}>
-        <div className={'flex items-center gap-4'}>
-          <HeartOutline />
-          <MessageCircleOutline />
-          <PaperPlaneOutline />
+      <div className={'w-full h-6 flex items-center justify-between mb-4'}>
+        <div className={'flex items-center gap-5'}>
+          <HeartOutline className={'size-6'} />
+          <MessageCircleOutline className={'size-6'} />
+          <PaperPlaneOutline className={'size-6'} />
         </div>
-        <BookmarkOutline />
+        <BookmarkOutline className={'size-6'} />
       </div>
-
-      <div className={'w-full min-h-[72px] flex gap-3'}>
+      <div className={'w-full h-[72px] flex gap-3'}>
         <Image
           alt={'Avatar'}
-          className={'w-6 h-6 rounded-full'}
+          className={'size-9 rounded-full mt-[5px]'}
           src={four}
         />
         <Typography
-          className={''}
+          className={
+            'flex-1 overflow-hidden text-justify line-clamp-3 leading-[24px]'
+          }
           variant={'reg14'}
         >
-          URLProfiele Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          <span className={'font-bold'}>URLProfiele</span> Lorem ipsum dolor sit
+          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          labore et dolore magna aliqua.
         </Typography>
       </div>
-      <div className={'w-full h-10 flex gap-4'}>
+      <div className={'w-full h-6 flex gap-4 mt-3 mb-6'}>
         <div className={'flex'}>
           <Image
             alt={'Avatar'}
@@ -102,13 +112,24 @@ function Home() {
             src={four}
           />
         </div>
-        <span>2243 &ldquo;Like&rdquo;</span>
+        <span className={'text-[14px] leading-[24px]'}>
+          2243 &ldquo;<span className={'font-bold'}>Like</span>&rdquo;
+        </span>
       </div>
-      <div className={'w-full h-10'}>
-        <button type={'button'}>View All Comments ...</button>
+      <div className={'w-full h-6 mb-3'}>
+        <button type={'button'}>
+          <span
+            className={'text-[14px] font-bold  leading-[24px] text-light-900'}
+          >
+            View All Comments (114)
+          </span>
+        </button>
       </div>
-      <div className={'w-full h-10 flex  justify-between'}>
+      <div className={'w-full flex  justify-between'}>
         <input
+          className={
+            'placeholder-light-900 text-[14px] font-400  leading-[24px] '
+          }
           placeholder={'Add a Comments...'}
           type={'text'}
         ></input>
