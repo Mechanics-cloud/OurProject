@@ -186,6 +186,9 @@ importers:
       jest-environment-jsdom:
         specifier: ^29.7.0
         version: 29.7.0
+      jira-prepare-commit-msg:
+        specifier: ^1.7.2
+        version: 1.7.2(typescript@5.4.5)
       lint-staged:
         specifier: ^15.2.10
         version: 15.2.10
@@ -3116,6 +3119,15 @@ packages:
     resolution: {integrity: sha512-AdmX6xUzdNASswsFtmwSt7Vj8po9IuqXm0UXz7QKPuEUmPB4XyjGfaAr2PSuELMwkRMVH1EpIkX5bTZGRB3eCA==}
     engines: {node: '>=10'}
 
+  cosmiconfig@8.3.6:
+    resolution: {integrity: sha512-kcZ6+W5QzcJ3P1Mt+83OUv/oHFqZHIx8DuxG6eZ5RGMERoLqp4BuGjhHLYGK+Kf5XVkQvqBSmAy/nGWN3qDgEA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      typescript: '>=4.9.5'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
+
   cosmiconfig@9.0.0:
     resolution: {integrity: sha512-itvL5h8RETACmOTFc4UfIyB2RfEHi71Ax6E/PivVxq9NseKbOWpeyHEOIbmAw1rs8Ak0VursQNww7lf7YtUwzg==}
     engines: {node: '>=14'}
@@ -4582,6 +4594,11 @@ packages:
     peerDependenciesMeta:
       node-notifier:
         optional: true
+
+  jira-prepare-commit-msg@1.7.2:
+    resolution: {integrity: sha512-vPmwqPoi5TfMF1rXh9XN6u7TiSG+FwdcbeL01nMBUbRRxTMXvIqQZoJSRoNoprgY1JUpYXplc3HGRSVsV22rLg==}
+    engines: {node: '>=14'}
+    hasBin: true
 
   jiti@1.21.6:
     resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
@@ -10249,6 +10266,15 @@ snapshots:
       path-type: 4.0.0
       yaml: 1.10.2
 
+  cosmiconfig@8.3.6(typescript@5.4.5):
+    dependencies:
+      import-fresh: 3.3.0
+      js-yaml: 4.1.0
+      parse-json: 5.2.0
+      path-type: 4.0.0
+    optionalDependencies:
+      typescript: 5.4.5
+
   cosmiconfig@9.0.0(typescript@5.4.5):
     dependencies:
       env-paths: 2.2.1
@@ -12159,6 +12185,12 @@ snapshots:
       - babel-plugin-macros
       - supports-color
       - ts-node
+
+  jira-prepare-commit-msg@1.7.2(typescript@5.4.5):
+    dependencies:
+      cosmiconfig: 8.3.6(typescript@5.4.5)
+    transitivePeerDependencies:
+      - typescript
 
   jiti@1.21.6: {}
 
