@@ -1,63 +1,31 @@
-import { useForm } from 'react-hook-form'
-
-import { Button, Card, Typography, useTranslation } from '@/common'
+import { Button, Card, Typography } from '@/common'
 import { FormTextField } from '@/common/form'
 import { Paths } from '@/common/paths'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { ExternalServicesRegistration } from '@/features/auth'
+import { useSignIn } from '@/features/auth/model/signIn/useSignIn'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
-import Router from 'next/router'
-
-import authStore from '../model/authStore'
-import { signInSchema } from '../model/singInSchemma'
-import { ExternalServicesRegistration } from './ExternalServicesRegistration'
-
-export type LoginForm = {
-  email: string
-  password: string
-}
 
 const SignIn = observer(() => {
-  const { t } = useTranslation()
-
-  const {
-    control,
-    formState: { isValid },
-    handleSubmit,
-    setError,
-    setFocus,
-  } = useForm<LoginForm>({
-    defaultValues: { email: '', password: '' },
-    mode: 'onTouched',
-    resolver: zodResolver(signInSchema),
-  })
-
-  const onSubmit = async (data: LoginForm) => {
-    try {
-      await authStore.login(data)
-      Router.push(Paths.home)
-    } catch (error: any) {
-      setError('email', {
-        message: t.signInForm.errorResponse,
-        type: 'manual',
-      }),
-        setFocus('email')
-    }
-  }
+  const { control, handleSubmit, isLoading, isValid, onSubmit, t } = useSignIn()
 
   return (
-    <div className={'flex items-center justify-center w-full h-full'}>
+    <div
+      className={
+        'md:mt-[36px] mt-4 md:w-[378px] mx-auto box-border border-transparent'
+      }
+    >
       <Card className={'flex flex-col items-center w-[378px]'}>
         <Typography variant={'h1'}>{t.signInForm.title}</Typography>
         <ExternalServicesRegistration />
         <form
-          className={'flex flex-col  w-full h-full'}
+          className={'flex flex-col w-full h-full'}
           noValidate
           onSubmit={handleSubmit(onSubmit)}
         >
           <FormTextField
             control={control}
-            disabled={authStore.isLoading}
+            disabled={isLoading}
             label={t.signInForm.labelEmail}
             name={'email'}
             placeholder={'Epam@epam.com'}
@@ -65,7 +33,7 @@ const SignIn = observer(() => {
           />
           <FormTextField
             control={control}
-            disabled={authStore.isLoading}
+            disabled={isLoading}
             label={t.signInForm.labelPassword}
             name={'password'}
             placeholder={'**********'}
@@ -80,7 +48,7 @@ const SignIn = observer(() => {
           </Link>
 
           <Button
-            disabled={!isValid || authStore.isLoading}
+            disabled={!isValid || isLoading}
             type={'submit'}
           >
             {t.signInForm.title}

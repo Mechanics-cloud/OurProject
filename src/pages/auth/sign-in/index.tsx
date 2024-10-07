@@ -1,7 +1,10 @@
+import { getBaseLayout } from '@/common'
 import SignInForm from '@/features/auth/ui/SignInForm'
 
-const SignUp = () => {
+const SignIn = () => {
   return <SignInForm />
 }
 
-export default SignUp
+SignIn.getLayout = getBaseLayout
+
+export default SignIn

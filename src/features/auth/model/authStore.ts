@@ -1,22 +1,20 @@
 import { StorageKeys } from '@/common/enums'
-import { handleServerError } from '@/common/utils/handleServerError'
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { authApi } from '../api/authApi'
 import { Profile } from '../api/authApi.types'
-import { LoginForm } from '../ui/SignInForm'
 
 class AuthStore {
-  isLoading = false
   profile: Profile | undefined
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  async login(data: LoginForm) {
-    this.isLoading = true
+  async login(data: SignInFields) {
     try {
       const accessToken = await authApi.login(data)
 
@@ -24,11 +22,9 @@ class AuthStore {
 
       await this.me()
     } catch (error) {
+      responseErrorHandler(error)
+
       return Promise.reject(error)
-    } finally {
-      runInAction(() => {
-        this.isLoading = false
-      })
     }
   }
   async logout() {
@@ -37,7 +33,7 @@ class AuthStore {
 
       localStorage.removeItem(StorageKeys.AccessToken)
     } catch (error) {
-      handleServerError(error)
+      responseErrorHandler(error)
     }
   }
 
@@ -49,7 +45,7 @@ class AuthStore {
         this.profile = profile
       })
     } catch (error) {
-      handleServerError(error)
+      responseErrorHandler(error)
     }
   }
 
@@ -64,7 +60,7 @@ class AuthStore {
         return axios(previousRequest)
       }
     } catch (error) {
-      handleServerError(error)
+      responseErrorHandler(error)
     }
   }
 }
