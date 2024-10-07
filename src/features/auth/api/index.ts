@@ -1,3 +1,4 @@
 export * from './auth.api'
 export * from './auth.endpoints'
-export * from './instances'
+export * from './authApi.types'
+export * from 'src/features/auth/api/instance'
