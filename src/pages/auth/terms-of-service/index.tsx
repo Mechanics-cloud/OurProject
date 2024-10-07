@@ -1,7 +1,8 @@
+import { getBaseLayout } from '@/common'
 import { Typography } from '@/common/components'
 import { TermsPolicyLayout } from '@/common/components/termsPolicyLayout'
 
-export default function TermsOfService() {
+function TermsOfService() {
   return (
     <TermsPolicyLayout title={'Terms of Service'}>
       <Typography variant={'reg14'}>
@@ -93,3 +94,6 @@ export default function TermsOfService() {
     </TermsPolicyLayout>
   )
 }
+
+TermsOfService.getLayout = getBaseLayout
+export default TermsOfService
