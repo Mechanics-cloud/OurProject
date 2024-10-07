@@ -11,6 +11,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Router from 'next/router'
 
 export const useSignIn = () => {
+  if (authStore.profile) {
+    Router.push(Paths.profile)
+  }
   const { t } = useTranslation()
   const {
     control,
