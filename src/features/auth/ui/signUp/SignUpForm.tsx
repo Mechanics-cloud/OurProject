@@ -1,7 +1,6 @@
 import {
   Button,
   Card,
-  Loader,
   Typography,
   typographyVariants,
   useTranslation,
@@ -15,15 +14,17 @@ import {
   ExternalServicesRegistration,
 } from '@/features/auth'
 import { useSignUp } from '@/features/auth/model'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-export const SignUpForm = () => {
+export const SignUpForm = observer(() => {
+  //todo redirect auth user to home page
   const { t } = useTranslation()
   const {
     control,
     errors,
     isLoading,
-    isOpen,
+    isModalOpen,
     isValid,
     onModalClose,
     onSubmit,
@@ -32,7 +33,6 @@ export const SignUpForm = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
       <Card className={'pt-6 pb-7 contents md:block'}>
         <Typography
           className={'text-center mb-3'}
@@ -86,7 +86,7 @@ export const SignUpForm = () => {
           </div>
           <Button
             className={'w-full mb-[18px]'}
-            disabled={!isValid}
+            disabled={!isValid || isLoading}
             type={'submit'}
           >
             {t.signUp}
@@ -94,7 +94,7 @@ export const SignUpForm = () => {
         </form>
 
         <ConfirmSignUpModal
-          isOpen={isOpen}
+          isOpen={isModalOpen}
           onModalClose={onModalClose}
           userEmail={userEmail}
         />
@@ -119,4 +119,4 @@ export const SignUpForm = () => {
       </Card>
     </>
   )
-}
+})

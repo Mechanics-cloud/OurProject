@@ -34,9 +34,11 @@ export const SideBar = () => {
 
   return (
     <aside
-      className={'flex justify-center border-r-2 border-dark-300 min-w-56'}
+      className={
+        'flex flex-col border-r-2 border-dark-300 min-w-56 fixed h-screen'
+      }
     >
-      <nav className={'pt-[72px] '}>
+      <nav className={'pt-[72px]'}>
         <ul className={`mb-[60px] [&_li]:mb-6`}>
           <NavLink
             ActiveIcon={Home}

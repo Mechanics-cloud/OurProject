@@ -1,13 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 
+import { generalStore } from '@/app/store'
+import { useModal } from '@/common'
 import { Environments } from '@/common/enviroments'
-import { ErrorResponse } from '@/common/types'
-import { signUpApi } from '@/features/auth/api/signUpAPI'
-import { SignUpFields, signUpSchema } from '@/features/auth/model/singUpSchema'
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { isAxiosError } from 'axios'
 
 export const useSignUp = () => {
   const {
@@ -29,39 +28,27 @@ export const useSignUp = () => {
     mode: 'onChange',
     resolver: zodResolver(signUpSchema),
   })
-  const [isLoading, setIsLoading] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+  const isLoadingStore = generalStore
+  const { isModalOpen, onModalClose, openModal } = useModal(() => {
+    reset()
+  })
 
   const onSubmit = handleSubmit(async (data) => {
     const { confirm, ...restData } = data
     const baseUrl = Environments.BASE_URL as string
 
-    setIsLoading(true)
+    isLoadingStore.turnOnLoading()
     try {
-      const res = await signUpApi.signUp({ ...restData, baseUrl })
+      const res = await authApi.signUp({ ...restData, baseUrl })
 
       if (!res.data) {
-        setIsOpen(true)
+        openModal()
       }
     } catch (error: unknown) {
-      if (isAxiosError(error) && error.response?.data?.messages) {
-        const errorData = error.response?.data as ErrorResponse
-
-        errorData.messages.forEach(({ field, message }) => {
-          toast.error(message)
-          setError(field as keyof SignUpFields, { message })
-        })
-        setIsLoading(false)
-      } else {
-        toast.error((error as Error).message ?? 'Something went wrong')
-      }
+      responseErrorHandler(error, setError)
     }
+    isLoadingStore.turnOffLoading()
   })
-
-  const onModalClose = () => {
-    setIsOpen(false)
-    reset()
-  }
 
   const password = watch('password')
   const confirm = watch('confirm')
@@ -85,8 +72,8 @@ export const useSignUp = () => {
   return {
     control,
     errors,
-    isLoading,
-    isOpen,
+    isLoading: isLoadingStore.isLoading,
+    isModalOpen,
     isValid,
     onModalClose,
     onSubmit,

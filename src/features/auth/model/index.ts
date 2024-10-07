@@ -1,3 +1,5 @@
-export * from './singUpSchema'
+export * from './forgotPassword/forgotPasswordSchema'
+export * from './forgotPassword/useForgotPassword'
+export * from './signUp/singUpSchema'
+export * from './signUp/useSignUp'
 export * from './types'
-export * from './useSignUp'
