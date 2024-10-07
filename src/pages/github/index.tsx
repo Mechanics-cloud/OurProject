@@ -1,17 +1,9 @@
 import { useEffect } from 'react'
 
 import { Loader } from '@/common'
-import axios from 'axios'
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { authApi } from '@/features/auth/api/auth.api'
 import { useRouter } from 'next/router'
-
-export const fetchUser = async (accessToken: string) => {
-  return axios.get(`${process.env.NEXT_PUBLIC_INCTAGRAM_API_URL}/v1/auth/me`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    withCredentials: true,
-  })
-}
 
 const GitHubCallback = () => {
   const router = useRouter()
@@ -22,11 +14,12 @@ const GitHubCallback = () => {
 
       if (accessToken) {
         localStorage.setItem('accessToken', accessToken as string)
-        fetchUser(accessToken as string).then(() => {
-          router.push('/profile')
-        })
+        authApi
+          .me(accessToken as string)
+          .then(() => router.push('/profile'))
+          .catch((error) => responseErrorHandler('No access token'))
       } else {
-        console.error('No access token')
+        console.warn('No token')
       }
     }
   }, [router, router.query])
