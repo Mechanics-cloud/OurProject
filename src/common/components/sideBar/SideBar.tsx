@@ -128,7 +128,7 @@ export const SideBar = observer(() => {
                 {t.menu.logOut}
               </NavLink>
             }
-            userEmail={'__email__'}
+            userEmail={authStore.profile?.email ?? ''}
           />
         </ul>
       </nav>
