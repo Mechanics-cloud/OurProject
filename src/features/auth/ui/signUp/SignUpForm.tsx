@@ -18,11 +18,9 @@ import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 export const SignUpForm = observer(() => {
-  //todo redirect auth user to home page
   const { t } = useTranslation()
   const {
     control,
-    errors,
     isLoading,
     isModalOpen,
     isValid,
@@ -48,20 +46,21 @@ export const SignUpForm = observer(() => {
         >
           <FormTextField
             control={control}
+            disabled={isLoading}
             label={t.signUpForm.labels.userName}
             name={'userName'}
             placeholder={t.signUpForm.placeholders.userName}
           />
           <FormTextField
             control={control}
-            error={errors.email?.message}
+            disabled={isLoading}
             label={t.signUpForm.labels.email}
             name={'email'}
             placeholder={t.signUpForm.placeholders.email}
           />
           <FormTextField
             control={control}
-            error={errors.password?.message}
+            disabled={isLoading}
             label={t.signUpForm.labels.password}
             name={'password'}
             placeholder={t.signUpForm.placeholders.password}
@@ -69,7 +68,7 @@ export const SignUpForm = observer(() => {
           />
           <FormTextField
             control={control}
-            error={errors.confirm?.message}
+            disabled={isLoading}
             label={t.signUpForm.labels.confirm}
             name={'confirm'}
             placeholder={t.signUpForm.placeholders.confirm}
@@ -78,6 +77,7 @@ export const SignUpForm = observer(() => {
           <div className={'mb-3'}>
             <FormCheckbox
               control={control}
+              disabled={isLoading}
               id={'agreement'}
               label={<AgreementWithTheTerms />}
               name={'agreesToTOS'}
