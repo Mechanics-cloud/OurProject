@@ -17,16 +17,16 @@ const Header = ({ isAuth }: HeaderProps) => {
   return (
     <header
       className={
-        'fixed z-50 top-0 left-0 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 pr-16 border-b border-b-dark-300'
+        'fixed z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300 pr-scrollbar'
       }
     >
       <div
         className={
-          'max-w-screen-2xl mx-auto flex items-center justify-between '
+          'w-full max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16'
         }
       >
         <Typography
-          className={'ml-14 py-3'}
+          className={'py-3'}
           variant={'large'}
         >
           <Link

@@ -74,7 +74,7 @@ const config: Config = {
         '700': '700',
       },
       gridTemplateColumns: {
-        gallery: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gallery: 'repeat(auto-fit, minmax(250px, 1fr))',
       },
       height: {
         headCalc: 'calc(100vh - var(--header-height))',
@@ -84,6 +84,9 @@ const config: Config = {
           '0%': { left: '0', transform: 'translateX(-100%)' },
           '100%': { left: '100%', transform: 'translateX(0%)' },
         },
+      },
+      spacing: {
+        scrollbar: '16px',
       },
     },
   },

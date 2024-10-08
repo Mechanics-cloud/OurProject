@@ -76,7 +76,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className={cn('grid gap-x-3 gap-y-3 grid-cols-gallery')}>
+        <div className={cn('grid gap-3 grid-cols-gallery w-full')}>
           {placeholderImages.map((image) => (
             <Image
               alt={'image'}
