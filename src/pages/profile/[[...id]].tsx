@@ -1,5 +1,6 @@
 import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Typography, getLayoutWithSidebar } from '@/common'
+import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
 import Image from 'next/image'
 
@@ -92,5 +93,6 @@ function Profile() {
     </div>
   )
 }
+
 Profile.getLayout = getLayoutWithSidebar
-export default Profile
+export default withProtection(Profile)
