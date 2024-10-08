@@ -1,0 +1,55 @@
+import { useForm } from 'react-hook-form'
+
+import { generalStore } from '@/app/store'
+import { Paths, useTranslation } from '@/common'
+import authStore from '@/features/auth/model/authStore'
+import {
+  SignInFields,
+  signInSchema,
+} from '@/features/auth/model/signIn/singInSchema'
+import { zodResolver } from '@hookform/resolvers/zod'
+import Router from 'next/router'
+
+export const useSignIn = () => {
+  if (authStore.profile) {
+    Router.push(Paths.profile)
+  }
+  const { t } = useTranslation()
+  const {
+    control,
+    formState: { isValid },
+    handleSubmit,
+    setError,
+    setFocus,
+  } = useForm<SignInFields>({
+    defaultValues: { email: '', password: '' },
+    mode: 'onTouched',
+    resolver: zodResolver(signInSchema),
+  })
+  const isLoadingStore = generalStore
+
+  const onSubmit = async (data: SignInFields) => {
+    isLoadingStore.turnOnLoading()
+    try {
+      await authStore.login(data)
+      await Router.push(Paths.home)
+    } catch (error: unknown) {
+      setError('email', {
+        message: t.signInForm.errorResponse,
+        type: 'manual',
+      })
+      setFocus('email')
+    } finally {
+      isLoadingStore.turnOffLoading()
+    }
+  }
+
+  return {
+    control,
+    handleSubmit,
+    isLoading: isLoadingStore.isLoading,
+    isValid,
+    onSubmit,
+    t,
+  }
+}

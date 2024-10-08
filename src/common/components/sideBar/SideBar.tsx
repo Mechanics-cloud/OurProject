@@ -1,5 +1,4 @@
-import { useState } from 'react'
-
+import { generalStore } from '@/app/store'
 import {
   Bookmark,
   Home,
@@ -19,17 +18,33 @@ import {
   SearchOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
-import { useTranslation } from '@/common'
+import { Paths, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import authStore from '@/features/auth/model/authStore'
+import { observer } from 'mobx-react-lite'
+import Router from 'next/router'
 
 import { NavLink } from './navLink/NavLink'
 
-export const SideBar = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+export const SideBar = observer(() => {
+  const { isModalOpen, onModalClose, openModal } = useModal(async () => {
+    const isLoadingStore = generalStore
+
+    isLoadingStore.turnOnLoading()
+    try {
+      await authStore.logout()
+      Router.push(Paths.signIn)
+    } catch (error: unknown) {
+      responseErrorHandler(error)
+    } finally {
+      isLoadingStore.turnOffLoading()
+    }
+  })
   const { t } = useTranslation()
 
   const handelCreate = () => {
-    setModalIsOpen(true)
+    openModal()
   }
 
   return (
@@ -52,7 +67,7 @@ export const SideBar = () => {
             ActiveIcon={PlusSquare}
             DefaultIcon={PlusSquareOutline}
             as={'button'}
-            iconTrigger={modalIsOpen}
+            iconTrigger={isModalOpen}
             onClick={handelCreate}
           >
             {t.menu.create}
@@ -103,9 +118,7 @@ export const SideBar = () => {
 
         <ul className={'mb-9'}>
           <LogOutModal
-            logOutModalHandler={() => {
-              alert('You are logged out!')
-            }}
+            logOutModalHandler={onModalClose}
             triggerButton={
               <NavLink
                 ActiveIcon={LogOut}
@@ -115,10 +128,10 @@ export const SideBar = () => {
                 {t.menu.logOut}
               </NavLink>
             }
-            userEmail={'__email__'}
+            userEmail={authStore.profile?.email ?? ''}
           />
         </ul>
       </nav>
     </aside>
   )
-}
+})

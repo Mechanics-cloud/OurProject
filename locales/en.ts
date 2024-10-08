@@ -46,6 +46,15 @@ export const en: LocaleType = {
     },
   },
   signIn: 'Sign In',
+  signInForm: {
+    errorResponse: 'The email or password are incorrect. Try again please',
+    labelEmail: 'Email',
+    labelPassword: 'Password',
+    passwordRecovery: 'Forgot Password',
+    signUpTitle: 'Sign Up',
+    text: 'Don’t have an account?',
+    title: 'Sign In',
+  },
   signUp: 'Sign Up',
   signUpForm: {
     confirmSignUpModal: {
