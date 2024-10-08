@@ -43,7 +43,7 @@ class AuthStore {
         this.profile = profile
       })
     } catch (error) {
-      responseErrorHandler(error)
+      return Promise.reject(error)
     }
   }
 
@@ -58,7 +58,7 @@ class AuthStore {
         return axios(previousRequest)
       }
     } catch (error) {
-      responseErrorHandler(error)
+      return Promise.reject(error)
     }
   }
 }

@@ -21,7 +21,7 @@ const placeholderImages = [
   { id: 8, img: image4 },
 ]
 
-function Profile() {
+const Profile = () => {
   return (
     <div className={'flex'}>
       <div className={'flex flex-col'}>

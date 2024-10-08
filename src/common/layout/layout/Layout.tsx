@@ -35,7 +35,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
           >
             <main
               className={cn(
-                'mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent',
+                'mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent w-full',
                 className
               )}
             >

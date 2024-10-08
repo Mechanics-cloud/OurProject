@@ -1,9 +1,7 @@
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
-import { Paths } from '@/common/paths'
 import { Endpoints } from '@/features/auth'
 import axios, { isAxiosError } from 'axios'
-import Router from 'next/router'
 
 import authStore from '../model/authStore'
 
@@ -25,8 +23,6 @@ instance.interceptors.response.use(
     if (isAxiosError(error)) {
       if (error.response?.status === StatusCode.Unauthorized) {
         if (error.config?.url === Endpoints.updateToken) {
-          await Router.push(Paths.signIn)
-
           return Promise.reject(error)
         } else {
           await authStore.updateToken(error.config)

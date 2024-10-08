@@ -3,16 +3,14 @@ import * as React from 'react'
 import { Button, LangSelect, useTranslation } from '@/common'
 import { Typography } from '@/common/components/typography'
 import { Paths } from '@/common/paths'
+import authStore from '@/features/auth/model/authStore'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
-type HeaderProps = {
-  isAuth?: boolean
-}
-
-const Header = ({ isAuth }: HeaderProps) => {
+const Header = () => {
   const { t } = useTranslation()
+  const isAuth = !!authStore.profile
 
   return (
     <header
@@ -22,7 +20,7 @@ const Header = ({ isAuth }: HeaderProps) => {
     >
       <div
         className={
-          'w-full max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16'
+          'max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16'
         }
       >
         <Typography

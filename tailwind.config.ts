@@ -5,6 +5,7 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/common/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/common/layout/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/common/HOC/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
