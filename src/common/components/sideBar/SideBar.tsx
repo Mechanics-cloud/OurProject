@@ -133,7 +133,7 @@ export const SideBar = observer(({ className }: Props) => {
                 {t.menu.logOut}
               </NavLink>
             }
-            userEmail={'__email__'}
+            userEmail={authStore.profile?.email ?? ''}
           />
         </ul>
       </nav>
