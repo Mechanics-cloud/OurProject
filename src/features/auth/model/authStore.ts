@@ -1,11 +1,9 @@
 import { StorageKeys } from '@/common/enums'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { Profile, authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
-
-import { authApi } from '../api/authApi'
-import { Profile } from '../api/authApi.types'
 
 class AuthStore {
   profile: Profile | undefined
