@@ -30,7 +30,7 @@ class AuthStore {
   async logout() {
     try {
       await authApi.logout()
-
+      this.profile = undefined
       localStorage.removeItem(StorageKeys.AccessToken)
     } catch (error) {
       responseErrorHandler(error)

@@ -11,9 +11,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Router from 'next/router'
 
 export const useSignUp = () => {
-  if (authStore.profile) {
-    Router.push(Paths.profile)
-  }
   const {
     clearErrors,
     control,
