@@ -1,11 +1,8 @@
 import { Paid } from '@/assets/icons/filledIcons'
-import { Button, Typography, getLayoutWithSidebar } from '@/common'
+import { Button, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import withLayout from '@/common/layout/withLayout'
 import { cn } from '@/common/utils/cn'
 import Image from 'next/image'
-
-import styles from './Profile.module.css'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
 import image1 from '../../assets/images/image1.jpg'
@@ -26,8 +23,8 @@ const placeholderImages = [
 
 function Profile() {
   return (
-    <div className={'flex '}>
-      <div className={'flex flex-col pl-9'}>
+    <div className={'flex'}>
+      <div className={'flex flex-col'}>
         <div className={'mt-9 flex items-start gap-[38px] w-full mb-[53px]'}>
           <Image
             alt={'avatar'}
@@ -79,7 +76,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className={cn('grid gap-x-3 gap-y-3', styles.gridAutoFit)}>
+        <div className={cn('grid gap-x-3 gap-y-3 grid-cols-gallery')}>
           {placeholderImages.map((image) => (
             <Image
               alt={'image'}
@@ -95,5 +92,4 @@ function Profile() {
   )
 }
 
-// Profile.getLayout = withLayout('user')
 export default withProtection(Profile, true)

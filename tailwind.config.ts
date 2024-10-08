@@ -73,6 +73,9 @@ const config: Config = {
         '600': '600',
         '700': '700',
       },
+      gridTemplateColumns: {
+        gallery: 'repeat(auto-fit, minmax(300px, 1fr))',
+      },
       height: {
         headCalc: 'calc(100vh - var(--header-height))',
       },

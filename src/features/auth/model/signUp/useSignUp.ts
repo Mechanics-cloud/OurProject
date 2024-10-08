@@ -2,13 +2,11 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { generalStore } from '@/app/store'
-import { Paths, useModal } from '@/common'
+import { useModal } from '@/common'
 import { Environments } from '@/common/enviroments'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
-import authStore from '@/features/auth/model/authStore'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Router from 'next/router'
 
 export const useSignUp = () => {
   const {
