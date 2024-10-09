@@ -14,10 +14,9 @@ class AuthApi {
   public async emailConfirmation(
     emailConfirmationCode: string
   ): Promise<AxiosResponse> {
-    return this.instance.post(
-      Endpoints.EmailConfirmation,
-      emailConfirmationCode
-    )
+    return this.instance.post(Endpoints.EmailConfirmation, {
+      confirmationCode: emailConfirmationCode,
+    })
   }
 
   public async emailResending(
