@@ -12,6 +12,17 @@ class AuthStore {
     makeAutoObservable(this)
   }
 
+  async authWithGoogle(code: string) {
+    try {
+      const res = await authApi.authWithGoogle(code)
+
+      localStorage.setItem(StorageKeys.AccessToken, res.data.accessToken)
+
+      return res.data.accessToken
+    } catch (error) {
+      responseErrorHandler(error)
+    }
+  }
   async login(data: SignInFields) {
     try {
       const accessToken = await authApi.login(data)
@@ -25,6 +36,7 @@ class AuthStore {
       return Promise.reject(error)
     }
   }
+
   async logout() {
     try {
       await authApi.logout()

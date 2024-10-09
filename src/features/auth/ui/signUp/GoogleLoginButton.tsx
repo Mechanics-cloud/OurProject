@@ -21,10 +21,11 @@ export const GoogleLoginButton = React.forwardRef<HTMLButtonElement>(
         if (credentialResponse.code) {
           try {
             isLoading.turnOnLoading()
-            const res = await authApi.authWithGoogle(credentialResponse.code)
+            const accessToken = await authStore.authWithGoogle(
+              credentialResponse.code
+            )
 
-            localStorage.setItem('accessToken', res.data.accessToken)
-            await authStore.me(res.data.accessToken)
+            await authStore.me(accessToken)
             isLoading.turnOffLoading()
             await router.push('/profile')
           } catch (error) {
