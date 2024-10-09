@@ -2,7 +2,7 @@ import React from 'react'
 
 import { generalStore } from '@/app/store'
 import { GoogleSvgrepoCom1 } from '@/assets/icons/filledIcons'
-import { StorageKeys } from '@/common/enums'
+import { Paths } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import authStore from '@/features/auth/model/authStore'
 import { useGoogleLogin } from '@react-oauth/google'
@@ -25,16 +25,9 @@ export const GoogleLoginButton = React.forwardRef<HTMLButtonElement>(
             isLoading.turnOnLoading()
             const res = await authStore.authWithGoogle(credentialResponse.code)
 
+            isLoading.turnOffLoading()
             if (res?.data.accessToken) {
-              localStorage.setItem(
-                StorageKeys.AccessToken,
-                res.data.accessToken
-              )
-              await authStore.me()
-              isLoading.turnOffLoading()
-              await router.push('/profile')
-            } else {
-              responseErrorHandler('An error occurred. Try again later')
+              await router.push(Paths.profile)
             }
           } catch (error) {
             responseErrorHandler(error)
