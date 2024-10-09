@@ -9,8 +9,3 @@ export type SignUpRequestData = BaseUrl &
 export type RecoveryPasswordData = BaseUrl & ForgotPasswordFields
 
 export type EmailResendRequestData = { email: string } & BaseUrl
-
-export type EmailConfirmationRequestData = {
-  confirmationCode: string
-  email: string
-}
