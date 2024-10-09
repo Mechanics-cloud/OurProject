@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 
 import { Loader } from '@/common'
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { authApi } from '@/features/auth/api/auth.api'
+import authStore from '@/features/auth/model/authStore'
 import { useRouter } from 'next/router'
 
 const GitHubCallback = () => {
@@ -14,10 +13,7 @@ const GitHubCallback = () => {
 
       if (accessToken) {
         localStorage.setItem('accessToken', accessToken as string)
-        authApi
-          .me(accessToken as string)
-          .then(() => router.push('/profile'))
-          .catch((error) => responseErrorHandler('No access token'))
+        authStore.me(accessToken as string).then(() => router.push('/profile'))
       } else {
         console.warn('No token')
       }
