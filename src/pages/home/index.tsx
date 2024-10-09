@@ -1,3 +1,6 @@
+import { useEffect, useLayoutEffect, useState } from 'react'
+
+import { generalStore } from '@/app/store'
 import {
   BookmarkOutline,
   HeartOutline,
@@ -10,11 +13,12 @@ import { Button } from '@/common/components/button'
 import Slider from '@/common/components/slider/Slider'
 import { Typography, typographyVariants } from '@/common/components/typography'
 import Image from 'next/image'
-import Link from 'next/link'
 import third from 'src/assets/images/image1.jpg'
 import second from 'src/assets/images/image2.jpg'
 import first from 'src/assets/images/image3.jpg'
 import four from 'src/assets/images/image4.jpg'
+
+import { homeApi } from './home.api'
 
 const images = [
   {
@@ -32,6 +36,24 @@ const images = [
 ]
 
 function Home() {
+  const [state, setState] = useState({})
+
+  useEffect(() => {
+    generalStore.turnOnLoading()
+    homeApi
+      .publicationsFollowers({
+        endCursorPostId: 0,
+        pageNumber: 1,
+        pageSize: 12,
+      })
+      .then((data) => {
+        setState(data)
+        generalStore.turnOffLoading()
+      })
+  }, [])
+
+  console.log(state)
+
   return (
     <div
       className={
