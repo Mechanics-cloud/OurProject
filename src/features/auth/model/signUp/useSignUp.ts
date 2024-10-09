@@ -15,6 +15,7 @@ export const useSignUp = () => {
     formState: { errors, isValid, touchedFields },
     handleSubmit,
     reset,
+    resetField,
     setError,
     watch,
   } = useForm<SignUpFields>({
@@ -46,6 +47,7 @@ export const useSignUp = () => {
       }
     } catch (error: unknown) {
       responseErrorHandler(error, setError)
+      resetField('confirm')
     }
     isLoadingStore.turnOffLoading()
   })

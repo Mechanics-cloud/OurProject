@@ -8,15 +8,7 @@ const SignUp = () => {
     Router.push(Paths.profile)
   }
 
-  return (
-    <div
-      className={
-        'md:mt-[24px] mt-4 md:w-[378px] mx-auto box-border border-transparent'
-      }
-    >
-      <SignUpForm />
-    </div>
-  )
+  return <SignUpForm />
 }
 
 SignUp.getLayout = getBaseLayout

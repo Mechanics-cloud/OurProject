@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 
 import { Paths } from '@/common/paths'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
@@ -21,9 +20,8 @@ export const useRegistrationConfirmation = () => {
 
       authApi
         .emailConfirmation(confirmationCode)
-        .then((res) => {
+        .then(() => {
           setIsConfirm(true)
-          toast(res.status)
         })
         .catch((error) => {
           responseErrorHandler(error)

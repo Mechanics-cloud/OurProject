@@ -39,5 +39,11 @@ export const withProtection = <P extends object>(
         </Layout>
       )
     }
+
+    return (
+      <Layout>
+        <></>
+      </Layout>
+    )
   }
 }
