@@ -32,7 +32,7 @@ export const useSignIn = () => {
     isLoadingStore.turnOnLoading()
     try {
       await authStore.login(data)
-      Router.push(Paths.home)
+      await Router.push(Paths.home)
     } catch (error: unknown) {
       setError('email', {
         message: t.signInForm.errorResponse,

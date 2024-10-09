@@ -1,12 +1,9 @@
 import { StorageKeys } from '@/common/enums'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { authApi } from '@/features/auth/api/authApi'
-// import { authApi } from '@/features/auth'
+import { Profile, authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import axios, { InternalAxiosRequestConfig } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
-
-import { Profile } from '../api/authApi.types'
 
 class AuthStore {
   profile: Profile | undefined
@@ -21,7 +18,7 @@ class AuthStore {
 
       localStorage.setItem(StorageKeys.AccessToken, accessToken)
 
-      await this.me(accessToken)
+      await this.me()
     } catch (error) {
       responseErrorHandler(error)
 
@@ -38,9 +35,9 @@ class AuthStore {
     }
   }
 
-  async me(accessToken: string) {
+  async me() {
     try {
-      const profile = await authApi.me(accessToken)
+      const profile = await authApi.me()
 
       runInAction(() => {
         this.profile = profile
