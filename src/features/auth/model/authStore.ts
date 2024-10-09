@@ -1,5 +1,6 @@
 import { StorageKeys } from '@/common/enums'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { setAccessToken } from '@/common/utils/setAccessToken'
 import { Profile, authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import axios, { InternalAxiosRequestConfig } from 'axios'
@@ -16,7 +17,7 @@ class AuthStore {
     try {
       const res = await authApi.authWithGoogle(code)
 
-      localStorage.setItem(StorageKeys.AccessToken, res.data.accessToken)
+      setAccessToken(res.data.accessToken)
       await this.me()
 
       return res

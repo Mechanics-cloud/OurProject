@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-import { Loader } from '@/common'
-import { StorageKeys } from '@/common/enums'
+import { Loader, Paths } from '@/common'
+import { setAccessToken } from '@/common/utils/setAccessToken'
 import authStore from '@/features/auth/model/authStore'
 import { useRouter } from 'next/router'
 
@@ -13,13 +13,13 @@ const GitHubCallback = () => {
       const { accessToken } = router.query
 
       if (accessToken) {
-        localStorage.setItem(StorageKeys.AccessToken, accessToken as string)
-        authStore.me(accessToken as string).then(() => router.push('/profile'))
+        setAccessToken(accessToken as string)
+        authStore.me().then(() => router.push(Paths.profile))
       } else {
         console.warn('No token')
       }
     }
-  }, [router, router.query])
+  }, [router])
 
   return <Loader />
 }
