@@ -1,26 +1,33 @@
 import React from 'react'
 
-import { GithubSvgrepoCom31 } from '@/assets/icons/filledIcons'
-import { Environments, Tooltip, useTranslation } from '@/common'
-import { Endpoints } from '@/features/auth'
-import { GoogleLoginButton } from '@/features/auth/ui/signUp/GoogleLoginButton'
+import {
+  GithubSvgrepoCom31,
+  GoogleSvgrepoCom1,
+} from '@/assets/icons/filledIcons'
+import { Tooltip, useTranslation } from '@/common'
+import { useOAuth } from '@/features/auth/model/useOAuth'
 
 export const ExternalServicesRegistration = () => {
   const { t } = useTranslation()
-
-  const handleLoginWithGithub = () => {
-    window.location.assign(`${Environments.API_URL}${Endpoints.AuthWithGithub}`)
-  }
+  const { githubLogin, googleLogin } = useOAuth()
 
   return (
     <div className={'flex gap-14 justify-center mb-6 mt-4'}>
       <Tooltip title={t.signUpForm.signUpGoogle}>
-        <GoogleLoginButton />
+        <button
+          onClick={() => googleLogin()}
+          type={'button'}
+        >
+          <GoogleSvgrepoCom1
+            height={36}
+            width={36}
+          />
+        </button>
       </Tooltip>
 
       <Tooltip title={t.signUpForm.signUpGithub}>
         <button
-          onClick={handleLoginWithGithub}
+          onClick={githubLogin}
           type={'button'}
         >
           <GithubSvgrepoCom31
