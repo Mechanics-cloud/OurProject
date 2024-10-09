@@ -1,7 +1,7 @@
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
 import { Endpoints } from '@/features/auth'
-import axios, { isAxiosError } from 'axios'
+import axios, { AxiosResponse, isAxiosError } from 'axios'
 
 import authStore from '../model/authStore'
 
@@ -16,16 +16,20 @@ export const instance = axios.create({
 //TODO фикс появления ошибки, на первом запросе при обновлении токена
 
 instance.interceptors.response.use(
-  (res) => {
-    return res
+  (response: AxiosResponse) => {
+    return response
   },
-  async (error) => {
+  async (error: unknown) => {
     if (isAxiosError(error)) {
       if (error.response?.status === StatusCode.Unauthorized) {
         if (error.config?.url === Endpoints.updateToken) {
           return Promise.reject(error)
         } else {
-          await authStore.updateToken(error.config)
+          try {
+            await authStore.updateToken(error.config)
+          } catch (updateError) {
+            return Promise.reject(updateError)
+          }
         }
       }
     }
