@@ -29,7 +29,7 @@ class AuthStore {
 
       localStorage.setItem(StorageKeys.AccessToken, accessToken)
 
-      await this.me(accessToken)
+      await this.me()
     } catch (error) {
       responseErrorHandler(error)
 
@@ -47,9 +47,9 @@ class AuthStore {
     }
   }
 
-  async me(accessToken: string) {
+  async me() {
     try {
-      const profile = await authApi.me(accessToken)
+      const profile = await authApi.me()
 
       runInAction(() => {
         this.profile = profile

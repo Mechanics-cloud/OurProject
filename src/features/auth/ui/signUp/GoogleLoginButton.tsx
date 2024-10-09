@@ -3,7 +3,6 @@ import React from 'react'
 import { generalStore } from '@/app/store'
 import { GoogleSvgrepoCom1 } from '@/assets/icons/filledIcons'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { authApi } from '@/features/auth'
 import authStore from '@/features/auth/model/authStore'
 import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
@@ -21,11 +20,9 @@ export const GoogleLoginButton = React.forwardRef<HTMLButtonElement>(
         if (credentialResponse.code) {
           try {
             isLoading.turnOnLoading()
-            const accessToken = await authStore.authWithGoogle(
-              credentialResponse.code
-            )
+            await authStore.authWithGoogle(credentialResponse.code)
 
-            await authStore.me(accessToken)
+            await authStore.me()
             isLoading.turnOffLoading()
             await router.push('/profile')
           } catch (error) {

@@ -38,12 +38,8 @@ class AuthApi {
     return instance.post(Endpoints.logout)
   }
 
-  public async me(accessToken: string): Promise<Profile> {
-    return instance.get(Endpoints.me, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
+  public async me(): Promise<Profile> {
+    return instance.get(Endpoints.me)
   }
 
   public async recoverPassword(
