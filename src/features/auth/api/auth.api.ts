@@ -3,7 +3,6 @@ import { Profile } from '@/features/auth/api/authApi.types'
 import { instance } from '@/features/auth/api/instance'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import {
-  EmailConfirmationRequestData,
   EmailResendRequestData,
   RecoveryPasswordData,
   SignUpRequestData,
@@ -13,9 +12,11 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 class AuthApi {
   constructor(private instance: AxiosInstance) {}
   public async emailConfirmation(
-    emailConfirmation: EmailConfirmationRequestData
+    emailConfirmationCode: string
   ): Promise<AxiosResponse> {
-    return this.instance.post(Endpoints.EmailResending, emailConfirmation)
+    return this.instance.post(Endpoints.EmailConfirmation, {
+      confirmationCode: emailConfirmationCode,
+    })
   }
 
   public async emailResending(

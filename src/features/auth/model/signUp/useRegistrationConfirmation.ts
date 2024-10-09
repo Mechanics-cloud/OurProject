@@ -18,16 +18,17 @@ export const useRegistrationConfirmation = () => {
 
     try {
       const confirmationCode = query.code as string
-      const email = query.email as string
 
       authApi
-        .emailConfirmation({ confirmationCode, email })
+        .emailConfirmation(confirmationCode)
         .then((res) => {
           setIsConfirm(true)
           toast(res.status)
         })
         .catch((error) => {
           responseErrorHandler(error)
+          const email = query.email as string
+
           push({
             pathname: Paths.registrationEmailResending,
             query: { code: confirmationCode, email },
