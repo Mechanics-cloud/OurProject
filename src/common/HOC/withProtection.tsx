@@ -24,16 +24,15 @@ export const withProtection = <P extends object>(
         .me()
         .then(() => {
           if (!authStore.profile && !isPublic) {
-            alert(authStore.profile)
-            router.push(Paths.signIn).catch(() => setLoading(false))
-          } else {
-            setLoading(false)
+            router.push(Paths.signIn)
           }
         })
         .catch(() => {
           if (!isPublic) {
-            router.push(Paths.signIn).catch(() => setLoading(false))
+            router.push(Paths.signIn)
           }
+        })
+        .finally(() => {
           setLoading(false)
         })
     }, [router])
