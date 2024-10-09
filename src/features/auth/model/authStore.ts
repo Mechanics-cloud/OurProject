@@ -14,11 +14,7 @@ class AuthStore {
 
   async authWithGoogle(code: string) {
     try {
-      const res = await authApi.authWithGoogle(code)
-
-      localStorage.setItem(StorageKeys.AccessToken, res.data.accessToken)
-
-      return res.data.accessToken
+      return await authApi.authWithGoogle(code)
     } catch (error) {
       responseErrorHandler(error)
     }

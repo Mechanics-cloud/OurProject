@@ -10,6 +10,7 @@ import { z } from 'zod'
  * @param error - Some error (zod, axios or code)
  * @param setError - Unnecessary parameter for from error handling
  */
+
 export const responseErrorHandler = (error: unknown, setError?: Function) => {
   const basicErrorMessage = 'Something went wrong'
 
@@ -18,21 +19,26 @@ export const responseErrorHandler = (error: unknown, setError?: Function) => {
 
     return
   }
-  if (!isAxiosError(error) || !error.response?.data?.messages) {
-    toast.error((error as Error).message ?? basicErrorMessage)
+
+  if (isAxiosError(error) && error.response?.data?.messages) {
+    const errorData = error.response.data as ErrorResponse
+
+    if (!setError) {
+      toast.error(errorData.messages[0].message ?? basicErrorMessage)
+
+      return
+    }
+
+    errorData.messages.forEach(({ field, message }) => {
+      setError(field as keyof SignUpFields, { message })
+    })
+  }
+
+  if (typeof error === 'string') {
+    toast.error(error)
 
     return
   }
 
-  const errorData = error.response?.data as ErrorResponse
-
-  if (!setError) {
-    toast.error(errorData.messages[0].message ?? basicErrorMessage)
-
-    return
-  }
-
-  errorData.messages.forEach(({ field, message }) => {
-    setError(field as keyof SignUpFields, { message })
-  })
+  toast.error(basicErrorMessage)
 }

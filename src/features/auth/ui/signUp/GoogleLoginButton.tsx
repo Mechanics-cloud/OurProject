@@ -2,6 +2,7 @@ import React from 'react'
 
 import { generalStore } from '@/app/store'
 import { GoogleSvgrepoCom1 } from '@/assets/icons/filledIcons'
+import { StorageKeys } from '@/common/enums'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import authStore from '@/features/auth/model/authStore'
 import { useGoogleLogin } from '@react-oauth/google'
@@ -15,16 +16,26 @@ export const GoogleLoginButton = React.forwardRef<HTMLButtonElement>(
 
     const login = useGoogleLogin({
       flow: 'auth-code',
-      onError: () => {},
+      onError: () => {
+        responseErrorHandler('Oops something went wrong')
+      },
       onSuccess: async (credentialResponse) => {
         if (credentialResponse.code) {
           try {
             isLoading.turnOnLoading()
-            await authStore.authWithGoogle(credentialResponse.code)
+            const res = await authStore.authWithGoogle(credentialResponse.code)
 
-            await authStore.me()
-            isLoading.turnOffLoading()
-            await router.push('/profile')
+            if (res?.data.accessToken) {
+              localStorage.setItem(
+                StorageKeys.AccessToken,
+                res.data.accessToken
+              )
+              await authStore.me()
+              isLoading.turnOffLoading()
+              await router.push('/profile')
+            } else {
+              responseErrorHandler('An error occurred. Try again later')
+            }
           } catch (error) {
             responseErrorHandler(error)
           } finally {
