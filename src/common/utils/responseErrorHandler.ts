@@ -20,25 +20,23 @@ export const responseErrorHandler = (error: unknown, setError?: Function) => {
     return
   }
 
-  if (isAxiosError(error) && error.response?.data?.messages) {
-    const errorData = error.response.data as ErrorResponse
-
-    if (!setError) {
-      toast.error(errorData.messages[0].message ?? basicErrorMessage)
-
-      return
-    }
-
-    errorData.messages.forEach(({ field, message }) => {
-      setError(field as keyof SignUpFields, { message })
-    })
-  }
-
-  if (typeof error === 'string') {
-    toast.error(error)
+  if (!isAxiosError(error) || !error.response?.data?.messages) {
+    toast.error(basicErrorMessage)
 
     return
   }
 
-  toast.error(basicErrorMessage)
+  const errorData = error.response?.data as ErrorResponse
+
+  if (!setError) {
+    toast.error(errorData.messages[0].message ?? basicErrorMessage)
+
+    return
+  }
+
+  errorData.messages.forEach(({ field, message }) => {
+    setError(field as keyof SignUpFields, { message })
+  })
 }
+
+export const responseServerErrorHandler = () => {}

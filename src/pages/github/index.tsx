@@ -16,7 +16,7 @@ const GitHubCallback = () => {
         setAccessToken(accessToken as string)
         authStore.me().then(() => router.push(Paths.profile))
       } else {
-        console.warn('No token')
+        throw new Error('no token')
       }
     }
   }, [router])

@@ -15,7 +15,7 @@ export const ExternalServicesRegistration = () => {
     <div className={'flex gap-14 justify-center mb-6 mt-4'}>
       <Tooltip title={t.signUpForm.signUpGoogle}>
         <button
-          onClick={() => googleLogin()}
+          onClick={googleLogin}
           type={'button'}
         >
           <GoogleSvgrepoCom1
