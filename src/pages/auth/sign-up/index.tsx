@@ -1,4 +1,5 @@
 import { Paths, getBaseLayout } from '@/common'
+import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
 import { SignUpForm } from '@/features/auth'
 import authStore from '@/features/auth/model/authStore'
 import Router from 'next/router'
@@ -13,4 +14,4 @@ const SignUp = () => {
 
 SignUp.getLayout = getBaseLayout
 
-export default SignUp
+export default withRedirectForAuthorize(SignUp)
