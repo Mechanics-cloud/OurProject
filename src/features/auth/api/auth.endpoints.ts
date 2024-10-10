@@ -1,4 +1,6 @@
 export const Endpoints = {
+  AuthWithGithub: '/v1/auth/github/login',
+  AuthWithGoogle: '/v1/auth/google/login',
   EmailConfirmation: '/v1/auth/registration-confirmation',
   EmailResending: '/v1/auth/registration-email-resending',
   RecoveryPassword: '/v1/auth/password-recovery',
