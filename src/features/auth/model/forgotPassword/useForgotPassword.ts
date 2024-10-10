@@ -1,9 +1,9 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { Environments, Nullable } from '@/common'
+import { Environments, Nullable, Paths, useModal } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import {
   ForgotPasswordFields,
@@ -11,12 +11,19 @@ import {
   forgotPasswordSchema,
 } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/router'
 
 export const useForgotPassword = () => {
+  const router = useRouter()
   const recaptchaRef = useRef<Nullable<ReCAPTCHA>>(null)
+
+  const [email, setEmail] = useState('')
+
+  const { isModalOpen, onModalClose, openModal } = useModal()
   const {
     control,
-    formState: { errors, isValid },
+    formState: { errors, isSubmitting, isValid },
+    getValues,
     handleSubmit,
     setError,
     setValue,
@@ -30,37 +37,47 @@ export const useForgotPassword = () => {
   })
 
   const onChangeRecaptcha = (token: Nullable<string>) =>
-    token && setValue('recaptcha', token, { shouldValidate: true })
+    setValue('recaptcha', token ?? '', { shouldValidate: true })
 
   const onResetRecaptcha = () => {
-    setValue('recaptcha', '')
+    onChangeRecaptcha(null)
     recaptchaRef?.current?.reset()
+  }
+
+  const onExpireRecaptcha = async () => {
+    await router.push(Paths.expiredSession)
   }
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.recaptcha) {
       return toast.error('Recaptcha is required')
     }
-
     try {
       await authApi.recoverPassword({
         baseUrl: Environments.BASE_URL ?? '',
         email: data.email,
         recaptcha: data.recaptcha,
       })
-      toast.success('Success! Check your email')
+      setEmail(data.email)
+      openModal()
     } catch (error: unknown) {
-      onResetRecaptcha()
       responseErrorHandler(error, setError)
+    } finally {
+      onResetRecaptcha()
     }
   })
 
   return {
     control,
+    email,
     errors,
+    getValues,
+    isModalOpen,
+    isSubmitting,
     isValid,
     onChangeRecaptcha,
-    onResetRecaptcha,
+    onExpireRecaptcha,
+    onModalClose,
     onSubmit,
     recaptchaRef,
   }
