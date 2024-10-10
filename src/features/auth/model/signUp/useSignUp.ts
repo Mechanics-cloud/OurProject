@@ -17,6 +17,7 @@ export const useSignUp = () => {
     reset,
     resetField,
     setError,
+    setFocus,
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
@@ -47,6 +48,7 @@ export const useSignUp = () => {
       }
     } catch (error: unknown) {
       responseErrorHandler(error, setError)
+      setFocus('confirm')
       resetField('confirm')
     }
     isLoadingStore.turnOffLoading()

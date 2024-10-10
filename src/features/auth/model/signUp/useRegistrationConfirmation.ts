@@ -15,26 +15,22 @@ export const useRegistrationConfirmation = () => {
     }
     const controller = new AbortController()
 
-    try {
+    const handleEmailConfirmation = async () => {
       const confirmationCode = query.code as string
 
-      authApi
-        .emailConfirmation(confirmationCode)
-        .then(() => {
-          setIsConfirm(true)
+      try {
+        await authApi.emailConfirmation(confirmationCode)
+        setIsConfirm(true)
+      } catch (error) {
+        responseErrorHandler(error)
+        push({
+          pathname: Paths.registrationEmailResending,
+          query: { code: confirmationCode, email: query.email as string },
         })
-        .catch((error) => {
-          responseErrorHandler(error)
-          const email = query.email as string
-
-          push({
-            pathname: Paths.registrationEmailResending,
-            query: { code: confirmationCode, email },
-          })
-        })
-    } catch (error) {
-      responseErrorHandler(error)
+      }
     }
+
+    handleEmailConfirmation()
 
     return () => {
       controller.abort()

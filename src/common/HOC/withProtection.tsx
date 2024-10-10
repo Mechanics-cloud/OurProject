@@ -11,11 +11,12 @@ type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: ReactElement) => ReactNode
 } & NextPage<P, IP>
 
-export const withProtection = <P extends object>(
-  PageComponent: NextPageWithLayout<P>,
-  isPublic: boolean = false
-): NextPageWithLayout<P> => {
-  return (props) => {
+export const withProtection =
+  <P extends object>(
+    PageComponent: NextPageWithLayout<P>,
+    isPublic: boolean = false
+  ): NextPageWithLayout<P> =>
+  (props) => {
     const router = useRouter()
 
     if (!authStore.profile && !isPublic) {
@@ -46,4 +47,3 @@ export const withProtection = <P extends object>(
       </Layout>
     )
   }
-}

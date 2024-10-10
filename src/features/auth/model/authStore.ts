@@ -43,7 +43,7 @@ class AuthStore {
         this.profile = profile
       })
     } catch (error) {
-      return
+      throw Error
     }
   }
 
