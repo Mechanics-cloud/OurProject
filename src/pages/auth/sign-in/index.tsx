@@ -1,4 +1,5 @@
 import { getBaseLayout } from '@/common'
+import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
 import SignInForm from '@/features/auth/ui/SignInForm'
 
 const SignIn = () => {
@@ -7,4 +8,4 @@ const SignIn = () => {
 
 SignIn.getLayout = getBaseLayout
 
-export default SignIn
+export default withRedirectForAuthorize(SignIn)

@@ -15,8 +15,13 @@ const SignIn = observer(() => {
         'md:mt-[36px] mt-4 md:w-[378px] mx-auto box-border border-transparent'
       }
     >
-      <Card className={'flex flex-col items-center w-[378px]'}>
-        <Typography variant={'h1'}>{t.signInForm.title}</Typography>
+      <Card className={'contents md:block'}>
+        <Typography
+          className={'text-center'}
+          variant={'h1'}
+        >
+          {t.signInForm.title}
+        </Typography>
         <ExternalServicesRegistration />
         <form
           className={'flex flex-col w-full h-full'}
@@ -54,18 +59,15 @@ const SignIn = observer(() => {
             {t.signInForm.title}
           </Button>
         </form>
-        <Typography
-          className={'mt-4'}
-          variant={'reg16'}
-        >
-          {t.signInForm.text}
-        </Typography>
-        <Button
-          asChild
-          variant={'text'}
-        >
-          <Link href={Paths.signUp}>{t.signInForm.signUpTitle}</Link>
-        </Button>
+        <div className={'flex flex-col gap-1 items-center mt-4'}>
+          <Typography variant={'reg16'}>{t.signInForm.text}</Typography>
+          <Button
+            asChild
+            variant={'text'}
+          >
+            <Link href={Paths.signUp}>{t.signInForm.signUpTitle}</Link>
+          </Button>
+        </div>
       </Card>
     </div>
   )

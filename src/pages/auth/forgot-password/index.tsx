@@ -1,4 +1,5 @@
 import { Card, getBaseLayout } from '@/common'
+import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
 import { ForgotPasswordForm } from '@/features/auth'
 
 function ForgotPassword() {
@@ -15,4 +16,4 @@ function ForgotPassword() {
 
 ForgotPassword.getLayout = getBaseLayout
 
-export default ForgotPassword
+export default withRedirectForAuthorize(ForgotPassword)

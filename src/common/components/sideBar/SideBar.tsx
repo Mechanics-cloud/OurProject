@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react'
+
 import { generalStore } from '@/app/store'
 import {
   Bookmark,
@@ -18,7 +20,7 @@ import {
   SearchOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
-import { Paths, useModal, useTranslation } from '@/common'
+import { Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import authStore from '@/features/auth/model/authStore'
@@ -27,7 +29,9 @@ import Router from 'next/router'
 
 import { NavLink } from './navLink/NavLink'
 
-export const SideBar = observer(() => {
+type Props = ComponentProps<'aside'>
+
+export const SideBar = observer(({ className }: Props) => {
   const { isModalOpen, onModalClose, openModal } = useModal(async () => {
     const isLoadingStore = generalStore
 
@@ -49,9 +53,10 @@ export const SideBar = observer(() => {
 
   return (
     <aside
-      className={
-        'flex flex-col border-r-2 border-dark-300 min-w-56 fixed h-screen'
-      }
+      className={cn(
+        'flex flex-col border-r-2 border-dark-300 min-w-56 h-screen fixed',
+        className
+      )}
     >
       <nav className={'pt-[72px]'}>
         <ul className={`mb-[60px] [&_li]:mb-6`}>

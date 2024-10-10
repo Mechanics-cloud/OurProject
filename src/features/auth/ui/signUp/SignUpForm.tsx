@@ -30,7 +30,11 @@ export const SignUpForm = observer(() => {
   } = useSignUp()
 
   return (
-    <>
+    <div
+      className={
+        'md:mt-[24px] mt-4 md:w-[378px] mx-auto box-border border-transparent'
+      }
+    >
       <Card className={'pt-6 pb-7 contents md:block'}>
         <Typography
           className={'text-center mb-3'}
@@ -99,7 +103,7 @@ export const SignUpForm = observer(() => {
           userEmail={userEmail}
         />
 
-        <div className={'flex flex-col gap-4 items-center'}>
+        <div className={'flex flex-col gap-3 items-center'}>
           <span>{t.signUpForm.text}</span>
           <Button
             asChild
@@ -117,6 +121,6 @@ export const SignUpForm = observer(() => {
           </Button>
         </div>
       </Card>
-    </>
+    </div>
   )
 })

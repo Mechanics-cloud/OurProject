@@ -1,7 +1,10 @@
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
-import type { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode, useEffect, useState } from 'react'
+
+import { Loader } from '@/common'
+import authStore from '@/features/auth/model/authStore'
 
 import '@/styles/globals.css'
 import '@fontsource/inter/400.css'
@@ -20,6 +23,16 @@ type AppPropsWithLayout = {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
+
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    authStore.me().finally(() => setLoading(false))
+  }, [])
+
+  if (loading) {
+    return <Loader />
+  }
 
   return getLayout(<Component {...pageProps} />)
 }
