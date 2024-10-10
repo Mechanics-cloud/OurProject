@@ -1,11 +1,27 @@
 export const ru = {
   basicError: 'Что-то пошло не так',
+  expiredSession: {
+    emailExpired: 'Ссылка для подтверждения электронной почты истекла',
+    pictureExpired: 'Изображение истекшей ссылки',
+    resendLink: 'Отправить ссылку снова',
+    sendLinkAgain:
+      'Похоже, что ссылка для подтверждения истекла. Не переживайте, мы можем отправить ссылку снова',
+  },
   forgotPassword: {
     buttonTitle: 'Отправить ссылку',
     description:
       'Введите свой адрес электронной почты и мы вышлем вам дальнейшие инструкции',
     emailPlaceholder: 'Введите свой адрес электронной почты',
     link: 'Вернуться к авторизации',
+    modalContent: {
+      getText: (userEmail: string) => {
+        return `Мы отправили ссылку для подтверждения вашего электронного письма на адрес ${userEmail}`
+      },
+    },
+    modalTitle: 'Письмо отправлено',
+    resentEmail:
+      'Ссылка была отправлена по электронной почте. Если вы не получили письмо, отправьте ссылку снова.',
+    sendAgain: 'Отправить ссылку снова',
     title: 'Забыли пароль',
   },
   logIn: 'Вход',
@@ -30,6 +46,12 @@ export const ru = {
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',
+  },
+  recoveryPassword: {
+    createNewPassword: 'Создать новый пароль',
+    newPassword: 'Новый пароль',
+    passwordConfirmation: 'Подтверждение пароля',
+    passwordValidation: 'Ваш пароль должен содержать от 6 до 20 символов',
   },
   registration: {
     confirmation: {

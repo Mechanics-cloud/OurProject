@@ -2,12 +2,28 @@ import { LocaleType } from './ru'
 
 export const en: LocaleType = {
   basicError: 'Something went wrong',
+  expiredSession: {
+    emailExpired: 'Email verification link expired',
+    pictureExpired: 'Picture of the expired link',
+    resendLink: 'Resend Link',
+    sendLinkAgain:
+      'Looks like the verification link has expired. Not to worry, we can send the link again',
+  },
   forgotPassword: {
     buttonTitle: 'Send Link',
     description:
       'Enter your email address and we will send you further instructions',
     emailPlaceholder: 'Enter your email address',
     link: 'Back to Sign In',
+    modalContent: {
+      getText: (userEmail: string) => {
+        return `We have sent a link to confirm your email to ${userEmail}`
+      },
+    },
+    modalTitle: 'Email sent',
+    resentEmail:
+      'The link has been sent by email. If you don’t receive an email send link again',
+    sendAgain: 'Send Link Again',
     title: 'Forgot Password',
   },
   logIn: 'Log In',
@@ -32,6 +48,12 @@ export const en: LocaleType = {
   pagination: {
     goBack: 'Go Back',
     goForward: 'Go forward',
+  },
+  recoveryPassword: {
+    createNewPassword: 'Create New Password',
+    newPassword: 'New Password',
+    passwordConfirmation: 'Password confirmation',
+    passwordValidation: 'Your password must be between 6 and 20 characters',
   },
   registration: {
     confirmation: {
