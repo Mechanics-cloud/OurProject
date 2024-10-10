@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export const useModal = (onClose: () => void) => {
+export const useModal = (onClose?: () => void) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => {
@@ -8,7 +8,7 @@ export const useModal = (onClose: () => void) => {
   }
 
   const onModalClose = () => {
-    onClose()
+    onClose && onClose()
     setIsModalOpen(false)
   }
 
