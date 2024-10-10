@@ -1,9 +1,9 @@
 import React, { ElementRef, ReactElement, forwardRef } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { generalStore } from '@/app/store'
 import { Header, Loader, ScrollArea } from '@/common'
 import { cn } from '@/common/utils/cn'
+import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
 import NextTopLoader from 'nextjs-toploader'
 
@@ -35,7 +35,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
 
           <main
             className={cn(
-              'px-4 md:px-14 mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent',
+              'px-4 md:px-14 mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent w-full',
               className
             )}
           >
