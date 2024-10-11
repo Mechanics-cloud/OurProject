@@ -11,7 +11,7 @@ export const ru = {
     buttonTitle: 'Отправить ссылку',
     description:
       'Введите свой адрес электронной почты и мы вышлем вам дальнейшие инструкции',
-    emailPlaceholder: 'Введите свой адрес электронной почты',
+    emailPlaceholder: 'Введите email',
     link: 'Вернуться к авторизации',
     modalContent: {
       getText: (userEmail: string) => {
@@ -50,6 +50,7 @@ export const ru = {
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
+    passwordChanged: 'Пароль был успешно изменен!',
     passwordConfirmation: 'Подтверждение пароля',
     passwordValidation: 'Ваш пароль должен содержать от 6 до 20 символов',
   },
@@ -108,6 +109,9 @@ export const ru = {
   },
   termsPolicyPage: {
     back: 'Назад',
+  },
+  validation: {
+    recaptchaRequired: 'Требуется Recaptcha',
   },
 }
 

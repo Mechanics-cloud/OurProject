@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode } from 'react'
+import { PropsWithChildren } from 'react'
 
 import {
   Dialog,
@@ -11,7 +11,6 @@ import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
   className?: string
-  footer?: ReactNode
   title: string
 } & DialogProps &
   PropsWithChildren
@@ -19,7 +18,6 @@ type Props = {
 export const SimpleModal = ({
   children,
   className,
-  footer,
   onOpenChange,
   open,
   title,

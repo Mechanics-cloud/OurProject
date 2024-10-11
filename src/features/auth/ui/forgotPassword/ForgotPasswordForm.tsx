@@ -15,7 +15,6 @@ export const ForgotPasswordForm = () => {
   const {
     control,
     email,
-    errors,
     isModalOpen,
     isSubmitting,
     isValid,
@@ -40,7 +39,6 @@ export const ForgotPasswordForm = () => {
           className={'w-full mb-0'}
           control={control}
           disabled={isSubmitting}
-          error={errors.email?.message}
           label={'Email'}
           name={'email'}
           placeholder={t.forgotPassword.emailPlaceholder}

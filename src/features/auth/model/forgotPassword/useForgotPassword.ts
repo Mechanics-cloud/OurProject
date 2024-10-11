@@ -3,7 +3,13 @@ import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { Environments, Nullable, Paths, useModal } from '@/common'
+import {
+  Environments,
+  Nullable,
+  Paths,
+  useModal,
+  useTranslation,
+} from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import {
   ForgotPasswordFields,
@@ -14,6 +20,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 
 export const useForgotPassword = () => {
+  const { t } = useTranslation()
   const router = useRouter()
   const recaptchaRef = useRef<Nullable<ReCAPTCHA>>(null)
 
@@ -50,7 +57,7 @@ export const useForgotPassword = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.recaptcha) {
-      return toast.error('Recaptcha is required')
+      return toast.error(t.validation.recaptchaRequired)
     }
     try {
       await authApi.recoverPassword({
