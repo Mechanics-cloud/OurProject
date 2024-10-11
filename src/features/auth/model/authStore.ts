@@ -1,6 +1,9 @@
 import { StorageKeys } from '@/common/enums'
+import {
+  removeFromLocalStorage,
+  setToLocalStorage,
+} from '@/common/utils/localStorage'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { setAccessToken } from '@/common/utils/setAccessToken'
 import { Profile, authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import axios, { InternalAxiosRequestConfig } from 'axios'
@@ -17,7 +20,7 @@ class AuthStore {
     try {
       const res = await authApi.authWithGoogle(code)
 
-      setAccessToken(res.data.accessToken)
+      setToLocalStorage(StorageKeys.AccessToken, res.data.accessToken)
       await this.me()
 
       return res
@@ -29,7 +32,7 @@ class AuthStore {
     try {
       const accessToken = await authApi.login(data)
 
-      localStorage.setItem(StorageKeys.AccessToken, accessToken)
+      setToLocalStorage(StorageKeys.AccessToken, accessToken)
 
       await this.me()
     } catch (error) {
@@ -43,7 +46,7 @@ class AuthStore {
     try {
       await authApi.logout()
 
-      localStorage.removeItem(StorageKeys.AccessToken)
+      removeFromLocalStorage(StorageKeys.AccessToken)
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -65,7 +68,7 @@ class AuthStore {
     try {
       const newToken = await authApi.updateToken()
 
-      localStorage.setItem(StorageKeys.AccessToken, newToken)
+      setToLocalStorage(StorageKeys.AccessToken, newToken)
       if (previousRequest) {
         previousRequest.headers.Authorization = `Bearer ${newToken}`
 
