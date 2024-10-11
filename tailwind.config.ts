@@ -6,7 +6,7 @@ const config: Config = {
     './src/common/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/common/layout/**/*.{js,ts,jsx,tsx,mdx}',
     './src/common/HOC/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/core/**/*.{js,ts,jsx,tsx,mdx}',
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   plugins: [require('tailwindcss-radix')()],

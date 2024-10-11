@@ -27,6 +27,7 @@ export const ru = {
     search: 'Поиск',
     statistics: 'Статистика',
   },
+  notFoundButton: 'Вернуться назад',
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',

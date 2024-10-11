@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { generalStore } from '@/app/store'
 import { useModal, useTranslation } from '@/common'
 import { Environments } from '@/common/enviroments'
 import { Paths } from '@/common/paths'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { generalStore } from '@/core/store'
 import { authApi } from '@/features/auth/api'
 import { useRouter } from 'next/router'
 import { z } from 'zod'

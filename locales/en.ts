@@ -29,6 +29,7 @@ export const en: LocaleType = {
     search: 'Search',
     statistics: 'Statistics',
   },
+  notFoundButton: 'Go back',
   pagination: {
     goBack: 'Go Back',
     goForward: 'Go forward',

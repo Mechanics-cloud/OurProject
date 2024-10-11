@@ -1,9 +1,9 @@
 import React, { ElementRef, ReactElement, forwardRef } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { generalStore } from '@/app/store'
 import { Header, Loader, ScrollArea } from '@/common'
 import { cn } from '@/common/utils/cn'
+import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
 import NextTopLoader from 'nextjs-toploader'
 
