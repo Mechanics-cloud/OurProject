@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 export interface RootInterface {
   items: [] | Item[]
   nextCursor: number
@@ -9,7 +11,7 @@ export interface RootInterface {
 }
 
 export interface Item {
-  avatarOwner: string
+  avatarOwner: StaticImageData | string //todo StaticImageData для теста (данные взял из обьекта) удалить
   createdAt: string
   description: string
   id: number
@@ -33,7 +35,7 @@ export interface Image {
   fileSize: number
   height: number
   uploadId: string
-  url: string
+  url: StaticImageData | string //todo StaticImageData для теста (данные взял из обьекта) удалить
   width: number
 }
 export interface homeData {

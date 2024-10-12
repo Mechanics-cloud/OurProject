@@ -14,7 +14,7 @@ type ImageType = {
   fileSize?: number
   height?: number
   uploadId?: string
-  url: StaticImageData | string
+  url: StaticImageData | string // StaticImageData временно после добавления картинок с сервера, удалить
   width?: number
 }
 

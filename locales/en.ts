@@ -12,6 +12,7 @@ export const en: LocaleType = {
   },
   logIn: 'Log In',
   menu: {
+    copyLink: 'Copy Link',
     create: 'Create',
     favorites: 'Favorites',
     home: 'Home',
@@ -28,6 +29,7 @@ export const en: LocaleType = {
     profile: 'Profile',
     search: 'Search',
     statistics: 'Statistics',
+    unfollow: 'Unfollow',
   },
   pagination: {
     goBack: 'Go Back',

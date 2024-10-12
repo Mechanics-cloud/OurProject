@@ -10,6 +10,7 @@ export const ru = {
   },
   logIn: 'Вход',
   menu: {
+    copyLink: 'Скопировать ссылку',
     create: 'Создать',
     favorites: 'Избранное',
     home: 'Домой',
@@ -26,6 +27,7 @@ export const ru = {
     profile: 'Профиль',
     search: 'Поиск',
     statistics: 'Статистика',
+    unfollow: 'Отписаться',
   },
   pagination: {
     goBack: 'Назад',

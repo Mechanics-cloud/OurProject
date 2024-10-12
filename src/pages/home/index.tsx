@@ -21,24 +21,11 @@ import second from 'src/assets/images/image2.jpg'
 import first from 'src/assets/images/image3.jpg'
 import four from 'src/assets/images/image4.jpg'
 
+import { CustomHomePopover } from './CustomHomePopover'
+import { LinksGroup } from './LinksGroup'
 import { homeApi } from './home.api'
 import { Item, RootInterface } from './home.types'
 import { timeAgo } from './utilsDate'
-
-const images = [
-  {
-    url: four,
-  },
-  {
-    url: second,
-  },
-  {
-    url: third,
-  },
-  {
-    url: first,
-  },
-]
 
 const dataTest = [
   {
@@ -52,7 +39,23 @@ const dataTest = [
         fileSize: 300,
         height: 300,
         uploadId: 'string',
-        url: 'https://example.com/image.jpg',
+        url: first,
+        width: 300,
+      },
+      {
+        createdAt: '2024-10-07T13:37:27.351Z',
+        fileSize: 300,
+        height: 300,
+        uploadId: 'string',
+        url: four,
+        width: 300,
+      },
+      {
+        createdAt: '2024-10-07T13:37:27.351Z',
+        fileSize: 300,
+        height: 300,
+        uploadId: 'string',
+        url: second,
         width: 300,
       },
     ],
@@ -71,15 +74,14 @@ const dataTest = [
 
 function Home() {
   const [state, setState] = useState<Item[]>(dataTest)
-  const [loading, setLoading] = useState(false) // change true
+  const [loading, setLoading] = useState(false) //todo change on true
 
   const { t } = useTranslation()
   const router = useRouter()
 
   const isAuth = !!authStore.profile
 
-  // console.log(router.locale)
-
+  // TODO раскоментировать
   // useEffect(() => {
   //   homeApi
   //     .publicationsFollowers({
@@ -107,6 +109,7 @@ function Home() {
       </>
     )
   }
+  // добавить в slider адресс item.images
 
   return state.map((item) => {
     return (
@@ -138,24 +141,16 @@ function Home() {
               </div>
             </div>
           </span>
-          <button type={'button'}>
-            <MoreHorizontalOutline
-              aria-label={'вызов настроек'}
-              className={'w-6 h-6 active:text-accent-500 focus:text-accent-500'}
-            />
-          </button>
+          <CustomHomePopover />
         </div>
         <section className={'h-[504px] mb-3'}>
-          {images.length > 0 ? <Slider images={images} /> : 'Нет картинок!'}
+          {item.images.length > 0 ? (
+            <Slider images={item.images} />
+          ) : (
+            'Нет картинок!'
+          )}
         </section>
-        <div className={'w-full h-6 flex items-center justify-between mb-4'}>
-          <div className={'flex items-center gap-5'}>
-            <HeartOutline className={'size-6'} />
-            <MessageCircleOutline className={'size-6'} />
-            <PaperPlaneOutline className={'size-6'} />
-          </div>
-          <BookmarkOutline className={'size-6'} />
-        </div>
+        <LinksGroup />
         <div className={'w-full h-[72px] flex gap-3'}>
           <Image
             alt={'Avatar'}
