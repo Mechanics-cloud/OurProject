@@ -58,7 +58,7 @@ export const SideBar = observer(() => {
           <NavLink
             ActiveIcon={Home}
             DefaultIcon={HomeOutline}
-            href={'/'}
+            href={'/home'}
           >
             {t.menu.home}
           </NavLink>

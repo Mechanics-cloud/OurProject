@@ -1,5 +1,5 @@
 export interface RootInterface {
-  items: Item[]
+  items: [] | Item[]
   nextCursor: number
   page: number
   pageSize: number

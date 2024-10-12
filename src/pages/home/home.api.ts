@@ -1,14 +1,14 @@
 import { instance } from '@/features/auth/api/instance'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
-import { homeData } from './home.types'
+import { RootInterface, homeData } from './home.types'
 
 class HomeApi {
   constructor(private instance: AxiosInstance) {}
 
-  public async publicationsFollowers(data: homeData): Promise<AxiosResponse> {
+  public async publicationsFollowers(data: homeData) {
     return instance
-      .get('/v1/home/publications-followers', { params: data })
+      .get<RootInterface>('/v1/home/publications-followers', { params: data })
       .then((res) => res.data)
   }
 }
