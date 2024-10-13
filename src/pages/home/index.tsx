@@ -1,14 +1,11 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 
-import { generalStore } from '@/app/store'
 import {
-  BookmarkOutline,
-  HeartOutline,
-  MessageCircleOutline,
-  MoreHorizontalOutline,
-  PaperPlaneOutline,
-} from '@/assets/icons/outlineIcons'
-import { Loader, getLayoutWithSidebar, useTranslation } from '@/common'
+  Loader,
+  TextArea,
+  getLayoutWithSidebar,
+  useTranslation,
+} from '@/common'
 import { Button } from '@/common/components/button'
 import Slider from '@/common/components/slider/Slider'
 import { Typography, typographyVariants } from '@/common/components/typography'
@@ -25,14 +22,61 @@ import { CustomHomePopover } from './CustomHomePopover'
 import { LinksGroup } from './LinksGroup'
 import { homeApi } from './home.api'
 import { Item, RootInterface } from './home.types'
+import { postsApi } from './posts.api'
 import { timeAgo } from './utilsDate'
 
 const dataTest = [
   {
     avatarOwner: four,
     createdAt: '2024-10-07T13:37:28.059Z',
-    description: 'description',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+
     id: 1,
+    images: [
+      {
+        createdAt: '2024-10-07T13:37:27.351Z',
+        fileSize: 300,
+        height: 300,
+        uploadId: 'string',
+        url: first,
+        width: 300,
+      },
+      {
+        createdAt: '2024-10-07T13:37:27.351Z',
+        fileSize: 300,
+        height: 300,
+        uploadId: 'string',
+        url: four,
+        width: 300,
+      },
+      {
+        createdAt: '2024-10-07T13:37:27.351Z',
+        fileSize: 300,
+        height: 300,
+        uploadId: 'string',
+        url: second,
+        width: 300,
+      },
+    ],
+    isLiked: true,
+    likesCount: 1,
+    location: 'location',
+    owner: {
+      firstName: 'firstName',
+      lastName: 'lastName',
+    },
+    ownerId: 1,
+    updatedAt: '2024-10-07T13:37:28.059Z',
+    userName: 'Alex',
+  },
+  {
+    avatarOwner: four,
+    createdAt: '2024-10-07T13:37:28.059Z',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+
+    id: 2,
     images: [
       {
         createdAt: '2024-10-07T13:37:27.351Z',
@@ -74,6 +118,7 @@ const dataTest = [
 
 function Home() {
   const [state, setState] = useState<Item[]>(dataTest)
+  const [images, setImages] = useState()
   const [loading, setLoading] = useState(false) //todo change on true
 
   const { t } = useTranslation()
@@ -81,7 +126,7 @@ function Home() {
 
   const isAuth = !!authStore.profile
 
-  // TODO раскоментировать
+  // TODO раскомментировать
   // useEffect(() => {
   //   homeApi
   //     .publicationsFollowers({
@@ -96,6 +141,17 @@ function Home() {
   //     })
   //     .finally(() => setLoading(false))
   // }, [])
+  useEffect(() => {
+    postsApi
+      .postIdLikes({ postId: 4852 })
+      .then((data) => {
+        if (data) {
+          setImages(data.items)
+        }
+      })
+      .finally(() => setLoading(false))
+  }, [])
+  console.log(images)
 
   if (loading) {
     return (
@@ -112,6 +168,12 @@ function Home() {
   // добавить в slider адресс item.images
 
   return state.map((item) => {
+    const URLProfile = (
+      <Link href={'/profile'}>
+        <b>{item.userName} </b>
+      </Link>
+    )
+
     return (
       <div
         className={
@@ -123,12 +185,11 @@ function Home() {
           <span className={'flex  items-center space-x-2'}>
             <Image
               alt={'Avatar'}
-              className={'w-9 h-9 rounded-full'}
-              // src={four}
+              className={'size-9 rounded-full'}
               src={item.avatarOwner}
             />
             <div className={'flex items-center space-x-2 pl-1'}>
-              <Link href={'/profile'}>{item.userName}</Link>
+              {URLProfile}
               <span className={'w-1.5 h-1.5 bg-light-100 rounded-full'}></span>
               <div className={'h-[20px] flex items-end'}>
                 <span
@@ -150,12 +211,12 @@ function Home() {
             'Нет картинок!'
           )}
         </section>
-        <LinksGroup />
+        <LinksGroup isLiked={item.isLiked} />
         <div className={'w-full h-[72px] flex gap-3'}>
           <Image
             alt={'Avatar'}
             className={'size-9 rounded-full mt-[5px]'}
-            src={four}
+            src={item.avatarOwner}
           />
           <Typography
             className={
@@ -163,33 +224,34 @@ function Home() {
             }
             variant={'reg14'}
           >
-            <span className={'font-bold'}>URLProfiele</span> Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
+            {URLProfile}
+            {item.description}
           </Typography>
         </div>
-        <div className={'w-full h-6 flex gap-4 mt-3 mb-6'}>
-          <div className={'flex'}>
-            <Image
-              alt={'Avatar'}
-              className={'w-6 h-6 rounded-full'}
-              src={four}
-            />
-            <Image
-              alt={'Avatar'}
-              className={'w-6 h-6 rounded-full -ml-2'}
-              src={four}
-            />
-            <Image
-              alt={'Avatar'}
-              className={'w-6 h-6 rounded-full -ml-2'}
-              src={four}
-            />
+        {
+          <div className={'w-full h-6 flex gap-4 mt-3 mb-6'}>
+            <div className={'flex'}>
+              <Image
+                alt={'Avatar'}
+                className={'w-6 h-6 rounded-full'}
+                src={four}
+              />
+              <Image
+                alt={'Avatar'}
+                className={'w-6 h-6 rounded-full -ml-2'}
+                src={four}
+              />
+              <Image
+                alt={'Avatar'}
+                className={'w-6 h-6 rounded-full -ml-2'}
+                src={four}
+              />
+            </div>
+            <span className={'text-[14px] leading-[24px]'}>
+              {item.likesCount} &ldquo;<b>Like</b>&rdquo;
+            </span>
           </div>
-          <span className={'text-[14px] leading-[24px]'}>
-            2243 &ldquo;<span className={'font-bold'}>Like</span>&rdquo;
-          </span>
-        </div>
+        }
         <div className={'w-full h-6 mb-3'}>
           <button type={'button'}>
             <span
@@ -202,11 +264,12 @@ function Home() {
         <div className={'w-full flex  justify-between'}>
           <input
             className={
-              'placeholder-light-900 text-[14px] font-400  leading-[24px] '
+              'placeholder-light-900 text-[14px] font-400  leading-[24px] w-full'
             }
             placeholder={'Add a Comments...'}
             type={'text'}
           ></input>
+          {/* <TextArea /> */}
           <Button
             className={typographyVariants({ variant: 'h3' })}
             variant={'text'}
