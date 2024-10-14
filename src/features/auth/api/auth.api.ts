@@ -4,6 +4,7 @@ import { instance } from '@/features/auth/api/instance'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import {
   EmailResendRequestData,
+  NewPasswordData,
   RecoveryPasswordData,
   SignUpRequestData,
 } from '@/features/auth/model/types'
@@ -11,6 +12,7 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 
 class AuthApi {
   constructor(private instance: AxiosInstance) {}
+
   public async emailConfirmation(
     emailConfirmationCode: string
   ): Promise<AxiosResponse> {
@@ -37,6 +39,10 @@ class AuthApi {
 
   public async me(): Promise<Profile> {
     return instance.get(Endpoints.me).then((res) => res.data)
+  }
+
+  public async newPassword(data: NewPasswordData): Promise<AxiosResponse> {
+    return this.instance.post(Endpoints.NewPassword, data)
   }
 
   public async recoverPassword(

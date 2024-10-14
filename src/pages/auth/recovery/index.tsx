@@ -1,18 +1,18 @@
 import { Card, getBaseLayout } from '@/common'
-import { ForgotPasswordForm } from '@/features/auth'
+import { RecoveryPasswordForm } from '@/features/auth'
 
-function ForgotPassword() {
+function RecoveryPassword() {
   return (
     <Card
       className={
         'mt-[132px] w-full mx-auto box-border p-6 border-transparent bg-transparent md:bg-dark-500 md:border md:border-dark-300 md:w-[378px]'
       }
     >
-      <ForgotPasswordForm />
+      <RecoveryPasswordForm />
     </Card>
   )
 }
 
-ForgotPassword.getLayout = getBaseLayout
+RecoveryPassword.getLayout = getBaseLayout
 
-export default ForgotPassword
+export default RecoveryPassword
