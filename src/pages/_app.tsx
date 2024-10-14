@@ -3,8 +3,9 @@ import type { AppProps } from 'next/app'
 
 import { ReactElement, ReactNode, useEffect, useState } from 'react'
 
-import { Loader } from '@/common'
+import { Environments, Loader } from '@/common'
 import authStore from '@/features/auth/model/authStore'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import '@/styles/globals.css'
 import '@fontsource/inter/400.css'
@@ -34,5 +35,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     return <Loader />
   }
 
-  return getLayout(<Component {...pageProps} />)
+  return getLayout(
+    <GoogleOAuthProvider clientId={Environments.CLIENT_ID!}>
+      <Component {...pageProps} />
+    </GoogleOAuthProvider>
+  )
 }
