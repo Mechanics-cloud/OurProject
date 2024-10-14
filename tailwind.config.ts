@@ -5,6 +5,7 @@ const config: Config = {
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/common/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/common/layout/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/common/HOC/**/*.{js,ts,jsx,tsx,mdx}',
     './src/core/**/*.{js,ts,jsx,tsx,mdx}',
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
   ],
@@ -73,6 +74,9 @@ const config: Config = {
         '600': '600',
         '700': '700',
       },
+      gridTemplateColumns: {
+        gallery: 'repeat(auto-fit, minmax(250px, 1fr))',
+      },
       height: {
         headCalc: 'calc(100vh - var(--header-height))',
       },
@@ -81,6 +85,9 @@ const config: Config = {
           '0%': { left: '0', transform: 'translateX(-100%)' },
           '100%': { left: '100%', transform: 'translateX(0%)' },
         },
+      },
+      spacing: {
+        scrollbar: '16px',
       },
     },
   },

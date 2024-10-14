@@ -12,12 +12,9 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 
 class AuthApi {
   constructor(private instance: AxiosInstance) {}
-
-  public async emailConfirmation(
-    emailConfirmationCode: string
-  ): Promise<AxiosResponse> {
+  public async emailConfirmation(code: string): Promise<AxiosResponse> {
     return this.instance.post(Endpoints.EmailConfirmation, {
-      confirmationCode: emailConfirmationCode,
+      confirmationCode: code,
     })
   }
 

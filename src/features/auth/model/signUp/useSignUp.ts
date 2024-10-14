@@ -1,26 +1,23 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Paths, useModal } from '@/common'
+import { useModal } from '@/common'
 import { Environments } from '@/common/enviroments'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
-import authStore from '@/features/auth/model/authStore'
 import { zodResolver } from '@hookform/resolvers/zod'
-import Router from 'next/router'
 
 export const useSignUp = () => {
-  if (authStore.profile) {
-    Router.push(Paths.profile)
-  }
   const {
     clearErrors,
     control,
     formState: { errors, isValid, touchedFields },
     handleSubmit,
     reset,
+    resetField,
     setError,
+    setFocus,
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
@@ -51,6 +48,8 @@ export const useSignUp = () => {
       }
     } catch (error: unknown) {
       responseErrorHandler(error, setError)
+      setFocus('confirm')
+      resetField('confirm')
     }
     isLoadingStore.turnOffLoading()
   })

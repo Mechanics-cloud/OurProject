@@ -17,32 +17,33 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     const isLoading = generalStore.isLoading
 
     return (
-      <ScrollArea className={'w-full h-full contents md:block'}>
-        <div
-          className={
-            'w-full max-w-screen-2xl mx-auto h-screen flex flex-col items-center justify-center'
-          }
-          ref={ref}
-          {...rest}
-        >
-          {isLoading && <Loader />}
-          <NextTopLoader
-            color={'#397DF6'}
-            showSpinner={false}
-          />
-          <ToastContainer />
-          <Header />
-
-          <main
-            className={cn(
-              'px-4 md:px-14 mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent w-full',
-              className
-            )}
+      <>
+        {isLoading && <Loader />}
+        <NextTopLoader
+          color={'#397DF6'}
+          showSpinner={false}
+        />
+        <ToastContainer />
+        <Header />
+        <ScrollArea className={'w-full h-full contents md:block'}>
+          <div
+            className={
+              'w-full max-w-screen-2xl mx-auto h-screen flex flex-col items-center justify-center px-6 md:px-10 lg:px-16'
+            }
+            ref={ref}
+            {...rest}
           >
-            {children}
-          </main>
-        </div>
-      </ScrollArea>
+            <main
+              className={cn(
+                'mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent w-full',
+                className
+              )}
+            >
+              {children}
+            </main>
+          </div>
+        </ScrollArea>
+      </>
     )
   }
 )

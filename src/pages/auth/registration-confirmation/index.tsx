@@ -1,4 +1,5 @@
 import { getBaseLayout } from '@/common'
+import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
 import { RegistrationConfirmation } from '@/features/auth/ui/signUp/RegistrationConfirmation'
 
 const Confirmation = () => {
@@ -11,4 +12,4 @@ const Confirmation = () => {
 
 Confirmation.getLayout = getBaseLayout
 
-export default Confirmation
+export default withRedirectForAuthorize(Confirmation)
