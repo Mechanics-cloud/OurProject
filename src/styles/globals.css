@@ -7,6 +7,7 @@
 
   font-family: Inter, sans-serif;
   color-scheme: dark;
+  background-color: rgb(13 13 13);
 }
 
 @media (prefers-color-scheme: dark) {

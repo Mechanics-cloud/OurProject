@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { generalStore } from '@/app/store'
 import { useModal } from '@/common'
 import { Environments } from '@/common/enviroments'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { generalStore } from '@/core/store'
 import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -15,7 +15,9 @@ export const useSignUp = () => {
     formState: { errors, isValid, touchedFields },
     handleSubmit,
     reset,
+    resetField,
     setError,
+    setFocus,
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
@@ -46,6 +48,8 @@ export const useSignUp = () => {
       }
     } catch (error: unknown) {
       responseErrorHandler(error, setError)
+      setFocus('confirm')
+      resetField('confirm')
     }
     isLoadingStore.turnOffLoading()
   })

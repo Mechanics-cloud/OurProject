@@ -1,6 +1,4 @@
-import { ReactElement } from 'react'
-
-import { Layout, getBaseLayout } from '@/common'
+import { getBaseLayout } from '@/common'
 import { Button } from '@/common/components/button'
 import { typographyVariants } from '@/common/components/typography'
 import Link from 'next/link'

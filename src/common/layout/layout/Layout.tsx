@@ -1,9 +1,9 @@
 import React, { ElementRef, ReactElement, forwardRef } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { generalStore } from '@/app/store'
 import { Header, Loader, ScrollArea } from '@/common'
 import { cn } from '@/common/utils/cn'
+import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
 import NextTopLoader from 'nextjs-toploader'
 
@@ -17,13 +17,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
     const isLoading = generalStore.isLoading
 
     return (
-      <div
-        className={
-          'w-full max-w-screen-2xl mx-auto h-screen flex flex-col items-center justify-center'
-        }
-        ref={ref}
-        {...rest}
-      >
+      <>
         {isLoading && <Loader />}
         <NextTopLoader
           color={'#397DF6'}
@@ -32,16 +26,24 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         <ToastContainer />
         <Header />
         <ScrollArea className={'w-full h-full contents md:block'}>
-          <main
-            className={cn(
-              'px-4 md:px-14 mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent',
-              className
-            )}
+          <div
+            className={
+              'w-full max-w-screen-2xl mx-auto h-screen flex flex-col items-center justify-center px-6 md:px-10 lg:px-16'
+            }
+            ref={ref}
+            {...rest}
           >
-            {children}
-          </main>
+            <main
+              className={cn(
+                'mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent w-full',
+                className
+              )}
+            >
+              {children}
+            </main>
+          </div>
         </ScrollArea>
-      </div>
+      </>
     )
   }
 )

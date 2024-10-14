@@ -18,7 +18,6 @@ export const responseErrorHandler = (error: unknown, setError?: Function) => {
 
     return
   }
-
   if (!isAxiosError(error) || !error.response?.data?.messages) {
     toast.error((error as Error).message ?? basicErrorMessage)
 
@@ -32,6 +31,7 @@ export const responseErrorHandler = (error: unknown, setError?: Function) => {
 
     return
   }
+
   errorData.messages.forEach(({ field, message }) => {
     setError(field as keyof SignUpFields, { message })
   })
