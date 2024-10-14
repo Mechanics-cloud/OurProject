@@ -12,7 +12,7 @@ const SvgGoogleSvgrepoCom1 = (
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
   >
-    <g clipPath={'url(#google-svgrepo-com-1_svg__a)'}>
+    <g clipPath={'url(#oauth-callback-google-svgrepo-com-1_svg__a)'}>
       <path
         d={
           'M5.266 9.765A7.08 7.08 0 0 1 12 4.909c1.69 0 3.218.6 4.418 1.582L19.91 3C17.782 1.145 15.055 0 12 0 7.27 0 3.198 2.698 1.24 6.65z'
@@ -39,7 +39,7 @@ const SvgGoogleSvgrepoCom1 = (
       />
     </g>
     <defs>
-      <clipPath id={'google-svgrepo-com-1_svg__a'}>
+      <clipPath id={'oauth-callback-google-svgrepo-com-1_svg__a'}>
         <path
           d={'M0 0h24v24H0z'}
           fill={'#fff'}

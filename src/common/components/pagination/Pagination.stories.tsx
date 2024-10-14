@@ -18,7 +18,7 @@ type Story = StoryObj<typeof meta>
 
 const mockData = [
   {
-    email: 'kminall0@google.com',
+    email: 'kminall0@oauth-callback-google.com',
     first_name: 'Kaila',
     id: 1,
     last_name: 'Minall',
@@ -30,7 +30,7 @@ const mockData = [
     last_name: 'Camous',
   },
   {
-    email: 'fpieroni2@google.cn',
+    email: 'fpieroni2@oauth-callback-google.cn',
     first_name: 'Frazier',
     id: 3,
     last_name: 'Pieroni',

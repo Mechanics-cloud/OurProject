@@ -1,3 +1,7 @@
+import {
+  PASSWORD_REGEXP,
+  USER_NAME_REGEXP,
+} from '@/features/auth/model/constants'
 import { z } from 'zod'
 
 export const signUpSchema = z
@@ -11,18 +15,15 @@ export const signUpSchema = z
       .string()
       .min(6, { message: 'Minimum number of characters 6' })
       .max(20, { message: 'Maximum number of characters 20' })
-      .regex(
-        /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~])[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
-        {
-          message:
-            'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-        }
-      ),
+      .regex(PASSWORD_REGEXP, {
+        message:
+          'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      }),
     userName: z
       .string()
       .min(6, { message: 'Minimum number of characters 6' })
       .max(30, { message: 'Maximum number of characters 30' })
-      .regex(/^[0-9A-Za-z_-]+$/, {
+      .regex(USER_NAME_REGEXP, {
         message: 'Input must contain only 0-9, A-Z, a-z, _, -',
       }),
   })

@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 
-import { generalStore } from '@/app/store'
 import { Paths, useTranslation } from '@/common'
+import { generalStore } from '@/core/store'
 import authStore from '@/features/auth/model/authStore'
 import {
   SignInFields,
@@ -11,9 +11,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Router from 'next/router'
 
 export const useSignIn = () => {
-  if (authStore.profile) {
-    Router.push(Paths.profile)
-  }
   const { t } = useTranslation()
   const {
     control,

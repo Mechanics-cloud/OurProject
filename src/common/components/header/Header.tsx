@@ -3,30 +3,28 @@ import * as React from 'react'
 import { Button, LangSelect, useTranslation } from '@/common'
 import { Typography } from '@/common/components/typography'
 import { Paths } from '@/common/paths'
+import authStore from '@/features/auth/model/authStore'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
-type HeaderProps = {
-  isAuth?: boolean
-}
-
-const Header = ({ isAuth }: HeaderProps) => {
+const Header = () => {
   const { t } = useTranslation()
+  const isAuth = !!authStore.profile
 
   return (
     <header
       className={
-        'fixed z-50 top-0 left-0 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 pr-16 border-b border-b-dark-300'
+        'fixed z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300 pr-scrollbar'
       }
     >
       <div
         className={
-          'max-w-screen-2xl mx-auto flex items-center justify-between '
+          'max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-10 lg:px-16'
         }
       >
         <Typography
-          className={'ml-14 py-3'}
+          className={'py-3'}
           variant={'large'}
         >
           <Link

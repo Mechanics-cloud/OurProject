@@ -7,9 +7,6 @@
 
   font-family: Inter, sans-serif;
   color-scheme: dark;
-}
-
-body {
   background-color: rgb(13 13 13);
 }
 
@@ -27,8 +24,8 @@ body {
   }
 }
 
-
-.swiper-button-prev, .swiper-button-next {
+.swiper-button-prev,
+.swiper-button-next {
   color: #fff !important;
 }
 
@@ -50,9 +47,11 @@ body {
 
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%) hue-rotate(199deg) brightness(103%) contrast(101%);}
-  
+  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
+    hue-rotate(199deg) brightness(103%) contrast(101%);
+}
+
 .swiper-button-prev::after,
-.swiper-button-next::after  {
+.swiper-button-next::after {
   content: '' !important;
 }
