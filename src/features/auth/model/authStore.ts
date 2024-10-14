@@ -1,4 +1,8 @@
 import { StorageKeys } from '@/common/enums'
+import {
+  removeFromLocalStorage,
+  setToLocalStorage,
+} from '@/common/utils/localStorage'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { Profile, authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
@@ -12,11 +16,23 @@ class AuthStore {
     makeAutoObservable(this)
   }
 
+  async authWithGoogle(code: string) {
+    try {
+      const res = await authApi.authWithGoogle(code)
+
+      setToLocalStorage(StorageKeys.AccessToken, res.data.accessToken)
+      await this.me()
+
+      return res
+    } catch (error) {
+      responseErrorHandler(error)
+    }
+  }
   async login(data: SignInFields) {
     try {
       const accessToken = await authApi.login(data)
 
-      localStorage.setItem(StorageKeys.AccessToken, accessToken)
+      setToLocalStorage(StorageKeys.AccessToken, accessToken)
 
       await this.me()
     } catch (error) {
@@ -25,11 +41,12 @@ class AuthStore {
       return Promise.reject(error)
     }
   }
+
   async logout() {
     try {
       await authApi.logout()
       this.profile = undefined
-      localStorage.removeItem(StorageKeys.AccessToken)
+      removeFromLocalStorage(StorageKeys.AccessToken)
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -51,7 +68,7 @@ class AuthStore {
     try {
       const newToken = await authApi.updateToken()
 
-      localStorage.setItem(StorageKeys.AccessToken, newToken)
+      setToLocalStorage(StorageKeys.AccessToken, newToken)
       if (previousRequest) {
         previousRequest.headers.Authorization = `Bearer ${newToken}`
 
