@@ -3,8 +3,8 @@ import { Profile } from '@/features/auth/api/authApi.types'
 import { instance } from '@/features/auth/api/instance'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import {
-  EmailConfirmationRequestData,
   EmailResendRequestData,
+  NewPasswordData,
   RecoveryPasswordData,
   SignUpRequestData,
 } from '@/features/auth/model/types'
@@ -15,11 +15,10 @@ class AuthApi {
   public async authWithGoogle(code: string): Promise<AxiosResponse> {
     return this.instance.post(Endpoints.AuthWithGoogle, { code })
   }
-
-  public async emailConfirmation(
-    emailConfirmation: EmailConfirmationRequestData
-  ): Promise<AxiosResponse> {
-    return this.instance.post(Endpoints.EmailResending, emailConfirmation)
+  public async emailConfirmation(code: string): Promise<AxiosResponse> {
+    return this.instance.post(Endpoints.EmailConfirmation, {
+      confirmationCode: code,
+    })
   }
 
   public async emailResending(
@@ -40,6 +39,10 @@ class AuthApi {
 
   public async me(): Promise<Profile> {
     return instance.get(Endpoints.me)
+  }
+
+  public async newPassword(data: NewPasswordData): Promise<AxiosResponse> {
+    return this.instance.post(Endpoints.NewPassword, data)
   }
 
   public async recoverPassword(

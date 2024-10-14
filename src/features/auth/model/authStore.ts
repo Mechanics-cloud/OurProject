@@ -45,7 +45,7 @@ class AuthStore {
   async logout() {
     try {
       await authApi.logout()
-
+      this.profile = undefined
       removeFromLocalStorage(StorageKeys.AccessToken)
     } catch (error) {
       responseErrorHandler(error)
@@ -60,7 +60,7 @@ class AuthStore {
         this.profile = profile
       })
     } catch (error) {
-      responseErrorHandler(error)
+      throw Error
     }
   }
 
@@ -75,7 +75,7 @@ class AuthStore {
         return axios(previousRequest)
       }
     } catch (error) {
-      responseErrorHandler(error)
+      return Promise.reject(error)
     }
   }
 }

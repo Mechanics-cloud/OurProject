@@ -1,6 +1,6 @@
-import { generalStore } from '@/app/store'
 import { Environments, Paths } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { generalStore } from '@/core/store'
 import { Endpoints } from '@/features/auth'
 import authStore from '@/features/auth/model/authStore'
 import { useGoogleLogin } from '@react-oauth/google'

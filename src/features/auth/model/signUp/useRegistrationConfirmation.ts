@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 
 import { Paths } from '@/common/paths'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
@@ -16,26 +15,22 @@ export const useRegistrationConfirmation = () => {
     }
     const controller = new AbortController()
 
-    try {
+    const handleEmailConfirmation = async () => {
       const confirmationCode = query.code as string
-      const email = query.email as string
 
-      authApi
-        .emailConfirmation({ confirmationCode, email })
-        .then((res) => {
-          setIsConfirm(true)
-          toast(res.status)
+      try {
+        await authApi.emailConfirmation(confirmationCode)
+        setIsConfirm(true)
+      } catch (error) {
+        responseErrorHandler(error)
+        push({
+          pathname: Paths.registrationEmailResending,
+          query: { code: confirmationCode, email: query.email as string },
         })
-        .catch((error) => {
-          responseErrorHandler(error)
-          push({
-            pathname: Paths.registrationEmailResending,
-            query: { code: confirmationCode, email },
-          })
-        })
-    } catch (error) {
-      responseErrorHandler(error)
+      }
     }
+
+    handleEmailConfirmation()
 
     return () => {
       controller.abort()
