@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Tabs, TabsType, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { GeneralInfo } from '@/features/profile/general-info'
+import { GeneralInfo } from 'src/features/profile/ui/general-info'
 
 const tabsData: TabsType[] = [
   {
