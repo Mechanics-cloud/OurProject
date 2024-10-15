@@ -1,8 +1,9 @@
 import { Paid } from '@/assets/icons/filledIcons'
-import { Button, Typography } from '@/common'
+import { Button, Paths, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
 import image1 from '../../assets/images/image1.jpg'
@@ -22,6 +23,11 @@ const placeholderImages = [
 ]
 
 const Profile = () => {
+  const router = useRouter()
+  const settingsClickHandler = () => {
+    router.push(Paths.generalInfo)
+  }
+
   return (
     <div className={'flex'}>
       <div className={'flex flex-col'}>
@@ -45,7 +51,12 @@ const Profile = () => {
                 <Paid />
               </Typography>
 
-              <Button variant={'secondary'}>Profile Settings</Button>
+              <Button
+                onClick={settingsClickHandler}
+                variant={'secondary'}
+              >
+                Profile Settings
+              </Button>
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
               <div className={'flex flex-col'}>
