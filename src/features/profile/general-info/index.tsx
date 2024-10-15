@@ -1,11 +1,10 @@
 import { ImageOutline } from '@/assets/icons/outlineIcons'
 import CalendarOutline from '@/assets/icons/outlineIcons/CalendarOutline'
 import { Button, Select, SelectItem, TextArea, TextField } from '@/common'
-import { withProtection } from '@/common/HOC/withProtection'
 
-const GeneralInfo = () => {
+export const GeneralInfo = () => {
   return (
-    <div className={'flex gap-10 w-full'}>
+    <div className={'flex gap-10 w-full mt-6'}>
       <div>
         <div
           className={
@@ -73,5 +72,3 @@ const GeneralInfo = () => {
     </div>
   )
 }
-
-export default withProtection(GeneralInfo, false, true)

@@ -1,7 +1,7 @@
 export const Paths = {
   expiredSession: '/auth/expired-session',
   forgotPassword: '/auth/forgot-password',
-  generalInfo: '/general-info',
+  generalInfo: '/settings',
   home: '/',
   privacyPolicy: '/auth/privacy-policy',
   profile: '/profile',
