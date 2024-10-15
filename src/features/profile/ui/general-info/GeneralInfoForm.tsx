@@ -26,7 +26,7 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
   const profile = AuthStore.profile
   const {
     control,
-    formState: { errors },
+    formState: {},
     handleSubmit,
     register,
     setValue,
