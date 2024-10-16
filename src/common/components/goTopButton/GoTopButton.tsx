@@ -1,26 +1,25 @@
 import { ArrowBackOutline } from '@/assets/icons/outlineIcons'
+import { useGoToTopButton } from '@/common/components/goTopButton/useGoToTopButton'
+import { motion } from 'framer-motion'
 
 export const GoTopButton = () => {
-  const isBrowser = () => typeof window !== 'undefined'
-
-  function scrollToTop() {
-    if (!isBrowser()) {
-      return
-    }
-    window.scrollTo({ behavior: 'smooth', top: 0 })
-  }
+  const { controls, scrollToTopHandler, scrollToTopVariants } =
+    useGoToTopButton()
 
   return (
-    <button
+    <motion.button
+      animate={controls}
       className={'bg-dark-300 fixed right-7 bottom-7 p-2 rounded-sm'}
-      onClick={scrollToTop}
+      initial={'hide'}
+      onClick={scrollToTopHandler}
       type={'button'}
+      variants={scrollToTopVariants}
     >
       <ArrowBackOutline
         className={'rotate-90'}
         height={'20'}
         width={'20'}
       />
-    </button>
+    </motion.button>
   )
 }

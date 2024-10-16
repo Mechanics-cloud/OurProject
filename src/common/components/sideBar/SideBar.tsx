@@ -38,7 +38,7 @@ export const SideBar = observer(({ className }: Props) => {
     isLoadingStore.turnOnLoading()
     try {
       await authStore.logout()
-      Router.push(Paths.signIn)
+      await Router.push(Paths.signIn)
     } catch (error: unknown) {
       responseErrorHandler(error)
     } finally {
