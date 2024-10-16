@@ -87,6 +87,39 @@ const Profile = () => {
             />
           ))}
         </div>
+        <div className={cn('grid gap-3 grid-cols-gallery w-full')}>
+          {placeholderImages.map((image) => (
+            <Image
+              alt={'image'}
+              height={228}
+              key={image.id}
+              src={image.img}
+              width={342}
+            />
+          ))}
+        </div>
+        <div className={cn('grid gap-3 grid-cols-gallery w-full')}>
+          {placeholderImages.map((image) => (
+            <Image
+              alt={'image'}
+              height={228}
+              key={image.id}
+              src={image.img}
+              width={342}
+            />
+          ))}
+        </div>
+        <div className={cn('grid gap-3 grid-cols-gallery w-full')}>
+          {placeholderImages.map((image) => (
+            <Image
+              alt={'image'}
+              height={228}
+              key={image.id}
+              src={image.img}
+              width={342}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

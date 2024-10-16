@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
-  ({ children, className, ...rest }, ref) => {
+  ({ children, className }) => {
     const isLoading = generalStore.isLoading
 
     return (
@@ -27,23 +27,17 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         <Header />
         <ScrollArea
           className={
-            'w-full h-full contents md:block mt-[var(--header-height)] border-t-transparent border-t'
+            'w-full h-full contents md:block mt-[var(--header-height)]'
           }
         >
-          <div
-            className={' w-full flex flex-col items-center justify-center'}
-            ref={ref}
-            {...rest}
+          <main
+            className={cn(
+              'border-t-[1px] border-transparent w-full max-w-screen-2xl mx-auto px-6 md:px-10 lg:px-16',
+              className
+            )}
           >
-            <main
-              className={cn(
-                'border-t-[1px] border-transparent w-full max-w-screen-2xl mx-auto px-6 md:px-10 lg:px-16',
-                className
-              )}
-            >
-              {children}
-            </main>
-          </div>
+            {children}
+          </main>
         </ScrollArea>
       </>
     )
