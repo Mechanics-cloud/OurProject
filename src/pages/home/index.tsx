@@ -6,6 +6,8 @@ import {
   getLayoutWithSidebar,
   useTranslation,
 } from '@/common'
+import { withProtection } from '@/common/HOC/withProtection'
+import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
 import { Button } from '@/common/components/button'
 import Slider from '@/common/components/slider/Slider'
 import { Typography, typographyVariants } from '@/common/components/typography'
@@ -18,11 +20,15 @@ import second from 'src/assets/images/image2.jpg'
 import first from 'src/assets/images/image3.jpg'
 import four from 'src/assets/images/image4.jpg'
 
+import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
 import { CustomHomePopover } from './CustomHomePopover'
+import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
+import ViewAllCommentsButton from './ViewAllCommentsButton'
 import { homeApi } from './home.api'
 import { Item, RootInterface } from './home.types'
-import { postsApi } from './posts.api'
+import { getAvatarImages } from './posts/getAvatarImages'
+import { postsApi } from './posts/posts.api'
 import { timeAgo } from './utilsDate'
 
 const dataTest = [
@@ -32,7 +38,7 @@ const dataTest = [
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
 
-    id: 1,
+    id: 5,
     images: [
       {
         createdAt: '2024-10-07T13:37:27.351Z',
@@ -60,7 +66,7 @@ const dataTest = [
       },
     ],
     isLiked: true,
-    likesCount: 1,
+    likesCount: 0,
     location: 'location',
     owner: {
       firstName: 'firstName',
@@ -103,8 +109,8 @@ const dataTest = [
         width: 300,
       },
     ],
-    isLiked: true,
-    likesCount: 1,
+    isLiked: false,
+    likesCount: 0,
     location: 'location',
     owner: {
       firstName: 'firstName',
@@ -118,7 +124,7 @@ const dataTest = [
 
 function Home() {
   const [state, setState] = useState<Item[]>(dataTest)
-  const [images, setImages] = useState()
+  // const [state, setState] = useState<Item[]>([])
   const [loading, setLoading] = useState(false) //todo change on true
 
   const { t } = useTranslation()
@@ -141,17 +147,8 @@ function Home() {
   //     })
   //     .finally(() => setLoading(false))
   // }, [])
-  useEffect(() => {
-    postsApi
-      .postIdLikes({ postId: 4852 })
-      .then((data) => {
-        if (data) {
-          setImages(data.items)
-        }
-      })
-      .finally(() => setLoading(false))
-  }, [])
-  console.log(images)
+  //TODO удалить консоль
+  // console.log(images)
 
   if (loading) {
     return (
@@ -159,25 +156,30 @@ function Home() {
         <Loader />
         <div
           className={
-            'w-[491px] h-[816px] border-b mt-[24px] ml-[395px] flex flex-col bg-dark-100 animate-pulse'
+            'w-[491px] h-[816px] border-b mt-[24px] ml-[10.9375rem] flex flex-col bg-dark-100 animate-pulse'
           }
         ></div>
       </>
     )
   }
-  // добавить в slider адресс item.images
-
-  return state.map((item) => {
-    const URLProfile = (
-      <Link href={'/profile'}>
-        <b>{item.userName} </b>
-      </Link>
-    )
-
+  if (state.length === 0) {
     return (
       <div
         className={
-          'w-[491px] h-[816px] border-b mt-[24px] ml-[395px] flex flex-col'
+          'w-[491px] h-40 border-b mt-[24px] ml-[10.9375rem] flex justify-center items-center bg-dark-100'
+        }
+      >
+        На данный момент нет постов
+      </div>
+    )
+  }
+  // добавить в slider адресс item.images
+
+  return state.map((item) => {
+    return (
+      <div
+        className={
+          'w-[491px] h-[816px] border-b mt-[24px] ml-[8%] flex flex-col '
         }
         key={item.id}
       >
@@ -189,7 +191,7 @@ function Home() {
               src={item.avatarOwner}
             />
             <div className={'flex items-center space-x-2 pl-1'}>
-              {URLProfile}
+              <LinkProfile userName={item.userName} />
               <span className={'w-1.5 h-1.5 bg-light-100 rounded-full'}></span>
               <div className={'h-[20px] flex items-end'}>
                 <span
@@ -208,7 +210,7 @@ function Home() {
           {item.images.length > 0 ? (
             <Slider images={item.images} />
           ) : (
-            'Нет картинок!'
+            'Нет картинок для поста!'
           )}
         </section>
         <LinksGroup isLiked={item.isLiked} />
@@ -224,35 +226,15 @@ function Home() {
             }
             variant={'reg14'}
           >
-            {URLProfile}
+            <LinkProfile userName={item.userName} />
             {item.description}
           </Typography>
         </div>
-        {
-          <div className={'w-full h-6 flex gap-4 mt-3 mb-6'}>
-            <div className={'flex'}>
-              <Image
-                alt={'Avatar'}
-                className={'w-6 h-6 rounded-full'}
-                src={four}
-              />
-              <Image
-                alt={'Avatar'}
-                className={'w-6 h-6 rounded-full -ml-2'}
-                src={four}
-              />
-              <Image
-                alt={'Avatar'}
-                className={'w-6 h-6 rounded-full -ml-2'}
-                src={four}
-              />
-            </div>
-            <span className={'text-[14px] leading-[24px]'}>
-              {item.likesCount} &ldquo;<b>Like</b>&rdquo;
-            </span>
-          </div>
-        }
-        <div className={'w-full h-6 mb-3'}>
+        <AvatarGroupWithLikes
+          id={item.id}
+          likesCount={item.likesCount}
+        />
+        {/* <div className={'w-full h-6 mb-3'}>
           <button type={'button'}>
             <span
               className={'text-[14px] font-bold  leading-[24px] text-light-900'}
@@ -260,7 +242,8 @@ function Home() {
               View All Comments (114)
             </span>
           </button>
-        </div>
+        </div> */}
+        <ViewAllCommentsButton postId={item.id} />
         <div className={'w-full flex  justify-between'}>
           <input
             className={
@@ -269,7 +252,6 @@ function Home() {
             placeholder={'Add a Comments...'}
             type={'text'}
           ></input>
-          {/* <TextArea /> */}
           <Button
             className={typographyVariants({ variant: 'h3' })}
             variant={'text'}
@@ -283,4 +265,4 @@ function Home() {
 }
 
 Home.getLayout = getLayoutWithSidebar
-export default Home
+export default withProtection(Home)
