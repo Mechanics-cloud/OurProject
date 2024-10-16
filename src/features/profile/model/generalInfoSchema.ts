@@ -5,6 +5,7 @@ export const generalInfoSchema = z.object({
   aboutMe: z.string().max(200, 'Maximum length is 200 symbols').optional(),
   city: z.string().optional(),
   country: z.string().optional(),
+  date: z.string().optional(),
   firstName: z
     .string()
     .min(1, { message: 'Minimum length is 1 symbol' })
