@@ -1,9 +1,10 @@
 import { ArrowBackOutline } from '@/assets/icons/outlineIcons'
+import { Tooltip } from '@/common'
 import { useGoToTopButton } from '@/common/components/goTopButton/useGoToTopButton'
 import { motion } from 'framer-motion'
 
 export const GoTopButton = () => {
-  const { controls, scrollToTopHandler, scrollToTopVariants } =
+  const { controls, scrollToTopHandler, scrollToTopVariants, t } =
     useGoToTopButton()
 
   return (
@@ -15,11 +16,13 @@ export const GoTopButton = () => {
       type={'button'}
       variants={scrollToTopVariants}
     >
-      <ArrowBackOutline
-        className={'rotate-90'}
-        height={'20'}
-        width={'20'}
-      />
+      <Tooltip title={t.goToTop}>
+        <ArrowBackOutline
+          className={'rotate-90'}
+          height={'20'}
+          width={'20'}
+        />
+      </Tooltip>
     </motion.button>
   )
 }

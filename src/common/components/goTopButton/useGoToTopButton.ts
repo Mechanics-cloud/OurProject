@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
 
+import { useTranslation } from '@/common'
 import { Variants, useAnimationControls, useScroll } from 'framer-motion'
 
 export const useGoToTopButton = () => {
+  const { t } = useTranslation()
   const isBrowser = () => typeof window !== 'undefined'
 
   const { scrollYProgress } = useScroll()
@@ -30,5 +32,5 @@ export const useGoToTopButton = () => {
     window.scrollTo({ behavior: 'smooth', top: 0 })
   }
 
-  return { controls, scrollToTopHandler, scrollToTopVariants }
+  return { controls, scrollToTopHandler, scrollToTopVariants, t }
 }
