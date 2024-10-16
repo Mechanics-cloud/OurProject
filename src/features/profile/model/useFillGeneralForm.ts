@@ -27,7 +27,6 @@ export const useFillGeneralForm = () => {
     handleSubmit,
     register,
     setValue,
-    watch,
   } = useForm<FormData>({
     defaultValues: {
       city: '',
@@ -39,9 +38,6 @@ export const useFillGeneralForm = () => {
     },
     resolver: zodResolver(generalInfoSchema),
   })
-
-  const country = watch('country')
-  const city = watch('city')
 
   const onSubmit = (data: FormData) => {
     alert(data)
@@ -82,9 +78,7 @@ export const useFillGeneralForm = () => {
   return {
     calendarOpenHandler,
     calendarRef,
-    city,
     control,
-    country,
     handleSubmit,
     onSubmit,
     register,

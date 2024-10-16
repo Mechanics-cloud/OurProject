@@ -5,25 +5,22 @@ import {
   Button,
   Calendar,
   FormTextField,
-  Select,
   SelectItem,
   TextArea,
   TextField,
 } from '@/common'
+import { FormSelect } from '@/common/form/FormSelect'
 import { useFillGeneralForm } from '@/features/profile/model/useFillGeneralForm'
 
 export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
   const {
     calendarOpenHandler,
     calendarRef,
-    city,
     control,
-    country,
     handleSubmit,
     onSubmit,
     register,
     selectDateHandler,
-    setValue,
     toggleOpen,
   } = useFillGeneralForm()
 
@@ -72,28 +69,26 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
           )}
         </TextField>
         <div className={'flex gap-6'}>
-          <Select
+          <FormSelect
             className={'w-full'}
+            control={control}
             label={'Country'}
+            name={'country'}
             placeholder={'Country'}
-            value={country}
-            {...register('country')}
-            onValueChange={(e) => setValue('country', e)}
           >
             <SelectItem value={'Austria'}>Austria</SelectItem>
             <SelectItem value={'Russia'}>Russia</SelectItem>
-          </Select>
-          <Select
+          </FormSelect>
+          <FormSelect
             className={'w-full'}
+            control={control}
             label={'City'}
+            name={'city'}
             placeholder={'City'}
-            value={city}
-            {...register('city')}
-            onValueChange={(e) => setValue('city', e)}
           >
             <SelectItem value={'Linz'}>Linz</SelectItem>
-            <SelectItem value={'Vienna'}>Vienna</SelectItem>
-          </Select>
+            <SelectItem value={'Moscow'}>Moscow</SelectItem>
+          </FormSelect>
         </div>
       </div>
       <TextArea
