@@ -25,17 +25,19 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         />
         <ToastContainer />
         <Header />
-        <ScrollArea className={'w-full h-full contents md:block'}>
+        <ScrollArea
+          className={
+            'w-full h-full contents md:block mt-[var(--header-height)] border-t-transparent border-t'
+          }
+        >
           <div
-            className={
-              'w-full max-w-screen-2xl mx-auto h-screen flex flex-col items-center justify-center px-6 md:px-10 lg:px-16'
-            }
+            className={' w-full flex flex-col items-center justify-center'}
             ref={ref}
             {...rest}
           >
             <main
               className={cn(
-                'mt-[var(--header-height)] h-headCalc border-t-[1px] border-transparent w-full',
+                'border-t-[1px] border-transparent w-full max-w-screen-2xl mx-auto px-6 md:px-10 lg:px-16',
                 className
               )}
             >

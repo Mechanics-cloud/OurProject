@@ -52,12 +52,7 @@ export const SideBar = observer(({ className }: Props) => {
   }
 
   return (
-    <aside
-      className={cn(
-        'flex flex-col border-r-2 border-dark-300 min-w-56 h-screen fixed',
-        className
-      )}
-    >
+    <aside className={cn('flex flex-col min-w-56 h-screen', className)}>
       <nav className={'pt-[72px]'}>
         <ul className={`mb-[60px] [&_li]:mb-6`}>
           <NavLink
