@@ -1,7 +1,7 @@
 import React, { ElementRef, ReactElement, forwardRef } from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { Header, Loader, ScrollArea } from '@/common'
+import { GoTopButton, Header, Loader, ScrollArea } from '@/common'
 import { cn } from '@/common/utils/cn'
 import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
@@ -39,6 +39,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
             {children}
           </main>
         </ScrollArea>
+        <GoTopButton />
       </>
     )
   }
