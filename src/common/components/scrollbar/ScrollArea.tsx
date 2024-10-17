@@ -13,7 +13,7 @@ export const ScrollArea = React.forwardRef<
   Props
 >(({ children, className, orientation, ...props }, ref) => (
   <ScrollAreaPrimitive.Root
-    className={cn(className, 'relative overflow-hidden pr-scrollbar')}
+    className={cn('relative overflow-hidden pr-scrollbar', className)}
     ref={ref}
     {...props}
   >
