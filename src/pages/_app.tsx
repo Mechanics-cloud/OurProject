@@ -1,10 +1,10 @@
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
-import { ReactElement, ReactNode, useEffect, useState } from 'react'
+import { ReactElement, ReactNode } from 'react'
 
 import { Environments, Loader } from '@/common'
-import authStore from '@/features/auth/model/authStore'
+import { useMe } from '@/common/hooks/useMe'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import '@/styles/globals.css'
@@ -25,17 +25,7 @@ type AppPropsWithLayout = {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
 
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const controller = new AbortController()
-
-    authStore.me().finally(() => setLoading(false))
-
-    return () => {
-      controller.abort()
-    }
-  }, [])
+  const { loading } = useMe()
 
   if (loading) {
     return <Loader />
