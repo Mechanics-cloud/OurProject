@@ -2,8 +2,9 @@ import React from 'react'
 
 import CalendarFilled from '@/assets/icons/filledIcons/CalendarFilled'
 import CalendarOutline from '@/assets/icons/outlineIcons/CalendarOutline'
-import { Button, Calendar, FormTextField, SelectItem, TextArea } from '@/common'
+import { Button, Calendar, FormTextField, SelectItem } from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
+import { FormTextArea } from '@/common/form/FormTextArea'
 import { useFillGeneralForm } from '@/features/profile/model/useFillGeneralForm'
 
 export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
@@ -12,8 +13,9 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
     control,
     handleSubmit,
     isCalendarOpen,
+    isSubmitting,
+    isValid,
     onSubmit,
-    register,
     selectDateHandler,
     toggleCalendar,
   } = useFillGeneralForm()
@@ -96,12 +98,14 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
           </FormSelect>
         </div>
       </div>
-      <TextArea
+      <FormTextArea
+        control={control}
         label={'About me'}
-        {...register('aboutMe')}
+        name={'aboutMe'}
       />
       <div className={'flex justify-end'}>
         <Button
+          disabled={!isValid || isSubmitting}
           type={'submit'}
           variant={'primary'}
         >

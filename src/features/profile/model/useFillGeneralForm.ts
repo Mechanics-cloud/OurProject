@@ -23,9 +23,8 @@ export const useFillGeneralForm = () => {
   const profile = AuthStore.profile
   const {
     control,
-    formState: {},
+    formState: { isSubmitting, isValid },
     handleSubmit,
-    register,
     setValue,
   } = useForm<FormData>({
     defaultValues: {
@@ -36,6 +35,7 @@ export const useFillGeneralForm = () => {
       lastName: '',
       username: profile?.userName,
     },
+    mode: 'onChange',
     resolver: zodResolver(generalInfoSchema),
   })
 
@@ -80,8 +80,9 @@ export const useFillGeneralForm = () => {
     control,
     handleSubmit,
     isCalendarOpen,
+    isSubmitting,
+    isValid,
     onSubmit,
-    register,
     selectDateHandler,
     setValue,
     toggleCalendar,
