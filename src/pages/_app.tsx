@@ -28,7 +28,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const controller = new AbortController()
+
     authStore.me().finally(() => setLoading(false))
+
+    return () => {
+      controller.abort()
+    }
   }, [])
 
   if (loading) {
