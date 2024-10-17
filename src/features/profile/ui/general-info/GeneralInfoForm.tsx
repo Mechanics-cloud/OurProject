@@ -1,14 +1,7 @@
 import React from 'react'
 
 import CalendarOutline from '@/assets/icons/outlineIcons/CalendarOutline'
-import {
-  Button,
-  Calendar,
-  FormTextField,
-  SelectItem,
-  TextArea,
-  TextField,
-} from '@/common'
+import { Button, Calendar, FormTextField, SelectItem, TextArea } from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
 import { useFillGeneralForm } from '@/features/profile/model/useFillGeneralForm'
 
@@ -49,9 +42,11 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
         required
       />
       <div className={'flex flex-col'}>
-        <TextField
+        <FormTextField
+          control={control}
           label={'Date of Birth'}
-          {...register('date')}
+          name={'date'}
+          readOnly
         >
           <CalendarOutline
             className={
@@ -67,7 +62,7 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
               />
             </div>
           )}
-        </TextField>
+        </FormTextField>
         <div className={'flex gap-6'}>
           <FormSelect
             className={'w-full'}
@@ -93,7 +88,6 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
       </div>
       <TextArea
         label={'About me'}
-        maxLength={200}
         {...register('aboutMe')}
       />
       <div className={'flex justify-end'}>
