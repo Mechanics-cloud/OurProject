@@ -4,8 +4,12 @@ import { useGoToTopButton } from '@/common/components/goTopButton/useGoToTopButt
 import { motion } from 'framer-motion'
 
 export const GoTopButton = () => {
-  const { controls, scrollToTopHandler, scrollToTopVariants, t } =
+  const { controls, isBrowser, scrollToTopHandler, scrollToTopVariants, t } =
     useGoToTopButton()
+
+  if (!isBrowser) {
+    return
+  }
 
   return (
     <motion.button

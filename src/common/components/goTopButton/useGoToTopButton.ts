@@ -26,11 +26,8 @@ export const useGoToTopButton = () => {
   })
 
   function scrollToTopHandler() {
-    if (!isBrowser()) {
-      return
-    }
     window.scrollTo({ behavior: 'smooth', top: 0 })
   }
 
-  return { controls, scrollToTopHandler, scrollToTopVariants, t }
+  return { controls, isBrowser, scrollToTopHandler, scrollToTopVariants, t }
 }
