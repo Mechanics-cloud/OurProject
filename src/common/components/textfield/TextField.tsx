@@ -1,4 +1,4 @@
-import React, { ElementType, forwardRef, useState } from 'react'
+import React, { ElementType, forwardRef, useRef, useState } from 'react'
 
 import {
   EyeOffOutline,
@@ -25,6 +25,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
 ) => {
   const [open, setOpen] = useState(false)
   const { isTablet } = useScreenWidth()
+  const inputRef = useRef(ref)
 
   const {
     className,
@@ -74,7 +75,9 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
         </Typography>
       )}
       <Popover
-        onOpenChange={() => {}}
+        onOpenChange={() => {
+          inputRef.current.focus()
+        }}
         open={!!error}
       >
         <div className={cls.inputContainer}>
@@ -83,7 +86,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           <input
             className={cls.input}
             disabled={disabled}
-            ref={ref}
+            ref={inputRef}
             required={required}
             type={type === 'search' || open ? 'text' : type}
             {...rest}
@@ -112,6 +115,9 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
             align={'end'}
             avoidCollisions
             className={'max-w-80 w-auto text-sm'}
+            onOpenAutoFocus={(e) => {
+              e.preventDefault()
+            }}
             side={'right'}
             sideOffset={12}
           >
