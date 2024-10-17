@@ -1,16 +1,22 @@
-import { ElementType, forwardRef, useState } from 'react'
+import React, { ElementType, forwardRef, useState } from 'react'
 
 import {
   EyeOffOutline,
   EyeOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
-import { Typography } from '@/common/components'
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverContent,
+  Typography,
+} from '@/common/components'
 import {
   PolymorphicRef,
   TextFieldProps,
 } from '@/common/components/textfield/TextField.types'
 import { getInputClasses } from '@/common/components/textfield/helper'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { cn } from '@/common/utils/cn'
 
 const TextFieldTemplate = <T extends ElementType = 'input'>(
@@ -18,6 +24,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
   ref: PolymorphicRef<T>
 ) => {
   const [open, setOpen] = useState(false)
+  const { isTablet } = useScreenWidth()
 
   const {
     className,
@@ -31,7 +38,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
 
   let marginForError = '24px'
 
-  if (error) {
+  if (error && isTablet) {
     const margin = `${Math.ceil(error.length / 50) * 24}px`
 
     marginForError = error.length > 50 ? margin : marginForError
@@ -66,34 +73,54 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           {required && <span className={cls.star}>*</span>}
         </Typography>
       )}
-      <div className={cls.inputContainer}>
-        {type === 'search' && <SearchOutline className={cls.leftIcon} />}
-        <input
-          className={cls.input}
-          disabled={disabled}
-          ref={ref}
-          required={required}
-          type={type === 'search' || open ? 'text' : type}
-          {...rest}
-        />
-        {type === 'password' &&
-          (open ? (
-            <EyeOutline
-              className={cls.rightIcon}
-              height={24}
-              onClick={handleToggle}
-              width={24}
-            />
-          ) : (
-            <EyeOffOutline
-              className={cls.rightIcon}
-              height={24}
-              onClick={handleToggle}
-              width={24}
-            />
-          ))}
-      </div>
-      {error && (
+      <Popover
+        onOpenChange={() => {}}
+        open={!!error}
+      >
+        <div className={cls.inputContainer}>
+          {type === 'search' && <SearchOutline className={cls.leftIcon} />}
+
+          <input
+            className={cls.input}
+            disabled={disabled}
+            ref={ref}
+            required={required}
+            type={type === 'search' || open ? 'text' : type}
+            {...rest}
+          />
+          {type === 'password' &&
+            (open ? (
+              <EyeOutline
+                className={cls.rightIcon}
+                height={24}
+                onClick={handleToggle}
+                width={24}
+              />
+            ) : (
+              <EyeOffOutline
+                className={cls.rightIcon}
+                height={24}
+                onClick={handleToggle}
+                width={24}
+              />
+            ))}
+          <PopoverAnchor />
+        </div>
+
+        {!isTablet && (
+          <PopoverContent
+            align={'end'}
+            avoidCollisions
+            className={'max-w-80 w-auto text-sm'}
+            side={'right'}
+            sideOffset={12}
+          >
+            {error}
+          </PopoverContent>
+        )}
+      </Popover>
+
+      {error && isTablet && (
         <Typography
           className={cls.error}
           variant={'reg14'}
