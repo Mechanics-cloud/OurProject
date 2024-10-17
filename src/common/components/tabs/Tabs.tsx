@@ -2,6 +2,7 @@
 
 import * as React from 'react'
 
+import { cn } from '@/common'
 import { typographyVariants } from '@/common/components/typography'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 import { clsx } from 'clsx'
@@ -20,7 +21,7 @@ export type TabsData = {
 const Tabs = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   TabsData
->(({ tabsData }, ref) => {
+>(({ className, tabsData }, ref) => {
   return (
     <TabsPrimitive.Root
       defaultValue={tabsData[0].id}
@@ -29,7 +30,7 @@ const Tabs = React.forwardRef<
       <TabsPrimitive.List className={clsx('flex w-full bg-dark-700')}>
         {tabsData.map(({ disabled, id, title }) => (
           <TabsPrimitive.Trigger
-            className={clsx(
+            className={cn(
               'group',
               'border-dark-100 border-b-2 text-dark-100',
               'flex-1 px-4 py-1.5',
@@ -39,7 +40,8 @@ const Tabs = React.forwardRef<
               'focus:radix-state-active:border-active-500',
               'focus:z-10 focus:outline-none focus-visible:ring focus-visible:rounded focus-visible:ring-accent-300',
               'enabled:hover:radix-state-active:bg-accent-900/[.15] enabled:hover:radix-state-inactive:bg-accent-900/[.15]',
-              'active:bg-accent-100/[.15]'
+              'active:bg-accent-100/[.15]',
+              className
             )}
             disabled={disabled ?? false}
             key={`tab-trigger-${id}`}
