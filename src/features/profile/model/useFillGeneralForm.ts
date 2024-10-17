@@ -18,7 +18,7 @@ type FormData = {
 }
 
 export const useFillGeneralForm = () => {
-  const [toggleOpen, setToggleOpen] = useState<boolean>(false)
+  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
   const calendarRef = useRef<HTMLDivElement>(null)
   const profile = AuthStore.profile
   const {
@@ -43,8 +43,8 @@ export const useFillGeneralForm = () => {
     alert(data)
   }
 
-  const calendarOpenHandler = () => {
-    setToggleOpen(true)
+  const toggleCalendar = () => {
+    setIsCalendarOpen((prev) => !prev)
   }
 
   const calendarOutsideClickHandler = (e: MouseEvent) => {
@@ -52,12 +52,12 @@ export const useFillGeneralForm = () => {
       calendarRef.current &&
       !calendarRef.current.contains(e.target as Node)
     ) {
-      setToggleOpen(false)
+      setIsCalendarOpen(false)
     }
   }
 
   useEffect(() => {
-    if (toggleOpen) {
+    if (isCalendarOpen) {
       document.addEventListener('mousedown', calendarOutsideClickHandler)
     } else {
       document.removeEventListener('mousedown', calendarOutsideClickHandler)
@@ -66,24 +66,24 @@ export const useFillGeneralForm = () => {
     return () => {
       document.removeEventListener('mousedown', calendarOutsideClickHandler)
     }
-  }, [toggleOpen])
+  }, [isCalendarOpen])
 
   const selectDateHandler = (date: Date) => {
     const formattedDate = format(date, 'dd.MM.yyyy', { locale: ru })
 
     setValue('date', formattedDate)
-    setToggleOpen(false)
+    setIsCalendarOpen(false)
   }
 
   return {
-    calendarOpenHandler,
     calendarRef,
     control,
     handleSubmit,
+    isCalendarOpen,
     onSubmit,
     register,
     selectDateHandler,
     setValue,
-    toggleOpen,
+    toggleCalendar,
   }
 }

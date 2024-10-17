@@ -1,5 +1,6 @@
 import React from 'react'
 
+import CalendarFilled from '@/assets/icons/filledIcons/CalendarFilled'
 import CalendarOutline from '@/assets/icons/outlineIcons/CalendarOutline'
 import { Button, Calendar, FormTextField, SelectItem, TextArea } from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
@@ -7,14 +8,14 @@ import { useFillGeneralForm } from '@/features/profile/model/useFillGeneralForm'
 
 export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
   const {
-    calendarOpenHandler,
     calendarRef,
     control,
     handleSubmit,
+    isCalendarOpen,
     onSubmit,
     register,
     selectDateHandler,
-    toggleOpen,
+    toggleCalendar,
   } = useFillGeneralForm()
 
   return (
@@ -48,13 +49,22 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
           name={'date'}
           readOnly
         >
-          <CalendarOutline
-            className={
-              'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer'
-            }
-            onClick={calendarOpenHandler}
-          />
-          {toggleOpen && (
+          {!isCalendarOpen ? (
+            <CalendarOutline
+              className={
+                'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer'
+              }
+              onClick={toggleCalendar}
+            />
+          ) : (
+            <CalendarFilled
+              className={
+                'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer'
+              }
+              onClick={toggleCalendar}
+            />
+          )}
+          {isCalendarOpen && (
             <div ref={calendarRef}>
               <Calendar
                 className={'absolute'}

@@ -1,14 +1,18 @@
 import { ChangeEvent, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
+import {
+  Calendar,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Typography,
+} from '@/common'
 import { cn } from '@/common/utils/cn'
 import { format, isValid, parse } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
-import { Calendar } from '../calendar/Calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '../popover/Popover'
-import { Typography } from '../typography'
-import CalendarClosed from './../../../assets/icons/filledIcons/Calendar'
+import CalendarClosed from '../../../assets/icons/filledIcons/CalendarFilled'
 import CalendarOpen from './../../../assets/icons/outlineIcons/CalendarOutline'
 
 type Props = {
