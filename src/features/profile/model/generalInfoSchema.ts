@@ -1,8 +1,16 @@
 import { USER_NAME_REGEXP } from '@/features/auth'
+import { ABOUT_ME_REGEXP } from '@/features/profile/model/constants'
 import { z } from 'zod'
 
 export const generalInfoSchema = z.object({
-  aboutMe: z.string().max(200, 'Maximum length is 200 symbols').optional(),
+  aboutMe: z
+    .string()
+    .max(200, 'Maximum length is 200 symbols')
+    .regex(ABOUT_ME_REGEXP, {
+      message:
+        'Input must contain only 0-9; A-Z; a-z; А-Я; а-я or special symbols',
+    })
+    .optional(),
   city: z.string().optional(),
   country: z.string().optional(),
   date: z.string().optional(),
