@@ -16,13 +16,15 @@ export const useGoToTopButton = () => {
   }
 
   useEffect(() => {
-    return scrollYProgress.on('change', (latestValue) => {
-      if (latestValue > 0.1) {
+    scrollYProgress.on('change', (latestValue) => {
+      if (latestValue > 0.5) {
         controls.start('show')
       } else {
         controls.start('hide')
       }
     })
+
+    return () => scrollYProgress.destroy()
   })
 
   function scrollToTopHandler() {
