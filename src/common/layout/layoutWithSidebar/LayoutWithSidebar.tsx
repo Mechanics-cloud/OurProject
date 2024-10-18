@@ -9,7 +9,7 @@ export const LayoutWithSidebar: NextPage<PropsWithChildren> = ({
   return (
     <Layout className={'flex h-full'}>
       <SideBar />
-      <div className={'pl-9 border-l-2 border-dark-300'}>{children}</div>
+      <div className={'pl-9 border-l-2 border-dark-300 w-full'}>{children}</div>
     </Layout>
   )
 }
