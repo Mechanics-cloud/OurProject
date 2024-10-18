@@ -47,7 +47,7 @@ const SignIn = observer(() => {
 
           <Link
             className={'self-end mt-3 mb-6 text-light-900'}
-            href={'/*'}
+            href={Paths.forgotPassword}
           >
             {t.signInForm.passwordRecovery}
           </Link>
