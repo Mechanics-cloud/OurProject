@@ -35,7 +35,7 @@ const ProfileSettings = () => {
         ) : (
           <Image
             alt={'avatar'}
-            className={'object-cover w-[200px] h-[200px]'}
+            className={'object-cover'}
             height={200}
             src={photo}
             width={200}
