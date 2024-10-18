@@ -55,7 +55,7 @@ const Tabs = React.forwardRef<
       </TabsPrimitive.List>
       {tabsData.map(({ content, id }) => (
         <TabsPrimitive.Content
-          className={clsx('bg-dark-700 px-6 py-4')}
+          className={clsx('bg-dark-700')}
           key={`tab-content-${id}`}
           value={id}
         >

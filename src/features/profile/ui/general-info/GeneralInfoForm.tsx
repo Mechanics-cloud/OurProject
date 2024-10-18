@@ -10,7 +10,10 @@ import { useFillGeneralForm } from '@/features/profile/model/useFillGeneralForm'
 export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
   const {
     calendarRef,
+    cities,
     control,
+    countriesData,
+    countryValue,
     handleSubmit,
     isCalendarOpen,
     isSubmitting,
@@ -54,14 +57,14 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
           {!isCalendarOpen ? (
             <CalendarOutline
               className={
-                'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer'
+                'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer w-[18px] h-5'
               }
               onClick={toggleCalendar}
             />
           ) : (
             <CalendarFilled
               className={
-                'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer'
+                'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer w-[18px] h-5'
               }
               onClick={toggleCalendar}
             />
@@ -79,22 +82,35 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
           <FormSelect
             className={'w-full'}
             control={control}
-            label={'Country'}
+            label={'Select your country'}
             name={'country'}
             placeholder={'Country'}
           >
-            <SelectItem value={'Austria'}>Austria</SelectItem>
-            <SelectItem value={'Russia'}>Russia</SelectItem>
+            {countriesData?.map((country) => (
+              <SelectItem
+                key={country.country}
+                value={country.country}
+              >
+                {country.country}
+              </SelectItem>
+            ))}
           </FormSelect>
           <FormSelect
             className={'w-full'}
             control={control}
-            label={'City'}
+            disabled={!countryValue}
+            label={'Select your city'}
             name={'city'}
             placeholder={'City'}
           >
-            <SelectItem value={'Linz'}>Linz</SelectItem>
-            <SelectItem value={'Moscow'}>Moscow</SelectItem>
+            {cities?.map((city) => (
+              <SelectItem
+                key={city}
+                value={city}
+              >
+                {city}
+              </SelectItem>
+            ))}
           </FormSelect>
         </div>
       </div>
@@ -103,8 +119,11 @@ export const GeneralInfoForm = React.forwardRef<HTMLFormElement>((_, ref) => {
         label={'About me'}
         name={'aboutMe'}
       />
-      <div className={'flex justify-end'}>
+      <div className={'flex justify-end mt-12'}>
         <Button
+          // className={
+          //   'relative before:absolute before:contain-content before:h-[1px] before:top-[50%] before:left-[50%] before:w-full before:bg-accent-500'
+          // }
           disabled={!isValid || isSubmitting}
           type={'submit'}
           variant={'primary'}

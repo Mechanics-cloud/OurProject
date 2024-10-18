@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 
 import AuthStore from '@/features/auth/model/authStore'
 import { generalInfoSchema } from '@/features/profile/model/generalInfoSchema'
+import { useFetchLocations } from '@/features/profile/model/useFetchLocations'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
@@ -19,6 +20,7 @@ type FormData = {
 
 export const useFillGeneralForm = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
+  const [cities, setCities] = useState<string[] | undefined>([])
   const calendarRef = useRef<HTMLDivElement>(null)
   const profile = AuthStore.profile
   const {
@@ -75,9 +77,31 @@ export const useFillGeneralForm = () => {
     setIsCalendarOpen(false)
   }
 
+  const { countriesData } = useFetchLocations()
+
+  const countryValue = useWatch({
+    control,
+    name: 'country',
+  })
+
+  useEffect(() => {
+    if (countryValue) {
+      const filteredCountryData = countriesData?.filter(
+        (country) => country.country === countryValue
+      )
+
+      if (filteredCountryData) {
+        setCities(filteredCountryData[0].cities)
+      }
+    }
+  }, [countriesData, countryValue])
+
   return {
     calendarRef,
+    cities,
     control,
+    countriesData,
+    countryValue,
     handleSubmit,
     isCalendarOpen,
     isSubmitting,
