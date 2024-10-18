@@ -21,9 +21,9 @@ class AuthStore {
       const res = await authApi.authWithGoogle(code)
 
       setToLocalStorage(StorageKeys.AccessToken, res.data.accessToken)
-      await this.me()
+      const userInfo = await this.me()
 
-      return res
+      return { res, userInfo }
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -59,6 +59,8 @@ class AuthStore {
       runInAction(() => {
         this.profile = profile
       })
+
+      return profile
     } catch (error) {
       throw Error
     }

@@ -1,0 +1,22 @@
+[
+  {
+    "country": "United States",
+    "cities": ["Chicago", "Los Angeles", "New York"]
+  },
+  {
+    "country": "Canada",
+    "cities": ["Toronto", "Vancouver", "Montreal"]
+  },
+  {
+    "country": "United Kingdom",
+    "cities": [ "Birmingham", "London", "Manchester"]
+  },
+  {
+    "country": "Austria",
+    "cities": ["Linz", "Salzburg", "Vienna"]
+  },
+  {
+    "country": "Russia",
+    "cities": ["Yekaterinburg", "Moscow", "St Petersburg"]
+  }
+]
