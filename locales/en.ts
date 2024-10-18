@@ -26,6 +26,7 @@ export const en: LocaleType = {
     sendAgain: 'Send Link Again',
     title: 'Forgot Password',
   },
+  goToTop: 'Go to top',
   logIn: 'Log In',
   menu: {
     create: 'Create',

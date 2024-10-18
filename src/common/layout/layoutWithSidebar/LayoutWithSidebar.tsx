@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactElement } from 'react'
+import { PropsWithChildren } from 'react'
 
 import { Layout, SideBar } from '@/common'
 import { NextPage } from 'next'
@@ -7,13 +7,9 @@ export const LayoutWithSidebar: NextPage<PropsWithChildren> = ({
   children,
 }) => {
   return (
-    <Layout>
+    <Layout className={'flex h-full'}>
       <SideBar />
-      <div className={'ml-[220px] pl-9'}>{children}</div>
+      <div className={'pl-9 border-l-2 border-dark-300 w-full'}>{children}</div>
     </Layout>
   )
-}
-
-export function getLayoutWithSidebar(page: ReactElement) {
-  return <LayoutWithSidebar>{page}</LayoutWithSidebar>
 }
