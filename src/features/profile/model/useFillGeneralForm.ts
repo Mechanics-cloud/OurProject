@@ -1,22 +1,26 @@
 import { useEffect, useRef, useState } from 'react'
 import { useForm, useWatch } from 'react-hook-form'
 
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import AuthStore from '@/features/auth/model/authStore'
 import { generalInfoSchema } from '@/features/profile/model/generalInfoSchema'
+import ProfileStore from '@/features/profile/model/profileStore'
 import { useFetchLocations } from '@/features/profile/model/useFetchLocations'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
-type FormData = {
+export type FormData = {
   aboutMe?: string
   city?: string
   country?: string
-  date?: string
+  dateOfBirth?: string
   firstName: string
   lastName: string
-  username: string
+  userName: string
 }
+
+export type UpdatedProfile = { region: string } & Required<FormData>
 
 export const useFillGeneralForm = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
@@ -30,19 +34,24 @@ export const useFillGeneralForm = () => {
     setValue,
   } = useForm<FormData>({
     defaultValues: {
+      aboutMe: '',
       city: '',
       country: '',
-      date: '',
+      dateOfBirth: '',
       firstName: '',
       lastName: '',
-      username: profile?.userName,
+      userName: profile?.userName || '',
     },
     mode: 'onChange',
     resolver: zodResolver(generalInfoSchema),
   })
 
-  const onSubmit = (data: FormData) => {
-    alert(data)
+  const onSubmit = async (data: FormData) => {
+    try {
+      await ProfileStore.updateProfile(data)
+    } catch (error) {
+      responseErrorHandler(error)
+    }
   }
 
   const toggleCalendar = () => {
@@ -73,7 +82,7 @@ export const useFillGeneralForm = () => {
   const selectDateHandler = (date: Date) => {
     const formattedDate = format(date, 'dd.MM.yyyy', { locale: ru })
 
-    setValue('date', formattedDate)
+    setValue('dateOfBirth', formattedDate)
     setIsCalendarOpen(false)
   }
 
