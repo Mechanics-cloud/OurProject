@@ -4,11 +4,12 @@ import * as React from 'react'
 import { ImageOutline } from '@/assets/icons/outlineIcons'
 import { Button } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { AvaratDialog } from '@/features/profile/settings/avatarDialog/AvaratDialog'
+import { AvatarDialog } from '@/features/profile/settings/avatarDialog'
+import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import Image from 'next/image'
 
 const ProfileSettings = () => {
-  const [photo, setPhoto] = useState<null | string>(null)
+  const [photoObj, setPhotoObj] = useState<PhotoResult>()
 
   return (
     <div
@@ -21,7 +22,7 @@ const ProfileSettings = () => {
           'w-[192px] aspect-square flex justify-center items-center rounded-full bg-dark-500'
         }
       >
-        {!photo ? (
+        {!photoObj?.photo ? (
           <div
             className={
               'w-[192px] aspect-square flex justify-center items-center rounded-full bg-dark-500'
@@ -37,13 +38,13 @@ const ProfileSettings = () => {
             alt={'avatar'}
             className={'object-cover'}
             height={200}
-            src={photo}
+            src={photoObj.photo}
             width={200}
           />
         )}
       </div>
-      <AvaratDialog
-        modalHandler={setPhoto}
+      <AvatarDialog
+        modalHandler={setPhotoObj}
         triggerButton={<Button variant={'outline'}>Add profile photo</Button>}
       />
     </div>
