@@ -1,26 +1,24 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ScreenWidths } from '@/common/enums'
-import { useDebouncedCallback } from '@/common/hooks/useDebouncedCallback'
+import { useDebounce } from '@/common/hooks/useDebounce'
 
 export const useScreenWidth = () => {
   const [width, setWidth] = useState(window.innerWidth)
   const breakpoint: number = ScreenWidths.lg
-  const isTablet = width < breakpoint
 
-  const handleWindowResize = useCallback(() => {
-    setWidth(window.innerWidth)
-  }, [])
+  const debouncedWidth = useDebounce(width)
+  const handleWindowResize = () => setWidth(window.innerWidth)
 
-  const debouncedHandleWindowResize = useDebouncedCallback(handleWindowResize)
+  const isTablet = debouncedWidth < breakpoint
 
   useEffect(() => {
-    window.addEventListener('resize', debouncedHandleWindowResize)
+    window.addEventListener('resize', handleWindowResize)
 
     return () => {
-      window.removeEventListener('resize', debouncedHandleWindowResize)
+      window.removeEventListener('resize', handleWindowResize)
     }
-  }, [debouncedHandleWindowResize])
+  }, [])
 
   return { isTablet }
 }
