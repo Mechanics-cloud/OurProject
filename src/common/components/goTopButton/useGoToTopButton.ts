@@ -25,7 +25,7 @@ export const useGoToTopButton = () => {
     })
 
     return () => scrollYProgress.destroy()
-  })
+  }, [scrollYProgress, controls])
 
   function scrollToTopHandler() {
     window.scrollTo({ behavior: 'smooth', top: 0 })
