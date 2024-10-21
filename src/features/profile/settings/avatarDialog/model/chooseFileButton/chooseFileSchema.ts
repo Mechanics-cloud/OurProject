@@ -4,7 +4,7 @@ import { z } from 'zod'
 
 export const chooseFileSchema = (t: LocaleType) => {
   return z.object({
-    fileSize: z.number().max(10 * FileSizes.OneMB, {
+    fileSize: z.number().max(FileSizes.UserPhotoSize, {
       message: t.avatarModal.errors.fileSize,
     }),
     fileType: z

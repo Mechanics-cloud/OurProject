@@ -1,46 +1,12 @@
-import * as React from 'react'
-import { ChangeEvent, useId, useRef } from 'react'
-
-import { Button, useTranslation } from '@/common'
+import { Button } from '@/common'
 import { ChooseFileButtonProps } from '@/features/profile/settings/avatarDialog/model'
-import {
-  ChooseFileSchemaType,
-  chooseFileSchema,
-} from '@/features/profile/settings/avatarDialog/model/chooseFileButton/chooseFileSchema'
-import { ZodError } from 'zod'
+import { useChooseFile } from '@/features/profile/settings/avatarDialog/model/chooseFileButton/useChooseFile'
 
 export const ChooseFileButton = ({
   onErrorChange,
   onPhotoChange,
 }: ChooseFileButtonProps) => {
-  const { t } = useTranslation()
-  const onPhotoChoose = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files ? e.target.files[0] : null
-
-    if (!file) {
-      onErrorChange(t.avatarModal.errors.chooseFile)
-
-      return
-    }
-
-    const dataFile: ChooseFileSchemaType = {
-      fileSize: file.size,
-      fileType: file.type,
-    }
-
-    try {
-      chooseFileSchema(t).parse(dataFile)
-      onPhotoChange(URL.createObjectURL(file))
-      onErrorChange('')
-    } catch (error) {
-      if (error instanceof ZodError) {
-        debugger
-        onErrorChange(error.errors[0].message)
-      } else {
-        onErrorChange(t.avatarModal.errors.unknownError)
-      }
-    }
-  }
+  const { onPhotoChoose, t } = useChooseFile({ onErrorChange, onPhotoChange })
 
   return (
     <>

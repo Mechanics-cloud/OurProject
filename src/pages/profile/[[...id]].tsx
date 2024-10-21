@@ -1,5 +1,5 @@
 import { Paid } from '@/assets/icons/filledIcons'
-import { Button, Typography } from '@/common'
+import { Button, Paths, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
 import Image from 'next/image'
@@ -47,7 +47,7 @@ const Profile = () => {
               </Typography>
 
               <Button variant={'secondary'}>
-                <Link href={'/profile/settings'}>Profile Settings</Link>
+                <Link href={Paths.profileSettings}>Profile Settings</Link>
               </Button>
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>

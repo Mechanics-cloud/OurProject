@@ -1,3 +1,5 @@
+const oneMB = 1024 * 1024
+
 export enum StatusCode {
   Unauthorized = 401,
 }
@@ -7,5 +9,5 @@ export enum StorageKeys {
 }
 
 export enum FileSizes {
-  OneMB = 1024 * 1024,
+  UserPhotoSize = 10 * oneMB,
 }

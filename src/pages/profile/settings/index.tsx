@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import * as React from 'react'
 
 import { ImageOutline } from '@/assets/icons/outlineIcons'
 import { Button } from '@/common'
@@ -7,6 +6,8 @@ import { withProtection } from '@/common/HOC/withProtection'
 import { AvatarDialog } from '@/features/profile/settings/avatarDialog'
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import Image from 'next/image'
+
+// todo заменить данную страницу на страницу из задачи IN-99/IN-107
 
 const ProfileSettings = () => {
   const [photoObj, setPhotoObj] = useState<PhotoResult>()

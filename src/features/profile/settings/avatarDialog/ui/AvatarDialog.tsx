@@ -1,5 +1,3 @@
-import * as React from 'react'
-
 import {
   Button,
   Dialog,
@@ -9,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  cn,
 } from '@/common'
 import { useAvatarDialog } from '@/features/profile/settings/avatarDialog/model'
 import { AvatarDialogProps } from '@/features/profile/settings/avatarDialog/model/types'
@@ -64,9 +63,10 @@ export const AvatarDialog = ({
           />
         </div>
         <DialogFooter
-          className={`flex items-center ${
+          className={cn(
+            'flex items-center',
             photo ? 'justify-end' : 'justify-center mb-[100px]'
-          }`}
+          )}
         >
           {photo ? (
             <DialogClose

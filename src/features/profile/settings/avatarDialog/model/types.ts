@@ -3,7 +3,6 @@ import { ReactNode } from 'react'
 import { Nullable } from '@/common'
 
 export type PhotoResult = {
-  error: Nullable<string>
   photo: Nullable<string>
   photoForServer: Nullable<Blob>
 }

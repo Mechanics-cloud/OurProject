@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import AvatarEditor from 'react-avatar-editor'
+import { toast } from 'react-toastify'
 
 import { Nullable, useTranslation } from '@/common'
 
@@ -7,7 +8,7 @@ import { ModalPhotoSaveHandler } from '../types'
 
 export const useAvatarDialog = (onModalPhotoSave: ModalPhotoSaveHandler) => {
   const [photo, setPhoto] = useState<Nullable<string>>(null)
-  const [error, setError] = useState<string>('')
+  const [error, setError] = useState<Nullable<string>>(null)
   const { t } = useTranslation()
 
   const photoEditorRef = useRef<Nullable<AvatarEditor>>(null)
@@ -46,17 +47,15 @@ export const useAvatarDialog = (onModalPhotoSave: ModalPhotoSaveHandler) => {
           outputCanvas.toBlob((blob) => {
             if (blob) {
               onModalPhotoSave({
-                error: null,
                 photo: finalPhoto,
                 photoForServer: blob,
               })
             } else {
               onModalPhotoSave({
-                error: 'blob error',
                 photo: null,
                 photoForServer: null,
               })
-              setError(t.avatarModal.errors.unknownError)
+              toast.error(t.avatarModal.errors.unknownError)
             }
           }, 'image/png')
         }
