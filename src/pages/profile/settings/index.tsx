@@ -22,7 +22,15 @@ const ProfileSettings = () => {
           'w-[192px] aspect-square flex justify-center items-center rounded-full bg-dark-500'
         }
       >
-        {!photoObj?.photo ? (
+        {photoObj?.photo ? (
+          <Image
+            alt={'avatar'}
+            className={'object-cover'}
+            height={200}
+            src={photoObj.photo}
+            width={200}
+          />
+        ) : (
           <div
             className={
               'w-[192px] aspect-square flex justify-center items-center rounded-full bg-dark-500'
@@ -33,18 +41,10 @@ const ProfileSettings = () => {
               width={48}
             />
           </div>
-        ) : (
-          <Image
-            alt={'avatar'}
-            className={'object-cover'}
-            height={200}
-            src={photoObj.photo}
-            width={200}
-          />
         )}
       </div>
       <AvatarDialog
-        modalHandler={setPhotoObj}
+        onModalPhotoSave={setPhotoObj}
         triggerButton={<Button variant={'outline'}>Add profile photo</Button>}
       />
     </div>

@@ -17,26 +17,29 @@ import { ChooseFileButton } from './chooseFileButton/ChooseFileButton'
 import { PhotoEditor } from './photoEditor/PhotoEditor'
 
 export const AvatarDialog = ({
-  modalHandler,
+  onModalPhotoSave,
   triggerButton,
 }: AvatarDialogProps) => {
-  const { error, handleSave, photo, photoEditorRef, setError, setPhoto } =
-    useAvatarDialog(modalHandler)
+  const {
+    error,
+    onModalOpenChange,
+    onPhotoSave,
+    photo,
+    photoEditorRef,
+    setError,
+    setPhoto,
+    t,
+  } = useAvatarDialog(onModalPhotoSave)
 
   return (
-    <Dialog
-      onOpenChange={() => {
-        setPhoto(null)
-        setError('')
-      }}
-    >
+    <Dialog onOpenChange={onModalOpenChange}>
       <DialogTrigger asChild>{triggerButton}</DialogTrigger>
       <DialogContent
-        aria-describedby={error ? 'error-description' : undefined}
+        aria-describedby={error ?? 'error-description'}
         className={'max-w-[494px] h-[580px] gap-0 flex flex-col'}
       >
         <DialogHeader>
-          <DialogTitle className={'px-6'}>Add a Profile Photo</DialogTitle>
+          <DialogTitle className={'px-6'}>{t.avatarModal.title}</DialogTitle>
         </DialogHeader>
         <div
           className={
@@ -49,8 +52,9 @@ export const AvatarDialog = ({
                 'absolute top-4 border border-danger-500 bg-danger-900 w-full max-w-[440px] max-h-[60px] px-6 py-1.5 flex justify-center items-center'
               }
             >
-              <span className={'text-center'}>
-                <strong>Error!</strong> {error}
+              <span className={'text-center text-balance'}>
+                <strong>{t.avatarModal.errors.error}</strong>
+                {` ${error}`}
               </span>
             </div>
           )}
@@ -64,23 +68,23 @@ export const AvatarDialog = ({
             photo ? 'justify-end' : 'justify-center mb-[100px]'
           }`}
         >
-          {!photo ? (
-            <ChooseFileButton
-              setError={setError}
-              setPhoto={setPhoto}
-            />
-          ) : (
+          {photo ? (
             <DialogClose
               asChild
               className={'mr-6'}
             >
               <Button
-                onClick={handleSave}
+                onClick={onPhotoSave}
                 type={'button'}
               >
-                Save
+                {t.avatarModal.saveButton}
               </Button>
             </DialogClose>
+          ) : (
+            <ChooseFileButton
+              onErrorChange={setError}
+              onPhotoChange={setPhoto}
+            />
           )}
         </DialogFooter>
       </DialogContent>

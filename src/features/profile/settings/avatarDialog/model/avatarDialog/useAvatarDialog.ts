@@ -1,15 +1,18 @@
 import { useRef, useState } from 'react'
 import AvatarEditor from 'react-avatar-editor'
 
-import { ModalHandler } from '../types'
+import { Nullable, useTranslation } from '@/common'
 
-export const useAvatarDialog = (modalHandler: ModalHandler) => {
-  const [photo, setPhoto] = useState<null | string>(null)
-  const [error, setError] = useState('')
+import { ModalPhotoSaveHandler } from '../types'
 
-  const photoEditorRef = useRef<AvatarEditor | null>(null)
+export const useAvatarDialog = (onModalPhotoSave: ModalPhotoSaveHandler) => {
+  const [photo, setPhoto] = useState<Nullable<string>>(null)
+  const [error, setError] = useState<string>('')
+  const { t } = useTranslation()
 
-  const handleSave = () => {
+  const photoEditorRef = useRef<Nullable<AvatarEditor>>(null)
+
+  const onPhotoSave = () => {
     if (photoEditorRef.current) {
       const canvas = photoEditorRef.current.getImageScaledToCanvas()
       const context = canvas.getContext('2d')
@@ -42,17 +45,18 @@ export const useAvatarDialog = (modalHandler: ModalHandler) => {
 
           outputCanvas.toBlob((blob) => {
             if (blob) {
-              modalHandler({
+              onModalPhotoSave({
                 error: null,
                 photo: finalPhoto,
                 photoForServer: blob,
               })
             } else {
-              modalHandler({
-                error: 'Blob error',
+              onModalPhotoSave({
+                error: 'blob error',
                 photo: null,
                 photoForServer: null,
               })
+              setError(t.avatarModal.errors.unknownError)
             }
           }, 'image/png')
         }
@@ -60,12 +64,19 @@ export const useAvatarDialog = (modalHandler: ModalHandler) => {
     }
   }
 
+  const onModalOpenChange = () => {
+    setPhoto(null)
+    setError('')
+  }
+
   return {
     error,
-    handleSave,
+    onModalOpenChange,
+    onPhotoSave,
     photo,
     photoEditorRef,
     setError,
     setPhoto,
+    t,
   }
 }

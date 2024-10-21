@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { ChangeEvent, useRef } from 'react'
+import { ChangeEvent, useId, useRef } from 'react'
 
-import { Button } from '@/common'
+import { Button, useTranslation } from '@/common'
 import { ChooseFileButtonProps } from '@/features/profile/settings/avatarDialog/model'
 import {
   ChooseFileSchemaType,
@@ -10,15 +10,15 @@ import {
 import { ZodError } from 'zod'
 
 export const ChooseFileButton = ({
-  setError,
-  setPhoto,
+  onErrorChange,
+  onPhotoChange,
 }: ChooseFileButtonProps) => {
-  const inputFileRef = useRef<HTMLInputElement>(null)
-  const handleChoose = (e: ChangeEvent<HTMLInputElement>) => {
+  const { t } = useTranslation()
+  const onPhotoChoose = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files ? e.target.files[0] : null
 
     if (!file) {
-      setError('Choose file')
+      onErrorChange(t.avatarModal.errors.chooseFile)
 
       return
     }
@@ -29,33 +29,34 @@ export const ChooseFileButton = ({
     }
 
     try {
-      chooseFileSchema.parse(dataFile)
-      setPhoto(URL.createObjectURL(file))
-      setError('')
+      chooseFileSchema(t).parse(dataFile)
+      onPhotoChange(URL.createObjectURL(file))
+      onErrorChange('')
     } catch (error) {
       if (error instanceof ZodError) {
-        setError(error.errors[0].message)
+        debugger
+        onErrorChange(error.errors[0].message)
       } else {
-        setError('Unknown error')
+        onErrorChange(t.avatarModal.errors.unknownError)
       }
     }
   }
 
   return (
     <>
-      <Button
-        onClick={() => {
-          inputFileRef.current?.click()
-        }}
-        type={'button'}
-      >
-        Select from Computer
-      </Button>
+      <label htmlFor={'chooseFileInput'}>
+        <Button
+          asChild
+          className={'cursor-pointer'}
+        >
+          <span>{t.avatarModal.chooseButton}</span>
+        </Button>
+      </label>
       <input
         accept={'image/*, .png, .jpg, .jpeg'}
         className={'opacity-0 h-0 w-0 leading-none hidden p-0 m-0'}
-        onChange={handleChoose}
-        ref={inputFileRef}
+        id={'chooseFileInput'}
+        onChange={onPhotoChoose}
         type={'file'}
       />
     </>

@@ -1,23 +1,23 @@
-import { Dispatch, ReactNode, SetStateAction } from 'react'
+import { ReactNode } from 'react'
 
 import { Nullable } from '@/common'
 
 export type PhotoResult = {
-  error: null | string
-  photo: null | string
-  photoForServer: Blob | null
+  error: Nullable<string>
+  photo: Nullable<string>
+  photoForServer: Nullable<Blob>
 }
 
-export type ModalHandler = (item: PhotoResult) => void
+export type ModalPhotoSaveHandler = (item: PhotoResult) => void
 
 export type AvatarDialogProps = {
-  modalHandler: ModalHandler
+  onModalPhotoSave: ModalPhotoSaveHandler
   triggerButton: ReactNode
 }
 
 export type ChooseFileButtonProps = {
-  setError: Dispatch<SetStateAction<string>>
-  setPhoto: Dispatch<SetStateAction<null | string>>
+  onErrorChange: (error: string) => void
+  onPhotoChange: (photo: Nullable<string>) => void
 }
 
 export type PhotoEditorProps = {

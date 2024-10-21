@@ -5,3 +5,7 @@ export enum StatusCode {
 export enum StorageKeys {
   AccessToken = 'accessToken',
 }
+
+export enum FileSizes {
+  OneMB = 1024 * 1024,
+}
