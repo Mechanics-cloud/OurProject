@@ -97,9 +97,9 @@ export const en: LocaleType = {
       userName: 'User name',
     },
     placeholders: {
-      confirm: 'Confirm your password',
+      confirm: 'Password confirmation',
       email: 'Enter your email',
-      password: 'Enter your password',
+      password: 'Enter a password',
       userName: 'Enter your username',
     },
     policy: 'Privacy Policy',
