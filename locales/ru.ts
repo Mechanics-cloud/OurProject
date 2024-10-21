@@ -1,4 +1,16 @@
 export const ru = {
+  avatarModal: {
+    chooseButton: 'Выбрать с компьютера',
+    errors: {
+      chooseFile: 'Выберите файл.',
+      error: 'Ошибка!',
+      fileSize: 'Размер файла должен быть не более 10 MB!',
+      fileType: 'Формат загружаемого файла должен быть PNG или JPG/JPEG.',
+      unknownError: 'Неизвестная ошибка.',
+    },
+    saveButton: 'Сохранить',
+    title: 'Добавить фотографию профиля',
+  },
   basicError: 'Что-то пошло не так',
   expiredSession: {
     emailExpired: 'Ссылка для подтверждения электронной почты истекла',
