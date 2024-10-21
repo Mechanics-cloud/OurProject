@@ -8,11 +8,12 @@ export const useScreenWidth = () => {
   const breakpoint: number = ScreenWidths.lg
 
   const debouncedWidth = useDebounce(width)
-  const handleWindowResize = () => setWidth(window.innerWidth)
 
   const isTablet = debouncedWidth < breakpoint
 
   useEffect(() => {
+    const handleWindowResize = () => setWidth(window.innerWidth)
+
     window.addEventListener('resize', handleWindowResize)
 
     return () => {
