@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { profileAPi } from '@/features/profile/api/profile.api'
 import {
@@ -20,6 +22,8 @@ class ProfileStore {
       runInAction(() => {
         this.updatedProfile = updatedProfile
       })
+
+      return updatedProfile
     } catch (error) {
       debugger
       responseErrorHandler(error)
@@ -41,7 +45,7 @@ class ProfileStore {
       const res = await profileAPi.updateProfile(updatedData)
 
       if (res.status === 204) {
-        alert('success')
+        toast.success('Your settings are saved!')
       }
     } catch (error) {
       responseErrorHandler(error)
