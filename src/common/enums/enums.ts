@@ -5,3 +5,8 @@ export enum StatusCode {
 export enum StorageKeys {
   AccessToken = 'accessToken',
 }
+
+export enum ScreenWidths {
+  lg = 1024,
+  md = 768,
+}

@@ -11,7 +11,7 @@ function NotFound() {
   }
 
   return (
-    <div className={'h-full mt-60 flex flex-col items-center justify-center'}>
+    <div className={'mt-40 flex flex-col items-center justify-center'}>
       <Image
         alt={'404 image'}
         height={500}

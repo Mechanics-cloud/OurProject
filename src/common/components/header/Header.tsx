@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header
       className={
-        'fixed z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300 pr-scrollbar'
+        'fixed top-0 z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300 pr-scrollbar'
       }
     >
       <div
