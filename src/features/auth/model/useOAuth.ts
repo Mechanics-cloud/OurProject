@@ -23,8 +23,8 @@ export const useOAuth = () => {
           const res = await authStore.authWithGoogle(credentialResponse.code)
 
           isLoading.turnOffLoading()
-          if (res?.data.accessToken) {
-            await router.push(Paths.profile)
+          if (res?.res.data.accessToken) {
+            await router.push(`${Paths.profile}/${res.userInfo.userId}`)
           }
         } catch (error) {
           responseErrorHandler(error)
