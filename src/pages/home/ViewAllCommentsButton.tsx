@@ -28,8 +28,6 @@ const ViewAllCommentsButton = ({ postId }: ViewAllCommentsButtonType) => {
     fetchComments()
   }, [postId])
 
-  console.log(commentCount)
-
   const isButtonDisabled =
     isLoading || commentCount === null || commentCount === 0
 

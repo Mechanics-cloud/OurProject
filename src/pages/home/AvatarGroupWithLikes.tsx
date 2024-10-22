@@ -17,10 +17,7 @@ export const AvatarGroupWithLikes = ({
 
   useEffect(() => {
     getAvatarImages(id).then((avatars) => setAvatarImages(avatars))
-    console.log('AvatarGroupWithLikes')
   }, [id])
-
-  console.log('AvatarGroupWithLikes ', avatarImages)
 
   return (
     <div className={'w-full h-6 flex gap-4 mt-3 mb-6'}>
@@ -31,8 +28,10 @@ export const AvatarGroupWithLikes = ({
               <Image
                 alt={'Avatar'}
                 className={'size-6 rounded-full'}
+                height={192}
                 key={i}
                 src={avaUrl}
+                width={192}
               />
             )
           })}

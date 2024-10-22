@@ -20,6 +20,7 @@ import second from 'src/assets/images/image2.jpg'
 import first from 'src/assets/images/image3.jpg'
 import four from 'src/assets/images/image4.jpg'
 
+import AddCommentGroup from './AddCommentGroup'
 import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
 import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
@@ -123,8 +124,8 @@ const dataTest = [
 ]
 
 function Home() {
-  const [state, setState] = useState<Item[]>(dataTest)
-  // const [state, setState] = useState<Item[]>([])
+  // const [state, setState] = useState<Item[]>(dataTest)
+  const [state, setState] = useState<Item[]>([])
   const [loading, setLoading] = useState(false) //todo change on true
 
   const { t } = useTranslation()
@@ -133,22 +134,24 @@ function Home() {
   const isAuth = !!authStore.profile
 
   // TODO раскомментировать
-  // useEffect(() => {
-  //   homeApi
-  //     .publicationsFollowers({
-  //       endCursorPostId: 0,
-  //       pageNumber: 1,
-  //       pageSize: 12,
-  //     })
-  //     .then((data) => {
-  //       if (data) {
-  //         setState(data.items)
-  //       }
-  //     })
-  //     .finally(() => setLoading(false))
-  // }, [])
+  useEffect(() => {
+    // homeApi
+    // .publicationsFollowers({
+    postsApi
+      .publicPosts({
+        endCursorPostId: 3,
+        pageNumber: 0,
+        pageSize: 3,
+      })
+      .then((data) => {
+        if (data) {
+          setState(data.items)
+        }
+      })
+      .finally(() => setLoading(false))
+  }, [])
   //TODO удалить консоль
-  // console.log(images)
+  // console.log(state)
 
   if (loading) {
     return (
@@ -162,17 +165,17 @@ function Home() {
       </>
     )
   }
-  if (state.length === 0) {
-    return (
-      <div
-        className={
-          'w-[491px] h-40 border-b mt-[24px] ml-[10.9375rem] flex justify-center items-center bg-dark-100'
-        }
-      >
-        На данный момент нет постов
-      </div>
-    )
-  }
+  // if (state.length === 0) {
+  //   return (
+  //     <div
+  //       className={
+  //         'w-[491px] h-40 border-b mt-[24px] ml-[10.9375rem] flex justify-center items-center bg-dark-100'
+  //       }
+  //     >
+  //       На данный момент нет постов
+  //     </div>
+  //   )
+  // }
   // добавить в slider адресс item.images
 
   return state.map((item) => {
@@ -188,7 +191,9 @@ function Home() {
             <Image
               alt={'Avatar'}
               className={'size-9 rounded-full'}
+              height={36}
               src={item.avatarOwner}
+              width={36}
             />
             <div className={'flex items-center space-x-2 pl-1'}>
               <LinkProfile userName={item.userName} />
@@ -213,12 +218,17 @@ function Home() {
             'Нет картинок для поста!'
           )}
         </section>
-        <LinksGroup isLiked={item.isLiked} />
-        <div className={'w-full h-[72px] flex gap-3'}>
+        <LinksGroup
+          id={item.id}
+          isLiked={item.isLiked}
+        />
+        <div className={'w-full max-h-[72px] inline-flex gap-3'}>
           <Image
             alt={'Avatar'}
             className={'size-9 rounded-full mt-[5px]'}
+            height={36}
             src={item.avatarOwner}
+            width={36}
           />
           <Typography
             className={
@@ -244,6 +254,8 @@ function Home() {
           </button>
         </div> */}
         <ViewAllCommentsButton postId={item.id} />
+        {/* <AddCommentGroup /> */}
+
         <div className={'w-full flex  justify-between'}>
           <input
             className={

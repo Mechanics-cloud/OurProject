@@ -51,13 +51,13 @@ const Slider = ({ images }: ImagesTypes) => {
           className={'w-full'}
           key={index}
         >
-          {/* <div className={'flex h-full w-auto items-center justify-center'}> */}
           <Image
             alt={''}
             className={'block h-full w-full object-cover'}
+            fill
+            sizes={'(max-width: 768px) 100vw, 33vw'}
             src={image.url}
           />
-          {/* </div> */}
         </SwiperSlide>
       ))}
     </Swiper>

@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Heart } from '@/assets/icons/filledIcons'
 import {
   BookmarkOutline,
@@ -8,15 +10,29 @@ import {
 import { Tooltip } from '@/common'
 import Link from 'next/link'
 
+import { postsApi } from './posts/posts.api'
+
 type LinksGroupProps = {
+  id: number
   isLiked: boolean
 }
 
-export const LinksGroup = ({ isLiked = false }: LinksGroupProps) => {
+export const LinksGroup = ({ id, isLiked }: LinksGroupProps) => {
+  const handleLike = async () => {
+    try {
+      await postsApi.postLike({ postId: id })
+    } catch (error) {
+      console.error('Error liking the post:', error)
+    }
+  }
+
   return (
     <div className={'w-full h-6 flex items-center justify-between mb-4'}>
       <div className={'flex items-center gap-5'}>
-        <Link href={'/'}>
+        <button
+          onClick={handleLike}
+          type={'button'}
+        >
           <Tooltip title={'Нравиться'}>
             {isLiked ? (
               <Heart className={'size-6'} />
@@ -24,7 +40,7 @@ export const LinksGroup = ({ isLiked = false }: LinksGroupProps) => {
               <HeartOutline className={'size-6'} />
             )}
           </Tooltip>
-        </Link>
+        </button>
         <Link href={'/'}>
           <Tooltip title={'Сообщения'}>
             <MessageCircleOutline className={'size-6'} />

@@ -30,7 +30,7 @@ class PostsStore {
 
   async getLikes(postId: number) {
     try {
-      this.likes = await postsApi.postIdLikes({ postId })
+      this.likes = await postsApi.postLike({ postId })
     } catch (error) {
       responseErrorHandler(error)
     }
