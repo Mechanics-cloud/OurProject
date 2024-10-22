@@ -2,6 +2,7 @@ import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Paths, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
+import ProfileStore from '@/features/profile/model/profileStore'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -28,6 +29,8 @@ const Profile = () => {
     router.push(Paths.generalInfo)
   }
 
+  const updatedProfile = ProfileStore.updatedProfile
+
   return (
     <div className={'flex'}>
       <div className={'flex flex-col'}>
@@ -47,7 +50,7 @@ const Profile = () => {
                 className={'text-light-100 flex items-center gap-3'}
                 variant={'h1'}
               >
-                URL Profile
+                {updatedProfile?.userName ?? 'URL Profile'}
                 <Paid />
               </Typography>
 

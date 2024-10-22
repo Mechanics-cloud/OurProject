@@ -22,6 +22,7 @@ export type UpdatedProfile = { region: string } & Required<FormData>
 
 export const useFillGeneralForm = () => {
   const profile = AuthStore.profile
+  const updatedProfile = ProfileStore.updatedProfile
 
   const {
     control,
@@ -30,13 +31,13 @@ export const useFillGeneralForm = () => {
     setValue,
   } = useForm<FormData>({
     defaultValues: {
-      aboutMe: '',
-      city: '',
-      country: '',
-      dateOfBirth: '',
-      firstName: '',
-      lastName: '',
-      userName: profile?.userName || '',
+      aboutMe: updatedProfile?.aboutMe || '',
+      city: updatedProfile?.city || '',
+      country: updatedProfile?.country || '',
+      dateOfBirth: updatedProfile?.dateOfBirth || '',
+      firstName: updatedProfile?.firstName || '',
+      lastName: updatedProfile?.lastName || '',
+      userName: updatedProfile?.userName || profile?.userName,
     },
     mode: 'onChange',
     resolver: zodResolver(generalInfoSchema),

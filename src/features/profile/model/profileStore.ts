@@ -9,7 +9,7 @@ import {
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {
-  updatedProfile: UpdatedProfile | undefined = undefined
+  updatedProfile: UpdatedProfile | undefined
 
   constructor() {
     makeAutoObservable(this)
@@ -25,7 +25,6 @@ class ProfileStore {
 
       return updatedProfile
     } catch (error) {
-      debugger
       responseErrorHandler(error)
     }
   }
