@@ -1,14 +1,12 @@
-import { useEffect, useRef, useState } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import AuthStore from '@/features/auth/model/authStore'
 import { generalInfoSchema } from '@/features/profile/model/generalInfoSchema'
 import ProfileStore from '@/features/profile/model/profileStore'
 import { useFetchLocations } from '@/features/profile/model/useFetchLocations'
+import { useHandleCalendar } from '@/features/profile/model/useHandleCalendar'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { format } from 'date-fns'
-import { ru } from 'date-fns/locale'
 
 export type FormData = {
   aboutMe?: string
@@ -23,10 +21,8 @@ export type FormData = {
 export type UpdatedProfile = { region: string } & Required<FormData>
 
 export const useFillGeneralForm = () => {
-  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false)
-  const [cities, setCities] = useState<string[] | undefined>([])
-  const calendarRef = useRef<HTMLDivElement>(null)
   const profile = AuthStore.profile
+
   const {
     control,
     formState: { isSubmitting, isValid },
@@ -46,6 +42,10 @@ export const useFillGeneralForm = () => {
     resolver: zodResolver(generalInfoSchema),
   })
 
+  const { calendarRef, isCalendarOpen, selectDateHandler, toggleCalendar } =
+    useHandleCalendar(setValue, 'dateOfBirth')
+  const { cities, countriesData, countryValue } = useFetchLocations(control)
+
   const onSubmit = async (data: FormData) => {
     try {
       await ProfileStore.updateProfile(data)
@@ -53,57 +53,6 @@ export const useFillGeneralForm = () => {
       responseErrorHandler(error)
     }
   }
-
-  const toggleCalendar = () => {
-    setIsCalendarOpen((prev) => !prev)
-  }
-
-  const calendarOutsideClickHandler = (e: MouseEvent) => {
-    if (
-      calendarRef.current &&
-      !calendarRef.current.contains(e.target as Node)
-    ) {
-      setIsCalendarOpen(false)
-    }
-  }
-
-  useEffect(() => {
-    if (isCalendarOpen) {
-      document.addEventListener('mousedown', calendarOutsideClickHandler)
-    } else {
-      document.removeEventListener('mousedown', calendarOutsideClickHandler)
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', calendarOutsideClickHandler)
-    }
-  }, [isCalendarOpen])
-
-  const selectDateHandler = (date: Date) => {
-    const formattedDate = format(date, 'dd.MM.yyyy', { locale: ru })
-
-    setValue('dateOfBirth', formattedDate)
-    setIsCalendarOpen(false)
-  }
-
-  const { countriesData } = useFetchLocations()
-
-  const countryValue = useWatch({
-    control,
-    name: 'country',
-  })
-
-  useEffect(() => {
-    if (countryValue) {
-      const filteredCountryData = countriesData?.filter(
-        (country) => country.country === countryValue
-      )
-
-      if (filteredCountryData) {
-        setCities(filteredCountryData[0].cities)
-      }
-    }
-  }, [countriesData, countryValue])
 
   return {
     calendarRef,
@@ -117,7 +66,6 @@ export const useFillGeneralForm = () => {
     isValid,
     onSubmit,
     selectDateHandler,
-    setValue,
     toggleCalendar,
   }
 }
