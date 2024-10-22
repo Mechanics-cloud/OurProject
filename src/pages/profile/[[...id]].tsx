@@ -1,8 +1,9 @@
 import { Paid } from '@/assets/icons/filledIcons'
-import { Button, Typography } from '@/common'
+import { Button, Paths, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
 import image1 from '../../assets/images/image1.jpg'
@@ -45,7 +46,9 @@ const Profile = () => {
                 <Paid />
               </Typography>
 
-              <Button variant={'secondary'}>Profile Settings</Button>
+              <Button variant={'secondary'}>
+                <Link href={Paths.profileSettings}>Profile Settings</Link>
+              </Button>
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
               <div className={'flex flex-col'}>
