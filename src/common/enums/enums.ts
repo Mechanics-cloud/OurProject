@@ -8,6 +8,11 @@ export enum StorageKeys {
   AccessToken = 'accessToken',
 }
 
+export enum ScreenWidths {
+  lg = 1024,
+  md = 768,
+}
+
 export enum FileSizes {
   UserPhotoSize = 10 * oneMB,
 }

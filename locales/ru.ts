@@ -36,6 +36,7 @@ export const ru = {
     sendAgain: 'Отправить ссылку снова',
     title: 'Забыли пароль',
   },
+  goToTop: 'Вверх',
   logIn: 'Вход',
   menu: {
     create: 'Создать',
