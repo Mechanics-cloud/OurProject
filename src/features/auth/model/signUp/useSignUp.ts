@@ -27,7 +27,7 @@ export const useSignUp = () => {
       password: '',
       userName: '',
     },
-    mode: 'onChange',
+    mode: 'onTouched',
     resolver: zodResolver(signUpSchema),
   })
   const isLoadingStore = generalStore
