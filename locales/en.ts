@@ -1,6 +1,18 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  avatarModal: {
+    chooseButton: 'Select from Computer',
+    errors: {
+      chooseFile: 'Choose file.',
+      error: 'Error!',
+      fileSize: 'Photo size must be less than 10 MB!',
+      fileType: 'The format of the uploaded photo must be PNG or JPG/JPEG.',
+      unknownError: 'Unknown error.',
+    },
+    saveButton: 'Save',
+    title: 'Add a Profile Photo',
+  },
   basicError: 'Something went wrong',
   expiredSession: {
     emailExpired: 'Email verification link expired',
