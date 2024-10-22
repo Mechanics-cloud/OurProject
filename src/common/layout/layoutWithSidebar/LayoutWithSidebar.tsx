@@ -1,7 +1,7 @@
 import { PropsWithChildren, ReactElement, useEffect, useState } from 'react'
 
 import { Layout, Loader, SideBar } from '@/common'
-import ProfileStore from '@/features/profile/model/profileStore'
+import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
 import { NextPage } from 'next'
 
 export const LayoutWithSidebar: NextPage<PropsWithChildren> = ({

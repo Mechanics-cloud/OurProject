@@ -1,5 +1,5 @@
 import { Endpoints, instance } from '@/features/auth'
-import { UpdatedProfile } from '@/features/profile/model/useFillGeneralForm'
+import { UpdatedProfile } from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
 class ProfileApi {

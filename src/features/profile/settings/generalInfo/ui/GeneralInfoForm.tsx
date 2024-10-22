@@ -11,7 +11,7 @@ import {
 } from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
 import { FormTextArea } from '@/common/form/FormTextArea'
-import { useFillGeneralForm } from '@/features/profile/model/useFillGeneralForm'
+import { useFillGeneralForm } from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
 import { observer } from 'mobx-react-lite'
 
 export const GeneralInfoForm = observer(

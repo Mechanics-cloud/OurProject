@@ -1,11 +1,11 @@
 import { toast } from 'react-toastify'
 
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { profileAPi } from '@/features/profile/api/profile.api'
+import { profileAPi } from '@/features/profile/settings/generalInfo/api/profile.api'
 import {
   FormData,
   UpdatedProfile,
-} from '@/features/profile/model/useFillGeneralForm'
+} from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {

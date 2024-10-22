@@ -2,10 +2,9 @@ import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Paths, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
-import ProfileStore from '@/features/profile/model/profileStore'
+import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
 import image1 from '../../assets/images/image1.jpg'
@@ -25,11 +24,6 @@ const placeholderImages = [
 ]
 
 const Profile = () => {
-  const router = useRouter()
-  const settingsClickHandler = () => {
-    router.push(Paths.generalInfo)
-  }
-
   const updatedProfile = ProfileStore.updatedProfile
 
   return (

@@ -1,5 +1,5 @@
-import { AddPhoto } from '@/features/profile/ui/general-info/AddPhoto'
-import { GeneralInfoForm } from '@/features/profile/ui/general-info/GeneralInfoForm'
+import { AddPhoto } from '@/features/profile/settings/generalInfo/ui/AddPhoto'
+import { GeneralInfoForm } from '@/features/profile/settings/generalInfo/ui/GeneralInfoForm'
 
 export const GeneralInfo = () => {
   return (

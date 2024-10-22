@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form'
 
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import AuthStore from '@/features/auth/model/authStore'
-import { generalInfoSchema } from '@/features/profile/model/generalInfoSchema'
-import ProfileStore from '@/features/profile/model/profileStore'
-import { useFetchLocations } from '@/features/profile/model/useFetchLocations'
-import { useHandleCalendar } from '@/features/profile/model/useHandleCalendar'
+import { generalInfoSchema } from '@/features/profile/settings/generalInfo/model/generalInfoSchema'
+import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
+import { useFetchLocations } from '@/features/profile/settings/generalInfo/model/useFetchLocations'
+import { useHandleCalendar } from '@/features/profile/settings/generalInfo/model/useHandleCalendar'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export type FormData = {
