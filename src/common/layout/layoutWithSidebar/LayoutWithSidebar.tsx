@@ -18,13 +18,9 @@ export const LayoutWithSidebar: NextPage<PropsWithChildren> = ({
   }
 
   return (
-    <Layout>
+    <Layout className={'flex h-full'}>
       <SideBar />
-      <div className={'ml-[220px] pl-9'}>{children}</div>
+      <div className={'pl-9 border-l-2 border-dark-300 w-full'}>{children}</div>
     </Layout>
   )
-}
-
-export function getLayoutWithSidebar(page: ReactElement) {
-  return <LayoutWithSidebar>{page}</LayoutWithSidebar>
 }

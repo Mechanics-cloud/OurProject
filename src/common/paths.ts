@@ -5,6 +5,7 @@ export const Paths = {
   home: '/',
   privacyPolicy: '/auth/privacy-policy',
   profile: '/profile',
+  profileSettings: '/profile/settings',
   recoveryPassword: '/auth/recovery',
   registrationEmailResending: '/auth/registration-email-resending',
   signIn: '/auth/sign-in',

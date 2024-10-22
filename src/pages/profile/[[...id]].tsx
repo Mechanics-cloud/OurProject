@@ -4,6 +4,7 @@ import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
 import ProfileStore from '@/features/profile/model/profileStore'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
@@ -54,11 +55,8 @@ const Profile = () => {
                 <Paid />
               </Typography>
 
-              <Button
-                onClick={settingsClickHandler}
-                variant={'secondary'}
-              >
-                Profile Settings
+              <Button variant={'secondary'}>
+                <Link href={Paths.profileSettings}>Profile Settings</Link>
               </Button>
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
