@@ -23,6 +23,7 @@ export type FormData = {
 export const useFillGeneralForm = () => {
   const profile = AuthStore.profile
   const userProfile = ProfileStore.userProfile
+  const avatar = userProfile?.avatars[0].url
 
   const {
     control,
@@ -37,10 +38,14 @@ export const useFillGeneralForm = () => {
       dateOfBirth: userProfile?.dateOfBirth || '',
       firstName: userProfile?.firstName || '',
       lastName: userProfile?.lastName || '',
-      photoData: {
-        photo: null,
-        photoForServer: null,
-      },
+      // photoData: {
+      //   photo: null,
+      //   photoForServer: null,
+      // },
+      photoData: avatar
+        ? { photo: avatar, photoForServer: null }
+        : { photo: null, photoForServer: null },
+
       userName: userProfile?.userName || profile?.userName,
     },
     mode: 'onChange',

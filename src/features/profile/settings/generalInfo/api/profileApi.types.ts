@@ -10,7 +10,7 @@ export type UserProfile = {
   avatars: Avatar[]
   createdAt: string
   id: number
-} & UpdatedProfile
+} & Omit<UpdatedProfile, 'photoData'>
 
 export type Avatar = {
   createdAt: string

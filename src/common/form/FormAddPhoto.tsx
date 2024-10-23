@@ -13,7 +13,7 @@ export const FormAddPhoto = <T extends FieldValues>({
   name,
 }: Props<T>) => {
   const {
-    field: { onChange },
+    field: { onChange, ...field },
   } = useController({ control, name })
 
   return (
@@ -21,6 +21,7 @@ export const FormAddPhoto = <T extends FieldValues>({
       onModalPhotoSave={(photo) => {
         onChange(photo)
       }}
+      {...field}
     />
   )
 }

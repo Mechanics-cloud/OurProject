@@ -25,6 +25,7 @@ const placeholderImages = [
 
 const Profile = () => {
   const userProfile = ProfileStore.userProfile
+  const avatar = userProfile?.avatars[0].url
 
   return (
     <div className={'flex'}>
@@ -34,7 +35,7 @@ const Profile = () => {
             alt={'avatar'}
             className={'rounded-full pr-0'}
             height={200}
-            src={avatarPlaceholder}
+            src={avatar || avatarPlaceholder}
             width={200}
           />
           <div className={'flex flex-col flex-wrap w-full'}>
