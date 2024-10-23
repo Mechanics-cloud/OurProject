@@ -18,11 +18,7 @@ export const AddPhoto = ({ onModalPhotoSave }: Props) => {
   }
 
   return (
-    <div
-      className={
-        'flex justify-center items-center flex-col w-full h-[500px] gap-6'
-      }
-    >
+    <div className={'flex items-center flex-col h-[500px] gap-6'}>
       <div
         className={
           'w-[192px] aspect-square flex justify-center items-center rounded-full bg-dark-500'

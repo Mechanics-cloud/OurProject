@@ -7,7 +7,7 @@ import {
   UpdatedProfile,
   UserProfile,
   profileAPi,
-} from '@/features/profile/settings/generalInfo/api/profile.api'
+} from '@/features/profile/settings/generalInfo/api'
 import { FormData } from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
 import { makeAutoObservable, runInAction } from 'mobx'
 
