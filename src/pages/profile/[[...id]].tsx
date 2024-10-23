@@ -24,7 +24,7 @@ const placeholderImages = [
 ]
 
 const Profile = () => {
-  const updatedProfile = ProfileStore.updatedProfile
+  const userProfile = ProfileStore.userProfile
 
   return (
     <div className={'flex'}>
@@ -45,7 +45,7 @@ const Profile = () => {
                 className={'text-light-100 flex items-center gap-3'}
                 variant={'h1'}
               >
-                {updatedProfile?.userName ?? 'URL Profile'}
+                {userProfile?.userName ?? 'URL Profile'}
                 <Paid />
               </Typography>
 

@@ -2,11 +2,11 @@ import React from 'react'
 
 import { Tabs, TabsType, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { GeneralInfo } from '@/features/profile/settings/generalInfo/ui'
+import { GeneralInfoForm } from '@/features/profile/settings/generalInfo/ui'
 
 const tabsData: TabsType[] = [
   {
-    content: <GeneralInfo />,
+    content: <GeneralInfoForm />,
     id: 'tab1',
     title: 'General Information',
   },

@@ -1,15 +1,18 @@
 import { toast } from 'react-toastify'
 
+import { createFileForUpload } from '@/common/utils/createFileForUpload'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { profileAPi } from '@/features/profile/settings/generalInfo/api/profile.api'
+import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import {
-  FormData,
   UpdatedProfile,
-} from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
+  UserProfile,
+  profileAPi,
+} from '@/features/profile/settings/generalInfo/api/profile.api'
+import { FormData } from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {
-  updatedProfile: UpdatedProfile | undefined
+  userProfile: UserProfile | undefined
 
   constructor() {
     makeAutoObservable(this)
@@ -17,13 +20,13 @@ class ProfileStore {
 
   async getProfile() {
     try {
-      const updatedProfile = await profileAPi.getProfile()
+      const userProfile = await profileAPi.getProfile()
 
       runInAction(() => {
-        this.updatedProfile = updatedProfile
+        this.userProfile = userProfile
       })
 
-      return updatedProfile
+      return userProfile
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -44,7 +47,25 @@ class ProfileStore {
       const res = await profileAPi.updateProfile(updatedData)
 
       if (res.status === 204) {
+        if (data.photoData) {
+          await this.uploadAvatar(data.photoData)
+        }
         toast.success('Your settings are saved!')
+      }
+    } catch (error) {
+      responseErrorHandler(error)
+    }
+  }
+  async uploadAvatar(photoData: PhotoResult) {
+    try {
+      if (photoData.photoForServer) {
+        const file = createFileForUpload(photoData)
+
+        if (file) {
+          return await profileAPi.uploadAvatar(file)
+        }
+      } else {
+        responseErrorHandler('error occurred')
       }
     } catch (error) {
       responseErrorHandler(error)

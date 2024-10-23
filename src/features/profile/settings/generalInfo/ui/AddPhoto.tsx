@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 import { ImageOutline } from '@/assets/icons/outlineIcons'
 import { Button } from '@/common'
@@ -6,8 +6,16 @@ import { AvatarDialog } from '@/features/profile/settings/avatarDialog'
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import Image from 'next/image'
 
-export const AddPhoto = () => {
+type Props = {
+  onModalPhotoSave: (photo: PhotoResult) => void
+}
+export const AddPhoto = ({ onModalPhotoSave }: Props) => {
   const [photoObj, setPhotoObj] = useState<PhotoResult>()
+
+  const handlePhotoSave = (photo: PhotoResult) => {
+    setPhotoObj(photo)
+    onModalPhotoSave(photo)
+  }
 
   return (
     <div
@@ -42,7 +50,7 @@ export const AddPhoto = () => {
         )}
       </div>
       <AvatarDialog
-        onModalPhotoSave={setPhotoObj}
+        onModalPhotoSave={handlePhotoSave}
         triggerButton={<Button variant={'outline'}>Add profile photo</Button>}
       />
     </div>
