@@ -4,7 +4,7 @@ import { FieldValues, Path, PathValue, UseFormSetValue } from 'react-hook-form'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
-export const useHandleCalendar = <T extends FieldValues>(
+export const useCalendar = <T extends FieldValues>(
   setValue: UseFormSetValue<T>,
   name: Path<T>
 ) => {
@@ -15,7 +15,7 @@ export const useHandleCalendar = <T extends FieldValues>(
     setIsCalendarOpen((prev) => !prev)
   }
 
-  const calendarOutsideClickHandler = (e: MouseEvent) => {
+  const onCalendarOutsideClick = (e: MouseEvent) => {
     if (
       calendarRef.current &&
       !calendarRef.current.contains(e.target as Node)
@@ -26,17 +26,17 @@ export const useHandleCalendar = <T extends FieldValues>(
 
   useEffect(() => {
     if (isCalendarOpen) {
-      document.addEventListener('mousedown', calendarOutsideClickHandler)
+      document.addEventListener('mousedown', onCalendarOutsideClick)
     } else {
-      document.removeEventListener('mousedown', calendarOutsideClickHandler)
+      document.removeEventListener('mousedown', onCalendarOutsideClick)
     }
 
     return () => {
-      document.removeEventListener('mousedown', calendarOutsideClickHandler)
+      document.removeEventListener('mousedown', onCalendarOutsideClick)
     }
   }, [isCalendarOpen])
 
-  const selectDateHandler = (date: Date) => {
+  const onSelectDate = (date: Date) => {
     const formattedDate = format(date, 'dd.MM.yyyy', { locale: ru })
 
     setValue(name, formattedDate as PathValue<T, Path<T>>)
@@ -46,7 +46,7 @@ export const useHandleCalendar = <T extends FieldValues>(
   return {
     calendarRef,
     isCalendarOpen,
-    selectDateHandler,
+    onSelectDate,
     toggleCalendar,
   }
 }

@@ -1,4 +1,4 @@
 export * from './generalInfoSchema'
+export * from './useCalendar'
 export * from './useFetchLocations'
-export * from './useFillGeneralForm'
-export * from './useHandleCalendar'
+export * from './useFillGeneralInfo'

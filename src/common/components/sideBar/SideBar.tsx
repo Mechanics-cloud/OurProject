@@ -48,7 +48,7 @@ export const SideBar = observer(({ className }: Props) => {
   const { t } = useTranslation()
   const userId = authStore.profile?.userId
 
-  const handelCreate = () => {
+  const onCreate = () => {
     openModal()
   }
 
@@ -69,7 +69,7 @@ export const SideBar = observer(({ className }: Props) => {
             DefaultIcon={PlusSquareOutline}
             as={'button'}
             iconTrigger={isModalOpen}
-            onClick={handelCreate}
+            onClick={onCreate}
           >
             {t.menu.create}
           </NavLink>

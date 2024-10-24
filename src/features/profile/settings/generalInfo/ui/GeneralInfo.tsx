@@ -5,7 +5,7 @@ import CalendarOutline from '@/assets/icons/outlineIcons/CalendarOutline'
 import { Button, Calendar, FormTextField, SelectItem } from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
 import { FormTextArea } from '@/common/form/FormTextArea'
-import { useFillGeneralForm } from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
+import { useFillGeneralInfo } from '@/features/profile/settings/generalInfo/model/useFillGeneralInfo'
 import { AddPhoto } from '@/features/profile/settings/generalInfo/ui/AddPhoto'
 import { observer } from 'mobx-react-lite'
 
@@ -23,12 +23,12 @@ export const GeneralInfo = observer(
       isSubmitting,
       isValid,
       onModalPhotoSave,
+      onSelectDate,
       onSubmit,
       photoObj,
-      selectDateHandler,
       t,
       toggleCalendar,
-    } = useFillGeneralForm()
+    } = useFillGeneralInfo()
 
     return (
       <div
@@ -90,7 +90,7 @@ export const GeneralInfo = observer(
                   <div ref={calendarRef}>
                     <Calendar
                       className={'absolute'}
-                      onDayClick={selectDateHandler}
+                      onDayClick={onSelectDate}
                     />
                   </div>
                 )}
