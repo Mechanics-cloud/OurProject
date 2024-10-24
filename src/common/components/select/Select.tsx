@@ -120,13 +120,10 @@ type Props = {
   placeholder?: number | string
 } & ComponentPropsWithoutRef<typeof SelectPrimitive.Root>
 
-const Select = ({
-  children,
-  className,
-  label,
-  placeholder,
-  ...props
-}: Props) => {
+const Select = React.forwardRef<
+  React.ElementRef<typeof SelectPrimitive.Root>,
+  Props
+>(({ children, className, label, placeholder, ...props }, ref) => {
   return (
     <SelectBasic {...props}>
       <SelectGroup className={className}>
@@ -138,7 +135,9 @@ const Select = ({
       </SelectGroup>
     </SelectBasic>
   )
-}
+})
+
+Select.displayName = 'Select'
 
 export {
   Select,

@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
-  ({ children, className }) => {
+  ({ children, className }, _) => {
     const isLoading = generalStore.isLoading
 
     return (
