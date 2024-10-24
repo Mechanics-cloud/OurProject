@@ -10,6 +10,8 @@ import ProfileStore from '@/features/profile/settings/generalInfo/model/profileS
 import { useFetchLocations } from '@/features/profile/settings/generalInfo/model/useFetchLocations'
 import { useHandleCalendar } from '@/features/profile/settings/generalInfo/model/useHandleCalendar'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { format } from 'date-fns'
+import { ru } from 'date-fns/locale'
 
 export const useFillGeneralForm = () => {
   const profile = AuthStore.profile
@@ -24,9 +26,13 @@ export const useFillGeneralForm = () => {
     setPhotoObj(photo)
   }
 
+  const formattedDate =
+    userProfile?.dateOfBirth &&
+    format(userProfile?.dateOfBirth, 'dd.MM.yyyy', { locale: ru })
+
   const {
     control,
-    formState: { isSubmitting, isValid },
+    formState: { isDirty, isSubmitting, isValid },
     handleSubmit,
     setValue,
   } = useForm<FormData>({
@@ -34,7 +40,7 @@ export const useFillGeneralForm = () => {
       aboutMe: userProfile?.aboutMe || '',
       city: userProfile?.city || '',
       country: userProfile?.country || '',
-      dateOfBirth: userProfile?.dateOfBirth || '',
+      dateOfBirth: formattedDate || '',
       firstName: userProfile?.firstName || '',
       lastName: userProfile?.lastName || '',
       userName: userProfile?.userName || profile?.userName,
@@ -66,6 +72,7 @@ export const useFillGeneralForm = () => {
     countryValue,
     handleSubmit,
     isCalendarOpen,
+    isDirty,
     isSubmitting,
     isValid,
     onModalPhotoSave,

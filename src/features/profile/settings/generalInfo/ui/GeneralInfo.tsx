@@ -19,6 +19,7 @@ export const GeneralInfoForm = observer(
       countryValue,
       handleSubmit,
       isCalendarOpen,
+      isDirty,
       isSubmitting,
       isValid,
       onModalPhotoSave,
@@ -69,15 +70,15 @@ export const GeneralInfoForm = observer(
                 name={'dateOfBirth'}
                 readOnly
               >
-                {!isCalendarOpen ? (
-                  <CalendarOutline
+                {isCalendarOpen ? (
+                  <CalendarFilled
                     className={
                       'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer w-[18px] h-5'
                     }
                     onClick={toggleCalendar}
                   />
                 ) : (
-                  <CalendarFilled
+                  <CalendarOutline
                     className={
                       'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer w-[18px] h-5'
                     }
@@ -136,7 +137,7 @@ export const GeneralInfoForm = observer(
             />
             <div className={'flex justify-end mt-12'}>
               <Button
-                disabled={!isValid || isSubmitting}
+                disabled={!isValid || isSubmitting || !isDirty}
                 type={'submit'}
                 variant={'primary'}
               >
