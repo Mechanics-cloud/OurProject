@@ -25,7 +25,7 @@ const placeholderImages = [
 
 const Profile = () => {
   const userProfile = ProfileStore.userProfile
-  const avatar = userProfile?.avatars[0].url
+  const avatar = userProfile?.avatars[0]?.url
 
   return (
     <div className={'flex'}>

@@ -2,17 +2,11 @@ import React from 'react'
 
 import CalendarFilled from '@/assets/icons/filledIcons/CalendarFilled'
 import CalendarOutline from '@/assets/icons/outlineIcons/CalendarOutline'
-import {
-  Button,
-  Calendar,
-  FormTextField,
-  SelectItem,
-  ToastContainer,
-} from '@/common'
-import { FormAddPhoto } from '@/common/form/FormAddPhoto'
+import { Button, Calendar, FormTextField, SelectItem } from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
 import { FormTextArea } from '@/common/form/FormTextArea'
 import { useFillGeneralForm } from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
+import { AddPhoto } from '@/features/profile/settings/generalInfo/ui/AddPhoto'
 import { observer } from 'mobx-react-lite'
 
 export const GeneralInfoForm = observer(
@@ -27,7 +21,9 @@ export const GeneralInfoForm = observer(
       isCalendarOpen,
       isSubmitting,
       isValid,
+      onModalPhotoSave,
       onSubmit,
+      photoObj,
       selectDateHandler,
       toggleCalendar,
     } = useFillGeneralForm()
@@ -35,18 +31,18 @@ export const GeneralInfoForm = observer(
     return (
       <div
         className={
-          'flex w-full mt-6 relative after:absolute after:contain-content after:h-[1px] after:top-[90%] after:left-0 after:w-full after:bg-dark-300'
+          'flex gap-10 w-full mt-6 relative after:absolute after:contain-content after:h-[1px] after:top-[90%] after:left-0 after:w-full after:bg-dark-300'
         }
       >
+        <AddPhoto
+          onModalPhotoSave={onModalPhotoSave}
+          photoObj={photoObj}
+        />
         <form
           className={'flex gap-10 w-full'}
           onSubmit={handleSubmit(onSubmit)}
           ref={ref}
         >
-          <FormAddPhoto
-            control={control}
-            name={'photoData'}
-          />
           <div className={'w-full flex flex-col gap-6'}>
             <FormTextField
               control={control}
@@ -149,7 +145,6 @@ export const GeneralInfoForm = observer(
             </div>
           </div>
         </form>
-        <ToastContainer />
       </div>
     )
   })

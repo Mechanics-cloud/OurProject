@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Tabs, TabsType, Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { GeneralInfoForm } from '@/features/profile/settings/generalInfo/ui'
+import { GeneralInfoForm } from '@/features/profile/settings/generalInfo/ui/GeneralInfo'
 
 const tabsData: TabsType[] = [
   {
@@ -35,4 +35,4 @@ const Settings = () => {
   )
 }
 
-export default withProtection(Settings, false)
+export default withProtection(Settings)

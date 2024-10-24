@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Control, useWatch } from 'react-hook-form'
 
+import { FormData } from '@/features/profile/settings/generalInfo'
 import locationsApi, {
   CountryData,
 } from '@/features/profile/settings/generalInfo/api/locations.api'
-import { FormData } from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
 
 export const useFetchLocations = (control: Control<FormData>) => {
   const [countriesData, setCountriesData] = useState<CountryData[] | null>(null)

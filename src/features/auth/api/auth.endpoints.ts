@@ -9,7 +9,5 @@ export const Endpoints = {
   login: '/v1/auth/login',
   logout: '/v1/auth/logout',
   me: '/v1/auth/me',
-  profile: '/v1/users/profile',
   updateToken: '/v1/auth/update-tokens',
-  uploadAvatar: '/v1/users/profile/avatar',
 }

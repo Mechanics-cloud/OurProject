@@ -4,27 +4,14 @@ import { ImageOutline } from '@/assets/icons/outlineIcons'
 import { Button } from '@/common'
 import { AvatarDialog } from '@/features/profile/settings/avatarDialog'
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
-import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
 import Image from 'next/image'
-
-import avatarPlaceholder from '../../../../../assets/images/avatar.jpg'
 
 type Props = {
   onModalPhotoSave: (photo: PhotoResult) => void
+  photoObj: PhotoResult
 }
 export const AddPhoto = React.forwardRef<HTMLDivElement, Props>(
-  ({ onModalPhotoSave }: Props, _) => {
-    const currentPhoto = ProfileStore.userProfile?.avatars[0].url
-    const [photoObj, setPhotoObj] = useState<PhotoResult>({
-      photo: currentPhoto || null,
-      photoForServer: null,
-    })
-
-    const handlePhotoSave = (photo: PhotoResult) => {
-      setPhotoObj(photo)
-      onModalPhotoSave(photo)
-    }
-
+  ({ onModalPhotoSave, photoObj }: Props, _) => {
     return (
       <div className={'flex items-center flex-col h-[500px] gap-6'}>
         <div
@@ -37,7 +24,7 @@ export const AddPhoto = React.forwardRef<HTMLDivElement, Props>(
               alt={'avatar'}
               className={'object-cover'}
               height={200}
-              src={photoObj.photo || currentPhoto || avatarPlaceholder}
+              src={photoObj.photo}
               width={200}
             />
           ) : (
@@ -54,7 +41,7 @@ export const AddPhoto = React.forwardRef<HTMLDivElement, Props>(
           )}
         </div>
         <AvatarDialog
-          onModalPhotoSave={handlePhotoSave}
+          onModalPhotoSave={onModalPhotoSave}
           triggerButton={<Button variant={'outline'}>Add profile photo</Button>}
         />
       </div>

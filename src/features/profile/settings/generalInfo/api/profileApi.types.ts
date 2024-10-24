@@ -1,10 +1,9 @@
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
-import { FormData as FormDataType } from '@/features/profile/settings/generalInfo/model/useFillGeneralForm'
 
 export type UpdatedProfile = {
   photoData?: PhotoResult | undefined
   region: string
-} & Omit<Required<FormDataType>, 'photoData'>
+} & Omit<Required<FormData>, 'photoData'>
 
 export type UserProfile = {
   avatars: Avatar[]
@@ -18,4 +17,14 @@ export type Avatar = {
   height: number
   url: string
   width: number
+}
+
+export type FormData = {
+  aboutMe?: string
+  city?: string
+  country?: string
+  dateOfBirth?: string
+  firstName: string
+  lastName: string
+  userName: string
 }

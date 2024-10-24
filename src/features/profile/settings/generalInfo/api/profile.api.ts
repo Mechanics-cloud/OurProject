@@ -1,19 +1,20 @@
-import { Endpoints, instance } from '@/features/auth'
+import { instance } from '@/features/auth'
 import {
   UpdatedProfile,
   UserProfile,
 } from '@/features/profile/settings/generalInfo/api'
+import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
 class ProfileApi {
   constructor(private instance: AxiosInstance) {}
   public async getProfile(): Promise<UserProfile> {
-    return this.instance.get(Endpoints.profile).then((res) => res.data)
+    return this.instance.get(ProfileEndpoints.profile).then((res) => res.data)
   }
   public async updateProfile(
     profileData: UpdatedProfile
   ): Promise<AxiosResponse> {
-    return this.instance.put(Endpoints.profile, profileData)
+    return this.instance.put(ProfileEndpoints.profile, profileData)
   }
   public async uploadAvatar(file: File): Promise<any> {
     const formData = new FormData()
@@ -21,7 +22,7 @@ class ProfileApi {
     formData.append('file', file, file.name || 'avatar.jpg')
 
     return this.instance
-      .post(Endpoints.uploadAvatar, formData, {
+      .post(ProfileEndpoints.uploadAvatar, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
