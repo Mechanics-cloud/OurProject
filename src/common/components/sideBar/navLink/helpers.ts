@@ -1,5 +1,1 @@
-export const getBasePath = (path: string) => {
-  const basePath = path.split('/').slice(0, 2)
-
-  return basePath.join('/')
-}
+export const getBasePath = (path: string) => path.split('/').filter(Boolean)[0]
