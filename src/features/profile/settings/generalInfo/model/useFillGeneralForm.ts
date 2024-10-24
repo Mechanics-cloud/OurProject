@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useTranslation } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import AuthStore from '@/features/auth/model/authStore'
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
@@ -52,6 +53,7 @@ export const useFillGeneralForm = () => {
   const { calendarRef, isCalendarOpen, selectDateHandler, toggleCalendar } =
     useHandleCalendar(setValue, 'dateOfBirth')
   const { cities, countriesData, countryValue } = useFetchLocations(control)
+  const { t } = useTranslation()
 
   const onSubmit = async (data: FormData) => {
     try {
@@ -79,6 +81,7 @@ export const useFillGeneralForm = () => {
     onSubmit,
     photoObj,
     selectDateHandler,
+    t,
     toggleCalendar,
   }
 }

@@ -9,7 +9,7 @@ import { useFillGeneralForm } from '@/features/profile/settings/generalInfo/mode
 import { AddPhoto } from '@/features/profile/settings/generalInfo/ui/AddPhoto'
 import { observer } from 'mobx-react-lite'
 
-export const GeneralInfoForm = observer(
+export const GeneralInfo = observer(
   React.forwardRef<HTMLFormElement>((_, ref) => {
     const {
       calendarRef,
@@ -26,6 +26,7 @@ export const GeneralInfoForm = observer(
       onSubmit,
       photoObj,
       selectDateHandler,
+      t,
       toggleCalendar,
     } = useFillGeneralForm()
 
@@ -47,26 +48,26 @@ export const GeneralInfoForm = observer(
           <div className={'w-full flex flex-col gap-6'}>
             <FormTextField
               control={control}
-              label={'Username'}
+              label={t.profileInputs.userName}
               name={'userName'}
               required
             />
             <FormTextField
               control={control}
-              label={'First Name'}
+              label={t.profileInputs.firstName}
               name={'firstName'}
               required
             />
             <FormTextField
               control={control}
-              label={'Last Name'}
+              label={t.profileInputs.lastName}
               name={'lastName'}
               required
             />
             <div className={'flex flex-col'}>
               <FormTextField
                 control={control}
-                label={'Date of Birth'}
+                label={t.profileInputs.dateOfBirth}
                 name={'dateOfBirth'}
                 readOnly
               >
@@ -98,9 +99,9 @@ export const GeneralInfoForm = observer(
                 <FormSelect
                   className={'w-full'}
                   control={control}
-                  label={'Select your country'}
+                  label={t.profileInputs.country}
                   name={'country'}
-                  placeholder={'Country'}
+                  placeholder={t.profileInputs.placeholders.country}
                 >
                   {countriesData?.map((country) => (
                     <SelectItem
@@ -115,9 +116,9 @@ export const GeneralInfoForm = observer(
                   className={'w-full'}
                   control={control}
                   disabled={!countryValue}
-                  label={'Select your city'}
+                  label={t.profileInputs.city}
                   name={'city'}
-                  placeholder={'City'}
+                  placeholder={t.profileInputs.placeholders.city}
                 >
                   {cities?.map((city) => (
                     <SelectItem
@@ -132,7 +133,7 @@ export const GeneralInfoForm = observer(
             </div>
             <FormTextArea
               control={control}
-              label={'About me'}
+              label={t.profileInputs.aboutMe}
               name={'aboutMe'}
             />
             <div className={'flex justify-end mt-12'}>
@@ -141,7 +142,7 @@ export const GeneralInfoForm = observer(
                 type={'submit'}
                 variant={'primary'}
               >
-                Save Changes
+                {t.profileInputs.saveChanges}
               </Button>
             </div>
           </div>

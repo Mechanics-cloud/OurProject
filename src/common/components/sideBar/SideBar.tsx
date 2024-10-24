@@ -25,7 +25,7 @@ import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import authStore from '@/features/auth/model/authStore'
 import { observer } from 'mobx-react-lite'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 import { NavLink } from './navLink/NavLink'
 
@@ -46,6 +46,7 @@ export const SideBar = observer(({ className }: Props) => {
     }
   })
   const { t } = useTranslation()
+  const userId = authStore.profile?.userId
 
   const handelCreate = () => {
     openModal()
@@ -76,7 +77,7 @@ export const SideBar = observer(({ className }: Props) => {
           <NavLink
             ActiveIcon={Person}
             DefaultIcon={PersonOutline}
-            href={'/profile'}
+            href={`${Paths.profile}/${userId}`}
           >
             {t.menu.profile}
           </NavLink>

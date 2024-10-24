@@ -1,5 +1,6 @@
 import React, { ComponentPropsWithoutRef, ElementType } from 'react'
 
+import { getBasePath } from '@/common/components/sideBar/navLink/helpers'
 import { cn } from '@/common/utils/cn'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -35,13 +36,20 @@ export const NavLink = React.forwardRef<HTMLElement, Props<ElementType>>(
     const Component = as || Link
     const { pathname } = useRouter()
 
+    if (!href) {
+      return
+    }
+
+    const basePath = getBasePath(pathname)
+    const baseHref = getBasePath(href)
+
     let isActive = false
 
     if (Component === Link) {
       if (href === '/') {
         isActive = pathname === href
       } else {
-        isActive = pathname.startsWith(href)
+        isActive = basePath === baseHref
       }
     } else {
       isActive = !!iconTrigger

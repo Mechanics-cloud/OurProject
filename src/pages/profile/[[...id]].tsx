@@ -1,5 +1,5 @@
 import { Paid } from '@/assets/icons/filledIcons'
-import { Button, Paths, Typography } from '@/common'
+import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
 import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
@@ -22,10 +22,11 @@ const placeholderImages = [
   { id: 7, img: image3 },
   { id: 8, img: image4 },
 ]
-
+//todo: remove avatarPlaceholder and place another placeholder image
 const Profile = () => {
   const userProfile = ProfileStore.userProfile
   const avatar = userProfile?.avatars[0]?.url
+  const { t } = useTranslation()
 
   return (
     <div className={'flex'}>
@@ -51,21 +52,32 @@ const Profile = () => {
               </Typography>
 
               <Button variant={'secondary'}>
-                <Link href={Paths.profileSettings}>Profile Settings</Link>
+                <Link href={Paths.profileSettings}>
+                  {t.profilePage.settingsButton}
+                </Link>
               </Button>
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
               <div className={'flex flex-col'}>
                 <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}> Following</Typography>
+                <Typography variant={'reg14'}>
+                  {' '}
+                  {t.profilePage.following}
+                </Typography>
               </div>
               <div className={'flex flex-col'}>
                 <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}> Followers</Typography>
+                <Typography variant={'reg14'}>
+                  {' '}
+                  {t.profilePage.followers}
+                </Typography>
               </div>
               <div className={'flex flex-col'}>
                 <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}> Publications</Typography>
+                <Typography variant={'reg14'}>
+                  {' '}
+                  {t.profilePage.publications}
+                </Typography>
               </div>
             </div>
             <div className={'mt-[23px]'}>
