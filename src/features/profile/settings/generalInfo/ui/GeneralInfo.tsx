@@ -25,6 +25,7 @@ export const GeneralInfo = observer(
       onModalPhotoSave,
       onSelectDate,
       onSubmit,
+      photoChanged,
       photoObj,
       t,
       toggleCalendar,
@@ -138,7 +139,9 @@ export const GeneralInfo = observer(
             />
             <div className={'flex justify-end mt-12'}>
               <Button
-                disabled={!isValid || isSubmitting || !isDirty}
+                disabled={
+                  !isValid || isSubmitting || (!isDirty && !photoChanged)
+                }
                 type={'submit'}
                 variant={'primary'}
               >

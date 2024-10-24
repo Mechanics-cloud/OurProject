@@ -59,7 +59,8 @@ class ProfileStore {
         const file = createFileForUpload(photoData)
 
         if (file) {
-          return await profileAPi.uploadAvatar(file)
+          await profileAPi.uploadAvatar(file)
+          toast.success('Your settings are saved!')
         }
       } else {
         responseErrorHandler('error occurred')
