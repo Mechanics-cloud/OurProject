@@ -63,6 +63,7 @@ export const ru = {
   },
   profileInputs: {
     aboutMe: 'Обо мне',
+    addProfilePhoto: 'Загрузить фото',
     city: 'Выьерите ваш город',
     country: 'Выьерите вашу страну',
     dateOfBirth: 'Дата рождения',

@@ -29,8 +29,8 @@ const Profile = () => {
   const { t } = useTranslation()
 
   return (
-    <div className={'flex'}>
-      <div className={'flex flex-col'}>
+    <div className={'flex w-full'}>
+      <div className={'flex flex-col w-full'}>
         <div className={'mt-9 flex items-start gap-[38px] w-full mb-[53px]'}>
           <Image
             alt={'avatar'}
@@ -81,17 +81,9 @@ const Profile = () => {
               </div>
             </div>
             <div className={'mt-[23px]'}>
-              <Typography variant={'reg16'}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco
-              </Typography>
-              <Typography
-                href={'/'}
-                variant={'regularLink'}
-              >
-                laboris nisi ut aliquip ex ea commodo consequat
-              </Typography>
+              {userProfile?.aboutMe ? (
+                <Typography variant={'reg16'}>{userProfile.aboutMe}</Typography>
+              ) : null}
             </div>
           </div>
         </div>

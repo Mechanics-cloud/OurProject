@@ -65,6 +65,7 @@ export const en: LocaleType = {
   },
   profileInputs: {
     aboutMe: 'About me',
+    addProfilePhoto: 'Add a profile photo',
     city: 'Select your city',
     country: 'Select your country',
     dateOfBirth: 'Date of birth',
@@ -75,7 +76,7 @@ export const en: LocaleType = {
       country: 'Country',
     },
     saveChanges: 'Save changes',
-    userName: 'Username',
+    userName: 'User name',
   },
   profilePage: {
     followers: 'Followers',

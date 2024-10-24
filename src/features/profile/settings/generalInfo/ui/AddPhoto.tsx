@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { ImageOutline } from '@/assets/icons/outlineIcons'
-import { Button } from '@/common'
+import { Button, useTranslation } from '@/common'
 import { AvatarDialog } from '@/features/profile/settings/avatarDialog'
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import Image from 'next/image'
@@ -12,6 +12,8 @@ type Props = {
 }
 export const AddPhoto = React.forwardRef<HTMLDivElement, Props>(
   ({ onModalPhotoSave, photoObj }: Props, _) => {
+    const { t } = useTranslation()
+
     return (
       <div className={'flex items-center flex-col h-[500px] gap-6'}>
         <div
@@ -42,7 +44,14 @@ export const AddPhoto = React.forwardRef<HTMLDivElement, Props>(
         </div>
         <AvatarDialog
           onModalPhotoSave={onModalPhotoSave}
-          triggerButton={<Button variant={'outline'}>Add profile photo</Button>}
+          triggerButton={
+            <Button
+              className={'min-w-[196px]'}
+              variant={'outline'}
+            >
+              {t.profileInputs.addProfilePhoto}
+            </Button>
+          }
         />
       </div>
     )
