@@ -1,12 +1,13 @@
 import Link from 'next/link'
 
 type LinkProfileType = {
+  userId: number
   userName: string
 }
 
-export const LinkProfile = ({ userName }: LinkProfileType) => {
+export const LinkProfile = ({ userId, userName }: LinkProfileType) => {
   return (
-    <Link href={'/profile'}>
+    <Link href={`/profile/${userId}`}>
       <b>{userName} </b>
     </Link>
   )

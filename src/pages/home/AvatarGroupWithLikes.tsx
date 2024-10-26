@@ -27,7 +27,7 @@ export const AvatarGroupWithLikes = ({
             return (
               <Image
                 alt={'Avatar'}
-                className={'size-6 rounded-full'}
+                className={`size-6 rounded-full ${i > 0 ? `-ml-2` : ''}`}
                 height={192}
                 key={i}
                 src={avaUrl}
@@ -37,7 +37,7 @@ export const AvatarGroupWithLikes = ({
           })}
       </div>
       <span className={'text-[14px] leading-[24px]'}>
-        {likesCount} &ldquo;<b>Like</b>&rdquo;
+        {likesCount} &ldquo;<b>{likesCount === 1 ? 'Like' : 'Likes'}</b>&rdquo;
       </span>
     </div>
   )

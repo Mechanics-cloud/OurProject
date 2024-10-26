@@ -29,7 +29,7 @@ const AddCommentGroup = () => {
     fetchComments()
   }, [])
 
-  console.log(commentCount)
+  // console.log(commentCount)
 
   return (
     <div className={'w-full flex  justify-between'}>

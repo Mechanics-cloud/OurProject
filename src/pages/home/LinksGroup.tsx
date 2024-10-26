@@ -15,14 +15,29 @@ import { postsApi } from './posts/posts.api'
 type LinksGroupProps = {
   id: number
   isLiked: boolean
+  ownerId: number
 }
 
-export const LinksGroup = ({ id, isLiked }: LinksGroupProps) => {
-  const handleLike = async () => {
+export const LinksGroup = ({ id, isLiked, ownerId }: LinksGroupProps) => {
+  const onLiked = async () => {
     try {
       await postsApi.postLike({ postId: id })
     } catch (error) {
       console.error('Error liking the post:', error)
+    }
+  }
+  const onFollowing = async () => {
+    try {
+      await postsApi.toFollowing({ selectedUserId: ownerId })
+    } catch (error) {
+      console.error('Error onFollowing the post:', error)
+    }
+  }
+  const getFollowing = async () => {
+    try {
+      await postsApi.getFollowing('SashkaEKB')
+    } catch (error) {
+      console.error('Error onFollowing the post:', error)
     }
   }
 
@@ -30,7 +45,7 @@ export const LinksGroup = ({ id, isLiked }: LinksGroupProps) => {
     <div className={'w-full h-6 flex items-center justify-between mb-4'}>
       <div className={'flex items-center gap-5'}>
         <button
-          onClick={handleLike}
+          onClick={onLiked}
           type={'button'}
         >
           <Tooltip title={'Нравиться'}>
@@ -52,11 +67,20 @@ export const LinksGroup = ({ id, isLiked }: LinksGroupProps) => {
           </Tooltip>
         </Link>
       </div>
-      <Link href={'/'}>
-        <Tooltip title={'Сохранить'}>
+      <button
+        onClick={onFollowing}
+        type={'button'}
+      >
+        <Tooltip title={`Сохранить ${ownerId}`}>
           <BookmarkOutline className={'size-6'} />
         </Tooltip>
-      </Link>
+      </button>
+      <button
+        onClick={getFollowing}
+        type={'button'}
+      >
+        test
+      </button>
     </div>
   )
 }

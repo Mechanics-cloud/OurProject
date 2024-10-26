@@ -38,34 +38,32 @@ export const CustomHomePopover = () => {
         </button>
       </PopoverTrigger>
       <PopoverContent
-        className={'z-50'}
+        className={'z-50 w-[144px] min-h-[85px] mr-[120px] px-2 py-3'}
         sideOffset={3}
       >
-        <Card
+        {/* <Card
           asChild
           className={'w-[144px] min-h-[85px] mr-[120px] px-2 py-3'}
-        >
-          <nav>
-            <ul>
-              <Link
-                className={
-                  'flex items-center gap-2 mb-3  hover:text-accent-500'
-                }
-                href={'/'}
-              >
-                <PersonRemoveOutline className={'size-6'} />
-                <span className={'text-sm'}>{t.menu.unfollow}</span>
-              </Link>
-              <Link
-                className={'flex items-center gap-2  hover:text-accent-500'}
-                href={'/'}
-              >
-                <CopyOutline className={'size-6 flex-shrink-0'} />
-                <span className={'text-sm'}>{t.menu.copyLink}</span>
-              </Link>
-            </ul>
-          </nav>
-        </Card>
+        > */}
+        <nav>
+          <ul>
+            <Link
+              className={'flex items-center gap-2 mb-3  hover:text-accent-500'}
+              href={'/'}
+            >
+              <PersonRemoveOutline className={'size-6'} />
+              <span className={'text-sm'}>{t.menu.unfollow}</span>
+            </Link>
+            <Link
+              className={'flex items-center gap-2  hover:text-accent-500'}
+              href={'/'}
+            >
+              <CopyOutline className={'size-6 flex-shrink-0'} />
+              <span className={'text-sm'}>{t.menu.copyLink}</span>
+            </Link>
+          </ul>
+        </nav>
+        {/* </Card> */}
       </PopoverContent>
     </Popover>
   )

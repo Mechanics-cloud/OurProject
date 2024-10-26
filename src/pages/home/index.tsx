@@ -1,11 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 
-import {
-  Loader,
-  TextArea,
-  getLayoutWithSidebar,
-  useTranslation,
-} from '@/common'
+import { LayoutWithSidebar, Loader, TextArea, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
 import { Button } from '@/common/components/button'
@@ -141,7 +136,7 @@ function Home() {
       .publicPosts({
         endCursorPostId: 3,
         pageNumber: 0,
-        pageSize: 3,
+        pageSize: 5,
       })
       .then((data) => {
         if (data) {
@@ -196,7 +191,10 @@ function Home() {
               width={36}
             />
             <div className={'flex items-center space-x-2 pl-1'}>
-              <LinkProfile userName={item.userName} />
+              <LinkProfile
+                userId={item.ownerId}
+                userName={item.userName}
+              />
               <span className={'w-1.5 h-1.5 bg-light-100 rounded-full'}></span>
               <div className={'h-[20px] flex items-end'}>
                 <span
@@ -221,6 +219,7 @@ function Home() {
         <LinksGroup
           id={item.id}
           isLiked={item.isLiked}
+          ownerId={item.ownerId}
         />
         <div className={'w-full max-h-[72px] inline-flex gap-3'}>
           <Image
@@ -236,7 +235,10 @@ function Home() {
             }
             variant={'reg14'}
           >
-            <LinkProfile userName={item.userName} />
+            <LinkProfile
+              userId={item.id}
+              userName={item.userName}
+            />
             {item.description}
           </Typography>
         </div>
@@ -254,9 +256,9 @@ function Home() {
           </button>
         </div> */}
         <ViewAllCommentsButton postId={item.id} />
-        {/* <AddCommentGroup /> */}
+        <AddCommentGroup />
 
-        <div className={'w-full flex  justify-between'}>
+        {/* <div className={'w-full flex  justify-between'}>
           <input
             className={
               'placeholder-light-900 text-[14px] font-400  leading-[24px] w-full'
@@ -270,11 +272,12 @@ function Home() {
           >
             Publish
           </Button>
-        </div>
+        </div> */}
       </div>
     )
   })
 }
 
-Home.getLayout = getLayoutWithSidebar
+// Home.getLayout = LayoutWithSidebar
+
 export default withProtection(Home)
