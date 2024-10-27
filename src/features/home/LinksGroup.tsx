@@ -33,13 +33,6 @@ export const LinksGroup = ({ id, isLiked, ownerId }: LinksGroupProps) => {
       console.error('Error onFollowing the post:', error)
     }
   }
-  const getFollowing = async () => {
-    try {
-      await postsApi.getFollowing('SashkaEKB')
-    } catch (error) {
-      console.error('Error onFollowing the post:', error)
-    }
-  }
 
   return (
     <div className={'w-full h-6 flex items-center justify-between mb-4'}>
@@ -71,15 +64,9 @@ export const LinksGroup = ({ id, isLiked, ownerId }: LinksGroupProps) => {
         onClick={onFollowing}
         type={'button'}
       >
-        <Tooltip title={`Сохранить ${ownerId}`}>
+        <Tooltip title={`Подписаться userId ${ownerId}`}>
           <BookmarkOutline className={'size-6'} />
         </Tooltip>
-      </button>
-      <button
-        onClick={getFollowing}
-        type={'button'}
-      >
-        test
       </button>
     </div>
   )
