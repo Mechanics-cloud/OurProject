@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
+
+import { observer } from 'mobx-react-lite'
 
 import { CommentsStore } from './posts/postsStore'
 
@@ -6,12 +8,13 @@ type ViewAllComments = {
   postId: number
 }
 
-const ViewAllCommentsButton = ({ postId }: ViewAllComments) => {
-  const commentsStore = new CommentsStore()
+//TODO to change (in progress)
+const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
+  const commentsStore = useMemo(() => new CommentsStore(), [])
 
   useEffect(() => {
     commentsStore.getComments(postId)
-  }, [postId])
+  }, [postId, commentsStore])
 
   const isButtonDisabled =
     commentsStore.isLoading ||
@@ -32,6 +35,6 @@ const ViewAllCommentsButton = ({ postId }: ViewAllComments) => {
       </button>
     </div>
   )
-}
+})
 
 export default ViewAllCommentsButton

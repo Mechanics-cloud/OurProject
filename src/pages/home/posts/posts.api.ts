@@ -7,15 +7,13 @@ import { PostsComments, PostsLikes } from './posts.types'
 class PostsApi {
   constructor(private instance: AxiosInstance) {}
 
-  //todo del getFollowing
+  //todo del getFollowing and toFollowing
   public getFollowing(userName: any) {
     return instance.get<any>(`/v1/users/${userName}/following`).then((res) => {
-      console.log(res)
-
       return res.data
     })
   }
-  public getPostIdComments({ postId }: { postId: number }) {
+  public getPostIdComments(postId: number) {
     return instance
       .get<PostsComments>(`/v1/posts/${postId}/comments`)
       .then((res) => res.data)
@@ -47,8 +45,6 @@ class PostsApi {
     return instance
       .post<any>(`/v1/users/following`, selectedUserId)
       .then((res) => {
-        console.log(res)
-
         return res.data
       })
   }

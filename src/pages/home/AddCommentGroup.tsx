@@ -1,51 +1,56 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
 import { Button, typographyVariants } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { instance } from '@/features/auth'
 
-import { postsApi } from './posts/posts.api'
+type CommentGroup = {
+  postId: number
+}
 
-const AddCommentGroup = () => {
-  const [commentCount, setCommentCount] = useState<null | number>(null)
-  const [isLoading, setIsLoading] = useState(true)
+const AddCommentGroup = ({ postId }: CommentGroup) => {
+  const [comment, setComment] = useState('')
 
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const posts = await postsApi.publicPosts({
-          endCursorPostId: 10,
-          pageNumber: 1,
-          pageSize: 10,
-        })
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
 
-        setCommentCount(posts)
-      } catch (error) {
-        responseErrorHandler(error)
-      } finally {
-        setIsLoading(false)
-      }
+    try {
+      const response = await instance.post<any>(
+        `/v1/posts/${postId}/comments`,
+        {
+          content: comment,
+        }
+      )
+
+      setComment('')
+    } catch (error) {
+      responseErrorHandler(error)
     }
-
-    fetchComments()
-  }, [])
-
-  // console.log(commentCount)
+  }
 
   return (
-    <div className={'w-full flex  justify-between'}>
-      <input
-        className={
-          'placeholder-light-900 text-[14px] font-400  leading-[24px] w-full'
-        }
-        placeholder={'Add a Comments...'}
-        type={'text'}
-      ></input>
-      <Button
-        className={typographyVariants({ variant: 'h3' })}
-        variant={'text'}
+    <div className={'w-full'}>
+      <form
+        className={'w-full flex  justify-between'}
+        onSubmit={onSubmit}
       >
-        Publish
-      </Button>
+        <input
+          className={
+            'placeholder-light-900 text-[14px] font-400  leading-[24px] w-full'
+          }
+          onChange={(e) => setComment(e.target.value)}
+          placeholder={'Add a Comments...'}
+          type={'text'}
+          value={comment}
+        ></input>
+        <Button
+          className={typographyVariants({ variant: 'h3' })}
+          type={'submit'}
+          variant={'text'}
+        >
+          Publish
+        </Button>
+      </form>
     </div>
   )
 }

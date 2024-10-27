@@ -1,12 +1,4 @@
-import { StorageKeys } from '@/common/enums'
-import {
-  removeFromLocalStorage,
-  setToLocalStorage,
-} from '@/common/utils/localStorage'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { Profile, authApi } from '@/features/auth'
-import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
-import axios, { InternalAxiosRequestConfig } from 'axios'
 import { makeAutoObservable, runInAction, toJS } from 'mobx'
 
 import { homeApi } from '../home.api'
@@ -28,7 +20,7 @@ export class CommentsStore {
     }
     try {
       this.isLoading = true
-      const response = await postsApi.getPostIdComments({ postId })
+      const response = await postsApi.getPostIdComments(postId)
 
       runInAction(() => {
         this.comments = response
@@ -62,5 +54,27 @@ export class LikesStore {
     } catch (error) {
       responseErrorHandler(error)
     }
+  }
+
+  get getAvatarImages() {
+    let firstThreeAvatars = null
+
+    if (
+      this.likes?.items.length !== 0 &&
+      this.likes?.items[0]?.avatars.length !== 0
+    ) {
+      firstThreeAvatars = this.likes?.items
+        .slice(0, 3)
+        .filter(
+          (item) =>
+            item !== undefined &&
+            item.avatars &&
+            item.avatars[0] &&
+            item.avatars[0].url
+        )
+        .map((item) => item.avatars[1]?.url)
+    }
+
+    return firstThreeAvatars
   }
 }

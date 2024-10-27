@@ -13,7 +13,6 @@ import {
   useTranslation,
 } from '@/common'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 export const CustomHomePopover = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false)

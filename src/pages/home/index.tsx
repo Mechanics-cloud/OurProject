@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { Loader, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import Slider from '@/common/components/slider/Slider'
-import { Typography, typographyVariants } from '@/common/components/typography'
+import { Typography } from '@/common/components/typography'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -121,8 +121,8 @@ const Home = observer(() => {
           </Typography>
         </div>
         <AvatarGroupWithLikes
-          id={item.id}
           likesCount={item.likesCount}
+          postId={item.id}
         />
         <ViewAllCommentsButton postId={item.id} />
         <AddCommentGroup postId={item.id} />

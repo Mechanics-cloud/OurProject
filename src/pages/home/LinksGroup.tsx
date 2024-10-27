@@ -17,7 +17,7 @@ type LinksGroupProps = {
   isLiked: boolean
   ownerId: number
 }
-
+//TODO to change (in progress)
 export const LinksGroup = ({ id, isLiked, ownerId }: LinksGroupProps) => {
   const onLiked = async () => {
     try {
