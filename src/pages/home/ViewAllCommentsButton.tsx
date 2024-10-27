@@ -1,35 +1,22 @@
 import React, { useEffect, useState } from 'react'
 
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { CommentsStore } from './posts/postsStore'
 
-import { postsApi } from './posts/posts.api'
-
-type ViewAllCommentsButtonType = {
+type ViewAllComments = {
   postId: number
 }
 
-const ViewAllCommentsButton = ({ postId }: ViewAllCommentsButtonType) => {
-  const [commentCount, setCommentCount] = useState<null | number>(null)
-  const [isLoading, setIsLoading] = useState(true)
+const ViewAllCommentsButton = ({ postId }: ViewAllComments) => {
+  const commentsStore = new CommentsStore()
 
   useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const count = await postsApi.postIdComments({ postId })
-
-        setCommentCount(count.totalCount)
-      } catch (error) {
-        responseErrorHandler(error)
-      } finally {
-        setIsLoading(false)
-      }
-    }
-
-    fetchComments()
+    commentsStore.getComments(postId)
   }, [postId])
 
   const isButtonDisabled =
-    isLoading || commentCount === null || commentCount === 0
+    commentsStore.isLoading ||
+    commentsStore.comments === null ||
+    commentsStore.comments.totalCount === 0
 
   return (
     <div className={'w-full h-6 mb-3'}>
@@ -38,9 +25,9 @@ const ViewAllCommentsButton = ({ postId }: ViewAllCommentsButtonType) => {
         type={'button'}
       >
         <span className={'text-[14px] font-bold leading-[24px] text-light-900'}>
-          {isLoading
+          {commentsStore.isLoading
             ? 'Loading...'
-            : `View All Comments (${commentCount || 0})`}
+            : `View All Comments (${commentsStore.comments?.totalCount || 0})`}
         </span>
       </button>
     </div>

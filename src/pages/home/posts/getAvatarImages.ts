@@ -20,7 +20,7 @@ export const getAvatarImages = async (
             item.avatars[0] &&
             item.avatars[0].url
         )
-        .map((item) => item.avatars[0]?.url)
+        .map((item) => item.avatars[1]?.url)
     }
   } catch (error) {
     responseErrorHandler(error)

@@ -16,3 +16,9 @@ export enum ScreenWidths {
 export enum FileSizes {
   UserPhotoSize = 10 * oneMB,
 }
+
+export enum LikeStatus {
+  Dislike = 'DISLIKE',
+  Like = 'LIKE',
+  None = 'NONE',
+}

@@ -1,6 +1,6 @@
 import { StaticImageData } from 'next/image'
 
-export interface RootInterface {
+export interface HomePageRootInterface {
   items: [] | Item[]
   nextCursor: number
   page: number
@@ -11,7 +11,7 @@ export interface RootInterface {
 }
 
 export interface Item {
-  avatarOwner: StaticImageData | string //todo StaticImageData для теста (данные взял из обьекта) удалить
+  avatarOwner: string
   createdAt: string
   description: string
   id: number
@@ -35,10 +35,10 @@ export interface Image {
   fileSize: number
   height: number
   uploadId: string
-  url: StaticImageData | string //todo StaticImageData для теста (данные взял из обьекта) удалить
+  url: string
   width: number
 }
-export interface homeData {
+export interface HomePageQuery {
   endCursorPostId: number
   pageNumber: number
   pageSize: number

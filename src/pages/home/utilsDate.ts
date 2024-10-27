@@ -1,4 +1,3 @@
-// Тип для ключей объекта ranges
 type TimeRangeKey =
   | 'days'
   | 'hours'
@@ -8,7 +7,6 @@ type TimeRangeKey =
   | 'weeks'
   | 'years'
 
-// Тип для объекта ranges
 type TimeRangesObj = {
   [key in TimeRangeKey]: number
 }

@@ -1,19 +1,13 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect } from 'react'
 
-import { LayoutWithSidebar, Loader, TextArea, useTranslation } from '@/common'
+import { Loader, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
-import { Button } from '@/common/components/button'
 import Slider from '@/common/components/slider/Slider'
 import { Typography, typographyVariants } from '@/common/components/typography'
-import authStore from '@/features/auth/model/authStore'
+import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import third from 'src/assets/images/image1.jpg'
-import second from 'src/assets/images/image2.jpg'
-import first from 'src/assets/images/image3.jpg'
-import four from 'src/assets/images/image4.jpg'
+import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
 import AddCommentGroup from './AddCommentGroup'
 import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
@@ -21,134 +15,19 @@ import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
 import ViewAllCommentsButton from './ViewAllCommentsButton'
-import { homeApi } from './home.api'
-import { Item, RootInterface } from './home.types'
-import { getAvatarImages } from './posts/getAvatarImages'
-import { postsApi } from './posts/posts.api'
+import postsStore from './homePageStore'
 import { timeAgo } from './utilsDate'
 
-const dataTest = [
-  {
-    avatarOwner: four,
-    createdAt: '2024-10-07T13:37:28.059Z',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-
-    id: 5,
-    images: [
-      {
-        createdAt: '2024-10-07T13:37:27.351Z',
-        fileSize: 300,
-        height: 300,
-        uploadId: 'string',
-        url: first,
-        width: 300,
-      },
-      {
-        createdAt: '2024-10-07T13:37:27.351Z',
-        fileSize: 300,
-        height: 300,
-        uploadId: 'string',
-        url: four,
-        width: 300,
-      },
-      {
-        createdAt: '2024-10-07T13:37:27.351Z',
-        fileSize: 300,
-        height: 300,
-        uploadId: 'string',
-        url: second,
-        width: 300,
-      },
-    ],
-    isLiked: true,
-    likesCount: 0,
-    location: 'location',
-    owner: {
-      firstName: 'firstName',
-      lastName: 'lastName',
-    },
-    ownerId: 1,
-    updatedAt: '2024-10-07T13:37:28.059Z',
-    userName: 'Alex',
-  },
-  {
-    avatarOwner: four,
-    createdAt: '2024-10-07T13:37:28.059Z',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-
-    id: 2,
-    images: [
-      {
-        createdAt: '2024-10-07T13:37:27.351Z',
-        fileSize: 300,
-        height: 300,
-        uploadId: 'string',
-        url: first,
-        width: 300,
-      },
-      {
-        createdAt: '2024-10-07T13:37:27.351Z',
-        fileSize: 300,
-        height: 300,
-        uploadId: 'string',
-        url: four,
-        width: 300,
-      },
-      {
-        createdAt: '2024-10-07T13:37:27.351Z',
-        fileSize: 300,
-        height: 300,
-        uploadId: 'string',
-        url: second,
-        width: 300,
-      },
-    ],
-    isLiked: false,
-    likesCount: 0,
-    location: 'location',
-    owner: {
-      firstName: 'firstName',
-      lastName: 'lastName',
-    },
-    ownerId: 1,
-    updatedAt: '2024-10-07T13:37:28.059Z',
-    userName: 'Alex',
-  },
-]
-
-function Home() {
-  // const [state, setState] = useState<Item[]>(dataTest)
-  const [state, setState] = useState<Item[]>([])
-  const [loading, setLoading] = useState(false) //todo change on true
-
+const Home = observer(() => {
+  const state = postsStore.publicationsFollowers?.items
   const { t } = useTranslation()
   const router = useRouter()
 
-  const isAuth = !!authStore.profile
-
-  // TODO раскомментировать
   useEffect(() => {
-    // homeApi
-    // .publicationsFollowers({
-    postsApi
-      .publicPosts({
-        endCursorPostId: 3,
-        pageNumber: 0,
-        pageSize: 5,
-      })
-      .then((data) => {
-        if (data) {
-          setState(data.items)
-        }
-      })
-      .finally(() => setLoading(false))
+    postsStore.getPostsPublicationsFollowers()
   }, [])
-  //TODO удалить консоль
-  // console.log(state)
 
-  if (loading) {
+  if (postsStore.isLoading) {
     return (
       <>
         <Loader />
@@ -160,20 +39,19 @@ function Home() {
       </>
     )
   }
-  // if (state.length === 0) {
-  //   return (
-  //     <div
-  //       className={
-  //         'w-[491px] h-40 border-b mt-[24px] ml-[10.9375rem] flex justify-center items-center bg-dark-100'
-  //       }
-  //     >
-  //       На данный момент нет постов
-  //     </div>
-  //   )
-  // }
-  // добавить в slider адресс item.images
+  if (state?.length === 0 && !postsStore.isLoading) {
+    return (
+      <div
+        className={
+          'w-[491px] h-40 border-b mt-[24px] ml-[10.9375rem] flex justify-center items-center bg-dark-100'
+        }
+      >
+        На данный момент нет постов
+      </div>
+    )
+  }
 
-  return state.map((item) => {
+  return state?.map((item) => {
     return (
       <div
         className={
@@ -187,7 +65,7 @@ function Home() {
               alt={'Avatar'}
               className={'size-9 rounded-full'}
               height={36}
-              src={item.avatarOwner}
+              src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
               width={36}
             />
             <div className={'flex items-center space-x-2 pl-1'}>
@@ -195,7 +73,7 @@ function Home() {
                 userId={item.ownerId}
                 userName={item.userName}
               />
-              <span className={'w-1.5 h-1.5 bg-light-100 rounded-full'}></span>
+              <span className={'size-1.5 bg-light-100 rounded-full'}></span>
               <div className={'h-[20px] flex items-end'}>
                 <span
                   className={
@@ -226,7 +104,7 @@ function Home() {
             alt={'Avatar'}
             className={'size-9 rounded-full mt-[5px]'}
             height={36}
-            src={item.avatarOwner}
+            src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
             width={36}
           />
           <Typography
@@ -246,38 +124,11 @@ function Home() {
           id={item.id}
           likesCount={item.likesCount}
         />
-        {/* <div className={'w-full h-6 mb-3'}>
-          <button type={'button'}>
-            <span
-              className={'text-[14px] font-bold  leading-[24px] text-light-900'}
-            >
-              View All Comments (114)
-            </span>
-          </button>
-        </div> */}
         <ViewAllCommentsButton postId={item.id} />
-        <AddCommentGroup />
-
-        {/* <div className={'w-full flex  justify-between'}>
-          <input
-            className={
-              'placeholder-light-900 text-[14px] font-400  leading-[24px] w-full'
-            }
-            placeholder={'Add a Comments...'}
-            type={'text'}
-          ></input>
-          <Button
-            className={typographyVariants({ variant: 'h3' })}
-            variant={'text'}
-          >
-            Publish
-          </Button>
-        </div> */}
+        <AddCommentGroup postId={item.id} />
       </div>
     )
   })
-}
-
-// Home.getLayout = LayoutWithSidebar
+})
 
 export default withProtection(Home)

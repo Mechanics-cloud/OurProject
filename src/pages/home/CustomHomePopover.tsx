@@ -41,10 +41,6 @@ export const CustomHomePopover = () => {
         className={'z-50 w-[144px] min-h-[85px] mr-[120px] px-2 py-3'}
         sideOffset={3}
       >
-        {/* <Card
-          asChild
-          className={'w-[144px] min-h-[85px] mr-[120px] px-2 py-3'}
-        > */}
         <nav>
           <ul>
             <Link
@@ -63,7 +59,6 @@ export const CustomHomePopover = () => {
             </Link>
           </ul>
         </nav>
-        {/* </Card> */}
       </PopoverContent>
     </Popover>
   )

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import Image from 'next/image'
 
-import { getAvatarImages } from './posts/getAvatarImages'
+import { getAvatarImages } from './getAvatarImages'
 
 type AvatarGroupWithLikesType = {
   id: number
@@ -28,10 +28,10 @@ export const AvatarGroupWithLikes = ({
               <Image
                 alt={'Avatar'}
                 className={`size-6 rounded-full ${i > 0 ? `-ml-2` : ''}`}
-                height={192}
+                height={45}
                 key={i}
                 src={avaUrl}
-                width={192}
+                width={45}
               />
             )
           })}

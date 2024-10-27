@@ -1,7 +1,7 @@
 import { instance } from '@/features/auth/api/instance'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
-import { homeData } from '../home.types'
+import { HomePageQuery } from '../home.types'
 import { PostsComments, PostsLikes } from './posts.types'
 
 class PostsApi {
@@ -9,20 +9,20 @@ class PostsApi {
 
   //todo del getFollowing
   public getFollowing(userName: any) {
-    return instance.get<any>(`/v1/users/${userName}/followers`).then((res) => {
+    return instance.get<any>(`/v1/users/${userName}/following`).then((res) => {
       console.log(res)
 
       return res.data
     })
   }
+  public getPostIdComments({ postId }: { postId: number }) {
+    return instance
+      .get<PostsComments>(`/v1/posts/${postId}/comments`)
+      .then((res) => res.data)
+  }
   public getPostLikes({ postId }: { postId: number }) {
     return instance
       .get<PostsLikes>(`/v1/posts/${postId}/likes`)
-      .then((res) => res.data)
-  }
-  public postIdComments({ postId }: { postId: number }) {
-    return instance
-      .get<PostsComments>(`/v1/posts/${postId}/comments`)
       .then((res) => res.data)
   }
   public postLike({ postId }: { postId: number }) {
@@ -38,7 +38,7 @@ class PostsApi {
       .then((res) => res.data)
   }
 
-  public publicPosts(data: homeData) {
+  public publicPosts(data: HomePageQuery) {
     return instance
       .get<any>(`/v1/public-posts/all/`, { params: data })
       .then((res) => res.data)
