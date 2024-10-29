@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, ElementType } from 'react'
 
-import { getBasePath } from '@/common/components/sideBar/navLink/helpers'
 import { cn } from '@/common/utils/cn'
+import { getBasePath } from '@/common/utils/getBasePath'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

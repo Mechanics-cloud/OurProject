@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
+import CalendarClosed from '@/assets/icons/filledIcons/CalendarFilled'
+import CalendarOpen from '@/assets/icons/outlineIcons/CalendarOutline'
 import {
   Calendar,
   Popover,
@@ -11,9 +13,6 @@ import {
 import { cn } from '@/common/utils/cn'
 import { format, isValid, parse } from 'date-fns'
 import { ru } from 'date-fns/locale'
-
-import CalendarClosed from '../../../assets/icons/filledIcons/CalendarFilled'
-import CalendarOpen from './../../../assets/icons/outlineIcons/CalendarOutline'
 
 type Props = {
   disabled: boolean

@@ -12,7 +12,7 @@ import {
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {
-  userProfile: UserProfile | undefined
+  userProfile?: UserProfile
 
   constructor() {
     makeAutoObservable(this)

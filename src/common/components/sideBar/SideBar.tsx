@@ -25,7 +25,7 @@ import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import authStore from '@/features/auth/model/authStore'
 import { observer } from 'mobx-react-lite'
-import Router, { useRouter } from 'next/router'
+import Router from 'next/router'
 
 import { NavLink } from './navLink/NavLink'
 
@@ -48,10 +48,6 @@ export const SideBar = observer(({ className }: Props) => {
   const { t } = useTranslation()
   const userId = authStore.profile?.userId
 
-  const onCreate = () => {
-    openModal()
-  }
-
   return (
     <aside className={cn('flex flex-col min-w-56 h-screen', className)}>
       <nav className={'pt-[72px]'}>
@@ -69,7 +65,7 @@ export const SideBar = observer(({ className }: Props) => {
             DefaultIcon={PlusSquareOutline}
             as={'button'}
             iconTrigger={isModalOpen}
-            onClick={onCreate}
+            onClick={openModal}
           >
             {t.menu.create}
           </NavLink>

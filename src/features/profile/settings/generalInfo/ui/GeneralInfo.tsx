@@ -87,14 +87,14 @@ export const GeneralInfo = observer(
                     onClick={toggleCalendar}
                   />
                 )}
-                {isCalendarOpen && (
-                  <div ref={calendarRef}>
+                <div ref={calendarRef}>
+                  {isCalendarOpen && (
                     <Calendar
                       className={'absolute'}
                       onDayClick={onSelectDate}
                     />
-                  </div>
-                )}
+                  )}
+                </div>
               </FormTextField>
               <div className={'flex gap-6'}>
                 <FormSelect
