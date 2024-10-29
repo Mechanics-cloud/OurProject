@@ -8,6 +8,8 @@ import {
   UserProfile,
   profileAPi,
 } from '@/features/profile/settings/generalInfo/api'
+import { format } from 'date-fns'
+import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {
@@ -20,9 +22,12 @@ class ProfileStore {
   async getProfile() {
     try {
       const userProfile = await profileAPi.getProfile()
+      const formattedDate =
+        userProfile.dateOfBirth &&
+        format(userProfile.dateOfBirth, 'dd.MM.yyyy', { locale: ru })
 
       runInAction(() => {
-        this.userProfile = userProfile
+        this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
       })
 
       return userProfile

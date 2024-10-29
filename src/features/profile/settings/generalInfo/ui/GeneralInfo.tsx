@@ -10,6 +10,7 @@ import {
 } from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
 import { FormTextArea } from '@/common/form/FormTextArea'
+import { useCalendar } from '@/features/profile'
 import { useFillGeneralInfo } from '@/features/profile/settings/generalInfo/model/useFillGeneralInfo'
 import { AddPhoto } from '@/features/profile/settings/generalInfo/ui/AddPhoto'
 import { observer } from 'mobx-react-lite'
@@ -18,22 +19,22 @@ export const GeneralInfo = observer(
   React.forwardRef<HTMLFormElement>((_, ref) => {
     const { t } = useTranslation()
     const {
-      calendarRef,
       cities,
       control,
       countriesData,
       countryValue,
-      isCalendarOpen,
       isDirty,
       isSubmitting,
       isValid,
       onModalPhotoSave,
-      onSelectDate,
       onSubmit,
       photoChanged,
       photoObj,
-      toggleCalendar,
+      setValue,
     } = useFillGeneralInfo()
+
+    const { calendarRef, isCalendarOpen, onSelectDate, toggleCalendar } =
+      useCalendar(setValue, 'dateOfBirth')
 
     return (
       <div
@@ -72,9 +73,8 @@ export const GeneralInfo = observer(
             <div className={'flex flex-col'}>
               <FormTextField
                 control={control}
-                label={t.profileInputs.dateOfBirth}
+                label={'Date of Birth'}
                 name={'dateOfBirth'}
-                readOnly
               >
                 {isCalendarOpen ? (
                   <CalendarFilled
