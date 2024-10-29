@@ -27,7 +27,7 @@ class AuthApi {
     return this.instance.post(Endpoints.EmailResending, emailResendData)
   }
 
-  public async login(data: SignInFields) {
+  public login(data: SignInFields) {
     return instance
       .post(Endpoints.login, data)
       .then((res) => res.data.accessToken)
@@ -37,7 +37,7 @@ class AuthApi {
     return instance.post(Endpoints.logout)
   }
 
-  public async me(): Promise<Profile> {
+  public me(): Promise<Profile> {
     return instance.get(Endpoints.me).then((res) => res.data)
   }
 

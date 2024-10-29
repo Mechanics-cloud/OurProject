@@ -1,8 +1,13 @@
 import React from 'react'
 
-import CalendarFilled from '@/assets/icons/filledIcons/CalendarFilled'
-import CalendarOutline from '@/assets/icons/outlineIcons/CalendarOutline'
-import { Button, Calendar, FormTextField, SelectItem } from '@/common'
+import { CalendarFilled, CalendarOutline } from '@/assets/icons'
+import {
+  Button,
+  Calendar,
+  FormTextField,
+  SelectItem,
+  useTranslation,
+} from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
 import { FormTextArea } from '@/common/form/FormTextArea'
 import { useFillGeneralInfo } from '@/features/profile/settings/generalInfo/model/useFillGeneralInfo'
@@ -11,13 +16,13 @@ import { observer } from 'mobx-react-lite'
 
 export const GeneralInfo = observer(
   React.forwardRef<HTMLFormElement>((_, ref) => {
+    const { t } = useTranslation()
     const {
       calendarRef,
       cities,
       control,
       countriesData,
       countryValue,
-      handleSubmit,
       isCalendarOpen,
       isDirty,
       isSubmitting,
@@ -27,7 +32,6 @@ export const GeneralInfo = observer(
       onSubmit,
       photoChanged,
       photoObj,
-      t,
       toggleCalendar,
     } = useFillGeneralInfo()
 
@@ -43,7 +47,7 @@ export const GeneralInfo = observer(
         />
         <form
           className={'flex gap-10 w-full'}
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={onSubmit}
           ref={ref}
         >
           <div className={'w-full flex flex-col gap-6'}>

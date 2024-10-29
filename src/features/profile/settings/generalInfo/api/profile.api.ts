@@ -8,15 +8,13 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 
 class ProfileApi {
   constructor(private instance: AxiosInstance) {}
-  public async getProfile(): Promise<UserProfile> {
+  public getProfile(): Promise<UserProfile> {
     return this.instance.get(ProfileEndpoints.profile).then((res) => res.data)
   }
-  public async updateProfile(
-    profileData: UpdatedProfile
-  ): Promise<AxiosResponse> {
+  public updateProfile(profileData: UpdatedProfile): Promise<AxiosResponse> {
     return this.instance.put(ProfileEndpoints.profile, profileData)
   }
-  public async uploadAvatar(file: File): Promise<any> {
+  public uploadAvatar(file: File): Promise<any> {
     const formData = new FormData()
 
     formData.append('file', file, file.name || 'avatar.jpg')

@@ -1,11 +1,10 @@
 import { toast } from 'react-toastify'
 
-import { createFileForUpload } from '@/common/utils/createFileForUpload'
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { createFileForUpload, responseErrorHandler } from '@/common'
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import {
-  FormData,
   UpdatedProfile,
+  UserInfo,
   UserProfile,
   profileAPi,
 } from '@/features/profile/settings/generalInfo/api'
@@ -32,7 +31,7 @@ class ProfileStore {
     }
   }
 
-  async updateProfile(data: FormData) {
+  async updateProfile(data: UserInfo) {
     try {
       const updatedData: UpdatedProfile = {
         aboutMe: data.aboutMe ?? '',

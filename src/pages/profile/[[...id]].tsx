@@ -24,9 +24,9 @@ const placeholderImages = [
 ]
 //todo: remove avatarPlaceholder and place another placeholder image
 const Profile = () => {
+  const { t } = useTranslation()
   const userProfile = ProfileStore.userProfile
   const avatar = userProfile?.avatars[0]?.url
-  const { t } = useTranslation()
 
   return (
     <div className={'flex w-full'}>

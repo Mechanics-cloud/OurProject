@@ -1,9 +1,9 @@
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 
 export type UpdatedProfile = {
-  photoData?: PhotoResult | undefined
+  photoData?: PhotoResult
   region: string
-} & Omit<Required<FormData>, 'photoData'>
+} & Omit<Required<UserInfo>, 'photoData'>
 
 export type UserProfile = {
   avatars: Avatar[]
@@ -19,7 +19,7 @@ export type Avatar = {
   width: number
 }
 
-export type FormData = {
+export type UserInfo = {
   aboutMe?: string
   city?: string
   country?: string

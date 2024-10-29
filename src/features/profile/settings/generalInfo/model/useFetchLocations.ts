@@ -8,7 +8,7 @@ import locationsApi, {
 
 export const useFetchLocations = (control: Control<FormData>) => {
   const [countriesData, setCountriesData] = useState<CountryData[] | null>(null)
-  const [cities, setCities] = useState<string[] | undefined>([])
+  const [cities, setCities] = useState<null | string[]>([])
 
   const countryValue = useWatch({
     control,

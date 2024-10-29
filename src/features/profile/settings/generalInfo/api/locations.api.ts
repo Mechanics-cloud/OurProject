@@ -3,7 +3,7 @@ import axios from 'axios'
 
 class LocationsApi {
   constructor() {}
-  public async fetchCountries(): Promise<CountryData[]> {
+  public fetchCountries(): Promise<CountryData[]> {
     return axios.get(ProfileEndpoints.locations).then((res) => res.data)
   }
 }

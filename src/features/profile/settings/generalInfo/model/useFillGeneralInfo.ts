@@ -1,9 +1,8 @@
 import { useForm } from 'react-hook-form'
 
-import { useTranslation } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import AuthStore from '@/features/auth/model/authStore'
-import { FormData, useCalendar } from '@/features/profile/settings/generalInfo'
+import { UserInfo, useCalendar } from '@/features/profile/settings/generalInfo'
 import { generalInfoSchema } from '@/features/profile/settings/generalInfo/model/generalInfoSchema'
 import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
 import { useAvatarUpload } from '@/features/profile/settings/generalInfo/model/useAvatarUpload'
@@ -13,6 +12,8 @@ import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 
 export const useFillGeneralInfo = () => {
+  const { onModalPhotoSave, photoChanged, photoObj, setPhotoChanged } =
+    useAvatarUpload()
   const profile = AuthStore.profile
   const userProfile = ProfileStore.userProfile
 
@@ -26,7 +27,7 @@ export const useFillGeneralInfo = () => {
     handleSubmit,
     reset,
     setValue,
-  } = useForm<FormData>({
+  } = useForm<UserInfo>({
     defaultValues: {
       aboutMe: userProfile?.aboutMe || '',
       city: userProfile?.city || '',
@@ -43,22 +44,14 @@ export const useFillGeneralInfo = () => {
   const { calendarRef, isCalendarOpen, onSelectDate, toggleCalendar } =
     useCalendar(setValue, 'dateOfBirth')
   const { cities, countriesData, countryValue } = useFetchLocations(control)
-  const { t } = useTranslation()
-  const {
-    currentPhoto,
-    onModalPhotoSave,
-    photoChanged,
-    photoObj,
-    setPhotoChanged,
-  } = useAvatarUpload()
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: UserInfo) => {
     try {
       if (isDirty) {
         await ProfileStore.updateProfile(data)
         reset()
       }
-      if (currentPhoto !== photoObj.photo && photoChanged) {
+      if (photoChanged) {
         await ProfileStore.uploadAvatar(photoObj)
         setPhotoChanged(false)
       }
@@ -80,10 +73,9 @@ export const useFillGeneralInfo = () => {
     isValid,
     onModalPhotoSave,
     onSelectDate,
-    onSubmit,
+    onSubmit: handleSubmit(onSubmit),
     photoChanged,
     photoObj,
-    t,
     toggleCalendar,
   }
 }
