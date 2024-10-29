@@ -14,19 +14,19 @@ import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
 import ViewAllCommentsButton from './ViewAllCommentsButton'
-import postsStore from './homePageStore'
+import homePageStore from './homePageStore'
 import { timeAgo } from './utilsDate'
 
 export const Home = observer(() => {
-  const state = postsStore.publicationsFollowers?.items
+  const state = homePageStore.publicationsFollowers?.items
   const { t } = useTranslation()
   const router = useRouter()
 
   useEffect(() => {
-    postsStore.getPostsPublicationsFollowers()
+    homePageStore.getPostsPublicationsFollowers()
   }, [])
 
-  if (postsStore.isLoading) {
+  if (homePageStore.isLoadingHomePage) {
     return (
       <>
         <Loader />
@@ -38,7 +38,7 @@ export const Home = observer(() => {
       </>
     )
   }
-  if (state?.length === 0 && !postsStore.isLoading) {
+  if (state?.length === 0 && !homePageStore.isLoadingHomePage) {
     return (
       <div
         className={
@@ -93,11 +93,7 @@ export const Home = observer(() => {
             'Нет картинок для поста!'
           )}
         </section>
-        <LinksGroup
-          id={item.id}
-          isLiked={item.isLiked}
-          ownerId={item.ownerId}
-        />
+        <LinksGroup item={item} />
         <div className={'w-full max-h-[72px] inline-flex gap-3'}>
           <Image
             alt={'Avatar'}

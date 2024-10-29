@@ -1,3 +1,4 @@
+import { LikeStatus } from '@/common/enums'
 import { instance } from '@/features/auth/api/instance'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
@@ -23,10 +24,16 @@ class PostsApi {
       .get<PostsLikes>(`/v1/posts/${postId}/likes`)
       .then((res) => res.data)
   }
-  public postLike({ postId }: { postId: number }) {
+  public postLike({
+    likeStatus,
+    postId,
+  }: {
+    likeStatus: LikeStatus
+    postId: number
+  }) {
     return instance
       .put<any>(`/v1/posts/${postId}/like-status`, {
-        likeStatus: 'LIKE',
+        likeStatus: likeStatus,
       })
       .then((res) => res.data)
   }

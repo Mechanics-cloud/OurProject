@@ -6,14 +6,14 @@ import { HomePageRootInterface } from './home.types'
 import { PostsComments, PostsLikes } from './posts/posts.types'
 
 class HomePageStore {
-  comments: PostsComments | null = null
-  isLoading: boolean = true
+  // comments: PostsComments | null = null
+  isLoadingHomePage: boolean = true
   likes: PostsLikes | null = null
   loadingRequestFlag: boolean = false
   publicationsFollowers: HomePageRootInterface | null = null
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, undefined, { autoBind: true })
   }
 
   async getPostsPublicationsFollowers() {
@@ -30,15 +30,21 @@ class HomePageStore {
 
       runInAction(() => {
         this.publicationsFollowers = response
-        this.isLoading = false
+        this.isLoadingHomePage = false
         this.loadingRequestFlag = false
       })
     } catch (error) {
       responseErrorHandler(error)
       runInAction(() => {
-        this.isLoading = false
+        this.isLoadingHomePage = false
       })
     }
+  }
+
+  isLiked(id: number, isLikedValue: boolean) {
+    this.publicationsFollowers?.items.map((i) =>
+      i.id === id ? (i.isLiked = isLikedValue) : i
+    )
   }
 }
 
