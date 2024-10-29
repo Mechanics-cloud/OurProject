@@ -39,11 +39,7 @@ export const NavLink = React.forwardRef<HTMLElement, Props<ElementType>>(
     let isActive = false
 
     if (Component === Link) {
-      if (href === '/') {
-        isActive = pathname === href
-      } else {
-        isActive = getBasePath(pathname) === getBasePath(href)
-      }
+      isActive = getBasePath(pathname) === getBasePath(href)
     } else {
       isActive = !!iconTrigger
     }
