@@ -9,8 +9,7 @@ import { useAvatarUpload } from '@/features/profile/settings/generalInfo/model/u
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useFillGeneralInfo = () => {
-  const { onModalPhotoSave, photoChanged, photoObj, setPhotoChanged } =
-    useAvatarUpload()
+  const { dirty, onModalPhotoSave, photoObj, setDirty } = useAvatarUpload()
   const profile = AuthStore.profile
   const userProfile = ProfileStore.userProfile
 
@@ -42,9 +41,9 @@ export const useFillGeneralInfo = () => {
       reset({
         ...data,
       })
-      if (photoChanged) {
+      if (dirty) {
         await ProfileStore.uploadAvatar(photoObj)
-        setPhotoChanged(false)
+        setDirty(false)
       }
     } catch (error) {
       responseErrorHandler(error)
@@ -53,13 +52,13 @@ export const useFillGeneralInfo = () => {
 
   return {
     control,
+    dirty,
     handleSubmit,
     isDirty,
     isSubmitting,
     isValid,
     onModalPhotoSave,
     onSubmit: handleSubmit(onSubmit),
-    photoChanged,
     photoObj,
     setValue,
   }
