@@ -15,16 +15,16 @@ export const useCalendar = <T extends FieldValues>(
     setIsCalendarOpen((prev) => !prev)
   }
 
-  const onCalendarOutsideClick = (e: MouseEvent) => {
-    if (
-      calendarRef.current &&
-      !calendarRef.current.contains(e.target as Node)
-    ) {
-      setIsCalendarOpen(false)
-    }
-  }
-
   useEffect(() => {
+    const onCalendarOutsideClick = (e: MouseEvent) => {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(e.target as Node)
+      ) {
+        setIsCalendarOpen(false)
+      }
+    }
+
     if (isCalendarOpen) {
       document.addEventListener('mousedown', onCalendarOutsideClick)
     } else {

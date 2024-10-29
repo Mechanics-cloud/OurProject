@@ -24,6 +24,7 @@ export const useFillGeneralInfo = () => {
     control,
     formState: { isDirty, isSubmitting, isValid },
     handleSubmit,
+    reset,
     setValue,
   } = useForm<FormData>({
     defaultValues: {
@@ -43,16 +44,23 @@ export const useFillGeneralInfo = () => {
     useCalendar(setValue, 'dateOfBirth')
   const { cities, countriesData, countryValue } = useFetchLocations(control)
   const { t } = useTranslation()
-  const { currentPhoto, onModalPhotoSave, photoChanged, photoObj } =
-    useAvatarUpload()
+  const {
+    currentPhoto,
+    onModalPhotoSave,
+    photoChanged,
+    photoObj,
+    setPhotoChanged,
+  } = useAvatarUpload()
 
   const onSubmit = async (data: FormData) => {
     try {
       if (isDirty) {
         await ProfileStore.updateProfile(data)
+        reset()
       }
-      if (currentPhoto !== photoObj.photo) {
+      if (currentPhoto !== photoObj.photo && photoChanged) {
         await ProfileStore.uploadAvatar(photoObj)
+        setPhotoChanged(false)
       }
     } catch (error) {
       responseErrorHandler(error)
