@@ -1,160 +1,85 @@
 import React from 'react'
 
-import { CalendarFilled, CalendarOutline } from '@/assets/icons'
-import {
-  Button,
-  Calendar,
-  FormTextField,
-  SelectItem,
-  useTranslation,
-} from '@/common'
-import { FormSelect } from '@/common/form/FormSelect'
+import { Button, FormTextField, useTranslation } from '@/common'
 import { FormTextArea } from '@/common/form/FormTextArea'
-import { useCalendar } from '@/features/profile'
 import { useFillGeneralInfo } from '@/features/profile/settings/generalInfo/model/useFillGeneralInfo'
 import { AddPhoto } from '@/features/profile/settings/generalInfo/ui/AddPhoto'
-import { observer } from 'mobx-react-lite'
+import { FormCalendar } from '@/features/profile/settings/generalInfo/ui/FormCalendar'
+import { SelectCountryAndCity } from '@/features/profile/settings/generalInfo/ui/SelectCountryAndCity'
 
-export const GeneralInfo = observer(
-  React.forwardRef<HTMLFormElement>((_, ref) => {
-    const { t } = useTranslation()
-    const {
-      cities,
-      control,
-      countriesData,
-      countryValue,
-      isDirty,
-      isSubmitting,
-      isValid,
-      onModalPhotoSave,
-      onSubmit,
-      photoChanged,
-      photoObj,
-      setValue,
-    } = useFillGeneralInfo()
+export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
+  const { t } = useTranslation()
+  const {
+    control,
+    isDirty,
+    isSubmitting,
+    isValid,
+    onModalPhotoSave,
+    onSubmit,
+    photoChanged,
+    photoObj,
+    setValue,
+  } = useFillGeneralInfo()
 
-    const { calendarRef, isCalendarOpen, onSelectDate, toggleCalendar } =
-      useCalendar(setValue, 'dateOfBirth')
-
-    return (
-      <div
-        className={
-          'flex gap-10 w-full mt-6 relative after:absolute after:contain-content after:h-[1px] after:top-[90%] after:left-0 after:w-full after:bg-dark-300'
-        }
+  return (
+    <div
+      className={
+        'flex gap-10 w-full mt-6 relative after:absolute after:contain-content after:h-[1px] after:top-[90%] after:left-0 after:w-full after:bg-dark-300'
+      }
+    >
+      <AddPhoto
+        onModalPhotoSave={onModalPhotoSave}
+        photoObj={photoObj}
+      />
+      <form
+        className={'flex gap-10 w-full'}
+        onSubmit={onSubmit}
+        ref={ref}
       >
-        <AddPhoto
-          onModalPhotoSave={onModalPhotoSave}
-          photoObj={photoObj}
-        />
-        <form
-          className={'flex gap-10 w-full'}
-          onSubmit={onSubmit}
-          ref={ref}
-        >
-          <div className={'w-full flex flex-col gap-6'}>
-            <FormTextField
+        <div className={'w-full flex flex-col gap-6'}>
+          <FormTextField
+            control={control}
+            label={t.profileInputs.userName}
+            name={'userName'}
+            required
+          />
+          <FormTextField
+            control={control}
+            label={t.profileInputs.firstName}
+            name={'firstName'}
+            required
+          />
+          <FormTextField
+            control={control}
+            label={t.profileInputs.lastName}
+            name={'lastName'}
+            required
+          />
+          <div className={'flex flex-col'}>
+            <FormCalendar
               control={control}
-              label={t.profileInputs.userName}
-              name={'userName'}
-              required
+              label={t.profileInputs.dateOfBirth}
+              name={'dateOfBirth'}
+              setValue={setValue}
             />
-            <FormTextField
-              control={control}
-              label={t.profileInputs.firstName}
-              name={'firstName'}
-              required
-            />
-            <FormTextField
-              control={control}
-              label={t.profileInputs.lastName}
-              name={'lastName'}
-              required
-            />
-            <div className={'flex flex-col'}>
-              <FormTextField
-                control={control}
-                label={'Date of Birth'}
-                name={'dateOfBirth'}
-              >
-                {isCalendarOpen ? (
-                  <CalendarFilled
-                    className={
-                      'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer w-[18px] h-5'
-                    }
-                    onClick={toggleCalendar}
-                  />
-                ) : (
-                  <CalendarOutline
-                    className={
-                      'absolute -translate-y-1/2 top-1/2 stroke-width-1 fill-light-100 right-3 cursor-pointer w-[18px] h-5'
-                    }
-                    onClick={toggleCalendar}
-                  />
-                )}
-                <div ref={calendarRef}>
-                  {isCalendarOpen && (
-                    <Calendar
-                      className={'absolute'}
-                      onDayClick={onSelectDate}
-                    />
-                  )}
-                </div>
-              </FormTextField>
-              <div className={'flex gap-6'}>
-                <FormSelect
-                  className={'w-full'}
-                  control={control}
-                  label={t.profileInputs.country}
-                  name={'country'}
-                  placeholder={t.profileInputs.placeholders.country}
-                >
-                  {countriesData?.map((country) => (
-                    <SelectItem
-                      key={country.country}
-                      value={country.country}
-                    >
-                      {country.country}
-                    </SelectItem>
-                  ))}
-                </FormSelect>
-                <FormSelect
-                  className={'w-full'}
-                  control={control}
-                  disabled={!countryValue}
-                  label={t.profileInputs.city}
-                  name={'city'}
-                  placeholder={t.profileInputs.placeholders.city}
-                >
-                  {cities?.map((city) => (
-                    <SelectItem
-                      key={city}
-                      value={city}
-                    >
-                      {city}
-                    </SelectItem>
-                  ))}
-                </FormSelect>
-              </div>
-            </div>
-            <FormTextArea
-              control={control}
-              label={t.profileInputs.aboutMe}
-              name={'aboutMe'}
-            />
-            <div className={'flex justify-end mt-12'}>
-              <Button
-                disabled={
-                  !isValid || isSubmitting || (!isDirty && !photoChanged)
-                }
-                type={'submit'}
-                variant={'primary'}
-              >
-                {t.profileInputs.saveChanges}
-              </Button>
-            </div>
+            <SelectCountryAndCity control={control} />
           </div>
-        </form>
-      </div>
-    )
-  })
-)
+          <FormTextArea
+            control={control}
+            label={t.profileInputs.aboutMe}
+            name={'aboutMe'}
+          />
+          <div className={'flex justify-end mt-12'}>
+            <Button
+              disabled={!isValid || isSubmitting || (!isDirty && !photoChanged)}
+              type={'submit'}
+              variant={'primary'}
+            >
+              {t.profileInputs.saveChanges}
+            </Button>
+          </div>
+        </div>
+      </form>
+    </div>
+  )
+})

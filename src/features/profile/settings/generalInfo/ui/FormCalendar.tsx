@@ -6,23 +6,25 @@ import { Calendar, FormTextField } from '@/common'
 import { useCalendar } from '@/features/profile'
 
 type Props<T extends FieldValues> = {
-  control: Control
+  control: Control<T>
   label?: string
+  name: Path<T>
   setValue: UseFormSetValue<T>
 }
 export const FormCalendar = <T extends FieldValues>({
   control,
   label,
+  name,
   setValue,
 }: Props<T>) => {
   const { calendarRef, isCalendarOpen, onSelectDate, toggleCalendar } =
-    useCalendar(setValue, 'dateOfBirth' as Path<T>)
+    useCalendar(setValue, name)
 
   return (
     <FormTextField
       control={control}
       label={label ?? ''}
-      name={'dateOfBirth'}
+      name={name}
     >
       {isCalendarOpen ? (
         <CalendarFilled

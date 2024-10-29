@@ -6,7 +6,6 @@ import { UserInfo } from '@/features/profile/settings/generalInfo'
 import { generalInfoSchema } from '@/features/profile/settings/generalInfo/model/generalInfoSchema'
 import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
 import { useAvatarUpload } from '@/features/profile/settings/generalInfo/model/useAvatarUpload'
-import { useFetchLocations } from '@/features/profile/settings/generalInfo/model/useFetchLocations'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useFillGeneralInfo = () => {
@@ -35,8 +34,6 @@ export const useFillGeneralInfo = () => {
     resolver: zodResolver(generalInfoSchema),
   })
 
-  const { cities, countriesData, countryValue } = useFetchLocations(control)
-
   const onSubmit = async (data: UserInfo) => {
     try {
       if (isDirty) {
@@ -55,10 +52,7 @@ export const useFillGeneralInfo = () => {
   }
 
   return {
-    cities,
     control,
-    countriesData,
-    countryValue,
     handleSubmit,
     isDirty,
     isSubmitting,

@@ -39,7 +39,9 @@ export const useCalendar = <T extends FieldValues>(
   const onSelectDate = (date: Date) => {
     const formattedDate = format(date, 'dd.MM.yyyy', { locale: ru })
 
-    setValue(name, formattedDate as PathValue<T, Path<T>>)
+    setValue(name, formattedDate as PathValue<T, Path<T>>, {
+      shouldDirty: true,
+    })
     setIsCalendarOpen(false)
   }
 
