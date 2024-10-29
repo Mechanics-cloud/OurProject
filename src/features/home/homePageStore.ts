@@ -43,8 +43,14 @@ class HomePageStore {
 
   isLiked(id: number, isLikedValue: boolean) {
     this.publicationsFollowers?.items.map((i) =>
-      i.id === id ? (i.isLiked = isLikedValue) : i
+      i.id === id
+        ? ((i.isLiked = isLikedValue),
+          (i.likesCount = isLikedValue
+            ? (i.likesCount += 1)
+            : (i.likesCount -= 1)))
+        : i
     )
+    console.log(this.publicationsFollowers?.items[0].likesCount)
   }
 }
 

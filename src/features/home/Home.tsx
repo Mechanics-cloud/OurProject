@@ -115,10 +115,7 @@ export const Home = observer(() => {
             {item.description}
           </Typography>
         </div>
-        <AvatarGroupWithLikes
-          likesCount={item.likesCount}
-          postId={item.id}
-        />
+        <AvatarGroupWithLikes item={item} />
         <ViewAllCommentsButton postId={item.id} />
         <AddCommentGroup postId={item.id} />
       </div>

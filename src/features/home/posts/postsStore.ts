@@ -39,7 +39,7 @@ export class LikesStore {
     makeAutoObservable(this)
   }
 
-  async getComments(postId: number) {
+  async getPostLikes(postId: number) {
     if (this.isLoading) {
       return
     }
