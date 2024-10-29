@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
-import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
+import { PhotoResult, ProfileStore } from '@/features/profile'
 
 export const useAvatarUpload = () => {
   const currentPhoto = ProfileStore.userProfile?.avatars[0]?.url
