@@ -27,6 +27,7 @@ export const useSignIn = () => {
 
   const onSubmit = async (data: SignInFields) => {
     isLoadingStore.turnOnLoading()
+    data.email = data.email.toLowerCase()
     try {
       await authStore.login(data)
       await Router.push(Paths.home)
