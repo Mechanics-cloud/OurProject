@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Device } from '@/features/profile/settings/Device'
+import { Device } from '@/features/profile/settings/devices/ui/Device'
 
 const meta = {
   component: Device,

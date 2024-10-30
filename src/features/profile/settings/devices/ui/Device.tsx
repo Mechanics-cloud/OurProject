@@ -3,7 +3,8 @@ import { Card, LinkWithIcon, Typography } from '@/common'
 
 type Props = {
   deviceName: string
-  deviceType: 'chrome' | 'desktop' | 'mobile'
+  // deviceType: DeviceType
+  deviceType: string
   ip: string
   lastActive?: string
 }

@@ -84,6 +84,12 @@ export const en: LocaleType = {
     publications: 'Publications',
     settingsButton: 'Profile settings',
   },
+  profileSessions: {
+    activeSessions: 'Active sessions',
+    currentSession: 'Current device',
+    lastVisit: 'Last visit',
+    terminateAll: 'Terminate all other session',
+  },
   recoveryPassword: {
     createNewPassword: 'Create New Password',
     newPassword: 'New Password',

@@ -82,6 +82,12 @@ export const ru = {
     publications: 'Публикации',
     settingsButton: 'Настройки профиля',
   },
+  profileSessions: {
+    activeSessions: 'Активные сессии',
+    currentSession: 'Текущее устройство',
+    lastVisit: 'Последний визит',
+    terminateAll: 'Завершить все другие сессии',
+  },
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
