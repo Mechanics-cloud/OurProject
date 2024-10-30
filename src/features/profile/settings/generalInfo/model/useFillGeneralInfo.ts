@@ -1,11 +1,13 @@
 import { useForm } from 'react-hook-form'
 
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import AuthStore from '@/features/auth/model/authStore'
-import { UserInfo } from '@/features/profile/settings/generalInfo'
-import { generalInfoSchema } from '@/features/profile/settings/generalInfo/model/generalInfoSchema'
-import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
-import { useAvatarUpload } from '@/features/profile/settings/generalInfo/model/useAvatarUpload'
+import { responseErrorHandler } from '@/common/utils'
+import { AuthStore } from '@/features/auth'
+import {
+  ProfileStore,
+  UserInfo,
+  generalInfoSchema,
+  useAvatarUpload,
+} from '@/features/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useFillGeneralInfo = () => {
@@ -38,9 +40,7 @@ export const useFillGeneralInfo = () => {
       if (isDirty) {
         await ProfileStore.updateProfile(data)
       }
-      reset({
-        ...data,
-      })
+      reset(data)
       if (dirty) {
         await ProfileStore.uploadAvatar(photoObj)
         setDirty(false)

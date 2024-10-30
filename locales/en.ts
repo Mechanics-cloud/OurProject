@@ -76,6 +76,10 @@ export const en: LocaleType = {
       country: 'Country',
     },
     saveChanges: 'Save changes',
+    updateStatusMessages: {
+      error: 'Something went wrong',
+      success: 'Your settings are saved!',
+    },
     userName: 'User name',
   },
   profilePage: {

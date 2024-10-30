@@ -109,7 +109,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
               />
             ))}
           <PopoverAnchor />
-          {children && children}
+          {children}
         </div>
         {!isTablet && (
           <PopoverContent
