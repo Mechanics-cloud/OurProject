@@ -1,7 +1,11 @@
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
-import type { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
+
+import { Environments, Loader } from '@/common'
+import { useMe } from '@/common/hooks/useMe'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import '@/styles/globals.css'
 import '@fontsource/inter/400.css'
@@ -21,5 +25,15 @@ type AppPropsWithLayout = {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
 
-  return getLayout(<Component {...pageProps} />)
+  const { loading } = useMe()
+
+  if (loading) {
+    return <Loader />
+  }
+
+  return getLayout(
+    <GoogleOAuthProvider clientId={Environments.CLIENT_ID!}>
+      <Component {...pageProps} />
+    </GoogleOAuthProvider>
+  )
 }

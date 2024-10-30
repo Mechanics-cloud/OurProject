@@ -1,6 +1,44 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  avatarModal: {
+    chooseButton: 'Select from Computer',
+    errors: {
+      chooseFile: 'Choose file.',
+      error: 'Error!',
+      fileSize: 'Photo size must be less than 10 MB!',
+      fileType: 'The format of the uploaded photo must be PNG or JPG/JPEG.',
+      unknownError: 'Unknown error.',
+    },
+    saveButton: 'Save',
+    title: 'Add a Profile Photo',
+  },
+  basicError: 'Something went wrong',
+  expiredSession: {
+    emailExpired: 'Email verification link expired',
+    pictureExpired: 'Picture of the expired link',
+    resendLink: 'Resend Link',
+    sendLinkAgain:
+      'Looks like the verification link has expired. Not to worry, we can send the link again',
+  },
+  forgotPassword: {
+    buttonTitle: 'Send Link',
+    description:
+      'Enter your email address and we will send you further instructions',
+    emailPlaceholder: 'Enter your email address',
+    link: 'Back to Sign In',
+    modalContent: {
+      getText: (userEmail: string) => {
+        return `We have sent a link to confirm your email to ${userEmail}`
+      },
+    },
+    modalTitle: 'Email sent',
+    resentEmail:
+      'The link has been sent by email. If you don’t receive an email send link again',
+    sendAgain: 'Send Link Again',
+    title: 'Forgot Password',
+  },
+  goToTop: 'Go to top',
   logIn: 'Log In',
   menu: {
     create: 'Create',
@@ -20,9 +58,29 @@ export const en: LocaleType = {
     search: 'Search',
     statistics: 'Statistics',
   },
+  notFoundButton: 'Go back',
   pagination: {
     goBack: 'Go Back',
     goForward: 'Go forward',
+  },
+  recoveryPassword: {
+    createNewPassword: 'Create New Password',
+    newPassword: 'New Password',
+    passwordChanged: 'Password was successfully changed!',
+    passwordConfirmation: 'Password confirmation',
+    passwordValidation: 'Your password must be between 6 and 20 characters',
+  },
+  registration: {
+    confirmation: {
+      buttonTitle: 'Sign in',
+      text: 'Your email has been confirmed',
+      title: 'Congratulations!',
+    },
+    expired: {
+      buttonTitle: 'Resend verification link',
+      text: 'Looks like the verification link has expired. Not to worry, we can send the link again',
+      title: 'Email verification link expired',
+    },
   },
   session: {
     activeSession: 'Active session',
@@ -33,6 +91,15 @@ export const en: LocaleType = {
     terminateAll: 'Terminate all other session',
   },
   signIn: 'Sign In',
+  signInForm: {
+    errorResponse: 'The email or password are incorrect. Try again please',
+    labelEmail: 'Email',
+    labelPassword: 'Password',
+    passwordRecovery: 'Forgot Password',
+    signUpTitle: 'Sign Up',
+    text: 'Don’t have an account?',
+    title: 'Sign In',
+  },
   signUp: 'Sign Up',
   signUpForm: {
     confirmSignUpModal: {
@@ -50,9 +117,9 @@ export const en: LocaleType = {
       userName: 'User name',
     },
     placeholders: {
-      confirm: 'Confirm your password',
+      confirm: 'Password confirmation',
       email: 'Enter your email',
-      password: 'Enter your password',
+      password: 'Enter a password',
       userName: 'Enter your username',
     },
     policy: 'Privacy Policy',
@@ -64,5 +131,8 @@ export const en: LocaleType = {
   },
   termsPolicyPage: {
     back: 'Back',
+  },
+  validation: {
+    recaptchaRequired: 'Recaptcha is required',
   },
 }

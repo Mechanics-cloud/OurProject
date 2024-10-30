@@ -7,11 +7,7 @@
 
   font-family: Inter, sans-serif;
   color-scheme: dark;
-}
-
-body {
-  display: flex;
-  justify-content: center;
+  background-color: rgb(13 13 13);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -27,5 +23,3 @@ body {
     text-wrap: balance;
   }
 }
-
-/* test */

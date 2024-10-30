@@ -1,10 +1,9 @@
 import { Paid } from '@/assets/icons/filledIcons'
-import { Button, Typography } from '@/common'
-import { getLayoutWithSidebar } from '@/common/components/layoutWithSidebar/LayoutWithSidebar'
+import { Button, Paths, Typography } from '@/common'
+import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
 import Image from 'next/image'
-
-import styles from './Profile.module.css'
+import Link from 'next/link'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
 import image1 from '../../assets/images/image1.jpg'
@@ -23,10 +22,10 @@ const placeholderImages = [
   { id: 8, img: image4 },
 ]
 
-function Profile() {
+const Profile = () => {
   return (
-    <div className={'flex ml-[220px]'}>
-      <div className={'flex flex-col pl-9'}>
+    <div className={'flex'}>
+      <div className={'flex flex-col'}>
         <div className={'mt-9 flex items-start gap-[38px] w-full mb-[53px]'}>
           <Image
             alt={'avatar'}
@@ -47,7 +46,9 @@ function Profile() {
                 <Paid />
               </Typography>
 
-              <Button variant={'secondary'}>Profile Settings</Button>
+              <Button variant={'secondary'}>
+                <Link href={Paths.profileSettings}>Profile Settings</Link>
+              </Button>
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
               <div className={'flex flex-col'}>
@@ -78,7 +79,7 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className={cn('grid gap-x-3 gap-y-3', styles.gridAutoFit)}>
+        <div className={cn('grid gap-3 grid-cols-gallery w-full')}>
           {placeholderImages.map((image) => (
             <Image
               alt={'image'}
@@ -93,5 +94,5 @@ function Profile() {
     </div>
   )
 }
-Profile.getLayout = getLayoutWithSidebar
-export default Profile
+
+export default withProtection(Profile, true)

@@ -1,4 +1,42 @@
 export const ru = {
+  avatarModal: {
+    chooseButton: 'Выбрать с компьютера',
+    errors: {
+      chooseFile: 'Выберите файл.',
+      error: 'Ошибка!',
+      fileSize: 'Размер файла должен быть не более 10 MB!',
+      fileType: 'Формат загружаемого файла должен быть PNG или JPG/JPEG.',
+      unknownError: 'Неизвестная ошибка.',
+    },
+    saveButton: 'Сохранить',
+    title: 'Добавить фотографию профиля',
+  },
+  basicError: 'Что-то пошло не так',
+  expiredSession: {
+    emailExpired: 'Ссылка для подтверждения электронной почты истекла',
+    pictureExpired: 'Изображение истекшей ссылки',
+    resendLink: 'Отправить ссылку снова',
+    sendLinkAgain:
+      'Похоже, что ссылка для подтверждения истекла. Не переживайте, мы можем отправить ссылку снова',
+  },
+  forgotPassword: {
+    buttonTitle: 'Отправить ссылку',
+    description:
+      'Введите свой адрес электронной почты и мы вышлем вам дальнейшие инструкции',
+    emailPlaceholder: 'Введите email',
+    link: 'Вернуться к авторизации',
+    modalContent: {
+      getText: (userEmail: string) => {
+        return `Мы отправили ссылку для подтверждения вашего электронного письма на адрес ${userEmail}`
+      },
+    },
+    modalTitle: 'Письмо отправлено',
+    resentEmail:
+      'Ссылка была отправлена по электронной почте. Если вы не получили письмо, отправьте ссылку снова.',
+    sendAgain: 'Отправить ссылку снова',
+    title: 'Забыли пароль',
+  },
+  goToTop: 'Вверх',
   logIn: 'Вход',
   menu: {
     create: 'Создать',
@@ -18,9 +56,29 @@ export const ru = {
     search: 'Поиск',
     statistics: 'Статистика',
   },
+  notFoundButton: 'Вернуться назад',
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',
+  },
+  recoveryPassword: {
+    createNewPassword: 'Создать новый пароль',
+    newPassword: 'Новый пароль',
+    passwordChanged: 'Пароль был успешно изменен!',
+    passwordConfirmation: 'Подтверждение пароля',
+    passwordValidation: 'Ваш пароль должен содержать от 6 до 20 символов',
+  },
+  registration: {
+    confirmation: {
+      buttonTitle: 'Войти',
+      text: 'Ваша почта подтверждена',
+      title: 'Поздравляем!',
+    },
+    expired: {
+      buttonTitle: 'Повторно отправить ссылку для подтверждения',
+      text: 'Похоже, срок действия ссылки для подтверждения истек. Не волнуйтесь, мы можем отправить ссылку еще раз.',
+      title: 'Срок действия ссылки для подтверждения электронной почты истек',
+    },
   },
   session: {
     activeSession: 'Активные сессии',
@@ -31,6 +89,17 @@ export const ru = {
     terminateAll: 'Завершить все остальные сеансы',
   },
   signIn: 'Вход',
+  signInForm: {
+    errorResponse:
+      'Указан неверный адрес электронной почты или пароль. Попробуйте еще раз, пожалуйста',
+    labelEmail: 'Электронная почта',
+    labelPassword: 'Пароль',
+    passwordRecovery: 'Забыли пароль',
+    signUpTitle: 'Зарегистрироваться',
+
+    text: 'У вас нет учетной записи?',
+    title: 'Вход',
+  },
   signUp: 'Регистрация',
   signUpForm: {
     confirmSignUpModal: {
@@ -62,6 +131,9 @@ export const ru = {
   },
   termsPolicyPage: {
     back: 'Назад',
+  },
+  validation: {
+    recaptchaRequired: 'Требуется Recaptcha',
   },
 }
 
