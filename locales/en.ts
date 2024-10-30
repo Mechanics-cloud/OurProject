@@ -63,6 +63,27 @@ export const en: LocaleType = {
     goBack: 'Go Back',
     goForward: 'Go forward',
   },
+  profileInputs: {
+    aboutMe: 'About me',
+    addProfilePhoto: 'Add a profile photo',
+    city: 'Select your city',
+    country: 'Select your country',
+    dateOfBirth: 'Date of birth',
+    firstName: 'First name',
+    lastName: 'Last name',
+    placeholders: {
+      city: 'City',
+      country: 'Country',
+    },
+    saveChanges: 'Save changes',
+    userName: 'User name',
+  },
+  profilePage: {
+    followers: 'Followers',
+    following: 'Following',
+    publications: 'Publications',
+    settingsButton: 'Profile settings',
+  },
   recoveryPassword: {
     createNewPassword: 'Create New Password',
     newPassword: 'New Password',
@@ -128,6 +149,12 @@ export const en: LocaleType = {
     terms: 'Terms of Service',
     text: 'Do you have an account?',
     title: 'Sign Up',
+  },
+  tabs: {
+    accountManagement: 'Account management',
+    devices: 'Devices',
+    generalInfo: 'General information',
+    myPayments: 'My payments',
   },
   termsPolicyPage: {
     back: 'Back',

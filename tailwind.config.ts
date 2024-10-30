@@ -8,6 +8,7 @@ const config: Config = {
     './src/common/HOC/**/*.{js,ts,jsx,tsx,mdx}',
     './src/core/**/*.{js,ts,jsx,tsx,mdx}',
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/assets/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   plugins: [require('tailwindcss-radix')()],
   theme: {

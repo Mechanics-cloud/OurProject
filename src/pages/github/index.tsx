@@ -15,7 +15,9 @@ const GitHubCallback = () => {
 
       if (accessToken) {
         setToLocalStorage(StorageKeys.AccessToken, accessToken as string)
-        authStore.me().then(() => router.push(Paths.profile))
+        authStore
+          .me()
+          .then((res) => router.push(`${Paths.profile}/${res.userId}`))
       } else {
         throw new Error('no token')
       }

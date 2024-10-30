@@ -1,6 +1,7 @@
 import React, { ComponentPropsWithoutRef, ElementType } from 'react'
 
 import { cn } from '@/common/utils/cn'
+import { getBasePath } from '@/common/utils/getBasePath'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -38,11 +39,7 @@ export const LinkWithIcon = React.forwardRef<HTMLElement, Props<ElementType>>(
     let isActive: boolean
 
     if (Component === Link) {
-      if (href === '/') {
-        isActive = pathname === href
-      } else {
-        isActive = pathname.startsWith(href)
-      }
+      isActive = getBasePath(pathname) === getBasePath(href)
     } else {
       isActive = !!iconTrigger
     }

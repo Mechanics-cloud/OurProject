@@ -44,10 +44,7 @@ export const SideBar = observer(({ className }: Props) => {
     }
   })
   const { t } = useTranslation()
-
-  const handelCreate = () => {
-    openModal()
-  }
+  const userId = authStore.profile?.userId
 
   return (
     <aside className={cn('flex flex-col min-w-56 h-screen', className)}>
@@ -62,13 +59,14 @@ export const SideBar = observer(({ className }: Props) => {
               {t.menu.home}
             </LinkWithIcon>
           </li>
+
           <li>
             <LinkWithIcon
               ActiveIcon={PlusSquare}
               DefaultIcon={PlusSquareOutline}
               as={'button'}
               iconTrigger={isModalOpen}
-              onClick={handelCreate}
+              onClick={openModal}
             >
               {t.menu.create}
             </LinkWithIcon>
@@ -78,7 +76,7 @@ export const SideBar = observer(({ className }: Props) => {
             <LinkWithIcon
               ActiveIcon={Person}
               DefaultIcon={PersonOutline}
-              href={'/profile'}
+              href={`${Paths.profile}/${userId}`}
             >
               {t.menu.profile}
             </LinkWithIcon>

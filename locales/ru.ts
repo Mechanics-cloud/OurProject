@@ -61,6 +61,27 @@ export const ru = {
     goBack: 'Назад',
     goForward: 'Вперед',
   },
+  profileInputs: {
+    aboutMe: 'Обо мне',
+    addProfilePhoto: 'Загрузить фото',
+    city: 'Выьерите ваш город',
+    country: 'Выьерите вашу страну',
+    dateOfBirth: 'Дата рождения',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    placeholders: {
+      city: 'Город',
+      country: 'Страна',
+    },
+    saveChanges: 'Сохранить изменения',
+    userName: 'Имя пользователя',
+  },
+  profilePage: {
+    followers: 'Подписчики',
+    following: 'Подписки',
+    publications: 'Публикации',
+    settingsButton: 'Настройки профиля',
+  },
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
@@ -128,6 +149,12 @@ export const ru = {
     terms: 'Условиями использования',
     text: 'Уже есть аккаунт?',
     title: 'Регистрация',
+  },
+  tabs: {
+    accountManagement: 'Управление аккаунтом',
+    devices: 'Устройства',
+    generalInfo: 'Общая информация',
+    myPayments: 'Мои платежи',
   },
   termsPolicyPage: {
     back: 'Назад',
