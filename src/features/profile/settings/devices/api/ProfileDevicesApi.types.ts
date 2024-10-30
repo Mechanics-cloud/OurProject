@@ -13,5 +13,10 @@ type Device = {
   osVersion: string
 }
 
-// export type DeviceType = 'chrome' | 'desktop' | 'mobile'
-export type BrowserNames = 'Chrome' | 'Firefox' | 'mobile'
+export type BrowserNames =
+  | 'Chrome'
+  | 'Edge'
+  | 'Firefox'
+  | 'Opera'
+  | 'Safari'
+  | 'Yandex'

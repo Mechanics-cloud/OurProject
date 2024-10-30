@@ -126,6 +126,7 @@ export const ru = {
     labelEmail: 'Электронная почта',
     labelPassword: 'Пароль',
     passwordRecovery: 'Забыли пароль',
+    placeholderPassword: 'Введите пароль',
     signUpTitle: 'Зарегистрироваться',
 
     text: 'У вас нет учетной записи?',

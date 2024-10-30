@@ -41,7 +41,7 @@ const SignIn = observer(() => {
             disabled={isLoading}
             label={t.signInForm.labelPassword}
             name={'password'}
-            placeholder={'Password'}
+            placeholder={t.signInForm.placeholderPassword}
             type={'password'}
           />
 
