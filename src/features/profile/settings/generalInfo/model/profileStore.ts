@@ -67,7 +67,7 @@ class ProfileStore {
           toast.success('Your settings are saved!')
         }
       } else {
-        responseErrorHandler('error occurred')
+        responseErrorHandler('an error occurred')
       }
     } catch (error) {
       responseErrorHandler(error)

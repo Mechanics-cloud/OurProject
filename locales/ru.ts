@@ -74,6 +74,10 @@ export const ru = {
       country: 'Страна',
     },
     saveChanges: 'Сохранить изменения',
+    updateStatusMessages: {
+      error: 'Что-то пошло не так',
+      success: 'Ваши данные сохранены',
+    },
     userName: 'Имя пользователя',
   },
   profilePage: {
