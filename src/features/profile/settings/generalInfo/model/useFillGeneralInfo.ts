@@ -40,9 +40,7 @@ export const useFillGeneralInfo = () => {
       if (isDirty) {
         await ProfileStore.updateProfile(data)
       }
-      reset({
-        ...data,
-      })
+      reset(data)
       if (dirty) {
         await ProfileStore.uploadAvatar(photoObj)
         setDirty(false)
