@@ -61,29 +61,26 @@ const Profile = () => {
               <div className={'flex flex-col'}>
                 <Typography variant={'reg14'}>2218</Typography>
                 <Typography variant={'reg14'}>
-                  {' '}
                   {t.profilePage.following}
                 </Typography>
               </div>
               <div className={'flex flex-col'}>
                 <Typography variant={'reg14'}>2218</Typography>
                 <Typography variant={'reg14'}>
-                  {' '}
                   {t.profilePage.followers}
                 </Typography>
               </div>
               <div className={'flex flex-col'}>
                 <Typography variant={'reg14'}>2218</Typography>
                 <Typography variant={'reg14'}>
-                  {' '}
                   {t.profilePage.publications}
                 </Typography>
               </div>
             </div>
             <div className={'mt-[23px]'}>
-              {userProfile?.aboutMe ? (
+              {userProfile?.aboutMe && (
                 <Typography variant={'reg16'}>{userProfile.aboutMe}</Typography>
-              ) : null}
+              )}
             </div>
           </div>
         </div>

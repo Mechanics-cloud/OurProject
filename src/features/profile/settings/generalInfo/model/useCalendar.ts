@@ -19,7 +19,7 @@ export const useCalendar = <T extends FieldValues>(
     setIsCalendarOpen(false)
   }, [])
 
-  const calendarRef = useClickOutside(onClose)
+  const calendarRef = useClickOutside<HTMLDivElement>(onClose)
 
   const onSelectDate = (date: Date) => {
     const formattedDate = format(date, 'dd.MM.yyyy', { locale: ru })

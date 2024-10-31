@@ -12,13 +12,15 @@ export const SelectCountryAndCity = <T extends FieldValues>({
   control,
 }: Props<T>) => {
   const { t } = useTranslation()
-  const { cities, countriesData, countryValue } = useFetchLocations(control)
+  const { cities, countriesData, countryValue, loading } =
+    useFetchLocations(control)
 
   return (
     <div className={'flex gap-6'}>
       <FormSelect
         className={'w-full'}
         control={control}
+        disabled={loading}
         label={t.profileInputs.country}
         name={'country' as Path<T>}
         placeholder={t.profileInputs.placeholders.country}
@@ -35,7 +37,7 @@ export const SelectCountryAndCity = <T extends FieldValues>({
       <FormSelect
         className={'w-full'}
         control={control}
-        disabled={!countryValue}
+        disabled={!countryValue || loading}
         label={t.profileInputs.city}
         name={'city' as Path<T>}
         placeholder={t.profileInputs.placeholders.city}
