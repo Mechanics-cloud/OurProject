@@ -16,16 +16,14 @@ type Story = StoryObj<typeof meta>
 
 export const CurrentDevice: Story = {
   args: {
-    deviceName: 'Chrome',
-    deviceType: 'chrome',
+    browserName: 'Chrome',
     ip: '22.345.345.12',
   },
 }
 
 export const ActiveSession: Story = {
   args: {
-    deviceName: 'Chrome',
-    deviceType: 'mobile',
+    browserName: 'Chrome',
     ip: '22.345.345.12',
     lastActive: '22.09.2022',
   },

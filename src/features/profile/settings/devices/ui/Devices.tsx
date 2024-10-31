@@ -1,29 +1,21 @@
-import { useEffect } from 'react'
-
-import {
-  Button,
-  Loader,
-  Typography,
-  responseErrorHandler,
-  useTranslation,
-} from '@/common'
+import { Loader, Typography, useTranslation } from '@/common'
 import { profileSessionsStore } from '@/features/profile/settings/devices/model'
+import { useDevices } from '@/features/profile/settings/devices/model/useDevices'
 import { Device } from '@/features/profile/settings/devices/ui/Device'
+import { OtherSessions } from '@/features/profile/settings/devices/ui/OtherSessions'
 import { observer } from 'mobx-react-lite'
 
 export const Devices = observer(() => {
   const { t } = useTranslation()
-
-  useEffect(() => {
-    try {
-      profileSessionsStore.getSessions()
-    } catch (error) {
-      responseErrorHandler(error)
-    }
-  }, [])
+  const {
+    currentSession,
+    onLogoutDeviceClick,
+    onTerminateAllSession,
+    otherSession,
+  } = useDevices()
 
   return (
-    <div>
+    <div className={'mt-8 w-full'}>
       {profileSessionsStore.loading ? (
         <Loader />
       ) : (
@@ -32,16 +24,17 @@ export const Devices = observer(() => {
             {t.profileSessions.currentSession}
           </Typography>
           <Device
-            deviceName={
-              profileSessionsStore.sessions?.current.browserName ?? ''
-            }
-            deviceType={'chrome'}
-            ip={profileSessionsStore.sessions?.current.ip ?? ''}
+            browserName={currentSession?.browserName ?? 'Desktop'}
+            className={'mt-1.5 mb-6'}
+            ip={currentSession?.ip ?? ''}
           />
-          <Button variant={'outline'}>{t.profileSessions.terminateAll}</Button>
-          <Typography variant={'h3'}>
-            {t.profileSessions.activeSessions}
-          </Typography>
+          {otherSession && (
+            <OtherSessions
+              onLogoutDeviceClick={onLogoutDeviceClick}
+              onTerminateAllSession={onTerminateAllSession}
+              sessions={otherSession}
+            />
+          )}
         </>
       )}
     </div>

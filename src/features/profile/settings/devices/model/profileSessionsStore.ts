@@ -16,6 +16,27 @@ class ProfileSessionsStore {
     makeAutoObservable(this)
   }
 
+  async deleteSession(deviceId: number) {
+    this.loading = true
+    try {
+      await profileDevicesApi.deleteSession(deviceId)
+      runInAction(() => {
+        if (this.sessions && this.sessions.others) {
+          this.sessions = {
+            ...this.sessions,
+            others: this.sessions?.others.filter(
+              (device) => device.deviceId !== deviceId
+            ),
+          }
+        }
+      })
+    } catch (error) {
+      responseErrorHandler(error)
+    } finally {
+      this.loading = false
+    }
+  }
+
   async getSessions() {
     this.loading = true
     try {
@@ -28,12 +49,31 @@ class ProfileSessionsStore {
       }))
 
       sessionsDataSchema.parse(sessions.current)
-      //console.log(sessions.current, otherSessions)
+      sessions.others.forEach((device) => sessionsDataSchema.parse(device))
       runInAction(() => {
         this.sessions = { current: sessions.current, others: otherSessions }
       })
 
       return sessions
+    } catch (error) {
+      responseErrorHandler(error)
+    } finally {
+      this.loading = false
+    }
+  }
+
+  async terminateAllSessions() {
+    this.loading = true
+    try {
+      await profileDevicesApi.terminateAllSessions()
+      runInAction(() => {
+        if (this.sessions && this.sessions.others) {
+          this.sessions = {
+            ...this.sessions,
+            others: [],
+          }
+        }
+      })
     } catch (error) {
       responseErrorHandler(error)
     } finally {

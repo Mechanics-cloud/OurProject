@@ -1,10 +1,10 @@
 export type Sessions = {
-  current: Device
-  others: Device[]
+  current: DeviceType
+  others: DeviceType[]
 }
 
-type Device = {
-  browserName: string
+export type DeviceType = {
+  browserName: BrowserNames
   browserVersion: string
   deviceId: number
   ip: string
@@ -15,6 +15,7 @@ type Device = {
 
 export type BrowserNames =
   | 'Chrome'
+  | 'Desktop'
   | 'Edge'
   | 'Firefox'
   | 'Opera'

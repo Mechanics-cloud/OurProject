@@ -1,38 +1,64 @@
-import { Chrome, Desktop, LogOut, Mobile } from '@/assets/icons/filledIcons'
-import { Card, LinkWithIcon, Typography } from '@/common'
+import { ComponentPropsWithoutRef } from 'react'
+
+import { Chrome, Desktop, LogOut } from '@/assets/icons/filledIcons'
+import { Card, LinkWithIcon, Typography, cn } from '@/common'
+import { BrowserNames } from '@/features/profile/settings/devices/api'
 
 type Props = {
-  deviceName: string
-  // deviceType: DeviceType
-  deviceType: string
+  browserName: BrowserNames
   ip: string
   lastActive?: string
-}
+  onLogoutClick?: (deviceId: number) => void
+} & ComponentPropsWithoutRef<'div'>
 
-export const Device = ({ deviceName, deviceType, ip, lastActive }: Props) => {
+export const Device = ({
+  browserName,
+  className,
+  ip,
+  lastActive,
+  onLogoutClick,
+  ...props
+}: Props) => {
   let IconToShow
 
-  switch (deviceType) {
-    case 'chrome':
+  switch (browserName) {
+    case 'Chrome':
       IconToShow = Chrome
       break
-    case 'mobile':
-      IconToShow = Mobile
+    case 'Firefox':
+      IconToShow = Chrome
       break
-    case 'desktop':
+    case 'Edge':
+      IconToShow = Chrome
+      break
+    case 'Safari':
+      IconToShow = Chrome
+      break
+    case 'Yandex':
+      IconToShow = Chrome
+      break
+    case 'Opera':
+      IconToShow = Chrome
+      break
     default:
       IconToShow = Desktop
   }
 
   return (
-    <Card className={'flex gap-3 w-full flex-nowrap items-center py-5 px-6'}>
+    <Card
+      className={cn(
+        'flex gap-3 w-full flex-nowrap items-center py-5 px-6',
+        className
+      )}
+      {...props}
+    >
       <IconToShow className={'size-9 self-start mt-1.5'} />
       <div className={'mr-auto'}>
         <Typography
           className={'mb-3'}
           variant={'bold16'}
         >
-          {deviceName}
+          {browserName}
         </Typography>
         <Typography
           className={'mb-1'}
@@ -48,6 +74,7 @@ export const Device = ({ deviceName, deviceType, ip, lastActive }: Props) => {
         <LinkWithIcon
           DefaultIcon={LogOut}
           as={'button'}
+          onClick={onLogoutClick}
         >
           Log out
         </LinkWithIcon>

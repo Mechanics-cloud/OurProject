@@ -10,10 +10,10 @@ class ProfileDevicesApi {
       `${ProfileDevicesEndpoints.sessions}/${deviceId}`
     )
   }
-  public getSessions(): Promise<Sessions> {
-    return this.instance
-      .get(ProfileDevicesEndpoints.sessions)
-      .then((res) => res.data)
+  public async getSessions(): Promise<Sessions> {
+    const res = await this.instance.get(ProfileDevicesEndpoints.sessions)
+
+    return res.data
   }
   public terminateAllSessions(): Promise<AxiosResponse> {
     return this.instance.delete(ProfileDevicesEndpoints.terminateAllSessions)
