@@ -1,19 +1,14 @@
-import { Paths } from '@/common'
 import { StatusCode, StorageKeys } from '@/common/enums'
-import {
-  removeFromLocalStorage,
-  setToLocalStorage,
-} from '@/common/utils/localStorage'
+import { clearAllData } from '@/common/utils/clearAllData'
+import { setToLocalStorage } from '@/common/utils/localStorage'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { Profile, authApi } from '@/features/auth'
+import { generalStore } from '@/core/store'
+import { authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import axios, { InternalAxiosRequestConfig, isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
-import Router from 'next/router'
 
 class AuthStore {
-  profile: Profile | undefined
-
   constructor() {
     makeAutoObservable(this)
   }
@@ -29,12 +24,6 @@ class AuthStore {
     } catch (error) {
       responseErrorHandler(error)
     }
-  }
-
-  clearProfile() {
-    runInAction(() => {
-      this.profile = undefined
-    })
   }
 
   async login(data: SignInFields) {
@@ -54,8 +43,7 @@ class AuthStore {
   async logout() {
     try {
       await authApi.logout()
-      this.profile = undefined
-      removeFromLocalStorage(StorageKeys.AccessToken)
+      clearAllData()
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -66,7 +54,7 @@ class AuthStore {
       const profile = await authApi.me()
 
       runInAction(() => {
-        this.profile = profile
+        generalStore.profile = profile
       })
 
       return profile
@@ -94,11 +82,7 @@ class AuthStore {
         }
       }
     } catch (error) {
-      Router.push(Paths.profile)
-      this.profile = undefined
-      removeFromLocalStorage(StorageKeys.AccessToken)
-
-      return
+      clearAllData()
     }
   }
 }

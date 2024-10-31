@@ -1,9 +1,7 @@
-'use client'
-
 import React, { ReactElement, ReactNode } from 'react'
 
 import { Layout, LayoutForAuthorized, Paths } from '@/common'
-import authStore from '@/features/auth/model/authStore'
+import { generalStore } from '@/core/store'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
@@ -19,11 +17,11 @@ export const withProtection =
   (props) => {
     const router = useRouter()
 
-    if (!authStore.profile && !isPublic) {
+    if (!generalStore.profile && !isPublic) {
       router.push(Paths.signIn)
     }
 
-    if (authStore.profile) {
+    if (generalStore.profile) {
       return (
         <LayoutForAuthorized>
           <PageComponent {...props} />
@@ -31,7 +29,7 @@ export const withProtection =
       )
     }
 
-    if (isPublic && !authStore.profile) {
+    if (isPublic && !generalStore.profile) {
       return (
         <Layout>
           <div className={'mx-24'}>

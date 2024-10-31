@@ -44,7 +44,7 @@ export const SideBar = observer(({ className }: Props) => {
     }
   })
   const { t } = useTranslation()
-  const userId = authStore.profile?.userId
+  const userId = generalStore.profile?.userId
 
   return (
     <aside className={cn('flex flex-col min-w-56 h-screen', className)}>
@@ -139,7 +139,7 @@ export const SideBar = observer(({ className }: Props) => {
                 </LinkWithIcon>
               </li>
             }
-            userEmail={authStore.profile?.email ?? ''}
+            userEmail={generalStore.profile?.email ?? ''}
           />
         </ul>
       </nav>

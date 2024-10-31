@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 
 import { responseErrorHandler } from '@/common/utils'
-import { AuthStore } from '@/features/auth'
+import { generalStore } from '@/core/store'
 import {
   ProfileStore,
   UserInfo,
@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useFillGeneralInfo = () => {
   const { dirty, onModalPhotoSave, photoObj, setDirty } = useAvatarUpload()
-  const profile = AuthStore.profile
+  const profile = generalStore.profile
   const userProfile = ProfileStore.userProfile
 
   const {
