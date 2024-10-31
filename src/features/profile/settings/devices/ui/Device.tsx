@@ -1,6 +1,15 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Chrome, Desktop, LogOut } from '@/assets/icons/filledIcons'
+import {
+  Chrome,
+  Desktop,
+  Edge,
+  Firefox,
+  LogOut,
+  Opera,
+  Safari,
+  Yandex,
+} from '@/assets/icons/filledIcons'
 import { Card, LinkWithIcon, Typography, cn } from '@/common'
 import { BrowserNames } from '@/features/profile/settings/devices/api'
 
@@ -26,19 +35,19 @@ export const Device = ({
       IconToShow = Chrome
       break
     case 'Firefox':
-      IconToShow = Chrome
+      IconToShow = Firefox
       break
     case 'Edge':
-      IconToShow = Chrome
+      IconToShow = Edge
       break
     case 'Safari':
-      IconToShow = Chrome
+      IconToShow = Safari
       break
     case 'Yandex':
-      IconToShow = Chrome
+      IconToShow = Yandex
       break
     case 'Opera':
-      IconToShow = Chrome
+      IconToShow = Opera
       break
     default:
       IconToShow = Desktop
