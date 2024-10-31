@@ -54,7 +54,7 @@ export const SideBar = observer(({ className }: Props) => {
             <LinkWithIcon
               ActiveIcon={Home}
               DefaultIcon={HomeOutline}
-              href={'/'}
+              href={Paths.home}
             >
               {t.menu.home}
             </LinkWithIcon>
@@ -86,7 +86,7 @@ export const SideBar = observer(({ className }: Props) => {
             <LinkWithIcon
               ActiveIcon={MessageCircle}
               DefaultIcon={MessageCircleOutline}
-              href={'/messenger'}
+              href={Paths.messenger}
             >
               {t.menu.messenger}
             </LinkWithIcon>
@@ -96,7 +96,7 @@ export const SideBar = observer(({ className }: Props) => {
             <LinkWithIcon
               ActiveIcon={Search}
               DefaultIcon={SearchOutline}
-              href={'/search'}
+              href={Paths.search}
             >
               {t.menu.search}
             </LinkWithIcon>
@@ -108,7 +108,7 @@ export const SideBar = observer(({ className }: Props) => {
             <LinkWithIcon
               ActiveIcon={TrendingUp}
               DefaultIcon={TrendingUpOutline}
-              href={'/statistics'}
+              href={Paths.statistics}
             >
               {t.menu.statistics}
             </LinkWithIcon>
@@ -118,7 +118,7 @@ export const SideBar = observer(({ className }: Props) => {
             <LinkWithIcon
               ActiveIcon={Bookmark}
               DefaultIcon={BookmarkOutline}
-              href={'/favorites'}
+              href={Paths.favorites}
             >
               {t.menu.favorites}
             </LinkWithIcon>

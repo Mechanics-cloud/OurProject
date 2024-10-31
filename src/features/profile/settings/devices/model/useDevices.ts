@@ -6,6 +6,14 @@ import { profileSessionsStore } from '@/features/profile/settings/devices/model/
 export const useDevices = () => {
   const currentSession = profileSessionsStore.currentSession
 
+  const onLogoutDeviceClick = useCallback(async (deviceId: number) => {
+    await profileSessionsStore.deleteSession(deviceId)
+  }, [])
+
+  const onTerminateAllSession = useCallback(async () => {
+    await profileSessionsStore.terminateAllSessions()
+  }, [])
+
   useEffect(() => {
     const controller = new AbortController()
 
@@ -18,14 +26,6 @@ export const useDevices = () => {
     return () => {
       controller.abort()
     }
-  }, [])
-
-  const onLogoutDeviceClick = useCallback(async (deviceId: number) => {
-    await profileSessionsStore.deleteSession(deviceId)
-  }, [])
-
-  const onTerminateAllSession = useCallback(async () => {
-    await profileSessionsStore.terminateAllSessions()
   }, [])
 
   return {
