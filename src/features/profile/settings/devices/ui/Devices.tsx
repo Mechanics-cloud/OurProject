@@ -28,7 +28,7 @@ export const Devices = observer(() => {
             className={'mt-1.5 mb-6'}
             ip={currentSession?.ip ?? ''}
           />
-          {otherSession && (
+          {otherSession.length > 0 && (
             <OtherSessions
               onLogoutDeviceClick={onLogoutDeviceClick}
               onTerminateAllSession={onTerminateAllSession}

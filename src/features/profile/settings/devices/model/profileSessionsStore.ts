@@ -1,4 +1,6 @@
-import { responseErrorHandler } from '@/common'
+import { Paths, removeFromLocalStorage, responseErrorHandler } from '@/common'
+import { StorageKeys } from '@/common/enums'
+import authStore from '@/features/auth/model/authStore'
 import {
   Sessions,
   profileDevicesApi,
@@ -7,6 +9,7 @@ import { sessionsDataSchema } from '@/features/profile/settings/devices/model/se
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
+import Router from 'next/router'
 
 class ProfileSessionsStore {
   loading: boolean = false
@@ -56,7 +59,10 @@ class ProfileSessionsStore {
 
       return sessions
     } catch (error) {
-      responseErrorHandler(error)
+      //todo interceptor не перехватывает, т.к. при разлогине возвращается 400
+      Router.push(Paths.profile)
+      removeFromLocalStorage(StorageKeys.AccessToken)
+      authStore.clearProfile()
     } finally {
       this.loading = false
     }

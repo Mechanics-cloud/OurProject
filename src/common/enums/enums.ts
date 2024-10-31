@@ -1,7 +1,7 @@
 const oneMB = 1024 * 1024
 
 export enum StatusCode {
-  Unauthorized = 401,
+  Unauthorized = 400,
 }
 
 export enum StorageKeys {

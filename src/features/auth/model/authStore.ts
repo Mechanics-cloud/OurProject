@@ -1,3 +1,4 @@
+import { Paths } from '@/common'
 import { StatusCode, StorageKeys } from '@/common/enums'
 import {
   removeFromLocalStorage,
@@ -8,6 +9,7 @@ import { Profile, authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import axios, { InternalAxiosRequestConfig, isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
+import Router from 'next/router'
 
 class AuthStore {
   profile: Profile | undefined
@@ -28,6 +30,13 @@ class AuthStore {
       responseErrorHandler(error)
     }
   }
+
+  clearProfile() {
+    runInAction(() => {
+      this.profile = undefined
+    })
+  }
+
   async login(data: SignInFields) {
     try {
       const accessToken = await authApi.login(data)
@@ -85,7 +94,11 @@ class AuthStore {
         }
       }
     } catch (error) {
-      return Promise.reject(error)
+      Router.push(Paths.profile)
+      this.profile = undefined
+      removeFromLocalStorage(StorageKeys.AccessToken)
+
+      return
     }
   }
 }

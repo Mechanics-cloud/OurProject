@@ -5,7 +5,10 @@ import { profileSessionsStore } from '@/features/profile/settings/devices/model/
 
 export const useDevices = () => {
   const currentSession = profileSessionsStore.sessions?.current
-  const otherSession = profileSessionsStore.sessions?.others ?? []
+  const otherSession =
+    profileSessionsStore.sessions?.others.filter(
+      (session) => session.deviceId !== currentSession?.deviceId
+    ) ?? []
 
   useEffect(() => {
     try {
