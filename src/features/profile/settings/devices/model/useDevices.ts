@@ -32,6 +32,5 @@ export const useDevices = () => {
     currentSession,
     onLogoutDeviceClick,
     onTerminateAllSession,
-    // otherSession,
   }
 }

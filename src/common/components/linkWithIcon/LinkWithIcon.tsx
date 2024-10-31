@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, ElementType } from 'react'
+import React, { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import { cn } from '@/common/utils/cn'
 import { getBasePath } from '@/common/utils/getBasePath'
@@ -11,8 +11,8 @@ const styles = {
 }
 
 type Props<T extends ElementType = typeof Link> = {
-  ActiveIcon?: ElementType
-  DefaultIcon: ElementType
+  ActiveIcon?: ReactNode
+  DefaultIcon: ReactNode
   as?: T
   disabled?: boolean
   iconTrigger?: boolean | string

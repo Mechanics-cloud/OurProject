@@ -34,7 +34,9 @@ class ProfileSessionsStore {
     } catch (error) {
       responseErrorHandler(error)
     } finally {
-      this.loading = false
+      runInAction(() => {
+        this.loading = false
+      })
     }
   }
 
@@ -65,7 +67,9 @@ class ProfileSessionsStore {
       removeFromLocalStorage(StorageKeys.AccessToken)
       authStore.clearProfile()
     } finally {
-      this.loading = false
+      runInAction(() => {
+        this.loading = false
+      })
     }
   }
 
@@ -79,7 +83,9 @@ class ProfileSessionsStore {
     } catch (error) {
       responseErrorHandler(error)
     } finally {
-      this.loading = false
+      runInAction(() => {
+        this.loading = false
+      })
     }
   }
 }
