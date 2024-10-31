@@ -12,11 +12,13 @@ export const OtherSessions = observer(
   ({ onLogoutDeviceClick, onTerminateAllSession }: Props) => {
     const { t } = useTranslation()
     const sessions = profileSessionsStore.otherSession ?? []
+    const isOtherSessionEmpty = sessions.length === 0
 
     return (
       <>
         <Button
           className={'ml-auto block'}
+          disabled={isOtherSessionEmpty}
           onClick={onTerminateAllSession}
           variant={'outline'}
         >
@@ -28,7 +30,14 @@ export const OtherSessions = observer(
         >
           {t.profileSessions.activeSessions}
         </Typography>
-        {sessions.length > 0 ? (
+        {isOtherSessionEmpty ? (
+          <Typography
+            className={'text-center'}
+            variant={'h2'}
+          >
+            You have not yet logged in from other devices
+          </Typography>
+        ) : (
           sessions.map((device) => (
             <Device
               browserName={device.browserName}
@@ -39,13 +48,6 @@ export const OtherSessions = observer(
               onLogoutClick={() => onLogoutDeviceClick(device.deviceId)}
             />
           ))
-        ) : (
-          <Typography
-            className={'text-center'}
-            variant={'h2'}
-          >
-            You have not yet logged in from other devices
-          </Typography>
         )}
       </>
     )

@@ -1,5 +1,5 @@
 import { Profile } from '@/features/auth'
-import { makeAutoObservable, runInAction } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 
 class GeneralStore {
   isLoading = false
@@ -10,9 +10,7 @@ class GeneralStore {
   }
 
   clearProfile() {
-    runInAction(() => {
-      this.profile = undefined
-    })
+    this.profile = undefined
   }
 
   turnOffLoading() {

@@ -1,4 +1,5 @@
 import { Loader, Typography, useTranslation } from '@/common'
+import { AsyncComponent } from '@/common/components/asyncComponent/AsyncComponent'
 import { profileSessionsStore } from '@/features/profile/settings/devices/model'
 import { useDevices } from '@/features/profile/settings/devices/model/useDevices'
 import { Device } from '@/features/profile/settings/devices/ui/Device'
@@ -12,24 +13,26 @@ export const Devices = observer(() => {
 
   return (
     <div className={'mt-8 w-full'}>
-      {profileSessionsStore.loading ? (
-        <Loader />
-      ) : (
-        <>
-          <Typography variant={'h3'}>
-            {t.profileSessions.currentSession}
-          </Typography>
-          <Device
-            browserName={currentSession?.browserName ?? 'Desktop'}
-            className={'mt-1.5 mb-6'}
-            ip={currentSession?.ip ?? ''}
-          />
-          <OtherSessions
-            onLogoutDeviceClick={onLogoutDeviceClick}
-            onTerminateAllSession={onTerminateAllSession}
-          />
-        </>
-      )}
+      <AsyncComponent isLoading={profileSessionsStore.loading}>
+        {profileSessionsStore.loading ? (
+          <Loader />
+        ) : (
+          <>
+            <Typography variant={'h3'}>
+              {t.profileSessions.currentSession}
+            </Typography>
+            <Device
+              browserName={currentSession?.browserName ?? 'Desktop'}
+              className={'mt-1.5 mb-6'}
+              ip={currentSession?.ip ?? ''}
+            />
+            <OtherSessions
+              onLogoutDeviceClick={onLogoutDeviceClick}
+              onTerminateAllSession={onTerminateAllSession}
+            />
+          </>
+        )}
+      </AsyncComponent>
     </div>
   )
 })

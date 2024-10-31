@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { responseErrorHandler } from '@/common'
 import { clearAllData } from '@/common/utils/clearAllData'
 import {
@@ -12,14 +14,13 @@ import { makeAutoObservable, runInAction } from 'mobx'
 class ProfileSessionsStore {
   currentSession?: DeviceType
   loading: boolean = false
-  otherSession?: DeviceType[]
+  otherSession?: DeviceType[] = []
 
   constructor() {
     makeAutoObservable(this)
   }
 
   async deleteSession(deviceId: number) {
-    this.loading = true
     try {
       await profileDevicesApi.deleteSession(deviceId)
       runInAction(() => {
@@ -29,12 +30,10 @@ class ProfileSessionsStore {
           )
         }
       })
+      //todo переводы в store
+      toast.success('Success')
     } catch (error) {
       responseErrorHandler(error)
-    } finally {
-      runInAction(() => {
-        this.loading = false
-      })
     }
   }
 
@@ -70,18 +69,15 @@ class ProfileSessionsStore {
   }
 
   async terminateAllSessions() {
-    this.loading = true
     try {
       await profileDevicesApi.terminateAllSessions()
       runInAction(() => {
         this.otherSession = []
       })
+      //todo переводы в store
+      toast.success('Success')
     } catch (error) {
       responseErrorHandler(error)
-    } finally {
-      runInAction(() => {
-        this.loading = false
-      })
     }
   }
 }

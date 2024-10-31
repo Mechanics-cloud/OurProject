@@ -21,8 +21,14 @@ export const LayoutForAuthorized: NextPage<PropsWithChildren> = ({
 
   return (
     <Layout className={'flex h-full'}>
-      {!isTablet && <SideBar className={'mr-9 border-r-2 border-dark-300'} />}
-      <div className={'w-full'}>{children}</div>
+      {!isTablet && <SideBar />}
+      <div
+        className={
+          isTablet ? 'w-full' : 'pl-9 w-full border-l-2 border-dark-300'
+        }
+      >
+        {children}
+      </div>
     </Layout>
   )
 }

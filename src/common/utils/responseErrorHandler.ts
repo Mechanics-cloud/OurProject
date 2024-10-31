@@ -38,5 +38,3 @@ export const responseErrorHandler = (error: unknown, setError?: Function) => {
     setError(field as keyof SignUpFields, { message })
   })
 }
-
-export const responseServerErrorHandler = () => {}
