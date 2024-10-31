@@ -28,13 +28,11 @@ export const Devices = observer(() => {
             className={'mt-1.5 mb-6'}
             ip={currentSession?.ip ?? ''}
           />
-          {otherSession.length > 0 && (
-            <OtherSessions
-              onLogoutDeviceClick={onLogoutDeviceClick}
-              onTerminateAllSession={onTerminateAllSession}
-              sessions={otherSession}
-            />
-          )}
+          <OtherSessions
+            onLogoutDeviceClick={onLogoutDeviceClick}
+            onTerminateAllSession={onTerminateAllSession}
+            sessions={otherSession}
+          />
         </>
       )}
     </div>

@@ -2,7 +2,7 @@
 
 import React, { ReactElement, ReactNode } from 'react'
 
-import { Layout, LayoutWithSidebar, Paths } from '@/common'
+import { Layout, LayoutForAuthorized, Paths } from '@/common'
 import authStore from '@/features/auth/model/authStore'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -25,9 +25,9 @@ export const withProtection =
 
     if (authStore.profile) {
       return (
-        <LayoutWithSidebar>
+        <LayoutForAuthorized>
           <PageComponent {...props} />
-        </LayoutWithSidebar>
+        </LayoutForAuthorized>
       )
     }
 

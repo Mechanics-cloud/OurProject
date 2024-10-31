@@ -1,1 +1,1 @@
-export * from './LayoutWithSidebar'
+export * from 'src/common/layout/layoutWithSidebar/LayoutForAuthorized'

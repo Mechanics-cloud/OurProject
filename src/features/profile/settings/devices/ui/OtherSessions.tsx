@@ -30,16 +30,22 @@ export const OtherSessions = ({
       >
         {t.profileSessions.activeSessions}
       </Typography>
-      {sessions.map((device) => (
-        <Device
-          browserName={device.browserName}
-          className={'mt-1.5 mb-6'}
-          ip={device.ip}
-          key={device.browserVersion}
-          lastActive={device.lastActive}
-          onLogoutClick={() => onLogoutDeviceClick(device.deviceId)}
-        />
-      ))}
+      {sessions.length > 0 ? (
+        sessions.map((device) => (
+          <Device
+            browserName={device.browserName}
+            className={'mt-1.5 mb-6'}
+            ip={device.ip}
+            key={device.browserVersion}
+            lastActive={device.lastActive}
+            onLogoutClick={() => onLogoutDeviceClick(device.deviceId)}
+          />
+        ))
+      ) : (
+        <Typography variant={'h2'}>
+          You have not yet logged in from other devices
+        </Typography>
+      )}
     </>
   )
 }

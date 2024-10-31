@@ -4,9 +4,11 @@ import {
   GoTopButton,
   Header,
   Loader,
+  MobileHeader,
   ScrollArea,
   ToastContainer,
 } from '@/common'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { cn } from '@/common/utils/cn'
 import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
@@ -20,6 +22,7 @@ type Props = {
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
   ({ children, className }, ref) => {
     const isLoading = generalStore.isLoading
+    const { isTablet } = useScreenWidth()
 
     return (
       <>
@@ -29,7 +32,8 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
           showSpinner={false}
         />
         <ToastContainer />
-        <Header />
+        {/*todo заменить тег на mobile header*/}
+        {isTablet ? <Header /> : <Header />}
         <ScrollArea className={'w-full h-full mt-[var(--header-height)]'}>
           <main
             className={cn(
