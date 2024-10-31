@@ -2,7 +2,7 @@ import { Paths, removeFromLocalStorage, responseErrorHandler } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import authStore from '@/features/auth/model/authStore'
 import {
-  Sessions,
+  DeviceType,
   profileDevicesApi,
 } from '@/features/profile/settings/devices/api'
 import { sessionsDataSchema } from '@/features/profile/settings/devices/model/sessionsDataSchema'
@@ -12,8 +12,9 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import Router from 'next/router'
 
 class ProfileSessionsStore {
+  currentSession?: DeviceType
   loading: boolean = false
-  sessions?: Sessions
+  otherSession?: DeviceType[]
 
   constructor() {
     makeAutoObservable(this)
@@ -24,13 +25,10 @@ class ProfileSessionsStore {
     try {
       await profileDevicesApi.deleteSession(deviceId)
       runInAction(() => {
-        if (this.sessions && this.sessions.others) {
-          this.sessions = {
-            ...this.sessions,
-            others: this.sessions?.others.filter(
-              (device) => device.deviceId !== deviceId
-            ),
-          }
+        if (this.currentSession && this.otherSession) {
+          this.otherSession = this.otherSession.filter(
+            (device) => device.deviceId !== deviceId
+          )
         }
       })
     } catch (error) {
@@ -54,7 +52,10 @@ class ProfileSessionsStore {
       sessionsDataSchema.parse(sessions.current)
       sessions.others.forEach((device) => sessionsDataSchema.parse(device))
       runInAction(() => {
-        this.sessions = { current: sessions.current, others: otherSessions }
+        this.currentSession = sessions.current
+        this.otherSession = otherSessions.filter(
+          (session) => session.deviceId !== this.currentSession?.deviceId
+        )
       })
 
       return sessions
@@ -73,12 +74,7 @@ class ProfileSessionsStore {
     try {
       await profileDevicesApi.terminateAllSessions()
       runInAction(() => {
-        if (this.sessions && this.sessions.others) {
-          this.sessions = {
-            ...this.sessions,
-            others: [],
-          }
-        }
+        this.otherSession = []
       })
     } catch (error) {
       responseErrorHandler(error)
