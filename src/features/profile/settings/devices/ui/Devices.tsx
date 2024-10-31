@@ -7,12 +7,8 @@ import { observer } from 'mobx-react-lite'
 
 export const Devices = observer(() => {
   const { t } = useTranslation()
-  const {
-    currentSession,
-    onLogoutDeviceClick,
-    onTerminateAllSession,
-    otherSession,
-  } = useDevices()
+  const { currentSession, onLogoutDeviceClick, onTerminateAllSession } =
+    useDevices()
 
   return (
     <div className={'mt-8 w-full'}>
@@ -31,7 +27,6 @@ export const Devices = observer(() => {
           <OtherSessions
             onLogoutDeviceClick={onLogoutDeviceClick}
             onTerminateAllSession={onTerminateAllSession}
-            sessions={otherSession}
           />
         </>
       )}
