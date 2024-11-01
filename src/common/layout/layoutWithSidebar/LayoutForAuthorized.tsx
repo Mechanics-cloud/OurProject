@@ -24,7 +24,9 @@ export const LayoutForAuthorized: NextPage<PropsWithChildren> = ({
       {!isTablet && <SideBar />}
       <div
         className={
-          isTablet ? 'w-full' : 'pl-9 w-full border-l-2 border-dark-300'
+          isTablet
+            ? 'w-full'
+            : 'pl-9 w-full border-l-2 border-dark-300 h-headCalc'
         }
       >
         {children}
