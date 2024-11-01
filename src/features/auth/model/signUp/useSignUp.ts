@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useModal } from '@/common'
+import { useModal, useTranslation } from '@/common'
 import { Environments } from '@/common/enviroments'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
@@ -9,6 +9,7 @@ import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useSignUp = () => {
+  const { t } = useTranslation(() => trigger())
   const {
     clearErrors,
     control,
@@ -18,6 +19,7 @@ export const useSignUp = () => {
     resetField,
     setError,
     setFocus,
+    trigger,
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
@@ -28,7 +30,7 @@ export const useSignUp = () => {
       userName: '',
     },
     mode: 'onTouched',
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(signUpSchema(t)),
   })
   const isLoadingStore = generalStore
   const { isModalOpen, onModalClose, openModal } = useModal(() => {
@@ -81,6 +83,7 @@ export const useSignUp = () => {
     isValid,
     onModalClose,
     onSubmit,
+    t,
     userEmail,
   }
 }

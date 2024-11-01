@@ -3,7 +3,7 @@ import { ElementRef, forwardRef } from 'react'
 import ReCAPTCHA, { ReCAPTCHAProps } from 'react-google-recaptcha'
 
 // valid key
-const RECAPTCHA_KEY = '6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ'
+const RECAPTCHA_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_KEY as string
 
 export const BaseReCAPTCHA = forwardRef<
   ElementRef<typeof ReCAPTCHA>,

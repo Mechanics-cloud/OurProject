@@ -33,6 +33,11 @@ export const ru = {
     modalTitle: 'Письмо отправлено',
     resentEmail:
       'Ссылка была отправлена по электронной почте. Если вы не получили письмо, отправьте ссылку снова.',
+    schemaErrors: {
+      email:
+        'Электронное письмо должно соответствовать формату example@example.com.',
+      emailRequiredError: 'Требуется электронная почта',
+    },
     sendAgain: 'Отправить ссылку снова',
     title: 'Забыли пароль',
   },
@@ -98,6 +103,12 @@ export const ru = {
     passwordChanged: 'Пароль был успешно изменен!',
     passwordConfirmation: 'Подтверждение пароля',
     passwordValidation: 'Ваш пароль должен содержать от 6 до 20 символов',
+    schemaErrors: {
+      matchPassword: 'Пароли должны совпадать',
+      maxCharPassword: 'Максимальное количество символов 20',
+      minCharPassword: 'Минимальное количество символов 6',
+      passwordComposition: 'Пароль должен содержать',
+    },
   },
   registration: {
     confirmation: {
@@ -130,9 +141,17 @@ export const ru = {
     labelEmail: 'Электронная почта',
     labelPassword: 'Пароль',
     passwordRecovery: 'Забыли пароль',
+    schemaErrors: {
+      email:
+        'Электронное письмо должно соответствовать формату example@example.com.',
+      emailRequiredError: 'Требуется электронная почта',
+      maxCharPassword: 'Максимальное количество символов 20',
+      minCharPassword: 'Минимальное количество символов 6',
+      passwordComposition: 'Пароль должен содержать',
+    },
+
     placeholderPassword: 'Введите пароль',
     signUpTitle: 'Зарегистрироваться',
-
     text: 'У вас нет учетной записи?',
     title: 'Вход',
   },
@@ -159,6 +178,16 @@ export const ru = {
       userName: 'Введите имя пользователя',
     },
     policy: 'Политикой конфиденциальности',
+    schemaErrors: {
+      email:
+        'Электронное письмо должно соответствовать формату example@example.com.',
+      emailRequiredError: 'Требуется электронная почта',
+      matchPassword: 'Пароли должны совпадать',
+      maxChar: 'Максимальное количество символов 20',
+      minChar: 'Минимальное количество символов 6',
+      passwordComposition: 'Пароль должен содержать',
+      userNameComposition: 'Ввод должен содержать только',
+    },
     signUpGithub: 'Регистрация с помощью Github',
     signUpGoogle: 'Регистрация с помощью Google',
     terms: 'Условиями использования',

@@ -20,7 +20,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/router'
 
 export const useForgotPassword = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(() => trigger())
   const router = useRouter()
   const recaptchaRef = useRef<Nullable<ReCAPTCHA>>(null)
 
@@ -34,13 +34,14 @@ export const useForgotPassword = () => {
     handleSubmit,
     setError,
     setValue,
+    trigger,
   } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
       recaptcha: '',
     },
     mode: 'onChange',
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(forgotPasswordSchema(t)),
   })
 
   const onChangeRecaptcha = (token: Nullable<string>) =>

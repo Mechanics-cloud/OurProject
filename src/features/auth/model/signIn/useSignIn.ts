@@ -11,17 +11,18 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Router from 'next/router'
 
 export const useSignIn = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(() => trigger())
   const {
     control,
     formState: { isValid },
     handleSubmit,
     setError,
     setFocus,
+    trigger,
   } = useForm<SignInFields>({
     defaultValues: { email: '', password: '' },
     mode: 'onTouched',
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signInSchema(t)),
   })
   const isLoadingStore = generalStore
 

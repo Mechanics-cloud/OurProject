@@ -1,32 +1,48 @@
-import { PASSWORD_REGEXP, USER_NAME_REGEXP } from '@/common/constants'
+import {
+  PASSWORD_REGEXP,
+  USER_NAME_REGEXP,
+} from '@/features/auth/model/constants'
+import { LocaleType } from '@locales/ru'
 import { z } from 'zod'
 
-export const signUpSchema = z
-  .object({
-    agreesToTOS: z.literal<boolean>(true),
-    confirm: z.string().min(6).max(20),
-    email: z.string({ required_error: 'Email is required' }).email({
-      message: 'The email must match the format example@example.com',
-    }),
-    password: z
-      .string()
-      .min(6, { message: 'Minimum number of characters 6' })
-      .max(20, { message: 'Maximum number of characters 20' })
-      .regex(PASSWORD_REGEXP, {
-        message:
-          'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-      }),
-    userName: z
-      .string()
-      .min(6, { message: 'Minimum number of characters 6' })
-      .max(30, { message: 'Maximum number of characters 30' })
-      .regex(USER_NAME_REGEXP, {
-        message: 'Input must contain only 0-9, A-Z, a-z, _, -',
-      }),
-  })
-  .refine((data) => data.password === data.confirm, {
-    message: 'Passwords must match',
-    path: ['confirm'],
-  })
+export const signUpSchema = (t: LocaleType) => {
+  return z
+    .object({
+      agreesToTOS: z.literal<boolean>(true),
+      confirm: z
+        .string()
+        .min(6, { message: t.signUpForm.schemaErrors.minChar })
+        .max(20, { message: t.signUpForm.schemaErrors.maxChar }),
+      email: z
+        .string({
+          required_error: t.signUpForm.schemaErrors.emailRequiredError,
+        })
+        .email({
+          message: t.signUpForm.schemaErrors.email,
+        }),
+      password: z
+        .string()
+        .min(6, { message: t.signUpForm.schemaErrors.minChar })
+        .max(20, { message: t.signUpForm.schemaErrors.maxChar })
+        .regex(PASSWORD_REGEXP, {
+          message:
+            t.signUpForm.schemaErrors.passwordComposition +
+            ' a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+        }),
+      userName: z
+        .string()
+        .min(6, { message: t.signUpForm.schemaErrors.minChar })
+        .max(30, { message: t.signUpForm.schemaErrors.maxChar })
+        .regex(USER_NAME_REGEXP, {
+          message:
+            t.signUpForm.schemaErrors.userNameComposition +
+            ' 0-9, A-Z, a-z, _, -',
+        }),
+    })
+    .refine((data) => data.password === data.confirm, {
+      message: t.signUpForm.schemaErrors.matchPassword,
+      path: ['confirm'],
+    })
+}
 
-export type SignUpFields = z.infer<typeof signUpSchema>
+export type SignUpFields = z.infer<ReturnType<typeof signUpSchema>>

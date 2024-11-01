@@ -1,21 +1,30 @@
 import { PASSWORD_REGEXP } from '@/features/auth'
+import { LocaleType } from '@locales/ru'
 import { z } from 'zod'
 
-export const recoveryPasswordSchema = z
-  .object({
-    confirm: z.string().min(6).max(20),
-    password: z
-      .string()
-      .min(6, { message: 'Minimum number of characters 6' })
-      .max(20, { message: 'Maximum number of characters 20' })
-      .regex(PASSWORD_REGEXP, {
-        message:
-          'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-      }),
-  })
-  .refine((data) => data.password === data.confirm, {
-    message: 'Passwords must match',
-    path: ['confirm'],
-  })
+export const recoveryPasswordSchema = (t: LocaleType) => {
+  return z
+    .object({
+      confirm: z
+        .string()
+        .min(6, { message: t.recoveryPassword.schemaErrors.minCharPassword })
+        .max(20, { message: t.recoveryPassword.schemaErrors.maxCharPassword }),
+      password: z
+        .string()
+        .min(6, { message: t.recoveryPassword.schemaErrors.minCharPassword })
+        .max(20, { message: t.recoveryPassword.schemaErrors.maxCharPassword })
+        .regex(PASSWORD_REGEXP, {
+          message:
+            t.recoveryPassword.schemaErrors.passwordComposition +
+            ' a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+        }),
+    })
+    .refine((data) => data.password === data.confirm, {
+      message: t.recoveryPassword.schemaErrors.matchPassword,
+      path: ['confirm'],
+    })
+}
 
-export type RecoveryPasswordFields = z.infer<typeof recoveryPasswordSchema>
+export type RecoveryPasswordFields = z.infer<
+  ReturnType<typeof recoveryPasswordSchema>
+>

@@ -13,7 +13,7 @@ import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
 export const useRecoveryPassword = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(() => trigger())
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -21,13 +21,14 @@ export const useRecoveryPassword = () => {
     control,
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
+    trigger,
   } = useForm<RecoveryPasswordFields>({
     defaultValues: {
       confirm: '',
       password: '',
     },
     mode: 'onChange',
-    resolver: zodResolver(recoveryPasswordSchema),
+    resolver: zodResolver(recoveryPasswordSchema(t)),
   })
 
   const onSubmit = handleSubmit(async (data) => {
