@@ -2,7 +2,7 @@ import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
-import ProfileStore from '@/features/profile/settings/generalInfo/model/profileStore'
+import { profileStore } from '@/features/profile'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -22,10 +22,11 @@ const placeholderImages = [
   { id: 7, img: image3 },
   { id: 8, img: image4 },
 ]
+
 //todo: remove avatarPlaceholder and place another placeholder image
 const Profile = () => {
   const { t } = useTranslation()
-  const userProfile = ProfileStore.userProfile
+  const userProfile = profileStore.userProfile
   const avatar = userProfile?.avatars[0]?.url
 
   return (

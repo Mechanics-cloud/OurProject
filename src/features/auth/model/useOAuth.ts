@@ -1,8 +1,7 @@
 import { Environments, Paths } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
-import { Endpoints } from '@/features/auth'
-import authStore from '@/features/auth/model/authStore'
+import { Endpoints, authStore } from '@/features/auth'
 import { useGoogleLogin } from '@react-oauth/google'
 import { useRouter } from 'next/router'
 
@@ -24,7 +23,7 @@ export const useOAuth = () => {
 
           isLoading.turnOffLoading()
           if (res?.res.data.accessToken) {
-            await router.push(`${Paths.profile}/${res.userInfo.userId}`)
+            await router.push(`${Paths.profile}/${res.userInfo?.userId}`)
           }
         } catch (error) {
           responseErrorHandler(error)

@@ -23,7 +23,7 @@ import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
-import authStore from '@/features/auth/model/authStore'
+import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 import Router from 'next/router'
 

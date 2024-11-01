@@ -3,9 +3,9 @@ import { useForm } from 'react-hook-form'
 import { responseErrorHandler } from '@/common/utils'
 import { generalStore } from '@/core/store'
 import {
-  ProfileStore,
   UserInfo,
   generalInfoSchema,
+  profileStore,
   useAvatarUpload,
 } from '@/features/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,7 +13,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 export const useFillGeneralInfo = () => {
   const { dirty, onModalPhotoSave, photoObj, setDirty } = useAvatarUpload()
   const profile = generalStore.user
-  const userProfile = ProfileStore.userProfile
+  const userProfile = profileStore.userProfile
 
   const {
     control,
@@ -38,11 +38,11 @@ export const useFillGeneralInfo = () => {
   const onSubmit = async (data: UserInfo) => {
     try {
       if (isDirty) {
-        await ProfileStore.updateProfile(data)
+        await profileStore.updateProfile(data)
       }
       reset(data)
       if (dirty) {
-        await ProfileStore.uploadAvatar(photoObj)
+        await profileStore.uploadAvatar(photoObj)
         setDirty(false)
       }
     } catch (error) {

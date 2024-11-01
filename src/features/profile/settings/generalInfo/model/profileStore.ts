@@ -75,4 +75,4 @@ class ProfileStore {
   }
 }
 
-export default new ProfileStore()
+export const profileStore = new ProfileStore()

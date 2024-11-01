@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 
 import { Paths, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
-import authStore from '@/features/auth/model/authStore'
+import { authStore } from '@/features/auth'
 import {
   SignInFields,
   signInSchema,

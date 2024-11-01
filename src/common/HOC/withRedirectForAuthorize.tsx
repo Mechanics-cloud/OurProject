@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import { Loader, Paths } from '@/common'
 import { generalStore } from '@/core/store'
-import authStore from '@/features/auth/model/authStore'
+import { authStore } from '@/features/auth'
 import { NextPageWithLayout } from '@/pages/_app'
 import { observer } from 'mobx-react-lite'
 import Router from 'next/router'

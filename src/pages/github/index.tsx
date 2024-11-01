@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { Loader, Paths } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { setToLocalStorage } from '@/common/utils/localStorage'
-import authStore from '@/features/auth/model/authStore'
+import { authStore } from '@/features/auth'
 import { useRouter } from 'next/router'
 
 const GitHubCallback = () => {
@@ -17,7 +17,7 @@ const GitHubCallback = () => {
         setToLocalStorage(StorageKeys.AccessToken, accessToken as string)
         authStore
           .me()
-          .then((res) => router.push(`${Paths.profile}/${res.userId}`))
+          .then((res) => router.push(`${Paths.profile}/${res?.userId}`))
       } else {
         throw new Error('no token')
       }

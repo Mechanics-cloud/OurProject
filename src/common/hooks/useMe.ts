@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import authStore from '@/features/auth/model/authStore'
+import { authStore } from '@/features/auth'
 
 export const useMe = () => {
   const [loading, setLoading] = useState(true)

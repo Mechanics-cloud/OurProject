@@ -1,6 +1,5 @@
 import { DayPicker, DayPickerProps } from 'react-day-picker'
 
-import { ru } from 'date-fns/locale'
 type Props = {} & DayPickerProps
 
 export const Calendar = ({ ...restProps }: Props) => {
@@ -51,14 +50,14 @@ export const Calendar = ({ ...restProps }: Props) => {
 
         today: 'text-accent-500 !font-bold',
 
-        week: '', //tr inside tbody
+        week: '', //<tr> inside tbody
         week_number: '',
         week_number_header: '',
 
-        weekday: 'text-light-900 w-9 h-9 font-medium', //th
+        weekday: 'text-light-900 w-9 h-9 font-medium', //<th>
 
-        weekdays: '', //tr inside thead
-        weeks: 'before:block before:h-3', //tbody
+        weekdays: '', //<tr> inside thead
+        weeks: 'before:block before:h-3', //<tbody>
         years_dropdown: '',
       }}
       weekStartsOn={1}
