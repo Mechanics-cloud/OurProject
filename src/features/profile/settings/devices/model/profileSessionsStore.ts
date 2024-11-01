@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 
-import { responseErrorHandler } from '@/common'
+import { Nullable, responseErrorHandler } from '@/common'
 import { clearAllData } from '@/common/utils/clearAllData'
 import {
   DeviceType,
@@ -12,8 +12,8 @@ import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileSessionsStore {
-  currentSession?: DeviceType
-  otherSession?: DeviceType[] = []
+  currentSession: Nullable<DeviceType> = null
+  otherSession: DeviceType[] = []
 
   constructor() {
     makeAutoObservable(this)

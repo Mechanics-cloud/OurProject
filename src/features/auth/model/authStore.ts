@@ -51,13 +51,13 @@ class AuthStore {
 
   async me() {
     try {
-      const profile = await authApi.me()
+      const user = await authApi.me()
 
       runInAction(() => {
-        generalStore.user = profile
+        generalStore.user = user
       })
 
-      return profile
+      return user
     } catch (error) {
       if (
         isAxiosError(error) &&

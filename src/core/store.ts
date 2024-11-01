@@ -1,16 +1,17 @@
+import { Nullable } from '@/common'
 import { Profile } from '@/features/auth'
 import { makeAutoObservable } from 'mobx'
 
 class GeneralStore {
   isLoading = false
-  user?: Profile
+  user: Nullable<Profile> = null
 
   constructor() {
     makeAutoObservable(this)
   }
 
   clearProfile() {
-    this.user = undefined
+    this.user = null
   }
 
   turnOffLoading() {

@@ -3,6 +3,7 @@ import { AsyncComponent } from '@/common/components/asyncComponent/AsyncComponen
 import { generalStore } from '@/core/store'
 import { useDevices } from '@/features/profile/settings/devices/model/useDevices'
 import { Device } from '@/features/profile/settings/devices/ui/Device'
+import { DevicesSkeleton } from '@/features/profile/settings/devices/ui/DevicesSkeleton'
 import { OtherSessions } from '@/features/profile/settings/devices/ui/OtherSessions'
 import { observer } from 'mobx-react-lite'
 
@@ -13,7 +14,10 @@ export const Devices = observer(() => {
 
   return (
     <div className={'mt-8 w-full'}>
-      <AsyncComponent isLoading={generalStore.isLoading}>
+      <AsyncComponent
+        isLoading={generalStore.isLoading}
+        loader={<DevicesSkeleton />}
+      >
         <Typography variant={'h3'}>
           {t.profileSessions.currentSession}
         </Typography>
