@@ -54,7 +54,7 @@ class AuthStore {
       const profile = await authApi.me()
 
       runInAction(() => {
-        generalStore.profile = profile
+        generalStore.user = profile
       })
 
       return profile

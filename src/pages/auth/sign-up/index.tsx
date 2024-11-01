@@ -5,7 +5,7 @@ import { SignUpForm } from '@/features/auth'
 import Router from 'next/router'
 
 const SignUp = () => {
-  if (generalStore.profile) {
+  if (generalStore.user) {
     Router.push(Paths.profile)
   }
 

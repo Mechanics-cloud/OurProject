@@ -1,6 +1,7 @@
 import { useCallback, useEffect } from 'react'
 
 import { responseErrorHandler } from '@/common'
+import { generalStore } from '@/core/store'
 import { profileSessionsStore } from '@/features/profile/settings/devices/model/profileSessionsStore'
 
 export const useDevices = () => {
@@ -17,11 +18,18 @@ export const useDevices = () => {
   useEffect(() => {
     const controller = new AbortController()
 
-    try {
-      profileSessionsStore.getSessions()
-    } catch (error) {
-      responseErrorHandler(error)
+    const fetchSessions = async () => {
+      try {
+        generalStore.turnOnLoading()
+        await profileSessionsStore.getSessions()
+      } catch (error) {
+        responseErrorHandler(error)
+      } finally {
+        generalStore.turnOffLoading()
+      }
     }
+
+    fetchSessions()
 
     return () => {
       controller.abort()

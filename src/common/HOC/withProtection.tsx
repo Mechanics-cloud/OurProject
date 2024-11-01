@@ -17,11 +17,11 @@ export const withProtection =
   (props) => {
     const router = useRouter()
 
-    if (!generalStore.profile && !isPublic) {
+    if (!generalStore.user && !isPublic) {
       router.push(Paths.signIn)
     }
 
-    if (generalStore.profile) {
+    if (generalStore.user) {
       return (
         <LayoutForAuthorized>
           <PageComponent {...props} />
@@ -29,7 +29,7 @@ export const withProtection =
       )
     }
 
-    if (isPublic && !generalStore.profile) {
+    if (isPublic && !generalStore.user) {
       return (
         <Layout>
           <div className={'mx-24'}>

@@ -10,7 +10,7 @@ import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
 const Header = () => {
   const { t } = useTranslation()
-  const isAuth = !!generalStore.profile
+  const isAuth = !!generalStore.user
 
   return (
     <header

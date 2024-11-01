@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useFillGeneralInfo = () => {
   const { dirty, onModalPhotoSave, photoObj, setDirty } = useAvatarUpload()
-  const profile = generalStore.profile
+  const profile = generalStore.user
   const userProfile = ProfileStore.userProfile
 
   const {

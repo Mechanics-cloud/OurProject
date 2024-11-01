@@ -3,14 +3,14 @@ import { makeAutoObservable } from 'mobx'
 
 class GeneralStore {
   isLoading = false
-  profile?: Profile
+  user?: Profile
 
   constructor() {
     makeAutoObservable(this)
   }
 
   clearProfile() {
-    this.profile = undefined
+    this.user = undefined
   }
 
   turnOffLoading() {

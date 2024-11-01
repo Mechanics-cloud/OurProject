@@ -13,7 +13,6 @@ import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileSessionsStore {
   currentSession?: DeviceType
-  loading: boolean = false
   otherSession?: DeviceType[] = []
 
   constructor() {
@@ -38,7 +37,6 @@ class ProfileSessionsStore {
   }
 
   async getSessions() {
-    this.loading = true
     try {
       const sessions = await profileDevicesApi.getSessions()
       const otherSessions = sessions.others.map((session) => ({
@@ -61,10 +59,6 @@ class ProfileSessionsStore {
     } catch (error) {
       //todo interceptor не перехватывает, т.к. при разлогине возвращается 400
       clearAllData()
-    } finally {
-      runInAction(() => {
-        this.loading = false
-      })
     }
   }
 

@@ -15,7 +15,7 @@ export const withRedirectForAuthorize = <P extends object>(
 
     useEffect(() => {
       authStore.me().finally(() => setLoading(false))
-      if (generalStore.profile) {
+      if (generalStore.user) {
         Router.push(Paths.profile)
       }
     }, [])

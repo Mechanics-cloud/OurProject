@@ -4,7 +4,6 @@ import {
   GoTopButton,
   Header,
   Loader,
-  MobileHeader,
   ScrollArea,
   ToastContainer,
 } from '@/common'
@@ -34,7 +33,9 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         <ToastContainer />
         {/*todo заменить тег на mobile header*/}
         {isTablet ? <Header /> : <Header />}
-        <ScrollArea className={'w-full h-full mt-[var(--header-height)]'}>
+        <ScrollArea
+          className={'w-full h-full pt-[var(--header-height)] box-border'}
+        >
           <main
             className={cn(
               'border-t-[1px] border-transparent w-full max-w-screen-2xl mx-auto px-6 md:px-10 lg:px-16',

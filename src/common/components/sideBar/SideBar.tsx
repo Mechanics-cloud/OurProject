@@ -44,10 +44,10 @@ export const SideBar = observer(({ className }: Props) => {
     }
   })
   const { t } = useTranslation()
-  const userId = generalStore.profile?.userId
+  const userId = generalStore.user?.userId
 
   return (
-    <aside className={cn('flex flex-col min-w-56 h-screen', className)}>
+    <aside className={cn('flex flex-col min-w-56 h-full', className)}>
       <nav className={'pt-[72px]'}>
         <ul className={`mb-[60px] [&_li]:mb-6`}>
           <li>
@@ -139,7 +139,7 @@ export const SideBar = observer(({ className }: Props) => {
                 </LinkWithIcon>
               </li>
             }
-            userEmail={generalStore.profile?.email ?? ''}
+            userEmail={generalStore.user?.email ?? ''}
           />
         </ul>
       </nav>

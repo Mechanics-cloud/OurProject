@@ -20,7 +20,7 @@ export const LayoutForAuthorized: NextPage<PropsWithChildren> = ({
   }
 
   return (
-    <Layout className={'flex h-full'}>
+    <Layout className={'flex'}>
       {!isTablet && <SideBar />}
       <div
         className={
