@@ -1,16 +1,18 @@
 import * as React from 'react'
-import { ComponentProps, useState } from 'react'
+import { ComponentProps, ReactNode, useState } from 'react'
 
 import { Button, Typography, cn, useTranslation } from '@/common'
 
 type Props = {
   charactersToShow?: number
   children: string
+  link?: ReactNode
 } & ComponentProps<'p'>
 export const TextUnfolding = ({
   charactersToShow = 250,
   children,
   className,
+  link,
 }: Props) => {
   const { t } = useTranslation()
   const [showMore, setShowMore] = useState<Boolean>(false)
@@ -18,9 +20,10 @@ export const TextUnfolding = ({
 
   return (
     <Typography
-      className={cn('relative pb-6', className)}
+      className={cn('relative', className, 'pb-6')}
       variant={'reg14'}
     >
+      {link && <>{link}&nbsp;</>}
       {showMore
         ? children
         : `${
@@ -29,9 +32,9 @@ export const TextUnfolding = ({
           }`}
       {isLongEnough && (
         <>
-          <span className={'inline-block w-2'}></span>
+          &nbsp;
           <Button
-            className={'focus-within:outline-0 underline p-0'}
+            className={cn('focus-within:outline-0 underline p-0 float-right')}
             onClick={() => {
               setShowMore((prevState) => !prevState)
             }}
