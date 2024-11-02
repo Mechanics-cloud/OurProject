@@ -82,6 +82,10 @@ export const en: LocaleType = {
       title: 'Email verification link expired',
     },
   },
+  showText: {
+    less: 'Hide',
+    more: 'Show more',
+  },
   signIn: 'Sign In',
   signInForm: {
     errorResponse: 'The email or password are incorrect. Try again please',
