@@ -1,7 +1,12 @@
 import React, { ElementRef, ReactElement, forwardRef } from 'react'
-import { ToastContainer } from 'react-toastify'
 
-import { GoTopButton, Header, Loader, ScrollArea } from '@/common'
+import {
+  GoTopButton,
+  Header,
+  Loader,
+  ScrollArea,
+  ToastContainer,
+} from '@/common'
 import { cn } from '@/common/utils/cn'
 import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
@@ -13,7 +18,7 @@ type Props = {
 }
 
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
-  ({ children, className }) => {
+  ({ children, className }, ref) => {
     const isLoading = generalStore.isLoading
 
     return (
@@ -31,6 +36,7 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
               'border-t-[1px] border-transparent w-full max-w-screen-2xl mx-auto px-6 md:px-10 lg:px-16',
               className
             )}
+            ref={ref}
           >
             {children}
           </main>
