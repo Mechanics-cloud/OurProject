@@ -1,12 +1,11 @@
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-import { homeApi } from './home.api'
+import { homeApi } from '../api/home.api'
 import { HomePageRootInterface } from './home.types'
-import { PostsComments, PostsLikes } from './posts/posts.types'
+import { PostsLikes } from './posts/posts.types'
 
 class HomePageStore {
-  // comments: PostsComments | null = null
   isLoadingHomePage: boolean = true
   likes: PostsLikes | null = null
   loadingRequestFlag: boolean = false
@@ -50,7 +49,6 @@ class HomePageStore {
             : (i.likesCount -= 1)))
         : i
     )
-    console.log(this.publicationsFollowers?.items[0].likesCount)
   }
 }
 

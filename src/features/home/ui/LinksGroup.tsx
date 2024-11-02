@@ -13,15 +13,10 @@ import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-import { Item } from './home.types'
-import homePageStore from './homePageStore'
-import { postsApi } from './posts/posts.api'
+import { postsApi } from '../api'
+import { Item } from '../model/home.types'
+import homePageStore from '../model/homePageStore'
 
-// type LinksGroupProps = {
-//   id: number
-//   isLiked: boolean
-//   ownerId: number
-// }
 type ItemProps = {
   item: Item
 }

@@ -1,7 +1,7 @@
 import { instance } from '@/features/auth/api/instance'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
-import { HomePageQuery, HomePageRootInterface } from './home.types'
+import { HomePageQuery, HomePageRootInterface } from '../model/home.types'
 
 class HomeApi {
   constructor(private instance: AxiosInstance) {}

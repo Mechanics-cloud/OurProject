@@ -1,9 +1,7 @@
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { makeAutoObservable, runInAction, toJS } from 'mobx'
 
-import { homeApi } from '../home.api'
-import { HomePageRootInterface } from '../home.types'
-import { postsApi } from './posts.api'
+import { postsApi } from '../../api'
 import { PostsComments, PostsLikes } from './posts.types'
 
 export class CommentsStore {

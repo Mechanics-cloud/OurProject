@@ -9,7 +9,7 @@ type CommentGroup = {
 }
 
 //TODO вынести из компаненты запрос на сервер, поправить дизайн, сделать ограничения на количество символов
-const AddCommentGroup = ({ postId }: CommentGroup) => {
+export const AddCommentGroup = ({ postId }: CommentGroup) => {
   const [comment, setComment] = useState('')
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -55,5 +55,3 @@ const AddCommentGroup = ({ postId }: CommentGroup) => {
     </div>
   )
 }
-
-export default AddCommentGroup

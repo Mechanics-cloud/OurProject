@@ -8,14 +8,14 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
+import homePageStore from '../model/homePageStore'
+import { timeAgo } from '../model/utilsDate'
+import { AddCommentGroup } from './AddCommentGroup'
+import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
+import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
-import ViewAllCommentsButton from './ViewAllCommentsButton'
-import homePageStore from './homePageStore'
-import AddCommentGroup from './ui/AddCommentGroup'
-import { AvatarGroupWithLikes } from './ui/AvatarGroupWithLikes'
-import { CustomHomePopover } from './ui/CustomHomePopover'
-import { timeAgo } from './utilsDate'
+import { ViewAllCommentsButton } from './ViewAllCommentsButton'
 
 export const Home = observer(() => {
   const state = homePageStore.publicationsFollowers?.items
@@ -54,7 +54,7 @@ export const Home = observer(() => {
     return (
       <div
         className={
-          'w-[491px] h-[816px] border-b mt-[24px] ml-[8%] flex flex-col '
+          'w-[491px] min-h-[816px] border-b mt-[24px] ml-[8%] flex flex-col '
         }
         key={item.id}
       >
@@ -94,7 +94,7 @@ export const Home = observer(() => {
           )}
         </section>
         <LinksGroup item={item} />
-        <div className={'w-full max-h-[72px] inline-flex gap-3'}>
+        <div className={'w-full inline-flex gap-3'}>
           <Image
             alt={'Avatar'}
             className={'size-9 rounded-full mt-[5px]'}
@@ -102,18 +102,6 @@ export const Home = observer(() => {
             src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
             width={36}
           />
-          {/* <Typography
-            className={
-              'flex-1 overflow-hidden text-justify line-clamp-3 leading-[24px]'
-            }
-            variant={'reg14'}
-          >
-            <LinkProfile
-              userId={item.id}
-              userName={item.userName}
-            />
-            {item.description}
-          </Typography> */}
           <TextUnfolding
             charactersToShow={170}
             link={

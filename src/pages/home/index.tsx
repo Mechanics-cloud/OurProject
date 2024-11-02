@@ -1,6 +1,6 @@
 import { withProtection } from '@/common/HOC/withProtection'
 
-import { Home } from '../../features/home/Home'
+import { Home } from '../../features/home/ui/Home'
 
 const HomePage = () => {
   return <Home />

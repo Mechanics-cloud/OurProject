@@ -2,14 +2,14 @@ import React, { useEffect, useMemo, useState } from 'react'
 
 import { observer } from 'mobx-react-lite'
 
-import { CommentsStore } from './posts/postsStore'
+import { CommentsStore } from '../model/posts/postsStore'
 
 type ViewAllComments = {
   postId: number
 }
 
 //TODO to change (in progress)
-const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
+export const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
   const commentsStore = useMemo(() => new CommentsStore(), [])
 
   useEffect(() => {
@@ -36,5 +36,3 @@ const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
     </div>
   )
 })
-
-export default ViewAllCommentsButton

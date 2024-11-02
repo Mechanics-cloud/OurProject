@@ -1,9 +1,11 @@
 import { LikeStatus } from '@/common/enums'
 import { instance } from '@/features/auth/api/instance'
-import { AxiosInstance, AxiosResponse } from 'axios'
+import { AxiosInstance } from 'axios'
 
-import { HomePageQuery } from '../home.types'
-import { PostsComments, PostsLikes } from './posts.types'
+import { HomePageQuery, PostsComments, PostsLikes } from '../model'
+
+// import { HomePageQuery } from '../../home.types'
+// import { PostsComments, PostsLikes } from './posts.types'
 
 class PostsApi {
   constructor(private instance: AxiosInstance) {}
