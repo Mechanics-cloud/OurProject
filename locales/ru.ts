@@ -82,6 +82,10 @@ export const ru = {
       title: 'Срок действия ссылки для подтверждения электронной почты истек',
     },
   },
+  showText: {
+    less: 'Свернуть',
+    more: 'Развернуть',
+  },
   signIn: 'Вход',
   signInForm: {
     errorResponse:
