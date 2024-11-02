@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Loader, useTranslation } from '@/common'
+import { Loader, TextUnfolding, useTranslation } from '@/common'
 import Slider from '@/common/components/slider/Slider'
 import { Typography } from '@/common/components/typography'
 import { observer } from 'mobx-react-lite'
@@ -8,13 +8,13 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
-import AddCommentGroup from './AddCommentGroup'
-import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
-import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
 import ViewAllCommentsButton from './ViewAllCommentsButton'
 import homePageStore from './homePageStore'
+import AddCommentGroup from './ui/AddCommentGroup'
+import { AvatarGroupWithLikes } from './ui/AvatarGroupWithLikes'
+import { CustomHomePopover } from './ui/CustomHomePopover'
 import { timeAgo } from './utilsDate'
 
 export const Home = observer(() => {
@@ -102,7 +102,7 @@ export const Home = observer(() => {
             src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
             width={36}
           />
-          <Typography
+          {/* <Typography
             className={
               'flex-1 overflow-hidden text-justify line-clamp-3 leading-[24px]'
             }
@@ -113,7 +113,18 @@ export const Home = observer(() => {
               userName={item.userName}
             />
             {item.description}
-          </Typography>
+          </Typography> */}
+          <TextUnfolding
+            charactersToShow={170}
+            link={
+              <LinkProfile
+                userId={item.id}
+                userName={item.userName}
+              />
+            }
+          >
+            {item.description}
+          </TextUnfolding>
         </div>
         <AvatarGroupWithLikes item={item} />
         <ViewAllCommentsButton postId={item.id} />

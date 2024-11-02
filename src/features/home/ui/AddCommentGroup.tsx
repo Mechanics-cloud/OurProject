@@ -8,6 +8,7 @@ type CommentGroup = {
   postId: number
 }
 
+//TODO вынести из компаненты запрос на сервер, поправить дизайн, сделать ограничения на количество символов
 const AddCommentGroup = ({ postId }: CommentGroup) => {
   const [comment, setComment] = useState('')
 

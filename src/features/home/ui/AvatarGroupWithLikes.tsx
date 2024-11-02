@@ -3,8 +3,8 @@ import { useEffect, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 
-import { Item } from './home.types'
-import { LikesStore } from './posts/postsStore'
+import { Item } from '../home.types'
+import { LikesStore } from '../posts/postsStore'
 
 // type AvatarGroupWithLikesType = {
 //   likesCount: number
