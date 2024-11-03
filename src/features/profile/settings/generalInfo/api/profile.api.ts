@@ -14,7 +14,7 @@ class ProfileApi {
   public updateProfile(profileData: UpdatedProfile): Promise<AxiosResponse> {
     return this.instance.put(ProfileEndpoints.profile, profileData)
   }
-  public uploadAvatar(file: File): Promise<AxiosResponse> {
+  public uploadAvatar(file: File): Promise<void> {
     const formData = new FormData()
 
     formData.append('file', file, file.name || 'avatar')
