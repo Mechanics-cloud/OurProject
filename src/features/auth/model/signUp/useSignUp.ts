@@ -1,15 +1,15 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { useModal, useTranslation } from '@/common'
+import { useModal } from '@/common'
 import { Environments } from '@/common/enviroments'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 
-export const useSignUp = () => {
-  const { t } = useTranslation(() => trigger())
+export const useSignUp = (t: LocaleType) => {
   const {
     clearErrors,
     control,
@@ -75,6 +75,12 @@ export const useSignUp = () => {
     }
   }, [touchedFields.confirm, confirm, password, clearErrors, setError])
 
+  //TODO Найти решение по лучше
+  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
+  useEffect(() => {
+    trigger()
+  }, [t, trigger])
+
   return {
     control,
     errors,
@@ -83,7 +89,6 @@ export const useSignUp = () => {
     isValid,
     onModalClose,
     onSubmit,
-    t,
     userEmail,
   }
 }

@@ -11,28 +11,28 @@ export const signUpSchema = (t: LocaleType) => {
       agreesToTOS: z.literal<boolean>(true),
       confirm: z
         .string()
-        .min(6, { message: t.signUpForm.schemaErrors.minChar })
-        .max(20, { message: t.signUpForm.schemaErrors.maxChar }),
+        .min(6, { message: t.validation.password.minChar })
+        .max(20, { message: t.validation.password.maxChar }),
       email: z
         .string({
-          required_error: t.signUpForm.schemaErrors.emailRequiredError,
+          required_error: t.validation.email.required,
         })
         .email({
-          message: t.signUpForm.schemaErrors.email,
+          message: t.validation.email.composition,
         }),
       password: z
         .string()
-        .min(6, { message: t.signUpForm.schemaErrors.minChar })
-        .max(20, { message: t.signUpForm.schemaErrors.maxChar })
+        .min(6, { message: t.validation.password.minChar })
+        .max(20, { message: t.validation.password.maxChar })
         .regex(PASSWORD_REGEXP, {
           message:
-            t.signUpForm.schemaErrors.passwordComposition +
+            t.validation.password.composition +
             ' a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
         }),
       userName: z
         .string()
-        .min(6, { message: t.signUpForm.schemaErrors.minChar })
-        .max(30, { message: t.signUpForm.schemaErrors.maxChar })
+        .min(6, { message: t.validation.password.minChar })
+        .max(30, { message: t.validation.password.maxChar })
         .regex(USER_NAME_REGEXP, {
           message:
             t.signUpForm.schemaErrors.userNameComposition +
@@ -40,7 +40,7 @@ export const signUpSchema = (t: LocaleType) => {
         }),
     })
     .refine((data) => data.password === data.confirm, {
-      message: t.signUpForm.schemaErrors.matchPassword,
+      message: t.validation.password.match,
       path: ['confirm'],
     })
 }

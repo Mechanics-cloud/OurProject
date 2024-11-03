@@ -7,20 +7,20 @@ export const recoveryPasswordSchema = (t: LocaleType) => {
     .object({
       confirm: z
         .string()
-        .min(6, { message: t.recoveryPassword.schemaErrors.minCharPassword })
-        .max(20, { message: t.recoveryPassword.schemaErrors.maxCharPassword }),
+        .min(6, { message: t.validation.password.minChar })
+        .max(20, { message: t.validation.password.maxChar }),
       password: z
         .string()
-        .min(6, { message: t.recoveryPassword.schemaErrors.minCharPassword })
-        .max(20, { message: t.recoveryPassword.schemaErrors.maxCharPassword })
+        .min(6, { message: t.validation.password.minChar })
+        .max(20, { message: t.validation.password.maxChar })
         .regex(PASSWORD_REGEXP, {
           message:
-            t.recoveryPassword.schemaErrors.passwordComposition +
+            t.validation.password.composition +
             ' a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
         }),
     })
     .refine((data) => data.password === data.confirm, {
-      message: t.recoveryPassword.schemaErrors.matchPassword,
+      message: t.validation.password.match,
       path: ['confirm'],
     })
 }

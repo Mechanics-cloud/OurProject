@@ -35,10 +35,6 @@ export const en: LocaleType = {
     modalTitle: 'Email sent',
     resentEmail:
       'The link has been sent by email. If you don’t receive an email send link again',
-    schemaErrors: {
-      email: 'The email must match the format example@example.com',
-      emailRequiredError: 'Email is required',
-    },
     sendAgain: 'Send Link Again',
     title: 'Forgot Password',
   },
@@ -104,12 +100,6 @@ export const en: LocaleType = {
     passwordChanged: 'Password was successfully changed!',
     passwordConfirmation: 'Password confirmation',
     passwordValidation: 'Your password must be between 6 and 20 characters',
-    schemaErrors: {
-      matchPassword: 'Passwords must match',
-      maxCharPassword: 'Maximum number of characters 20',
-      minCharPassword: 'Minimum number of characters 6',
-      passwordComposition: 'Password must contain',
-    },
   },
   registration: {
     confirmation: {
@@ -141,13 +131,6 @@ export const en: LocaleType = {
     labelEmail: 'Email',
     labelPassword: 'Password',
     passwordRecovery: 'Forgot Password',
-    schemaErrors: {
-      email: 'The email must match the format example@example.com',
-      emailRequiredError: 'Email is required',
-      maxCharPassword: 'Maximum number of characters 20',
-      minCharPassword: 'Minimum number of characters 6',
-      passwordComposition: 'Password must contain',
-    },
     placeholderPassword: 'Enter your password',
     signUpTitle: 'Sign Up',
     text: 'Don’t have an account?',
@@ -177,12 +160,6 @@ export const en: LocaleType = {
     },
     policy: 'Privacy Policy',
     schemaErrors: {
-      email: 'The email must match the format example@example.com',
-      emailRequiredError: 'Email is required',
-      matchPassword: 'Passwords must match',
-      maxChar: 'Maximum number of characters 20',
-      minChar: 'Minimum number of characters 6',
-      passwordComposition: 'Password must contain',
       userNameComposition: 'Input must contain only',
     },
     signUpGithub: 'Sign Up with Github',
@@ -201,6 +178,16 @@ export const en: LocaleType = {
     back: 'Back',
   },
   validation: {
+    email: {
+      composition: 'The email must match the format example@example.com',
+      required: 'Email is required',
+    },
+    password: {
+      composition: 'Password must contain',
+      match: 'Passwords must match',
+      maxChar: 'Maximum number of characters 20',
+      minChar: 'Minimum number of characters 6',
+    },
     recaptchaRequired: 'Recaptcha is required',
   },
 }

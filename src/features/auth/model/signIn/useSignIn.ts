@@ -1,6 +1,7 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
-import { Paths, useTranslation } from '@/common'
+import { Paths } from '@/common'
 import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
 import {
@@ -8,10 +9,10 @@ import {
   signInSchema,
 } from '@/features/auth/model/signIn/singInSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 import Router from 'next/router'
 
-export const useSignIn = () => {
-  const { t } = useTranslation(() => trigger())
+export const useSignIn = (t: LocaleType) => {
   const {
     control,
     formState: { isValid },
@@ -42,6 +43,12 @@ export const useSignIn = () => {
       isLoadingStore.turnOffLoading()
     }
   }
+
+  //TODO Найти решение по лучше
+  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
+  useEffect(() => {
+    trigger()
+  }, [t, trigger])
 
   return {
     control,

@@ -1,4 +1,10 @@
-import { Button, Card, Typography, typographyVariants } from '@/common'
+import {
+  Button,
+  Card,
+  Typography,
+  typographyVariants,
+  useTranslation,
+} from '@/common'
 import { FormCheckbox, FormTextField } from '@/common/form'
 import { Paths } from '@/common/paths'
 import { cn } from '@/common/utils/cn'
@@ -12,6 +18,8 @@ import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 export const SignUpForm = observer(() => {
+  const { t } = useTranslation()
+
   const {
     control,
     isLoading,
@@ -19,9 +27,8 @@ export const SignUpForm = observer(() => {
     isValid,
     onModalClose,
     onSubmit,
-    t,
     userEmail,
-  } = useSignUp()
+  } = useSignUp(t)
 
   return (
     <div

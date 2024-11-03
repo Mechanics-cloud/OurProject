@@ -1,25 +1,21 @@
+import { PASSWORD_REGEXP } from '@/features/auth'
 import { LocaleType } from '@locales/ru'
 import { z } from 'zod'
 
 export const signInSchema = (t: LocaleType) => {
   return z.object({
-    email: z
-      .string({ required_error: t.signInForm.schemaErrors.emailRequiredError })
-      .email({
-        message: t.signInForm.schemaErrors.email,
-      }),
+    email: z.string({ required_error: t.validation.email.required }).email({
+      message: t.validation.email.composition,
+    }),
     password: z
       .string()
-      .min(6, { message: t.signInForm.schemaErrors.minCharPassword })
-      .max(20, { message: t.signInForm.schemaErrors.maxCharPassword })
-      .regex(
-        /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~])[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
-        {
-          message:
-            t.signInForm.schemaErrors.passwordComposition +
-            ' a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-        }
-      ),
+      .min(6, { message: t.validation.password.minChar })
+      .max(20, { message: t.validation.password.maxChar })
+      .regex(PASSWORD_REGEXP, {
+        message:
+          t.validation.password.composition +
+          ' a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      }),
   })
 }
 

@@ -5,9 +5,9 @@ export const forgotPasswordSchema = (t: LocaleType) => {
   return z.object({
     email: z
       .string({
-        required_error: t.forgotPassword.schemaErrors.emailRequiredError,
+        required_error: t.validation.email.required,
       })
-      .email({ message: t.forgotPassword.schemaErrors.email }),
+      .email({ message: t.validation.email.composition }),
     recaptcha: z.string().min(1),
   })
 }
