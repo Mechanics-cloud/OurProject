@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 export interface PostsLikes {
   items: ItemLikes[]
   pageSize: number
@@ -18,13 +20,15 @@ export interface Avatar {
   createdAt: string
   fileSize: number
   height: number
-  url: string
+  url: StaticImageData | string
   width: number
 }
 
 export interface PostsComments {
   items: ItemComment[]
+  page: number
   pageSize: number
+  pagesCount: number
   totalCount: number
 }
 

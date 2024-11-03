@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { Button, typographyVariants } from '@/common'
+import { Button, cn, typographyVariants } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { instance } from '@/features/auth'
 
@@ -8,9 +8,13 @@ type CommentGroup = {
   postId: number
 }
 
-//TODO вынести из компаненты запрос на сервер, поправить дизайн, сделать ограничения на количество символов
+//TODO вынести из компаненты запрос на сервер, поправить дизайн
 export const AddCommentGroup = ({ postId }: CommentGroup) => {
   const [comment, setComment] = useState('')
+
+  const onBlur = () => {
+    setComment(comment.trim())
+  }
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -37,15 +41,17 @@ export const AddCommentGroup = ({ postId }: CommentGroup) => {
       >
         <input
           className={
-            'placeholder-light-900 text-[14px] font-400  leading-[24px] w-full'
+            'bg-transparent focus:outline-none text-[14px] font-400  leading-[24px] w-full'
           }
+          maxLength={300}
+          onBlur={onBlur}
           onChange={(e) => setComment(e.target.value)}
           placeholder={'Add a Comments...'}
           type={'text'}
           value={comment}
         ></input>
         <Button
-          className={typographyVariants({ variant: 'h3' })}
+          className={cn(typographyVariants({ variant: 'h3' }), 'p-3')}
           type={'submit'}
           variant={'text'}
         >

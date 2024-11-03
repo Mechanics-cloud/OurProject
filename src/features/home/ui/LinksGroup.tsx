@@ -20,7 +20,7 @@ import homePageStore from '../model/homePageStore'
 type ItemProps = {
   item: Item
 }
-//TODO to change (in progress)
+//TODO to change (in progress) вынести логику, добавить логику на кнопки, добавить перевод
 export const LinksGroup = observer(({ item }: ItemProps) => {
   const [isChangeLike, setIsChangeLike] = useState<boolean>(false)
   const [loadingRequestFlag, setLoadingRequestFlag] = useState<boolean>(false)
@@ -83,11 +83,8 @@ export const LinksGroup = observer(({ item }: ItemProps) => {
           </Tooltip>
         </Link>
       </div>
-      <button
-        onClick={onFollowing}
-        type={'button'}
-      >
-        <Tooltip title={`Подписаться userId ${item.ownerId}`}>
+      <button type={'button'}>
+        <Tooltip title={'Добавить в избранное'}>
           <BookmarkOutline className={'size-6'} />
         </Tooltip>
       </button>

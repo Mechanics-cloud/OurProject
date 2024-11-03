@@ -54,7 +54,7 @@ export const Home = observer(() => {
     return (
       <div
         className={
-          'w-[491px] min-h-[816px] border-b mt-[24px] ml-[8%] flex flex-col '
+          'w-[491px] min-h-[816px] border-b mt-[24px] ml-[8%] flex flex-col pb-2'
         }
         key={item.id}
       >
