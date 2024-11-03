@@ -42,8 +42,8 @@ export const useFillGeneralInfo = () => {
       }
       reset(data)
       if (dirty) {
-        await ProfileStore.uploadAvatar(photoObj)
         setDirty(false)
+        await ProfileStore.uploadAvatar(photoObj)
       }
     } catch (error) {
       responseErrorHandler(error)
