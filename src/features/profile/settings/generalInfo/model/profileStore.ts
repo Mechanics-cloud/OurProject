@@ -1,5 +1,3 @@
-import { toast } from 'react-toastify'
-
 import { createFileForUpload, responseErrorHandler } from '@/common'
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import {
@@ -48,11 +46,8 @@ class ProfileStore {
         region: '',
         userName: data.userName,
       }
-      const res = await profileAPi.updateProfile(updatedData)
 
-      if (res.status === 204) {
-        toast.success('Your settings are saved!')
-      }
+      await profileAPi.updateProfile(updatedData)
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -64,7 +59,6 @@ class ProfileStore {
 
         if (file) {
           await profileAPi.uploadAvatar(file)
-          toast.success('Your settings are saved!')
         }
       } else {
         responseErrorHandler('an error occurred')

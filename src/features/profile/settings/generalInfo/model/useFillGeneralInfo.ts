@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { responseErrorHandler } from '@/common/utils'
 import { AuthStore } from '@/features/auth'
@@ -45,6 +46,7 @@ export const useFillGeneralInfo = () => {
         setDirty(false)
         await ProfileStore.uploadAvatar(photoObj)
       }
+      toast.success('Your settings are saved!')
     } catch (error) {
       responseErrorHandler(error)
     }
