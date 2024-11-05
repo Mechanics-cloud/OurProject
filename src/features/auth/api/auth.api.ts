@@ -38,7 +38,7 @@ class AuthApi {
   }
 
   public async me(): Promise<Profile> {
-    return instance.get(Endpoints.me)
+    return instance.get(Endpoints.me).then((res) => res.data)
   }
 
   public async newPassword(data: NewPasswordData): Promise<AxiosResponse> {

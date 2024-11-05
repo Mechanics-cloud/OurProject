@@ -4,6 +4,7 @@ import React, { ReactElement, ReactNode } from 'react'
 
 import { Layout, LayoutWithSidebar, Paths } from '@/common'
 import authStore from '@/features/auth/model/authStore'
+import { observer } from 'mobx-react-lite'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
@@ -11,12 +12,11 @@ type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: ReactElement) => ReactNode
 } & NextPage<P, IP>
 
-export const withProtection =
-  <P extends object>(
-    PageComponent: NextPageWithLayout<P>,
-    isPublic: boolean = false
-  ): NextPageWithLayout<P> =>
-  (props) => {
+export const withProtection = <P extends object>(
+  PageComponent: NextPageWithLayout<P>,
+  isPublic: boolean = false
+): NextPageWithLayout<P> =>
+  observer((props) => {
     const router = useRouter()
 
     if (!authStore.profile && !isPublic) {
@@ -46,4 +46,4 @@ export const withProtection =
         <></>
       </Layout>
     )
-  }
+  })
