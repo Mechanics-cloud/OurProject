@@ -1,6 +1,6 @@
 export type Profile = {
   email: string
-  siBlocked: boolean
+  isBlocked: boolean
   userId: number
   userName: string
 }

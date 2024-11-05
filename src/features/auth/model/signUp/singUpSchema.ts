@@ -1,7 +1,4 @@
-import {
-  PASSWORD_REGEXP,
-  USER_NAME_REGEXP,
-} from '@/features/auth/model/constants'
+import { PASSWORD_REGEXP, USER_NAME_REGEXP } from '@/common/constants'
 import { z } from 'zod'
 
 export const signUpSchema = z
