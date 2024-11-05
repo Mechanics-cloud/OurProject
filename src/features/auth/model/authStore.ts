@@ -4,13 +4,13 @@ import {
   setToLocalStorage,
 } from '@/common/utils/localStorage'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { Profile, authApi } from '@/features/auth'
+import { Profile, authApi, instance } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
-import axios, { InternalAxiosRequestConfig } from 'axios'
+import { InternalAxiosRequestConfig } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AuthStore {
-  profile: Profile | undefined
+  profile: Profile | undefined = undefined
 
   constructor() {
     makeAutoObservable(this)
@@ -41,7 +41,6 @@ class AuthStore {
       return Promise.reject(error)
     }
   }
-
   async logout() {
     try {
       await authApi.logout()
@@ -64,15 +63,18 @@ class AuthStore {
     }
   }
 
-  async updateToken(previousRequest: InternalAxiosRequestConfig | undefined) {
+  async updateToken(params: InternalAxiosRequestConfig | undefined) {
     try {
       const newToken = await authApi.updateToken()
 
       setToLocalStorage(StorageKeys.AccessToken, newToken)
-      if (previousRequest) {
-        previousRequest.headers.Authorization = `Bearer ${newToken}`
 
-        return axios(previousRequest)
+      if (params) {
+        params.headers.Authorization = `Bearer ${newToken}`
+
+        const repeatedRequest = await instance.request(params)
+
+        return repeatedRequest
       }
     } catch (error) {
       return Promise.reject(error)
