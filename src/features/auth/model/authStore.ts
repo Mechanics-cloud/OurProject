@@ -1,17 +1,14 @@
-import { StorageKeys } from '@/common/enums'
-import {
-  removeFromLocalStorage,
-  setToLocalStorage,
-} from '@/common/utils/localStorage'
+import { StatusCode, StorageKeys } from '@/common/enums'
+import { clearAllData } from '@/common/utils/clearAllData'
+import { setToLocalStorage } from '@/common/utils/localStorage'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { Profile, authApi } from '@/features/auth'
+import { generalStore } from '@/core/store'
+import { authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
-import axios, { InternalAxiosRequestConfig } from 'axios'
+import axios, { InternalAxiosRequestConfig, isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AuthStore {
-  profile: Profile | undefined
-
   constructor() {
     makeAutoObservable(this)
   }
@@ -28,6 +25,7 @@ class AuthStore {
       responseErrorHandler(error)
     }
   }
+
   async login(data: SignInFields) {
     try {
       const accessToken = await authApi.login(data)
@@ -45,8 +43,7 @@ class AuthStore {
   async logout() {
     try {
       await authApi.logout()
-      this.profile = undefined
-      removeFromLocalStorage(StorageKeys.AccessToken)
+      clearAllData()
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -54,32 +51,40 @@ class AuthStore {
 
   async me() {
     try {
-      const profile = await authApi.me()
+      const user = await authApi.me()
 
       runInAction(() => {
-        this.profile = profile
+        generalStore.user = user
       })
 
-      return profile
+      return user
     } catch (error) {
-      throw Error
+      if (
+        isAxiosError(error) &&
+        error?.response?.status === StatusCode.Unauthorized
+      ) {
+        return
+      }
+      throw { error }
     }
   }
 
   async updateToken(previousRequest: InternalAxiosRequestConfig | undefined) {
     try {
-      const newToken = await authApi.updateToken()
+      if (localStorage.getItem(StorageKeys.AccessToken)) {
+        const newToken = await authApi.updateToken()
 
-      setToLocalStorage(StorageKeys.AccessToken, newToken)
-      if (previousRequest) {
-        previousRequest.headers.Authorization = `Bearer ${newToken}`
+        setToLocalStorage(StorageKeys.AccessToken, newToken)
+        if (previousRequest) {
+          previousRequest.headers.Authorization = `Bearer ${newToken}`
 
-        return axios(previousRequest)
+          return axios(previousRequest)
+        }
       }
     } catch (error) {
-      return Promise.reject(error)
+      clearAllData()
     }
   }
 }
 
-export default new AuthStore()
+export const authStore = new AuthStore()

@@ -2,6 +2,7 @@ import React from 'react'
 
 import { TabsType, Typography } from '@/common'
 import { GeneralInfo } from '@/features/profile'
+import { Devices } from '@/features/profile/settings/devices/ui/Devices'
 import { LocaleType } from '@locales/ru'
 
 export const getSettingsTabs = (t: LocaleType): TabsType[] => {
@@ -12,7 +13,7 @@ export const getSettingsTabs = (t: LocaleType): TabsType[] => {
       title: t.tabs.generalInfo,
     },
     {
-      content: <Typography variant={'reg16'}>Devices</Typography>,
+      content: <Devices />,
       id: 'tab2',
       title: t.tabs.devices,
     },

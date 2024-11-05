@@ -79,7 +79,7 @@ const config: Config = {
         gallery: 'repeat(auto-fit, minmax(250px, 1fr))',
       },
       height: {
-        headCalc: 'calc(100vh - var(--header-height))',
+        headCalc: 'calc(100vh - var(--header-height) - 2px)',
       },
       keyframes: {
         animationLoader: {

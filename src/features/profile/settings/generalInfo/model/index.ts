@@ -1,5 +1,5 @@
 export * from './generalInfoSchema'
-export { default as ProfileStore } from './profileStore'
+export * from './profileStore'
 export * from './useAvatarUpload'
 export * from './useCalendar'
 export * from './useFetchLocations'

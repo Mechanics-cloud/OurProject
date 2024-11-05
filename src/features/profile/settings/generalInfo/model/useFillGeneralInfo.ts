@@ -2,19 +2,19 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { responseErrorHandler } from '@/common/utils'
-import { AuthStore } from '@/features/auth'
+import { generalStore } from '@/core/store'
 import {
-  ProfileStore,
   UserInfo,
   generalInfoSchema,
+  profileStore,
   useAvatarUpload,
 } from '@/features/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useFillGeneralInfo = () => {
   const { dirty, onModalPhotoSave, photoObj, setDirty } = useAvatarUpload()
-  const profile = AuthStore.profile
-  const userProfile = ProfileStore.userProfile
+  const profile = generalStore.user
+  const userProfile = profileStore.userProfile
 
   const {
     control,
@@ -39,12 +39,12 @@ export const useFillGeneralInfo = () => {
   const onSubmit = async (data: UserInfo) => {
     try {
       if (isDirty) {
-        await ProfileStore.updateProfile(data)
+        await profileStore.updateProfile(data)
       }
       reset(data)
       if (dirty) {
         setDirty(false)
-        await ProfileStore.uploadAvatar(photoObj)
+        await profileStore.uploadAvatar(photoObj)
       }
       toast.success('Your settings are saved!')
     } catch (error) {

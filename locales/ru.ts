@@ -86,6 +86,12 @@ export const ru = {
     publications: 'Публикации',
     settingsButton: 'Настройки профиля',
   },
+  profileSessions: {
+    activeSessions: 'Активные сессии',
+    currentSession: 'Текущее устройство',
+    lastVisit: 'Последний визит',
+    terminateAll: 'Завершить все другие сессии',
+  },
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
@@ -105,6 +111,14 @@ export const ru = {
       title: 'Срок действия ссылки для подтверждения электронной почты истек',
     },
   },
+  session: {
+    activeSession: 'Активные сессии',
+    currentDevice: 'Текущее устройство',
+    devices: 'Устройства',
+    lastVisit: 'Последнее посещение',
+    logOut: 'Выйти',
+    terminateAll: 'Завершить все остальные сеансы',
+  },
   signIn: 'Вход',
   signInForm: {
     errorResponse:
@@ -112,6 +126,7 @@ export const ru = {
     labelEmail: 'Электронная почта',
     labelPassword: 'Пароль',
     passwordRecovery: 'Забыли пароль',
+    placeholderPassword: 'Введите пароль',
     signUpTitle: 'Зарегистрироваться',
 
     text: 'У вас нет учетной записи?',

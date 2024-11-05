@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import { Button } from '@/common'
-
 import {
+  Button,
   Dialog,
   DialogContent,
   DialogDescription,
@@ -10,7 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from './BaseModal'
+} from '@/common'
 
 const meta = {
   component: Dialog,
