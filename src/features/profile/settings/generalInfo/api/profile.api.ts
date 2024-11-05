@@ -14,10 +14,10 @@ class ProfileApi {
   public updateProfile(profileData: UpdatedProfile): Promise<AxiosResponse> {
     return this.instance.put(ProfileEndpoints.profile, profileData)
   }
-  public uploadAvatar(file: File): Promise<any> {
+  public uploadAvatar(file: File): Promise<void> {
     const formData = new FormData()
 
-    formData.append('file', file, file.name || 'avatar.jpg')
+    formData.append('file', file, file.name || 'avatar')
 
     return this.instance
       .post(ProfileEndpoints.uploadAvatar, formData, {
