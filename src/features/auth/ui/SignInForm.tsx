@@ -33,7 +33,7 @@ const SignIn = observer(() => {
             disabled={isLoading}
             label={t.signInForm.labelEmail}
             name={'email'}
-            placeholder={'Epam@epam.com'}
+            placeholder={'epam@epam.com'}
             type={'email'}
           />
           <FormTextField
@@ -41,7 +41,7 @@ const SignIn = observer(() => {
             disabled={isLoading}
             label={t.signInForm.labelPassword}
             name={'password'}
-            placeholder={'**********'}
+            placeholder={t.signInForm.placeholderPassword}
             type={'password'}
           />
 

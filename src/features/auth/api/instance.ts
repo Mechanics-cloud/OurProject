@@ -1,9 +1,7 @@
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
-import { Endpoints } from '@/features/auth'
+import { Endpoints, authStore } from '@/features/auth'
 import axios, { AxiosResponse, isAxiosError } from 'axios'
-
-import authStore from '../model/authStore'
 
 export const instance = axios.create({
   baseURL: Environments.API_URL,
@@ -26,7 +24,7 @@ instance.interceptors.response.use(
           return Promise.reject(error)
         } else {
           try {
-            await authStore.updateToken(error.config)
+            return await authStore.updateToken(error.config)
           } catch (updateError) {
             return Promise.reject(updateError)
           }

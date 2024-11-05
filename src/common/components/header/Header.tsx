@@ -3,19 +3,19 @@ import * as React from 'react'
 import { Button, LangSelect, useTranslation } from '@/common'
 import { Typography } from '@/common/components/typography'
 import { Paths } from '@/common/paths'
-import authStore from '@/features/auth/model/authStore'
+import { generalStore } from '@/core/store'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
 const Header = () => {
   const { t } = useTranslation()
-  const isAuth = !!authStore.profile
+  const isAuth = !!generalStore.user
 
   return (
     <header
       className={
-        'fixed z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300 pr-scrollbar'
+        'fixed top-0 z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300 pr-scrollbar'
       }
     >
       <div

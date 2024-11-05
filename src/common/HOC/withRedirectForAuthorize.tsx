@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
 import { Loader, Paths } from '@/common'
-import authStore from '@/features/auth/model/authStore'
+import { generalStore } from '@/core/store'
+import { authStore } from '@/features/auth'
 import { NextPageWithLayout } from '@/pages/_app'
 import { observer } from 'mobx-react-lite'
 import Router from 'next/router'
@@ -14,7 +15,7 @@ export const withRedirectForAuthorize = <P extends object>(
 
     useEffect(() => {
       authStore.me().finally(() => setLoading(false))
-      if (authStore.profile) {
+      if (generalStore.user) {
         Router.push(Paths.profile)
       }
     }, [])

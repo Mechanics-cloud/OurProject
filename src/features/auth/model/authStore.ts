@@ -1,17 +1,14 @@
-import { StorageKeys } from '@/common/enums'
-import {
-  removeFromLocalStorage,
-  setToLocalStorage,
-} from '@/common/utils/localStorage'
+import { StatusCode, StorageKeys } from '@/common/enums'
+import { clearAllData } from '@/common/utils/clearAllData'
+import { setToLocalStorage } from '@/common/utils/localStorage'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { Profile, authApi } from '@/features/auth'
+import { generalStore } from '@/core/store'
+import { authApi, instance } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
-import axios, { InternalAxiosRequestConfig } from 'axios'
+import { InternalAxiosRequestConfig, isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AuthStore {
-  profile: Profile | undefined
-
   constructor() {
     makeAutoObservable(this)
   }
@@ -21,13 +18,14 @@ class AuthStore {
       const res = await authApi.authWithGoogle(code)
 
       setToLocalStorage(StorageKeys.AccessToken, res.data.accessToken)
-      await this.me()
+      const userInfo = await this.me()
 
-      return res
+      return { res, userInfo }
     } catch (error) {
       responseErrorHandler(error)
     }
   }
+
   async login(data: SignInFields) {
     try {
       const accessToken = await authApi.login(data)
@@ -45,8 +43,7 @@ class AuthStore {
   async logout() {
     try {
       await authApi.logout()
-      this.profile = undefined
-      removeFromLocalStorage(StorageKeys.AccessToken)
+      clearAllData()
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -54,25 +51,36 @@ class AuthStore {
 
   async me() {
     try {
-      const profile = await authApi.me()
+      const user = await authApi.me()
 
       runInAction(() => {
-        this.profile = profile
+        generalStore.user = user
       })
+
+      return user
     } catch (error) {
-      throw Error
+      if (
+        isAxiosError(error) &&
+        error?.response?.status === StatusCode.Unauthorized
+      ) {
+        return
+      }
+      throw { error }
     }
   }
 
-  async updateToken(previousRequest: InternalAxiosRequestConfig | undefined) {
+  async updateToken(params: InternalAxiosRequestConfig | undefined) {
     try {
-      const newToken = await authApi.updateToken()
+      if (localStorage.getItem(StorageKeys.AccessToken)) {
+        const newToken = await authApi.updateToken()
 
-      setToLocalStorage(StorageKeys.AccessToken, newToken)
-      if (previousRequest) {
-        previousRequest.headers.Authorization = `Bearer ${newToken}`
+        setToLocalStorage(StorageKeys.AccessToken, newToken)
 
-        return axios(previousRequest)
+        if (params) {
+          params.headers.Authorization = `Bearer ${newToken}`
+
+          return await instance.request(params)
+        }
       }
     } catch (error) {
       return Promise.reject(error)
@@ -80,4 +88,4 @@ class AuthStore {
   }
 }
 
-export default new AuthStore()
+export const authStore = new AuthStore()
