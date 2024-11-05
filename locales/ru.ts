@@ -119,6 +119,10 @@ export const ru = {
     logOut: 'Выйти',
     terminateAll: 'Завершить все остальные сеансы',
   },
+  showText: {
+    less: 'Свернуть',
+    more: 'Развернуть',
+  },
   signIn: 'Вход',
   signInForm: {
     errorResponse:

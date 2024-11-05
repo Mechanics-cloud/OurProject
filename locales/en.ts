@@ -121,6 +121,10 @@ export const en: LocaleType = {
     logOut: 'Log out',
     terminateAll: 'Terminate all other session',
   },
+  showText: {
+    less: 'Hide',
+    more: 'Show more',
+  },
   signIn: 'Sign In',
   signInForm: {
     errorResponse: 'The email or password are incorrect. Try again please',
