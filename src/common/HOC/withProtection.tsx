@@ -1,9 +1,7 @@
-'use client'
-
 import React, { ReactElement, ReactNode } from 'react'
 
-import { Layout, LayoutWithSidebar, Paths } from '@/common'
-import authStore from '@/features/auth/model/authStore'
+import { Layout, LayoutForAuthorized, Paths } from '@/common'
+import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
@@ -19,19 +17,19 @@ export const withProtection = <P extends object>(
   observer((props) => {
     const router = useRouter()
 
-    if (!authStore.profile && !isPublic) {
+    if (!generalStore.user && !isPublic) {
       router.push(Paths.signIn)
     }
 
-    if (authStore.profile) {
+    if (generalStore.user) {
       return (
-        <LayoutWithSidebar>
+        <LayoutForAuthorized>
           <PageComponent {...props} />
-        </LayoutWithSidebar>
+        </LayoutForAuthorized>
       )
     }
 
-    if (isPublic && !authStore.profile) {
+    if (isPublic && !generalStore.user) {
       return (
         <Layout>
           <div className={'mx-24'}>

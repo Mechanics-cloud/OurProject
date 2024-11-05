@@ -1,9 +1,7 @@
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
-import { Endpoints } from '@/features/auth'
+import { Endpoints, authStore } from '@/features/auth'
 import axios, { AxiosResponse, isAxiosError } from 'axios'
-
-import authStore from '../model/authStore'
 
 export const instance = axios.create({
   baseURL: Environments.API_URL,

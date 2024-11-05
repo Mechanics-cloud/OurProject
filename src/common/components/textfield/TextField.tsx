@@ -28,6 +28,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
   const inputRef = useRef(ref)
 
   const {
+    children,
     className,
     disabled,
     error,
@@ -108,8 +109,8 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
               />
             ))}
           <PopoverAnchor />
+          {children}
         </div>
-
         {!isTablet && (
           <PopoverContent
             align={'end'}

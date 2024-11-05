@@ -1,1 +1,1 @@
-export * from './mobileHeader'
+export * from 'src/common/components/mobileHeader/MobileHeader'

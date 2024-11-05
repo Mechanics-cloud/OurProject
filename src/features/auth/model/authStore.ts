@@ -1,17 +1,14 @@
 import { StatusCode, StorageKeys } from '@/common/enums'
-import {
-  removeFromLocalStorage,
-  setToLocalStorage,
-} from '@/common/utils/localStorage'
+import { clearAllData } from '@/common/utils/clearAllData'
+import { setToLocalStorage } from '@/common/utils/localStorage'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { Profile, authApi, instance } from '@/features/auth'
+import { generalStore } from '@/core/store'
+import { authApi, instance } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import { InternalAxiosRequestConfig, isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AuthStore {
-  profile: Profile | undefined = undefined
-
   constructor() {
     makeAutoObservable(this)
   }
@@ -21,13 +18,14 @@ class AuthStore {
       const res = await authApi.authWithGoogle(code)
 
       setToLocalStorage(StorageKeys.AccessToken, res.data.accessToken)
-      await this.me()
+      const userInfo = await this.me()
 
-      return res
+      return { res, userInfo }
     } catch (error) {
       responseErrorHandler(error)
     }
   }
+
   async login(data: SignInFields) {
     try {
       const accessToken = await authApi.login(data)
@@ -41,11 +39,11 @@ class AuthStore {
       return Promise.reject(error)
     }
   }
+
   async logout() {
     try {
       await authApi.logout()
-      this.profile = undefined
-      removeFromLocalStorage(StorageKeys.AccessToken)
+      clearAllData()
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -53,11 +51,13 @@ class AuthStore {
 
   async me() {
     try {
-      const profile = await authApi.me()
+      const user = await authApi.me()
 
       runInAction(() => {
-        this.profile = profile
+        generalStore.user = user
       })
+
+      return user
     } catch (error) {
       if (
         isAxiosError(error) &&
@@ -79,9 +79,7 @@ class AuthStore {
         if (params) {
           params.headers.Authorization = `Bearer ${newToken}`
 
-          const repeatedRequest = await instance.request(params)
-
-          return repeatedRequest
+          return await instance.request(params)
         }
       }
     } catch (error) {
@@ -90,4 +88,4 @@ class AuthStore {
   }
 }
 
-export default new AuthStore()
+export const authStore = new AuthStore()

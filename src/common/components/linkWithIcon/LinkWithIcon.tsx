@@ -1,6 +1,7 @@
-import React, { ComponentPropsWithoutRef, ElementType } from 'react'
+import React, { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react'
 
 import { cn } from '@/common/utils/cn'
+import { getBasePath } from '@/common/utils/getBasePath'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -10,14 +11,14 @@ const styles = {
 }
 
 type Props<T extends ElementType = typeof Link> = {
-  ActiveIcon: ElementType
-  DefaultIcon: ElementType
+  ActiveIcon?: ReactNode
+  DefaultIcon: ReactNode
   as?: T
   disabled?: boolean
   iconTrigger?: boolean | string
 } & ComponentPropsWithoutRef<T>
 
-export const NavLink = React.forwardRef<HTMLElement, Props<ElementType>>(
+export const LinkWithIcon = React.forwardRef<HTMLElement, Props<ElementType>>(
   function NavLink(
     {
       ActiveIcon,
@@ -35,39 +36,33 @@ export const NavLink = React.forwardRef<HTMLElement, Props<ElementType>>(
     const Component = as || Link
     const { pathname } = useRouter()
 
-    let isActive = false
+    let isActive: boolean
 
     if (Component === Link) {
-      if (href === '/') {
-        isActive = pathname === href
-      } else {
-        isActive = pathname.startsWith(href)
-      }
+      isActive = getBasePath(pathname) === getBasePath(href)
     } else {
       isActive = !!iconTrigger
     }
 
     return (
-      <li>
-        <Component
-          href={href}
-          {...rest}
-          aria-disabled={disabled}
-          className={cn(
-            className,
-            styles.link,
-            isActive && styles.activeLink,
-            disabled && 'pointer-events-none text-dark-100'
-          )}
-          ref={ref}
-          tabIndex={disabled ? -1 : undefined}
-        >
-          {isActive ? <ActiveIcon /> : <DefaultIcon />}
-          {children}
-        </Component>
-      </li>
+      <Component
+        href={href}
+        {...rest}
+        aria-disabled={disabled}
+        className={cn(
+          className,
+          styles.link,
+          isActive && styles.activeLink,
+          disabled && 'pointer-events-none text-dark-100'
+        )}
+        ref={ref}
+        tabIndex={disabled ? -1 : undefined}
+      >
+        {isActive ? <ActiveIcon /> : <DefaultIcon />}
+        {children}
+      </Component>
     )
   }
 )
 
-NavLink.displayName = 'NavLink'
+LinkWithIcon.displayName = 'LinkWithIcon'
