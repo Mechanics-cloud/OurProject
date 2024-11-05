@@ -1,4 +1,4 @@
-import { StorageKeys } from '@/common/enums'
+import { StatusCode, StorageKeys } from '@/common/enums'
 import {
   removeFromLocalStorage,
   setToLocalStorage,
@@ -6,7 +6,7 @@ import {
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { Profile, authApi, instance } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
-import { InternalAxiosRequestConfig } from 'axios'
+import { InternalAxiosRequestConfig, isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AuthStore {
@@ -59,22 +59,30 @@ class AuthStore {
         this.profile = profile
       })
     } catch (error) {
-      throw Error
+      if (
+        isAxiosError(error) &&
+        error?.response?.status === StatusCode.Unauthorized
+      ) {
+        return
+      }
+      throw { error }
     }
   }
 
   async updateToken(params: InternalAxiosRequestConfig | undefined) {
     try {
-      const newToken = await authApi.updateToken()
+      if (localStorage.getItem(StorageKeys.AccessToken)) {
+        const newToken = await authApi.updateToken()
 
-      setToLocalStorage(StorageKeys.AccessToken, newToken)
+        setToLocalStorage(StorageKeys.AccessToken, newToken)
 
-      if (params) {
-        params.headers.Authorization = `Bearer ${newToken}`
+        if (params) {
+          params.headers.Authorization = `Bearer ${newToken}`
 
-        const repeatedRequest = await instance.request(params)
+          const repeatedRequest = await instance.request(params)
 
-        return repeatedRequest
+          return repeatedRequest
+        }
       }
     } catch (error) {
       return Promise.reject(error)
