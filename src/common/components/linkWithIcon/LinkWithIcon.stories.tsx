@@ -5,11 +5,18 @@ import { Meta, StoryObj } from '@storybook/react'
 import Link from 'next/link'
 
 const meta = {
+  args: {
+    ActiveIcon: Chrome,
+    DefaultIcon: Chrome,
+    as: Link,
+    children: 'Chrome',
+    disabled: false,
+    href: '/123',
+  },
   component: LinkWithIcon,
   parameters: {
     layout: 'centered',
   },
-  tags: ['autodocs'],
   title: 'Component/LinkWithIcon',
 } satisfies Meta<typeof LinkWithIcon>
 

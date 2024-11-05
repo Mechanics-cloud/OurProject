@@ -58,7 +58,7 @@ export const LinkWithIcon = React.forwardRef<HTMLElement, Props<ElementType>>(
         ref={ref}
         tabIndex={disabled ? -1 : undefined}
       >
-        {isActive ? <ActiveIcon /> : <DefaultIcon />}
+        {isActive && ActiveIcon ? <ActiveIcon /> : <DefaultIcon />}
         {children}
       </Component>
     )

@@ -1,4 +1,5 @@
 import { TextField } from '@/common/components'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof TextField> = {
@@ -53,4 +54,35 @@ export const Search: Story = {
     placeholder: 'Input search',
     type: 'search',
   },
+}
+
+export const Invalid: Story = {
+  args: {
+    error: 'Invalid message',
+    label: 'Label',
+    placeholder: 'Input search',
+  },
+}
+
+export const InvalidWithTooltip: Story = {
+  args: {
+    error: 'Invalid message',
+    errorMode: 'tooltip',
+    label: 'Label',
+    placeholder: 'Input search',
+  },
+}
+
+export const ChangeByScreenWidth = () => {
+  const { isTablet } = useScreenWidth()
+
+  return (
+    <TextField
+      error={`Change screen width: now ${
+        isTablet ? 'Text error mode' : 'Tooltip error mode'
+      }`}
+      errorMode={isTablet ? 'text' : 'tooltip'}
+      label={'Dynamic error mode'}
+    />
+  )
 }
