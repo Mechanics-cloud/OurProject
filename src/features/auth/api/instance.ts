@@ -26,9 +26,7 @@ instance.interceptors.response.use(
           return Promise.reject(error)
         } else {
           try {
-            const repeatedResponse = await authStore.updateToken(error.config)
-
-            return Promise.resolve(repeatedResponse)
+            return await authStore.updateToken(error.config)
           } catch (updateError) {
             return Promise.reject(updateError)
           }
