@@ -22,5 +22,6 @@ export const useAvatarUpload = () => {
     onModalPhotoSave,
     photoObj,
     setDirty,
+    setPhotoObj,
   }
 }

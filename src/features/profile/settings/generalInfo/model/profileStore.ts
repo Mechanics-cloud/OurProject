@@ -17,6 +17,15 @@ class ProfileStore {
     makeAutoObservable(this)
   }
 
+  async deleteAvatar() {
+    try {
+      await profileAPi.deleteAvatar()
+    } catch (error) {
+      debugger
+      responseErrorHandler(error)
+    }
+  }
+
   async getProfile() {
     try {
       const userProfile = await profileAPi.getProfile()
@@ -33,7 +42,6 @@ class ProfileStore {
       responseErrorHandler(error)
     }
   }
-
   async updateProfile(data: UserInfo) {
     try {
       const updatedData: UpdatedProfile = {
@@ -57,11 +65,10 @@ class ProfileStore {
       if (photoData.photoForServer) {
         const file = createFileForUpload(photoData)
 
-        if (file) {
-          await profileAPi.uploadAvatar(file)
+        if (!file) {
+          return
         }
-      } else {
-        responseErrorHandler('an error occurred')
+        await profileAPi.uploadAvatar(file)
       }
     } catch (error) {
       responseErrorHandler(error)

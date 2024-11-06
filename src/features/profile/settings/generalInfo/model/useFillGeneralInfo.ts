@@ -12,7 +12,8 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useFillGeneralInfo = () => {
-  const { dirty, onModalPhotoSave, photoObj, setDirty } = useAvatarUpload()
+  const { dirty, onModalPhotoSave, photoObj, setDirty, setPhotoObj } =
+    useAvatarUpload()
   const profile = generalStore.user
   const userProfile = profileStore.userProfile
 
@@ -46,6 +47,9 @@ export const useFillGeneralInfo = () => {
         setDirty(false)
         await profileStore.uploadAvatar(photoObj)
       }
+      if (!photoObj.photo && !photoObj.photoForServer && dirty) {
+        await profileStore.deleteAvatar()
+      }
       toast.success('Your settings are saved!')
     } catch (error) {
       responseErrorHandler(error)
@@ -62,6 +66,8 @@ export const useFillGeneralInfo = () => {
     onModalPhotoSave,
     onSubmit: handleSubmit(onSubmit),
     photoObj,
+    setDirty,
+    setPhotoObj,
     setValue,
   }
 }

@@ -8,6 +8,9 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 
 class ProfileApi {
   constructor(private instance: AxiosInstance) {}
+  public deleteAvatar(): Promise<void> {
+    return this.instance.delete(ProfileEndpoints.avatar)
+  }
   public getProfile(): Promise<UserProfile> {
     return this.instance.get(ProfileEndpoints.profile).then((res) => res.data)
   }
@@ -20,7 +23,7 @@ class ProfileApi {
     formData.append('file', file, file.name || 'avatar')
 
     return this.instance
-      .post(ProfileEndpoints.uploadAvatar, formData, {
+      .post(ProfileEndpoints.avatar, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

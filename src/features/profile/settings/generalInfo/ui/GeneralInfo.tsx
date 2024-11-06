@@ -18,6 +18,8 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
     onModalPhotoSave,
     onSubmit,
     photoObj,
+    setDirty,
+    setPhotoObj,
     setValue,
   } = useFillGeneralInfo()
 
@@ -30,6 +32,8 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
       <AddPhoto
         onModalPhotoSave={onModalPhotoSave}
         photoObj={photoObj}
+        setPhotoChanged={setDirty}
+        setPhotoObj={setPhotoObj}
       />
       <form
         className={'flex gap-10 w-full'}
