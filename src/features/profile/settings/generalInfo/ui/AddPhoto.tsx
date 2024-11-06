@@ -22,7 +22,7 @@ export const AddPhoto = ({
   const imageClass =
     'w-[192px] aspect-square flex justify-center items-center rounded-full bg-dark-500'
 
-  const onDeleteAvatar = async () => {
+  const onDeleteAvatar = () => {
     setPhotoObj({
       photo: null,
       photoForServer: null,

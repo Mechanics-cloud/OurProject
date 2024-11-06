@@ -8,27 +8,28 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 
 class ProfileApi {
   constructor(private instance: AxiosInstance) {}
-  public deleteAvatar(): Promise<void> {
+  public deleteAvatar(): Promise<AxiosResponse> {
     return this.instance.delete(ProfileEndpoints.avatar)
   }
-  public getProfile(): Promise<UserProfile> {
-    return this.instance.get(ProfileEndpoints.profile).then((res) => res.data)
+  public async getProfile(): Promise<UserProfile> {
+    const res = await this.instance.get(ProfileEndpoints.profile)
+
+    return res.data
   }
   public updateProfile(profileData: UpdatedProfile): Promise<AxiosResponse> {
     return this.instance.put(ProfileEndpoints.profile, profileData)
   }
-  public uploadAvatar(file: File): Promise<void> {
+  public async uploadAvatar(file: File): Promise<void> {
     const formData = new FormData()
 
     formData.append('file', file, file.name || 'avatar')
+    const res = await this.instance.post(ProfileEndpoints.avatar, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    })
 
-    return this.instance
-      .post(ProfileEndpoints.avatar, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      })
-      .then((res) => res.data)
+    return res.data
   }
 }
 
