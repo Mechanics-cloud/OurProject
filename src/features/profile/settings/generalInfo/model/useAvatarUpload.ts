@@ -9,19 +9,19 @@ export const useAvatarUpload = () => {
     photoForServer: null,
   })
 
-  const [dirty, setDirty] = useState(false)
+  const [photoChanged, setPhotoChanged] = useState(false)
 
   const onModalPhotoSave = (photo: PhotoResult) => {
     setPhotoObj(photo)
-    setDirty(true)
+    setPhotoChanged(true)
   }
 
   return {
     currentPhoto,
-    dirty,
     onModalPhotoSave,
+    photoChanged,
     photoObj,
-    setDirty,
+    setPhotoChanged,
     setPhotoObj,
   }
 }

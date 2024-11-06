@@ -33,10 +33,9 @@ export const AddPhoto = ({
   return (
     <div className={'flex items-center flex-col h-[500px] gap-6'}>
       {photoObj?.photo ? (
-        <div className={'relative'}>
+        <div className={cn('relative object-cover', imageClass)}>
           <Image
             alt={'avatar'}
-            className={cn('object-cover', imageClass)}
             height={200}
             src={photoObj.photo}
             width={200}
