@@ -44,6 +44,8 @@
     "react-avatar-editor": "^13.0.2",
     "react-day-picker": "^9.0.8",
     "react-dom": "^18",
+    "react-dropzone": "^14.3.5",
+    "react-easy-crop": "^5.1.0",
     "react-google-recaptcha": "^3.1.0",
     "react-hook-form": "^7.53.0",
     "react-toastify": "^10.0.5",
