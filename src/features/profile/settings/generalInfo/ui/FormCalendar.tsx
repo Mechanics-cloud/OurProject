@@ -21,11 +21,13 @@ export const FormCalendar = <T extends FieldValues>({
     useCalendar(setValue, name)
 
   return (
-    <FormTextField
-      control={control}
-      label={label ?? ''}
-      name={name}
-    >
+    <div className={'relative'}>
+      <FormTextField
+        control={control}
+        label={label ?? ''}
+        name={name}
+      ></FormTextField>
+
       {isCalendarOpen ? (
         <CalendarFilled
           className={
@@ -44,11 +46,11 @@ export const FormCalendar = <T extends FieldValues>({
       <div ref={calendarRef}>
         {isCalendarOpen && (
           <Calendar
-            className={'absolute'}
+            className={'absolute top-[75%]'}
             onDayClick={onSelectDate}
           />
         )}
       </div>
-    </FormTextField>
+    </div>
   )
 }
