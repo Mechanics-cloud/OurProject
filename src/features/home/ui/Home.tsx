@@ -2,7 +2,6 @@ import { useEffect } from 'react'
 
 import { Loader, TextUnfolding, useTranslation } from '@/common'
 import Slider from '@/common/components/slider/Slider'
-import { Typography } from '@/common/components/typography'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -10,12 +9,13 @@ import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
 import homePageStore from '../model/homePageStore'
 import { timeAgo } from '../model/utilsDate'
+import { WrapperParentComponent } from '../model/wrapper'
 import { AddCommentGroup } from './AddCommentGroup'
 import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
 import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
-import { ViewAllCommentsButton } from './ViewAllCommentsButton'
+// import { ViewAllCommentsButton } from './ViewAllCommentsButton'
 
 export const Home = observer(() => {
   const state = homePageStore.publicationsFollowers?.items
@@ -54,7 +54,7 @@ export const Home = observer(() => {
     return (
       <div
         className={
-          'w-[491px] min-h-[816px] border-b mt-[24px] ml-[8%] flex flex-col pb-2'
+          'w-[491px] min-h-[816px] border-b mt-[24px] ml-[8%] flex flex-col pb-2 justify-between'
         }
         key={item.id}
       >
@@ -106,7 +106,7 @@ export const Home = observer(() => {
             charactersToShow={170}
             link={
               <LinkProfile
-                userId={item.id}
+                userId={item.ownerId}
                 userName={item.userName}
               />
             }
@@ -115,8 +115,9 @@ export const Home = observer(() => {
           </TextUnfolding>
         </div>
         <AvatarGroupWithLikes item={item} />
-        <ViewAllCommentsButton postId={item.id} />
-        <AddCommentGroup postId={item.id} />
+        <WrapperParentComponent postId={item.id} />
+        {/* <ViewAllCommentsButton postId={item.id} />
+        <AddCommentGroup postId={item.id} /> */}
       </div>
     )
   })

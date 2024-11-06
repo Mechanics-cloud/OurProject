@@ -3,14 +3,17 @@ import React, { useState } from 'react'
 import { Button, cn, typographyVariants } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { instance } from '@/features/auth'
+import { observer } from 'mobx-react-lite'
+
+import { useStore } from '../model/homeContext'
 
 type CommentGroup = {
   postId: number
 }
 
-//TODO вынести из компаненты запрос на сервер, поправить дизайн
-export const AddCommentGroup = ({ postId }: CommentGroup) => {
-  const [comment, setComment] = useState('')
+export const AddCommentGroup = observer(({ postId }: CommentGroup) => {
+  const [comment, setComment] = useState<string>('')
+  const commentsStore = useStore()
 
   const onBlur = () => {
     setComment(comment.trim())
@@ -18,16 +21,12 @@ export const AddCommentGroup = ({ postId }: CommentGroup) => {
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-
     try {
-      const response = await instance.post<any>(
-        `/v1/posts/${postId}/comments`,
-        {
-          content: comment,
-        }
-      )
+      const response = await commentsStore.addComment(postId, comment)
 
-      setComment('')
+      if (response) {
+        setComment('')
+      }
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -51,7 +50,8 @@ export const AddCommentGroup = ({ postId }: CommentGroup) => {
           value={comment}
         ></input>
         <Button
-          className={cn(typographyVariants({ variant: 'h3' }), 'p-3')}
+          className={cn(typographyVariants({ variant: 'h3' }), 'px-3')}
+          disabled={!comment}
           type={'submit'}
           variant={'text'}
         >
@@ -60,4 +60,4 @@ export const AddCommentGroup = ({ postId }: CommentGroup) => {
       </form>
     </div>
   )
-}
+})

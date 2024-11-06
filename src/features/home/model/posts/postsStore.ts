@@ -12,6 +12,23 @@ export class CommentsStore {
     makeAutoObservable(this)
   }
 
+  async addComment(postId: number, comment: string) {
+    if (this.isLoading) {
+      return
+    }
+    try {
+      this.isLoading = true
+      const response = await postsApi.addComment({ comment, postId })
+
+      this.getComments(postId)
+
+      return response
+    } catch (error) {
+      responseErrorHandler(error)
+    } finally {
+      this.isLoading = false
+    }
+  }
   async getComments(postId: number) {
     if (this.isLoading) {
       return

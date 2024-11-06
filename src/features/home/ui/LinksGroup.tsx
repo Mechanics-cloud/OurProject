@@ -35,7 +35,7 @@ export const LinksGroup = observer(({ item }: ItemProps) => {
 
       const likeStatus = item.isLiked ? LikeStatus.None : LikeStatus.Like
 
-      await postsApi.postLike({ likeStatus, postId: item.id })
+      await postsApi.updateLikeStatus({ likeStatus, postId: item.id })
 
       runInAction(() => {
         homePageStore.isLiked(item.id, !item.isLiked)

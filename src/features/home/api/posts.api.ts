@@ -2,20 +2,17 @@ import { LikeStatus } from '@/common/enums'
 import { instance } from '@/features/auth/api/instance'
 import { AxiosInstance } from 'axios'
 
-import { HomePageQuery, PostsComments, PostsLikes } from '../model'
-
-// import { HomePageQuery } from '../../home.types'
-// import { PostsComments, PostsLikes } from './posts.types'
+import { PostsComments, PostsLikes } from '../model'
 
 class PostsApi {
   constructor(private instance: AxiosInstance) {}
 
-  //todo del getFollowing and toFollowing
-  public getFollowing(userName: any) {
-    return instance.get<any>(`/v1/users/${userName}/following`).then((res) => {
-      return res.data
+  public addComment({ comment, postId }: { comment: string; postId: number }) {
+    return instance.post(`/v1/posts/${postId}/comments`, {
+      content: comment,
     })
   }
+
   public getPostIdComments(postId: number) {
     return instance
       .get<PostsComments>(`/v1/posts/${postId}/comments`)
@@ -26,7 +23,8 @@ class PostsApi {
       .get<PostsLikes>(`/v1/posts/${postId}/likes`)
       .then((res) => res.data)
   }
-  public postLike({
+
+  public updateLikeStatus({
     likeStatus,
     postId,
   }: {
@@ -39,24 +37,5 @@ class PostsApi {
       })
       .then((res) => res.data)
   }
-  public publicPost({ postId }: { postId: number }) {
-    return instance
-      .get<any>(`/v1/public-posts/${postId}`)
-      .then((res) => res.data)
-  }
-
-  public publicPosts(data: HomePageQuery) {
-    return instance
-      .get<any>(`/v1/public-posts/all/`, { params: data })
-      .then((res) => res.data)
-  }
-  public toFollowing(selectedUserId: any) {
-    return instance
-      .post<any>(`/v1/users/following`, selectedUserId)
-      .then((res) => {
-        return res.data
-      })
-  }
 }
-
 export const postsApi = new PostsApi(instance)
