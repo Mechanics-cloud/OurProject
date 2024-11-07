@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Popover, PopoverContent, PopoverTrigger } from '@/common'
 import { observer } from 'mobx-react-lite'
 
-import { useStore } from '../model/homeContext'
+import { useCommentsStore } from '../model/homeContext'
 import { PostDescription } from './PostDescription'
 
 type ViewAllComments = {
@@ -12,8 +12,7 @@ type ViewAllComments = {
 
 //TODO to change (in progress) добавить стили, отрисовать слайдер, в поповер добавить логику
 export const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
-  // const commentsStore = useMemo(() => new CommentsStore(), [])
-  const commentsStore = useStore()
+  const commentsStore = useCommentsStore()
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
 

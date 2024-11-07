@@ -1,4 +1,10 @@
 export const ru = {
+  actionIconsGroup: {
+    addFavorite: 'Добавить в избранное',
+    isLiked: 'Нравиться',
+    message: 'Сообщения',
+    share: 'Поделиться',
+  },
   avatarModal: {
     chooseButton: 'Выбрать с компьютера',
     errors: {

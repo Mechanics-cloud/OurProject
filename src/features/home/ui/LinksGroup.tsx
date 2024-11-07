@@ -7,7 +7,7 @@ import {
   MessageCircleOutline,
   PaperPlaneOutline,
 } from '@/assets/icons/outlineIcons'
-import { Tooltip } from '@/common'
+import { Tooltip, useTranslation } from '@/common'
 import { LikeStatus } from '@/common/enums'
 import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
@@ -20,10 +20,11 @@ import homePageStore from '../model/homePageStore'
 type ItemProps = {
   item: Item
 }
-//TODO to change (in progress) вынести логику, добавить логику на кнопки, добавить перевод
+//TODO to change (in progress) вынести логику, добавить логику на кнопки
 export const LinksGroup = observer(({ item }: ItemProps) => {
   const [isChangeLike, setIsChangeLike] = useState<boolean>(false)
   const [loadingRequestFlag, setLoadingRequestFlag] = useState<boolean>(false)
+  const { t } = useTranslation()
 
   const onLiked = async () => {
     if (loadingRequestFlag) {
@@ -48,13 +49,6 @@ export const LinksGroup = observer(({ item }: ItemProps) => {
       setLoadingRequestFlag(false)
     }
   }
-  const onFollowing = async () => {
-    try {
-      await postsApi.toFollowing({ selectedUserId: item.ownerId })
-    } catch (error) {
-      console.error('Error onFollowing the post:', error)
-    }
-  }
 
   return (
     <div className={'w-full h-6 flex items-center justify-between mb-4'}>
@@ -64,7 +58,7 @@ export const LinksGroup = observer(({ item }: ItemProps) => {
           onClick={onLiked}
           type={'button'}
         >
-          <Tooltip title={'Нравиться'}>
+          <Tooltip title={t.actionIconsGroup.isLiked}>
             {item.isLiked ? (
               <Heart className={'size-6'} />
             ) : (
@@ -73,18 +67,18 @@ export const LinksGroup = observer(({ item }: ItemProps) => {
           </Tooltip>
         </button>
         <Link href={'/'}>
-          <Tooltip title={'Сообщения'}>
+          <Tooltip title={t.actionIconsGroup.message}>
             <MessageCircleOutline className={'size-6'} />
           </Tooltip>
         </Link>
         <Link href={'/'}>
-          <Tooltip title={'Поделиться'}>
+          <Tooltip title={t.actionIconsGroup.share}>
             <PaperPlaneOutline className={'size-6'} />
           </Tooltip>
         </Link>
       </div>
       <button type={'button'}>
-        <Tooltip title={'Добавить в избранное'}>
+        <Tooltip title={t.actionIconsGroup.addFavorite}>
           <BookmarkOutline className={'size-6'} />
         </Tooltip>
       </button>

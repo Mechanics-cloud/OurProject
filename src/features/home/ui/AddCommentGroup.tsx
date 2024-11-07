@@ -5,7 +5,7 @@ import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { instance } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 
-import { useStore } from '../model/homeContext'
+import { useCommentsStore } from '../model/homeContext'
 
 type CommentGroup = {
   postId: number
@@ -13,7 +13,7 @@ type CommentGroup = {
 
 export const AddCommentGroup = observer(({ postId }: CommentGroup) => {
   const [comment, setComment] = useState<string>('')
-  const commentsStore = useStore()
+  const commentsStore = useCommentsStore()
 
   const onBlur = () => {
     setComment(comment.trim())

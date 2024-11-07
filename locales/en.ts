@@ -1,6 +1,12 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  actionIconsGroup: {
+    addFavorite: 'Add to Favorites',
+    isLiked: 'Like',
+    message: 'Message',
+    share: 'Share',
+  },
   avatarModal: {
     chooseButton: 'Select from Computer',
     errors: {
