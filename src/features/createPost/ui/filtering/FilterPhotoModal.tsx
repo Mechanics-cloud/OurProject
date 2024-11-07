@@ -12,6 +12,7 @@ import {
   cn,
 } from '@/common'
 import { useStages } from '@/features/createPost/model/useStages'
+import { Filters } from '@/features/createPost/ui/filtering/Filters'
 
 type Props = {
   photo: string
@@ -31,7 +32,7 @@ export const FilterPhotoModal = ({ photo, setPhoto }: Props) => {
             className={'absolute top-[18px] left-6'}
             onClick={prevStage}
           />
-          <span>Cropping</span>
+          <span>Filters</span>
           <Typography
             className={
               'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2'
@@ -44,13 +45,10 @@ export const FilterPhotoModal = ({ photo, setPhoto }: Props) => {
         </DialogTitle>
       </DialogHeader>
       <DialogDescription
-        className={cn(
-          'flex flex-col items-center h-[490px] m-0 p-0 lg:m-0 lg:p-0 relative',
-          '.addPhoto'
-        )}
+        className={cn('flex h-[504px] m-0 p-0 lg:m-0 lg:p-0 relative')}
       >
         <SwiperImage
-          className={cn('w-[490px]', 'addPost')}
+          className={cn('w-[490px] m-0 shrink-0', 'addPost')}
           images={[
             {
               height: 300,
@@ -63,6 +61,11 @@ export const FilterPhotoModal = ({ photo, setPhoto }: Props) => {
               width: 300,
             },
           ]}
+        />
+        <Filters
+          src={
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Jensen_Ackles.jpg/640px-Jensen_Ackles.jpg'
+          }
         />
       </DialogDescription>
     </DialogContent>

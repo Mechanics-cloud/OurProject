@@ -62,6 +62,7 @@ input[type='password']::-ms-clear {
 }
 
 /* styles for new post */
+
 .addPost .swiper-button-prev {
   width: 36px;
   height: 36px;
@@ -106,4 +107,19 @@ input[type='password']::-ms-clear {
 .addPost .swiper-button-next:hover::after {
   filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
     hue-rotate(199deg) brightness(103%) contrast(101%);
+}
+
+.addPost .swiper-pagination {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 25px;
+}
+
+.addPost .swiper-pagination-bullet {
+  display: block;
+
+  width: 8px;
+  height: 8px;
+  margin: 0;
+  padding: 0;
 }
