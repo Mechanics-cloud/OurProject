@@ -1,7 +1,6 @@
 import { ComponentPropsWithoutRef, useState } from 'react'
 
 import { cn } from '@/common'
-import { SwiperNavigation } from '@/features/createPost/ui/components/SwiperNavigation'
 import Image, { StaticImageData } from 'next/image'
 import {
   EffectFade,
@@ -69,7 +68,6 @@ export const SwiperImage = ({ className, images }: ImagesTypes) => {
             />
           </SwiperSlide>
         ))}
-        <SwiperNavigation swiper={swiperInstance} />
       </Swiper>
     </>
   )
