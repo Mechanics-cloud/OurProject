@@ -20,7 +20,10 @@ export class CommentsStore {
       this.isLoading = true
       const response = await postsApi.addComment({ comment, postId })
 
-      this.getComments(postId)
+      runInAction(() => {
+        this.isLoading = false
+        this.getComments(postId)
+      })
 
       return response
     } catch (error) {
