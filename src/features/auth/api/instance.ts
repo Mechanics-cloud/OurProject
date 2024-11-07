@@ -1,5 +1,7 @@
+import { Paths } from '@/common'
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
+import { clearAllData } from '@/common/utils/clearAllData'
 import { Endpoints, authStore } from '@/features/auth'
 import axios, { AxiosResponse, isAxiosError } from 'axios'
 
@@ -21,6 +23,8 @@ instance.interceptors.response.use(
     if (isAxiosError(error)) {
       if (error.response?.status === StatusCode.Unauthorized) {
         if (error.config?.url === Endpoints.updateToken) {
+          await clearAllData(Paths.signIn)
+
           return Promise.reject(error)
         } else {
           try {
