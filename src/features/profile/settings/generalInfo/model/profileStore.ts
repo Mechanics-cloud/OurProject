@@ -21,7 +21,6 @@ class ProfileStore {
     try {
       await profileAPi.deleteAvatar()
     } catch (error) {
-      debugger
       responseErrorHandler(error)
     }
   }

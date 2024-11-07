@@ -13,10 +13,10 @@ import { zodResolver } from '@hookform/resolvers/zod'
 
 export const useFillGeneralInfo = () => {
   const {
+    isPhotoChanged,
     onModalPhotoSave,
-    photoChanged,
     photoObj,
-    setPhotoChanged,
+    setIsPhotoChanged,
     setPhotoObj,
   } = useAvatarUpload()
   const profile = generalStore.user
@@ -48,11 +48,11 @@ export const useFillGeneralInfo = () => {
         await profileStore.updateProfile(data)
       }
       reset(data)
-      if (photoChanged) {
-        setPhotoChanged(false)
+      if (isPhotoChanged) {
+        setIsPhotoChanged(false)
         await profileStore.uploadAvatar(photoObj)
       }
-      if (!photoObj.photo && !photoObj.photoForServer && photoChanged) {
+      if (!photoObj.photo && !photoObj.photoForServer && isPhotoChanged) {
         await profileStore.deleteAvatar()
       }
       toast.success('Your settings are saved!')
@@ -65,13 +65,13 @@ export const useFillGeneralInfo = () => {
     control,
     handleSubmit,
     isDirty,
+    isPhotoChanged,
     isSubmitting,
     isValid,
     onModalPhotoSave,
     onSubmit: handleSubmit(onSubmit),
-    photoChanged,
     photoObj,
-    setPhotoChanged,
+    setIsPhotoChanged,
     setPhotoObj,
     setValue,
   }

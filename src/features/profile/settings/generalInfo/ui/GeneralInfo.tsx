@@ -12,13 +12,13 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
   const {
     control,
     isDirty,
+    isPhotoChanged,
     isSubmitting,
     isValid,
     onModalPhotoSave,
     onSubmit,
-    photoChanged,
     photoObj,
-    setPhotoChanged,
+    setIsPhotoChanged,
     setPhotoObj,
     setValue,
   } = useFillGeneralInfo()
@@ -32,7 +32,7 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
       <AddPhoto
         onModalPhotoSave={onModalPhotoSave}
         photoObj={photoObj}
-        setPhotoChanged={setPhotoChanged}
+        setIsPhotoChanged={setIsPhotoChanged}
         setPhotoObj={setPhotoObj}
       />
       <form
@@ -75,7 +75,9 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
           />
           <div className={'flex justify-end mt-12'}>
             <Button
-              disabled={!isValid || isSubmitting || (!isDirty && !photoChanged)}
+              disabled={
+                !isValid || isSubmitting || (!isDirty && !isPhotoChanged)
+              }
               type={'submit'}
               variant={'primary'}
             >

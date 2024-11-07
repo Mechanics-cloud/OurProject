@@ -9,13 +9,13 @@ import Image from 'next/image'
 type Props = {
   onModalPhotoSave: (photo: PhotoResult) => void
   photoObj: PhotoResult
-  setPhotoChanged: (photoChanged: boolean) => void
+  setIsPhotoChanged: (isPhotoChanged: boolean) => void
   setPhotoObj: (photoObj: PhotoResult) => void
 }
 export const AddPhoto = ({
   onModalPhotoSave,
   photoObj,
-  setPhotoChanged,
+  setIsPhotoChanged,
   setPhotoObj,
 }: Props) => {
   const { t } = useTranslation()
@@ -27,7 +27,7 @@ export const AddPhoto = ({
       photo: null,
       photoForServer: null,
     })
-    setPhotoChanged(true)
+    setIsPhotoChanged(true)
   }
 
   return (
