@@ -45,6 +45,11 @@ class AuthStore {
       await authApi.logout()
       clearAllData()
     } catch (error) {
+      if (isAxiosError(error)) {
+        if (error.response?.status === StatusCode.Unauthorized) {
+          clearAllData()
+        }
+      }
       responseErrorHandler(error)
     }
   }
