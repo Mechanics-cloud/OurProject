@@ -11,13 +11,15 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
   const { t } = useTranslation()
   const {
     control,
-    dirty,
     isDirty,
+    isPhotoChanged,
     isSubmitting,
     isValid,
     onModalPhotoSave,
     onSubmit,
     photoObj,
+    setIsPhotoChanged,
+    setPhotoObj,
     setValue,
   } = useFillGeneralInfo()
 
@@ -30,6 +32,8 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
       <AddPhoto
         onModalPhotoSave={onModalPhotoSave}
         photoObj={photoObj}
+        setIsPhotoChanged={setIsPhotoChanged}
+        setPhotoObj={setPhotoObj}
       />
       <form
         className={'flex gap-10 w-full'}
@@ -71,7 +75,9 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
           />
           <div className={'flex justify-end mt-12'}>
             <Button
-              disabled={!isValid || isSubmitting || (!isDirty && !dirty)}
+              disabled={
+                !isValid || isSubmitting || (!isDirty && !isPhotoChanged)
+              }
               type={'submit'}
               variant={'primary'}
             >
