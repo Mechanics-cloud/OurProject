@@ -10,6 +10,7 @@ import {
 } from '@/features/createPost/model/useStages'
 import { AddPhotoModal } from '@/features/createPost/ui/AddPhotoModal'
 import { CropPhotoModal } from '@/features/createPost/ui/cropping/CropPhotoModal'
+import { FilterPhotoModal } from '@/features/createPost/ui/filtering/FilterPhotoModal'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
@@ -47,20 +48,18 @@ export const NewPostDialog = ({
       {...rest}
     >
       {currentState === PhotoEditorState.adding && (
-        <AddPhotoModal
-          changeState={() => {
-            setCurrentState(PhotoEditorState.cropping)
-          }}
-          setPhoto={setPhoto}
-          title={'Add photo'}
-        />
+        <AddPhotoModal setPhoto={setPhoto} />
       )}
 
       {currentState === PhotoEditorState.cropping && photo && (
         <CropPhotoModal
-          changeState={() => {
-            setCurrentState(PhotoEditorState.publication)
-          }}
+          photo={photo}
+          setPhoto={setPhoto}
+        />
+      )}
+
+      {currentState === PhotoEditorState.filtering && photo && (
+        <FilterPhotoModal
           photo={photo}
           setPhoto={setPhoto}
         />

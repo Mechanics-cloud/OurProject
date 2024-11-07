@@ -11,23 +11,23 @@ import {
   Nullable,
   cn,
 } from '@/common'
+import { useStages } from '@/features/createPost/model/useStages'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
-  changeState: () => void
   className?: string
   setPhoto: (photo: Nullable<string>) => void
-  title: string
 } & DialogProps &
   PropsWithChildren
 
-export const AddPhotoModal = ({ changeState, setPhoto, title }: Props) => {
+export const AddPhotoModal = ({ setPhoto }: Props) => {
+  const { nextStage } = useStages()
   const onPhotoDrop = useCallback(
     (acceptedFiles: File[]) => {
       setPhoto(URL.createObjectURL(acceptedFiles[0]))
-      changeState()
+      nextStage()
     },
-    [setPhoto, changeState]
+    [setPhoto, nextStage]
   )
   const { getInputProps, getRootProps, isDragActive } = useDropzone({
     onDrop: onPhotoDrop,
@@ -41,13 +41,13 @@ export const AddPhotoModal = ({ changeState, setPhoto, title }: Props) => {
     }
 
     setPhoto(URL.createObjectURL(file))
-    changeState()
+    nextStage()
   }
 
   return (
     <DialogContent className={'max-w-[492px]'}>
       <DialogHeader>
-        <DialogTitle>{title}</DialogTitle>
+        <DialogTitle>Add photo</DialogTitle>
       </DialogHeader>
       <DialogDescription
         className={cn('flex flex-col items-center gap-16 mt-16 mb-10')}

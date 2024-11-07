@@ -1,3 +1,6 @@
+import { ComponentPropsWithoutRef } from 'react'
+
+import { cn } from '@/common'
 import Image, { StaticImageData } from 'next/image'
 import {
   EffectFade,
@@ -20,15 +23,15 @@ type ImageType = {
 
 type ImagesTypes = {
   images: Array<ImageType>
-}
-const Slider = ({ images }: ImagesTypes) => {
+} & ComponentPropsWithoutRef<'div'>
+export const SwiperImage = ({ className, images }: ImagesTypes) => {
   if (images.length === 0) {
     return <p>Нет изображений для отображения</p>
   }
 
   return (
     <Swiper
-      className={'h-full w-full'}
+      className={cn('h-full w-full', className)}
       effect={'fade'}
       hashNavigation={{
         watchState: true,
@@ -51,17 +54,15 @@ const Slider = ({ images }: ImagesTypes) => {
           className={'w-full'}
           key={index}
         >
-          {/* <div className={'flex h-full w-auto items-center justify-center'}> */}
           <Image
-            alt={''}
+            alt={'Image from gallery'}
             className={'block h-full w-full object-cover'}
+            height={image.height ?? 300}
             src={image.url}
+            width={image.width ?? 300}
           />
-          {/* </div> */}
         </SwiperSlide>
       ))}
     </Swiper>
   )
 }
-
-export default Slider

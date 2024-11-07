@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Cropper from 'react-easy-crop'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
@@ -7,14 +6,18 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  Nullable,
+  SwiperImage,
   Typography,
   cn,
 } from '@/common'
 import { useStages } from '@/features/createPost/model/useStages'
-import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel'
 
-type Props = {}
-export const FilterPhotoModal = (props: Props) => {
+type Props = {
+  photo: string
+  setPhoto: (photo: Nullable<string>) => void
+}
+export const FilterPhotoModal = ({ photo, setPhoto }: Props) => {
   const { nextStage, prevStage } = useStages()
 
   return (
@@ -45,7 +48,16 @@ export const FilterPhotoModal = (props: Props) => {
           'flex flex-col items-center h-[490px] m-0 p-0 lg:m-0 lg:p-0 relative'
         )}
       >
-        <ControllersPanel />
+        <SwiperImage
+          className={'w-[490px]'}
+          images={[
+            {
+              height: 300,
+              url: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Misha_Collins_%26_Jensen_Ackles_%2848478258422%29%28c%29.jpg',
+              width: 300,
+            },
+          ]}
+        />
       </DialogDescription>
     </DialogContent>
   )

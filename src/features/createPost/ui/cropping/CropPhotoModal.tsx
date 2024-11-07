@@ -17,12 +17,11 @@ import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersP
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
-  changeState: () => void
   photo: string
   setPhoto: (photo: Nullable<string>) => void
 } & DialogProps &
   PropsWithChildren
-export const CropPhotoModal = ({ changeState, photo, setPhoto }: Props) => {
+export const CropPhotoModal = ({ photo, setPhoto }: Props) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
   const { nextStage, prevStage } = useStages()
