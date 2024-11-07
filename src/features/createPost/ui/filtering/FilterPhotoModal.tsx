@@ -45,15 +45,21 @@ export const FilterPhotoModal = ({ photo, setPhoto }: Props) => {
       </DialogHeader>
       <DialogDescription
         className={cn(
-          'flex flex-col items-center h-[490px] m-0 p-0 lg:m-0 lg:p-0 relative'
+          'flex flex-col items-center h-[490px] m-0 p-0 lg:m-0 lg:p-0 relative',
+          '.addPhoto'
         )}
       >
         <SwiperImage
-          className={'w-[490px]'}
+          className={cn('w-[490px]', 'addPost')}
           images={[
             {
               height: 300,
               url: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Misha_Collins_%26_Jensen_Ackles_%2848478258422%29%28c%29.jpg',
+              width: 300,
+            },
+            {
+              height: 300,
+              url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Jensen_Ackles.jpg/640px-Jensen_Ackles.jpg',
               width: 300,
             },
           ]}

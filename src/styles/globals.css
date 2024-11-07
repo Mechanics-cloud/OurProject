@@ -60,3 +60,50 @@ input[type='password']::-ms-clear {
 .swiper-button-next::after {
   content: '' !important;
 }
+
+/* styles for new post */
+.addPost .swiper-button-prev {
+  width: 36px;
+  height: 36px;
+
+  background-color: rgb(23 23 23 / 80%);
+  background-image: none !important;
+  background-size: 10px !important;
+  border-radius: 2px;
+}
+
+.addPost .swiper-button-next {
+  width: 36px;
+  height: 36px;
+
+  background-color: rgb(23 23 23 / 80%);
+  background-image: none !important;
+  background-size: 10px !important;
+  border-radius: 2px;
+}
+
+.addPost .swiper-button-prev::after,
+.addPost .swiper-button-next::after {
+  content: '' !important;
+
+  transform: translateX(-1px);
+
+  width: 24px;
+  height: 24px;
+
+  background-image: url('/Vector.svg') !important;
+  background-repeat: no-repeat;
+  background-position: center !important;
+  background-size: 10px !important;
+}
+
+.addPost .swiper-button-prev:hover,
+.addPost .swiper-button-next:hover {
+  filter: none;
+}
+
+.addPost .swiper-button-prev:hover::after,
+.addPost .swiper-button-next:hover::after {
+  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
+    hue-rotate(199deg) brightness(103%) contrast(101%);
+}
