@@ -24,6 +24,11 @@
   }
 }
 
+input[type='password']::-ms-reveal,
+input[type='password']::-ms-clear {
+  display: none;
+}
+
 .swiper-button-prev,
 .swiper-button-next {
   color: #fff !important;

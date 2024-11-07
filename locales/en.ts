@@ -65,6 +65,37 @@ export const en: LocaleType = {
     goBack: 'Go Back',
     goForward: 'Go forward',
   },
+  profileInputs: {
+    aboutMe: 'About me',
+    addProfilePhoto: 'Add a profile photo',
+    city: 'Select your city',
+    country: 'Select your country',
+    dateOfBirth: 'Date of birth',
+    firstName: 'First name',
+    lastName: 'Last name',
+    placeholders: {
+      city: 'City',
+      country: 'Country',
+    },
+    saveChanges: 'Save changes',
+    updateStatusMessages: {
+      error: 'Something went wrong',
+      success: 'Your settings are saved!',
+    },
+    userName: 'User name',
+  },
+  profilePage: {
+    followers: 'Followers',
+    following: 'Following',
+    publications: 'Publications',
+    settingsButton: 'Profile settings',
+  },
+  profileSessions: {
+    activeSessions: 'Active sessions',
+    currentSession: 'Current device',
+    lastVisit: 'Last visit',
+    terminateAll: 'Terminate all other session',
+  },
   recoveryPassword: {
     createNewPassword: 'Create New Password',
     newPassword: 'New Password',
@@ -84,6 +115,14 @@ export const en: LocaleType = {
       title: 'Email verification link expired',
     },
   },
+  session: {
+    activeSession: 'Active session',
+    currentDevice: 'Current device',
+    devices: 'Devices',
+    lastVisit: 'Last visit',
+    logOut: 'Log out',
+    terminateAll: 'Terminate all other session',
+  },
   showText: {
     less: 'Hide',
     more: 'Show more',
@@ -94,6 +133,7 @@ export const en: LocaleType = {
     labelEmail: 'Email',
     labelPassword: 'Password',
     passwordRecovery: 'Forgot Password',
+    placeholderPassword: 'Enter your password',
     signUpTitle: 'Sign Up',
     text: 'Don’t have an account?',
     title: 'Sign In',
@@ -126,6 +166,12 @@ export const en: LocaleType = {
     terms: 'Terms of Service',
     text: 'Do you have an account?',
     title: 'Sign Up',
+  },
+  tabs: {
+    accountManagement: 'Account management',
+    devices: 'Devices',
+    generalInfo: 'General information',
+    myPayments: 'My payments',
   },
   termsPolicyPage: {
     back: 'Back',

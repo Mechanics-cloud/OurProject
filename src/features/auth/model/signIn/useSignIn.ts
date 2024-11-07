@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 
 import { Paths, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
-import authStore from '@/features/auth/model/authStore'
+import { authStore } from '@/features/auth'
 import {
   SignInFields,
   signInSchema,
@@ -27,6 +27,7 @@ export const useSignIn = () => {
 
   const onSubmit = async (data: SignInFields) => {
     isLoadingStore.turnOnLoading()
+    data.email = data.email.toLowerCase()
     try {
       await authStore.login(data)
       await Router.push(Paths.home)

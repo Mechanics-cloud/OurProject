@@ -1,2 +1,2 @@
 export * from './layout/'
-export * from './layoutWithSidebar'
+export * from './layoutForAuthorized'

@@ -19,15 +19,13 @@ import {
   SearchOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
-import { Paths, cn, useModal, useTranslation } from '@/common'
+import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
-import authStore from '@/features/auth/model/authStore'
+import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 import Router from 'next/router'
-
-import { NavLink } from './navLink/NavLink'
 
 type Props = ComponentProps<'aside'>
 
@@ -46,89 +44,102 @@ export const SideBar = observer(({ className }: Props) => {
     }
   })
   const { t } = useTranslation()
-
-  const handelCreate = () => {
-    openModal()
-  }
+  const userId = generalStore.user?.userId
 
   return (
-    <aside className={cn('flex flex-col min-w-56 h-screen', className)}>
+    <aside className={cn('flex flex-col min-w-56 h-full', className)}>
       <nav className={'pt-[72px]'}>
         <ul className={`mb-[60px] [&_li]:mb-6`}>
-          <NavLink
-            ActiveIcon={Home}
-            DefaultIcon={HomeOutline}
-            href={Paths.home}
-          >
-            {t.menu.home}
-          </NavLink>
+          <li>
+            <LinkWithIcon
+              ActiveIcon={Home}
+              DefaultIcon={HomeOutline}
+              href={Paths.home}
+            >
+              {t.menu.home}
+            </LinkWithIcon>
+          </li>
 
-          <NavLink
-            ActiveIcon={PlusSquare}
-            DefaultIcon={PlusSquareOutline}
-            as={'button'}
-            iconTrigger={isModalOpen}
-            onClick={handelCreate}
-          >
-            {t.menu.create}
-          </NavLink>
+          <li>
+            <LinkWithIcon
+              ActiveIcon={PlusSquare}
+              DefaultIcon={PlusSquareOutline}
+              as={'button'}
+              iconTrigger={isModalOpen}
+              onClick={openModal}
+            >
+              {t.menu.create}
+            </LinkWithIcon>
+          </li>
 
-          <NavLink
-            ActiveIcon={Person}
-            DefaultIcon={PersonOutline}
-            href={'/profile'}
-          >
-            {t.menu.profile}
-          </NavLink>
+          <li>
+            <LinkWithIcon
+              ActiveIcon={Person}
+              DefaultIcon={PersonOutline}
+              href={`${Paths.profile}/${userId}`}
+            >
+              {t.menu.profile}
+            </LinkWithIcon>
+          </li>
 
-          <NavLink
-            ActiveIcon={MessageCircle}
-            DefaultIcon={MessageCircleOutline}
-            href={'/messenger'}
-          >
-            {t.menu.messenger}
-          </NavLink>
+          <li>
+            <LinkWithIcon
+              ActiveIcon={MessageCircle}
+              DefaultIcon={MessageCircleOutline}
+              href={Paths.messenger}
+            >
+              {t.menu.messenger}
+            </LinkWithIcon>
+          </li>
 
-          <NavLink
-            ActiveIcon={Search}
-            DefaultIcon={SearchOutline}
-            href={'/search'}
-          >
-            {t.menu.search}
-          </NavLink>
+          <li>
+            <LinkWithIcon
+              ActiveIcon={Search}
+              DefaultIcon={SearchOutline}
+              href={Paths.search}
+            >
+              {t.menu.search}
+            </LinkWithIcon>
+          </li>
         </ul>
 
         <ul className={`mb-[180px] [&_li]:mb-6`}>
-          <NavLink
-            ActiveIcon={TrendingUp}
-            DefaultIcon={TrendingUpOutline}
-            href={'/statistics'}
-          >
-            {t.menu.statistics}
-          </NavLink>
+          <li>
+            <LinkWithIcon
+              ActiveIcon={TrendingUp}
+              DefaultIcon={TrendingUpOutline}
+              href={Paths.statistics}
+            >
+              {t.menu.statistics}
+            </LinkWithIcon>
+          </li>
 
-          <NavLink
-            ActiveIcon={Bookmark}
-            DefaultIcon={BookmarkOutline}
-            href={'/favorites'}
-          >
-            {t.menu.favorites}
-          </NavLink>
+          <li>
+            <LinkWithIcon
+              ActiveIcon={Bookmark}
+              DefaultIcon={BookmarkOutline}
+              href={Paths.favorites}
+            >
+              {t.menu.favorites}
+            </LinkWithIcon>
+          </li>
         </ul>
 
         <ul className={'mb-9'}>
           <LogOutModal
             logOutModalHandler={onModalClose}
             triggerButton={
-              <NavLink
-                ActiveIcon={LogOut}
-                DefaultIcon={LogOut}
-                as={'button'}
-              >
-                {t.menu.logOut}
-              </NavLink>
+              <li>
+                <LinkWithIcon
+                  ActiveIcon={LogOut}
+                  DefaultIcon={LogOut}
+                  as={'button'}
+                >
+                  {t.menu.logOut}
+                </LinkWithIcon>
+              </li>
             }
-            userEmail={authStore.profile?.email ?? ''}
+            userEmail={generalStore.user?.email ?? ''}
           />
         </ul>
       </nav>

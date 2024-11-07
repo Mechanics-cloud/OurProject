@@ -1,9 +1,9 @@
+import { Paths } from '@/common'
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
-import { Endpoints } from '@/features/auth'
+import { clearAllData } from '@/common/utils/clearAllData'
+import { Endpoints, authStore } from '@/features/auth'
 import axios, { AxiosResponse, isAxiosError } from 'axios'
-
-import authStore from '../model/authStore'
 
 export const instance = axios.create({
   baseURL: Environments.API_URL,
@@ -23,10 +23,12 @@ instance.interceptors.response.use(
     if (isAxiosError(error)) {
       if (error.response?.status === StatusCode.Unauthorized) {
         if (error.config?.url === Endpoints.updateToken) {
+          await clearAllData(Paths.signIn)
+
           return Promise.reject(error)
         } else {
           try {
-            await authStore.updateToken(error.config)
+            return await authStore.updateToken(error.config)
           } catch (updateError) {
             return Promise.reject(updateError)
           }

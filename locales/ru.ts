@@ -63,6 +63,37 @@ export const ru = {
     goBack: 'Назад',
     goForward: 'Вперед',
   },
+  profileInputs: {
+    aboutMe: 'Обо мне',
+    addProfilePhoto: 'Загрузить фото',
+    city: 'Выьерите ваш город',
+    country: 'Выьерите вашу страну',
+    dateOfBirth: 'Дата рождения',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    placeholders: {
+      city: 'Город',
+      country: 'Страна',
+    },
+    saveChanges: 'Сохранить изменения',
+    updateStatusMessages: {
+      error: 'Что-то пошло не так',
+      success: 'Ваши данные сохранены',
+    },
+    userName: 'Имя пользователя',
+  },
+  profilePage: {
+    followers: 'Подписчики',
+    following: 'Подписки',
+    publications: 'Публикации',
+    settingsButton: 'Настройки профиля',
+  },
+  profileSessions: {
+    activeSessions: 'Активные сессии',
+    currentSession: 'Текущее устройство',
+    lastVisit: 'Последний визит',
+    terminateAll: 'Завершить все другие сессии',
+  },
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
@@ -82,6 +113,14 @@ export const ru = {
       title: 'Срок действия ссылки для подтверждения электронной почты истек',
     },
   },
+  session: {
+    activeSession: 'Активные сессии',
+    currentDevice: 'Текущее устройство',
+    devices: 'Устройства',
+    lastVisit: 'Последнее посещение',
+    logOut: 'Выйти',
+    terminateAll: 'Завершить все остальные сеансы',
+  },
   showText: {
     less: 'Свернуть',
     more: 'Развернуть',
@@ -93,6 +132,7 @@ export const ru = {
     labelEmail: 'Электронная почта',
     labelPassword: 'Пароль',
     passwordRecovery: 'Забыли пароль',
+    placeholderPassword: 'Введите пароль',
     signUpTitle: 'Зарегистрироваться',
 
     text: 'У вас нет учетной записи?',
@@ -126,6 +166,12 @@ export const ru = {
     terms: 'Условиями использования',
     text: 'Уже есть аккаунт?',
     title: 'Регистрация',
+  },
+  tabs: {
+    accountManagement: 'Управление аккаунтом',
+    devices: 'Устройства',
+    generalInfo: 'Общая информация',
+    myPayments: 'Мои платежи',
   },
   termsPolicyPage: {
     back: 'Назад',
