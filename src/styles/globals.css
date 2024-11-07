@@ -1,6 +1,6 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind base;
 
 :root {
   --header-height: 3.75rem;
@@ -62,64 +62,103 @@ input[type='password']::-ms-clear {
 }
 
 /* styles for new post */
-
-.addPost .swiper-button-prev {
-  width: 36px;
-  height: 36px;
-
-  background-color: rgb(23 23 23 / 80%);
-  background-image: none !important;
-  background-size: 10px !important;
-  border-radius: 2px;
-}
-
+.addPost .swiper-button-prev,
 .addPost .swiper-button-next {
-  width: 36px;
-  height: 36px;
-
-  background-color: rgb(23 23 23 / 80%);
   background-image: none !important;
-  background-size: 10px !important;
-  border-radius: 2px;
 }
 
-.addPost .swiper-button-prev::after,
-.addPost .swiper-button-next::after {
-  content: '' !important;
+/* .addPost .swiper-button-prev { */
 
-  transform: translateX(-1px);
+/*  width: 36px; */
 
-  width: 24px;
-  height: 24px;
+/*  height: 36px; */
 
-  background-image: url('/Vector.svg') !important;
-  background-repeat: no-repeat;
-  background-position: center !important;
-  background-size: 10px !important;
-}
+/*  background-color: rgb(23 23 23 / 80%); */
 
-.addPost .swiper-button-prev:hover,
-.addPost .swiper-button-next:hover {
-  filter: none;
-}
+/*  background-image: none !important; */
 
-.addPost .swiper-button-prev:hover::after,
-.addPost .swiper-button-next:hover::after {
-  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
-    hue-rotate(199deg) brightness(103%) contrast(101%);
-}
+/*  background-size: 10px !important; */
 
-.addPost .swiper-pagination {
-  display: flex;
-  justify-content: center;
-  padding-bottom: 25px;
-}
+/*  border-radius: 2px; */
 
-.addPost .swiper-pagination-bullet {
-  display: block;
+/* } */
 
-  width: 8px;
-  height: 8px;
-  margin: 0;
-  padding: 0;
-}
+/* .addPost .swiper-button-next { */
+
+/*  width: 36px; */
+
+/*  height: 36px; */
+
+/*  background-color: rgb(23 23 23 / 80%); */
+
+/*  background-image: none !important; */
+
+/*  background-size: 10px !important; */
+
+/*  border-radius: 2px; */
+
+/* } */
+
+/* .addPost .swiper-button-prev::after, */
+
+/* .addPost .swiper-button-next::after { */
+
+/*  content: '' !important; */
+
+/*  transform: translateX(-1px); */
+
+/*  width: 24px; */
+
+/*  height: 24px; */
+
+/*  background-image: url('/Vector.svg') !important; */
+
+/*  background-repeat: no-repeat; */
+
+/*  background-position: center !important; */
+
+/*  background-size: 10px !important; */
+
+/* } */
+
+/* .addPost .swiper-button-prev:hover, */
+
+/* .addPost .swiper-button-next:hover { */
+
+/*  filter: none; */
+
+/* } */
+
+/* .addPost .swiper-button-prev:hover::after, */
+
+/* .addPost .swiper-button-next:hover::after { */
+
+/*  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%) */
+
+/*    hue-rotate(199deg) brightness(103%) contrast(101%); */
+
+/* } */
+
+/* .addPost .swiper-pagination { */
+
+/*  display: flex; */
+
+/*  justify-content: center; */
+
+/*  padding-bottom: 25px; */
+
+/* } */
+
+/* .addPost .swiper-pagination-bullet { */
+
+/*  display: block; */
+
+/*  width: 8px; */
+
+/*  height: 8px; */
+
+/*  margin: 0; */
+
+/*  padding: 0; */
+
+/* } */
