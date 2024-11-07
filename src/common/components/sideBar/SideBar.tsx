@@ -21,12 +21,9 @@ import {
 } from '@/assets/icons/outlineIcons'
 import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
-import { authStore } from '@/features/auth'
-import { AvatarDialog } from '@/features/createPost/ui/addNewPhotoModal'
+import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { observer } from 'mobx-react-lite'
-import Router from 'next/router'
 
 type Props = ComponentProps<'aside'>
 
@@ -134,10 +131,9 @@ export const SideBar = observer(({ className }: Props) => {
           </ul>
         </nav>
       </aside>
-      <AvatarDialog
+      <NewPostDialog
         onOpenChange={onModalClose}
         open={isModalOpen}
-        title={'Add photo'}
       />
     </>
   )
