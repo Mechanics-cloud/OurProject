@@ -2,32 +2,30 @@ import * as React from 'react'
 import { PropsWithChildren, useState } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 
-import {
-  ArrowBackOutline,
-  Expand,
-  ImageOutline,
-  MaximizeOutline,
-} from '@/assets/icons'
+import { ArrowBackOutline } from '@/assets/icons'
 import {
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  Nullable,
   Typography,
   cn,
 } from '@/common'
-import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
+import { useStages } from '@/features/createPost/model/useStages'
 import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
   changeState: () => void
   photo: string
+  setPhoto: (photo: Nullable<string>) => void
 } & DialogProps &
   PropsWithChildren
-export const CropPhotoModal = ({ changeState, photo }: Props) => {
+export const CropPhotoModal = ({ changeState, photo, setPhoto }: Props) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
+  const { nextStage, prevStage } = useStages()
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     console.log(croppedArea, croppedAreaPixels)
   }
@@ -41,18 +39,14 @@ export const CropPhotoModal = ({ changeState, photo }: Props) => {
         <DialogTitle className={'flex justify-center items-center relative'}>
           <ArrowBackOutline
             className={'absolute top-[18px] left-6'}
-            onClick={() => {
-              alert('Back')
-            }}
+            onClick={prevStage}
           />
           <span>Cropping</span>
           <Typography
             className={
               'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2'
             }
-            onClick={() => {
-              alert('Next')
-            }}
+            onClick={nextStage}
             variant={'h3'}
           >
             Next

@@ -1,52 +1,70 @@
 import * as React from 'react'
-import { PropsWithChildren, useState } from 'react'
+import { PropsWithChildren, createContext, useContext, useState } from 'react'
 
 import { Dialog, Nullable } from '@/common'
+import { PhotoEditorProvider } from '@/features/createPost/model/PhotoEditorProvider'
+import {
+  PhotoEditorState,
+  PhotoEditorStateType,
+  useStages,
+} from '@/features/createPost/model/useStages'
 import { AddPhotoModal } from '@/features/createPost/ui/AddPhotoModal'
-import { CropPhotoModal } from '@/features/createPost/ui/CropPhotoModal'
+import { CropPhotoModal } from '@/features/createPost/ui/cropping/CropPhotoModal'
 import { DialogProps } from '@radix-ui/react-dialog'
 
-type Props = DialogProps & PropsWithChildren
+type Props = {
+  onClose: () => void
+} & DialogProps &
+  PropsWithChildren
 
-const MODAL_STATES = {
-  ADDING: 'ADDING',
-  CROPPING: 'CROPPING',
-  FILTERING: 'FILTERING',
-  PUBLICATION: 'PUBLICATION',
-} as const
+export const PrevNextContext = createContext<
+  | {
+      nextStage: () => void
+      prevStage: () => void
+    }
+  | undefined
+>(undefined)
 
-export const NewPostDialog = ({ onOpenChange, open, ...rest }: Props) => {
-  const [currentState, setCurrentState] = useState<keyof typeof MODAL_STATES>(
-    MODAL_STATES.ADDING
-  )
+export const NewPostDialog = ({
+  onClose,
+  onOpenChange,
+  open,
+  ...rest
+}: Props) => {
+  const { currentState, setCurrentState } = useStages()
   const [photo, setPhoto] = useState<Nullable<string>>(null)
 
-  return (
-    <>
-      <Dialog
-        onOpenChange={onOpenChange}
-        open={open}
-        {...rest}
-      >
-        {currentState === MODAL_STATES.ADDING && (
-          <AddPhotoModal
-            changeState={() => {
-              setCurrentState(MODAL_STATES.CROPPING)
-            }}
-            setPhoto={setPhoto}
-            title={'Add photo'}
-          />
-        )}
+  const handleClose = () => {
+    setCurrentState(PhotoEditorState.adding)
+    setPhoto(null)
+    onClose()
+  }
 
-        {currentState === MODAL_STATES.CROPPING && photo && (
-          <CropPhotoModal
-            changeState={() => {
-              setCurrentState(MODAL_STATES.PUBLICATION)
-            }}
-            photo={photo}
-          />
-        )}
-      </Dialog>
-    </>
+  return (
+    <Dialog
+      onOpenChange={onOpenChange}
+      open={open}
+      {...rest}
+    >
+      {currentState === PhotoEditorState.adding && (
+        <AddPhotoModal
+          changeState={() => {
+            setCurrentState(PhotoEditorState.cropping)
+          }}
+          setPhoto={setPhoto}
+          title={'Add photo'}
+        />
+      )}
+
+      {currentState === PhotoEditorState.cropping && photo && (
+        <CropPhotoModal
+          changeState={() => {
+            setCurrentState(PhotoEditorState.publication)
+          }}
+          photo={photo}
+          setPhoto={setPhoto}
+        />
+      )}
+    </Dialog>
   )
 }
