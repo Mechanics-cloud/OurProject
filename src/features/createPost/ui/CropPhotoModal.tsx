@@ -2,7 +2,12 @@ import * as React from 'react'
 import { PropsWithChildren, useState } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 
-import { ArrowBackOutline } from '@/assets/icons'
+import {
+  ArrowBackOutline,
+  Expand,
+  ImageOutline,
+  MaximizeOutline,
+} from '@/assets/icons'
 import {
   DialogContent,
   DialogDescription,
@@ -11,6 +16,8 @@ import {
   Typography,
   cn,
 } from '@/common'
+import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
+import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
@@ -54,7 +61,7 @@ export const CropPhotoModal = ({ changeState, photo }: Props) => {
       </DialogHeader>
       <DialogDescription
         className={cn(
-          'flex flex-col items-center h-[490px] m-0 p-0 lg:m-0 lg:p-0'
+          'flex flex-col items-center h-[490px] m-0 p-0 lg:m-0 lg:p-0 relative'
         )}
       >
         <span className={'relative w-full h-full m-0'}>
@@ -68,6 +75,7 @@ export const CropPhotoModal = ({ changeState, photo }: Props) => {
             zoom={zoom}
           />
         </span>
+        <ControllersPanel />
       </DialogDescription>
     </DialogContent>
   )
