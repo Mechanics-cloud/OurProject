@@ -14,11 +14,7 @@ import {
 import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { Filters } from '@/features/createPost/ui/filtering/Filters'
 
-type Props = {
-  photo: string
-  setPhoto: (photo: Nullable<string>) => void
-}
-export const FilterPhotoModal = ({ photo, setPhoto }: Props) => {
+export const FilterPhotoModal = () => {
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage
 

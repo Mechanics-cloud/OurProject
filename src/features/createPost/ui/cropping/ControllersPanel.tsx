@@ -1,13 +1,17 @@
 import * as React from 'react'
 
 import { AddPhotoControllerPopover } from '@/features/createPost/ui/cropping/AddPhotoControllerPopover'
-import { RatioControllerPopover } from '@/features/createPost/ui/cropping/RatioControllerPopover'
+import { AspectControllerPopover } from '@/features/createPost/ui/cropping/AspectControllerPopover'
 import { ScaleControllerPopover } from '@/features/createPost/ui/cropping/ScaleControllerPopover'
 
-export const ControllersPanel = () => {
+type Props = {
+  id: string
+}
+
+export const ControllersPanel = ({ id }: Props) => {
   return (
     <span className={'absolute p-2.5 bottom-0 left-0 right-0 flex gap-6'}>
-      <RatioControllerPopover />
+      <AspectControllerPopover id={id} />
       <ScaleControllerPopover />
       <AddPhotoControllerPopover />
     </span>

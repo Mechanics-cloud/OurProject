@@ -27,11 +27,12 @@ export const NewPostDialog = observer(
   ({ onClose, onOpenChange, open, ...rest }: Props) => {
     const currentState = addPostStore.currentStage
     const setCurrentState = addPostStore.changeStage
-    const [photo, setPhoto] = useState<Nullable<string>>(null)
+    const clearPostData = addPostStore.clearData
+
+    const [photo, setPhoto] = useState<Nullable<string>[]>([])
 
     const handleClose = () => {
-      setCurrentState(PhotoEditorState.adding)
-      setPhoto(null)
+      clearPostData()
       onClose()
     }
 
@@ -41,22 +42,12 @@ export const NewPostDialog = observer(
         open={open}
         {...rest}
       >
-        {currentState === PhotoEditorState.adding && (
-          <AddPhotoModal setPhoto={setPhoto} />
-        )}
+        {currentState === PhotoEditorState.adding && <AddPhotoModal />}
 
-        {currentState === PhotoEditorState.cropping && photo && (
-          <CropPhotoModal
-            photo={photo}
-            setPhoto={setPhoto}
-          />
-        )}
+        {currentState === PhotoEditorState.cropping && <CropPhotoModal />}
 
         {currentState === PhotoEditorState.filtering && photo && (
-          <FilterPhotoModal
-            photo={photo}
-            setPhoto={setPhoto}
-          />
+          <FilterPhotoModal />
         )}
       </Dialog>
     )

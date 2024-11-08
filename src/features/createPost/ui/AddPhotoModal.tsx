@@ -1,4 +1,4 @@
-import { ChangeEvent, PropsWithChildren, useCallback } from 'react'
+import { ChangeEvent, useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 
 import { Image as ImageFull, ImageOutline } from '@/assets/icons'
@@ -8,26 +8,19 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  Nullable,
   cn,
 } from '@/common'
 import { addPostStore } from '@/features/createPost/model/addPostStore'
-import { DialogProps } from '@radix-ui/react-dialog'
 
-type Props = {
-  className?: string
-  setPhoto: (photo: Nullable<string>) => void
-} & DialogProps &
-  PropsWithChildren
-
-export const AddPhotoModal = ({ setPhoto }: Props) => {
+export const AddPhotoModal = () => {
   const nextStage = addPostStore.nextStage
+  const addPostPhoto = addPostStore.addPhoto
   const onPhotoDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      setPhoto(URL.createObjectURL(acceptedFiles[0]))
+    (file: File[]) => {
+      addPostPhoto(file[0])
       nextStage()
     },
-    [setPhoto, nextStage]
+    [nextStage, addPostPhoto]
   )
   const { getInputProps, getRootProps, isDragActive } = useDropzone({
     onDrop: onPhotoDrop,
@@ -39,8 +32,7 @@ export const AddPhotoModal = ({ setPhoto }: Props) => {
     if (!file) {
       return
     }
-
-    setPhoto(URL.createObjectURL(file))
+    addPostPhoto(file)
     nextStage()
   }
 

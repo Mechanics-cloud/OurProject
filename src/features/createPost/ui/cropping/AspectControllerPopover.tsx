@@ -3,9 +3,13 @@ import * as React from 'react'
 import { Expand } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '@/common'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
-import { RatioControllerButtons } from '@/features/createPost/ui/cropping/RatioControllerButtons'
+import { AspectControllerButtons } from '@/features/createPost/ui/cropping/AspectControllerButtons'
 
-export const RatioControllerPopover = () => {
+type Props = {
+  id: string
+}
+
+export const AspectControllerPopover = ({ id }: Props) => {
   //todo сменить при открытом поповере иконку
 
   return (
@@ -23,7 +27,7 @@ export const RatioControllerPopover = () => {
         side={'top'}
         sideOffset={2}
       >
-        <RatioControllerButtons />
+        <AspectControllerButtons id={id} />
       </PopoverContent>
     </Popover>
   )

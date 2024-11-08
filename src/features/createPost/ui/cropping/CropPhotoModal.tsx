@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { PropsWithChildren, useState } from 'react'
+import { useState } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 
 import { ArrowBackOutline } from '@/assets/icons'
@@ -8,27 +8,37 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  Nullable,
   cn,
   typographyVariants,
 } from '@/common'
 import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel'
-import { DialogProps } from '@radix-ui/react-dialog'
+import { observer } from 'mobx-react-lite'
 
-type Props = {
-  photo: string
-  setPhoto: (photo: Nullable<string>) => void
-} & DialogProps &
-  PropsWithChildren
-export const CropPhotoModal = ({ photo, setPhoto }: Props) => {
+export const CropPhotoModal = observer(() => {
+  const photos = addPostStore.photos
+  const addZoom = addPostStore.addZoom
+  const addCrop = addPostStore.addCrop
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
-  const [zoom, setZoom] = useState(1)
+  // const [zoom, setZoom] = useState(1)
+
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage
+
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-    console.log(croppedArea, croppedAreaPixels)
+    addCrop(photos[0].id, croppedAreaPixels)
+    //console.log(croppedArea, croppedAreaPixels)
   }
+
+  const onZoom = (zoom: number) => {
+    addZoom(photos[0].id, zoom)
+  }
+
+  // const onCrop = (crop: Point) => {
+  //   console.log(crop)
+  //   setCrop(crop)
+  //   addCrop(photos[0].id, crop)
+  // }
 
   return (
     <DialogContent
@@ -62,18 +72,18 @@ export const CropPhotoModal = ({ photo, setPhoto }: Props) => {
         >
           <span className={'relative w-full h-full m-0'}>
             <Cropper
-              aspect={4 / 3}
+              aspect={photos[0].aspect}
               crop={crop}
-              image={photo}
+              image={photos[0].url as string}
               onCropChange={setCrop}
               onCropComplete={onCropComplete}
-              onZoomChange={setZoom}
-              zoom={zoom}
+              onZoomChange={onZoom}
+              zoom={photos[0].zoom ?? 1}
             />
           </span>
-          <ControllersPanel />
+          <ControllersPanel id={photos[0].id} />
         </div>
       </DialogDescription>
     </DialogContent>
   )
-}
+})
