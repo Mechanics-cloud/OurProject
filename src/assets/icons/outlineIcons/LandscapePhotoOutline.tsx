@@ -8,7 +8,7 @@ const LandscapePhotoOutline = (
     fill={'none'}
     height={'1em'}
     ref={ref}
-    viewBox={'0 0 26 18'}
+    viewBox={'0 0 26 24'}
     width={'2em'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
@@ -18,10 +18,10 @@ const LandscapePhotoOutline = (
       rx={'2'}
       stroke={'currentcolor'}
       strokeWidth={'2'}
-      transform={'rotate(90 25 1)'}
+      transform={'rotate(90 25 3)'}
       width={'18'}
       x={'25'}
-      y={'1'}
+      y={'3'}
     />
   </svg>
 )

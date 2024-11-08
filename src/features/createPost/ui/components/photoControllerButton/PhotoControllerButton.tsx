@@ -1,14 +1,14 @@
 import * as React from 'react'
-import { ComponentPropsWithoutRef, ReactNode } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import { cn } from '@/common'
+import * as PopoverPrimitive from '@radix-ui/react-popover'
 
 type Props = ComponentPropsWithoutRef<'span'>
-export const PhotoControllerButton = ({
-  children,
-  className,
-  onClick,
-}: Props) => {
+export const PhotoControllerButton = forwardRef<
+  React.ElementRef<typeof PopoverPrimitive.Trigger>,
+  Props
+>(({ children, className, onClick }: Props, ref) => {
   return (
     <span
       className={cn(
@@ -16,8 +16,9 @@ export const PhotoControllerButton = ({
         className
       )}
       onClick={onClick}
+      ref={ref}
     >
       <span className={'relative z-10'}>{children}</span>
     </span>
   )
-}
+})

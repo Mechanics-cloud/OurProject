@@ -8,7 +8,7 @@ const BookPhotoOutline = (
     fill={'none'}
     height={'1em'}
     ref={ref}
-    viewBox={'0 0 18 26'}
+    viewBox={'0 0 24 26'}
     width={'1em'}
     xmlns={'http://www.w3.org/2000/svg'}
     {...props}
@@ -19,7 +19,7 @@ const BookPhotoOutline = (
       stroke={'currentcolor'}
       strokeWidth={'2'}
       width={'16'}
-      x={'1'}
+      x={'4'}
       y={'1'}
     />
   </svg>

@@ -14,13 +14,13 @@ const SquarePhotoOutline = (
     {...props}
   >
     <rect
-      height={'18'}
+      height={'16'}
       rx={'2'}
       stroke={'currentcolor'}
       strokeWidth={'2'}
-      width={'18'}
-      x={'1'}
-      y={'1'}
+      width={'16'}
+      x={'4'}
+      y={'4'}
     />
   </svg>
 )
