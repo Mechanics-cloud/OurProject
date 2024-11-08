@@ -1,7 +1,4 @@
-import {
-  PASSWORD_REGEXP,
-  USER_NAME_REGEXP,
-} from '@/features/auth/model/constants'
+import { PASSWORD_REGEXP, USER_NAME_REGEXP } from '@/common/constants'
 import { LocaleType } from '@locales/ru'
 import { z } from 'zod'
 
