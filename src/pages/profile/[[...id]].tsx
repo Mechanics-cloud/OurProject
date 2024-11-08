@@ -2,7 +2,10 @@ import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
-import { profileStore } from '@/features/profile'
+import { generalStore } from '@/core/store'
+import { authStore } from '@/features/auth'
+import { profileAPi, profileStore } from '@/features/profile'
+import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -23,11 +26,13 @@ const placeholderImages = [
   { id: 8, img: image4 },
 ]
 
-//todo: remove avatarPlaceholder and place another placeholder image
-const Profile = () => {
+const Profile = ({ data }: any) => {
   const { t } = useTranslation()
-  const userProfile = profileStore.userProfile
-  const avatar = userProfile?.avatars[0]?.url
+
+  // const userProfile = profileStore.userProfile
+  // const avatar = userProfile?.avatars[0]?.url
+  const userProfile = data
+  const avatar = data.avatars[0]?.url
 
   return (
     <div className={'flex w-full'}>
@@ -52,11 +57,13 @@ const Profile = () => {
                 <Paid />
               </Typography>
 
-              <Button variant={'secondary'}>
-                <Link href={Paths.profileSettings}>
-                  {t.profilePage.settingsButton}
-                </Link>
-              </Button>
+              {generalStore.user && (
+                <Button variant={'secondary'}>
+                  <Link href={Paths.profileSettings}>
+                    {t.profilePage.settingsButton}
+                  </Link>
+                </Button>
+              )}
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
               <div className={'flex flex-col'}>
@@ -102,3 +109,21 @@ const Profile = () => {
 }
 
 export default withProtection(Profile, true)
+export async function getServerSideProps(context: any) {
+  console.log(context)
+
+  const res = await axios
+    .get(
+      `https://inctagram.work/api/v1/public-user/profile/${context.params.id[0]}`
+    )
+    .then((res) => res.data)
+
+  if (!res) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return { props: { data: res } }
+}
+//todo: remove avatarPlaceholder and place another placeholder image
