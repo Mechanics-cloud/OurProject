@@ -7,15 +7,14 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
+import { calculateCharactersToShow } from '../model'
 import homePageStore from '../model/homePageStore'
 import { timeAgo } from '../model/utilsDate'
 import { WrapperParentComponent } from '../model/wrapper'
-import { AddCommentGroup } from './AddCommentGroup'
 import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
 import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
-// import { ViewAllCommentsButton } from './ViewAllCommentsButton'
 
 export const Home = observer(() => {
   const state = homePageStore.publicationsFollowers?.items
@@ -103,7 +102,11 @@ export const Home = observer(() => {
             width={36}
           />
           <TextUnfolding
-            charactersToShow={170}
+            charactersToShow={calculateCharactersToShow(
+              item.description,
+              item.userName
+            )}
+            className={'text-justify break-words'}
             link={
               <LinkProfile
                 userId={item.ownerId}
@@ -116,8 +119,6 @@ export const Home = observer(() => {
         </div>
         <AvatarGroupWithLikes item={item} />
         <WrapperParentComponent postId={item.id} />
-        {/* <ViewAllCommentsButton postId={item.id} />
-        <AddCommentGroup postId={item.id} /> */}
       </div>
     )
   })
