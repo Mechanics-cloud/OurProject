@@ -1,7 +1,5 @@
 import * as React from 'react'
 
-import { ImageOutline } from '@/assets/icons'
-import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
 import { AddPhotoControllerPopover } from '@/features/createPost/ui/cropping/AddPhotoControllerPopover'
 import { RatioControllerPopover } from '@/features/createPost/ui/cropping/RatioControllerPopover'
 import { ScaleControllerPopover } from '@/features/createPost/ui/cropping/ScaleControllerPopover'

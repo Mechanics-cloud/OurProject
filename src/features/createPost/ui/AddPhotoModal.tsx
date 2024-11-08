@@ -11,7 +11,7 @@ import {
   Nullable,
   cn,
 } from '@/common'
-import { useStages } from '@/features/createPost/model/useStages'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
@@ -21,7 +21,7 @@ type Props = {
   PropsWithChildren
 
 export const AddPhotoModal = ({ setPhoto }: Props) => {
-  const { nextStage } = useStages()
+  const nextStage = addPostStore.nextStage
   const onPhotoDrop = useCallback(
     (acceptedFiles: File[]) => {
       setPhoto(URL.createObjectURL(acceptedFiles[0]))

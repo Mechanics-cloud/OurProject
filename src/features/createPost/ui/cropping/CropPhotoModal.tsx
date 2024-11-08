@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
   Nullable,
-  Typography,
   cn,
+  typographyVariants,
 } from '@/common'
-import { useStages } from '@/features/createPost/model/useStages'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel'
 import { DialogProps } from '@radix-ui/react-dialog'
 
@@ -24,7 +24,8 @@ type Props = {
 export const CropPhotoModal = ({ photo, setPhoto }: Props) => {
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
   const [zoom, setZoom] = useState(1)
-  const { nextStage, prevStage } = useStages()
+  const nextStage = addPostStore.nextStage
+  const prevStage = addPostStore.prevStage
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
     console.log(croppedArea, croppedAreaPixels)
   }
@@ -41,34 +42,37 @@ export const CropPhotoModal = ({ photo, setPhoto }: Props) => {
             onClick={prevStage}
           />
           <span>Cropping</span>
-          <Typography
-            className={
-              'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2'
-            }
+          <span
+            className={cn(
+              'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2',
+              typographyVariants({ variant: 'h3' })
+            )}
             onClick={nextStage}
-            variant={'h3'}
           >
             Next
-          </Typography>
+          </span>
         </DialogTitle>
       </DialogHeader>
       <DialogDescription
-        className={cn(
-          'flex flex-col items-center h-[490px] m-0 p-0 lg:m-0 lg:p-0 relative'
-        )}
+        asChild
+        className={'lg:m-0 lg:p-0'}
       >
-        <span className={'relative w-full h-full m-0'}>
-          <Cropper
-            aspect={4 / 3}
-            crop={crop}
-            image={photo}
-            onCropChange={setCrop}
-            onCropComplete={onCropComplete}
-            onZoomChange={setZoom}
-            zoom={zoom}
-          />
-        </span>
-        <ControllersPanel />
+        <div
+          className={'flex flex-col items-center h-[490px] m-0 p-0 relative'}
+        >
+          <span className={'relative w-full h-full m-0'}>
+            <Cropper
+              aspect={4 / 3}
+              crop={crop}
+              image={photo}
+              onCropChange={setCrop}
+              onCropComplete={onCropComplete}
+              onZoomChange={setZoom}
+              zoom={zoom}
+            />
+          </span>
+          <ControllersPanel />
+        </div>
       </DialogDescription>
     </DialogContent>
   )

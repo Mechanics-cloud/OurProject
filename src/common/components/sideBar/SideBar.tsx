@@ -22,7 +22,6 @@ import {
 import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
 import { generalStore } from '@/core/store'
-import { PhotoEditorProvider } from '@/features/createPost/model/PhotoEditorProvider'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { observer } from 'mobx-react-lite'
 
@@ -132,13 +131,11 @@ export const SideBar = observer(({ className }: Props) => {
           </ul>
         </nav>
       </aside>
-      <PhotoEditorProvider>
-        <NewPostDialog
-          onClose={onModalClose}
-          onOpenChange={onModalClose}
-          open={isModalOpen}
-        />
-      </PhotoEditorProvider>
+      <NewPostDialog
+        onClose={onModalClose}
+        onOpenChange={onModalClose}
+        open={isModalOpen}
+      />
     </>
   )
 })
