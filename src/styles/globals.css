@@ -123,3 +123,9 @@ input[type='password']::-ms-clear {
   margin: 0;
   padding: 0;
 }
+
+@layer components {
+  .popoverOpacity {
+    @apply relative w-48 z-50 bg-transparent before:top-0 before:left-0 before:right-0 before:bottom-0 before:absolute before:bg-dark-500 before:-z-10 before:opacity-80 before:rounded-sm;
+  }
+}

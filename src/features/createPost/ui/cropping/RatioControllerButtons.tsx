@@ -14,7 +14,8 @@ type ScaleSizeButtonType = {
   title: string
 }
 
-export const ScaleControllerButtons = () => {
+export const RatioControllerButtons = () => {
+  //todo перевод
   const sizes: ScaleSizeButtonType[] = [
     { icon: ImageOutline, title: 'Оригинал' },
     { icon: SquarePhotoOutline, title: '1:1' },
@@ -39,7 +40,7 @@ const ScaleSizeButton = ({ icon, title }: ScaleSizeButtonType) => {
   const Component = icon
 
   return (
-    <span className={'flex justify-between'}>
+    <span className={'flex justify-between gap-8'}>
       <span className={typographyVariants({ variant: 'h3' })}>{title}</span>
       <Component className={'w-6 h-6'} />
     </span>
