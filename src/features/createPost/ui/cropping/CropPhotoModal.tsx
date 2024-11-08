@@ -20,7 +20,6 @@ export const CropPhotoModal = observer(() => {
   const addZoom = addPostStore.addZoom
   const addCrop = addPostStore.addCrop
   const [crop, setCrop] = useState<Point>({ x: 0, y: 0 })
-  // const [zoom, setZoom] = useState(1)
 
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage

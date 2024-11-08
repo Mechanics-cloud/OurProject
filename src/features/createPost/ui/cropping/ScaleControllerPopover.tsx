@@ -16,6 +16,10 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const changeZoom = addPostStore.addZoom
 
+  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    setIsOpen(false)
+  }
+
   const onZoom = (zoom: number[]) => {
     changeZoom(id, zoom[0])
   }
@@ -41,7 +45,7 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
         sideOffset={2}
       >
         <Slider
-          defaultValue={[1]}
+          defaultValue={[addPostStore.getZoom(id)]}
           max={3}
           min={1}
           onValueChange={onZoom}

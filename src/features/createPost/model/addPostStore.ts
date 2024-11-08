@@ -41,6 +41,7 @@ class AddPostStore {
     this.addCrop = this.addCrop.bind(this)
     this.changeAspect = this.changeAspect.bind(this)
     this.getAspect = this.getAspect.bind(this)
+    this.getZoom = this.getZoom.bind(this)
   }
 
   addCrop(id: string, crop: Point) {
@@ -106,6 +107,16 @@ class AddPostStore {
     }
 
     return
+  }
+
+  getZoom(id: string) {
+    const photo = this.photos.find((ph) => ph.id === id)
+
+    if (photo) {
+      return photo.zoom ?? 1
+    }
+
+    return 1
   }
 
   // getOriginAspect(id: string) {
