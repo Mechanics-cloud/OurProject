@@ -1,18 +1,37 @@
 import * as React from 'react'
+import { useState } from 'react'
 
-import { MaximizeOutline } from '@/assets/icons'
+import { Maximize, MaximizeOutline } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '@/common'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { Slider } from '@/features/createPost/ui/components'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
+import { observer } from 'mobx-react-lite'
 
-export const ScaleControllerPopover = () => {
-  //todo сменить при открытом поповере иконку
+type Props = {
+  id: string
+}
+
+export const ScaleControllerPopover = observer(({ id }: Props) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const changeZoom = addPostStore.addZoom
+
+  const onZoom = (zoom: number[]) => {
+    changeZoom(id, zoom[0])
+  }
 
   return (
-    <Popover>
+    <Popover
+      onOpenChange={setIsOpen}
+      open={isOpen}
+    >
       <PopoverTrigger asChild>
         <PhotoControllerButton>
-          <MaximizeOutline className={'w-[28px] h-[28px]'} />
+          {isOpen ? (
+            <Maximize className={'w-[28px] h-[28px] text-accent-500'} />
+          ) : (
+            <MaximizeOutline className={'w-[28px] h-[28px]'} />
+          )}
         </PhotoControllerButton>
       </PopoverTrigger>
       <PopoverContent
@@ -22,11 +41,13 @@ export const ScaleControllerPopover = () => {
         sideOffset={2}
       >
         <Slider
-          defaultValue={[0]}
-          max={100}
-          min={0}
+          defaultValue={[1]}
+          max={3}
+          min={1}
+          onValueChange={onZoom}
+          step={0.1}
         />
       </PopoverContent>
     </Popover>
   )
-}
+})

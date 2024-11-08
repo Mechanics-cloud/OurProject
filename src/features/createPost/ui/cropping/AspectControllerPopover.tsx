@@ -1,7 +1,8 @@
 import * as React from 'react'
+import { useState } from 'react'
 
 import { Expand } from '@/assets/icons'
-import { Popover, PopoverContent, PopoverTrigger } from '@/common'
+import { Popover, PopoverContent, PopoverTrigger, cn } from '@/common'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
 import { AspectControllerButtons } from '@/features/createPost/ui/cropping/AspectControllerButtons'
 
@@ -10,13 +11,18 @@ type Props = {
 }
 
 export const AspectControllerPopover = ({ id }: Props) => {
-  //todo сменить при открытом поповере иконку
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <Popover>
+    <Popover
+      onOpenChange={setIsOpen}
+      open={isOpen}
+    >
       <PopoverTrigger asChild>
         <PhotoControllerButton>
-          <Expand className={'w-[28px] h-[28px]'} />
+          <Expand
+            className={cn('w-[28px] h-[28px]', isOpen ? 'text-accent-500' : '')}
+          />
         </PhotoControllerButton>
       </PopoverTrigger>
       <PopoverContent

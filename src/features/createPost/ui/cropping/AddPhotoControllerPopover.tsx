@@ -1,22 +1,31 @@
 import * as React from 'react'
+import { useState } from 'react'
 
-import {
-  ImageOutline,
-  MaximizeOutline,
-  PlusCircleOutline,
-} from '@/assets/icons'
+import { Image, ImageOutline, PlusCircleOutline } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '@/common'
-import { Slider } from '@/features/createPost/ui/components'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
 
-export const AddPhotoControllerPopover = () => {
-  //todo сменить при открытом поповере иконку
+type Props = {
+  id: string
+}
+
+export const AddPhotoControllerPopover = ({ id }: Props) => {
+  const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <Popover>
+    <Popover
+      onOpenChange={setIsOpen}
+      open={isOpen}
+    >
       <PopoverTrigger asChild>
         <PhotoControllerButton className={'ml-auto'}>
-          <ImageOutline className={'w-[28px] h-[28px] self-start'} />
+          {isOpen ? (
+            <Image
+              className={'w-[28px] h-[28px]  self-start text-accent-500'}
+            />
+          ) : (
+            <ImageOutline className={'w-[28px] h-[28px] self-start'} />
+          )}
         </PhotoControllerButton>
       </PopoverTrigger>
       <PopoverContent
