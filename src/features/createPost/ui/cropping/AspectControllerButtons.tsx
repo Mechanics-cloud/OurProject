@@ -25,7 +25,7 @@ export const AspectControllerButtons = observer(({ id }: Props) => {
   //todo перевод
   const sizes: ScaleSizeButtonType[] = [
     {
-      aspect: 1.1,
+      aspect: addPostStore.getOriginAspect(id),
       icon: ImageOutline,
       title: 'Оригинал',
     },

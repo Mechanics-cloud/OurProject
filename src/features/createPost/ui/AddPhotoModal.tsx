@@ -71,7 +71,7 @@ export const AddPhotoModal = () => {
             <span>Load</span>
           </Button>
           <input
-            accept={'.png, .jpg, .jpeg'}
+            accept={'*/image, .png, .jpg, .jpeg'}
             className={'sr-only'}
             onChange={onPhotoChoose}
             type={'file'}
