@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 
-import { Button, cn, typographyVariants } from '@/common'
+import { Button, cn, typographyVariants, useTranslation } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { instance } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 
 import { useCommentsStore } from '../model/homeContext'
@@ -14,6 +13,7 @@ type CommentGroup = {
 export const AddCommentGroup = observer(({ postId }: CommentGroup) => {
   const [comment, setComment] = useState<string>('')
   const commentsStore = useCommentsStore()
+  const { t } = useTranslation()
 
   const onBlur = () => {
     setComment(comment.trim())
@@ -45,7 +45,7 @@ export const AddCommentGroup = observer(({ postId }: CommentGroup) => {
           maxLength={300}
           onBlur={onBlur}
           onChange={(e) => setComment(e.target.value)}
-          placeholder={'Add a Comments...'}
+          placeholder={t.homePage.addComments}
           type={'text'}
           value={comment}
         ></input>
@@ -55,7 +55,7 @@ export const AddCommentGroup = observer(({ postId }: CommentGroup) => {
           type={'submit'}
           variant={'text'}
         >
-          Publish
+          {t.homePage.publish}
         </Button>
       </form>
     </div>

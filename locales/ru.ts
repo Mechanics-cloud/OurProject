@@ -43,6 +43,12 @@ export const ru = {
     title: 'Забыли пароль',
   },
   goToTop: 'Вверх',
+  homePage: {
+    addComments: 'Добавить комментарий...',
+    loading: 'Загрузка...',
+    publish: 'Опубликовать',
+    viewAllComments: 'Посмотреть все комментарии',
+  },
   logIn: 'Вход',
   menu: {
     copyLink: 'Скопировать ссылку',

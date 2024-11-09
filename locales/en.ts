@@ -45,6 +45,12 @@ export const en: LocaleType = {
     title: 'Forgot Password',
   },
   goToTop: 'Go to top',
+  homePage: {
+    addComments: 'Add a Comments...',
+    loading: 'Loading...',
+    publish: 'Publish',
+    viewAllComments: 'View All Comments',
+  },
   logIn: 'Log In',
   menu: {
     copyLink: 'Copy Link',

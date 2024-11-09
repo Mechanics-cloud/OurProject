@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react'
 
-import { Popover, PopoverContent, PopoverTrigger } from '@/common'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  useTranslation,
+} from '@/common'
 import { observer } from 'mobx-react-lite'
 
 import { useCommentsStore } from '../model/homeContext'
@@ -13,6 +18,7 @@ type ViewAllComments = {
 //TODO to change (in progress) добавить стили, отрисовать слайдер, в поповер добавить логику
 export const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
   const commentsStore = useCommentsStore()
+  const { t } = useTranslation()
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
@@ -40,8 +46,8 @@ export const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
               className={'text-[14px] font-bold leading-[24px] text-light-900'}
             >
               {commentsStore.isLoading
-                ? 'Loading...'
-                : `View All Comments (${
+                ? t.homePage.loading
+                : `${t.homePage.viewAllComments} (${
                     commentsStore.comments?.totalCount || 0
                   })`}
             </span>
