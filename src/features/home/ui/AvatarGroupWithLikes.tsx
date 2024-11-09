@@ -3,8 +3,9 @@ import { useEffect, useMemo } from 'react'
 import { observer } from 'mobx-react-lite'
 import Image, { StaticImageData } from 'next/image'
 
+import { LikesStore } from '../model'
 import { Item } from '../model/home.types'
-import { LikesStore } from '../model/posts/postsStore'
+
 type ItemProps = {
   item: Item
 }
