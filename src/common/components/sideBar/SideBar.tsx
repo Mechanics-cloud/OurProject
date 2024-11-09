@@ -21,15 +21,38 @@ import {
 } from '@/assets/icons/outlineIcons'
 import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
+import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
+import { authStore } from '@/features/auth'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { observer } from 'mobx-react-lite'
+import Router from 'next/router'
 
 type Props = ComponentProps<'aside'>
 
 export const SideBar = observer(({ className }: Props) => {
-  const { isModalOpen, onModalClose, openModal } = useModal()
   const { t } = useTranslation()
+  const { isModalOpen: isLogOutModalOpen, onModalClose: onLogOutModalClose } =
+    useModal(async () => {
+      const isLoadingStore = generalStore
+
+      isLoadingStore.turnOnLoading()
+      try {
+        await authStore.logout()
+        await Router.push(Paths.signIn)
+      } catch (error: unknown) {
+        responseErrorHandler(error)
+      } finally {
+        isLoadingStore.turnOffLoading()
+      }
+    })
+
+  const {
+    isModalOpen: isNewPostModalOpen,
+    onModalClose: onNewPostModalClose,
+    openModal: openNewPostModal,
+  } = useModal()
+
   const userId = generalStore.user?.userId
 
   return (
@@ -52,8 +75,8 @@ export const SideBar = observer(({ className }: Props) => {
                 ActiveIcon={PlusSquare}
                 DefaultIcon={PlusSquareOutline}
                 as={'button'}
-                iconTrigger={isModalOpen}
-                onClick={openModal}
+                iconTrigger={isLogOutModalOpen}
+                onClick={openNewPostModal}
               >
                 {t.menu.create}
               </LinkWithIcon>
@@ -114,7 +137,7 @@ export const SideBar = observer(({ className }: Props) => {
 
           <ul className={'mb-9'}>
             <LogOutModal
-              logOutModalHandler={onModalClose}
+              logOutModalHandler={onLogOutModalClose}
               triggerButton={
                 <li>
                   <LinkWithIcon
@@ -132,9 +155,9 @@ export const SideBar = observer(({ className }: Props) => {
         </nav>
       </aside>
       <NewPostDialog
-        onClose={onModalClose}
-        onOpenChange={onModalClose}
-        open={isModalOpen}
+        onClose={onNewPostModalClose}
+        onOpenChange={onNewPostModalClose}
+        open={isNewPostModalOpen}
       />
     </>
   )

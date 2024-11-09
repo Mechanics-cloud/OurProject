@@ -2,7 +2,7 @@ import * as React from 'react'
 import { PropsWithChildren, createContext, useState } from 'react'
 
 import { Dialog, Nullable } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
 import { AddPhotoModal } from '@/features/createPost/ui/AddPhotoModal'
 import { CropPhotoModal } from '@/features/createPost/ui/cropping/CropPhotoModal'

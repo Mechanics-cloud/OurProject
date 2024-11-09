@@ -11,7 +11,7 @@ import {
   cn,
   typographyVariants,
 } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
 import { Filters } from '@/features/createPost/ui/filtering/Filters'
 
 export const FilterPhotoModal = () => {

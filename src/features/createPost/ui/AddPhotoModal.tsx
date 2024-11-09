@@ -10,7 +10,7 @@ import {
   DialogTitle,
   cn,
 } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
 
 export const AddPhotoModal = () => {
   const nextStage = addPostStore.nextStage

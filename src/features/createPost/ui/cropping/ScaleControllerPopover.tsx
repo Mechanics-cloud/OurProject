@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { Maximize, MaximizeOutline } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
 import { Slider } from '@/features/createPost/ui/components'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
 import { observer } from 'mobx-react-lite'

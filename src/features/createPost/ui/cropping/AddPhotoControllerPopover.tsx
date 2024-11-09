@@ -3,6 +3,7 @@ import { useState } from 'react'
 
 import { Image, ImageOutline, PlusCircleOutline } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '@/common'
+import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
 
 type Props = {
@@ -11,6 +12,7 @@ type Props = {
 
 export const AddPhotoControllerPopover = ({ id }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
+  const photos = addPostStore
 
   return (
     <Popover

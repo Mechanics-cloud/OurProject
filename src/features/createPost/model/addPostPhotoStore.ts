@@ -1,14 +1,14 @@
 import { Point } from 'react-easy-crop'
 
 import { findObjectInArray } from '@/common/utils/findObjectInArray'
+import { PhotoEditorState } from '@/features/createPost/model/constants'
 import {
-  PhotoEditorState,
   PhotoEditorStateType,
   PostPhoto,
-} from '@/features/createPost/model/constants'
+} from '@/features/createPost/model/types'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-class AddPostStore {
+class AddPostPhotoStore {
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
   photos: PostPhoto[] = []
 
@@ -33,17 +33,7 @@ class AddPostStore {
   }
 
   constructor() {
-    makeAutoObservable(this)
-    this.changeStage = this.changeStage.bind(this)
-    this.nextStage = this.nextStage.bind(this)
-    this.prevStage = this.prevStage.bind(this)
-    this.addPhoto = this.addPhoto.bind(this)
-    this.addZoom = this.addZoom.bind(this)
-    this.addCrop = this.addCrop.bind(this)
-    this.changeAspect = this.changeAspect.bind(this)
-    this.getAspect = this.getAspect.bind(this)
-    this.getZoom = this.getZoom.bind(this)
-    this.getOriginAspect = this.getOriginAspect.bind(this)
+    makeAutoObservable(this, undefined, { autoBind: true })
   }
 
   addCrop(id: string, crop: Point) {
@@ -144,4 +134,4 @@ class AddPostStore {
   }
 }
 
-export const addPostStore = new AddPostStore()
+export const addPostStore = new AddPostPhotoStore()
