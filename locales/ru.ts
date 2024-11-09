@@ -132,7 +132,6 @@ export const ru = {
     passwordRecovery: 'Забыли пароль',
     placeholderPassword: 'Введите пароль',
     signUpTitle: 'Зарегистрироваться',
-
     text: 'У вас нет учетной записи?',
     title: 'Вход',
   },
@@ -159,6 +158,9 @@ export const ru = {
       userName: 'Введите имя пользователя',
     },
     policy: 'Политикой конфиденциальности',
+    schemaErrors: {
+      userNameComposition: 'Ввод должен содержать только',
+    },
     signUpGithub: 'Регистрация с помощью Github',
     signUpGoogle: 'Регистрация с помощью Google',
     terms: 'Условиями использования',
@@ -175,6 +177,17 @@ export const ru = {
     back: 'Назад',
   },
   validation: {
+    email: {
+      composition:
+        'Электронное письмо должно соответствовать формату example@example.com.',
+      required: 'Требуется электронная почта',
+    },
+    password: {
+      composition: 'Пароль должен содержать',
+      match: 'Пароли должны совпадать',
+      maxChar: 'Максимальное количество символов 20',
+      minChar: 'Минимальное количество символов 6',
+    },
     recaptchaRequired: 'Требуется Recaptcha',
   },
 }

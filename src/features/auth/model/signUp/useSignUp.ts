@@ -7,8 +7,9 @@ import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 
-export const useSignUp = () => {
+export const useSignUp = (t: LocaleType) => {
   const {
     clearErrors,
     control,
@@ -18,6 +19,7 @@ export const useSignUp = () => {
     resetField,
     setError,
     setFocus,
+    trigger,
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
@@ -28,7 +30,7 @@ export const useSignUp = () => {
       userName: '',
     },
     mode: 'onTouched',
-    resolver: zodResolver(signUpSchema),
+    resolver: zodResolver(signUpSchema(t)),
   })
   const isLoadingStore = generalStore
   const { isModalOpen, onModalClose, openModal } = useModal(() => {
@@ -72,6 +74,12 @@ export const useSignUp = () => {
       }
     }
   }, [touchedFields.confirm, confirm, password, clearErrors, setError])
+
+  //TODO Найти решение по лучше
+  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
+  useEffect(() => {
+    trigger()
+  }, [t, trigger])
 
   return {
     control,

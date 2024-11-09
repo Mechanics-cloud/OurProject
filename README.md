@@ -36,9 +36,9 @@ Before you begin, ensure you have met the following requirements:
 ### Installation
 
 1. Clone the repository:
-   ```sh
+  ```sh
     git clone https://github.com/Mechanics-cloud/OurProject.git
-   ```
+  ```
 2. Navigate to the project directory:
   ```sh
     cd OurProject
@@ -50,6 +50,14 @@ Before you begin, ensure you have met the following requirements:
     yarn install
     # or
     pnpm install
+ ```
+4. Run the script to create a file with local environment variables
+  ```sh
+    cp .env.example .env.local
+ ```
+5. Run the script to create a file with environment variables for deploying the application (running is necessary when deploying the application to hosting)
+  ```sh
+    cp .env.example .env.production
  ```
 
 ### Usage

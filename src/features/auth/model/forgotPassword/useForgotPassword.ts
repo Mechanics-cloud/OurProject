@@ -1,15 +1,9 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import {
-  Environments,
-  Nullable,
-  Paths,
-  useModal,
-  useTranslation,
-} from '@/common'
+import { Environments, Nullable, Paths, useModal } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import {
   ForgotPasswordFields,
@@ -17,10 +11,10 @@ import {
   forgotPasswordSchema,
 } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 import { useRouter } from 'next/router'
 
-export const useForgotPassword = () => {
-  const { t } = useTranslation()
+export const useForgotPassword = (t: LocaleType) => {
   const router = useRouter()
   const recaptchaRef = useRef<Nullable<ReCAPTCHA>>(null)
 
@@ -34,13 +28,14 @@ export const useForgotPassword = () => {
     handleSubmit,
     setError,
     setValue,
+    trigger,
   } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
       recaptcha: '',
     },
     mode: 'onChange',
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(forgotPasswordSchema(t)),
   })
 
   const onChangeRecaptcha = (token: Nullable<string>) =>
@@ -73,6 +68,12 @@ export const useForgotPassword = () => {
       onResetRecaptcha()
     }
   })
+
+  //TODO Найти решение по лучше
+  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
+  useEffect(() => {
+    trigger()
+  }, [t, trigger])
 
   return {
     control,

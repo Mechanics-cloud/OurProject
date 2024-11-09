@@ -23,7 +23,7 @@ export const ForgotPasswordForm = () => {
     onModalClose,
     onSubmit,
     recaptchaRef,
-  } = useForgotPassword()
+  } = useForgotPassword(t)
 
   return (
     <div className={'flex flex-col items-center w-full gap-4'}>
