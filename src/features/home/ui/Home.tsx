@@ -15,6 +15,7 @@ import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
 import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
+import { PostSkeleton } from './PostSkeleton'
 
 export const Home = observer(() => {
   const state = homePageStore.publicationsFollowers?.items
@@ -29,11 +30,7 @@ export const Home = observer(() => {
     return (
       <>
         <Loader />
-        <div
-          className={
-            'w-[491px] h-[816px] border-b mt-[24px] ml-[10.9375rem] flex flex-col bg-dark-100 animate-pulse'
-          }
-        ></div>
+        <PostSkeleton />
       </>
     )
   }
