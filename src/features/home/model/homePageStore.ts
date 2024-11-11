@@ -21,7 +21,7 @@ class HomePageStore {
     }
     try {
       this.loadingRequestFlag = true
-      const response = await homeApi.publicationsFollowers({
+      const response = await homeApi.getFollowersPublications({
         endCursorPostId: 0,
         pageNumber: 1,
         pageSize: 10,

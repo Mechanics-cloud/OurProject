@@ -2,15 +2,19 @@ import { instance } from '@/features/auth/api/instance'
 import { AxiosInstance } from 'axios'
 
 import { HomePageQuery, HomePageRootInterface } from '../model/home.types'
+import { HomePageRequestEndpoints } from './home.endpoints'
 
 class HomeApi {
   constructor(private instance: AxiosInstance) {}
 
-  public publicationsFollowers(data: HomePageQuery) {
+  public getFollowersPublications(data: HomePageQuery) {
     return this.instance
-      .get<HomePageRootInterface>('/v1/home/publications-followers', {
-        params: data,
-      })
+      .get<HomePageRootInterface>(
+        HomePageRequestEndpoints.followersPublications,
+        {
+          params: data,
+        }
+      )
       .then((res) => res.data)
   }
 }

@@ -3,37 +3,38 @@ import { instance } from '@/features/auth/api/instance'
 import { AxiosInstance } from 'axios'
 
 import { PostsComments, PostsLikes } from '../model'
+import { PostsRequestEndpoints } from './posts.endpoints'
 
 class PostsApi {
   constructor(private instance: AxiosInstance) {}
 
   public addComment({ comment, postId }: { comment: string; postId: number }) {
-    return this.instance.post(`/v1/posts/${postId}/comments`, {
+    return this.instance.post(PostsRequestEndpoints.idComments(postId), {
       content: comment,
     })
   }
 
   public getPostIdComments(postId: number) {
     return this.instance
-      .get<PostsComments>(`/v1/posts/${postId}/comments`)
+      .get<PostsComments>(PostsRequestEndpoints.idComments(postId))
       .then((res) => res.data)
   }
   public getPostLikes({ postId }: { postId: number }) {
     return this.instance
-      .get<PostsLikes>(`/v1/posts/${postId}/likes`)
+      .get<PostsLikes>(PostsRequestEndpoints.idLikes(postId))
       .then((res) => res.data)
   }
 
   public updateLikeStatus({
-    likeStatus,
+    newLikeStatus,
     postId,
   }: {
-    likeStatus: LikeStatus
+    newLikeStatus: LikeStatus
     postId: number
   }) {
     return this.instance
-      .put<any>(`/v1/posts/${postId}/like-status`, {
-        likeStatus: likeStatus,
+      .put<any>(PostsRequestEndpoints.idLikeStatus(postId), {
+        likeStatus: newLikeStatus,
       })
       .then((res) => res.data)
   }
