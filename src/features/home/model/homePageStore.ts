@@ -15,6 +15,23 @@ class HomePageStore {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
+  changeLikesCount(id: number, isLikedValue: boolean) {
+    if (!this.publicationsFollowers?.items) {
+      return
+    }
+
+    this.publicationsFollowers.items = this.publicationsFollowers.items.map(
+      (item) => {
+        if (item.id === id) {
+          item.isLiked = isLikedValue
+          item.likesCount += isLikedValue ? 1 : -1
+        }
+
+        return item
+      }
+    )
+  }
+
   async getPostsPublicationsFollowers() {
     if (this.loadingRequestFlag) {
       return
@@ -38,17 +55,6 @@ class HomePageStore {
         this.isLoadingHomePage = false
       })
     }
-  }
-
-  isLiked(id: number, isLikedValue: boolean) {
-    this.publicationsFollowers?.items.map((i) =>
-      i.id === id
-        ? ((i.isLiked = isLikedValue),
-          (i.likesCount = isLikedValue
-            ? (i.likesCount += 1)
-            : (i.likesCount -= 1)))
-        : i
-    )
   }
 }
 

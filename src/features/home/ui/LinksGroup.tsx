@@ -34,12 +34,12 @@ export const LinksGroup = observer(({ item }: ItemProps) => {
       setIsChangeLike(true)
       setLoadingRequestFlag(true)
 
-      const likeStatus = item.isLiked ? LikeStatus.None : LikeStatus.Like
+      const newLikeStatus = item.isLiked ? LikeStatus.None : LikeStatus.Like
 
-      await postsApi.updateLikeStatus({ likeStatus, postId: item.id })
+      await postsApi.updateLikeStatus({ newLikeStatus, postId: item.id })
 
       runInAction(() => {
-        homePageStore.isLiked(item.id, !item.isLiked)
+        homePageStore.changeLikesCount(item.id, !item.isLiked)
         setIsChangeLike(false)
         setLoadingRequestFlag(false)
       })

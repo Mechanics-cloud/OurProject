@@ -27,11 +27,11 @@ export class CommentsStore {
 
       return response
     } catch (error) {
-      responseErrorHandler(error)
-    } finally {
       this.isLoading = false
+      responseErrorHandler(error)
     }
   }
+
   async getComments(postId: number) {
     if (this.isLoading) {
       return
@@ -45,6 +45,7 @@ export class CommentsStore {
         this.isLoading = false
       })
     } catch (error) {
+      this.isLoading = false
       responseErrorHandler(error)
     }
   }

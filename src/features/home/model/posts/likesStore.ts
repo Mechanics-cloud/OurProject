@@ -1,5 +1,6 @@
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { makeAutoObservable, runInAction } from 'mobx'
+import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
 import { postsApi } from '../../api'
 import { PostsLikes } from './posts.types'
@@ -25,29 +26,23 @@ export class LikesStore {
         this.isLoading = false
       })
     } catch (error) {
+      this.isLoading = false
       responseErrorHandler(error)
     }
   }
 
   get getAvatarImages() {
-    let firstThreeAvatars = null
+    let avatarUrls = null
+    const isLiked = this.likes?.items.length != 0
 
-    if (
-      this.likes?.items.length !== 0 &&
-      this.likes?.items[0]?.avatars.length !== 0
-    ) {
-      firstThreeAvatars = this.likes?.items
-        .slice(0, 3)
-        .filter(
-          (item) =>
-            item !== undefined &&
-            item.avatars &&
-            item.avatars[0] &&
-            item.avatars[0].url
-        )
-        .map((item) => item.avatars[1]?.url)
+    if (isLiked) {
+      const firstThreeLikes = this.likes?.items.slice(0, 3)
+
+      avatarUrls = firstThreeLikes?.map(
+        (item) => item.avatars[1]?.url || avatarPlaceholder
+      )
     }
 
-    return firstThreeAvatars
+    return avatarUrls
   }
 }
