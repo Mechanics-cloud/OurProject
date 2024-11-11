@@ -22,6 +22,8 @@ import {
 } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+//todo убрать fade эффект
+
 export const CropPhotoModal = observer(() => {
   const photos = addPostStore.photos
   const addZoom = addPostStore.addZoom
@@ -98,34 +100,37 @@ export const CropPhotoModal = observer(() => {
             touchStartPreventDefault={false}
             watchSlidesProgress
           >
-            <SwiperSlide
-              className={'w-full'}
-              key={'index'}
-            >
-              <Cropper
-                aspect={photos[0].aspect}
-                crop={photos[0].crop as Point}
-                image={photos[0].url as string}
-                onCropChange={onCrop}
-                onCropComplete={onCropComplete}
-                onZoomChange={onZoom}
-                zoom={photos[0].zoom ?? 1}
-              />
-            </SwiperSlide>
-            <SwiperSlide
-              className={'w-full'}
-              key={'index'}
-            >
-              <Cropper
-                aspect={photos[0].aspect}
-                crop={photos[0].crop as Point}
-                image={photos[0].url as string}
-                onCropChange={onCrop}
-                onCropComplete={onCropComplete}
-                onZoomChange={onZoom}
-                zoom={photos[0].zoom ?? 1}
-              />
-            </SwiperSlide>
+            {photos.map((photo) => (
+              <SwiperSlide
+                className={'w-full'}
+                key={'index'}
+              >
+                <Cropper
+                  aspect={photo.aspect}
+                  crop={photo.crop as Point}
+                  image={photo.url as string}
+                  onCropChange={onCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={onZoom}
+                  zoom={photo.zoom ?? 1}
+                />
+              </SwiperSlide>
+            ))}
+
+            {/*<SwiperSlide*/}
+            {/*  className={'w-full'}*/}
+            {/*  key={'index'}*/}
+            {/*>*/}
+            {/*  <Cropper*/}
+            {/*    aspect={photos[0].aspect}*/}
+            {/*    crop={photos[0].crop as Point}*/}
+            {/*    image={photos[0].url as string}*/}
+            {/*    onCropChange={onCrop}*/}
+            {/*    onCropComplete={onCropComplete}*/}
+            {/*    onZoomChange={onZoom}*/}
+            {/*    zoom={photos[0].zoom ?? 1}*/}
+            {/*  />*/}
+            {/*</SwiperSlide>*/}
           </Swiper>
           <ControllersPanel id={photos[0].id} />
         </div>

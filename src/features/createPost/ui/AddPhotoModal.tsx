@@ -17,12 +17,20 @@ export const AddPhotoModal = () => {
   const addPostPhoto = addPostStore.addPhoto
   const onPhotoDrop = useCallback(
     (file: File[]) => {
-      addPostPhoto(file[0])
+      file.forEach((photo) => {
+        addPostPhoto(photo)
+      })
+
       nextStage()
     },
     [nextStage, addPostPhoto]
   )
   const { getInputProps, getRootProps, isDragActive } = useDropzone({
+    accept: {
+      'image/jpeg': ['.jpeg'],
+      'image/jpg': ['.jpg'],
+      'image/png': ['.png'],
+    },
     onDrop: onPhotoDrop,
   })
 
@@ -71,8 +79,9 @@ export const AddPhotoModal = () => {
             <span>Load</span>
           </Button>
           <input
-            accept={'*/image, .png, .jpg, .jpeg'}
+            accept={'image/*, .png, .jpg, .jpeg'}
             className={'sr-only'}
+            multiple
             onChange={onPhotoChoose}
             type={'file'}
             {...getInputProps()}
