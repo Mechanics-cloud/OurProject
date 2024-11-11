@@ -19,6 +19,7 @@ import Link from 'next/link'
 
 export const SignUpForm = observer(() => {
   const { t } = useTranslation()
+
   const {
     control,
     isLoading,
@@ -27,7 +28,7 @@ export const SignUpForm = observer(() => {
     onModalClose,
     onSubmit,
     userEmail,
-  } = useSignUp()
+  } = useSignUp(t)
 
   return (
     <div
