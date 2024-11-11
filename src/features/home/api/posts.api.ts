@@ -8,18 +8,18 @@ class PostsApi {
   constructor(private instance: AxiosInstance) {}
 
   public addComment({ comment, postId }: { comment: string; postId: number }) {
-    return instance.post(`/v1/posts/${postId}/comments`, {
+    return this.instance.post(`/v1/posts/${postId}/comments`, {
       content: comment,
     })
   }
 
   public getPostIdComments(postId: number) {
-    return instance
+    return this.instance
       .get<PostsComments>(`/v1/posts/${postId}/comments`)
       .then((res) => res.data)
   }
   public getPostLikes({ postId }: { postId: number }) {
-    return instance
+    return this.instance
       .get<PostsLikes>(`/v1/posts/${postId}/likes`)
       .then((res) => res.data)
   }
@@ -31,7 +31,7 @@ class PostsApi {
     likeStatus: LikeStatus
     postId: number
   }) {
-    return instance
+    return this.instance
       .put<any>(`/v1/posts/${postId}/like-status`, {
         likeStatus: likeStatus,
       })
