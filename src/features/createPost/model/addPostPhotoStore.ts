@@ -89,6 +89,10 @@ class AddPostPhotoStore {
     return findObjectInArray(this.photos, id)?.aspect ?? 1
   }
 
+  getCurrentPhotosCount() {
+    return this.photos.length
+  }
+
   getOriginAspect(id: string) {
     return findObjectInArray(this.photos, id)?.originAspect ?? 1
   }

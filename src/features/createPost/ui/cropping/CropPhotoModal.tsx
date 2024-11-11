@@ -84,7 +84,7 @@ export const CropPhotoModal = observer(() => {
             {photos.map((photo, index) => (
               <SwiperSlide
                 className={'w-full bg-dark-500 relative'}
-                key={'index'}
+                key={index}
               >
                 <PhotoCrop photo={photo} />
               </SwiperSlide>

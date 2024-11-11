@@ -1,5 +1,6 @@
-import { ChangeEvent, useCallback } from 'react'
+import { useCallback, useMemo } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { toast } from 'react-toastify'
 
 import { Image as ImageFull, ImageOutline } from '@/assets/icons'
 import {
@@ -9,40 +10,46 @@ import {
   DialogHeader,
   DialogTitle,
   cn,
+  useTranslation,
 } from '@/common'
+import {
+  AddPhotoSchema,
+  addPhotoSchema,
+} from '@/features/createPost/model/addPhotoSchema'
+import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
 import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { z } from 'zod'
 
 export const AddPhotoModal = () => {
-  const nextStage = addPostStore.nextStage
-  const addPostPhoto = addPostStore.addPhoto
-  const onPhotoDrop = useCallback(
-    (file: File[]) => {
-      file.forEach((photo) => {
-        addPostPhoto(photo)
-      })
+  const { t } = useTranslation()
+  const nextStage = useMemo(() => addPostStore.nextStage, [])
+  const addPostPhoto = useMemo(() => addPostStore.addPhoto, [])
+  const totalCount = addPostStore.getCurrentPhotosCount()
 
+  const onPhotoDrop = useCallback(
+    (files: File[]) => {
+      addPhotosCheck(files, totalCount, t, addPostPhoto)
       nextStage()
     },
-    [nextStage, addPostPhoto]
+    [nextStage, addPostPhoto, t, totalCount]
   )
-  const { getInputProps, getRootProps, isDragActive } = useDropzone({
-    accept: {
-      'image/jpeg': ['.jpeg'],
-      'image/jpg': ['.jpg'],
-      'image/png': ['.png'],
-    },
-    onDrop: onPhotoDrop,
-  })
 
-  const onPhotoChoose = (inputEvent: ChangeEvent<HTMLInputElement>) => {
-    const file = inputEvent.target.files?.[0] ?? null
+  const dropzoneOptions = useMemo(
+    () => ({
+      accept: {
+        'image/jpeg': ['.jpeg'],
+        'image/jpg': ['.jpg'],
+        'image/png': ['.png'],
+      },
+      maxFiles: 10,
+      multiple: true,
+      onDrop: onPhotoDrop,
+    }),
+    [onPhotoDrop]
+  )
 
-    if (!file) {
-      return
-    }
-    addPostPhoto(file)
-    nextStage()
-  }
+  const { getInputProps, getRootProps, isDragActive } =
+    useDropzone(dropzoneOptions)
 
   return (
     <DialogContent className={'max-w-[492px]'}>
@@ -79,10 +86,7 @@ export const AddPhotoModal = () => {
             <span>Load</span>
           </Button>
           <input
-            accept={'image/*, .png, .jpg, .jpeg'}
             className={'sr-only'}
-            multiple
-            onChange={onPhotoChoose}
             type={'file'}
             {...getInputProps()}
           />

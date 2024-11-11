@@ -4,3 +4,5 @@ export const PhotoEditorState = {
   filtering: 'FILTERING',
   publication: 'PUBLICATION',
 } as const
+
+export const MaxPhotoCount = 10
