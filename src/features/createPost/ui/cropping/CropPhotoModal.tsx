@@ -1,6 +1,4 @@
 import * as React from 'react'
-import { useState } from 'react'
-import Cropper, { Area, Point } from 'react-easy-crop'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
@@ -12,7 +10,7 @@ import {
   typographyVariants,
 } from '@/common'
 import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
-import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel'
+import { PhotoCrop } from '@/features/createPost/ui/cropping/PhotoCrop'
 import { observer } from 'mobx-react-lite'
 import {
   EffectFade,
@@ -26,24 +24,8 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 export const CropPhotoModal = observer(() => {
   const photos = addPostStore.photos
-  const addZoom = addPostStore.addZoom
-  const addCrop = addPostStore.addCrop
-
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage
-
-  const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-    //addCrop(photos[0].id, croppedAreaPixels)
-  }
-
-  const onZoom = (zoom: number) => {
-    addZoom(photos[0].id, zoom)
-  }
-
-  const onCrop = (crop: Point) => {
-    addCrop(photos[0].id, crop)
-  }
-  const [swiperInstance, setSwiperInstance] = useState<any>(null)
 
   return (
     <DialogContent
@@ -72,16 +54,15 @@ export const CropPhotoModal = observer(() => {
         asChild
         className={'lg:m-0 lg:p-0'}
       >
-        <div
-          className={'relative'}
-          // className={'flex flex-col items-center h-[490px] m-0 p-0 relative'}
-        >
+        <div className={'relative max-w-[492px] h-[490px]'}>
           <Swiper
+            allowTouchMove={false}
             className={cn(
-              'max-w-[492px] h-[490px] w-full m-0 shrink-0,',
+              'absolute h-full w-full top-0 left-0 m-0 shrink-0,',
               'addPost'
             )}
             effect={'fade'}
+            grabCursor={false}
             hashNavigation={{
               watchState: true,
             }}
@@ -92,47 +73,23 @@ export const CropPhotoModal = observer(() => {
             navigation
             noSwiping
             noSwipingSelector={'button'}
-            onSwiper={setSwiperInstance}
             pagination={{
               clickable: true,
             }}
+            simulateTouch={false}
             spaceBetween={30}
             touchStartPreventDefault={false}
             watchSlidesProgress
           >
-            {photos.map((photo) => (
+            {photos.map((photo, index) => (
               <SwiperSlide
-                className={'w-full'}
+                className={'w-full bg-dark-500 relative'}
                 key={'index'}
               >
-                <Cropper
-                  aspect={photo.aspect}
-                  crop={photo.crop as Point}
-                  image={photo.url as string}
-                  onCropChange={onCrop}
-                  onCropComplete={onCropComplete}
-                  onZoomChange={onZoom}
-                  zoom={photo.zoom ?? 1}
-                />
+                <PhotoCrop photo={photo} />
               </SwiperSlide>
             ))}
-
-            {/*<SwiperSlide*/}
-            {/*  className={'w-full'}*/}
-            {/*  key={'index'}*/}
-            {/*>*/}
-            {/*  <Cropper*/}
-            {/*    aspect={photos[0].aspect}*/}
-            {/*    crop={photos[0].crop as Point}*/}
-            {/*    image={photos[0].url as string}*/}
-            {/*    onCropChange={onCrop}*/}
-            {/*    onCropComplete={onCropComplete}*/}
-            {/*    onZoomChange={onZoom}*/}
-            {/*    zoom={photos[0].zoom ?? 1}*/}
-            {/*  />*/}
-            {/*</SwiperSlide>*/}
           </Swiper>
-          <ControllersPanel id={photos[0].id} />
         </div>
       </DialogDescription>
     </DialogContent>

@@ -112,12 +112,10 @@ input[type='password']::-ms-clear {
 .addPost .swiper-pagination {
   display: flex;
   justify-content: center;
-  padding-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .addPost .swiper-pagination-bullet {
-  display: block;
-
   width: 8px;
   height: 8px;
   margin: 0;
