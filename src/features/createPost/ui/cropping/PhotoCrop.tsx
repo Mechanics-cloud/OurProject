@@ -3,7 +3,7 @@ import Cropper, { Area, Point } from 'react-easy-crop'
 
 import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
 import { PostPhoto } from '@/features/createPost/model/types'
-import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel'
+import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel/ControllersPanel'
 import { observer } from 'mobx-react-lite'
 
 type Props = {

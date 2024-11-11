@@ -85,6 +85,10 @@ class AddPostPhotoStore {
     this.photos = []
   }
 
+  deletePhoto(id: string) {
+    this.photos = this.photos.filter((photo) => photo.id !== id)
+  }
+
   getAspect(id: string) {
     return findObjectInArray(this.photos, id)?.aspect ?? 1
   }

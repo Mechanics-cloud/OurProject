@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-import { AddPhotoControllerPopover } from '@/features/createPost/ui/cropping/AddPhotoControllerPopover'
-import { AspectControllerPopover } from '@/features/createPost/ui/cropping/AspectControllerPopover'
-import { ScaleControllerPopover } from '@/features/createPost/ui/cropping/ScaleControllerPopover'
+import { AddPhotoControllerPopover } from '@/features/createPost/ui/cropping/ControllersPanel/AddPhotoControllerPopover'
+import { AspectControllerPopover } from '@/features/createPost/ui/cropping/ControllersPanel/AspectControllerPopover'
+import { ScaleControllerPopover } from '@/features/createPost/ui/cropping/ControllersPanel/ScaleControllerPopover'
 
 type Props = {
   id: string

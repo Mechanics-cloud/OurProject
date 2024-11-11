@@ -1,6 +1,5 @@
 import { useCallback, useMemo } from 'react'
 import { useDropzone } from 'react-dropzone'
-import { toast } from 'react-toastify'
 
 import { Image as ImageFull, ImageOutline } from '@/assets/icons'
 import {
@@ -12,13 +11,8 @@ import {
   cn,
   useTranslation,
 } from '@/common'
-import {
-  AddPhotoSchema,
-  addPhotoSchema,
-} from '@/features/createPost/model/addPhotoSchema'
 import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
 import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
-import { z } from 'zod'
 
 export const AddPhotoModal = () => {
   const { t } = useTranslation()

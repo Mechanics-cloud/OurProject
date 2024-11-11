@@ -11,6 +11,7 @@ export type PostPhoto = {
   crop?: Area | Point | undefined
   id: string
   originAspect: number
-  url: Nullable<string>
+  //url: Nullable<string>
+  url: string
   zoom?: number
 }
