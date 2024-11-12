@@ -1,26 +1,26 @@
-import { LoadingComponent } from '@/features/profile/ui/LoadingComponent'
-import { observer } from 'mobx-react-lite'
+import { Skeleton } from '@/common'
 import Image, { StaticImageData } from 'next/image'
 
 type Props = {
   isProfileLoading: boolean
-  src?: StaticImageData | string
+  src: StaticImageData | string
 }
-export const ProfileAvatar = observer(({ isProfileLoading, src }: Props) => {
+
+export const ProfileAvatar = ({ isProfileLoading, src }: Props) => {
   return (
-    <LoadingComponent
-      className={'rounded-full pr-0 min-w-[147px] min-h-[147px]'}
-      isProfileLoading={isProfileLoading}
-    >
-      {src && (
-        <Image
-          alt={'avatar'}
-          className={'rounded-full pr-0'}
-          height={200}
-          src={src}
-          width={200}
-        />
+    <div className={'relative w-full max-w-[200px] aspect-square'}>
+      {isProfileLoading && (
+        <Skeleton className={'absolute inset-0 w-full h-full rounded-full'} />
       )}
-    </LoadingComponent>
+      <Image
+        alt={'avatar'}
+        className={`rounded-full transition-opacity duration-300 ${
+          isProfileLoading ? 'opacity-0' : 'opacity-100'
+        }`}
+        fill
+        sizes={'200px'}
+        src={src}
+      />
+    </div>
   )
-})
+}

@@ -32,12 +32,14 @@ export const GeneralInfoLoading = () => {
             <Skeleton className={'w-full h-[36px]'} />
           </div>
           <Skeleton className={'w-full h-[60px]'} />
-          <Button
-            disabled
-            variant={'primary'}
-          >
-            Save Changes
-          </Button>
+          <div className={'flex justify-end mt-12'}>
+            <Button
+              disabled
+              variant={'primary'}
+            >
+              Save Changes
+            </Button>
+          </div>
         </div>
       </div>
     </div>

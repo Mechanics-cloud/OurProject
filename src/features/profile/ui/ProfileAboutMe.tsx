@@ -1,5 +1,4 @@
-import { Typography } from '@/common'
-import { LoadingComponent } from '@/features/profile/ui/LoadingComponent'
+import { Skeleton, Typography } from '@/common'
 
 type Props = {
   aboutMe?: string
@@ -7,18 +6,15 @@ type Props = {
 }
 export const ProfileAboutMe = ({ aboutMe, isProfileLoading }: Props) => {
   return (
-    <LoadingComponent
-      className={'min-h-[40px] max-w-[300px] mt-[23px]'}
-      isProfileLoading={isProfileLoading}
+    <Typography
+      className={'mt-[23px]'}
+      variant={'reg16'}
     >
-      {aboutMe && (
-        <Typography
-          className={'mt-[23px]'}
-          variant={'reg16'}
-        >
-          {aboutMe}
-        </Typography>
+      {isProfileLoading ? (
+        <Skeleton className={`min-h-[40px] max-w-[300px]`} />
+      ) : (
+        (aboutMe ?? '')
       )}
-    </LoadingComponent>
+    </Typography>
   )
 }

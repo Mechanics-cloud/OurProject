@@ -1,5 +1,4 @@
-import { Typography } from '@/common'
-import { LoadingComponent } from '@/features/profile/ui/LoadingComponent'
+import { Skeleton, Typography } from '@/common'
 
 type Props = {
   isProfileLoading: boolean
@@ -12,14 +11,14 @@ export const ProfileStatistics = ({
   statisticsTitle,
 }: Props) => {
   return (
-    <LoadingComponent
-      className={'min-h-[42px] min-w-[70px]'}
-      isProfileLoading={isProfileLoading}
-    >
-      <div className={'flex flex-col'}>
+    <div className={'flex flex-col'}>
+      {isProfileLoading ? (
+        <Skeleton className={`h-5 w-full`} />
+      ) : (
         <Typography variant={'reg14'}>{statisticsCount}</Typography>
-        <Typography variant={'reg14'}>{statisticsTitle}</Typography>
-      </div>
-    </LoadingComponent>
+      )}
+
+      <Typography variant={'reg14'}>{statisticsTitle}</Typography>
+    </div>
   )
 }
