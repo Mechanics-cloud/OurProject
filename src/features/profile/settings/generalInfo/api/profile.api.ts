@@ -1,10 +1,12 @@
+import { Environments } from '@/common'
 import { instance } from '@/features/auth'
 import {
+  PublicProfile,
   UpdatedProfile,
   UserProfile,
 } from '@/features/profile/settings/generalInfo/api'
 import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
-import { AxiosInstance, AxiosResponse } from 'axios'
+import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 class ProfileApi {
   constructor(private instance: AxiosInstance) {}
@@ -15,6 +17,11 @@ class ProfileApi {
     const res = await this.instance.get(ProfileEndpoints.profile)
 
     return res.data
+  }
+  public async getPublicUser(profileId: string): Promise<PublicProfile> {
+    return axios(
+      Environments.API_URL + ProfileEndpoints.publicProfile(profileId)
+    ).then((res) => res.data)
   }
   public updateProfile(profileData: UpdatedProfile): Promise<AxiosResponse> {
     return this.instance.put(ProfileEndpoints.profile, profileData)

@@ -3,9 +3,8 @@ import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
 import { generalStore } from '@/core/store'
-import { authStore } from '@/features/auth'
-import { profileAPi, profileStore } from '@/features/profile'
-import axios from 'axios'
+import { PublicProfile, profileAPi } from '@/features/profile'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -14,6 +13,27 @@ import image1 from '../../assets/images/image1.jpg'
 import image2 from '../../assets/images/image2.jpg'
 import image3 from '../../assets/images/image3.jpg'
 import image4 from '../../assets/images/image4.jpg'
+
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { params } = context
+
+  if (!params || !params.id) {
+    return {
+      notFound: true,
+    }
+  }
+  try {
+    const userProfile = await profileAPi.getPublicUser(params.id[0])
+
+    return { props: userProfile }
+  } catch {
+    return {
+      notFound: true,
+    }
+  }
+}
 
 const placeholderImages = [
   { id: 1, img: image1 },
@@ -25,14 +45,11 @@ const placeholderImages = [
   { id: 7, img: image3 },
   { id: 8, img: image4 },
 ]
-
-const Profile = ({ data }: any) => {
+//todo: remove avatarPlaceholder and place another placeholder image
+const Profile = (userProfile: PublicProfile) => {
   const { t } = useTranslation()
 
-  // const userProfile = profileStore.userProfile
-  // const avatar = userProfile?.avatars[0]?.url
-  const userProfile = data
-  const avatar = data.avatars[0]?.url
+  const avatar = userProfile.avatars[0]?.url
 
   return (
     <div className={'flex w-full'}>
@@ -67,19 +84,25 @@ const Profile = ({ data }: any) => {
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
               <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
+                <Typography variant={'reg14'}>
+                  {userProfile.userMetadata.following}
+                </Typography>
                 <Typography variant={'reg14'}>
                   {t.profilePage.following}
                 </Typography>
               </div>
               <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
+                <Typography variant={'reg14'}>
+                  {userProfile.userMetadata.followers}
+                </Typography>
                 <Typography variant={'reg14'}>
                   {t.profilePage.followers}
                 </Typography>
               </div>
               <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
+                <Typography variant={'reg14'}>
+                  {userProfile.userMetadata.publications}
+                </Typography>
                 <Typography variant={'reg14'}>
                   {t.profilePage.publications}
                 </Typography>
@@ -109,21 +132,3 @@ const Profile = ({ data }: any) => {
 }
 
 export default withProtection(Profile, true)
-export async function getServerSideProps(context: any) {
-  console.log(context)
-
-  const res = await axios
-    .get(
-      `https://inctagram.work/api/v1/public-user/profile/${context.params.id[0]}`
-    )
-    .then((res) => res.data)
-
-  if (!res) {
-    return {
-      notFound: true,
-    }
-  }
-
-  return { props: { data: res } }
-}
-//todo: remove avatarPlaceholder and place another placeholder image
