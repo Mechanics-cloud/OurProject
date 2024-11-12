@@ -1,6 +1,5 @@
 import { Area, Point } from 'react-easy-crop'
 
-import { Nullable } from '@/common'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
 
 export type PhotoEditorStateType =
@@ -8,10 +7,10 @@ export type PhotoEditorStateType =
 
 export type PostPhoto = {
   aspect: number
-  crop?: Area | Point | undefined
+  crop: Point
+  croppedArea: Area
   id: string
   originAspect: number
-  //url: Nullable<string>
   url: string
   zoom?: number
 }

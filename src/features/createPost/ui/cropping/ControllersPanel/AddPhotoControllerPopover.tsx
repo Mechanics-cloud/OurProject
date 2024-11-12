@@ -10,7 +10,7 @@ import {
   useTranslation,
 } from '@/common'
 import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
-import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
 import { MaxPhotoCount } from '@/features/createPost/model/constants'
 import { SwiperContext } from '@/features/createPost/ui/components/SwiperCover'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
@@ -20,9 +20,9 @@ import { observer } from 'mobx-react-lite'
 export const AddPhotoControllerPopover = observer(() => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
-  const addPostPhoto = addPostStore.addPhoto
-  const photos = addPostStore.photos
-  const totalCount = addPostStore.getCurrentPhotosCount()
+  const addPostPhoto = addPostPhotoStore.addPhoto
+  const photos = addPostPhotoStore.photos
+  const totalCount = addPostPhotoStore.getCurrentPhotosCount()
   const isAddingDisabled = totalCount === MaxPhotoCount
   const context = useContext(SwiperContext)
 

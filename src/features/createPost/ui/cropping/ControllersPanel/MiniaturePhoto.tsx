@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react'
 
 import { Close } from '@/assets/icons'
 import { Tooltip, cn, useTranslation } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 
@@ -16,8 +16,8 @@ type Props = {
 export const MiniaturePhoto = observer(
   ({ className, id, onClick, src }: Props) => {
     const { t } = useTranslation()
-    const deletePostPhoto = addPostStore.deletePhoto
-    const totalCount = addPostStore.getCurrentPhotosCount()
+    const deletePostPhoto = addPostPhotoStore.deletePhoto
+    const totalCount = addPostPhotoStore.getCurrentPhotosCount()
     const isLastPhoto = totalCount === 1
 
     return (

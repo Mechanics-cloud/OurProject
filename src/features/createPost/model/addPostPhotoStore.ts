@@ -1,4 +1,4 @@
-import { Point } from 'react-easy-crop'
+import { Area, Point } from 'react-easy-crop'
 
 import { findObjectInArray } from '@/common/utils/findObjectInArray'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
@@ -9,6 +9,7 @@ import {
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AddPostPhotoStore {
+  currentSliderIndex: number = 0
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
   photos: PostPhoto[] = []
 
@@ -44,6 +45,18 @@ class AddPostPhotoStore {
     }
   }
 
+  addCroppedArea(id: string, croppedAreaPixels: Area) {
+    const photo = findObjectInArray(this.photos, id)
+
+    if (photo) {
+      photo.croppedArea = croppedAreaPixels
+    }
+  }
+
+  addCurrentSliderIndex(index: number) {
+    this.currentSliderIndex = index
+  }
+
   addPhoto(file: File) {
     const id = Math.random().toString(16).slice(2)
     const url = URL.createObjectURL(file)
@@ -53,6 +66,7 @@ class AddPostPhotoStore {
       {
         aspect: 1,
         crop: { x: 0, y: 0 },
+        croppedArea: { height: 0, width: 0, x: 0, y: 0 },
         id,
         originAspect: 1,
         url,
@@ -142,4 +156,4 @@ class AddPostPhotoStore {
   }
 }
 
-export const addPostStore = new AddPostPhotoStore()
+export const addPostPhotoStore = new AddPostPhotoStore()

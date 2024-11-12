@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
@@ -6,17 +7,23 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  Nullable,
-  SwiperImage,
   cn,
   typographyVariants,
 } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { SwiperCover } from '@/features/createPost/ui/components/SwiperCover'
 import { Filters } from '@/features/createPost/ui/filtering/Filters'
+import Image from 'next/image'
+import { SwiperSlide } from 'swiper/react'
+
+import ImageH from '/src/assets/images/image4.jpg'
 
 export const FilterPhotoModal = () => {
-  const nextStage = addPostStore.nextStage
-  const prevStage = addPostStore.prevStage
+  const nextStage = addPostPhotoStore.nextStage
+  const prevStage = addPostPhotoStore.prevStage
+  const photos = addPostPhotoStore.photos
+
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
 
   return (
     <DialogContent
@@ -46,26 +53,31 @@ export const FilterPhotoModal = () => {
         className={cn('m-0 p-0 lg:m-0 lg:p-0')}
       >
         <div className={'flex h-[504px] relative'}>
-          <SwiperImage
-            className={cn('w-[490px] m-0 shrink-0', 'addPost')}
-            images={[
-              {
-                height: 300,
-                url: 'https://upload.wikimedia.org/wikipedia/commons/8/8c/Misha_Collins_%26_Jensen_Ackles_%2848478258422%29%28c%29.jpg',
-                width: 300,
-              },
-              {
-                height: 300,
-                url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Jensen_Ackles.jpg/640px-Jensen_Ackles.jpg',
-                width: 300,
-              },
-            ]}
-          />
-          <Filters
-            src={
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Jensen_Ackles.jpg/640px-Jensen_Ackles.jpg'
-            }
-          />
+          <SwiperCover
+            className={cn(
+              'w-[490px] m-0 shrink-0 bg-dark-500 relative',
+              'addPost'
+            )}
+          >
+            {photos.map((photo, index) => (
+              <SwiperSlide
+                className={cn(
+                  'w-[490px] m-0 shrink-0 bg-dark-500 relative flex',
+                  'addPost'
+                )}
+                key={index}
+              >
+                <Image
+                  alt={'Photo in carousel'}
+                  className={'object-center object-contain'}
+                  height={490}
+                  src={photo.url}
+                  width={490}
+                />
+              </SwiperSlide>
+            ))}
+          </SwiperCover>
+          <Filters src={ImageH.src} />
         </div>
       </DialogDescription>
     </DialogContent>

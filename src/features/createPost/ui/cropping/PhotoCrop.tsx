@@ -1,9 +1,10 @@
 import * as React from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 
-import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
 import { PostPhoto } from '@/features/createPost/model/types'
 import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel/ControllersPanel'
+import { toJS } from 'mobx'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
@@ -11,11 +12,12 @@ type Props = {
 }
 
 export const PhotoCrop = observer(({ photo }: Props) => {
-  const addZoom = addPostStore.addZoom
-  const addCrop = addPostStore.addCrop
+  const addZoom = addPostPhotoStore.addZoom
+  const addCrop = addPostPhotoStore.addCrop
+  const addCroppedArea = addPostPhotoStore.addCroppedArea
 
   const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-    //addCrop(photos[0].id, croppedAreaPixels)
+    addCroppedArea(photo.id, toJS(croppedAreaPixels))
   }
 
   const onZoom = (zoom: number) => {

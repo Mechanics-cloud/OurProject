@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { Maximize, MaximizeOutline } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
 import { Slider } from '@/features/createPost/ui/components'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
 import { observer } from 'mobx-react-lite'
@@ -14,7 +14,7 @@ type Props = {
 
 export const ScaleControllerPopover = observer(({ id }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const changeZoom = addPostStore.addZoom
+  const changeZoom = addPostPhotoStore.addZoom
 
   const onZoom = (zoom: number[]) => {
     changeZoom(id, zoom[0])
@@ -41,7 +41,7 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
         sideOffset={2}
       >
         <Slider
-          defaultValue={[addPostStore.getZoom(id)]}
+          defaultValue={[addPostPhotoStore.getZoom(id)]}
           max={3}
           min={1}
           onValueChange={onZoom}

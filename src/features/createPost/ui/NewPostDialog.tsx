@@ -2,7 +2,7 @@ import * as React from 'react'
 import { PropsWithChildren, createContext, useState } from 'react'
 
 import { Dialog, Nullable } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
 import { AddPhotoModal } from '@/features/createPost/ui/AddPhotoModal'
 import { CropPhotoModal } from '@/features/createPost/ui/cropping/CropPhotoModal'
@@ -25,9 +25,9 @@ export const PrevNextContext = createContext<
 
 export const NewPostDialog = observer(
   ({ onClose, onOpenChange, open, ...rest }: Props) => {
-    const currentState = addPostStore.currentStage
-    const setCurrentState = addPostStore.changeStage
-    const clearPostData = addPostStore.clearData
+    const currentState = addPostPhotoStore.currentStage
+    const setCurrentState = addPostPhotoStore.changeStage
+    const clearPostData = addPostPhotoStore.clearData
 
     const [photo, setPhoto] = useState<Nullable<string>[]>([])
 

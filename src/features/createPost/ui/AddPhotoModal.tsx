@@ -12,13 +12,13 @@ import {
   useTranslation,
 } from '@/common'
 import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
-import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
 
 export const AddPhotoModal = () => {
   const { t } = useTranslation()
-  const nextStage = useMemo(() => addPostStore.nextStage, [])
-  const addPostPhoto = useMemo(() => addPostStore.addPhoto, [])
-  const totalCount = addPostStore.getCurrentPhotosCount()
+  const nextStage = useMemo(() => addPostPhotoStore.nextStage, [])
+  const addPostPhoto = useMemo(() => addPostPhotoStore.addPhoto, [])
+  const totalCount = addPostPhotoStore.getCurrentPhotosCount()
 
   const onPhotoDrop = useCallback(
     (files: File[]) => {

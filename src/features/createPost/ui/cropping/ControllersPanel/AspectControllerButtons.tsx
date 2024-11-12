@@ -8,7 +8,7 @@ import {
   SquarePhotoOutline,
 } from '@/assets/icons'
 import { Typography, cn, typographyVariants } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
 import { observer } from 'mobx-react-lite'
 
 type ScaleSizeButtonType = {
@@ -25,7 +25,7 @@ export const AspectControllerButtons = observer(({ id }: Props) => {
   //todo перевод
   const sizes: ScaleSizeButtonType[] = [
     {
-      aspect: addPostStore.getOriginAspect(id),
+      aspect: addPostPhotoStore.getOriginAspect(id),
       icon: ImageOutline,
       title: 'Оригинал',
     },
@@ -34,8 +34,8 @@ export const AspectControllerButtons = observer(({ id }: Props) => {
     { aspect: 1.7, icon: LandscapePhotoOutline, title: '16:9' },
   ]
 
-  const changeAspect = addPostStore.changeAspect
-  const currentRatio = addPostStore.getAspect(id)
+  const changeAspect = addPostPhotoStore.changeAspect
+  const currentRatio = addPostPhotoStore.getAspect(id)
 
   return (
     <>
