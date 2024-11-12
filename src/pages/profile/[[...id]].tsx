@@ -1,8 +1,14 @@
-import { Paid } from '@/assets/icons/filledIcons'
-import { Button, Paths, Typography, useTranslation } from '@/common'
+import { Button, Paths, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { cn } from '@/common/utils/cn'
-import { profileStore } from '@/features/profile'
+import {
+  ProfileAvatar,
+  ProfileUserName,
+  profileStore,
+} from '@/features/profile'
+import { ProfileAboutMe } from '@/features/profile/ui/ProfileAboutMe'
+import { ProfileStatistics } from '@/features/profile/ui/ProfileStatistics'
+import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -24,68 +30,60 @@ const placeholderImages = [
 ]
 
 //todo: remove avatarPlaceholder and place another placeholder image
-const Profile = () => {
+const Profile = observer(() => {
   const { t } = useTranslation()
-  const userProfile = profileStore.userProfile
+  const { followers, following, publications, settingsButton } = t.profilePage
+  const { isProfileLoading, userProfile } = profileStore
   const avatar = userProfile?.avatars[0]?.url
 
   return (
     <div className={'flex w-full'}>
       <div className={'flex flex-col w-full'}>
         <div className={'mt-9 flex items-start gap-[38px] w-full mb-[53px]'}>
-          <Image
-            alt={'avatar'}
-            className={'rounded-full pr-0'}
-            height={200}
+          <ProfileAvatar
+            isProfileLoading={isProfileLoading}
             src={avatar || avatarPlaceholder}
-            width={200}
           />
           <div className={'flex flex-col flex-wrap w-full'}>
             <div
               className={'flex items-center justify-between w-full mb-[19px]'}
             >
-              <Typography
-                className={'text-light-100 flex items-center gap-3'}
-                variant={'h1'}
-              >
-                {userProfile?.userName ?? 'URL Profile'}
-                <Paid />
-              </Typography>
+              <ProfileUserName
+                isProfileLoading={isProfileLoading}
+                userName={userProfile?.userName ?? 'URL Profile'}
+              />
 
-              <Button variant={'secondary'}>
-                <Link href={Paths.profileSettings}>
-                  {t.profilePage.settingsButton}
-                </Link>
+              <Button
+                disabled={isProfileLoading}
+                variant={'secondary'}
+              >
+                <Link href={Paths.profileSettings}>{settingsButton}</Link>
               </Button>
             </div>
             <div className={'flex gap-[100px] flex-wrap'}>
-              <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}>
-                  {t.profilePage.following}
-                </Typography>
-              </div>
-              <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}>
-                  {t.profilePage.followers}
-                </Typography>
-              </div>
-              <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}>
-                  {t.profilePage.publications}
-                </Typography>
-              </div>
+              <ProfileStatistics
+                isProfileLoading={isProfileLoading}
+                statisticsCount={2218}
+                statisticsTitle={following}
+              />
+              <ProfileStatistics
+                isProfileLoading={isProfileLoading}
+                statisticsCount={2218}
+                statisticsTitle={followers}
+              />
+              <ProfileStatistics
+                isProfileLoading={isProfileLoading}
+                statisticsCount={2218}
+                statisticsTitle={publications}
+              />
             </div>
-            <div className={'mt-[23px]'}>
-              {userProfile?.aboutMe && (
-                <Typography variant={'reg16'}>{userProfile.aboutMe}</Typography>
-              )}
-            </div>
+            <ProfileAboutMe
+              aboutMe={userProfile?.aboutMe}
+              isProfileLoading={isProfileLoading}
+            />
           </div>
         </div>
-        <div className={cn('grid gap-3 grid-cols-gallery w-full')}>
+        <div className={cn('grid gap-3 w-full lg:grid-cols-4')}>
           {placeholderImages.map((image) => (
             <Image
               alt={'image'}
@@ -99,6 +97,6 @@ const Profile = () => {
       </div>
     </div>
   )
-}
+})
 
 export default withProtection(Profile, true)

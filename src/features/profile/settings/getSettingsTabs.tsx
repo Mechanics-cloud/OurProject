@@ -3,12 +3,13 @@ import React from 'react'
 import { TabsType, Typography } from '@/common'
 import { GeneralInfo } from '@/features/profile'
 import { Devices } from '@/features/profile/settings/devices/ui/Devices'
+import { GeneralInfoPage } from '@/features/profile/settings/generalInfo/ui/GeneralInfoPage'
 import { LocaleType } from '@locales/ru'
 
 export const getSettingsTabs = (t: LocaleType): TabsType[] => {
   return [
     {
-      content: <GeneralInfo />,
+      content: <GeneralInfoPage />,
       id: 'tab1',
       title: t.tabs.generalInfo,
     },

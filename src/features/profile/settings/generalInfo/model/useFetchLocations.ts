@@ -9,7 +9,7 @@ export const useFetchLocations = <T extends FieldValues>(
   control: Control<T>
 ) => {
   const [countriesData, setCountriesData] = useState<CountryData[] | null>(null)
-  const [cities, setCities] = useState<null | string[]>([])
+  const [cities, setCities] = useState<null | string[]>(null)
   const [loading, setLoading] = useState<boolean>(true)
 
   const countryValue = useWatch({
