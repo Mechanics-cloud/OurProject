@@ -7,10 +7,11 @@ import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersP
 import { observer } from 'mobx-react-lite'
 
 type Props = {
+  goToSlide: (index: number) => void
   photo: PostPhoto
 }
 
-export const PhotoCrop = observer(({ photo }: Props) => {
+export const PhotoCrop = observer(({ goToSlide, photo }: Props) => {
   const addZoom = addPostStore.addZoom
   const addCrop = addPostStore.addCrop
 
@@ -37,7 +38,10 @@ export const PhotoCrop = observer(({ photo }: Props) => {
         onZoomChange={onZoom}
         zoom={photo.zoom ?? 1}
       />
-      <ControllersPanel id={photo.id} />
+      <ControllersPanel
+        goToSlide={goToSlide}
+        id={photo.id}
+      />
     </>
   )
 })

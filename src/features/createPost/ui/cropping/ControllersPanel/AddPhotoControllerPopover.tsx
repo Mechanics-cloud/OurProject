@@ -6,6 +6,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  cn,
   useTranslation,
 } from '@/common'
 import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
@@ -16,23 +17,25 @@ import { MiniaturePhoto } from '@/features/createPost/ui/cropping/ControllersPan
 import { observer } from 'mobx-react-lite'
 
 type Props = {
-  id: string
+  goToSlide: (index: number) => void
 }
 
-export const AddPhotoControllerPopover = observer(({ id }: Props) => {
+export const AddPhotoControllerPopover = observer(({ goToSlide }: Props) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const addPostPhoto = addPostStore.addPhoto
   const photos = addPostStore.photos
   const totalCount = addPostStore.getCurrentPhotosCount()
+  const isAddingDisabled = totalCount === MaxPhotoCount
 
-  const onPhotoChoose = (inputEvent: ChangeEvent<HTMLInputElement>) => {
+  const onPhotoChoose = async (inputEvent: ChangeEvent<HTMLInputElement>) => {
     const fileList = inputEvent.target.files
 
     if (fileList) {
       const files: File[] = Array.from(fileList)
 
-      addPhotosCheck(files, totalCount, t, addPostPhoto)
+      await addPhotosCheck(files, totalCount, t, addPostPhoto)
+      goToSlide(totalCount + 1)
     }
   }
 
@@ -44,9 +47,7 @@ export const AddPhotoControllerPopover = observer(({ id }: Props) => {
       <PopoverTrigger asChild>
         <PhotoControllerButton className={'ml-auto'}>
           {isOpen ? (
-            <Image
-              className={'w-[28px] h-[28px]  self-start text-accent-500'}
-            />
+            <Image className={'w-[28px] h-[28px] self-start text-accent-500'} />
           ) : (
             <ImageOutline className={'w-[28px] h-[28px] self-start'} />
           )}
@@ -54,26 +55,36 @@ export const AddPhotoControllerPopover = observer(({ id }: Props) => {
       </PopoverTrigger>
       <PopoverContent
         align={'end'}
-        className={'popoverOpacity py-5 px-3 border-0 bg-transparent flex'}
+        className={
+          'popoverOpacity py-5 px-3 border-0 bg-transparent flex flex-wrap gap-3'
+        }
         side={'top'}
         sideOffset={2}
       >
-        <div className={'flex gap-3'}>
+        <div className={'flex gap-3 flex-wrap justify-end max-w-[360px]'}>
           {photos.length > 0 &&
-            photos.map((photo) => (
+            photos.map((photo, index) => (
               <MiniaturePhoto
                 id={photo.id}
                 key={photo.id}
+                onClick={() => {
+                  goToSlide(index)
+                }}
                 src={photo.url}
               />
             ))}
         </div>
         <label className={'justify-self-end'}>
-          <PlusCircleOutline className={'w-7 h-7'} />
+          <PlusCircleOutline
+            className={cn(
+              'w-7 h-7 hover:text-accent-500',
+              isAddingDisabled ? 'opacity-50 hover:text-light-100' : ''
+            )}
+          />
           <input
             accept={'image/*, .png, .jpg, .jpeg'}
             className={'sr-only'}
-            disabled={totalCount === MaxPhotoCount}
+            disabled={isAddingDisabled}
             onChange={onPhotoChoose}
             type={'file'}
           />

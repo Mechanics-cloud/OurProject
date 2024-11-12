@@ -16,10 +16,6 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const changeZoom = addPostStore.addZoom
 
-  const handleWheel = (event: React.WheelEvent<HTMLDivElement>) => {
-    setIsOpen(false)
-  }
-
   const onZoom = (zoom: number[]) => {
     changeZoom(id, zoom[0])
   }
@@ -40,7 +36,7 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
       </PopoverTrigger>
       <PopoverContent
         align={'start'}
-        className={'popoverOpacity py-5 px-3 border-0 bg-transparent'}
+        className={'popoverOpacity w-48 py-5 px-3 border-0 bg-transparent'}
         side={'top'}
         sideOffset={2}
       >

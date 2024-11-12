@@ -5,15 +5,16 @@ import { AspectControllerPopover } from '@/features/createPost/ui/cropping/Contr
 import { ScaleControllerPopover } from '@/features/createPost/ui/cropping/ControllersPanel/ScaleControllerPopover'
 
 type Props = {
+  goToSlide: (index: number) => void
   id: string
 }
 
-export const ControllersPanel = ({ id }: Props) => {
+export const ControllersPanel = ({ goToSlide, id }: Props) => {
   return (
     <span className={'absolute p-2.5 bottom-0 left-0 right-0 flex gap-6 z-50'}>
       <AspectControllerPopover id={id} />
       <ScaleControllerPopover id={id} />
-      <AddPhotoControllerPopover id={id} />
+      <AddPhotoControllerPopover goToSlide={goToSlide} />
     </span>
   )
 }

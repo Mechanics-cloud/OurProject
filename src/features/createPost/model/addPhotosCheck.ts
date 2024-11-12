@@ -15,7 +15,7 @@ import { z } from 'zod'
  * @param t - translation object
  * @param addPostPhoto - add photo function
  */
-export const addPhotosCheck = (
+export const addPhotosCheck = async (
   files: File[],
   totalCount: number,
   t: LocaleType,
@@ -43,6 +43,7 @@ export const addPhotosCheck = (
       }
     }
   }
+
   if (totalCount === MaxPhotoCount) {
     {
       return

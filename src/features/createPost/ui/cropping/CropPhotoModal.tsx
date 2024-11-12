@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useCallback, useRef } from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
@@ -26,6 +27,14 @@ export const CropPhotoModal = observer(() => {
   const photos = addPostStore.photos
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage
+
+  const swiperRef = useRef<typeof Swiper>(null)
+
+  const goToSlide = useCallback((index: number) => {
+    if (swiperRef.current) {
+      swiperRef.current.slideTo(index)
+    }
+  }, [])
 
   return (
     <DialogContent
@@ -73,6 +82,9 @@ export const CropPhotoModal = observer(() => {
             navigation
             noSwiping
             noSwipingSelector={'button'}
+            onSwiper={(swiperInstance: typeof Swiper) => {
+              swiperRef.current = swiperInstance
+            }}
             pagination={{
               clickable: true,
             }}
@@ -86,7 +98,10 @@ export const CropPhotoModal = observer(() => {
                 className={'w-full bg-dark-500 relative'}
                 key={index}
               >
-                <PhotoCrop photo={photo} />
+                <PhotoCrop
+                  goToSlide={goToSlide}
+                  photo={photo}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
