@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
 
 import { Image, ImageOutline, PlusCircleOutline } from '@/assets/icons'
 import {
@@ -12,21 +12,25 @@ import {
 import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
 import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
 import { MaxPhotoCount } from '@/features/createPost/model/constants'
+import { SwiperContext } from '@/features/createPost/ui/components/SwiperCover'
 import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
 import { MiniaturePhoto } from '@/features/createPost/ui/cropping/ControllersPanel/MiniaturePhoto'
 import { observer } from 'mobx-react-lite'
 
-type Props = {
-  goToSlide: (index: number) => void
-}
-
-export const AddPhotoControllerPopover = observer(({ goToSlide }: Props) => {
+export const AddPhotoControllerPopover = observer(() => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const addPostPhoto = addPostStore.addPhoto
   const photos = addPostStore.photos
   const totalCount = addPostStore.getCurrentPhotosCount()
   const isAddingDisabled = totalCount === MaxPhotoCount
+  const context = useContext(SwiperContext)
+
+  if (!context) {
+    throw new Error('Slide must be used within a Swiper provider')
+  }
+
+  const { goToSlide } = context
 
   const onPhotoChoose = async (inputEvent: ChangeEvent<HTMLInputElement>) => {
     const fileList = inputEvent.target.files

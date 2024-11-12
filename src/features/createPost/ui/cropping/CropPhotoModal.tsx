@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useCallback, useRef } from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
@@ -11,30 +10,15 @@ import {
   typographyVariants,
 } from '@/common'
 import { addPostStore } from '@/features/createPost/model/addPostPhotoStore'
+import { SwiperCover } from '@/features/createPost/ui/components/SwiperCover'
 import { PhotoCrop } from '@/features/createPost/ui/cropping/PhotoCrop'
 import { observer } from 'mobx-react-lite'
-import {
-  EffectFade,
-  HashNavigation,
-  Navigation,
-  Pagination,
-} from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
-
-//todo убрать fade эффект
+import { SwiperSlide } from 'swiper/react'
 
 export const CropPhotoModal = observer(() => {
   const photos = addPostStore.photos
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage
-
-  const swiperRef = useRef<typeof Swiper>(null)
-
-  const goToSlide = useCallback((index: number) => {
-    if (swiperRef.current) {
-      swiperRef.current.slideTo(index)
-    }
-  }, [])
 
   return (
     <DialogContent
@@ -64,47 +48,16 @@ export const CropPhotoModal = observer(() => {
         className={'lg:m-0 lg:p-0'}
       >
         <div className={'relative max-w-[492px] h-[490px]'}>
-          <Swiper
-            allowTouchMove={false}
-            className={cn(
-              'absolute h-full w-full top-0 left-0 m-0 shrink-0,',
-              'addPost'
-            )}
-            effect={'fade'}
-            grabCursor={false}
-            hashNavigation={{
-              watchState: true,
-            }}
-            keyboard={{
-              enabled: true,
-            }}
-            modules={[Navigation, Pagination, EffectFade, HashNavigation]}
-            navigation
-            noSwiping
-            noSwipingSelector={'button'}
-            onSwiper={(swiperInstance: typeof Swiper) => {
-              swiperRef.current = swiperInstance
-            }}
-            pagination={{
-              clickable: true,
-            }}
-            simulateTouch={false}
-            spaceBetween={30}
-            touchStartPreventDefault={false}
-            watchSlidesProgress
-          >
+          <SwiperCover>
             {photos.map((photo, index) => (
               <SwiperSlide
                 className={'w-full bg-dark-500 relative'}
                 key={index}
               >
-                <PhotoCrop
-                  goToSlide={goToSlide}
-                  photo={photo}
-                />
+                <PhotoCrop photo={photo} />
               </SwiperSlide>
             ))}
-          </Swiper>
+          </SwiperCover>
         </div>
       </DialogDescription>
     </DialogContent>
