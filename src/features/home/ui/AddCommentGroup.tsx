@@ -6,11 +6,7 @@ import { observer } from 'mobx-react-lite'
 
 import { useCommentsStore } from '../model/homeContext'
 
-type CommentGroup = {
-  postId: number
-}
-
-export const AddCommentGroup = observer(({ postId }: CommentGroup) => {
+export const AddCommentGroup = observer(({ postId }: { postId: number }) => {
   const [comment, setComment] = useState<string>('')
   const commentsStore = useCommentsStore()
   const { t } = useTranslation()
