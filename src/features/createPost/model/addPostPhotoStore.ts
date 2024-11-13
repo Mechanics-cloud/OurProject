@@ -60,14 +60,6 @@ class AddPostPhotoStore {
     })
   }
 
-  addIsNewDialog() {
-    this.isNewDialog = true
-  }
-
-  addIsNotNewDialog() {
-    this.isNewDialog = false
-  }
-
   addPhoto(file: File) {
     const id = Math.random().toString(16).slice(2)
     const url = URL.createObjectURL(file)
@@ -148,6 +140,14 @@ class AddPostPhotoStore {
       default:
         return
     }
+  }
+
+  setIsNewDialog() {
+    this.isNewDialog = true
+  }
+
+  setIsNotNewDialog() {
+    this.isNewDialog = false
   }
 
   setOriginAspect(id: string, url: string) {

@@ -19,8 +19,6 @@ export const ClosePostCreatingModal = ({
 }: Props) => {
   const { t } = useTranslation()
 
-  //todo fix cross in modal
-
   return (
     <SimpleModal
       onOpenChange={onOpenChange}

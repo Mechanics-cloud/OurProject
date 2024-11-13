@@ -19,7 +19,7 @@ type Props = {
 export const NewPostDialog = observer(
   ({ onClose, onOpenChange, open, ...rest }: Props) => {
     const currentState = addPostPhotoStore.currentStage
-    const addIsNewDialog = addPostPhotoStore.addIsNewDialog
+    const setIsNewDialog = addPostPhotoStore.setIsNewDialog
     const isNewDialog = addPostPhotoStore.isNewDialog
 
     const { isModalOpen, onModalClose, openModal } = useModal()
@@ -31,7 +31,7 @@ export const NewPostDialog = observer(
     const onClosePostCreating = () => {
       onModalClose()
       onClose()
-      addIsNewDialog()
+      setIsNewDialog()
     }
 
     return (
@@ -58,6 +58,7 @@ export const NewPostDialog = observer(
         <ClosePostCreatingModal
           onClose={onModalClose}
           onCloseFull={onClosePostCreating}
+          onOpenChange={onModalClose}
           open={isModalOpen}
         />
       </>

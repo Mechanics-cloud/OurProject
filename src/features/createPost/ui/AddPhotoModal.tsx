@@ -17,18 +17,20 @@ import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore
 export const AddPhotoModal = () => {
   const { t } = useTranslation()
   const nextStage = useMemo(() => addPostPhotoStore.nextStage, [])
+  const clearOldData = addPostPhotoStore.clearData
   const isDraft = addPostPhotoStore.isDraft
-  const addIsNotNewDialog = addPostPhotoStore.addIsNotNewDialog
+  const setIsNotNewDialog = addPostPhotoStore.setIsNotNewDialog
   const addPostPhoto = useMemo(() => addPostPhotoStore.addPhoto, [])
   const totalCount = addPostPhotoStore.getCurrentPhotosCount()
 
   const onPhotoDrop = useCallback(
     async (files: File[]) => {
+      setIsNotNewDialog()
+      clearOldData()
       await addPhotosCheck(files, totalCount, t, addPostPhoto)
-      addIsNotNewDialog()
       nextStage()
     },
-    [nextStage, addPostPhoto, t, totalCount, addIsNotNewDialog]
+    [nextStage, addPostPhoto, t, totalCount, setIsNotNewDialog, clearOldData]
   )
 
   const dropzoneOptions = useMemo(
@@ -52,48 +54,52 @@ export const AddPhotoModal = () => {
       <DialogHeader>
         <DialogTitle>Add photo</DialogTitle>
       </DialogHeader>
-      <DialogDescription
-        className={cn('flex flex-col items-center gap-6 mt-16 mb-10')}
-        {...getRootProps()}
-      >
-        <span
-          className={
-            'w-[220px] aspect-square flex justify-center items-center bg-dark-500'
-          }
-        >
-          {isDragActive ? (
-            <ImageFull
-              height={48}
-              width={48}
-            />
-          ) : (
-            <ImageOutline
-              height={48}
-              width={48}
-            />
-          )}
-        </span>
-
-        <label className={'mt-9'}>
-          <Button
-            asChild
-            className={'cursor-pointer'}
+      <DialogDescription className={'mt-16 mb-10 flex justify-center'}>
+        <span className={'flex flex-col w-max'}>
+          <span
+            className={'flex flex-col items-center gap-6 mb-6'}
+            {...getRootProps()}
           >
-            <span>Select from Computer</span>
+            <span
+              className={
+                'w-[220px] aspect-square flex justify-center items-center bg-dark-500'
+              }
+            >
+              {isDragActive ? (
+                <ImageFull
+                  height={48}
+                  width={48}
+                />
+              ) : (
+                <ImageOutline
+                  height={48}
+                  width={48}
+                />
+              )}
+            </span>
+
+            <label className={'mt-9'}>
+              <Button
+                asChild
+                className={'cursor-pointer'}
+              >
+                <span>Select from Computer</span>
+              </Button>
+              <input
+                className={'sr-only'}
+                type={'file'}
+                {...getInputProps()}
+              />
+            </label>
+          </span>
+          <Button
+            disabled={!isDraft}
+            onClick={() => setIsNotNewDialog()}
+            variant={'outline'}
+          >
+            Open Draft
           </Button>
-          <input
-            className={'sr-only'}
-            type={'file'}
-            {...getInputProps()}
-          />
-        </label>
-        <Button
-          disabled={!isDraft}
-          onClick={() => addIsNotNewDialog()}
-          variant={'outline'}
-        >
-          Open Draft
-        </Button>
+        </span>
       </DialogDescription>
     </DialogContent>
   )
