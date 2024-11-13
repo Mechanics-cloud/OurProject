@@ -1,10 +1,11 @@
 import * as React from 'react'
-import { PropsWithChildren, createContext, useState } from 'react'
+import { PropsWithChildren } from 'react'
 
-import { Dialog, Nullable } from '@/common'
+import { Dialog, useModal } from '@/common'
 import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
 import { AddPhotoModal } from '@/features/createPost/ui/AddPhotoModal'
+import { ClosePostCreatingModal } from '@/features/createPost/ui/ClosePostCreatingModal'
 import { CropPhotoModal } from '@/features/createPost/ui/cropping/CropPhotoModal'
 import { FilterPhotoModal } from '@/features/createPost/ui/filtering/FilterPhotoModal'
 import { DialogProps } from '@radix-ui/react-dialog'
@@ -15,41 +16,51 @@ type Props = {
 } & DialogProps &
   PropsWithChildren
 
-export const PrevNextContext = createContext<
-  | {
-      nextStage: () => void
-      prevStage: () => void
-    }
-  | undefined
->(undefined)
-
 export const NewPostDialog = observer(
   ({ onClose, onOpenChange, open, ...rest }: Props) => {
     const currentState = addPostPhotoStore.currentStage
-    const setCurrentState = addPostPhotoStore.changeStage
-    const clearPostData = addPostPhotoStore.clearData
+    const addIsNewDialog = addPostPhotoStore.addIsNewDialog
+    const isNewDialog = addPostPhotoStore.isNewDialog
 
-    const [photo, setPhoto] = useState<Nullable<string>[]>([])
+    const { isModalOpen, onModalClose, openModal } = useModal()
 
-    const handleClose = () => {
-      clearPostData()
+    const onOpenDialogChange = () => {
+      openModal()
+    }
+
+    const onClosePostCreating = () => {
+      onModalClose()
       onClose()
+      addIsNewDialog()
     }
 
     return (
-      <Dialog
-        onOpenChange={onOpenChange}
-        open={open}
-        {...rest}
-      >
-        {currentState === PhotoEditorState.adding && <AddPhotoModal />}
+      <>
+        <Dialog
+          onOpenChange={onOpenDialogChange}
+          open={open}
+          {...rest}
+        >
+          {isNewDialog && <AddPhotoModal />}
 
-        {currentState === PhotoEditorState.cropping && <CropPhotoModal />}
+          {!isNewDialog && currentState === PhotoEditorState.adding && (
+            <AddPhotoModal />
+          )}
 
-        {currentState === PhotoEditorState.filtering && photo && (
-          <FilterPhotoModal />
-        )}
-      </Dialog>
+          {!isNewDialog && currentState === PhotoEditorState.cropping && (
+            <CropPhotoModal />
+          )}
+
+          {!isNewDialog && currentState === PhotoEditorState.filtering && (
+            <FilterPhotoModal />
+          )}
+        </Dialog>
+        <ClosePostCreatingModal
+          onClose={onModalClose}
+          onCloseFull={onClosePostCreating}
+          open={isModalOpen}
+        />
+      </>
     )
   }
 )

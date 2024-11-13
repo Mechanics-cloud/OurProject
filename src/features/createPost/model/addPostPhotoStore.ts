@@ -11,6 +11,7 @@ import { makeAutoObservable, runInAction } from 'mobx'
 class AddPostPhotoStore {
   currentSliderIndex: number = 0
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
+  isNewDialog = true
   photos: PostPhoto[] = []
 
   prevStage = () => {
@@ -54,7 +55,17 @@ class AddPostPhotoStore {
   }
 
   addCurrentSliderIndex(index: number) {
-    this.currentSliderIndex = index
+    runInAction(() => {
+      this.currentSliderIndex = index
+    })
+  }
+
+  addIsNewDialog() {
+    this.isNewDialog = true
+  }
+
+  addIsNotNewDialog() {
+    this.isNewDialog = false
   }
 
   addPhoto(file: File) {
@@ -97,6 +108,7 @@ class AddPostPhotoStore {
   clearData() {
     this.currentStage = PhotoEditorState.adding
     this.photos = []
+    this.currentSliderIndex = 0
   }
 
   deletePhoto(id: string) {
@@ -153,6 +165,10 @@ class AddPostPhotoStore {
         }
       })
     }
+  }
+
+  get isDraft() {
+    return this.photos.length > 0
   }
 }
 

@@ -17,15 +17,18 @@ import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore
 export const AddPhotoModal = () => {
   const { t } = useTranslation()
   const nextStage = useMemo(() => addPostPhotoStore.nextStage, [])
+  const isDraft = addPostPhotoStore.isDraft
+  const addIsNotNewDialog = addPostPhotoStore.addIsNotNewDialog
   const addPostPhoto = useMemo(() => addPostPhotoStore.addPhoto, [])
   const totalCount = addPostPhotoStore.getCurrentPhotosCount()
 
   const onPhotoDrop = useCallback(
     async (files: File[]) => {
       await addPhotosCheck(files, totalCount, t, addPostPhoto)
+      addIsNotNewDialog()
       nextStage()
     },
-    [nextStage, addPostPhoto, t, totalCount]
+    [nextStage, addPostPhoto, t, totalCount, addIsNotNewDialog]
   )
 
   const dropzoneOptions = useMemo(
@@ -50,7 +53,7 @@ export const AddPhotoModal = () => {
         <DialogTitle>Add photo</DialogTitle>
       </DialogHeader>
       <DialogDescription
-        className={cn('flex flex-col items-center gap-16 mt-16 mb-10')}
+        className={cn('flex flex-col items-center gap-6 mt-16 mb-10')}
         {...getRootProps()}
       >
         <span
@@ -71,12 +74,12 @@ export const AddPhotoModal = () => {
           )}
         </span>
 
-        <label>
+        <label className={'mt-9'}>
           <Button
             asChild
             className={'cursor-pointer'}
           >
-            <span>Load</span>
+            <span>Select from Computer</span>
           </Button>
           <input
             className={'sr-only'}
@@ -84,6 +87,13 @@ export const AddPhotoModal = () => {
             {...getInputProps()}
           />
         </label>
+        <Button
+          disabled={!isDraft}
+          onClick={() => addIsNotNewDialog()}
+          variant={'outline'}
+        >
+          Open Draft
+        </Button>
       </DialogDescription>
     </DialogContent>
   )
