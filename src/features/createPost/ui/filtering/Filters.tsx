@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { Button, Tabs, TabsType, useTranslation } from '@/common'
 import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { ClassicSettings } from '@/features/createPost/ui/filtering/ClassicSettings'
 import { InstaFilters } from '@/features/createPost/ui/filtering/InstaFilters'
 import { LocaleType } from '@locales/ru'
 import { observer } from 'mobx-react-lite'
@@ -22,17 +23,12 @@ export const getFiltersTabs = (t: LocaleType): TabsType[] => {
   return [
     {
       content: <InstaFilters />,
-      id: 'tab1',
+      id: 'Filters',
       title: 'Filters',
     },
     {
-      content: (
-        <div>
-          <p>I recommend you to stop</p>
-          <Button>Stop here</Button>
-        </div>
-      ),
-      id: 'tab2',
+      content: <ClassicSettings />,
+      id: 'Settings',
       title: 'Settings',
     },
   ]
@@ -45,8 +41,8 @@ export const Filters = observer(() => {
   addCurrentSliderIndex(0)
 
   return (
-    <span className={'border-l-[1px] border-dark-100'}>
-      <Tabs tabsData={getFiltersTabs(t)}></Tabs>
+    <span className={'border-l-[1px] border-dark-100 w-full'}>
+      <Tabs tabsData={getFiltersTabs(t)} />
     </span>
   )
 })

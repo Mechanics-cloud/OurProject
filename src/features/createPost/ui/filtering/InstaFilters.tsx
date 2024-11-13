@@ -22,9 +22,7 @@ export const InstaFilters = observer(() => {
   const currentSliderIndex = addPostPhotoStore.currentSliderIndex || 0
 
   return (
-    <span
-      className={'flex flex-wrap gap-x-6 gap-y-5 pt-6 px-[53px] self-start'}
-    >
+    <div className={'flex flex-wrap gap-x-6 gap-y-5 pt-6 px-[53px] self-start'}>
       {filtersData.map((filter, index) => (
         <Filter
           filterName={filter.name}
@@ -33,6 +31,6 @@ export const InstaFilters = observer(() => {
           onClick={() => {}}
         />
       ))}
-    </span>
+    </div>
   )
 })
