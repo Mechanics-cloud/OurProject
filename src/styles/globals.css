@@ -154,3 +154,9 @@ input[type='password']::-ms-clear {
     @apply relative after:absolute after:-z-10 after:w-0.5 after:h-4 after:bg-light-900 after:left-[50%] after:-translate-x-[50%];
   }
 }
+
+@media (width <= 768px) {
+  .radix-dialog {
+    width: 100%;
+  }
+}
