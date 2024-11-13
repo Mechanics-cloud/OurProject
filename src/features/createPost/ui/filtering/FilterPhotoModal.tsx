@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useState } from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
@@ -16,14 +15,10 @@ import { Filters } from '@/features/createPost/ui/filtering/Filters'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
-import ImageH from '/src/assets/images/image4.jpg'
-
 export const FilterPhotoModal = () => {
   const nextStage = addPostPhotoStore.nextStage
   const prevStage = addPostPhotoStore.prevStage
   const photos = addPostPhotoStore.photos
-
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
 
   return (
     <DialogContent
@@ -56,7 +51,7 @@ export const FilterPhotoModal = () => {
           <SwiperCover
             className={cn(
               'w-[490px] m-0 shrink-0 bg-dark-500 relative',
-              'addPost'
+              'addPost addFilter'
             )}
           >
             {photos.map((photo, index) => (
@@ -77,7 +72,7 @@ export const FilterPhotoModal = () => {
               </SwiperSlide>
             ))}
           </SwiperCover>
-          <Filters src={ImageH.src} />
+          <Filters />
         </div>
       </DialogDescription>
     </DialogContent>

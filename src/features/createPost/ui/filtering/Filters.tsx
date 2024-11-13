@@ -1,11 +1,10 @@
 import * as React from 'react'
 
+import { Button, Tabs, TabsType, useTranslation } from '@/common'
 import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { InstaFilters } from '@/features/createPost/ui/filtering/InstaFilters'
+import { LocaleType } from '@locales/ru'
 import { observer } from 'mobx-react-lite'
-
-import { Filter } from './Filter'
-
-type Props = { src: string }
 
 type FilterType = {
   name: string
@@ -19,20 +18,35 @@ const filtersData: FilterType[] = [
   { name: 'Moon' },
 ] as const
 
-export const Filters = observer(({ src }: Props) => {
-  const photos = addPostPhotoStore.photos
+export const getFiltersTabs = (t: LocaleType): TabsType[] => {
+  return [
+    {
+      content: <InstaFilters />,
+      id: 'tab1',
+      title: 'Filters',
+    },
+    {
+      content: (
+        <div>
+          <p>I recommend you to stop</p>
+          <Button>Stop here</Button>
+        </div>
+      ),
+      id: 'tab2',
+      title: 'Settings',
+    },
+  ]
+}
+
+export const Filters = observer(() => {
+  const { t } = useTranslation()
+  const addCurrentSliderIndex = addPostPhotoStore.addCurrentSliderIndex
+
+  addCurrentSliderIndex(0)
 
   return (
-    <span
-      className={'flex flex-wrap gap-x-6 gap-y-5 mt-6 px-[54px] self-start'}
-    >
-      {filtersData.map((filter, index) => (
-        <Filter
-          filterName={filter.name}
-          imageSrc={src}
-          key={index}
-        />
-      ))}
+    <span className={'border-l-[1px] border-dark-100'}>
+      <Tabs tabsData={getFiltersTabs(t)}></Tabs>
     </span>
   )
 })
