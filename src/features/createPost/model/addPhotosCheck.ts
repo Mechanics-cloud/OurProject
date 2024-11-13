@@ -21,9 +21,11 @@ export const addPhotosCheck = async (
   t: LocaleType,
   addPostPhoto: (file: File) => void
 ) => {
-  for (let i = 0; i < files.length; i++) {
-    if (totalCount === 10) {
-      toast('Limit is 10')
+  const photosCount = files.length
+
+  for (let i = 0; i < photosCount; i++) {
+    if (totalCount === MaxPhotoCount || i === MaxPhotoCount) {
+      toast(`Limit is ${MaxPhotoCount}`)
       break
     }
 

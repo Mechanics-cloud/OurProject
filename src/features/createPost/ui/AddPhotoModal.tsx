@@ -21,8 +21,8 @@ export const AddPhotoModal = () => {
   const totalCount = addPostPhotoStore.getCurrentPhotosCount()
 
   const onPhotoDrop = useCallback(
-    (files: File[]) => {
-      addPhotosCheck(files, totalCount, t, addPostPhoto)
+    async (files: File[]) => {
+      await addPhotosCheck(files, totalCount, t, addPostPhoto)
       nextStage()
     },
     [nextStage, addPostPhoto, t, totalCount]
@@ -35,7 +35,6 @@ export const AddPhotoModal = () => {
         'image/jpg': ['.jpg'],
         'image/png': ['.png'],
       },
-      maxFiles: 10,
       multiple: true,
       onDrop: onPhotoDrop,
     }),
