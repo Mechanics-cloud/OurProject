@@ -1,7 +1,11 @@
 import { Area, Point } from 'react-easy-crop'
 
 import { findObjectInArray } from '@/common/utils/findObjectInArray'
-import { PhotoEditorState } from '@/features/createPost/model/constants'
+import {
+  PhotoEditorState,
+  mapNext,
+  mapPrev,
+} from '@/features/createPost/model/constants'
 import {
   PhotoEditorStateType,
   PostPhoto,
@@ -15,23 +19,7 @@ class AddPostPhotoStore {
   photos: PostPhoto[] = []
 
   prevStage = () => {
-    switch (this.currentStage) {
-      case 'CROPPING':
-        this.changeStage(PhotoEditorState.adding)
-        this.clearData()
-
-        return
-      case 'FILTERING':
-        this.changeStage(PhotoEditorState.cropping)
-
-        return
-      case 'PUBLICATION':
-        this.changeStage(PhotoEditorState.filtering)
-
-        return
-      default:
-        return
-    }
+    this.currentStage = mapPrev.get(this.currentStage) ?? this.currentStage
   }
 
   constructor() {
@@ -76,7 +64,7 @@ class AddPostPhotoStore {
         zoom: 1,
       },
     ]
-    this.setOriginAspect(id, url)
+    this.initOriginAspect(id, url)
   }
 
   addZoom(id: string, zoom: number) {
@@ -93,14 +81,15 @@ class AddPostPhotoStore {
     }
   }
 
-  changeStage(newStage: PhotoEditorStateType) {
-    this.currentStage = newStage
-  }
+  // changeStage(newStage: PhotoEditorStateType) {
+  //   this.currentStage = newStage
+  // }
 
-  clearData() {
-    this.currentStage = PhotoEditorState.adding
-    this.photos = []
-    this.currentSliderIndex = 0
+  continueDialog() {
+    this.isNewDialog = false
+    if (this.currentStage === PhotoEditorState.adding) {
+      this.currentStage = PhotoEditorState.cropping
+    }
   }
 
   deletePhoto(id: string) {
@@ -123,34 +112,7 @@ class AddPostPhotoStore {
     return findObjectInArray(this.photos, id)?.zoom ?? 1
   }
 
-  nextStage() {
-    switch (this.currentStage) {
-      case 'ADDING':
-        this.changeStage(PhotoEditorState.cropping)
-
-        return
-      case 'CROPPING':
-        this.changeStage(PhotoEditorState.filtering)
-
-        return
-      case 'FILTERING':
-        this.changeStage(PhotoEditorState.publication)
-
-        return
-      default:
-        return
-    }
-  }
-
-  setIsNewDialog() {
-    this.isNewDialog = true
-  }
-
-  setIsNotNewDialog() {
-    this.isNewDialog = false
-  }
-
-  setOriginAspect(id: string, url: string) {
+  initOriginAspect(id: string, url: string) {
     const img = new Image()
 
     img.src = url
@@ -165,6 +127,20 @@ class AddPostPhotoStore {
         }
       })
     }
+  }
+
+  nextStage() {
+    this.currentStage = mapNext.get(this.currentStage) ?? this.currentStage
+  }
+
+  resetData() {
+    this.currentStage = PhotoEditorState.adding
+    this.photos = []
+    this.currentSliderIndex = 0
+  }
+
+  startNewDialog() {
+    this.isNewDialog = true
   }
 
   get isDraft() {

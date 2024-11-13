@@ -6,7 +6,7 @@ import Router from 'next/router'
 
 export const clearAllData = async (path?: string) => {
   generalStore.clearProfile()
-  addPostPhotoStore.clearData()
+  addPostPhotoStore.resetData()
   removeFromLocalStorage(StorageKeys.AccessToken)
   await Router.push(path ? path : Paths.home)
 }

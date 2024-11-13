@@ -8,7 +8,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  cn,
   useTranslation,
 } from '@/common'
 import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
@@ -17,9 +16,9 @@ import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore
 export const AddPhotoModal = () => {
   const { t } = useTranslation()
   const nextStage = useMemo(() => addPostPhotoStore.nextStage, [])
-  const clearOldData = addPostPhotoStore.clearData
+  const clearOldData = addPostPhotoStore.resetData
   const isDraft = addPostPhotoStore.isDraft
-  const setIsNotNewDialog = addPostPhotoStore.setIsNotNewDialog
+  const setIsNotNewDialog = addPostPhotoStore.continueDialog
   const addPostPhoto = useMemo(() => addPostPhotoStore.addPhoto, [])
   const totalCount = addPostPhotoStore.getCurrentPhotosCount()
 

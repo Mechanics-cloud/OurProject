@@ -19,7 +19,7 @@ type Props = {
 export const NewPostDialog = observer(
   ({ onClose, onOpenChange, open, ...rest }: Props) => {
     const currentState = addPostPhotoStore.currentStage
-    const setIsNewDialog = addPostPhotoStore.setIsNewDialog
+    const setIsNewDialog = addPostPhotoStore.startNewDialog
     const isNewDialog = addPostPhotoStore.isNewDialog
 
     const { isModalOpen, onModalClose, openModal } = useModal()

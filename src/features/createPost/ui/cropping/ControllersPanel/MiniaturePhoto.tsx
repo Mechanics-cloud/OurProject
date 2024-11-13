@@ -41,7 +41,7 @@ export const MiniaturePhoto = observer(
           {!isLastPhoto && (
             <span
               className={cn(
-                'absolute z-10 top-0.5 right-0.5 p-0.5] ',
+                'absolute z-10 top-0.5 right-0.5 p-0.5]',
                 'before:absolute before:bg-dark-500 before:top-0 before:bottom-0 before:left-0 before:right-0 before:rounded-sm before:-z-10 before:opacity-80'
               )}
               onClick={() => {
