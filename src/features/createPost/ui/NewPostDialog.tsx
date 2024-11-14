@@ -8,6 +8,7 @@ import { AddPhotoModal } from '@/features/createPost/ui/AddPhotoModal'
 import { ClosePostCreatingModal } from '@/features/createPost/ui/ClosePostCreatingModal'
 import { CropPhotoModal } from '@/features/createPost/ui/cropping/CropPhotoModal'
 import { FilterPhotoModal } from '@/features/createPost/ui/filtering/FilterPhotoModal'
+import { PublicationModal } from '@/features/createPost/ui/publication/PublicationModal'
 import { DialogProps } from '@radix-ui/react-dialog'
 import { observer } from 'mobx-react-lite'
 
@@ -53,6 +54,10 @@ export const NewPostDialog = observer(
 
           {!isNewDialog && currentState === PhotoEditorState.filtering && (
             <FilterPhotoModal />
+          )}
+
+          {!isNewDialog && currentState === PhotoEditorState.publication && (
+            <PublicationModal />
           )}
         </Dialog>
         <ClosePostCreatingModal
