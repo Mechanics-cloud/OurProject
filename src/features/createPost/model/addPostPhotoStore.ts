@@ -16,6 +16,7 @@ class AddPostPhotoStore {
   currentSliderIndex: number = 0
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
   isNewDialog = true
+  location: string[] = []
   photos: PostPhoto[] = []
 
   prevStage = () => {
@@ -46,6 +47,10 @@ class AddPostPhotoStore {
     runInAction(() => {
       this.currentSliderIndex = index
     })
+  }
+
+  addLocation(city: string, country: string) {
+    this.location = [city, country]
   }
 
   addPhoto(file: File) {
@@ -79,6 +84,10 @@ class AddPostPhotoStore {
     if (photo) {
       photo.aspect = aspect
     }
+  }
+
+  clearLocation() {
+    this.location = []
   }
 
   // changeStage(newStage: PhotoEditorStateType) {

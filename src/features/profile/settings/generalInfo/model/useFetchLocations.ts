@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Control, FieldValues, Path, useWatch } from 'react-hook-form'
 
-import locationsApi, {
+import {
   CountryData,
+  locationsApi,
 } from '@/features/profile/settings/generalInfo/api/locations.api'
 
 export const useFetchLocations = <T extends FieldValues>(

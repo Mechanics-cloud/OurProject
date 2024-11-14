@@ -13,4 +13,4 @@ export type CountryData = {
   country: string
 }
 
-export default new LocationsApi()
+export const locationsApi = new LocationsApi()

@@ -1,21 +1,15 @@
 import * as React from 'react'
 
-import { FlagRussia, FlagUnitedKingdom } from '@/assets/icons'
-import {
-  Paths,
-  Select,
-  SelectItem,
-  TextArea,
-  Typography,
-  UserMiniLink,
-  useTranslation,
-} from '@/common'
+import { TextArea, Typography, UserMiniLink, useTranslation } from '@/common'
+import { addPostPhotoStore } from '@/features/createPost'
+import { CityAutocomplete } from '@/features/createPost/ui/publication/CityAutocomplete'
 import { profileStore } from '@/features/profile'
+import { observer } from 'mobx-react-lite'
 
-type Props = {}
-export const AddTextPost = (props: Props) => {
+export const AddTextPost = observer((s) => {
   const { t } = useTranslation()
   const userProfile = profileStore.userProfile
+  const location = addPostPhotoStore.location
 
   return (
     <div className={'border-l-[1px] border-dark-100 w-full'}>
@@ -45,23 +39,20 @@ export const AddTextPost = (props: Props) => {
       </div>
 
       <div className={'p-6 flex flex-col'}>
+        <CityAutocomplete />
         <Typography
-          className={'text-light-900 mb-1'}
-          variant={'reg14'}
+          className={'-mt-3 ml-0.5'}
+          variant={'reg16'}
         >
-          Add location
+          {location[0]}
         </Typography>
-        <Select className={'border-dark-100'}>
-          <SelectItem value={'ru'}>
-            <FlagRussia />
-            Russian
-          </SelectItem>
-          <SelectItem value={'en'}>
-            <FlagUnitedKingdom />
-            English
-          </SelectItem>
-        </Select>
+        <Typography
+          className={'text-light-900 mt-1.5 ml-0.5'}
+          variant={'small'}
+        >
+          {location[1]}
+        </Typography>
       </div>
     </div>
   )
-}
+})
