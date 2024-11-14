@@ -2,13 +2,15 @@ import * as React from 'react'
 import { PropsWithChildren } from 'react'
 
 import { Dialog, useModal } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
-import { PhotoEditorState } from '@/features/createPost/model/constants'
-import { AddPhotoModal } from '@/features/createPost/ui/AddPhotoModal'
-import { ClosePostCreatingModal } from '@/features/createPost/ui/ClosePostCreatingModal'
-import { CropPhotoModal } from '@/features/createPost/ui/cropping/CropPhotoModal'
-import { FilterPhotoModal } from '@/features/createPost/ui/filtering/FilterPhotoModal'
-import { PublicationModal } from '@/features/createPost/ui/publication/PublicationModal'
+import {
+  AddPhotoModal,
+  ClosePostCreatingModal,
+  CropPhotoModal,
+  FilterPhotoModal,
+  PhotoEditorState,
+  PublicationModal,
+  addPostStore,
+} from '@/features/createPost'
 import { DialogProps } from '@radix-ui/react-dialog'
 import { observer } from 'mobx-react-lite'
 

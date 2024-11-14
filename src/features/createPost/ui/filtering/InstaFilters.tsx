@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { addPostStore } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 
 import { Filter } from './Filter'

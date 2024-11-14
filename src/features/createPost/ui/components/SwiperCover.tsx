@@ -7,7 +7,7 @@ import {
 } from 'react'
 
 import { Nullable, cn } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { addPostStore } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import {
   EffectFade,

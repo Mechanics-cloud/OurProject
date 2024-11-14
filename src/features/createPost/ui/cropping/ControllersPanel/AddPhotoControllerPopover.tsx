@@ -9,11 +9,13 @@ import {
   cn,
   useTranslation,
 } from '@/common'
-import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
-import { MaxPhotoCount } from '@/features/createPost/model/constants'
-import { SwiperContext } from '@/features/createPost/ui/components/SwiperCover'
-import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
+import {
+  MaxPhotoCount,
+  PhotoControllerButton,
+  SwiperContext,
+  addPhotosCheck,
+  addPostStore,
+} from '@/features/createPost'
 import { MiniaturePhoto } from '@/features/createPost/ui/cropping/ControllersPanel/MiniaturePhoto'
 import { observer } from 'mobx-react-lite'
 

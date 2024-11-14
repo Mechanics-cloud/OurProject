@@ -10,9 +10,7 @@ import {
   typographyVariants,
   useTranslation,
 } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
-import { SwiperCover } from '@/features/createPost/ui/components/SwiperCover'
-import { AddTextPost } from '@/features/createPost/ui/publication/AddTextPost'
+import { AddTextPost, SwiperCover, addPostStore } from '@/features/createPost'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 

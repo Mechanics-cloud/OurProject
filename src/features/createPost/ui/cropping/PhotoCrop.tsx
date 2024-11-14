@@ -1,9 +1,11 @@
 import * as React from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 
-import { addPostStore } from '@/features/createPost/model/addPostStore'
-import { PostPhoto } from '@/features/createPost/model/types'
-import { ControllersPanel } from '@/features/createPost/ui/cropping/ControllersPanel/ControllersPanel'
+import {
+  ControllersPanel,
+  PostPhoto,
+  addPostStore,
+} from '@/features/createPost'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react-lite'
 

@@ -1,9 +1,11 @@
 import * as React from 'react'
 
 import { Tabs, TabsType, useTranslation } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
-import { ClassicSettings } from '@/features/createPost/ui/filtering/ClassicSettings'
-import { InstaFilters } from '@/features/createPost/ui/filtering/InstaFilters'
+import {
+  ClassicSettings,
+  InstaFilters,
+  addPostStore,
+} from '@/features/createPost'
 import { LocaleType } from '@locales/ru'
 import { observer } from 'mobx-react-lite'
 

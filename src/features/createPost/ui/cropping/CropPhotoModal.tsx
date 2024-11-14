@@ -9,9 +9,7 @@ import {
   cn,
   typographyVariants,
 } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
-import { SwiperCover } from '@/features/createPost/ui/components/SwiperCover'
-import { PhotoCrop } from '@/features/createPost/ui/cropping/PhotoCrop'
+import { PhotoCrop, SwiperCover, addPostStore } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import { SwiperSlide } from 'swiper/react'
 

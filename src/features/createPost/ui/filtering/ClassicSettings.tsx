@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { Typography, useTranslation } from '@/common'
-import { Slider } from '@/features/createPost/ui/components'
+import { Slider } from '@/features/createPost'
 
 type Props = {}
 export const ClassicSettings = (props: Props) => {

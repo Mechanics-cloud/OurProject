@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react'
 
 import { Close } from '@/assets/icons'
 import { Tooltip, cn, useTranslation } from '@/common'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { addPostStore } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 

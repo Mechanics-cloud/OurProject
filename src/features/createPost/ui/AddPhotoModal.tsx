@@ -10,8 +10,7 @@ import {
   DialogTitle,
   useTranslation,
 } from '@/common'
-import { addPhotosCheck } from '@/features/createPost/model/addPhotosCheck'
-import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { addPhotosCheck, addPostStore } from '@/features/createPost'
 
 export const AddPhotoModal = () => {
   const { t } = useTranslation()

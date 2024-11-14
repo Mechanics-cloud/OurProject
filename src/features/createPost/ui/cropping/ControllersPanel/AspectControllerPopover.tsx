@@ -3,8 +3,10 @@ import { useState } from 'react'
 
 import { Expand } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger, cn } from '@/common'
-import { PhotoControllerButton } from '@/features/createPost/ui/components/photoControllerButton/PhotoControllerButton'
-import { AspectControllerButtons } from '@/features/createPost/ui/cropping/ControllersPanel/AspectControllerButtons'
+import {
+  AspectControllerButtons,
+  PhotoControllerButton,
+} from '@/features/createPost'
 
 type Props = {
   id: string
