@@ -19,3 +19,4 @@ for (const [key, value] of mapNext) {
 }
 
 export const MaxPhotoCount = 10
+export const MaxDescriptionLength = 500

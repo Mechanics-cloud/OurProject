@@ -10,18 +10,16 @@ import {
   typographyVariants,
   useTranslation,
 } from '@/common'
-import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { SwiperCover } from '@/features/createPost/ui/components/SwiperCover'
-import { Filters } from '@/features/createPost/ui/filtering/Filters'
 import { AddTextPost } from '@/features/createPost/ui/publication/AddTextPost'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
 export const PublicationModal = () => {
   const { t } = useTranslation()
-  const nextStage = addPostPhotoStore.nextStage
-  const prevStage = addPostPhotoStore.prevStage
-  const photos = addPostPhotoStore.photos
+  const prevStage = addPostStore.prevStage
+  const photos = addPostStore.photos
 
   return (
     <DialogContent

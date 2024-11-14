@@ -1,15 +1,20 @@
 import * as React from 'react'
 
 import { TextArea, Typography, UserMiniLink, useTranslation } from '@/common'
-import { addPostPhotoStore } from '@/features/createPost'
-import { CityAutocomplete } from '@/features/createPost/ui/publication/CityAutocomplete'
+import {
+  CityAutocomplete,
+  MaxDescriptionLength,
+  addPostStore,
+} from '@/features/createPost'
 import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 
-export const AddTextPost = observer((s) => {
+export const AddTextPost = observer(() => {
   const { t } = useTranslation()
   const userProfile = profileStore.userProfile
-  const location = addPostPhotoStore.location
+  const location = addPostStore.location
+  const postDescription = addPostStore.postDescription
+  const addPostDescription = addPostStore.addPostDescription
 
   return (
     <div className={'border-l-[1px] border-dark-100 w-full'}>
@@ -29,12 +34,14 @@ export const AddTextPost = observer((s) => {
           className={'h-[120px] resize-none'}
           label={'Add publication descriptions'}
           maxLength={500}
+          onChange={(e) => addPostDescription(e.target.value)}
+          value={postDescription}
         />
         <Typography
           className={'text-light-900 ml-auto'}
           variant={'small'}
         >
-          0/500
+          {`${postDescription.length}/${MaxDescriptionLength}`}
         </Typography>
       </div>
 

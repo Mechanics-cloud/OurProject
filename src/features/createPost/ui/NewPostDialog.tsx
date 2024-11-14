@@ -2,7 +2,7 @@ import * as React from 'react'
 import { PropsWithChildren } from 'react'
 
 import { Dialog, useModal } from '@/common'
-import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
 import { AddPhotoModal } from '@/features/createPost/ui/AddPhotoModal'
 import { ClosePostCreatingModal } from '@/features/createPost/ui/ClosePostCreatingModal'
@@ -19,9 +19,9 @@ type Props = {
 
 export const NewPostDialog = observer(
   ({ onClose, onOpenChange, open, ...rest }: Props) => {
-    const currentState = addPostPhotoStore.currentStage
-    const setIsNewDialog = addPostPhotoStore.startNewDialog
-    const isNewDialog = addPostPhotoStore.isNewDialog
+    const currentState = addPostStore.currentStage
+    const setIsNewDialog = addPostStore.startNewDialog
+    const isNewDialog = addPostStore.isNewDialog
 
     const { isModalOpen, onModalClose, openModal } = useModal()
 

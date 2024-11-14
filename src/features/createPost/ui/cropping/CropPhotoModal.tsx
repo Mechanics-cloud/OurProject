@@ -9,16 +9,16 @@ import {
   cn,
   typographyVariants,
 } from '@/common'
-import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { SwiperCover } from '@/features/createPost/ui/components/SwiperCover'
 import { PhotoCrop } from '@/features/createPost/ui/cropping/PhotoCrop'
 import { observer } from 'mobx-react-lite'
 import { SwiperSlide } from 'swiper/react'
 
 export const CropPhotoModal = observer(() => {
-  const photos = addPostPhotoStore.photos
-  const nextStage = addPostPhotoStore.nextStage
-  const prevStage = addPostPhotoStore.prevStage
+  const photos = addPostStore.photos
+  const nextStage = addPostStore.nextStage
+  const prevStage = addPostStore.prevStage
 
   return (
     <DialogContent

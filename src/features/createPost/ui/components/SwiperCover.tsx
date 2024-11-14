@@ -7,7 +7,7 @@ import {
 } from 'react'
 
 import { Nullable, cn } from '@/common'
-import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { observer } from 'mobx-react-lite'
 import {
   EffectFade,
@@ -26,7 +26,7 @@ export const SwiperContext = createContext<Nullable<SwiperContextValue>>(null)
 export const SwiperCover = observer(
   ({ children, className }: ComponentPropsWithoutRef<'div'>) => {
     const swiperRef = useRef<typeof Swiper>(null)
-    const addCurrentSliderIndex = addPostPhotoStore.addCurrentSliderIndex
+    const addCurrentSliderIndex = addPostStore.addCurrentSliderIndex
 
     const handleSlideChange = (swiper: typeof Swiper) => {
       addCurrentSliderIndex(swiper.activeIndex)

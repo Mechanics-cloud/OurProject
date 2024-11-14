@@ -2,6 +2,7 @@ import { Area, Point } from 'react-easy-crop'
 
 import { findObjectInArray } from '@/common/utils/findObjectInArray'
 import {
+  MaxDescriptionLength,
   PhotoEditorState,
   mapNext,
   mapPrev,
@@ -12,12 +13,13 @@ import {
 } from '@/features/createPost/model/types'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-class AddPostPhotoStore {
+class AddPostStore {
   currentSliderIndex: number = 0
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
   isNewDialog = true
   location: string[] = []
   photos: PostPhoto[] = []
+  postDescription: string = ''
 
   prevStage = () => {
     this.currentStage = mapPrev.get(this.currentStage) ?? this.currentStage
@@ -72,6 +74,13 @@ class AddPostPhotoStore {
     this.initOriginAspect(id, url)
   }
 
+  addPostDescription(description: string) {
+    if (description.length > MaxDescriptionLength) {
+      description = description.slice(0, MaxDescriptionLength)
+    }
+    this.postDescription = description.toString()
+  }
+
   addZoom(id: string, zoom: number) {
     this.photos = this.photos.map((photo) =>
       photo.id === id ? { ...photo, zoom } : photo
@@ -89,10 +98,6 @@ class AddPostPhotoStore {
   clearLocation() {
     this.location = []
   }
-
-  // changeStage(newStage: PhotoEditorStateType) {
-  //   this.currentStage = newStage
-  // }
 
   continueDialog() {
     this.isNewDialog = false
@@ -157,4 +162,4 @@ class AddPostPhotoStore {
   }
 }
 
-export const addPostPhotoStore = new AddPostPhotoStore()
+export const addPostStore = new AddPostStore()

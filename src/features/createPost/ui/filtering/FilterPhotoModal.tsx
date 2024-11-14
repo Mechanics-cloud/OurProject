@@ -9,16 +9,16 @@ import {
   cn,
   typographyVariants,
 } from '@/common'
-import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { SwiperCover } from '@/features/createPost/ui/components/SwiperCover'
 import { Filters } from '@/features/createPost/ui/filtering/Filters'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
 export const FilterPhotoModal = () => {
-  const nextStage = addPostPhotoStore.nextStage
-  const prevStage = addPostPhotoStore.prevStage
-  const photos = addPostPhotoStore.photos
+  const nextStage = addPostStore.nextStage
+  const prevStage = addPostStore.prevStage
+  const photos = addPostStore.photos
 
   return (
     <DialogContent

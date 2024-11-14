@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { Button, Tabs, TabsType, useTranslation } from '@/common'
-import { addPostPhotoStore } from '@/features/createPost/model/addPostPhotoStore'
+import { Tabs, TabsType, useTranslation } from '@/common'
+import { addPostStore } from '@/features/createPost/model/addPostStore'
 import { ClassicSettings } from '@/features/createPost/ui/filtering/ClassicSettings'
 import { InstaFilters } from '@/features/createPost/ui/filtering/InstaFilters'
 import { LocaleType } from '@locales/ru'
@@ -36,7 +36,7 @@ export const getFiltersTabs = (t: LocaleType): TabsType[] => {
 
 export const Filters = observer(() => {
   const { t } = useTranslation()
-  const addCurrentSliderIndex = addPostPhotoStore.addCurrentSliderIndex
+  const addCurrentSliderIndex = addPostStore.addCurrentSliderIndex
 
   addCurrentSliderIndex(0)
 
