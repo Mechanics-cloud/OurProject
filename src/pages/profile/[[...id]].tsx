@@ -74,7 +74,7 @@ const Profile = (userProfile: PublicProfile) => {
                 <Paid />
               </Typography>
 
-              {generalStore.user && (
+              {generalStore.user?.userId && (
                 <Button variant={'secondary'}>
                   <Link href={Paths.profileSettings}>
                     {t.profilePage.settingsButton}
