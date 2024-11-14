@@ -1,12 +1,11 @@
 import { toast } from 'react-toastify'
 
 import { Nullable, responseErrorHandler } from '@/common'
-import { clearAllData } from '@/common/utils/clearAllData'
 import {
   DeviceType,
   profileDevicesApi,
-} from '@/features/profile/settings/devices/api'
-import { sessionsDataSchema } from '@/features/profile/settings/devices/model/sessionsDataSchema'
+  sessionsDataSchema,
+} from '@/features/profile/settings/devices'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
@@ -57,8 +56,8 @@ class ProfileSessionsStore {
 
       return sessions
     } catch (error) {
-      //todo interceptor не перехватывает, т.к. при разлогине возвращается 400
-      clearAllData()
+      console.log(error)
+      throw new Error((error as Error).message)
     }
   }
 
@@ -68,7 +67,6 @@ class ProfileSessionsStore {
       runInAction(() => {
         this.otherSession = []
       })
-      //todo переводы в store
       toast.success('Success')
     } catch (error) {
       responseErrorHandler(error)
