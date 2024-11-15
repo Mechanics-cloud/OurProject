@@ -9,6 +9,7 @@ export type PostPhoto = {
   aspect: number
   crop: Point
   croppedArea: Area
+  croppedImgUrl: string
   id: string
   originAspect: number
   url: string

@@ -62,10 +62,10 @@ export const FilterPhotoModal = () => {
               >
                 <Image
                   alt={'Photo in carousel'}
-                  className={'object-center object-contain'}
-                  height={490}
-                  src={photo.url}
-                  width={490}
+                  className={'object-center object-contain w-full h-auto'}
+                  height={0}
+                  src={photo.croppedImgUrl}
+                  width={0}
                 />
               </SwiperSlide>
             ))}
