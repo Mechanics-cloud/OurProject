@@ -26,7 +26,10 @@ export const InstaFilters = observer(() => {
       {filtersData.map((filter, index) => (
         <Filter
           filterName={filter.name}
-          imageSrc={photos[currentSliderIndex].url}
+          imageSrc={
+            photos[currentSliderIndex].croppedImgData.photoUrl ??
+            photos[currentSliderIndex].url
+          }
           key={index}
           onClick={() => {}}
         />

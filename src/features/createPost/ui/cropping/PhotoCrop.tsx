@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useState } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 
 import {
@@ -18,7 +19,7 @@ export const PhotoCrop = observer(({ photo }: Props) => {
   const addCrop = addPostStore.addCrop
   const addCroppedArea = addPostStore.addCroppedArea
 
-  const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
+  const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
     addCroppedArea(photo.id, toJS(croppedAreaPixels))
   }
 

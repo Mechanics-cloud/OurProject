@@ -48,7 +48,7 @@ export const PublicationModal = () => {
         asChild
         className={cn('m-0 p-0 lg:m-0 lg:p-0')}
       >
-        <div className={'flex h-[504px] relative'}>
+        <div className={'flex h-[490px] relative'}>
           <SwiperCover
             className={cn(
               'w-[490px] m-0 shrink-0 bg-dark-500 relative',
@@ -67,7 +67,7 @@ export const PublicationModal = () => {
                   alt={'Photo in carousel'}
                   className={'object-center object-contain'}
                   height={490}
-                  src={photo.url}
+                  src={photo.croppedImgData.photoUrl ?? photo.url}
                   width={490}
                 />
               </SwiperSlide>

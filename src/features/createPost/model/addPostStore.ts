@@ -53,7 +53,7 @@ class AddPostStore {
         const cropPhotoData = await getCroppedImg(photo.url, photo.croppedArea)
 
         runInAction(() => {
-          photo.croppedImgUrl = {
+          photo.croppedImgData = {
             photoFile: cropPhotoData.photoFile,
             photoUrl: cropPhotoData.photoUrl,
           }
@@ -84,9 +84,9 @@ class AddPostStore {
         aspect: 1,
         crop: { x: 0, y: 0 },
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },
-        croppedImgUrl: {
+        croppedImgData: {
           photoFile: null,
-          photoUrl: url,
+          photoUrl: null,
         },
         id,
         originAspect: 1,
@@ -115,6 +115,15 @@ class AddPostStore {
 
     if (photo) {
       photo.aspect = aspect
+    }
+  }
+
+  cleanCroppedImgData() {
+    for (const photo of this.photos) {
+      photo.croppedImgData = {
+        photoFile: null,
+        photoUrl: null,
+      }
     }
   }
 
