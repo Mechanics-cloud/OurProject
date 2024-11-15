@@ -61,7 +61,7 @@ class ProfileStore {
   }
   async uploadAvatar(photoData: PhotoResult) {
     try {
-      if (photoData.photoForServer) {
+      if (photoData.photoFile) {
         const file = createFileForUpload(photoData)
 
         if (!file) {

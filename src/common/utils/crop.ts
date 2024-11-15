@@ -1,5 +1,7 @@
 import { Area } from 'react-easy-crop'
 
+import { PhotoResult } from '@/common'
+
 const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image()
@@ -12,7 +14,7 @@ const createImage = (url: string): Promise<HTMLImageElement> =>
 export default async function getCroppedImg(
   imageSrc: string,
   pixelCrop: Area
-): Promise<string> {
+): Promise<PhotoResult> {
   const image = await createImage(imageSrc)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
@@ -39,8 +41,15 @@ export default async function getCroppedImg(
   return new Promise((resolve, reject) => {
     canvas.toBlob((file) => {
       if (file) {
-        resolve(URL.createObjectURL(file))
+        resolve({
+          photoFile: file,
+          photoUrl: URL.createObjectURL(file),
+        })
       } else {
+        resolve({
+          photoFile: null,
+          photoUrl: null,
+        })
         reject(new Error('Failed to create Blob from canvas'))
       }
     }, 'image/jpeg')

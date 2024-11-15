@@ -52,7 +52,7 @@ export const useFillGeneralInfo = () => {
         setIsPhotoChanged(false)
         await profileStore.uploadAvatar(photoObj)
       }
-      if (!photoObj.photo && !photoObj.photoForServer && isPhotoChanged) {
+      if (!photoObj.photoUrl && !photoObj.photoFile && isPhotoChanged) {
         await profileStore.deleteAvatar()
       }
       toast.success('Your settings are saved!')

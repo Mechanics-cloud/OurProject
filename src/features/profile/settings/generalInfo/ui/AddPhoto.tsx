@@ -24,20 +24,20 @@ export const AddPhoto = ({
 
   const onDeleteAvatar = () => {
     setPhotoObj({
-      photo: null,
-      photoForServer: null,
+      photoFile: null,
+      photoUrl: null,
     })
     setIsPhotoChanged(true)
   }
 
   return (
     <div className={'flex items-center flex-col h-[500px] gap-6'}>
-      {photoObj?.photo ? (
+      {photoObj?.photoUrl ? (
         <div className={cn('relative object-cover', imageClass)}>
           <Image
             alt={'avatar'}
             height={200}
-            src={photoObj.photo}
+            src={photoObj.photoUrl}
             width={200}
           />
           <button

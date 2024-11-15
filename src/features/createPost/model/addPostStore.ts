@@ -1,5 +1,7 @@
 import { Area, Point } from 'react-easy-crop'
+import { toast } from 'react-toastify'
 
+import getCroppedImg from '@/common/utils/crop'
 import { findObjectInArray } from '@/common/utils/findObjectInArray'
 import {
   MaxDescriptionLength,
@@ -45,6 +47,23 @@ class AddPostStore {
     }
   }
 
+  async addCroppedImgUrl() {
+    for (const photo of this.photos) {
+      try {
+        const cropPhotoData = await getCroppedImg(photo.url, photo.croppedArea)
+
+        runInAction(() => {
+          photo.croppedImgUrl = {
+            photoFile: cropPhotoData.photoFile,
+            photoUrl: cropPhotoData.photoUrl,
+          }
+        })
+      } catch (error) {
+        toast('Something went wrong')
+      }
+    }
+  }
+
   addCurrentSliderIndex(index: number) {
     runInAction(() => {
       this.currentSliderIndex = index
@@ -65,6 +84,10 @@ class AddPostStore {
         aspect: 1,
         crop: { x: 0, y: 0 },
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },
+        croppedImgUrl: {
+          photoFile: null,
+          photoUrl: url,
+        },
         id,
         originAspect: 1,
         url,
@@ -143,8 +166,13 @@ class AddPostStore {
     }
   }
 
-  nextStage() {
-    this.currentStage = mapNext.get(this.currentStage) ?? this.currentStage
+  async nextStage() {
+    if (this.currentStage === PhotoEditorState.cropping) {
+      await this.addCroppedImgUrl()
+    }
+    runInAction(() => {
+      this.currentStage = mapNext.get(this.currentStage) ?? this.currentStage
+    })
   }
 
   resetData() {
