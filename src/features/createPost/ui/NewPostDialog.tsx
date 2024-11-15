@@ -27,10 +27,6 @@ export const NewPostDialog = observer(
 
     const { isModalOpen, onModalClose, openModal } = useModal()
 
-    const onOpenDialogChange = () => {
-      openModal()
-    }
-
     const onClosePostCreating = () => {
       onModalClose()
       onClose()
@@ -40,7 +36,7 @@ export const NewPostDialog = observer(
     return (
       <>
         <Dialog
-          onOpenChange={onOpenDialogChange}
+          onOpenChange={(!isNewDialog && openModal) || onClose}
           open={open}
           {...rest}
         >
