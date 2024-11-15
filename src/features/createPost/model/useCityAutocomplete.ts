@@ -43,6 +43,18 @@ export const useCityAutocomplete = () => {
     })
   }, [])
 
+  const handleMouseMove = (event: MouseEvent) => {
+    setFocusedIndex(-1)
+  }
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
+
   const onSelectCity = (selectedCity: string) => {
     let country = ''
 

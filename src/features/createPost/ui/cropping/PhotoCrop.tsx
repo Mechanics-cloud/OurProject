@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useState } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 
 import {

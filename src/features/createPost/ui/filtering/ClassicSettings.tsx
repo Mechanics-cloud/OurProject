@@ -3,8 +3,7 @@ import * as React from 'react'
 import { Typography, useTranslation } from '@/common'
 import { Slider } from '@/features/createPost'
 
-type Props = {}
-export const ClassicSettings = (props: Props) => {
+export const ClassicSettings = () => {
   const { t } = useTranslation()
 
   return (

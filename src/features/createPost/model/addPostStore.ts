@@ -118,15 +118,6 @@ class AddPostStore {
     }
   }
 
-  cleanCroppedImgData() {
-    for (const photo of this.photos) {
-      photo.croppedImgData = {
-        photoFile: null,
-        photoUrl: null,
-      }
-    }
-  }
-
   clearLocation() {
     this.location = []
   }
