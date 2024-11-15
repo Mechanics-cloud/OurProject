@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useMemo } from 'react'
 
 import { AddCommentGroup, ViewAllCommentsButton } from '../ui'
 import { CommentsStoreContext } from './homeContext'
 import { CommentsStore } from './posts/postsStore'
 
 export const WrapperParentComponent = ({ postId }: { postId: number }) => {
-  const [commentsStore] = useState(() => new CommentsStore())
+  const commentsStore = useMemo(() => new CommentsStore(), [])
 
   return (
     <CommentsStoreContext.Provider value={commentsStore}>

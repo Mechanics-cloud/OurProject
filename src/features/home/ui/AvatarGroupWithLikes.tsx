@@ -12,16 +12,19 @@ type ItemProps = {
 
 export const AvatarGroupWithLikes = observer(({ item }: ItemProps) => {
   const likesStore = useMemo(() => new LikesStore(), [])
+  const firstThreeAvatarImages = likesStore.avatarImages
+  const likesCount = item.likesCount
+  const postId = item.id
 
   useEffect(() => {
-    likesStore.getPostLikes(item.id)
-  }, [item.likesCount, likesStore])
+    likesStore.getPostLikes(postId)
+  }, [likesCount, postId, likesStore])
 
   return (
     <div className={'w-full h-6 flex gap-4 mt-3 mb-6'}>
       <div className={'flex'}>
-        {likesStore.getAvatarImages &&
-          likesStore.getAvatarImages.map(
+        {firstThreeAvatarImages &&
+          firstThreeAvatarImages.map(
             (avaUrl: StaticImageData | string, i: number) => {
               return (
                 <Image

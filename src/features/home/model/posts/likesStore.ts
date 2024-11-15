@@ -31,7 +31,7 @@ export class LikesStore {
     }
   }
 
-  get getAvatarImages() {
+  get avatarImages() {
     let avatarUrls = null
     const isLiked = this.likes?.items.length != 0
 
