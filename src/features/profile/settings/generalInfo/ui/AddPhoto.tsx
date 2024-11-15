@@ -1,9 +1,8 @@
 import React from 'react'
 
 import { CloseOutline, ImageOutline } from '@/assets/icons/outlineIcons'
-import { Button, cn, useTranslation } from '@/common'
+import { Button, PhotoResult, cn, useTranslation } from '@/common'
 import { AvatarDialog } from '@/features/profile/settings/avatarDialog'
-import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import Image from 'next/image'
 
 type Props = {
@@ -37,6 +36,7 @@ export const AddPhoto = ({
           <Image
             alt={'avatar'}
             height={200}
+            priority
             src={photoObj.photoUrl}
             width={200}
           />

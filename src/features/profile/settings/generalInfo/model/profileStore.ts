@@ -1,5 +1,8 @@
-import { createFileForUpload, responseErrorHandler } from '@/common'
-import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
+import {
+  PhotoResult,
+  createFileForUpload,
+  responseErrorHandler,
+} from '@/common'
 import {
   UpdatedProfile,
   UserInfo,

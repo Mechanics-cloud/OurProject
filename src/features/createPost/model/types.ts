@@ -1,7 +1,7 @@
 import { Area, Point } from 'react-easy-crop'
 
+import { PhotoResult } from '@/common'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
-import { PhotoResult } from '@/features/profile'
 
 export type PhotoEditorStateType =
   (typeof PhotoEditorState)[keyof typeof PhotoEditorState]

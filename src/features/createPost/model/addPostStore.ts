@@ -1,7 +1,7 @@
 import { Area, Point } from 'react-easy-crop'
 import { toast } from 'react-toastify'
 
-import getCroppedImg from '@/common/utils/crop'
+import getCroppedImg from '@/common/utils/cropPhoto'
 import { findObjectInArray } from '@/common/utils/findObjectInArray'
 import {
   MaxDescriptionLength,
