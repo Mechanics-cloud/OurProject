@@ -1,20 +1,22 @@
+import { PASSWORD_REGEXP } from '@/features/auth'
+import { LocaleType } from '@locales/ru'
 import { z } from 'zod'
 
-export const signInSchema = z.object({
-  email: z.string({ required_error: 'Email is required' }).email({
-    message: 'The email must match the format example@example.com',
-  }),
-  password: z
-    .string()
-    .min(6, { message: 'Minimum number of characters 6' })
-    .max(20, { message: 'Maximum number of characters 20' })
-    .regex(
-      /^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~])[0-9A-Za-z!"#$%&'()*+,\-./:;<=>?@[\]^_`{|}~]+$/,
-      {
+export const signInSchema = (t: LocaleType) => {
+  return z.object({
+    email: z.string({ required_error: t.validation.email.required }).email({
+      message: t.validation.email.composition,
+    }),
+    password: z
+      .string()
+      .min(6, { message: t.validation.password.minChar })
+      .max(20, { message: t.validation.password.maxChar })
+      .regex(PASSWORD_REGEXP, {
         message:
-          'Password must contain a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
-      }
-    ),
-})
+          t.validation.password.composition +
+          ' a-z, A-Z,  ! " # $ % & \' ( ) * + , - . / : ; < = > ? @ [ \\ ] ^ _` { | } ~',
+      }),
+  })
+}
 
-export type SignInFields = z.infer<typeof signInSchema>
+export type SignInFields = z.infer<ReturnType<typeof signInSchema>>

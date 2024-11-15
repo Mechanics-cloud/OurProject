@@ -1,7 +1,8 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { Paths, useTranslation } from '@/common'
+import { Paths } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { authApi } from '@/features/auth'
 import {
@@ -9,11 +10,11 @@ import {
   recoveryPasswordSchema,
 } from '@/features/auth/model/forgotPassword/recoveryPasswordSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 import { useSearchParams } from 'next/navigation'
 import { useRouter } from 'next/router'
 
-export const useRecoveryPassword = () => {
-  const { t } = useTranslation()
+export const useRecoveryPassword = (t: LocaleType) => {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -21,13 +22,14 @@ export const useRecoveryPassword = () => {
     control,
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
+    trigger,
   } = useForm<RecoveryPasswordFields>({
     defaultValues: {
       confirm: '',
       password: '',
     },
     mode: 'onChange',
-    resolver: zodResolver(recoveryPasswordSchema),
+    resolver: zodResolver(recoveryPasswordSchema(t)),
   })
 
   const onSubmit = handleSubmit(async (data) => {
@@ -42,6 +44,12 @@ export const useRecoveryPassword = () => {
       responseErrorHandler(error)
     }
   })
+
+  //TODO Найти решение по лучше
+  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
+  useEffect(() => {
+    trigger()
+  }, [t, trigger])
 
   return {
     control,
