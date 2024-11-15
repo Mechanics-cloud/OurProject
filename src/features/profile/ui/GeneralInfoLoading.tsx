@@ -1,9 +1,12 @@
 import React from 'react'
 
-import { Button, Skeleton } from '@/common'
+import { Button, Skeleton, useTranslation } from '@/common'
 
 export const GeneralInfoLoading = () => {
-  const fieldClass = 'w-full h-[36px] mb-6 mt-5'
+  const fieldClass = 'w-full h-[36px] mb-6'
+  const { t } = useTranslation()
+  const { aboutMe, city, country, dateOfBirth, firstName, lastName, userName } =
+    t.profileInputs
 
   return (
     <div
@@ -22,24 +25,53 @@ export const GeneralInfoLoading = () => {
         </Button>
       </div>
       <div className={'w-full flex flex-col gap-6'}>
-        <div className={'w-full flex flex-col gap-6'}>
+        <label>
+          <p className={'mb-1 text-[14px] text-light-900'}>
+            {userName}
+            <span className={'text-danger-500 ml-1'}>*</span>
+          </p>
           <Skeleton className={fieldClass} />
+        </label>
+        <label>
+          <p className={'mb-1 text-[14px] text-light-900'}>
+            {firstName}
+            <span className={'text-danger-500 ml-1'}>*</span>
+          </p>
           <Skeleton className={fieldClass} />
+        </label>
+        <label>
+          <p className={'mb-1 text-[14px] text-light-900'}>
+            {lastName}
+            <span className={'text-danger-500 ml-1'}>*</span>
+          </p>
           <Skeleton className={fieldClass} />
+        </label>
+        <label>
+          <p className={'mb-1 text-[14px] text-light-900'}>{dateOfBirth}</p>
           <Skeleton className={fieldClass} />
-          <div className={'flex gap-2'}>
+        </label>
+
+        <div className={'flex gap-6'}>
+          <label className={'w-full'}>
+            <p className={'mb-1 text-[14px] text-light-900'}>{country}</p>
             <Skeleton className={'w-full h-[36px]'} />
+          </label>
+          <label className={'w-full'}>
+            <p className={'mb-1 text-[14px] text-light-900'}>{city}</p>
             <Skeleton className={'w-full h-[36px]'} />
-          </div>
+          </label>
+        </div>
+        <label className={'w-full'}>
+          <p className={'mb-1 text-[14px] text-light-900'}>{aboutMe}</p>
           <Skeleton className={'w-full h-[60px]'} />
-          <div className={'flex justify-end mt-12'}>
-            <Button
-              disabled
-              variant={'primary'}
-            >
-              Save Changes
-            </Button>
-          </div>
+        </label>
+        <div className={'flex justify-end mt-12'}>
+          <Button
+            disabled
+            variant={'primary'}
+          >
+            Save Changes
+          </Button>
         </div>
       </div>
     </div>
