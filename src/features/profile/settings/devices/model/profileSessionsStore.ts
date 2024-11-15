@@ -56,8 +56,7 @@ class ProfileSessionsStore {
 
       return sessions
     } catch (error) {
-      console.log(error)
-      throw new Error((error as Error).message)
+      responseErrorHandler(error)
     }
   }
 
