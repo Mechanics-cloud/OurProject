@@ -1,29 +1,13 @@
 import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { profileStore } from '@/features/profile'
-import PhotoGallery from '@/features/profile/loadFotoPosts/loderFotoPosts'
+import { PhotoProfilePostsGallery, profileStore } from '@/features/profile'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
-import image1 from '../../assets/images/image1.jpg'
-import image2 from '../../assets/images/image2.jpg'
-import image3 from '../../assets/images/image3.jpg'
-import image4 from '../../assets/images/image4.jpg'
 
-const placeholderImages = [
-  { id: 1, img: image1 },
-  { id: 2, img: image2 },
-  { id: 3, img: image3 },
-  { id: 4, img: image4 },
-  { id: 5, img: image1 },
-  { id: 6, img: image2 },
-  { id: 7, img: image3 },
-  { id: 8, img: image4 },
-]
-
-//todo: remove avatarPlaceholder and place another placeholder image
+//todo: remove avatarPlaceholder
 const Profile = () => {
   const { t } = useTranslation()
   const userProfile = profileStore.userProfile
@@ -37,6 +21,7 @@ const Profile = () => {
             alt={'avatar'}
             className={'rounded-full pr-0'}
             height={200}
+            priority
             src={avatar || avatarPlaceholder}
             width={200}
           />
@@ -51,7 +36,6 @@ const Profile = () => {
                 {userProfile?.userName ?? 'URL Profile'}
                 <Paid />
               </Typography>
-
               <Button variant={'secondary'}>
                 <Link href={Paths.profileSettings}>
                   {t.profilePage.settingsButton}
@@ -85,18 +69,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        {/* <div className={cn('grid gap-3 grid-cols-gallery w-full')}> */}
-        {/* {placeholderImages.map((image) => (
-            <Image
-              alt={'image'}
-              height={228}
-              key={image.id}
-              src={image.img}
-              width={342}
-            />
-          ))} */}
-        <PhotoGallery />
-        {/* </div> */}
+        <PhotoProfilePostsGallery />
       </div>
     </div>
   )

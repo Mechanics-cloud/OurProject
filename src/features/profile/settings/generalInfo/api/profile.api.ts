@@ -1,4 +1,5 @@
 import { instance } from '@/features/auth'
+import { Data } from '@/features/profile/model/types'
 import {
   UpdatedProfile,
   UserProfile,
@@ -16,9 +17,25 @@ class ProfileApi {
 
     return res.data
   }
+  public async getProfilePosts(page: number, userName: string) {
+    const res = await this.instance.get<Data>(
+      ProfileEndpoints.posts(userName),
+      {
+        params: {
+          endCursorPostId: 0,
+          pageNumber: page,
+          pageSize: 8,
+        },
+      }
+    )
+
+    return res.data
+  }
+
   public updateProfile(profileData: UpdatedProfile): Promise<AxiosResponse> {
     return this.instance.put(ProfileEndpoints.profile, profileData)
   }
+
   public async uploadAvatar(file: File): Promise<void> {
     const formData = new FormData()
 
