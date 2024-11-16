@@ -1,8 +1,8 @@
 import { Paid } from '@/assets/icons/filledIcons'
 import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { cn } from '@/common/utils/cn'
 import { profileStore } from '@/features/profile'
+import PhotoGallery from '@/features/profile/loadFotoPosts/loderFotoPosts'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -85,8 +85,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <div className={cn('grid gap-3 grid-cols-gallery w-full')}>
-          {placeholderImages.map((image) => (
+        {/* <div className={cn('grid gap-3 grid-cols-gallery w-full')}> */}
+        {/* {placeholderImages.map((image) => (
             <Image
               alt={'image'}
               height={228}
@@ -94,8 +94,9 @@ const Profile = () => {
               src={image.img}
               width={342}
             />
-          ))}
-        </div>
+          ))} */}
+        <PhotoGallery />
+        {/* </div> */}
       </div>
     </div>
   )
