@@ -1,5 +1,5 @@
 import { instance } from '@/features/auth'
-import { Data } from '@/features/profile/model/types'
+import { ImageData } from '@/features/profile/model/types'
 import {
   UpdatedProfile,
   UserProfile,
@@ -18,7 +18,7 @@ class ProfileApi {
     return res.data
   }
   public async getProfilePosts(page: number, userName: string) {
-    const res = await this.instance.get<Data>(
+    const res = await this.instance.get<ImageData>(
       ProfileEndpoints.posts(userName),
       {
         params: {

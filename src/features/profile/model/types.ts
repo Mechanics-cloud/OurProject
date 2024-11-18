@@ -1,4 +1,4 @@
-interface Images {
+type Images = {
   createdAt: string
   fileSize: number
   height: number
@@ -6,11 +6,11 @@ interface Images {
   url: string
   width: number
 }
-export interface Foto {
+export type Foto = {
   id: number
-  images: Array<Images>
+  images: Images[]
 }
-interface Item {
+type Item = {
   avatarOwner: string
   avatarWhoLikes: string[]
   createdAt: string
@@ -28,7 +28,7 @@ interface Item {
   updatedAt: string
   userName: string
 }
-export interface Data {
+export type ImageData = {
   items: Item[]
   page: number
   pageSize: number

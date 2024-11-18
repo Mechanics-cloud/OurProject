@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { profileStore } from '../settings'
 
 export const PhotoProfilePostsGallery = observer(() => {
-  const photos = profileStore?.foto
+  const photos = profileStore?.fotos
 
   const { inView, ref } = useInView({
     threshold: 0.1,
@@ -22,7 +22,7 @@ export const PhotoProfilePostsGallery = observer(() => {
   }, [inView])
 
   return (
-    <div>
+    <>
       <div className={cn('grid gap-3 grid-cols-gallery w-full mb-4')}>
         {photos.map((item) => (
           <Link
@@ -40,15 +40,15 @@ export const PhotoProfilePostsGallery = observer(() => {
         ))}
       </div>
       <div
-        className={'mt-2'}
+        className={'mt-10'}
         ref={ref}
       >
         {profileStore.isLoading ? (
           <Skeleton className={'w-full h-[228px]'} />
         ) : (
-          <div className={'w-full h-[28px]'}></div>
+          <div className={'w-full h-[18px]'}></div>
         )}
       </div>
-    </div>
+    </>
   )
 })

@@ -12,7 +12,7 @@ import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {
-  foto: [] | Foto[] = []
+  fotos: Foto[] = []
   isLoading: boolean = false
   pageNumber: number = 1
   stopRequest: boolean = false
@@ -43,17 +43,19 @@ class ProfileStore {
           this.userProfile?.userName
         )
 
-        const newPhotos = res.items.map((item) => ({
-          id: item.id,
-          images: item.images,
-        }))
+        let newPhotos: Foto[] = []
 
-        if (newPhotos.length === 0) {
+        if (res.items.length !== 0) {
+          newPhotos = res.items.map((item) => ({
+            id: item.id,
+            images: item.images,
+          }))
+        } else {
           this.stopRequest = true
         }
 
         runInAction(() => {
-          this.foto = [...this.foto, ...newPhotos]
+          this.fotos.push(...newPhotos)
           this.isLoading = false
           this.pageNumber += 1
         })
