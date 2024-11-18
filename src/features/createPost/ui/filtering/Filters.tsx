@@ -9,18 +9,6 @@ import {
 import { LocaleType } from '@locales/ru'
 import { observer } from 'mobx-react-lite'
 
-type FilterType = {
-  name: string
-}
-
-const filtersData: FilterType[] = [
-  { name: 'Normal' },
-  { name: 'Calendon' },
-  { name: 'Lark' },
-  { name: 'Gingham' },
-  { name: 'Moon' },
-] as const
-
 export const getFiltersTabs = (t: LocaleType): TabsType[] => {
   return [
     {

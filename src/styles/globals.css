@@ -145,6 +145,12 @@ input[type='password']::-ms-clear {
   background-color: transparent;
 }
 
+@media (width <= 768px) {
+  .radix-dialog {
+    width: 100%;
+  }
+}
+
 @layer components {
   .popoverOpacity {
     @apply relative z-50 bg-transparent before:top-0 before:left-0 before:right-0 before:bottom-0 before:absolute before:bg-dark-500 before:-z-10 before:opacity-80 before:rounded-sm;
@@ -152,12 +158,6 @@ input[type='password']::-ms-clear {
 
   .sliderCenter {
     @apply relative after:absolute after:-z-10 after:w-0.5 after:h-4 after:bg-light-900 after:left-[50%] after:-translate-x-[50%];
-  }
-}
-
-@media (width <= 768px) {
-  .radix-dialog {
-    width: 100%;
   }
 }
 
@@ -257,7 +257,7 @@ input[type='password']::-ms-clear {
   filter: brightness(1.2) contrast(0.85) saturate(0.05) sepia(0.2);
 }
 
-.filter-xpro-ii {
+.filter-xpro {
   filter: sepia(0.45) contrast(1.25) brightness(1.75) saturate(1.3)
     hue-rotate(-5deg);
 

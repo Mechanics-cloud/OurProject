@@ -6,9 +6,16 @@ import Image from 'next/image'
 
 type Props = {
   filterName: string
+  filterSettings: string
   imageSrc: string
 } & ComponentPropsWithoutRef<'span'>
-export const Filter = ({ className, filterName, imageSrc, onClick }: Props) => {
+export const Filter = ({
+  className,
+  filterName,
+  filterSettings,
+  imageSrc,
+  onClick,
+}: Props) => {
   return (
     <span
       className={cn(
@@ -19,7 +26,10 @@ export const Filter = ({ className, filterName, imageSrc, onClick }: Props) => {
     >
       <Image
         alt={filterName}
-        className={'object-cover mb-1.5 w-[108px] h-[108px] '}
+        className={cn(
+          'object-cover mb-1.5 w-[108px] h-[108px]',
+          filterSettings
+        )}
         height={108}
         src={imageSrc}
         width={108}
