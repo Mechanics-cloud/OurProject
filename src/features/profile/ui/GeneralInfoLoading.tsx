@@ -5,8 +5,16 @@ import { Button, Skeleton, useTranslation } from '@/common'
 export const GeneralInfoLoading = () => {
   const fieldClass = 'w-full h-[36px] mb-6'
   const { t } = useTranslation()
-  const { aboutMe, city, country, dateOfBirth, firstName, lastName, userName } =
-    t.profileInputs
+  const {
+    aboutMe,
+    addProfilePhoto,
+    city,
+    country,
+    dateOfBirth,
+    firstName,
+    lastName,
+    userName,
+  } = t.profileInputs
 
   return (
     <div
@@ -21,7 +29,7 @@ export const GeneralInfoLoading = () => {
           disabled
           variant={'outline'}
         >
-          Add a Profile Photo
+          {addProfilePhoto}
         </Button>
       </div>
       <div className={'w-full flex flex-col gap-6'}>
