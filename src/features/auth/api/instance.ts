@@ -6,8 +6,7 @@ import { Endpoints, authStore } from '@/features/auth'
 import axios, { AxiosResponse, isAxiosError } from 'axios'
 
 export const instance = axios.create({
-  // baseURL: Environments.API_URL,
-  baseURL: 'https://inctagram.work/api',
+  baseURL: Environments.API_URL,
   headers: {
     'Content-Type': 'application/json',
   },
