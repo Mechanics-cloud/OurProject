@@ -42,7 +42,7 @@ const Profile = observer(() => {
         <div
           className={cn(
             'mt-9 flex items-start w-full',
-            isTablet ? 'gap-[20px] mb-[13px]' : 'gap-[38px] mb-[53px]'
+            isTablet ? 'gap-5 mb-3' : 'gap-9 mb-13'
           )}
         >
           <Image
@@ -53,9 +53,7 @@ const Profile = observer(() => {
             width={200}
           />
           <div className={'flex flex-col flex-wrap w-full'}>
-            <div
-              className={'flex items-center justify-between w-full mb-[19px]'}
-            >
+            <div className={'flex items-center justify-between w-full mb-5'}>
               <Typography
                 className={'text-light-100 flex items-center gap-3'}
                 variant={'h1'}
@@ -71,7 +69,7 @@ const Profile = observer(() => {
                 <Link href={Paths.profileSettings}>{settingsButton}</Link>
               </Button>
             </div>
-            <div className={'flex gap-[15px] sm:gap-[50px] lg:gap-[100px]'}>
+            <div className={'flex gap-4 sm:gap-12 lg:gap-25'}>
               <div className={'flex flex-col'}>
                 <Typography variant={isTablet ? 'small' : 'reg14'}>
                   2218
@@ -97,9 +95,7 @@ const Profile = observer(() => {
                 </Typography>
               </div>
             </div>
-            <div
-              className={isTablet ? 'hidden' : 'mt-[23px] order-3 sm:order-2'}
-            >
+            <div className={isTablet ? 'hidden' : 'mt-6'}>
               {userProfile?.aboutMe && (
                 <Typography variant={isTablet ? 'small' : 'reg14'}>
                   {userProfile.aboutMe}
@@ -108,19 +104,25 @@ const Profile = observer(() => {
             </div>
           </div>
         </div>
-        <div className={isTablet ? 'mb-[29px]' : 'hidden'}>
+        <div className={isTablet ? 'mb-7' : 'hidden'}>
           {userProfile?.aboutMe && (
             <Typography variant={isTablet ? 'small' : 'reg14'}>
               {userProfile.aboutMe}
             </Typography>
           )}
         </div>
-        <div className={cn('grid gap-3 lg:grid-cols-4 grid-cols-3 w-full')}>
+        <div
+          className={cn(
+            'grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full'
+          )}
+        >
           {placeholderImages.map((image) => (
             <Image
               alt={'image'}
+              className={'w-full h-auto object-cover'}
               height={228}
               key={image.id}
+              layout={'responsive'}
               src={image.img}
               width={342}
             />
