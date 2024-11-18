@@ -159,6 +159,9 @@ export const en: LocaleType = {
       userName: 'Enter your username',
     },
     policy: 'Privacy Policy',
+    schemaErrors: {
+      userNameComposition: 'Input must contain only',
+    },
     signUpGithub: 'Sign Up with Github',
     signUpGoogle: 'Sign Up with Google',
     terms: 'Terms of Service',
@@ -175,6 +178,16 @@ export const en: LocaleType = {
     back: 'Back',
   },
   validation: {
+    email: {
+      composition: 'The email must match the format example@example.com',
+      required: 'Email is required',
+    },
+    password: {
+      composition: 'Password must contain',
+      match: 'Passwords must match',
+      maxChar: 'Maximum number of characters 20',
+      minChar: 'Minimum number of characters 6',
+    },
     recaptchaRequired: 'Recaptcha is required',
   },
 }
