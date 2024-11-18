@@ -1,6 +1,7 @@
 import { Paid } from '@/assets/icons'
 import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { cn } from '@/common/utils/cn'
 import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
@@ -31,15 +32,18 @@ const Profile = observer(() => {
   const { isProfileLoading, userProfile } = profileStore
   const avatar = userProfile?.avatars[0]?.url
 
+  const { isTablet } = useScreenWidth()
+
   return isProfileLoading ? (
     <div>Loading...</div> //временная заглушка
   ) : (
     <div className={'flex w-full'}>
       <div className={'flex flex-col w-full'}>
         <div
-          className={
-            'mt-9 flex items-start gap-[20px] md:gap-[38px] w-full mb-[53px]'
-          }
+          className={cn(
+            'mt-9 flex items-start w-full',
+            isTablet ? 'gap-[20px] mb-[13px]' : 'gap-[38px] mb-[53px]'
+          )}
         >
           <Image
             alt={'avatar'}
@@ -69,59 +73,47 @@ const Profile = observer(() => {
             </div>
             <div className={'flex gap-[15px] sm:gap-[50px] lg:gap-[100px]'}>
               <div className={'flex flex-col'}>
-                <Typography
-                  className={'text-xs md:text-sm'}
-                  variant={'reg14'}
-                >
+                <Typography variant={isTablet ? 'small' : 'reg14'}>
                   2218
                 </Typography>
-                <Typography
-                  className={'text-xs md:text-sm'}
-                  variant={'reg14'}
-                >
+                <Typography variant={isTablet ? 'small' : 'reg14'}>
                   {following}
                 </Typography>
               </div>
               <div className={'flex flex-col'}>
-                <Typography
-                  className={'text-xs md:text-sm'}
-                  variant={'reg14'}
-                >
+                <Typography variant={isTablet ? 'small' : 'reg14'}>
                   2218
                 </Typography>
-                <Typography
-                  className={'text-xs md:text-sm'}
-                  variant={'reg14'}
-                >
+                <Typography variant={isTablet ? 'small' : 'reg14'}>
                   {followers}
                 </Typography>
               </div>
               <div className={'flex flex-col'}>
-                <Typography
-                  className={'text-xs md:text-sm'}
-                  variant={'reg14'}
-                >
+                <Typography variant={isTablet ? 'small' : 'reg14'}>
                   2218
                 </Typography>
-                <Typography
-                  className={'text-xs md:text-sm'}
-                  variant={'reg14'}
-                >
+                <Typography variant={isTablet ? 'small' : 'reg14'}>
                   {publications}
                 </Typography>
               </div>
             </div>
-            <div className={'mt-[23px]'}>
+            <div
+              className={isTablet ? 'hidden' : 'mt-[23px] order-3 sm:order-2'}
+            >
               {userProfile?.aboutMe && (
-                <Typography
-                  className={'text-xs md:text-sm'}
-                  variant={'reg16'}
-                >
+                <Typography variant={isTablet ? 'small' : 'reg14'}>
                   {userProfile.aboutMe}
                 </Typography>
               )}
             </div>
           </div>
+        </div>
+        <div className={isTablet ? 'mb-[29px]' : 'hidden'}>
+          {userProfile?.aboutMe && (
+            <Typography variant={isTablet ? 'small' : 'reg14'}>
+              {userProfile.aboutMe}
+            </Typography>
+          )}
         </div>
         <div className={cn('grid gap-3 lg:grid-cols-4 grid-cols-3 w-full')}>
           {placeholderImages.map((image) => (
