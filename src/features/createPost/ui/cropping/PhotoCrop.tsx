@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import Cropper, { Area, Point } from 'react-easy-crop'
 
 import {
@@ -15,7 +16,7 @@ type Props = {
 
 export const PhotoCrop = observer(({ photo }: Props) => {
   const addZoom = addPostStore.addZoom
-  const addCrop = addPostStore.addCrop
+  const addCrop = useMemo(() => addPostStore.addCrop, [])
   const addCroppedArea = addPostStore.addCroppedArea
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
@@ -26,9 +27,20 @@ export const PhotoCrop = observer(({ photo }: Props) => {
     addZoom(photo.id, zoom)
   }
 
-  const onCrop = (crop: Point) => {
-    addCrop(photo.id, crop)
-  }
+  const onCrop = useCallback(
+    (crop: Point) => {
+      addCrop(photo.id, crop)
+    },
+    [addCrop, photo.id]
+  )
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      onCrop(photo.cropDataSave ?? { x: 0, y: 0 })
+    }, 0)
+
+    return () => clearTimeout(timeoutId)
+  }, [onCrop, photo.cropDataSave])
 
   return (
     <>

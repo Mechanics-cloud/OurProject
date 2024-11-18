@@ -83,6 +83,7 @@ class AddPostStore {
       {
         aspect: 1,
         crop: { x: 0, y: 0 },
+        cropDataSave: null,
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },
         croppedImgData: {
           photoFile: null,
@@ -169,6 +170,9 @@ class AddPostStore {
   async nextStage() {
     if (this.currentStage === PhotoEditorState.cropping) {
       await this.addCroppedImgUrl()
+      this.photos.forEach((photo) => {
+        photo.cropDataSave = photo.crop
+      })
     }
     runInAction(() => {
       this.currentStage = mapNext.get(this.currentStage) ?? this.currentStage
