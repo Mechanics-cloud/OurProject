@@ -1,6 +1,7 @@
 import { Area, Point } from 'react-easy-crop'
 import { toast } from 'react-toastify'
 
+import { Nullable } from '@/common'
 import getCroppedImg from '@/common/utils/cropPhoto'
 import { findObjectInArray } from '@/common/utils/findObjectInArray'
 import {
@@ -70,6 +71,10 @@ class AddPostStore {
     })
   }
 
+  addFilter(index: number, filter: string) {
+    this.photos[index].filter = filter
+  }
+
   addLocation(city: string, country: string) {
     this.location = [city, country]
   }
@@ -89,6 +94,7 @@ class AddPostStore {
           photoFile: null,
           photoUrl: null,
         },
+        filter: '',
         id,
         originAspect: 1,
         url,

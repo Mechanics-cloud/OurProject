@@ -8,6 +8,7 @@ import { Filter } from './Filter'
 
 export const InstaFilters = observer(() => {
   const photos = addPostStore.photos
+  const addFilter = addPostStore.addFilter
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
 
   return (
@@ -26,7 +27,9 @@ export const InstaFilters = observer(() => {
               photos[currentSliderIndex].url
             }
             key={index}
-            onClick={() => {}}
+            onClick={() => {
+              addFilter(currentSliderIndex, filter.style)
+            }}
           />
         ))}
       </div>

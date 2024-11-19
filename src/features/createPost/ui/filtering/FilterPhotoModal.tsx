@@ -62,7 +62,10 @@ export const FilterPhotoModal = () => {
               >
                 <Image
                   alt={'Photo in carousel'}
-                  className={'object-center object-contain w-full h-auto'}
+                  className={cn(
+                    'object-center object-contain w-full h-auto',
+                    photo.filter
+                  )}
                   height={0}
                   src={photo.croppedImgData.photoUrl ?? photo.url}
                   width={0}
