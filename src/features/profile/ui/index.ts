@@ -1,5 +1,4 @@
 export * from './GeneralInfoLoading'
 export * from './ProfileAboutMe'
-export * from './ProfileAvatar'
+export * from './ProfilePosts'
 export * from './ProfileStatistics'
-export * from './ProfileUserName'

@@ -1,24 +1,41 @@
-import { Skeleton, Typography } from '@/common'
+import { Typography } from '@/common'
 
 type Props = {
-  isProfileLoading: boolean
-  statisticsCount: number
-  statisticsTitle: string
+  followers: string
+  following: string
+  isMobile: boolean
+  publications: string
 }
 export const ProfileStatistics = ({
-  isProfileLoading,
-  statisticsCount,
-  statisticsTitle,
+  followers,
+  following,
+  isMobile,
+  publications,
 }: Props) => {
   return (
-    <div className={'flex flex-col'}>
-      {isProfileLoading ? (
-        <Skeleton className={`h-5 w-full`} />
-      ) : (
-        <Typography variant={'reg14'}>{statisticsCount}</Typography>
-      )}
-
-      <Typography variant={'reg14'}>{statisticsTitle}</Typography>
+    <div
+      className={
+        'flex gap-4 justify-between sm:gap-12 sm:justify-start lg:gap-25'
+      }
+    >
+      <div className={'flex flex-col text-center'}>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>2218</Typography>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>
+          {following}
+        </Typography>
+      </div>
+      <div className={'flex flex-col text-center'}>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>2218</Typography>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>
+          {followers}
+        </Typography>
+      </div>
+      <div className={'flex flex-col text-center'}>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>2218</Typography>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>
+          {publications}
+        </Typography>
+      </div>
     </div>
   )
 }

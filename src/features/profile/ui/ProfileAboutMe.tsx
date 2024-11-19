@@ -1,20 +1,27 @@
-import { Skeleton, Typography } from '@/common'
+import { HTMLAttributes } from 'react'
+
+import { Typography } from '@/common'
 
 type Props = {
   aboutMe?: string
-  isProfileLoading: boolean
-}
-export const ProfileAboutMe = ({ aboutMe, isProfileLoading }: Props) => {
+  isMobile: boolean
+} & HTMLAttributes<HTMLDivElement>
+export const ProfileAboutMe = ({
+  aboutMe,
+  className,
+  isMobile,
+  ...props
+}: Props) => {
   return (
-    <Typography
-      className={'mt-[23px]'}
-      variant={'reg16'}
+    <div
+      className={className}
+      {...props}
     >
-      {isProfileLoading ? (
-        <Skeleton className={`min-h-[40px] max-w-[300px]`} />
-      ) : (
-        (aboutMe ?? '')
+      {aboutMe && (
+        <Typography variant={isMobile ? 'small' : 'reg14'}>
+          {aboutMe}
+        </Typography>
       )}
-    </Typography>
+    </div>
   )
 }
