@@ -1,5 +1,5 @@
 import { createFileForUpload, responseErrorHandler } from '@/common'
-import { Foto } from '@/features/profile/model/types'
+import { Photo } from '@/features/profile/model/types'
 import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import {
   UpdatedProfile,
@@ -12,9 +12,9 @@ import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {
-  fotos: Foto[] = []
   isLoading: boolean = false
   pageNumber: number = 1
+  photos: Photo[] = []
   stopRequest: boolean = false
   userProfile?: UserProfile
 
@@ -30,7 +30,7 @@ class ProfileStore {
     }
   }
 
-  async getFotoUser() {
+  async getPhotoUser() {
     try {
       if (this.isLoading || this.stopRequest) {
         return
@@ -43,7 +43,7 @@ class ProfileStore {
           this.userProfile?.userName
         )
 
-        let newPhotos: Foto[] = []
+        let newPhotos: Photo[] = []
 
         if (res.items.length !== 0) {
           newPhotos = res.items.map((item) => ({
@@ -55,7 +55,7 @@ class ProfileStore {
         }
 
         runInAction(() => {
-          this.fotos.push(...newPhotos)
+          this.photos.push(...newPhotos)
           this.isLoading = false
           this.pageNumber += 1
         })

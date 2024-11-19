@@ -6,7 +6,7 @@ type Images = {
   url: string
   width: number
 }
-export type Foto = {
+export type Photo = {
   id: number
   images: Images[]
 }

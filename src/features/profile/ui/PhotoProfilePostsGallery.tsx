@@ -9,7 +9,7 @@ import Link from 'next/link'
 import { profileStore } from '../settings'
 
 export const PhotoProfilePostsGallery = observer(() => {
-  const photos = profileStore?.fotos
+  const photos = profileStore?.photos
 
   const { inView, ref } = useInView({
     threshold: 0.1,
@@ -17,7 +17,7 @@ export const PhotoProfilePostsGallery = observer(() => {
 
   useEffect(() => {
     if (inView) {
-      profileStore.getFotoUser()
+      profileStore.getPhotoUser()
     }
   }, [inView])
 
