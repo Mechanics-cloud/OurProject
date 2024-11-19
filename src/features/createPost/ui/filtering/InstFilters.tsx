@@ -3,10 +3,9 @@ import * as React from 'react'
 import { ScrollArea } from '@/common'
 import { addPostStore, instFiltersData } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
+import { InstFilter } from 'src/features/createPost/ui/filtering/InstFilter'
 
-import { Filter } from './Filter'
-
-export const InstaFilters = observer(() => {
+export const InstFilters = observer(() => {
   const photos = addPostStore.photos
   const addFilter = addPostStore.addFilter
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
@@ -19,7 +18,7 @@ export const InstaFilters = observer(() => {
         }
       >
         {instFiltersData.map((filter, index) => (
-          <Filter
+          <InstFilter
             filterName={filter.name}
             filterSettings={filter.style}
             imageSrc={

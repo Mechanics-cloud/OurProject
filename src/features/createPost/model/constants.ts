@@ -1,5 +1,6 @@
 import {
-  FilterType,
+  ClassicSetting,
+  InstFilter,
   PhotoEditorStateType,
 } from '@/features/createPost/model/types'
 
@@ -24,7 +25,7 @@ for (const [key, value] of mapNext) {
 export const MaxPhotoCount = 10
 export const MaxDescriptionLength = 500
 
-export const instFiltersData: FilterType[] = [
+export const instFiltersData: InstFilter[] = [
   { name: 'Normal', style: '' },
   { name: '1977', style: 'filter-1977' },
   { name: 'Aden', style: 'filter-aden' },
@@ -38,4 +39,12 @@ export const instFiltersData: FilterType[] = [
   { name: 'Perpetua', style: 'filter-perpetua' },
   { name: 'Willow', style: 'filter-willow' },
   { name: 'Xpro', style: 'filter-xpro' },
+] as const
+
+export const classicSettingsData: ClassicSetting[] = [
+  { centered: true, field: 'contrast', name: 'Contrast' },
+  { centered: true, field: 'brightness', name: 'Brightness' },
+  { centered: true, field: 'saturate', name: 'Saturation' },
+  { field: 'sepia', name: 'Sepia' },
+  { field: 'grayscale', name: 'Grayscale' },
 ] as const

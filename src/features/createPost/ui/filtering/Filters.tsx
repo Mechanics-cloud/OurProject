@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import { Tabs, TabsType, useTranslation } from '@/common'
 import {
-  ClassicSettings,
-  InstaFilters,
+  ClassicFilters,
+  InstFilters,
   addPostStore,
 } from '@/features/createPost'
 import { LocaleType } from '@locales/ru'
@@ -12,12 +12,12 @@ import { observer } from 'mobx-react-lite'
 export const getFiltersTabs = (t: LocaleType): TabsType[] => {
   return [
     {
-      content: <InstaFilters />,
+      content: <InstFilters />,
       id: 'Filters',
       title: 'Filters',
     },
     {
-      content: <ClassicSettings />,
+      content: <ClassicFilters />,
       id: 'Settings',
       title: 'Settings',
     },

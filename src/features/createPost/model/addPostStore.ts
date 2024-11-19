@@ -1,7 +1,6 @@
 import { Area, Point } from 'react-easy-crop'
 import { toast } from 'react-toastify'
 
-import { Nullable } from '@/common'
 import getCroppedImg from '@/common/utils/cropPhoto'
 import { findObjectInArray } from '@/common/utils/findObjectInArray'
 import {

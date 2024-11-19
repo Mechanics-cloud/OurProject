@@ -10,10 +10,11 @@ import {
   typographyVariants,
 } from '@/common'
 import { Filters, SwiperCover, addPostStore } from '@/features/createPost'
+import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
-export const FilterPhotoModal = () => {
+export const FilterPhotoModal = observer(() => {
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage
   const photos = addPostStore.photos
@@ -78,4 +79,4 @@ export const FilterPhotoModal = () => {
       </DialogDescription>
     </DialogContent>
   )
-}
+})

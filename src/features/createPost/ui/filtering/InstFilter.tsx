@@ -9,7 +9,8 @@ type Props = {
   filterSettings: string
   imageSrc: string
 } & ComponentPropsWithoutRef<'span'>
-export const Filter = ({
+
+export const InstFilter = ({
   className,
   filterName,
   filterSettings,

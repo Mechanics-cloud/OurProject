@@ -19,7 +19,25 @@ export type PostPhoto = {
   zoom?: number
 }
 
-export type FilterType = {
+export type InstFilter = {
   name: string
   style: string
+}
+
+export type ClassicFiltersType =
+  | 'brightness'
+  | 'contrast'
+  | 'grayscale'
+  | 'saturate'
+  | 'sepia'
+
+export type ClassicSetting = {
+  centered?: boolean
+  field: ClassicFiltersType
+  name: string
+  // value: number
+}
+
+export type FiltersState = {
+  [key in ClassicFiltersType]: number
 }
