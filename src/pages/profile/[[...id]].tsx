@@ -2,7 +2,6 @@ import { Paid } from '@/assets/icons'
 import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
-import { cn } from '@/common/utils/cn'
 import {
   ProfileAboutMe,
   ProfilePosts,
