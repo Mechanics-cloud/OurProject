@@ -17,7 +17,11 @@ class ProfileApi {
 
     return res.data
   }
-  public async getProfilePosts(page: number, userName: string) {
+  public async getProfilePosts(
+    page: number,
+    userName: string,
+    signal?: AbortSignal
+  ) {
     const res = await this.instance.get<ImageData>(
       ProfileEndpoints.posts(userName),
       {
@@ -26,6 +30,7 @@ class ProfileApi {
           pageNumber: page,
           pageSize: 8,
         },
+        signal: signal,
       }
     )
 

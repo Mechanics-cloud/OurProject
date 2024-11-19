@@ -30,7 +30,7 @@ class ProfileStore {
     }
   }
 
-  async getPhotoUser() {
+  async getPhotoUser({ signal }: { signal?: AbortSignal }) {
     try {
       if (this.isLoading || this.stopRequest) {
         return
@@ -40,7 +40,8 @@ class ProfileStore {
       if (this.userProfile) {
         const res = await profileAPi.getProfilePosts(
           this.pageNumber,
-          this.userProfile?.userName
+          this.userProfile?.userName,
+          signal
         )
 
         let newPhotos: Photo[] = []
@@ -62,6 +63,8 @@ class ProfileStore {
       }
     } catch (error) {
       responseErrorHandler(error)
+    } finally {
+      this.isLoading = false
     }
   }
 

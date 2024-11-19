@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { LegacyRef, useEffect, useRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { Skeleton, cn } from '@/common'
@@ -16,8 +16,15 @@ export const PhotoProfilePostsGallery = observer(() => {
   })
 
   useEffect(() => {
+    const controller = new AbortController()
+    const signal = controller.signal
+
     if (inView) {
-      profileStore.getPhotoUser()
+      profileStore.getPhotoUser({ signal })
+    }
+
+    return () => {
+      controller.abort()
     }
   }, [inView])
 
@@ -40,13 +47,13 @@ export const PhotoProfilePostsGallery = observer(() => {
         ))}
       </div>
       <div
-        className={'mt-10'}
+        className={'mt-10 w-full h-[228px]'}
         ref={ref}
       >
         {profileStore.isLoading ? (
-          <Skeleton className={'w-full h-[228px]'} />
+          <Skeleton className={'w-full h-full'} />
         ) : (
-          <div className={'w-full h-[18px]'}></div>
+          <div className={'w-full  h-full'}></div>
         )}
       </div>
     </>
