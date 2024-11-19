@@ -3,6 +3,7 @@ import {
   createFileForUpload,
   responseErrorHandler,
 } from '@/common'
+import { generalStore } from '@/core/store'
 import {
   UpdatedProfile,
   UserInfo,
@@ -37,6 +38,7 @@ class ProfileStore {
 
       runInAction(() => {
         this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
+        generalStore.addUserAvatar(userProfile.avatars[0].url)
       })
 
       return userProfile

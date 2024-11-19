@@ -35,11 +35,7 @@ export const PhotoCrop = observer(({ photo }: Props) => {
   )
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      onCrop(photo.cropDataSave ?? { x: 0, y: 0 })
-    }, 0)
-
-    return () => clearTimeout(timeoutId)
+    onCrop(photo.cropDataSave ?? { x: 0, y: 0 })
   }, [onCrop, photo.cropDataSave])
 
   return (

@@ -17,3 +17,8 @@ export type PostPhoto = {
   url: string
   zoom?: number
 }
+
+export type FilterType = {
+  name: string
+  style: string
+}

@@ -1,17 +1,18 @@
 import * as React from 'react'
 
 import { TextArea, Typography, UserMiniLink, useTranslation } from '@/common'
+import { generalStore } from '@/core/store'
 import {
   CityAutocomplete,
   MaxDescriptionLength,
   addPostStore,
 } from '@/features/createPost'
-import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 
 export const AddTextPost = observer(() => {
   const { t } = useTranslation()
-  const userProfile = profileStore.userProfile
+  const userAvatar = generalStore.userAvatar ?? ''
+  const userName = generalStore.user?.userName ?? ''
   const location = addPostStore.location
   const postDescription = addPostStore.postDescription
   const addPostDescription = addPostStore.addPostDescription
@@ -26,8 +27,8 @@ export const AddTextPost = observer(() => {
           onClick={(e) => {
             e.preventDefault()
           }}
-          userAvatarSrc={userProfile?.avatars[0].url ?? ''}
-          userName={userProfile?.userName ?? ''}
+          userAvatarSrc={userAvatar}
+          userName={userName}
           userProfileLink={''}
         />
         <TextArea
