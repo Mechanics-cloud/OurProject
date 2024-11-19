@@ -30,20 +30,24 @@ const Profile = observer(() => {
       <div className={'flex flex-col w-full'}>
         <div
           className={
-            'mt-9 flex items-start w-full gap-5 mb-3 lg:gap-9 lg:mb-[53px]'
+            'mt-5 md:mt-9 flex items-start w-full gap-5 mb-3 lg:gap-9 lg:mb-[53px]'
           }
         >
           <Image
             alt={'avatar'}
             className={'rounded-full pr-0'}
-            height={200}
+            height={isMobile ? 100 : 200}
             src={avatar || avatarPlaceholder}
-            width={200}
+            width={isMobile ? 100 : 200}
           />
           <div className={'flex flex-col flex-wrap w-full'}>
-            <div className={'flex items-center justify-between w-full mb-5'}>
+            <div
+              className={
+                'hidden md:flex items-center justify-between w-full mb-5'
+              }
+            >
               <Typography
-                className={'text-light-100 flex items-center gap-3'}
+                className={'flex text-light-100 items-center gap-3'}
                 variant={'h1'}
               >
                 {userProfile?.userName ?? 'URL Profile'}
@@ -70,6 +74,13 @@ const Profile = observer(() => {
             />
           </div>
         </div>
+        <Typography
+          className={'md:hidden flex text-light-100 items-center gap-3 mb-3'}
+          variant={'h1'}
+        >
+          {userProfile?.userName ?? 'URL Profile'}
+          <Paid />
+        </Typography>
         <ProfileAboutMe
           aboutMe={userProfile?.aboutMe}
           className={isTablet ? 'mb-7' : 'hidden'}
