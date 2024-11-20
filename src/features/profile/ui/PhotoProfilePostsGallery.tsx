@@ -16,10 +16,13 @@ export const PhotoProfilePostsGallery = observer(() => {
   })
 
   useEffect(() => {
+    const windowHeight = document.documentElement.clientHeight
     const controller = new AbortController()
     const signal = controller.signal
 
-    if (inView) {
+    if (inView && windowHeight > 965) {
+      profileStore.getPhotoUser({ pageSize: 16, signal })
+    } else if (inView) {
       profileStore.getPhotoUser({ signal })
     }
 

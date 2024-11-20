@@ -30,7 +30,10 @@ class ProfileStore {
     }
   }
 
-  async getPhotoUser({ signal }: { signal?: AbortSignal }) {
+  async getPhotoUser({
+    pageSize,
+    signal,
+  }: { pageSize?: number; signal?: AbortSignal } = {}) {
     try {
       if (this.isLoading || this.stopRequest) {
         return
@@ -41,7 +44,8 @@ class ProfileStore {
         const res = await profileAPi.getProfilePosts(
           this.pageNumber,
           this.userProfile?.userName,
-          signal
+          signal,
+          pageSize
         )
 
         let newPhotos: Photo[] = []
@@ -57,12 +61,16 @@ class ProfileStore {
 
         runInAction(() => {
           this.photos.push(...newPhotos)
-          this.isLoading = false
           this.pageNumber += 1
+          this.isLoading = false
         })
       }
     } catch (error) {
-      responseErrorHandler(error)
+      if ((error as Error).name !== 'AbortError') {
+        return
+      } else {
+        responseErrorHandler(error)
+      }
     } finally {
       this.isLoading = false
     }
