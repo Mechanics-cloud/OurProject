@@ -68,10 +68,6 @@ export const FilterPhotoModal = observer(() => {
                     photo.instFilter
                   )}
                   height={0}
-                  onClick={() => {
-                    console.log(photo.instFilter)
-                    console.log(photo.classicFilter)
-                  }}
                   src={photo.croppedImgData.photoUrl ?? photo.url}
                   style={{ filter: photo.classicFilter }}
                   width={0}

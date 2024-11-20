@@ -1,14 +1,8 @@
 import * as React from 'react'
-import { useCallback, useEffect, useMemo } from 'react'
-import Cropper, { Area, Point } from 'react-easy-crop'
+import Cropper, { Point } from 'react-easy-crop'
 
-import {
-  ControllersPanel,
-  PostPhoto,
-  addPostStore,
-} from '@/features/createPost'
-import { usePhotoCrop } from '@/features/createPost/model/usePhotoCrop'
-import { toJS } from 'mobx'
+import { ControllersPanel, PostPhoto } from '@/features/createPost'
+import { usePhotoCrop } from '@/features/createPost/model/cropping/usePhotoCrop'
 import { observer } from 'mobx-react-lite'
 
 type Props = {

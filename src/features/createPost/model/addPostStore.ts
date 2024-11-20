@@ -83,6 +83,13 @@ class AddPostStore {
 
   addInstFilter(index: number, filter: string) {
     this.photos[index].classicFilter = ''
+    this.photos[index].classicFilterSettings = {
+      brightness: 1,
+      contrast: 1,
+      grayscale: 0,
+      saturate: 1,
+      sepia: 0,
+    }
     this.photos[index].instFilter = filter
   }
 

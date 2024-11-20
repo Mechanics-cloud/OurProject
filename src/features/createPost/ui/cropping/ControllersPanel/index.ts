@@ -1,4 +1,5 @@
 export * from './AddPhotoControllerPopover'
+export * from './AspectButton'
 export * from './AspectControllerButtons'
 export * from './AspectControllerPopover'
 export * from './ControllersPanel'

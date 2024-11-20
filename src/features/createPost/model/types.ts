@@ -1,3 +1,4 @@
+import { ElementType } from 'react'
 import { Area, Point } from 'react-easy-crop'
 
 import { Nullable, PhotoResult } from '@/common'
@@ -41,4 +42,10 @@ export type ClassicSetting = {
 
 export type FiltersState = {
   [key in ClassicFiltersType]: number
+}
+
+export type ScaleSizeButtonType = {
+  aspect: number
+  icon: ElementType
+  title: string
 }

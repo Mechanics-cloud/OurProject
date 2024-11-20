@@ -1,49 +1,24 @@
 import * as React from 'react'
-import { ChangeEvent, useContext, useState } from 'react'
 
 import { Image, ImageOutline, PlusCircleOutline } from '@/assets/icons'
+import { Popover, PopoverContent, PopoverTrigger, cn } from '@/common'
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  cn,
-  useTranslation,
-} from '@/common'
-import {
-  MaxPhotoCount,
+  MiniaturePhoto,
   PhotoControllerButton,
-  SwiperContext,
-  addPhotosCheck,
-  addPostStore,
+  useAddPhotoControllerPopover,
 } from '@/features/createPost'
-import { MiniaturePhoto } from '@/features/createPost/ui/cropping/ControllersPanel/MiniaturePhoto'
 import { observer } from 'mobx-react-lite'
 
 export const AddPhotoControllerPopover = observer(() => {
-  const { t } = useTranslation()
-  const [isOpen, setIsOpen] = useState(false)
-  const addPostPhoto = addPostStore.addPhoto
-  const photos = addPostStore.photos
-  const totalCount = addPostStore.getCurrentPhotosCount()
-  const isAddingDisabled = totalCount === MaxPhotoCount
-  const context = useContext(SwiperContext)
-
-  if (!context) {
-    throw new Error('Slide must be used within a Swiper provider')
-  }
-
-  const { goToSlide } = context
-
-  const onPhotoChoose = async (inputEvent: ChangeEvent<HTMLInputElement>) => {
-    const fileList = inputEvent.target.files
-
-    if (fileList) {
-      const files: File[] = Array.from(fileList)
-
-      await addPhotosCheck(files, totalCount, t, addPostPhoto)
-      goToSlide(totalCount + 1)
-    }
-  }
+  const {
+    goToSlide,
+    isAddingDisabled,
+    isOpen,
+    onPhotoChoose,
+    photos,
+    setIsOpen,
+    t,
+  } = useAddPhotoControllerPopover()
 
   return (
     <Popover
