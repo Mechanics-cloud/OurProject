@@ -2,11 +2,8 @@ import * as React from 'react'
 
 import { TextArea, Typography, UserMiniLink, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
-import {
-  CityAutocomplete,
-  MaxDescriptionLength,
-  addPostStore,
-} from '@/features/createPost'
+import { CityAutocomplete, addPostStore } from '@/features/createPost'
+import { MaxDescriptionLength } from '@/features/createPost/model/constants'
 import { observer } from 'mobx-react-lite'
 
 export const AddTextPost = observer(() => {

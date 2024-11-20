@@ -10,7 +10,7 @@ export const useCityAutocomplete = () => {
   const location = addPostStore.location
   const [query, setQuery] = useState<string>('')
   const [suggestions, setSuggestions] = useState<string[]>([])
-  const [cityData, setCityData] = useState<CountryData[]>([])
+  const [locationData, setLocationData] = useState<CountryData[]>([])
   const [isCitySelected, setIsCitySelected] = useState<boolean>(false)
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
   const suggestionsListRef = useRef<HTMLUListElement | null>(null)
@@ -20,7 +20,7 @@ export const useCityAutocomplete = () => {
       if (query.length > 0 && !isCitySelected) {
         const matchingCities: string[] = []
 
-        cityData.forEach((country) => {
+        locationData.forEach((country) => {
           matchingCities.push(
             ...country.cities.filter((city) =>
               city.toLowerCase().includes(query.toLowerCase())
@@ -34,15 +34,15 @@ export const useCityAutocomplete = () => {
     }, 300)
 
     return () => clearTimeout(timeoutId)
-  }, [query, cityData, isCitySelected])
+  }, [query, locationData, isCitySelected])
 
   useEffect(() => {
     locationsApi.fetchCountries().then((res) => {
-      setCityData(res)
+      setLocationData(res)
     })
   }, [])
 
-  const handleMouseMove = (event: MouseEvent) => {
+  const handleMouseMove = () => {
     setFocusedIndex(-1)
   }
 
@@ -57,10 +57,10 @@ export const useCityAutocomplete = () => {
   const onSelectCity = (selectedCity: string) => {
     let country = ''
 
-    for (let i = 0; i < cityData.length; i++) {
-      cityData[i].cities.find((city) => {
+    for (let i = 0; i < locationData.length; i++) {
+      locationData[i].cities.find((city) => {
         if (city === selectedCity) {
-          country = cityData[i].country
+          country = locationData[i].country
         }
       })
       if (country) {

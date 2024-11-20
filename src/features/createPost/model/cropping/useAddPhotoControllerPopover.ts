@@ -2,11 +2,11 @@ import { ChangeEvent, useContext, useState } from 'react'
 
 import { useTranslation } from '@/common'
 import {
-  MaxPhotoCount,
   SwiperContext,
   addPhotosCheck,
   addPostStore,
 } from '@/features/createPost'
+import { MaxPhotoCount } from '@/features/createPost/model/constants'
 
 export const useAddPhotoControllerPopover = () => {
   const { t } = useTranslation()
