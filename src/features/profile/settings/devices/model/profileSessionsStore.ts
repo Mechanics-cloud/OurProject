@@ -1,7 +1,6 @@
 import { toast } from 'react-toastify'
 
-import { Nullable, responseErrorHandler } from '@/common'
-import { clearAllData } from '@/common/utils/clearAllData'
+import { Nullable, clearAllData, responseErrorHandler } from '@/common'
 import {
   DeviceType,
   profileDevicesApi,

@@ -1,3 +1,4 @@
+export * from './clearAllData'
 export * from './cn'
 export * from './createFileForUpload'
 export * from './cropPhoto'

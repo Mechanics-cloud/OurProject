@@ -1,14 +1,13 @@
-import { Paths, setToLocalStorage } from '@/common'
+import { Paths, clearAllData, setToLocalStorage } from '@/common'
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
-import { clearAllData } from '@/common/utils/clearAllData'
 import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
   isAxiosError,
 } from 'axios'
 
-import { EndpointsToken } from './instance.endpoints'
+import { CommonEndpoints } from './common.endpoints'
 
 export const instance = axios.create({
   baseURL: Environments.API_URL,
@@ -22,7 +21,7 @@ const updateToken = async (params: InternalAxiosRequestConfig | undefined) => {
   try {
     if (localStorage.getItem(StorageKeys.AccessToken)) {
       const newToken = await instance
-        .post(EndpointsToken.updateToken)
+        .post(CommonEndpoints.updateToken)
         .then((res) => res.data.accessToken)
 
       setToLocalStorage(StorageKeys.AccessToken, newToken)
@@ -47,7 +46,7 @@ instance.interceptors.response.use(
   async (error: unknown) => {
     if (isAxiosError(error)) {
       if (error.response?.status === StatusCode.Unauthorized) {
-        if (error.config?.url === EndpointsToken.updateToken) {
+        if (error.config?.url === CommonEndpoints.updateToken) {
           await clearAllData(Paths.signIn)
 
           return Promise.reject(error)

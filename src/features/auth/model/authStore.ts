@@ -1,7 +1,6 @@
+import { clearAllData, responseErrorHandler } from '@/common'
 import { StatusCode, StorageKeys } from '@/common/enums'
-import { clearAllData } from '@/common/utils/clearAllData'
 import { setToLocalStorage } from '@/common/utils/localStorage'
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import { authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'

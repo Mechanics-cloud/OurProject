@@ -1,10 +1,11 @@
-import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
 import axios from 'axios'
+
+import { CommonEndpoints } from './common.endpoints'
 
 class LocationsApi {
   constructor() {}
   public fetchCountries(): Promise<CountryData[]> {
-    return axios.get(ProfileEndpoints.locations).then((res) => res.data)
+    return axios.get(CommonEndpoints.locations).then((res) => res.data)
   }
 }
 
