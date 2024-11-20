@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
-import { CountryData, locationsApi, useTranslation } from '@/common'
+import { useTranslation } from '@/common'
+import { CountryData, locationsApi } from '@/common/api'
 import { addPostStore } from '@/features/createPost'
 
 export const useCityAutocomplete = () => {

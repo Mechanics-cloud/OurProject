@@ -1,4 +1,4 @@
-import { instance } from '@/features/auth'
+import { instance } from '@/common/api'
 import { AddPostEndpoints } from '@/features/createPost'
 import { AxiosInstance } from 'axios'
 
