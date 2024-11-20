@@ -8,12 +8,14 @@ export type PhotoEditorStateType =
 
 export type PostPhoto = {
   aspect: number
+  classicFilter: string
+  classicFilterSettings: FiltersState
   crop: Point
   cropDataSave: Nullable<Point>
   croppedArea: Area
   croppedImgData: PhotoResult
-  filter: string
   id: string
+  instFilter: string
   originAspect: number
   url: string
   zoom?: number
@@ -35,7 +37,6 @@ export type ClassicSetting = {
   centered?: boolean
   field: ClassicFiltersType
   name: string
-  // value: number
 }
 
 export type FiltersState = {

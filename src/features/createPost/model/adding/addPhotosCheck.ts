@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import {
   AddPhotoSchema,
   addPhotoSchema,
-} from '@/features/createPost/model/addPhotoSchema'
+} from '@/features/createPost/model/adding/addPhotoSchema'
 import { MaxPhotoCount } from '@/features/createPost/model/constants'
 import { LocaleType } from '@locales/ru'
 import { z } from 'zod'

@@ -10,6 +10,7 @@ import {
   mapPrev,
 } from '@/features/createPost/model/constants'
 import {
+  ClassicFiltersType,
   PhotoEditorStateType,
   PostPhoto,
 } from '@/features/createPost/model/types'
@@ -29,6 +30,16 @@ class AddPostStore {
 
   constructor() {
     makeAutoObservable(this, undefined, { autoBind: true })
+  }
+
+  addClassicFilter(index: number) {
+    this.photos[index].instFilter = ''
+
+    this.photos[index].classicFilter = Object.entries(
+      this.photos[index].classicFilterSettings
+    ).reduce((acc, filter) => {
+      return acc + `${filter[0]}(${filter[1]}) `
+    }, '')
   }
 
   addCrop(id: string, crop: Point) {
@@ -70,8 +81,9 @@ class AddPostStore {
     })
   }
 
-  addFilter(index: number, filter: string) {
-    this.photos[index].filter = filter
+  addInstFilter(index: number, filter: string) {
+    this.photos[index].classicFilter = ''
+    this.photos[index].instFilter = filter
   }
 
   addLocation(city: string, country: string) {
@@ -86,6 +98,14 @@ class AddPostStore {
       ...this.photos,
       {
         aspect: 1,
+        classicFilter: '',
+        classicFilterSettings: {
+          brightness: 1,
+          contrast: 1,
+          grayscale: 0,
+          saturate: 1,
+          sepia: 0,
+        },
         crop: { x: 0, y: 0 },
         cropDataSave: null,
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },
@@ -93,8 +113,8 @@ class AddPostStore {
           photoFile: null,
           photoUrl: null,
         },
-        filter: '',
         id,
+        instFilter: '',
         originAspect: 1,
         url,
         zoom: 1,
@@ -122,6 +142,15 @@ class AddPostStore {
     if (photo) {
       photo.aspect = aspect
     }
+  }
+
+  changeClassicFilterSetting(
+    index: number,
+    filter: ClassicFiltersType,
+    value: number
+  ) {
+    this.photos[index].classicFilterSettings[filter] = value
+    this.addClassicFilter(index)
   }
 
   clearLocation() {

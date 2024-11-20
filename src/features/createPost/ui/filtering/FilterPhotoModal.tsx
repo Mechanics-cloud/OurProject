@@ -65,10 +65,15 @@ export const FilterPhotoModal = observer(() => {
                   alt={'Photo in carousel'}
                   className={cn(
                     'object-center object-contain w-full h-auto',
-                    photo.filter
+                    photo.instFilter
                   )}
                   height={0}
+                  onClick={() => {
+                    console.log(photo.instFilter)
+                    console.log(photo.classicFilter)
+                  }}
                   src={photo.croppedImgData.photoUrl ?? photo.url}
+                  style={{ filter: photo.classicFilter }}
                   width={0}
                 />
               </SwiperSlide>

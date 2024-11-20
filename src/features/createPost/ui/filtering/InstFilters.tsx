@@ -7,7 +7,7 @@ import { InstFilter } from 'src/features/createPost/ui/filtering/InstFilter'
 
 export const InstFilters = observer(() => {
   const photos = addPostStore.photos
-  const addFilter = addPostStore.addFilter
+  const addInstFilter = addPostStore.addInstFilter
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
 
   return (
@@ -27,7 +27,7 @@ export const InstFilters = observer(() => {
             }
             key={index}
             onClick={() => {
-              addFilter(currentSliderIndex, filter.style)
+              addInstFilter(currentSliderIndex, filter.style)
             }}
           />
         ))}

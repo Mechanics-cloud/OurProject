@@ -7,6 +7,7 @@ import {
   PostPhoto,
   addPostStore,
 } from '@/features/createPost'
+import { usePhotoCrop } from '@/features/createPost/model/usePhotoCrop'
 import { toJS } from 'mobx'
 import { observer } from 'mobx-react-lite'
 
@@ -15,28 +16,7 @@ type Props = {
 }
 
 export const PhotoCrop = observer(({ photo }: Props) => {
-  const addZoom = addPostStore.addZoom
-  const addCrop = useMemo(() => addPostStore.addCrop, [])
-  const addCroppedArea = addPostStore.addCroppedArea
-
-  const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
-    addCroppedArea(photo.id, toJS(croppedAreaPixels))
-  }
-
-  const onZoom = (zoom: number) => {
-    addZoom(photo.id, zoom)
-  }
-
-  const onCrop = useCallback(
-    (crop: Point) => {
-      addCrop(photo.id, crop)
-    },
-    [addCrop, photo.id]
-  )
-
-  useEffect(() => {
-    onCrop(photo.cropDataSave ?? { x: 0, y: 0 })
-  }, [onCrop, photo.cropDataSave])
+  const { onCrop, onCropComplete, onZoom } = usePhotoCrop(photo)
 
   return (
     <>

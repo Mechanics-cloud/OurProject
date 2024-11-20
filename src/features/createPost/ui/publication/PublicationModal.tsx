@@ -65,9 +65,14 @@ export const PublicationModal = () => {
               >
                 <Image
                   alt={'Photo in carousel'}
-                  className={'object-center object-contain'}
+                  // className={'object-center object-contain'}
+                  className={cn(
+                    'object-center object-contain w-full h-auto',
+                    photo.instFilter
+                  )}
                   height={490}
                   src={photo.croppedImgData.photoUrl ?? photo.url}
+                  style={{ filter: photo.classicFilter }}
                   width={490}
                 />
               </SwiperSlide>

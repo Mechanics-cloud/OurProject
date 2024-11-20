@@ -157,7 +157,7 @@ input[type='password']::-ms-clear {
   }
 
   .sliderCenter {
-    @apply relative after:absolute after:-z-10 after:w-0.5 after:h-4 after:bg-light-900 after:left-[50%] after:-translate-x-[50%];
+    @apply relative after:absolute after:-z-10 after:w-0.5 after:h-4 after:bg-light-900 after:left-[34%] after:-translate-x-[50%];
   }
 }
 
