@@ -75,10 +75,7 @@ export const GeneralInfoComponent = forwardRef<HTMLFormElement>((_, ref) => {
               name={'dateOfBirth'}
               setValue={setValue}
             />
-            <SelectCountryAndCity
-              control={control}
-              isTablet={isTablet}
-            />
+            <SelectCountryAndCity control={control} />
           </div>
           <FormTextArea
             control={control}

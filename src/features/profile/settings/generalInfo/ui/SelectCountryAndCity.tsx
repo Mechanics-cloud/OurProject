@@ -1,17 +1,15 @@
 import React from 'react'
 import { Control, FieldValues, Path } from 'react-hook-form'
 
-import { SelectItem, cn, useTranslation } from '@/common'
+import { SelectItem, useTranslation } from '@/common'
 import { FormSelect } from '@/common/form/FormSelect'
 import { useFetchLocations } from '@/features/profile'
 
 type Props<T extends FieldValues> = {
   control: Control<T>
-  isTablet: boolean
 }
 export const SelectCountryAndCity = <T extends FieldValues>({
   control,
-  isTablet,
 }: Props<T>) => {
   const { t } = useTranslation()
   const { cities, countriesData, countryValue, loading } =
