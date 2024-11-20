@@ -7,10 +7,10 @@ import {
   ClosePostCreatingModal,
   CropPhotoModal,
   FilterPhotoModal,
-  PhotoEditorState,
   PublicationModal,
   addPostStore,
 } from '@/features/createPost'
+import { PhotoEditorState } from '@/features/createPost/model/constants'
 import { DialogProps } from '@radix-ui/react-dialog'
 import { observer } from 'mobx-react-lite'
 

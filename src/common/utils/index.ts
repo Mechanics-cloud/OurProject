@@ -1,5 +1,7 @@
 export * from './cn'
 export * from './createFileForUpload'
+export * from './cropPhoto'
+export * from './findObjectInArray'
 export * from './getBasePath'
 export * from './localStorage'
 export * from './responseErrorHandler'

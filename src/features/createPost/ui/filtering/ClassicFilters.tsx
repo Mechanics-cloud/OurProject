@@ -1,35 +1,16 @@
 import * as React from 'react'
-import { useState } from 'react'
 
 import { Typography } from '@/common'
-import {
-  ClassicFiltersType,
-  FiltersState,
-  Slider,
-  addPostStore,
-  classicSettingsData,
-} from '@/features/createPost'
+import { ClassicFiltersType, Slider, addPostStore } from '@/features/createPost'
+import { classicSettingsData } from '@/features/createPost/model/constants'
 import { observer } from 'mobx-react-lite'
 
 export const ClassicFilters = observer(() => {
-  // const [classicFilter, setClassicFilter] = useState<FiltersState>({
-  //   brightness: 1,
-  //   contrast: 1,
-  //   grayscale: 0,
-  //   saturate: 1,
-  //   sepia: 0,
-  // })
   const photos = addPostStore.photos
   const changeClassicFilterSetting = addPostStore.changeClassicFilterSetting
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
 
   const updateFilter = (filter: ClassicFiltersType, value: number) => {
-    // setClassicFilter((prevFilters) => ({
-    //   ...prevFilters,
-    //   [filter]: value,
-    // }))
-    // const filterForImage = `contrast(${classicFilter.contrast}) brightness(${classicFilter.brightness}) grayscale(${classicFilter.grayscale}) saturate(${classicFilter.saturate}) sepia(${classicFilter.sepia})`
-
     changeClassicFilterSetting(currentSliderIndex, filter, value)
   }
 

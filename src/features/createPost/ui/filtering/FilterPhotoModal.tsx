@@ -42,6 +42,7 @@ export const FilterPhotoModal = observer(() => {
           </span>
         </DialogTitle>
       </DialogHeader>
+
       <DialogDescription
         asChild
         className={cn('m-0 p-0 lg:m-0 lg:p-0')}

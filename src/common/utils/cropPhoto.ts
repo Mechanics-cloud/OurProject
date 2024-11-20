@@ -11,7 +11,7 @@ const createImage = (url: string): Promise<HTMLImageElement> =>
     image.src = url
   })
 
-export default async function getCroppedImg(
+export async function getCroppedImg(
   imageSrc: string,
   pixelCrop: Area
 ): Promise<PhotoResult> {

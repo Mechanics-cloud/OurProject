@@ -1,17 +1,17 @@
 import { Area, Point } from 'react-easy-crop'
 import { toast } from 'react-toastify'
 
-import getCroppedImg from '@/common/utils/cropPhoto'
-import { findObjectInArray } from '@/common/utils/findObjectInArray'
+import { findObjectInArray, getCroppedImg } from '@/common'
 import {
   MaxDescriptionLength,
   PhotoEditorState,
+  PhotoEditorStateType,
+  defaultClassicFiltersSettings,
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
 import {
   ClassicFiltersType,
-  PhotoEditorStateType,
   PostPhoto,
 } from '@/features/createPost/model/types'
 import { makeAutoObservable, runInAction } from 'mobx'
@@ -83,13 +83,7 @@ class AddPostStore {
 
   addInstFilter(index: number, filter: string) {
     this.photos[index].classicFilter = ''
-    this.photos[index].classicFilterSettings = {
-      brightness: 1,
-      contrast: 1,
-      grayscale: 0,
-      saturate: 1,
-      sepia: 0,
-    }
+    this.photos[index].classicFilterSettings = defaultClassicFiltersSettings
     this.photos[index].instFilter = filter
   }
 
@@ -106,13 +100,7 @@ class AddPostStore {
       {
         aspect: 1,
         classicFilter: '',
-        classicFilterSettings: {
-          brightness: 1,
-          contrast: 1,
-          grayscale: 0,
-          saturate: 1,
-          sepia: 0,
-        },
+        classicFilterSettings: defaultClassicFiltersSettings,
         crop: { x: 0, y: 0 },
         cropDataSave: null,
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },

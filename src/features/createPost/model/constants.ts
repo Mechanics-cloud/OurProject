@@ -1,8 +1,4 @@
-import {
-  ClassicSetting,
-  InstFilter,
-  PhotoEditorStateType,
-} from '@/features/createPost/model/types'
+import { ClassicSetting, InstFilter } from './types'
 
 export const PhotoEditorState = {
   adding: 'ADDING',
@@ -10,6 +6,9 @@ export const PhotoEditorState = {
   filtering: 'FILTERING',
   publication: 'PUBLICATION',
 } as const
+
+export type PhotoEditorStateType =
+  (typeof PhotoEditorState)[keyof typeof PhotoEditorState]
 
 export const mapNext = new Map<PhotoEditorStateType, PhotoEditorStateType>([
   [PhotoEditorState.adding, PhotoEditorState.cropping],
@@ -48,3 +47,11 @@ export const classicSettingsData: ClassicSetting[] = [
   { field: 'sepia', name: 'Sepia' },
   { field: 'grayscale', name: 'Grayscale' },
 ] as const
+
+export const defaultClassicFiltersSettings = {
+  brightness: 1,
+  contrast: 1,
+  grayscale: 0,
+  saturate: 1,
+  sepia: 0,
+}

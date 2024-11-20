@@ -1,5 +1,4 @@
+export * from './ClassicFilters'
 export * from './FilterPhotoModal'
 export * from './Filters'
-export * from 'src/features/createPost/ui/filtering/ClassicFilters'
-export * from 'src/features/createPost/ui/filtering/InstFilter'
-export * from 'src/features/createPost/ui/filtering/InstFilters'
+export * from './InstFilters'

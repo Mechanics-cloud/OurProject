@@ -1,6 +1,3 @@
-import { useCallback, useMemo } from 'react'
-import { useDropzone } from 'react-dropzone'
-
 import { Image as ImageFull, ImageOutline } from '@/assets/icons'
 import {
   Button,
@@ -8,44 +5,18 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  useTranslation,
 } from '@/common'
-import { addPhotosCheck, addPostStore } from '@/features/createPost'
+import { useAddPhotoModal } from '@/features/createPost'
 
 export const AddPhotoModal = () => {
-  const { t } = useTranslation()
-  const nextStage = useMemo(() => addPostStore.nextStage, [])
-  const clearOldData = addPostStore.resetData
-  const isDraft = addPostStore.isDraft
-  const setIsNotNewDialog = addPostStore.continueDialog
-  const addPostPhoto = useMemo(() => addPostStore.addPhoto, [])
-  const totalCount = addPostStore.getCurrentPhotosCount()
-
-  const onPhotoDrop = useCallback(
-    async (files: File[]) => {
-      setIsNotNewDialog()
-      clearOldData()
-      await addPhotosCheck(files, totalCount, t, addPostPhoto)
-      nextStage()
-    },
-    [nextStage, addPostPhoto, t, totalCount, setIsNotNewDialog, clearOldData]
-  )
-
-  const dropzoneOptions = useMemo(
-    () => ({
-      accept: {
-        'image/jpeg': ['.jpeg'],
-        'image/jpg': ['.jpg'],
-        'image/png': ['.png'],
-      },
-      multiple: true,
-      onDrop: onPhotoDrop,
-    }),
-    [onPhotoDrop]
-  )
-
-  const { getInputProps, getRootProps, isDragActive } =
-    useDropzone(dropzoneOptions)
+  const {
+    getInputProps,
+    getRootProps,
+    isDraft,
+    isDragActive,
+    setIsNotNewDialog,
+    t,
+  } = useAddPhotoModal()
 
   return (
     <DialogContent className={'max-w-[492px]'}>

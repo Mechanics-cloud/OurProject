@@ -1,9 +1,11 @@
 import * as React from 'react'
 
 import { ScrollArea } from '@/common'
-import { addPostStore, instFiltersData } from '@/features/createPost'
+import { addPostStore } from '@/features/createPost'
+import { instFiltersData } from '@/features/createPost/model/constants'
 import { observer } from 'mobx-react-lite'
-import { InstFilter } from 'src/features/createPost/ui/filtering/InstFilter'
+
+import { InstFilter } from './InstFilter'
 
 export const InstFilters = observer(() => {
   const photos = addPostStore.photos
