@@ -2,11 +2,13 @@ import * as React from 'react'
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Typography, cn } from '@/common'
+import { FiltersState } from '@/features/createPost'
+import { prepareFilterStyles } from '@/features/createPost/model/prepareFilterStyles'
 import Image from 'next/image'
 
 type Props = {
   filterName: string
-  filterSettings: string
+  filterSettings: FiltersState
   imageSrc: string
 } & ComponentPropsWithoutRef<'span'>
 
@@ -30,7 +32,7 @@ export const InstFilter = ({
         className={cn('object-cover mb-1.5 w-[108px] h-[108px]')}
         height={108}
         src={imageSrc}
-        style={{ filter: filterSettings }}
+        style={{ filter: prepareFilterStyles(filterSettings) }}
         width={108}
       />
       <Typography variant={'reg16'}>{filterName}</Typography>

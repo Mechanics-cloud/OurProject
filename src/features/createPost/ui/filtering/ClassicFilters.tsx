@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite'
 
 export const ClassicFilters = observer(() => {
   const photos = addPostStore.photos
-  const changeClassicFilterSetting = addPostStore.changeClassicFilterSetting
+  const changeClassicFilterSetting = addPostStore.changeFilterSetting
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
 
   const updateFilter = (filter: ClassicFiltersType, value: number) => {
@@ -29,9 +29,7 @@ export const ClassicFilters = observer(() => {
             min={0}
             onValueChange={(value) => updateFilter(setting.field, value[0])}
             step={setting.centered ? 0.1 : 0.01}
-            value={[
-              photos[currentSliderIndex].classicFilterSettings[setting.field],
-            ]}
+            value={[photos[currentSliderIndex].filterSettings[setting.field]]}
           />
         </React.Fragment>
       ))}

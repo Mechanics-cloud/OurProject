@@ -36,30 +36,120 @@ export const defaultClassicFiltersSettings = {
   brightness: 1,
   contrast: 1,
   grayscale: 0,
+  'hue-rotate': 1,
+  hueRotate: 0,
   saturate: 1,
   sepia: 0,
 }
 
 /* filters */
-const f1977 = 'sepia(0.5) hue-rotate(-30deg) saturate(1.4)'
-const aden = 'sepia(0.2) brightness(1.15) saturate(1.4)'
-
-const amaro = 'sepia(0.35) contrast(1.1) brightness(1.2) saturate(1.3)'
-const ashby = 'sepia(0.5) contrast(1.2) saturate(1.8)'
-const brooklyn = 'sepia(0.25) contrast(1.25) brightness(1.25) hue-rotate(5deg)'
-const crema =
-  'sepia(0.5) contrast(1.25) brightness(1.15) saturate(0.9) hue-rotate(-2deg)'
-const inkwell = 'brightness(1.25) contrast(0.85) grayscale(1)'
-const lofi = 'saturate(1.1) contrast(1.5)'
-const ludwi = 'sepia(0.25) contrast(1.05) brightness(1.05) saturate(2)'
-const moon = 'brightness(1.4) contrast(0.95) saturate(0) sepia(0.35)'
-const perpetua = 'contrast(1.1) brightness(1.25) saturate(1.1)'
-const willow = 'brightness(1.2) contrast(0.85) saturate(0.05) sepia(0.2)'
-const xpro =
-  'sepia(0.45) contrast(1.25) brightness(1.75) saturate(1.3) hue-rotate(-5deg)'
+const f1977 = {
+  brightness: 1,
+  contrast: 1,
+  grayscale: 0,
+  'hue-rotate': -30,
+  saturate: 1.4,
+  sepia: 0.5,
+}
+const aden = {
+  brightness: 1.15,
+  contrast: 1,
+  grayscale: 0,
+  'hue-rotate': 0,
+  saturate: 1.4,
+  sepia: 0.2,
+}
+const amaro = {
+  brightness: 1.2,
+  contrast: 1.1,
+  grayscale: 0,
+  'hue-rotate': 0,
+  saturate: 1.3,
+  sepia: 0.35,
+}
+const ashby = {
+  brightness: 1,
+  contrast: 1.2,
+  grayscale: 0,
+  'hue-rotate': 0,
+  saturate: 1.8,
+  sepia: 0.5,
+}
+const brooklyn = {
+  brightness: 1.25,
+  contrast: 1.25,
+  grayscale: 0,
+  'hue-rotate': 5,
+  saturate: 1,
+  sepia: 0.25,
+}
+const crema = {
+  brightness: 1.15,
+  contrast: 1.25,
+  grayscale: 0,
+  'hue-rotate': -2,
+  saturate: 0.9,
+  sepia: 0.5,
+}
+const inkwell = {
+  brightness: 1.25,
+  contrast: 0.85,
+  grayscale: 1,
+  'hue-rotate': 0,
+  saturate: 1,
+  sepia: 0,
+}
+const lofi = {
+  brightness: 1,
+  contrast: 1.5,
+  grayscale: 0,
+  'hue-rotate': 0,
+  saturate: 1.1,
+  sepia: 0,
+}
+const ludwi = {
+  brightness: 1.05,
+  contrast: 1.05,
+  grayscale: 0,
+  'hue-rotate': 0,
+  saturate: 2,
+  sepia: 0.25,
+}
+const moon = {
+  brightness: 1.4,
+  contrast: 0.95,
+  grayscale: 0,
+  'hue-rotate': 0,
+  saturate: 0,
+  sepia: 0.35,
+}
+const perpetua = {
+  brightness: 1.25,
+  contrast: 1.1,
+  grayscale: 0,
+  'hue-rotate': 0,
+  saturate: 1.1,
+  sepia: 0,
+}
+const willow = {
+  brightness: 1.2,
+  contrast: 0.85,
+  grayscale: 0,
+  'hue-rotate': 0,
+  saturate: 0.05,
+  sepia: 0.2,
+}
+const xpro = {
+  brightness: 1.75,
+  contrast: 1.25,
+  grayscale: 0,
+  'hue-rotate': -5,
+  saturate: 1.3,
+  sepia: 0.45,
+}
 
 export const instFiltersData: InstFilter[] = [
-  { name: 'Normal', style: '' },
+  { name: 'Normal', style: defaultClassicFiltersSettings },
   { name: '1977', style: f1977 },
   { name: 'Aden', style: aden },
   { name: 'Amaro', style: amaro },

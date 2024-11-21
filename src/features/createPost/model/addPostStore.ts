@@ -7,7 +7,7 @@ import {
   getCroppedImg,
   responseErrorHandler,
 } from '@/common'
-import { addPostApi } from '@/features/createPost'
+import { FiltersState, addPostApi } from '@/features/createPost'
 import { UploadPost } from '@/features/createPost/api/addPost.types'
 import { applyFilters } from '@/features/createPost/model/applyFilters'
 import {
@@ -18,6 +18,7 @@ import {
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
+import { prepareFilterStyles } from '@/features/createPost/model/prepareFilterStyles'
 import {
   ClassicFiltersType,
   PostPhoto,
@@ -38,14 +39,6 @@ class AddPostStore {
 
   constructor() {
     makeAutoObservable(this, undefined, { autoBind: true })
-  }
-
-  addClassicFilter(index: number) {
-    this.photos[index].filter = Object.entries(
-      this.photos[index].classicFilterSettings
-    ).reduce((acc, filter) => {
-      return acc + `${filter[0]}(${filter[1]}) `
-    }, '')
   }
 
   addCrop(id: string, crop: Point) {
@@ -110,9 +103,9 @@ class AddPostStore {
     }
   }
 
-  addInstFilter(index: number, filter: string) {
-    this.photos[index].classicFilterSettings = defaultClassicFiltersSettings
-    this.photos[index].filter = filter
+  addInstFilter(index: number, filter: FiltersState) {
+    this.photos[index].filterSettings = filter
+    this.applyFilter(index)
   }
 
   addLocation(city: string, country: string) {
@@ -127,11 +120,11 @@ class AddPostStore {
       ...this.photos,
       {
         aspect: 1,
-        classicFilterSettings: defaultClassicFiltersSettings,
         crop: { x: 0, y: 0 },
         cropDataSave: null,
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },
         filter: '',
+        filterSettings: defaultClassicFiltersSettings,
         id,
         imgUrlToShow: '',
         originAspect: 1,
@@ -159,6 +152,12 @@ class AddPostStore {
     )
   }
 
+  applyFilter(index: number) {
+    this.photos[index].filter = prepareFilterStyles(
+      this.photos[index].filterSettings
+    )
+  }
+
   changeAspect(id: string, aspect: number) {
     const photo = findObjectInArray(this.photos, id)
 
@@ -167,13 +166,13 @@ class AddPostStore {
     }
   }
 
-  changeClassicFilterSetting(
+  changeFilterSetting(
     index: number,
     filter: ClassicFiltersType,
     value: number
   ) {
-    this.photos[index].classicFilterSettings[filter] = value
-    this.addClassicFilter(index)
+    this.photos[index].filterSettings[filter] = value
+    this.applyFilter(index)
   }
 
   clearLocation() {
@@ -266,7 +265,7 @@ class AddPostStore {
         description: this.postDescription,
       }
 
-      // await addPostApi.uploadPostDescription(post)
+      await addPostApi.uploadPostDescription(post)
       this.resetData()
     } catch (error) {
       responseErrorHandler(error)

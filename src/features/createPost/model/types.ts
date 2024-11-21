@@ -5,11 +5,11 @@ import { Nullable, PhotoResult } from '@/common'
 
 export type PostPhoto = {
   aspect: number
-  classicFilterSettings: FiltersState
   crop: Point
   cropDataSave: Nullable<Point>
   croppedArea: Area
   filter: string
+  filterSettings: FiltersState
   id: string
   imgUrlToShow: string
   originAspect: number
@@ -20,13 +20,14 @@ export type PostPhoto = {
 
 export type InstFilter = {
   name: string
-  style: string
+  style: FiltersState
 }
 
 export type ClassicFiltersType =
   | 'brightness'
   | 'contrast'
   | 'grayscale'
+  | 'hue-rotate'
   | 'saturate'
   | 'sepia'
 
