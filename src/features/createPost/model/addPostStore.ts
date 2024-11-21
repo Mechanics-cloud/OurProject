@@ -41,9 +41,7 @@ class AddPostStore {
   }
 
   addClassicFilter(index: number) {
-    this.photos[index].instFilter = ''
-
-    this.photos[index].classicFilter = Object.entries(
+    this.photos[index].filter = Object.entries(
       this.photos[index].classicFilterSettings
     ).reduce((acc, filter) => {
       return acc + `${filter[0]}(${filter[1]}) `
@@ -92,14 +90,10 @@ class AddPostStore {
   async addFilteredImgUrl() {
     for (const photo of this.photos) {
       try {
-        if (
-          photo.preparedImgData.photoFile &&
-          (photo.instFilter || photo.classicFilter)
-        ) {
+        if (photo.preparedImgData.photoFile && photo.filter) {
           const filterPhotoData = await applyFilters(
             photo.preparedImgData.photoFile,
-            photo.instFilter || photo.classicFilter,
-            !!photo.instFilter
+            photo.filter
           )
 
           runInAction(() => {
@@ -116,9 +110,8 @@ class AddPostStore {
   }
 
   addInstFilter(index: number, filter: string) {
-    this.photos[index].classicFilter = ''
     this.photos[index].classicFilterSettings = defaultClassicFiltersSettings
-    this.photos[index].instFilter = filter
+    this.photos[index].filter = filter
   }
 
   addLocation(city: string, country: string) {
@@ -133,13 +126,12 @@ class AddPostStore {
       ...this.photos,
       {
         aspect: 1,
-        classicFilter: '',
         classicFilterSettings: defaultClassicFiltersSettings,
         crop: { x: 0, y: 0 },
         cropDataSave: null,
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },
+        filter: '',
         id,
-        instFilter: '',
         originAspect: 1,
         preparedImgData: {
           photoFile: null,

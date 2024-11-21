@@ -27,12 +27,10 @@ export const InstFilter = ({
     >
       <Image
         alt={filterName}
-        className={cn(
-          'object-cover mb-1.5 w-[108px] h-[108px]',
-          filterSettings
-        )}
+        className={cn('object-cover mb-1.5 w-[108px] h-[108px]')}
         height={108}
         src={imageSrc}
+        style={{ filter: filterSettings }}
         width={108}
       />
       <Typography variant={'reg16'}>{filterName}</Typography>

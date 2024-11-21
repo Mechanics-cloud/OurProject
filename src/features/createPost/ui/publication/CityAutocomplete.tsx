@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { PinOutline } from '@/assets/icons'
 import { ScrollArea, TextField, cn } from '@/common'
+import { generalStore } from '@/core/store'
 import { useCityAutocomplete } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 
@@ -22,6 +23,7 @@ export const CityAutocomplete = observer(() => {
     <span className={'relative'}>
       <TextField
         className={'autocomplete-input'}
+        disabled={generalStore.isLoading}
         label={'Add location'}
         onChange={onLocationChange}
         onKeyDown={handleKeyDown}

@@ -2,8 +2,7 @@ import { PhotoResult, createImage } from '@/common'
 
 export async function applyFilters(
   imageBlob: Blob,
-  style: string,
-  isCssClass: boolean = false
+  style: string
 ): Promise<PhotoResult> {
   const objectURL = URL.createObjectURL(imageBlob)
   const photo = await createImage(objectURL)
@@ -17,9 +16,7 @@ export async function applyFilters(
     return Promise.reject()
   }
 
-  isCssClass ? (photo.className = style) : (ctx.filter = style)
-  console.log(photo.className)
-
+  ctx.filter = style
   ctx.drawImage(photo, 0, 0)
 
   return new Promise((resolve, reject) => {

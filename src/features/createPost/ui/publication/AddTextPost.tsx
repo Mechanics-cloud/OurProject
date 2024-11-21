@@ -30,6 +30,7 @@ export const AddTextPost = observer(() => {
         />
         <TextArea
           className={'h-[120px] resize-none'}
+          disabled={generalStore.isLoading}
           label={'Add publication descriptions'}
           maxLength={500}
           onChange={(e) => addPostDescription(e.target.value)}

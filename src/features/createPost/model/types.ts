@@ -5,13 +5,12 @@ import { Nullable, PhotoResult } from '@/common'
 
 export type PostPhoto = {
   aspect: number
-  classicFilter: string
   classicFilterSettings: FiltersState
   crop: Point
   cropDataSave: Nullable<Point>
   croppedArea: Area
+  filter: string
   id: string
-  instFilter: string
   originAspect: number
   preparedImgData: PhotoResult
   url: string
