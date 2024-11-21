@@ -18,7 +18,11 @@ import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
-export const PublicationModal = observer(() => {
+type Props = {
+  onPostUpload: () => void
+}
+
+export const PublicationModal = observer(({ onPostUpload }: Props) => {
   const { t } = useTranslation()
   const prevStage = addPostStore.prevStage
   const photos = addPostStore.photos
@@ -28,6 +32,7 @@ export const PublicationModal = observer(() => {
     try {
       generalStore.turnOnLoading()
       await addPostStore.uploadPost()
+      onPostUpload()
     } catch (error) {
       responseErrorHandler(error)
     } finally {
@@ -81,9 +86,16 @@ export const PublicationModal = observer(() => {
               >
                 <Image
                   alt={'Photo in carousel'}
-                  className={cn('object-center object-contain w-full h-auto')}
+                  className={cn(
+                    'object-center object-contain w-full h-auto',
+                    isLoading ? 'animate-pulse' : ''
+                  )}
                   height={490}
-                  src={photo.preparedImgData.photoUrl ?? photo.url}
+                  src={
+                    isLoading
+                      ? (photo.imgUrlToShow ?? photo.url)
+                      : (photo.preparedImgData.photoUrl ?? photo.url)
+                  }
                   style={{ filter: photo.filter }}
                   width={490}
                 />

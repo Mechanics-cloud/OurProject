@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { PropsWithChildren } from 'react'
+import { toast } from 'react-toastify'
 
 import { Dialog, useModal } from '@/common'
 import {
@@ -25,18 +26,27 @@ export const NewPostDialog = observer(
     const setIsNewDialog = addPostStore.startNewDialog
     const isNewDialog = addPostStore.isNewDialog
 
-    const { isModalOpen, onModalClose, openModal } = useModal()
+    const {
+      isModalOpen: isModalExitOpen,
+      onModalClose: onModalExitClose,
+      openModal: openExitModal,
+    } = useModal()
 
     const onClosePostCreating = () => {
-      onModalClose()
+      onModalExitClose()
       onClose()
+    }
+
+    const onPostUpload = () => {
+      onClose()
+      toast('Success')
       setIsNewDialog()
     }
 
     return (
       <>
         <Dialog
-          onOpenChange={(!isNewDialog && openModal) || onClose}
+          onOpenChange={(!isNewDialog && openExitModal) || onClose}
           open={open}
           {...rest}
         >
@@ -55,14 +65,14 @@ export const NewPostDialog = observer(
           )}
 
           {!isNewDialog && currentState === PhotoEditorState.publication && (
-            <PublicationModal />
+            <PublicationModal onPostUpload={onPostUpload} />
           )}
         </Dialog>
+
         <ClosePostCreatingModal
-          onClose={onModalClose}
+          onClose={onModalExitClose}
           onCloseFull={onClosePostCreating}
-          onOpenChange={onModalClose}
-          open={isModalOpen}
+          open={isModalExitOpen}
         />
       </>
     )

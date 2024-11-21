@@ -11,6 +11,7 @@ export type PostPhoto = {
   croppedArea: Area
   filter: string
   id: string
+  imgUrlToShow: string
   originAspect: number
   preparedImgData: PhotoResult
   url: string

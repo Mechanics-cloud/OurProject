@@ -74,6 +74,7 @@ class AddPostStore {
             photoFile: cropPhotoData.photoFile,
             photoUrl: cropPhotoData.photoUrl,
           }
+          photo.imgUrlToShow = cropPhotoData.photoUrl as string
         })
       } catch (error) {
         toast('Something went wrong')
@@ -132,6 +133,7 @@ class AddPostStore {
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },
         filter: '',
         id,
+        imgUrlToShow: '',
         originAspect: 1,
         preparedImgData: {
           photoFile: null,
@@ -238,6 +240,8 @@ class AddPostStore {
     this.currentStage = PhotoEditorState.adding
     this.photos = []
     this.currentSliderIndex = 0
+    this.location = []
+    this.postDescription = ''
   }
 
   startNewDialog() {
@@ -262,8 +266,8 @@ class AddPostStore {
         description: this.postDescription,
       }
 
-      //todo open full post creation
-      //await addPostApi.uploadPostDescription(post)
+      // await addPostApi.uploadPostDescription(post)
+      this.resetData()
     } catch (error) {
       responseErrorHandler(error)
     }

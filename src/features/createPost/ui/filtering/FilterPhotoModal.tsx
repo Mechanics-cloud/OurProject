@@ -66,7 +66,7 @@ export const FilterPhotoModal = observer(() => {
                   alt={'Photo in carousel'}
                   className={cn('object-center object-contain w-full h-auto')}
                   height={0}
-                  src={photo.preparedImgData.photoUrl ?? photo.url}
+                  src={photo.imgUrlToShow ?? photo.url}
                   style={{ filter: photo.filter }}
                   width={0}
                 />

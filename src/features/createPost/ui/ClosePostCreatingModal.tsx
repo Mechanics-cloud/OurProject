@@ -13,7 +13,6 @@ type Props = {
 export const ClosePostCreatingModal = ({
   onClose,
   onCloseFull,
-  onOpenChange,
   open,
   ...rest
 }: Props) => {
@@ -21,7 +20,6 @@ export const ClosePostCreatingModal = ({
 
   return (
     <SimpleModal
-      onOpenChange={onOpenChange}
       open={open}
       title={'Close'}
       {...rest}
