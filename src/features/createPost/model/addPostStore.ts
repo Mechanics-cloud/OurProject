@@ -1,7 +1,13 @@
 import { Area, Point } from 'react-easy-crop'
 import { toast } from 'react-toastify'
 
-import { findObjectInArray, getCroppedImg } from '@/common'
+import {
+  createFileForUpload,
+  findObjectInArray,
+  getCroppedImg,
+  responseErrorHandler,
+} from '@/common'
+import { addPostApi } from '@/features/createPost'
 import {
   MaxDescriptionLength,
   PhotoEditorState,
@@ -216,6 +222,25 @@ class AddPostStore {
 
   startNewDialog() {
     this.isNewDialog = true
+  }
+
+  async uploadPostPhotos() {
+    try {
+      const filesToUpload: File[] = []
+
+      this.photos.forEach((photo) => {
+        const file = createFileForUpload(photo.croppedImgData)
+
+        if (file) {
+          filesToUpload.push(file)
+        }
+      })
+      const res = await addPostApi.uploadPhotos(filesToUpload)
+
+      console.log('res: ', res.data)
+    } catch (error) {
+      responseErrorHandler(error)
+    }
   }
 
   get isDraft() {

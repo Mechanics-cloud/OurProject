@@ -1,4 +1,4 @@
 export const AddPostEndpoints = {
-  uploadPhotos: '/api/v1/posts/image',
-  uploadPost: '/api/v1/posts',
+  uploadPhotos: '/v1/posts/image',
+  uploadPost: '/v1/posts',
 }

@@ -19,6 +19,10 @@ export const PublicationModal = () => {
   const prevStage = addPostStore.prevStage
   const photos = addPostStore.photos
 
+  const onPublish = async () => {
+    await addPostStore.uploadPostPhotos()
+  }
+
   return (
     <DialogContent
       className={'max-w-[972px] gap-0'}
@@ -36,9 +40,7 @@ export const PublicationModal = () => {
               'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2',
               typographyVariants({ variant: 'h3' })
             )}
-            onClick={() => {
-              alert('Publish')
-            }}
+            onClick={onPublish}
           >
             Publish
           </span>
