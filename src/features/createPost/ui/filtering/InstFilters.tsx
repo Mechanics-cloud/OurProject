@@ -24,7 +24,7 @@ export const InstFilters = observer(() => {
             filterName={filter.name}
             filterSettings={filter.style}
             imageSrc={
-              photos[currentSliderIndex].croppedImgData.photoUrl ??
+              photos[currentSliderIndex].preparedImgData.photoUrl ??
               photos[currentSliderIndex].url
             }
             key={index}

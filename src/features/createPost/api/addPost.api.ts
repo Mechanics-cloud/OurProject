@@ -13,12 +13,6 @@ class AddPostApi {
   public uploadPhotos(
     formData: FormData
   ): Promise<AxiosResponse<UploadPhotoResponse>> {
-    // const formData = new FormData()
-    //
-    // files.forEach((file) => {
-    //   formData.append('file', file, file.name || 'Post photo')
-    // })
-
     return this.instance.post(AddPostEndpoints.uploadPhotos, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',

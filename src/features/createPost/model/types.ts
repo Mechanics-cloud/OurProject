@@ -10,10 +10,10 @@ export type PostPhoto = {
   crop: Point
   cropDataSave: Nullable<Point>
   croppedArea: Area
-  croppedImgData: PhotoResult
   id: string
   instFilter: string
   originAspect: number
+  preparedImgData: PhotoResult
   url: string
   zoom?: number
 }

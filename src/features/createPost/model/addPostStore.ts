@@ -72,7 +72,7 @@ class AddPostStore {
         const cropPhotoData = await getCroppedImg(photo.url, photo.croppedArea)
 
         runInAction(() => {
-          photo.croppedImgData = {
+          photo.preparedImgData = {
             photoFile: cropPhotoData.photoFile,
             photoUrl: cropPhotoData.photoUrl,
           }
@@ -93,16 +93,17 @@ class AddPostStore {
     for (const photo of this.photos) {
       try {
         if (
-          photo.croppedImgData.photoFile &&
+          photo.preparedImgData.photoFile &&
           (photo.instFilter || photo.classicFilter)
         ) {
           const filterPhotoData = await applyFilters(
-            photo.croppedImgData.photoFile,
-            photo.instFilter ?? photo.classicFilter
+            photo.preparedImgData.photoFile,
+            photo.instFilter || photo.classicFilter,
+            !!photo.instFilter
           )
 
           runInAction(() => {
-            photo.croppedImgData = {
+            photo.preparedImgData = {
               photoFile: filterPhotoData.photoFile,
               photoUrl: filterPhotoData.photoUrl,
             }
@@ -137,13 +138,13 @@ class AddPostStore {
         crop: { x: 0, y: 0 },
         cropDataSave: null,
         croppedArea: { height: 0, width: 0, x: 0, y: 0 },
-        croppedImgData: {
-          photoFile: null,
-          photoUrl: null,
-        },
         id,
         instFilter: '',
         originAspect: 1,
+        preparedImgData: {
+          photoFile: null,
+          photoUrl: null,
+        },
         url,
         zoom: 1,
       },
@@ -257,7 +258,7 @@ class AddPostStore {
       const formData = new FormData()
 
       for (const photo of this.photos) {
-        const file = createFileForUpload(photo.croppedImgData)
+        const file = createFileForUpload(photo.preparedImgData)
 
         if (file) {
           formData.append('file', file, file.name || 'Post photo')
