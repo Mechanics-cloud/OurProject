@@ -8,6 +8,8 @@ import {
   responseErrorHandler,
 } from '@/common'
 import { addPostApi } from '@/features/createPost'
+import { UploadPost } from '@/features/createPost/api/addPost.types'
+import { applyFilters } from '@/features/createPost/model/applyFilters'
 import {
   MaxDescriptionLength,
   PhotoEditorState,
@@ -85,6 +87,31 @@ class AddPostStore {
     runInAction(() => {
       this.currentSliderIndex = index
     })
+  }
+
+  async addFilteredImgUrl() {
+    for (const photo of this.photos) {
+      try {
+        if (
+          photo.croppedImgData.photoFile &&
+          (photo.instFilter || photo.classicFilter)
+        ) {
+          const filterPhotoData = await applyFilters(
+            photo.croppedImgData.photoFile,
+            photo.instFilter ?? photo.classicFilter
+          )
+
+          runInAction(() => {
+            photo.croppedImgData = {
+              photoFile: filterPhotoData.photoFile,
+              photoUrl: filterPhotoData.photoUrl,
+            }
+          })
+        }
+      } catch (error) {
+        toast('Something went wrong')
+      }
+    }
   }
 
   addInstFilter(index: number, filter: string) {
@@ -224,20 +251,26 @@ class AddPostStore {
     this.isNewDialog = true
   }
 
-  async uploadPostPhotos() {
+  async uploadPost() {
     try {
-      const filesToUpload: File[] = []
+      await this.addFilteredImgUrl()
+      const formData = new FormData()
 
-      this.photos.forEach((photo) => {
+      for (const photo of this.photos) {
         const file = createFileForUpload(photo.croppedImgData)
 
         if (file) {
-          filesToUpload.push(file)
+          formData.append('file', file, file.name || 'Post photo')
         }
-      })
-      const res = await addPostApi.uploadPhotos(filesToUpload)
+      }
+      const res = await addPostApi.uploadPhotos(formData)
+      const post: UploadPost = {
+        childrenMetadata: [{ uploadId: res.data.images[0].uploadId }],
+        description: this.postDescription,
+      }
 
-      console.log('res: ', res.data)
+      //todo open full post creation
+      //await addPostApi.uploadPostDescription(post)
     } catch (error) {
       responseErrorHandler(error)
     }

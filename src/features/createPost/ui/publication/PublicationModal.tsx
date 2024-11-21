@@ -2,25 +2,37 @@ import * as React from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
+  Button,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   cn,
+  responseErrorHandler,
   typographyVariants,
   useTranslation,
 } from '@/common'
+import { generalStore } from '@/core/store'
 import { AddTextPost, SwiperCover, addPostStore } from '@/features/createPost'
+import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
-export const PublicationModal = () => {
+export const PublicationModal = observer(() => {
   const { t } = useTranslation()
   const prevStage = addPostStore.prevStage
   const photos = addPostStore.photos
+  const isLoading = generalStore.isLoading
 
-  const onPublish = async () => {
-    await addPostStore.uploadPostPhotos()
+  const onPublishPost = async () => {
+    try {
+      generalStore.turnOnLoading()
+      await addPostStore.uploadPost()
+    } catch (error) {
+      responseErrorHandler(error)
+    } finally {
+      generalStore.turnOffLoading()
+    }
   }
 
   return (
@@ -35,15 +47,17 @@ export const PublicationModal = () => {
             onClick={prevStage}
           />
           <span>Publication</span>
-          <span
+          <Button
             className={cn(
-              'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2',
+              'absolute text-accent-500 px-3 py-1.5 right-4 top-2 focus-within:outline-0',
               typographyVariants({ variant: 'h3' })
             )}
-            onClick={onPublish}
+            disabled={isLoading}
+            onClick={onPublishPost}
+            variant={'text'}
           >
             Publish
-          </span>
+          </Button>
         </DialogTitle>
       </DialogHeader>
       <DialogDescription
@@ -85,4 +99,4 @@ export const PublicationModal = () => {
       </DialogDescription>
     </DialogContent>
   )
-}
+})

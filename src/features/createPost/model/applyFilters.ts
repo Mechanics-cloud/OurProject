@@ -1,33 +1,23 @@
-import { Area } from 'react-easy-crop'
-
 import { PhotoResult, createImage } from '@/common'
 
-export async function getCroppedImg(
-  imageSrc: string,
-  pixelCrop: Area
+export async function applyFilters(
+  imageBlob: Blob,
+  filter: string
 ): Promise<PhotoResult> {
-  const image = await createImage(imageSrc)
+  const objectURL = URL.createObjectURL(imageBlob)
+  const photo = await createImage(objectURL)
   const canvas = document.createElement('canvas')
   const ctx = canvas.getContext('2d')
+
+  canvas.width = photo.width
+  canvas.height = photo.height
 
   if (!ctx) {
     return Promise.reject()
   }
 
-  canvas.width = pixelCrop.width
-  canvas.height = pixelCrop.height
-
-  ctx.drawImage(
-    image,
-    pixelCrop.x,
-    pixelCrop.y,
-    pixelCrop.width,
-    pixelCrop.height,
-    0,
-    0,
-    pixelCrop.width,
-    pixelCrop.height
-  )
+  ctx.filter = filter
+  ctx.drawImage(photo, 0, 0)
 
   return new Promise((resolve, reject) => {
     canvas.toBlob((file) => {

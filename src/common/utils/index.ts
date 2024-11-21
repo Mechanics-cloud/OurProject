@@ -1,6 +1,7 @@
 export * from './clearAllData'
 export * from './cn'
 export * from './createFileForUpload'
+export * from './createImage'
 export * from './cropPhoto'
 export * from './findObjectInArray'
 export * from './getBasePath'
