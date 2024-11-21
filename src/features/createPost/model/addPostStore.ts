@@ -70,7 +70,7 @@ class AddPostStore {
           photo.imgUrlToShow = cropPhotoData.photoUrl as string
         })
       } catch (error) {
-        toast('Something went wrong')
+        toast.error('Something went wrong')
       }
     }
   }
@@ -98,7 +98,7 @@ class AddPostStore {
           })
         }
       } catch (error) {
-        toast('Something went wrong')
+        toast.error('Something went wrong')
       }
     }
   }

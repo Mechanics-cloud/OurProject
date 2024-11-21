@@ -34,7 +34,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
       generalStore.turnOnLoading()
       await addPostStore.uploadPost()
       onPostUpload()
-      toast(t.createPost.publication.success)
+      toast.success(t.createPost.publication.success)
     } catch (error) {
       responseErrorHandler(error)
     } finally {
