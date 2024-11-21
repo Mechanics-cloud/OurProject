@@ -17,6 +17,7 @@ export const PhotoProfilePostsGallery = observer(() => {
 
   useEffect(() => {
     const windowHeight = document.documentElement.clientHeight
+
     const controller = new AbortController()
     const signal = controller.signal
 
@@ -50,11 +51,11 @@ export const PhotoProfilePostsGallery = observer(() => {
         ))}
       </div>
       <div
-        className={'mt-10 w-full h-[228px]'}
+        className={'w-full h-[1px]'}
         ref={ref}
       >
         {profileStore.isLoading ? (
-          <Skeleton className={'w-full h-full'} />
+          <Skeleton className={'w-full h-[228px]'} />
         ) : (
           <div className={'w-full  h-full'}></div>
         )}
