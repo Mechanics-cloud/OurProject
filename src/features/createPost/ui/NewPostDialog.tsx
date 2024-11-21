@@ -70,6 +70,7 @@ export const NewPostDialog = observer(
         <ClosePostCreatingModal
           onClose={onModalExitClose}
           onCloseFull={onClosePostCreating}
+          onOpenChange={onModalExitClose}
           open={isModalExitOpen}
         />
       </>

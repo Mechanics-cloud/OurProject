@@ -21,6 +21,12 @@ export const en: LocaleType = {
       title: 'Add post',
     },
     alt: 'Photo in carousel',
+    closeModal: {
+      description: 'Do you really want to close the creation of a publication?',
+      discard: 'Discard',
+      save: 'Save draft',
+      title: 'Close',
+    },
     cropping: {
       originalRatio: 'Original',
       title: 'Cropping',
@@ -28,6 +34,13 @@ export const en: LocaleType = {
     filtering: {
       filters: 'Filters library',
       settings: 'Filters settings',
+      settingsData: {
+        brightness: 'Brightness',
+        contrast: 'Contrast',
+        grayscale: 'Grayscale',
+        saturate: 'Saturation',
+        sepia: 'Sepia',
+      },
       title: 'Filters',
     },
     next: 'Next',

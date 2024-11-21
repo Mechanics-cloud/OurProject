@@ -21,19 +21,18 @@ export const ClosePostCreatingModal = ({
   return (
     <SimpleModal
       open={open}
-      title={'Close'}
+      title={t.createPost.closeModal.title}
       {...rest}
     >
-      Do you really want to close the creation of a publication? If you close
-      everything will be deleted
+      {t.createPost.closeModal.description}
       <span className={'flex justify-between pt-[18px] pb-6'}>
         <Button
           onClick={onClose}
           variant={'outline'}
         >
-          Discard
+          {t.createPost.closeModal.discard}
         </Button>
-        <Button onClick={onCloseFull}>Save draft</Button>
+        <Button onClick={onCloseFull}>{t.createPost.closeModal.save}</Button>
       </span>
     </SimpleModal>
   )

@@ -19,6 +19,12 @@ export const ru = {
       title: 'Добавить пост',
     },
     alt: 'Фото в карусели',
+    closeModal: {
+      description: 'Вы действительно хотите закрыть создание публикации?',
+      discard: 'Отмена',
+      save: 'Сохранить черновик',
+      title: 'Закрыть',
+    },
     cropping: {
       originalRatio: 'Оригинал',
       title: 'Обрезка',
@@ -26,6 +32,13 @@ export const ru = {
     filtering: {
       filters: 'Библиотека фильтров',
       settings: 'Настройки фильтров',
+      settingsData: {
+        brightness: 'Яркость',
+        contrast: 'Контрастность',
+        grayscale: 'Оттенки серого',
+        saturate: 'Насыщенность',
+        sepia: 'Сепия',
+      },
       title: 'Фильтры',
     },
     next: 'Дальше',

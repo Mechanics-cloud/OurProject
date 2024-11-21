@@ -1,3 +1,5 @@
+import { LocaleType } from '@locales/ru'
+
 import { ClassicSetting, InstFilter } from './types'
 
 export const PhotoEditorState = {
@@ -24,13 +26,27 @@ for (const [key, value] of mapNext) {
 export const MaxPhotoCount = 10
 export const MaxDescriptionLength = 500
 
-export const classicSettingsData: ClassicSetting[] = [
-  { centered: true, field: 'contrast', name: 'Contrast' },
-  { centered: true, field: 'brightness', name: 'Brightness' },
-  { centered: true, field: 'saturate', name: 'Saturation' },
-  { field: 'sepia', name: 'Sepia' },
-  { field: 'grayscale', name: 'Grayscale' },
-] as const
+export const classicSettingsData = (t: LocaleType): ClassicSetting[] => {
+  return [
+    {
+      centered: true,
+      field: 'contrast',
+      name: t.createPost.filtering.settingsData.contrast,
+    },
+    {
+      centered: true,
+      field: 'brightness',
+      name: t.createPost.filtering.settingsData.brightness,
+    },
+    {
+      centered: true,
+      field: 'saturate',
+      name: t.createPost.filtering.settingsData.saturate,
+    },
+    { field: 'sepia', name: t.createPost.filtering.settingsData.sepia },
+    { field: 'grayscale', name: t.createPost.filtering.settingsData.grayscale },
+  ] as const
+}
 
 export const defaultClassicFiltersSettings = {
   brightness: 1,

@@ -1,11 +1,12 @@
 import * as React from 'react'
 
-import { Typography } from '@/common'
+import { Typography, useTranslation } from '@/common'
 import { ClassicFiltersType, Slider, addPostStore } from '@/features/createPost'
 import { classicSettingsData } from '@/features/createPost/model/constants'
 import { observer } from 'mobx-react-lite'
 
 export const ClassicFilters = observer(() => {
+  const { t } = useTranslation()
   const photos = addPostStore.photos
   const changeClassicFilterSetting = addPostStore.changeFilterSetting
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
@@ -20,7 +21,7 @@ export const ClassicFilters = observer(() => {
         'grid grid-cols-[min-content_1fr] gap-x-5 gap-y-12 pt-14 px-[53px]'
       }
     >
-      {classicSettingsData.map((setting, index) => (
+      {classicSettingsData(t).map((setting, index) => (
         <React.Fragment key={index}>
           <Typography variant={'reg16'}>{setting.name}</Typography>
           <Slider
