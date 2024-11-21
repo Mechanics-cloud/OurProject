@@ -21,7 +21,9 @@ export const AddPhotoModal = () => {
   return (
     <DialogContent className={'max-w-[492px]'}>
       <DialogHeader>
-        <DialogTitle>{t.createPost.adding.title}</DialogTitle>
+        <DialogTitle className={'flex justify-center items-center relative'}>
+          {t.createPost.adding.title}
+        </DialogTitle>
       </DialogHeader>
       <DialogDescription className={'mt-16 mb-10 flex justify-center'}>
         <span className={'flex flex-col w-max'}>

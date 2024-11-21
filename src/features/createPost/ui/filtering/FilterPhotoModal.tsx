@@ -2,6 +2,7 @@ import * as React from 'react'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
+  Button,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -29,19 +30,20 @@ export const FilterPhotoModal = observer(() => {
       <DialogHeader>
         <DialogTitle className={'flex justify-center items-center relative'}>
           <ArrowBackOutline
-            className={'absolute top-[18px] left-6'}
+            className={'arrowBack'}
             onClick={prevStage}
           />
           <span>{t.createPost.filtering.title}</span>
-          <span
+          <Button
             className={cn(
-              'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2',
+              'absolute text-accent-500 px-3 py-1.5 right-4 top-2 focus-within:outline-0',
               typographyVariants({ variant: 'h3' })
             )}
             onClick={nextStage}
+            variant={'text'}
           >
             {t.createPost.next}
-          </span>
+          </Button>
         </DialogTitle>
       </DialogHeader>
 

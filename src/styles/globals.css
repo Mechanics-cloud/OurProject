@@ -159,4 +159,8 @@ input[type='password']::-ms-clear {
   .sliderCenter {
     @apply relative after:absolute after:-z-10 after:w-0.5 after:h-4 after:bg-light-900 after:left-[34%] after:-translate-x-[50%];
   }
+
+  .arrowBack {
+    @apply absolute top-[18px] left-6 cursor-pointer hover:text-accent-500 transition hover:-translate-x-1;
+  }
 }

@@ -50,7 +50,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
       <DialogHeader>
         <DialogTitle className={'flex justify-center items-center relative'}>
           <ArrowBackOutline
-            className={'absolute top-[18px] left-6'}
+            className={'arrowBack'}
             onClick={prevStage}
           />
           <span>{t.createPost.publication.title}</span>
