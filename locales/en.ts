@@ -14,6 +14,32 @@ export const en: LocaleType = {
     title: 'Add a Profile Photo',
   },
   basicError: 'Something went wrong',
+  createPost: {
+    adding: {
+      buttonDraft: 'Open draft',
+      buttonNew: 'Select from computer',
+      title: 'Add post',
+    },
+    alt: 'Photo in carousel',
+    cropping: {
+      originalRatio: 'Original',
+      title: 'Cropping',
+    },
+    filtering: {
+      filters: 'Filters library',
+      settings: 'Filters settings',
+      title: 'Filters',
+    },
+    next: 'Next',
+    publication: {
+      description: 'Add publication descriptions',
+      location: 'Add location',
+      locationPlaceholder: 'Enter city name...',
+      publishButton: 'Publish',
+      success: 'Published successfully',
+      title: 'Publication',
+    },
+  },
   expiredSession: {
     emailExpired: 'Email verification link expired',
     pictureExpired: 'Picture of the expired link',

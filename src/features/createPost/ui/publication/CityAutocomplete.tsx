@@ -24,10 +24,10 @@ export const CityAutocomplete = observer(() => {
       <TextField
         className={'autocomplete-input'}
         disabled={generalStore.isLoading}
-        label={'Add location'}
+        label={t.createPost.publication.location}
         onChange={onLocationChange}
         onKeyDown={handleKeyDown}
-        placeholder={'Enter city name...'}
+        placeholder={t.createPost.publication.locationPlaceholder}
         value={location[0] ?? query}
       />
       {suggestions.length > 0 && (

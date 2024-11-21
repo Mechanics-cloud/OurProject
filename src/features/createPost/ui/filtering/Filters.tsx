@@ -14,12 +14,12 @@ export const getFiltersTabs = (t: LocaleType): TabsType[] => {
     {
       content: <InstFilters />,
       id: 'Filters',
-      title: 'Filters',
+      title: t.createPost.filtering.filters,
     },
     {
       content: <ClassicFilters />,
       id: 'Settings',
-      title: 'Settings',
+      title: t.createPost.filtering.settings,
     },
   ]
 }

@@ -8,12 +8,14 @@ import {
   DialogTitle,
   cn,
   typographyVariants,
+  useTranslation,
 } from '@/common'
 import { PhotoCrop, SwiperCover, addPostStore } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import { SwiperSlide } from 'swiper/react'
 
 export const CropPhotoModal = observer(() => {
+  const { t } = useTranslation()
   const photos = addPostStore.photos
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage
@@ -29,7 +31,7 @@ export const CropPhotoModal = observer(() => {
             className={'absolute top-[18px] left-6'}
             onClick={prevStage}
           />
-          <span>Cropping</span>
+          <span>{t.createPost.cropping.title}</span>
           <span
             className={cn(
               'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2',
@@ -37,7 +39,7 @@ export const CropPhotoModal = observer(() => {
             )}
             onClick={nextStage}
           >
-            Next
+            {t.createPost.next}
           </span>
         </DialogTitle>
       </DialogHeader>

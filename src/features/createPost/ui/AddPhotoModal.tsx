@@ -21,7 +21,7 @@ export const AddPhotoModal = () => {
   return (
     <DialogContent className={'max-w-[492px]'}>
       <DialogHeader>
-        <DialogTitle>Add photo</DialogTitle>
+        <DialogTitle>{t.createPost.adding.title}</DialogTitle>
       </DialogHeader>
       <DialogDescription className={'mt-16 mb-10 flex justify-center'}>
         <span className={'flex flex-col w-max'}>
@@ -52,7 +52,7 @@ export const AddPhotoModal = () => {
                 asChild
                 className={'cursor-pointer'}
               >
-                <span>Select from Computer</span>
+                <span>{t.createPost.adding.buttonNew}</span>
               </Button>
               <input
                 className={'sr-only'}
@@ -66,7 +66,7 @@ export const AddPhotoModal = () => {
             onClick={() => setIsNotNewDialog()}
             variant={'outline'}
           >
-            Open Draft
+            {t.createPost.adding.buttonDraft}
           </Button>
         </span>
       </DialogDescription>

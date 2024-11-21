@@ -8,6 +8,7 @@ import {
   DialogTitle,
   cn,
   typographyVariants,
+  useTranslation,
 } from '@/common'
 import { Filters, SwiperCover, addPostStore } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
@@ -15,6 +16,7 @@ import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
 export const FilterPhotoModal = observer(() => {
+  const { t } = useTranslation()
   const nextStage = addPostStore.nextStage
   const prevStage = addPostStore.prevStage
   const photos = addPostStore.photos
@@ -30,7 +32,7 @@ export const FilterPhotoModal = observer(() => {
             className={'absolute top-[18px] left-6'}
             onClick={prevStage}
           />
-          <span>Filters</span>
+          <span>{t.createPost.filtering.title}</span>
           <span
             className={cn(
               'absolute text-accent-500 cursor-pointer px-3 py-1.5 right-6 top-2',
@@ -38,7 +40,7 @@ export const FilterPhotoModal = observer(() => {
             )}
             onClick={nextStage}
           >
-            Next
+            {t.createPost.next}
           </span>
         </DialogTitle>
       </DialogHeader>
@@ -63,7 +65,7 @@ export const FilterPhotoModal = observer(() => {
                 key={index}
               >
                 <Image
-                  alt={'Photo in carousel'}
+                  alt={t.createPost.alt}
                   className={cn('object-center object-contain w-full h-auto')}
                   height={0}
                   src={photo.imgUrlToShow ?? photo.url}

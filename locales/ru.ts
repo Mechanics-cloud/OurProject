@@ -12,6 +12,32 @@ export const ru = {
     title: 'Добавить фотографию профиля',
   },
   basicError: 'Что-то пошло не так',
+  createPost: {
+    adding: {
+      buttonDraft: 'Открыть черновик',
+      buttonNew: 'Загрузить фото',
+      title: 'Добавить пост',
+    },
+    alt: 'Фото в карусели',
+    cropping: {
+      originalRatio: 'Оригинал',
+      title: 'Обрезка',
+    },
+    filtering: {
+      filters: 'Библиотека фильтров',
+      settings: 'Настройки фильтров',
+      title: 'Фильтры',
+    },
+    next: 'Дальше',
+    publication: {
+      description: 'Добавить описание',
+      location: 'Добавить локацию',
+      locationPlaceholder: 'Введите название города...',
+      publishButton: 'Опубликовать',
+      success: 'Это успех :)',
+      title: 'Публикация',
+    },
+  },
   expiredSession: {
     emailExpired: 'Ссылка для подтверждения электронной почты истекла',
     pictureExpired: 'Изображение истекшей ссылки',

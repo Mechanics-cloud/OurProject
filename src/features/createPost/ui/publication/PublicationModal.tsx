@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { toast } from 'react-toastify'
 
 import { ArrowBackOutline } from '@/assets/icons'
 import {
@@ -33,6 +34,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
       generalStore.turnOnLoading()
       await addPostStore.uploadPost()
       onPostUpload()
+      toast(t.createPost.publication.success)
     } catch (error) {
       responseErrorHandler(error)
     } finally {
@@ -51,7 +53,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
             className={'absolute top-[18px] left-6'}
             onClick={prevStage}
           />
-          <span>Publication</span>
+          <span>{t.createPost.publication.title}</span>
           <Button
             className={cn(
               'absolute text-accent-500 px-3 py-1.5 right-4 top-2 focus-within:outline-0',
@@ -61,7 +63,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
             onClick={onPublishPost}
             variant={'text'}
           >
-            Publish
+            {t.createPost.publication.publishButton}
           </Button>
         </DialogTitle>
       </DialogHeader>

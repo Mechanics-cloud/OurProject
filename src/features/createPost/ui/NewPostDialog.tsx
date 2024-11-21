@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { PropsWithChildren } from 'react'
-import { toast } from 'react-toastify'
 
 import { Dialog, useModal } from '@/common'
 import {
@@ -39,7 +38,6 @@ export const NewPostDialog = observer(
 
     const onPostUpload = () => {
       onClose()
-      toast('Success')
       setIsNewDialog()
     }
 
