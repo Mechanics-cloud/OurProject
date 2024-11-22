@@ -16,6 +16,12 @@ export const ru = {
     adding: {
       buttonDraft: 'Открыть черновик',
       buttonNew: 'Загрузить фото',
+      errors: {
+        basic: 'Что-то пошло не так',
+        countLimit: 'Лимит ',
+        tooBig: 'Фото слишком большое',
+        type: 'Неверный тип файла',
+      },
       title: 'Добавить пост',
     },
     alt: 'Фото в карусели',

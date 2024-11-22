@@ -18,6 +18,12 @@ export const en: LocaleType = {
     adding: {
       buttonDraft: 'Open draft',
       buttonNew: 'Select from computer',
+      errors: {
+        basic: 'Something went wrong',
+        countLimit: 'Limit is ',
+        tooBig: 'Photo is too big',
+        type: 'Wrong type',
+      },
       title: 'Add post',
     },
     alt: 'Photo in carousel',

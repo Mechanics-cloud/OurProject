@@ -10,11 +10,11 @@ import {
   ClassicFiltersType,
   FiltersState,
   PostPhoto,
+  UploadPost,
   addPostApi,
   applyFilters,
   prepareFilterStyles,
 } from '@/features/createPost'
-import { UploadPost } from '@/features/createPost/api/addPost.types'
 import {
   MaxDescriptionLength,
   PhotoEditorState,

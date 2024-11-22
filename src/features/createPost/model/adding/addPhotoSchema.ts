@@ -5,15 +5,14 @@ import { z } from 'zod'
 export const addPhotoSchema = (t: LocaleType) => {
   return z.object({
     photoSize: z.number().max(FileSizes.PostPhotoSize, {
-      //todo перевод
-      message: 'Photo is too big',
+      message: t.createPost.adding.errors.tooBig,
     }),
     photoType: z
       .string()
       .refine(
         (type) => ['image/jpeg', 'image/jpg', 'image/png'].includes(type),
         {
-          message: 'Wrong type',
+          message: t.createPost.adding.errors.type,
         }
       ),
   })

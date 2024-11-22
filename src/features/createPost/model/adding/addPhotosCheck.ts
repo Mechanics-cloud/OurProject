@@ -25,7 +25,7 @@ export const addPhotosCheck = async (
 
   for (let i = 0; i < photosCount; i++) {
     if (totalCount === MaxPhotoCount || i === MaxPhotoCount) {
-      toast(`Limit is ${MaxPhotoCount}`)
+      toast(`${t.createPost.adding.errors.countLimit}${MaxPhotoCount}`)
       break
     }
 
@@ -41,7 +41,7 @@ export const addPhotosCheck = async (
       if (error instanceof z.ZodError) {
         toast(error.errors[0].message)
       } else {
-        toast('Something went wrong')
+        toast.error(t.createPost.adding.errors.basic)
       }
     }
   }
