@@ -13,7 +13,7 @@ const TooltipContent = React.forwardRef<
 >(({ className, side, sideOffset = 4, ...props }, ref) => (
   <TooltipPrimitive.Content
     className={cn(
-      'rounded bg-dark-500 border-dark-100 px-4 py-2 text-sm text-popover-foreground border z-1 shadow-md animate-in fade-in-0 zoom-in-95 before:bg-dark-500 before:border-dark-100 before:w-3 before:h-3 before:rotate-45 before:absolute before:z-[2]',
+      'rounded bg-dark-500 border-dark-100 px-4 py-2 text-sm text-popover-foreground border z-[100] shadow-md animate-in fade-in-0 zoom-in-95 before:bg-dark-500 before:border-dark-100 before:w-3 before:h-3 before:rotate-45 before:absolute before:z-[2]',
       {
         'before:-bottom-1.5 before:left-0 before:right-0 before:mx-auto before:border-b before:border-r':
           side === 'top',

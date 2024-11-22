@@ -34,6 +34,7 @@ export const NewPostDialog = observer(
     const onClosePostCreating = () => {
       onModalExitClose()
       onClose()
+      setIsNewDialog()
     }
 
     const onPostUpload = () => {

@@ -80,6 +80,7 @@ export const FilterPhotoModal = observer(() => {
                   alt={t.createPost.alt}
                   className={cn('object-center object-contain w-full h-auto')}
                   height={0}
+                  onClick={() => console.log(photo.filter)}
                   src={photo.imgUrlToShow ?? photo.url}
                   style={{ filter: photo.filter }}
                   width={0}

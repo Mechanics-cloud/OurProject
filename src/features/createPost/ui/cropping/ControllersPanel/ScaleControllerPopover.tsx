@@ -1,7 +1,13 @@
 import * as React from 'react'
 
 import { Maximize, MaximizeOutline } from '@/assets/icons'
-import { Popover, PopoverContent, PopoverTrigger } from '@/common'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Tooltip,
+  useTranslation,
+} from '@/common'
 import {
   PhotoControllerButton,
   Slider,
@@ -15,6 +21,7 @@ type Props = {
 }
 
 export const ScaleControllerPopover = observer(({ id }: Props) => {
+  const { t } = useTranslation()
   const { isOpen, onZoom, setIsOpen } = useScaleControllerPopover(id)
 
   return (
@@ -24,11 +31,13 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
     >
       <PopoverTrigger asChild>
         <PhotoControllerButton>
-          {isOpen ? (
-            <Maximize className={'w-[28px] h-[28px] text-accent-500'} />
-          ) : (
-            <MaximizeOutline className={'w-[28px] h-[28px]'} />
-          )}
+          <Tooltip title={t.createPost.cropping.zoom}>
+            {isOpen ? (
+              <Maximize className={'w-[28px] h-[28px] text-accent-500'} />
+            ) : (
+              <MaximizeOutline className={'w-[28px] h-[28px]'} />
+            )}
+          </Tooltip>
         </PhotoControllerButton>
       </PopoverTrigger>
       <PopoverContent

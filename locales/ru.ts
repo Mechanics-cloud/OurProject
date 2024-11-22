@@ -26,8 +26,11 @@ export const ru = {
       title: 'Закрыть',
     },
     cropping: {
+      add: 'Добавить',
+      crop: 'Обрезать',
       originalRatio: 'Оригинал',
       title: 'Обрезка',
+      zoom: 'Приблизить',
     },
     filtering: {
       filters: 'Библиотека фильтров',

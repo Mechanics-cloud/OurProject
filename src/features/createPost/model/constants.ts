@@ -53,7 +53,6 @@ export const defaultClassicFiltersSettings = {
   contrast: 1,
   grayscale: 0,
   'hue-rotate': 1,
-  hueRotate: 0,
   saturate: 1,
   sepia: 0,
 }

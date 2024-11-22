@@ -1,8 +1,16 @@
 import * as React from 'react'
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 
 import { Expand } from '@/assets/icons'
-import { Popover, PopoverContent, PopoverTrigger, cn } from '@/common'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Tooltip,
+  cn,
+  useTranslation,
+} from '@/common'
 import {
   AspectControllerButtons,
   PhotoControllerButton,
@@ -13,6 +21,7 @@ type Props = {
 }
 
 export const AspectControllerPopover = ({ id }: Props) => {
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -22,9 +31,14 @@ export const AspectControllerPopover = ({ id }: Props) => {
     >
       <PopoverTrigger asChild>
         <PhotoControllerButton>
-          <Expand
-            className={cn('w-[28px] h-[28px]', isOpen ? 'text-accent-500' : '')}
-          />
+          <Tooltip title={t.createPost.cropping.crop}>
+            <Expand
+              className={cn(
+                'w-[28px] h-[28px]',
+                isOpen ? 'text-accent-500' : ''
+              )}
+            />
+          </Tooltip>
         </PhotoControllerButton>
       </PopoverTrigger>
       <PopoverContent

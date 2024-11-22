@@ -28,8 +28,11 @@ export const en: LocaleType = {
       title: 'Close',
     },
     cropping: {
+      add: 'Add',
+      crop: 'Crop',
       originalRatio: 'Original',
       title: 'Cropping',
+      zoom: 'Zoom',
     },
     filtering: {
       filters: 'Filters library',

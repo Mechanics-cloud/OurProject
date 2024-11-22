@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { Image, ImageOutline, PlusCircleOutline } from '@/assets/icons'
-import { Popover, PopoverContent, PopoverTrigger, cn } from '@/common'
+import { Popover, PopoverContent, PopoverTrigger, Tooltip, cn } from '@/common'
 import {
   MiniaturePhoto,
   PhotoControllerButton,
@@ -27,11 +27,15 @@ export const AddPhotoControllerPopover = observer(() => {
     >
       <PopoverTrigger asChild>
         <PhotoControllerButton className={'ml-auto'}>
-          {isOpen ? (
-            <Image className={'w-[28px] h-[28px] self-start text-accent-500'} />
-          ) : (
-            <ImageOutline className={'w-[28px] h-[28px] self-start'} />
-          )}
+          <Tooltip title={t.createPost.cropping.add}>
+            {isOpen ? (
+              <Image
+                className={'w-[28px] h-[28px] self-start text-accent-500'}
+              />
+            ) : (
+              <ImageOutline className={'w-[28px] h-[28px] self-start'} />
+            )}
+          </Tooltip>
         </PhotoControllerButton>
       </PopoverTrigger>
       <PopoverContent
