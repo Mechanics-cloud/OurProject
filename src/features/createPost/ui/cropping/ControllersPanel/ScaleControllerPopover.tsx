@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { useState } from 'react'
 
 import { Maximize, MaximizeOutline } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger } from '@/common'
@@ -8,6 +7,7 @@ import {
   Slider,
   addPostStore,
 } from '@/features/createPost'
+import { useScaleControllerPopover } from '@/features/createPost/model/cropping/useScaleControllerPopover'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
@@ -15,12 +15,7 @@ type Props = {
 }
 
 export const ScaleControllerPopover = observer(({ id }: Props) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const changeZoom = addPostStore.addZoom
-
-  const onZoom = (zoom: number[]) => {
-    changeZoom(id, zoom[0])
-  }
+  const { isOpen, onZoom, setIsOpen } = useScaleControllerPopover(id)
 
   return (
     <Popover
