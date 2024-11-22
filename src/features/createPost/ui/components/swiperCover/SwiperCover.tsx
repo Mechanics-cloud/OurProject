@@ -1,13 +1,7 @@
 import * as React from 'react'
-import {
-  ComponentPropsWithoutRef,
-  createContext,
-  useCallback,
-  useRef,
-} from 'react'
+import { ComponentPropsWithoutRef, createContext } from 'react'
 
 import { Nullable, cn } from '@/common'
-import { addPostStore } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import {
   EffectFade,
@@ -17,6 +11,8 @@ import {
 } from 'swiper/modules'
 import { Swiper } from 'swiper/react'
 
+import { useSwiperCover } from './useSwiperCover'
+
 type SwiperContextValue = {
   goToSlide: (slideIndex: number) => void
 }
@@ -25,18 +21,7 @@ export const SwiperContext = createContext<Nullable<SwiperContextValue>>(null)
 
 export const SwiperCover = observer(
   ({ children, className }: ComponentPropsWithoutRef<'div'>) => {
-    const swiperRef = useRef<typeof Swiper>(null)
-    const addCurrentSliderIndex = addPostStore.addCurrentSliderIndex
-
-    const handleSlideChange = (swiper: typeof Swiper) => {
-      addCurrentSliderIndex(swiper.activeIndex)
-    }
-
-    const goToSlide = useCallback((index: number) => {
-      if (swiperRef.current) {
-        swiperRef.current.slideTo(index)
-      }
-    }, [])
+    const { goToSlide, handleSlideChange, swiperRef } = useSwiperCover()
 
     return (
       <SwiperContext.Provider value={{ goToSlide }}>

@@ -8,9 +8,9 @@ import {
   CropPhotoModal,
   FilterPhotoModal,
   PublicationModal,
+  useNewPostDialog,
 } from '@/features/createPost'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
-import { useNewPostDialog } from '@/features/createPost/model/useNewPostDialog'
 import { DialogProps } from '@radix-ui/react-dialog'
 import { observer } from 'mobx-react-lite'
 

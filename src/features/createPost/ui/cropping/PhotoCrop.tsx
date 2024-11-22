@@ -1,8 +1,11 @@
 import * as React from 'react'
 import Cropper, { Point } from 'react-easy-crop'
 
-import { ControllersPanel, PostPhoto } from '@/features/createPost'
-import { usePhotoCrop } from '@/features/createPost/model/cropping/usePhotoCrop'
+import {
+  ControllersPanel,
+  PostPhoto,
+  usePhotoCrop,
+} from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 
 type Props = {

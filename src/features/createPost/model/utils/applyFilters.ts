@@ -1,5 +1,11 @@
 import { PhotoResult, createImage } from '@/common'
 
+/**
+ *
+ * @param imageBlob - image for styling
+ * @param style - css filter styles to apply
+ */
+
 export async function applyFilters(
   imageBlob: Blob,
   style: string

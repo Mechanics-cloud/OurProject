@@ -1,6 +1,5 @@
-export * from './AddPhotoModal'
 export * from './ClosePostCreatingModal'
-export * from './NewPostDialog'
+export * from './adding'
 export * from './components'
 export * from './cropping'
 export * from './filtering'

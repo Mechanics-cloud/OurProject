@@ -1,19 +1,11 @@
 import * as React from 'react'
-import { toast } from 'react-toastify'
 
-import {
-  DialogContent,
-  DialogDescription,
-  cn,
-  responseErrorHandler,
-  useTranslation,
-} from '@/common'
-import { generalStore } from '@/core/store'
+import { DialogContent, DialogDescription, cn } from '@/common'
 import {
   AddTextPost,
   ModalHeader,
   SwiperCover,
-  addPostStore,
+  usePublicationModal,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -24,22 +16,8 @@ type Props = {
 }
 
 export const PublicationModal = observer(({ onPostUpload }: Props) => {
-  const { t } = useTranslation()
-  const photos = addPostStore.photos
-  const isLoading = generalStore.isLoading
-
-  const onPublishPost = async () => {
-    try {
-      generalStore.turnOnLoading()
-      await addPostStore.uploadPost()
-      onPostUpload()
-      toast.success(t.createPost.publication.success)
-    } catch (error) {
-      responseErrorHandler(error)
-    } finally {
-      generalStore.turnOffLoading()
-    }
-  }
+  const { isLoading, onPublishPost, photos, t } =
+    usePublicationModal(onPostUpload)
 
   return (
     <DialogContent

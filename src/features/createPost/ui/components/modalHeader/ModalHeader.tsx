@@ -8,6 +8,7 @@ import {
   cn,
   typographyVariants,
 } from '@/common'
+import { generalStore } from '@/core/store'
 import { addPostStore } from '@/features/createPost'
 
 type Props = {
@@ -40,6 +41,7 @@ export const ModalHeader = ({
             'absolute text-accent-500 px-3 py-1.5 right-4 top-2 focus-within:outline-0',
             typographyVariants({ variant: 'h3' })
           )}
+          disabled={generalStore.isLoading}
           onClick={onRightButtonClick}
           variant={'text'}
         >

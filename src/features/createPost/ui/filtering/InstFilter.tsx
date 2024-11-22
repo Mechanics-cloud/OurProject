@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react'
 
 import { Typography, cn } from '@/common'
 import { FiltersState } from '@/features/createPost'
-import { prepareFilterStyles } from '@/features/createPost/model/prepareFilterStyles'
+import { prepareFilterStyles } from '@/features/createPost/model/utils/prepareFilterStyles'
 import Image from 'next/image'
 
 type Props = {

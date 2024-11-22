@@ -6,9 +6,15 @@ import {
   getCroppedImg,
   responseErrorHandler,
 } from '@/common'
-import { FiltersState, addPostApi } from '@/features/createPost'
+import {
+  ClassicFiltersType,
+  FiltersState,
+  PostPhoto,
+  addPostApi,
+  applyFilters,
+  prepareFilterStyles,
+} from '@/features/createPost'
 import { UploadPost } from '@/features/createPost/api/addPost.types'
-import { applyFilters } from '@/features/createPost/model/applyFilters'
 import {
   MaxDescriptionLength,
   PhotoEditorState,
@@ -17,11 +23,6 @@ import {
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
-import { prepareFilterStyles } from '@/features/createPost/model/prepareFilterStyles'
-import {
-  ClassicFiltersType,
-  PostPhoto,
-} from '@/features/createPost/model/types'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AddPostStore {

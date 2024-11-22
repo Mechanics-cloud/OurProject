@@ -12,8 +12,8 @@ import {
   PhotoControllerButton,
   Slider,
   addPostStore,
+  useScaleControllerPopover,
 } from '@/features/createPost'
-import { useScaleControllerPopover } from '@/features/createPost/model/cropping/useScaleControllerPopover'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
