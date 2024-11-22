@@ -13,10 +13,10 @@ export const InstFilters = observer(() => {
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
 
   return (
-    <ScrollArea className={'h-[450px]'}>
+    <ScrollArea className={'h-[430px]'}>
       <div
         className={
-          'flex flex-wrap gap-x-6 gap-y-5 pt-6 pl-[54px] pr-[36px] self-start'
+          'flex flex-wrap gap-x-6 gap-y-5 pt-6 pl-[54px] pr-[36px] self-start justify-center overflow-y-hidden'
         }
       >
         {instFiltersData.map((filter, index) => (

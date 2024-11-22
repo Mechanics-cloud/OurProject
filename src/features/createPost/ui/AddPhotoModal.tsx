@@ -5,6 +5,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
+  cn,
 } from '@/common'
 import { useAddPhotoModal } from '@/features/createPost'
 
@@ -19,9 +20,19 @@ export const AddPhotoModal = () => {
   } = useAddPhotoModal()
 
   return (
-    <DialogContent className={'max-w-[492px]'}>
+    <DialogContent
+      className={cn(
+        'md:max-w-[492px]',
+        'md:bg-dark-300 bg-dark-700 md:border border-0 max-w-full',
+        'md:top-[50%] md:translate-y-[-50%] top-16 translate-y-0'
+      )}
+    >
       <DialogHeader>
-        <DialogTitle className={'flex justify-center items-center relative'}>
+        <DialogTitle
+          className={
+            'flex justify-center items-center relative border-0 md:border-b'
+          }
+        >
           {t.createPost.adding.title}
         </DialogTitle>
       </DialogHeader>

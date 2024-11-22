@@ -23,11 +23,19 @@ export const CropPhotoModal = observer(() => {
 
   return (
     <DialogContent
-      className={'max-w-[492px] gap-0'}
+      className={cn(
+        'md:max-w-[492px] gap-0',
+        'md:bg-dark-300 bg-dark-700 md:border border-0 max-w-full',
+        'md:top-[50%] md:translate-y-[-50%] top-0 translate-y-0'
+      )}
       crossOff
     >
       <DialogHeader>
-        <DialogTitle className={'flex justify-center items-center relative'}>
+        <DialogTitle
+          className={
+            'flex justify-center items-center relative  border-0 md:border-b'
+          }
+        >
           <ArrowBackOutline
             className={'arrowBack'}
             onClick={prevStage}
@@ -45,11 +53,12 @@ export const CropPhotoModal = observer(() => {
           </Button>
         </DialogTitle>
       </DialogHeader>
+
       <DialogDescription
         asChild
-        className={'lg:m-0 lg:p-0'}
+        className={'md:m-0 lg:m-0 p-0'}
       >
-        <div className={'relative max-w-[492px] h-[490px]'}>
+        <div className={'relative max-w-full md:max-w-[492px] h-[490px]'}>
           <SwiperCover>
             {photos.map((photo, index) => (
               <SwiperSlide

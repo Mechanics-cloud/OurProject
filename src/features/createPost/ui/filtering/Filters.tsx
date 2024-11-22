@@ -31,7 +31,7 @@ export const Filters = observer(() => {
   addCurrentSliderIndex(0)
 
   return (
-    <div className={'border-l-[1px] border-dark-100 w-full'}>
+    <div className={'border-l-[1px] border-dark-100 w-full p-b-3'}>
       <Tabs tabsData={getFiltersTabs(t)} />
     </div>
   )

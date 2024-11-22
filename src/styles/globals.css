@@ -109,6 +109,13 @@ input[type='password']::-ms-clear {
     hue-rotate(199deg) brightness(103%) contrast(101%);
 }
 
+@media screen and (width <= 768px) {
+  .addPost .swiper-pagination {
+    display: none;
+    opacity: 0;
+  }
+}
+
 .addPost .swiper-pagination {
   left: 246px;
   transform: translateX(-50%);
