@@ -15,7 +15,7 @@ export const AddTextPost = observer(() => {
   const addPostDescription = addPostStore.addPostDescription
 
   return (
-    <div className={'border-l-[1px] border-dark-100 w-full'}>
+    <div className={'border-l-[1px] border-dark-100 w-full text-left'}>
       <div className={'p-6 border-b-[1px] border-dark-100 flex flex-col'}>
         <UserMiniLink
           className={
