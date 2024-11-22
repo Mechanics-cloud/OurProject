@@ -1,5 +1,4 @@
 import { Area, Point } from 'react-easy-crop'
-import { toast } from 'react-toastify'
 
 import {
   createFileForUpload,
@@ -70,7 +69,7 @@ class AddPostStore {
           photo.imgUrlToShow = cropPhotoData.photoUrl as string
         })
       } catch (error) {
-        toast.error('Something went wrong')
+        throw new Error('Something went wrong')
       }
     }
   }
@@ -98,7 +97,7 @@ class AddPostStore {
           })
         }
       } catch (error) {
-        toast.error('Something went wrong')
+        throw new Error('Something went wrong')
       }
     }
   }

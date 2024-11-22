@@ -1,16 +1,16 @@
 import * as React from 'react'
 import { PropsWithChildren } from 'react'
 
-import { Dialog, useModal } from '@/common'
+import { Dialog } from '@/common'
 import {
   AddPhotoModal,
   ClosePostCreatingModal,
   CropPhotoModal,
   FilterPhotoModal,
   PublicationModal,
-  addPostStore,
 } from '@/features/createPost'
 import { PhotoEditorState } from '@/features/createPost/model/constants'
+import { useNewPostDialog } from '@/features/createPost/model/useNewPostDialog'
 import { DialogProps } from '@radix-ui/react-dialog'
 import { observer } from 'mobx-react-lite'
 
@@ -21,31 +21,20 @@ type Props = {
 
 export const NewPostDialog = observer(
   ({ onClose, onOpenChange, open, ...rest }: Props) => {
-    const currentState = addPostStore.currentStage
-    const setIsNewDialog = addPostStore.startNewDialog
-    const isNewDialog = addPostStore.isNewDialog
-
     const {
-      isModalOpen: isModalExitOpen,
-      onModalClose: onModalExitClose,
-      openModal: openExitModal,
-    } = useModal()
-
-    const onClosePostCreating = () => {
-      onModalExitClose()
-      onClose()
-      setIsNewDialog()
-    }
-
-    const onPostUpload = () => {
-      onClose()
-      setIsNewDialog()
-    }
+      currentState,
+      isModalExitOpen,
+      isNewDialog,
+      onCloseAddPost,
+      onClosePostCreating,
+      onModalExitClose,
+      onPostUpload,
+    } = useNewPostDialog(onClose)
 
     return (
       <>
         <Dialog
-          onOpenChange={(!isNewDialog && openExitModal) || onClose}
+          onOpenChange={onCloseAddPost()}
           open={open}
           {...rest}
         >
