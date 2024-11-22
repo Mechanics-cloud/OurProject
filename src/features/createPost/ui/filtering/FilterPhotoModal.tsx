@@ -1,17 +1,12 @@
 import * as React from 'react'
 
-import { ArrowBackOutline } from '@/assets/icons'
+import { DialogContent, DialogDescription, cn, useTranslation } from '@/common'
 import {
-  Button,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  cn,
-  typographyVariants,
-  useTranslation,
-} from '@/common'
-import { Filters, SwiperCover, addPostStore } from '@/features/createPost'
+  Filters,
+  ModalHeader,
+  SwiperCover,
+  addPostStore,
+} from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
@@ -19,7 +14,6 @@ import { SwiperSlide } from 'swiper/react'
 export const FilterPhotoModal = observer(() => {
   const { t } = useTranslation()
   const nextStage = addPostStore.nextStage
-  const prevStage = addPostStore.prevStage
   const photos = addPostStore.photos
 
   return (
@@ -31,29 +25,11 @@ export const FilterPhotoModal = observer(() => {
       )}
       crossOff
     >
-      <DialogHeader>
-        <DialogTitle
-          className={
-            'flex justify-center items-center relative  border-0 md:border-b'
-          }
-        >
-          <ArrowBackOutline
-            className={'arrowBack'}
-            onClick={prevStage}
-          />
-          <span>{t.createPost.filtering.title}</span>
-          <Button
-            className={cn(
-              'absolute text-accent-500 px-3 py-1.5 right-4 top-2 focus-within:outline-0',
-              typographyVariants({ variant: 'h3' })
-            )}
-            onClick={nextStage}
-            variant={'text'}
-          >
-            {t.createPost.next}
-          </Button>
-        </DialogTitle>
-      </DialogHeader>
+      <ModalHeader
+        onRightButtonClick={nextStage}
+        rightButtonTitle={t.createPost.next}
+        title={t.createPost.filtering.title}
+      />
 
       <DialogDescription
         asChild

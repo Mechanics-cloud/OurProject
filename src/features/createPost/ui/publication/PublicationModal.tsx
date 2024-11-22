@@ -1,20 +1,20 @@
 import * as React from 'react'
 import { toast } from 'react-toastify'
 
-import { ArrowBackOutline } from '@/assets/icons'
 import {
-  Button,
   DialogContent,
   DialogDescription,
-  DialogHeader,
-  DialogTitle,
   cn,
   responseErrorHandler,
-  typographyVariants,
   useTranslation,
 } from '@/common'
 import { generalStore } from '@/core/store'
-import { AddTextPost, SwiperCover, addPostStore } from '@/features/createPost'
+import {
+  AddTextPost,
+  ModalHeader,
+  SwiperCover,
+  addPostStore,
+} from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
@@ -25,7 +25,6 @@ type Props = {
 
 export const PublicationModal = observer(({ onPostUpload }: Props) => {
   const { t } = useTranslation()
-  const prevStage = addPostStore.prevStage
   const photos = addPostStore.photos
   const isLoading = generalStore.isLoading
 
@@ -51,26 +50,11 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
       )}
       crossOff
     >
-      <DialogHeader>
-        <DialogTitle className={'flex justify-center items-center relative'}>
-          <ArrowBackOutline
-            className={'arrowBack'}
-            onClick={prevStage}
-          />
-          <span>{t.createPost.publication.title}</span>
-          <Button
-            className={cn(
-              'absolute text-accent-500 px-3 py-1.5 right-4 top-2 focus-within:outline-0',
-              typographyVariants({ variant: 'h3' })
-            )}
-            disabled={isLoading}
-            onClick={onPublishPost}
-            variant={'text'}
-          >
-            {t.createPost.publication.publishButton}
-          </Button>
-        </DialogTitle>
-      </DialogHeader>
+      <ModalHeader
+        onRightButtonClick={onPublishPost}
+        rightButtonTitle={t.createPost.publication.publishButton}
+        title={t.createPost.publication.title}
+      />
       <DialogDescription
         asChild
         className={cn(
