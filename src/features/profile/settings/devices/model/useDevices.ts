@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react'
 
 import { responseErrorHandler } from '@/common'
 import { generalStore } from '@/core/store'
-import { profileSessionsStore } from '@/features/profile/settings/devices/model/profileSessionsStore'
+import { profileSessionsStore } from '@/features/profile/settings/devices'
 
 export const useDevices = () => {
   const currentSession = profileSessionsStore.currentSession
