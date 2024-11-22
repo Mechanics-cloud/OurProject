@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -22,7 +21,6 @@ export const useRecoveryPassword = (t: LocaleType) => {
     control,
     formState: { errors, isSubmitting, isValid },
     handleSubmit,
-    trigger,
   } = useForm<RecoveryPasswordFields>({
     defaultValues: {
       confirm: '',
@@ -44,12 +42,6 @@ export const useRecoveryPassword = (t: LocaleType) => {
       responseErrorHandler(error)
     }
   })
-
-  //TODO Найти решение по лучше
-  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
-  useEffect(() => {
-    trigger()
-  }, [t, trigger])
 
   return {
     control,

@@ -1,10 +1,11 @@
-import { Typography, useTranslation } from '@/common'
-import { AsyncComponent } from '@/common/components/asyncComponent/AsyncComponent'
+import { AsyncComponent, Typography, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
-import { useDevices } from '@/features/profile/settings/devices/model/useDevices'
-import { Device } from '@/features/profile/settings/devices/ui/Device'
-import { DevicesSkeleton } from '@/features/profile/settings/devices/ui/DevicesSkeleton'
-import { OtherSessions } from '@/features/profile/settings/devices/ui/OtherSessions'
+import {
+  Device,
+  DevicesSkeleton,
+  OtherSessions,
+  useDevices,
+} from '@/features/profile/settings/devices'
 import { observer } from 'mobx-react-lite'
 
 export const Devices = observer(() => {
