@@ -51,14 +51,12 @@ export const PhotoProfilePostsGallery = observer(() => {
         ))}
       </div>
       <div
-        className={'w-full h-[1px]'}
+        className={`w-full ${
+          profileStore.stopRequest ? 'h-[1px]' : 'h-[15px]'
+        }`}
         ref={ref}
       >
-        {profileStore.isLoading ? (
-          <Skeleton className={'w-full h-[228px]'} />
-        ) : (
-          <div className={'w-full  h-full'}></div>
-        )}
+        {profileStore.isLoading && <Skeleton className={'w-full h-[228px]'} />}
       </div>
     </>
   )
