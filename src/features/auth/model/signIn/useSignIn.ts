@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Paths } from '@/common'
@@ -19,7 +18,6 @@ export const useSignIn = (t: LocaleType) => {
     handleSubmit,
     setError,
     setFocus,
-    trigger,
   } = useForm<SignInFields>({
     defaultValues: { email: '', password: '' },
     mode: 'onTouched',
@@ -43,12 +41,6 @@ export const useSignIn = (t: LocaleType) => {
       isLoadingStore.turnOffLoading()
     }
   }
-
-  //TODO Найти решение по лучше
-  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
-  useEffect(() => {
-    trigger()
-  }, [t, trigger])
 
   return {
     control,
