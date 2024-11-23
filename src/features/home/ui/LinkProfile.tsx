@@ -1,3 +1,4 @@
+import { Paths, Typography } from '@/common'
 import Link from 'next/link'
 
 type Props = {
@@ -7,8 +8,13 @@ type Props = {
 
 export const LinkProfile = ({ userId, userName }: Props) => {
   return (
-    <Link href={`/profile/${userId}`}>
-      <b>{userName} </b>
+    <Link href={`${Paths.profile}/${userId}`}>
+      <Typography
+        className={'inline'}
+        variant={'bold16'}
+      >
+        {userName}{' '}
+      </Typography>
     </Link>
   )
 }

@@ -45,6 +45,8 @@ export const ru = {
   goToTop: 'Вверх',
   homePage: {
     addComments: 'Добавить комментарий...',
+    like: 'Нравиться',
+    likes: 'Нравиться',
     loading: 'Загрузка...',
     publish: 'Опубликовать',
     viewAllComments: 'Посмотреть все комментарии',
@@ -100,12 +102,14 @@ export const ru = {
     publications: 'Публикации',
     settingsButton: 'Настройки профиля',
   },
+
   profileSessions: {
     activeSessions: 'Активные сессии',
     currentSession: 'Текущее устройство',
     lastVisit: 'Последний визит',
     terminateAll: 'Завершить все другие сессии',
   },
+
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
@@ -180,6 +184,9 @@ export const ru = {
     terms: 'Условиями использования',
     text: 'Уже есть аккаунт?',
     title: 'Регистрация',
+  },
+  slider: {
+    noText: 'Нет картинок для поста!',
   },
   tabs: {
     accountManagement: 'Управление аккаунтом',

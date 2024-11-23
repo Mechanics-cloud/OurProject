@@ -14,7 +14,7 @@ type ImageType = {
   fileSize?: number
   height?: number
   uploadId?: string
-  url: StaticImageData | string // StaticImageData временно после добавления картинок с сервера, удалить
+  url: StaticImageData | string // TODO StaticImageData временно, после добавления картинок с сервера, удалить
   width?: number
 }
 
@@ -52,7 +52,7 @@ const Slider = ({ images }: ImagesTypes) => {
           key={index}
         >
           <Image
-            alt={''}
+            alt={'picture from post'}
             className={'block h-full w-full object-cover'}
             fill
             sizes={'(max-width: 768px) 100vw, 33vw'}

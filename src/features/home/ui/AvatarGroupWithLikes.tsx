@@ -1,5 +1,6 @@
 import { useEffect, useMemo } from 'react'
 
+import { Typography, useTranslation } from '@/common'
 import { observer } from 'mobx-react-lite'
 import Image, { StaticImageData } from 'next/image'
 
@@ -12,9 +13,12 @@ type ItemProps = {
 
 export const AvatarGroupWithLikes = observer(({ item }: ItemProps) => {
   const likesStore = useMemo(() => new LikesStore(), [])
+  const { t } = useTranslation()
   const firstThreeAvatarImages = likesStore.avatarImages
   const likesCount = item.likesCount
   const postId = item.id
+
+  const like = item.likesCount === 1 ? t.homePage.like : t.homePage.likes
 
   useEffect(() => {
     likesStore.getPostLikes(postId)
@@ -41,7 +45,12 @@ export const AvatarGroupWithLikes = observer(({ item }: ItemProps) => {
       </div>
       <span className={'text-[14px] leading-[24px]'}>
         {item.likesCount} &ldquo;
-        <b>{item.likesCount === 1 ? 'Like' : 'Likes'}</b>
+        <Typography
+          className={'inline'}
+          variant={'bold14'}
+        >
+          {like}
+        </Typography>
         &rdquo;
       </span>
     </div>

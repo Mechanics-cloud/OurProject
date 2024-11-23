@@ -1,5 +1,5 @@
 export interface HomePageRootInterface {
-  items: [] | Item[]
+  items: Item[]
   nextCursor: number
   page: number
   pageSize: number

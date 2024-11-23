@@ -47,6 +47,8 @@ export const en: LocaleType = {
   goToTop: 'Go to top',
   homePage: {
     addComments: 'Add a Comments...',
+    like: 'Like',
+    likes: 'Likes',
     loading: 'Loading...',
     publish: 'Publish',
     viewAllComments: 'View All Comments',
@@ -181,6 +183,9 @@ export const en: LocaleType = {
     terms: 'Terms of Service',
     text: 'Do you have an account?',
     title: 'Sign Up',
+  },
+  slider: {
+    noText: 'No pictures for this post!',
   },
   tabs: {
     accountManagement: 'Account management',

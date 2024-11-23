@@ -10,7 +10,6 @@ import { PostSkeleton } from './PostSkeleton'
 
 export const Home = observer(() => {
   const state = homePageStore.publicationsFollowers?.items
-  const { t } = useTranslation()
   const router: NextRouter = useRouter()
 
   useEffect(() => {

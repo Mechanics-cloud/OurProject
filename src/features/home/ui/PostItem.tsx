@@ -20,12 +20,13 @@ type Props = {
 }
 
 const PostItem = ({ item, router }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div
       className={
         'w-[491px] min-h-[816px] border-b mt-[24px] ml-[8%] flex flex-col pb-2 justify-between'
       }
-      key={item.id}
     >
       <div className={'w-full h-9 mb-3 flex  items-center justify-between'}>
         <span className={'flex  items-center space-x-2'}>
@@ -41,7 +42,11 @@ const PostItem = ({ item, router }: Props) => {
               userId={item.ownerId}
               userName={item.userName}
             />
-            <span className={'size-1.5 bg-light-100 rounded-full'}></span>
+            <span
+              className={
+                'size-1.5 bg-light-100 rounded-full relative top-[1px]'
+              }
+            ></span>
             <div className={'h-[20px] flex items-end'}>
               <span
                 className={
@@ -59,7 +64,7 @@ const PostItem = ({ item, router }: Props) => {
         {item.images.length > 0 ? (
           <Slider images={item.images} />
         ) : (
-          'Нет картинок для поста!'
+          t.slider.noText
         )}
       </section>
       <LinksGroup item={item} />
