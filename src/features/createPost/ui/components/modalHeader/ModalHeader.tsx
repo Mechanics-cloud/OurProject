@@ -28,13 +28,24 @@ export const ModalHeader = ({
     <DialogHeader>
       <DialogTitle
         className={
-          'flex justify-center items-center relative  border-0 md:border-b'
+          'flex justify-center items-center relative border-0 md:border-b'
         }
       >
-        <ArrowBackOutline
-          className={'arrowBack'}
+        <button
+          disabled={generalStore.isLoading}
           onClick={prevStage}
-        />
+          type={'button'}
+        >
+          <ArrowBackOutline
+            className={cn(
+              'arrowBack',
+              generalStore.isLoading
+                ? 'opacity-50 transition-none hover:translate-x-0 hover:text-light-100'
+                : ''
+            )}
+          />
+        </button>
+
         <span>{title}</span>
         <Button
           className={cn(
