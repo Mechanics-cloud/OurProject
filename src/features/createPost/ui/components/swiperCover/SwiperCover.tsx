@@ -21,7 +21,7 @@ export const SwiperContext = createContext<Nullable<SwiperContextValue>>(null)
 
 export const SwiperCover = observer(
   ({ children, className }: ComponentPropsWithoutRef<'div'>) => {
-    const { goToSlide, handleSlideChange, swiperRef } = useSwiperCover()
+    const { goToSlide, onSlideChange, swiperRef } = useSwiperCover()
 
     return (
       <SwiperContext.Provider value={{ goToSlide }}>
@@ -44,7 +44,7 @@ export const SwiperCover = observer(
           navigation
           noSwiping
           noSwipingSelector={'button'}
-          onSlideChange={handleSlideChange}
+          onSlideChange={onSlideChange}
           onSwiper={(swiperInstance: typeof Swiper) => {
             swiperRef.current = swiperInstance
           }}

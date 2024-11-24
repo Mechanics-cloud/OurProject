@@ -7,7 +7,7 @@ export const useSwiperCover = () => {
   const swiperRef = useRef<typeof Swiper>(null)
   const addCurrentSliderIndex = addPostStore.addCurrentSliderIndex
 
-  const handleSlideChange = (swiper: typeof Swiper) => {
+  const onSlideChange = (swiper: typeof Swiper) => {
     addCurrentSliderIndex(swiper.activeIndex)
   }
 
@@ -17,5 +17,5 @@ export const useSwiperCover = () => {
     }
   }, [])
 
-  return { goToSlide, handleSlideChange, swiperRef }
+  return { goToSlide, onSlideChange, swiperRef }
 }

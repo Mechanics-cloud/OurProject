@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
-import { useTranslation } from '@/common'
+import { Nullable, useTranslation } from '@/common'
 import { CountryData, locationsApi } from '@/common/api'
 import { addPostStore } from '@/features/createPost'
 
@@ -14,7 +14,7 @@ export const useCityAutocomplete = () => {
   const [locationData, setLocationData] = useState<CountryData[]>([])
   const [isCitySelected, setIsCitySelected] = useState<boolean>(false)
   const [focusedIndex, setFocusedIndex] = useState<number>(-1)
-  const suggestionsListRef = useRef<HTMLUListElement | null>(null)
+  const suggestionsListRef = useRef<Nullable<HTMLUListElement>>(null)
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -43,11 +43,11 @@ export const useCityAutocomplete = () => {
     })
   }, [])
 
-  const handleMouseMove = () => {
-    setFocusedIndex(-1)
-  }
-
   useEffect(() => {
+    const handleMouseMove = () => {
+      setFocusedIndex(-1)
+    }
+
     window.addEventListener('mousemove', handleMouseMove)
 
     return () => {

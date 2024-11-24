@@ -10,7 +10,7 @@ export const useAddPhotoModal = () => {
   const clearOldData = addPostStore.resetData
   const isDraft = addPostStore.isDraft
   const setIsNotNewDialog = addPostStore.continueDialog
-  const addPostPhoto = useMemo(() => addPostStore.addPhoto, [])
+  const addPostPhoto = addPostStore.addPhoto
   const totalCount = addPostStore.getCurrentPhotosCount()
 
   const onPhotoDrop = useCallback(

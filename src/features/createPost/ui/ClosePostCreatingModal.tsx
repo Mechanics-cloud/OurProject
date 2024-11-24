@@ -5,14 +5,14 @@ import { Button, SimpleModal, useTranslation } from '@/common'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
+  onBack: () => void
   onClose: () => void
-  onCloseFull: () => void
 } & DialogProps &
   PropsWithChildren
 
 export const ClosePostCreatingModal = ({
+  onBack,
   onClose,
-  onCloseFull,
   open,
   ...rest
 }: Props) => {
@@ -27,12 +27,12 @@ export const ClosePostCreatingModal = ({
       {t.createPost.closeModal.description}
       <span className={'flex justify-between pt-[18px] pb-6'}>
         <Button
-          onClick={onClose}
+          onClick={onBack}
           variant={'outline'}
         >
           {t.createPost.closeModal.discard}
         </Button>
-        <Button onClick={onCloseFull}>{t.createPost.closeModal.save}</Button>
+        <Button onClick={onClose}>{t.createPost.closeModal.save}</Button>
       </span>
     </SimpleModal>
   )

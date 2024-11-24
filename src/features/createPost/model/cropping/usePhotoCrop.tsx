@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect } from 'react'
 import { Area, Point } from 'react-easy-crop'
 
 import { PostPhoto, addPostStore } from '@/features/createPost'
@@ -6,7 +6,7 @@ import { toJS } from 'mobx'
 
 export const usePhotoCrop = (photo: PostPhoto) => {
   const addZoom = addPostStore.addZoom
-  const addCrop = useMemo(() => addPostStore.addCrop, [])
+  const addCrop = addPostStore.addCrop
   const addCroppedArea = addPostStore.addCroppedArea
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {

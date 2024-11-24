@@ -8,7 +8,7 @@ type HasId<N> = {
  * @param array of objects (id is required parameter)
  * @param id of object to find
  */
-export const findObjectInArray = <T extends HasId<N>, N>(
+export const findObjectById = <T extends HasId<N>, N>(
   array: Array<T>,
   id: N
 ): Nullable<T> => {

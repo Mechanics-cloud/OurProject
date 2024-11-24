@@ -2,7 +2,7 @@ import { Area, Point } from 'react-easy-crop'
 
 import {
   createFileForUpload,
-  findObjectInArray,
+  findObjectById,
   getCroppedImg,
   responseErrorHandler,
 } from '@/common'
@@ -42,7 +42,7 @@ class AddPostStore {
   }
 
   addCrop(id: string, crop: Point) {
-    const photo = findObjectInArray(this.photos, id)
+    const photo = findObjectById(this.photos, id)
 
     if (photo) {
       photo.crop = crop
@@ -50,7 +50,7 @@ class AddPostStore {
   }
 
   addCroppedArea(id: string, croppedAreaPixels: Area) {
-    const photo = findObjectInArray(this.photos, id)
+    const photo = findObjectById(this.photos, id)
 
     if (photo) {
       photo.croppedArea = croppedAreaPixels
@@ -159,7 +159,7 @@ class AddPostStore {
   }
 
   changeAspect(id: string, aspect: number) {
-    const photo = findObjectInArray(this.photos, id)
+    const photo = findObjectById(this.photos, id)
 
     if (photo) {
       photo.aspect = aspect
@@ -191,7 +191,7 @@ class AddPostStore {
   }
 
   getAspect(id: string) {
-    return findObjectInArray(this.photos, id)?.aspect ?? 1
+    return findObjectById(this.photos, id)?.aspect ?? 1
   }
 
   getCurrentPhotosCount() {
@@ -199,18 +199,18 @@ class AddPostStore {
   }
 
   getOriginAspect(id: string) {
-    return findObjectInArray(this.photos, id)?.originAspect ?? 1
+    return findObjectById(this.photos, id)?.originAspect ?? 1
   }
 
   getZoom(id: string) {
-    return findObjectInArray(this.photos, id)?.zoom ?? 1
+    return findObjectById(this.photos, id)?.zoom ?? 1
   }
 
   initOriginAspect(id: string, url: string) {
     const img = new Image()
 
     img.src = url
-    const photo = findObjectInArray(this.photos, id)
+    const photo = findObjectById(this.photos, id)
 
     img.onload = function () {
       runInAction(() => {

@@ -1,11 +1,8 @@
-import { Paths, clearAllData, setToLocalStorage } from '@/common'
+import { Paths, clearAllData } from '@/common'
+import { updateToken } from '@/common/api/utils/updateToken'
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
-import axios, {
-  AxiosResponse,
-  InternalAxiosRequestConfig,
-  isAxiosError,
-} from 'axios'
+import axios, { AxiosResponse, isAxiosError } from 'axios'
 
 import { CommonEndpoints } from './common.endpoints'
 
@@ -16,26 +13,6 @@ export const instance = axios.create({
   },
   withCredentials: true,
 })
-
-const updateToken = async (params: InternalAxiosRequestConfig | undefined) => {
-  try {
-    if (localStorage.getItem(StorageKeys.AccessToken)) {
-      const newToken = await instance
-        .post(CommonEndpoints.updateToken)
-        .then((res) => res.data.accessToken)
-
-      setToLocalStorage(StorageKeys.AccessToken, newToken)
-
-      if (params) {
-        params.headers.Authorization = `Bearer ${newToken}`
-
-        return await instance.request(params)
-      }
-    }
-  } catch (error) {
-    return Promise.reject(error)
-  }
-}
 
 //TODO фикс появления ошибки, на первом запросе при обновлении токена
 
