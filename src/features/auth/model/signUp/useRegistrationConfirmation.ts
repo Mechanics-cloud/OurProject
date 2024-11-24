@@ -15,7 +15,7 @@ export const useRegistrationConfirmation = () => {
     }
     const controller = new AbortController()
 
-    const handleEmailConfirmation = async () => {
+    const onEmailConfirmation = async () => {
       const confirmationCode = query.code as string
 
       try {
@@ -30,7 +30,7 @@ export const useRegistrationConfirmation = () => {
       }
     }
 
-    handleEmailConfirmation()
+    onEmailConfirmation()
 
     return () => {
       controller.abort()

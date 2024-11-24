@@ -63,7 +63,6 @@ export const useFillGeneralInfo = () => {
 
   return {
     control,
-    handleSubmit,
     isDirty,
     isPhotoChanged,
     isSubmitting,
