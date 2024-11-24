@@ -1,9 +1,7 @@
 import { toast } from 'react-toastify'
 
-import {
-  AddPhotoSchema,
-  addPhotoSchema,
-} from '@/features/createPost/model/adding/addPhotoSchema'
+import { isCanAddPhoto } from '@/common'
+import { AddPhotoSchema, addPhotoSchema } from '@/features/createPost'
 import { MaxPhotoCount } from '@/features/createPost/model/constants'
 import { LocaleType } from '@locales/ru'
 import { z } from 'zod'
@@ -23,8 +21,12 @@ export const addPhotosCheck = async (
 ) => {
   const photosCount = files.length
 
+  if (!isCanAddPhoto(totalCount)) {
+    return
+  }
+
   for (let i = 0; i < photosCount; i++) {
-    if (totalCount === MaxPhotoCount || i === MaxPhotoCount) {
+    if (i === MaxPhotoCount) {
       toast(`${t.createPost.adding.errors.countLimit}${MaxPhotoCount}`)
       break
     }
@@ -43,12 +45,6 @@ export const addPhotosCheck = async (
       } else {
         toast.error(t.createPost.adding.errors.basic)
       }
-    }
-  }
-
-  if (totalCount === MaxPhotoCount) {
-    {
-      return
     }
   }
 }
