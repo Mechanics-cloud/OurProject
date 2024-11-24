@@ -1,4 +1,7 @@
 export const ru = {
+  auth: {
+    welcome: 'Добро пожаловать! Пожалуйста, войдите.',
+  },
   avatarModal: {
     chooseButton: 'Выбрать с компьютера',
     errors: {

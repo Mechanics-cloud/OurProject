@@ -1,6 +1,9 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  auth: {
+    welcome: 'Welcome! Please sign in.',
+  },
   avatarModal: {
     chooseButton: 'Select from Computer',
     errors: {
