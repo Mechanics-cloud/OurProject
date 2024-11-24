@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ComponentPropsWithoutRef } from 'react'
 
+import { Person } from '@/assets/icons'
 import { Typography, cn } from '@/common'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -27,13 +28,22 @@ export const UserMiniLink = ({
       href={userProfileLink}
       onClick={onClick}
     >
-      <Image
-        alt={userName}
-        className={'w-9 h-9 rounded-full'}
-        height={36}
-        src={userAvatarSrc}
-        width={36}
-      />
+      {userAvatarSrc ? (
+        <Image
+          alt={userName}
+          className={'w-9 h-9 rounded-full'}
+          height={36}
+          src={userAvatarSrc}
+          width={36}
+        />
+      ) : (
+        <Person
+          className={'bg-dark-100 w-9 h-9 rounded-full text-light-900'}
+          height={36}
+          width={36}
+        />
+      )}
+
       <Typography variant={'reg16'}>{userName}</Typography>
     </Link>
   )
