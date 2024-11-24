@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -28,7 +28,6 @@ export const useForgotPassword = (t: LocaleType) => {
     handleSubmit,
     setError,
     setValue,
-    trigger,
   } = useForm<ForgotPasswordFields>({
     defaultValues: {
       email: '',
@@ -68,12 +67,6 @@ export const useForgotPassword = (t: LocaleType) => {
       onResetRecaptcha()
     }
   })
-
-  //TODO Найти решение по лучше
-  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
-  useEffect(() => {
-    trigger()
-  }, [t, trigger])
 
   return {
     control,
