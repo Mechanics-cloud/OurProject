@@ -28,10 +28,10 @@ const placeholderImages = [
 const Profile = observer(() => {
   const { t } = useTranslation()
   const { followers, following, publications, settingsButton } = t.profilePage
-  const { isProfileLoading, userProfile } = profileStore
+  const { isLoading, userProfile } = profileStore
   const avatar = userProfile?.avatars[0]?.url
 
-  return isProfileLoading ? (
+  return isLoading ? (
     <div>Loading...</div> //временная заглушка
   ) : (
     <div className={'flex w-full'}>
