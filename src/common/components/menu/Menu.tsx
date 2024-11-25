@@ -14,19 +14,11 @@ import {
   PlusSquareOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
-import { useTranslation } from '@/common'
+import { Paths, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-const PATHS = {
-  HOME: '/',
-  MESSENGER: '/messenger',
-  PROFILE: '/profile/[[...id]]',
-  PUBLICATION: '/publication',
-  SEARCH: '/search',
-} as const
 
 export const Menu = () => {
   const router = useRouter()
@@ -41,12 +33,16 @@ export const Menu = () => {
   }
 
   return (
-    <nav className={'min-w-[360px] w-full bg-dark-00 border-t border-dark-300'}>
+    <nav
+      className={
+        'min-w-[360px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0'
+      }
+    >
       <ul className={'flex w-full justify-evenly py-[18px]'}>
         <li>
           <Tooltip title={t.menu.home}>
-            <Link href={PATHS.HOME}>
-              {matchesPathname(href, PATHS.HOME) ? (
+            <Link href={Paths.home}>
+              {matchesPathname(href, Paths.home) ? (
                 <Home className={'size-6 text-accent-500'} />
               ) : (
                 <HomeOutline className={'size-6'} />
@@ -77,8 +73,8 @@ export const Menu = () => {
         </li>
         <li>
           <Tooltip title={t.menu.messenger}>
-            <Link href={PATHS.MESSENGER}>
-              {matchesPathname(href, PATHS.MESSENGER) ? (
+            <Link href={Paths.messenger}>
+              {matchesPathname(href, Paths.messenger) ? (
                 <MessageCircle className={'size-6 text-accent-500'} />
               ) : (
                 <MessageCircleOutline className={'size-6'} />
@@ -89,8 +85,8 @@ export const Menu = () => {
         </li>
         <li>
           <Tooltip title={t.menu.search}>
-            <Link href={PATHS.SEARCH}>
-              {matchesPathname(href, PATHS.SEARCH) ? (
+            <Link href={Paths.search}>
+              {matchesPathname(href, Paths.search) ? (
                 <Search className={'size-6 text-accent-500'} />
               ) : (
                 <SearchOutline className={'size-6'} />
@@ -101,8 +97,8 @@ export const Menu = () => {
         </li>
         <li>
           <Tooltip title={t.menu.profile}>
-            <Link href={PATHS.PROFILE}>
-              {matchesPathname(href, PATHS.PROFILE) ? (
+            <Link href={Paths.profile}>
+              {matchesPathname(href, Paths.profile) ? (
                 <Person className={'size-6 text-accent-500'} />
               ) : (
                 <PersonOutline className={'size-6'} />

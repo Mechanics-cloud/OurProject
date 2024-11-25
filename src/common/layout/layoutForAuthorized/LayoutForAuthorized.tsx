@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect, useState } from 'react'
 
-import { Layout, Loader, SideBar } from '@/common'
+import { Layout, Loader, Menu, SideBar } from '@/common'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { profileStore } from '@/features/profile'
 import { NextPage } from 'next'
@@ -21,7 +21,7 @@ export const LayoutForAuthorized: NextPage<PropsWithChildren> = ({
 
   return (
     <Layout className={'flex'}>
-      {!isTablet && <SideBar />}
+      {isTablet ? <Menu /> : <SideBar />}
       <div
         className={
           isTablet

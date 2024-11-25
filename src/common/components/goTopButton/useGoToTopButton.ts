@@ -1,14 +1,15 @@
 import { useEffect } from 'react'
 
 import { useTranslation } from '@/common'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Variants, useAnimationControls, useScroll } from 'framer-motion'
 
 export const useGoToTopButton = () => {
   const { t } = useTranslation()
-  const isBrowser = () => typeof window !== 'undefined'
-
-  const { scrollYProgress } = useScroll()
+  const { isTablet } = useScreenWidth()
   const controls = useAnimationControls()
+  const { scrollYProgress } = useScroll()
+  const isBrowser = () => typeof window !== 'undefined'
 
   const scrollToTopVariants: Variants = {
     hide: { opacity: 0, y: 100 },
@@ -41,5 +42,12 @@ export const useGoToTopButton = () => {
     window.scrollTo({ behavior: 'smooth', top: 0 })
   }
 
-  return { controls, isBrowser, scrollToTopHandler, scrollToTopVariants, t }
+  return {
+    controls,
+    isBrowser,
+    isTablet,
+    scrollToTopHandler,
+    scrollToTopVariants,
+    t,
+  }
 }
