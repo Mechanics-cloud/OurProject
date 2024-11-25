@@ -21,7 +21,7 @@ type ImageType = {
 type ImagesTypes = {
   images: Array<ImageType>
 }
-const Slider = ({ images }: ImagesTypes) => {
+const CustomSwiper = ({ images }: ImagesTypes) => {
   if (images.length === 0) {
     return <p>Нет изображений для отображения</p>
   }
@@ -64,4 +64,4 @@ const Slider = ({ images }: ImagesTypes) => {
   )
 }
 
-export default Slider
+export default CustomSwiper

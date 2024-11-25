@@ -33,7 +33,7 @@ class PostsApi {
     postId: number
   }) {
     return this.instance
-      .put<any>(PostsRequestEndpoints.idLikeStatus(postId), {
+      .put<void>(PostsRequestEndpoints.idLikeStatus(postId), {
         likeStatus: newLikeStatus,
       })
       .then((res) => res.data)

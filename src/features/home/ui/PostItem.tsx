@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { TextUnfolding, useTranslation } from '@/common'
-import Slider from '@/common/components/slider/Slider'
+import { CustomSwiper } from '@/common/components/swiper'
 import Image from 'next/image'
 import { NextRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
@@ -62,7 +62,7 @@ const PostItem = ({ item, router }: Props) => {
       </div>
       <section className={'h-[504px] mb-3'}>
         {item.images.length > 0 ? (
-          <Slider images={item.images} />
+          <CustomSwiper images={item.images} />
         ) : (
           t.slider.noText
         )}
