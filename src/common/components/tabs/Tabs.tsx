@@ -1,17 +1,17 @@
 'use client'
 
 import * as React from 'react'
+import { ReactNode } from 'react'
 
 import { cn } from '@/common'
-import { typographyVariants } from '@/common/components/typography'
 import * as TabsPrimitive from '@radix-ui/react-tabs'
 import { clsx } from 'clsx'
 
 export type TabsType = {
-  content: React.ReactNode
+  content: ReactNode
   disabled?: true
   id: string
-  title: string
+  title: ReactNode | string
 }
 
 export type TabsData = {
@@ -47,9 +47,7 @@ const Tabs = React.forwardRef<
             key={`tab-trigger-${id}`}
             value={id}
           >
-            <span className={clsx(typographyVariants({ variant: 'h3' }))}>
-              {title}
-            </span>
+            {title}
           </TabsPrimitive.Trigger>
         ))}
       </TabsPrimitive.List>
