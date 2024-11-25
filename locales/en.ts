@@ -113,6 +113,7 @@ export const en: LocaleType = {
       title: 'Email verification link expired',
     },
   },
+  serverError: 'Something went wrong on our end. Please try again later.',
   session: {
     activeSession: 'Active session',
     currentDevice: 'Current device',
