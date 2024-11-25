@@ -1,1 +1,5 @@
+export * from './GeneralInfoLoading'
 export * from './PhotoProfilePostsGallery'
+export * from './ProfileAboutMe'
+export * from './ProfilePosts'
+export * from './ProfileStatistics'

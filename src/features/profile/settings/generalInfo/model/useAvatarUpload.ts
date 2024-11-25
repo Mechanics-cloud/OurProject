@@ -17,7 +17,6 @@ export const useAvatarUpload = () => {
   }
 
   return {
-    currentPhoto,
     isPhotoChanged,
     onModalPhotoSave,
     photoObj,

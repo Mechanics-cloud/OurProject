@@ -1,12 +1,12 @@
 import { createFileForUpload, responseErrorHandler } from '@/common'
-import { Photo } from '@/features/profile/model/types'
-import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
 import {
+  PhotoResult,
   UpdatedProfile,
   UserInfo,
   UserProfile,
   profileAPi,
-} from '@/features/profile/settings/generalInfo/api'
+} from '@/features/profile'
+import { Photo } from '@/features/profile/model/types'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
@@ -25,6 +25,11 @@ class ProfileStore {
   async deleteAvatar() {
     try {
       await profileAPi.deleteAvatar()
+      runInAction(() => {
+        if (this.userProfile) {
+          this.userProfile.avatars = []
+        }
+      })
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -90,8 +95,13 @@ class ProfileStore {
       return userProfile
     } catch (error) {
       responseErrorHandler(error)
+    } finally {
+      runInAction(() => {
+        this.isLoading = false
+      })
     }
   }
+
   async updateProfile(data: UserInfo) {
     try {
       const updatedData: UpdatedProfile = {
@@ -106,6 +116,14 @@ class ProfileStore {
       }
 
       await profileAPi.updateProfile(updatedData)
+      runInAction(() => {
+        if (this.userProfile) {
+          this.userProfile = {
+            ...this.userProfile,
+            ...updatedData,
+          }
+        }
+      })
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -119,6 +137,14 @@ class ProfileStore {
           return
         }
         await profileAPi.uploadAvatar(file)
+
+        runInAction(() => {
+          if (this.userProfile && photoData.photo) {
+            this.userProfile.avatars = [
+              { ...this.userProfile.avatars[0], url: photoData.photo },
+            ]
+          }
+        })
       }
     } catch (error) {
       responseErrorHandler(error)
