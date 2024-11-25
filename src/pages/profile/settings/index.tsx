@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { ArrowBackOutline } from '@/assets/icons'
 import { Tabs, TabsType, cn, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
@@ -12,8 +13,7 @@ const Settings = () => {
   const tabsData: TabsType[] = getSettingsTabs(t, isMobile)
 
   return (
-    <div className={cn('mt-[42px]', isTablet && 'mt-5')}>
-      {isTablet && <p className={'text-center mb-5'}>Back to Profile</p>}
+    <div className={'md:mt-[42px] mt-5'}>
       <Tabs tabsData={tabsData} />
     </div>
   )
