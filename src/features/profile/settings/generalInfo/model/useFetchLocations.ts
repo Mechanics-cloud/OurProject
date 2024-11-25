@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Control, FieldValues, Path, useWatch } from 'react-hook-form'
 
+import { Nullable } from '@/common'
 import locationsApi, {
   CountryData,
 } from '@/features/profile/settings/generalInfo/api/locations.api'
@@ -8,8 +9,9 @@ import locationsApi, {
 export const useFetchLocations = <T extends FieldValues>(
   control: Control<T>
 ) => {
-  const [countriesData, setCountriesData] = useState<CountryData[] | null>(null)
-  const [cities, setCities] = useState<null | string[]>([])
+  const [countriesData, setCountriesData] =
+    useState<Nullable<CountryData[]>>(null)
+  const [cities, setCities] = useState<Nullable<string[]>>(null)
   const [loading, setLoading] = useState<boolean>(true)
 
   const countryValue = useWatch({
