@@ -29,7 +29,7 @@ const Slider = React.forwardRef<
     </SliderPrimitive.Track>
     <SliderPrimitive.Thumb
       className={
-        'block h-3 w-3 rounded-full border-[3px] bg-light-100 border-accent-500 focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2'
+        'block h-3 w-3 rounded-full border-[3px] bg-light-100 border-accent-500 focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2 hover:cursor-pointer focus:cursor-grabbing'
       }
     />
   </SliderPrimitive.Root>
