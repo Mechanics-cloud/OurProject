@@ -37,11 +37,15 @@ export const UserMiniLink = ({
           width={36}
         />
       ) : (
-        <Person
-          className={'bg-dark-100 w-9 h-9 rounded-full text-light-900'}
-          height={36}
-          width={36}
-        />
+        <span className={'relative bg-dark-100 w-9 h-9 rounded-full'}>
+          <Person
+            className={
+              'absolute text-light-900 block top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2'
+            }
+            height={24}
+            width={24}
+          />
+        </span>
       )}
 
       <Typography variant={'reg16'}>{userName}</Typography>
