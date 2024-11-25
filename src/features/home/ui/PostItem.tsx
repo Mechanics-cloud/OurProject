@@ -2,15 +2,17 @@ import React from 'react'
 
 import { TextUnfolding, useTranslation } from '@/common'
 import Slider from '@/common/components/slider/Slider'
+import {
+  AvatarGroupWithLikes,
+  CustomHomePopover,
+  timeAgo,
+} from '@/features/home'
 import Image from 'next/image'
 import { NextRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
 import { Item, calculateCharactersToShow } from '../model'
-import { timeAgo } from '../model/utilsDate'
 import { WrapperParentComponent } from '../model/wrapperParentComponent'
-import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
-import { CustomHomePopover } from './CustomHomePopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
 
