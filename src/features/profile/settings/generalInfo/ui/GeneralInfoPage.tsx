@@ -8,7 +8,7 @@ import {
 import { observer } from 'mobx-react-lite'
 
 export const GeneralInfoPage = observer(() => {
-  const { isProfileLoading } = profileStore
+  const { isLoading } = profileStore
 
-  return isProfileLoading ? <GeneralInfoLoading /> : <GeneralInfo />
+  return isLoading ? <GeneralInfoLoading /> : <GeneralInfo />
 })

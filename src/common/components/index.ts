@@ -1,3 +1,4 @@
+export * from './asyncComponent'
 export * from './baseModal'
 export * from './button'
 export * from './calendar'
