@@ -1,16 +1,19 @@
 import React from 'react'
 
-import { Tabs, TabsType, useTranslation } from '@/common'
+import { ArrowBackOutline } from '@/assets/icons'
+import { Tabs, TabsType, cn, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { getSettingsTabs } from '@/features/profile'
 
 const Settings = () => {
   const { t } = useTranslation()
+  const { isMobile, isTablet } = useScreenWidth()
 
-  const tabsData: TabsType[] = getSettingsTabs(t)
+  const tabsData: TabsType[] = getSettingsTabs(t, isMobile)
 
   return (
-    <div className={'mt-[42px]'}>
+    <div className={'md:mt-[42px] mt-5'}>
       <Tabs tabsData={tabsData} />
     </div>
   )

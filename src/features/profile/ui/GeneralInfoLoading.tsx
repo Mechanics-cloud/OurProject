@@ -1,30 +1,40 @@
 import React from 'react'
 
-import { Button, Skeleton, useTranslation } from '@/common'
+import { Button, Skeleton, useScreenWidth, useTranslation } from '@/common'
 
 export const GeneralInfoLoading = () => {
   const fieldClass = 'w-full h-[36px] mb-6'
   const { t } = useTranslation()
-  const { aboutMe, city, country, dateOfBirth, firstName, lastName, userName } =
-    t.profileInputs
+  const {
+    aboutMe,
+    addProfilePhoto,
+    city,
+    country,
+    dateOfBirth,
+    firstName,
+    lastName,
+    userName,
+  } = t.profileInputs
+
+  const { isTablet } = useScreenWidth()
 
   return (
     <div
       className={
-        'flex gap-10 w-full mt-6 relative after:absolute after:contain-content after:h-[1px] after:top-[90%] after:left-0 after:w-full after:bg-dark-300'
+        'flex flex-col lg:flex-row gap-10 w-full mt-6 relative after:absolute after:contain-content after:h-[1px] after:bottom-[5%] lg:after:top-[90%] after:left-0 after:w-full after:bg-dark-300'
       }
     >
-      <div className={'flex items-center flex-col h-[500px] gap-6'}>
+      <div className={'flex items-center flex-col gap-6'}>
         <Skeleton className={'rounded-full pr-0 w-[200px] h-[200px]'} />
         <Button
           className={'min-w-[196px]'}
           disabled
           variant={'outline'}
         >
-          Add a Profile Photo
+          {addProfilePhoto}
         </Button>
       </div>
-      <div className={'w-full flex flex-col gap-6'}>
+      <div className={'w-full flex flex-col lg:gap-6'}>
         <label>
           <p className={'mb-1 text-[14px] text-light-900'}>
             {userName}
@@ -51,7 +61,7 @@ export const GeneralInfoLoading = () => {
           <Skeleton className={fieldClass} />
         </label>
 
-        <div className={'flex gap-6'}>
+        <div className={'flex gap-6 lg:flex-row flex-col'}>
           <label className={'w-full'}>
             <p className={'mb-1 text-[14px] text-light-900'}>{country}</p>
             <Skeleton className={'w-full h-[36px]'} />
@@ -67,6 +77,7 @@ export const GeneralInfoLoading = () => {
         </label>
         <div className={'flex justify-end mt-12'}>
           <Button
+            className={isTablet ? 'w-full' : ''}
             disabled
             variant={'primary'}
           >

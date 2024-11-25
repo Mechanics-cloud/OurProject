@@ -1,28 +1,18 @@
 import { Paid } from '@/assets/icons'
 import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { cn } from '@/common/utils/cn'
-import { profileStore } from '@/features/profile'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
+import {
+  ProfileAboutMe,
+  ProfilePosts,
+  ProfileStatistics,
+  profileStore,
+} from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
-import image1 from '../../assets/images/image1.jpg'
-import image2 from '../../assets/images/image2.jpg'
-import image3 from '../../assets/images/image3.jpg'
-import image4 from '../../assets/images/image4.jpg'
-
-const placeholderImages = [
-  { id: 1, img: image1 },
-  { id: 2, img: image2 },
-  { id: 3, img: image3 },
-  { id: 4, img: image4 },
-  { id: 5, img: image1 },
-  { id: 6, img: image2 },
-  { id: 7, img: image3 },
-  { id: 8, img: image4 },
-]
 
 //todo: remove avatarPlaceholder and place another placeholder image
 const Profile = observer(() => {
@@ -31,67 +21,72 @@ const Profile = observer(() => {
   const { isLoading, userProfile } = profileStore
   const avatar = userProfile?.avatars[0]?.url
 
+  const { isMobile, isTablet } = useScreenWidth()
+
   return isLoading ? (
     <div>Loading...</div> //временная заглушка
   ) : (
     <div className={'flex w-full'}>
       <div className={'flex flex-col w-full'}>
-        <div className={'mt-9 flex items-start gap-[38px] w-full mb-[53px]'}>
+        <div
+          className={
+            'mt-5 md:mt-9 flex items-center w-full gap-5 mb-3 lg:gap-9 lg:mb-[53px]'
+          }
+        >
           <Image
             alt={'avatar'}
             className={'rounded-full pr-0'}
-            height={200}
+            height={isMobile ? 100 : 200}
             src={avatar || avatarPlaceholder}
-            width={200}
+            width={isMobile ? 100 : 200}
           />
           <div className={'flex flex-col flex-wrap w-full'}>
             <div
-              className={'flex items-center justify-between w-full mb-[19px]'}
+              className={
+                'hidden md:flex items-center justify-between w-full mb-5'
+              }
             >
               <Typography
-                className={'text-light-100 flex items-center gap-3'}
+                className={'flex text-light-100 items-center gap-3'}
                 variant={'h1'}
               >
                 {userProfile?.userName ?? 'URL Profile'}
                 <Paid />
               </Typography>
 
-              <Button variant={'secondary'}>
+              <Button
+                className={'hidden md:block'}
+                variant={'secondary'}
+              >
                 <Link href={Paths.profileSettings}>{settingsButton}</Link>
               </Button>
             </div>
-            <div className={'flex gap-[100px] flex-wrap'}>
-              <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}>{following}</Typography>
-              </div>
-              <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}>{followers}</Typography>
-              </div>
-              <div className={'flex flex-col'}>
-                <Typography variant={'reg14'}>2218</Typography>
-                <Typography variant={'reg14'}>{publications}</Typography>
-              </div>
-            </div>
-            <div className={'mt-[23px]'}>
-              {userProfile?.aboutMe && (
-                <Typography variant={'reg16'}>{userProfile.aboutMe}</Typography>
-              )}
-            </div>
+            <ProfileStatistics
+              followers={followers}
+              following={following}
+              isMobile={isMobile}
+              publications={publications}
+            />
+            <ProfileAboutMe
+              aboutMe={userProfile?.aboutMe}
+              className={isTablet ? 'hidden' : 'mt-6'}
+              isMobile={isMobile}
+            />
           </div>
         </div>
-        <div className={cn('grid gap-3 grid-cols-gallery w-full')}>
-          {placeholderImages.map((image) => (
-            <Image
-              alt={'image'}
-              height={228}
-              key={image.id}
-              src={image.img}
-              width={342}
-            />
-          ))}
-        </div>
+        <Typography
+          className={'md:hidden flex text-light-100 items-center gap-3 mb-3'}
+          variant={'h1'}
+        >
+          {userProfile?.userName ?? 'URL Profile'}
+          <Paid />
+        </Typography>
+        <ProfileAboutMe
+          aboutMe={userProfile?.aboutMe}
+          className={isTablet ? 'mb-7' : 'hidden'}
+          isMobile={isMobile}
+        />
+        <ProfilePosts />
       </div>
     </div>
   )

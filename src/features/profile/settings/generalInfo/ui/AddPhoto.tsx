@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CloseOutline, ImageOutline } from '@/assets/icons/outlineIcons'
+import { CloseOutline, ImageOutline } from '@/assets/icons'
 import { Button, cn, useTranslation } from '@/common'
 import { AvatarDialog, PhotoResult } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
@@ -27,7 +27,7 @@ export const AddPhoto = observer(
     }
 
     return (
-      <div className={'flex items-center flex-col h-[500px] gap-6'}>
+      <div className={'flex items-center flex-col gap-6'}>
         {photoObj.photo ? (
           <div className={cn('relative object-cover', imageClass)}>
             {photoObj.photo && (
