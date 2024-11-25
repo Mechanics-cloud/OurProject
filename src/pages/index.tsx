@@ -1,6 +1,7 @@
 import { withProtection } from '@/common/HOC/withProtection'
 import { Button } from '@/common/components/button'
 import { typographyVariants } from '@/common/components/typography'
+import { DeletePost } from '@/features/profile/post/ui/deletePost'
 import Link from 'next/link'
 
 function Home() {
@@ -18,6 +19,10 @@ function Home() {
       >
         <Link href={'/publication'}>publication</Link>
       </Button>
+
+      <DeletePost postId={1}>
+        <Button>Delete Post</Button>
+      </DeletePost>
     </div>
   )
 }
