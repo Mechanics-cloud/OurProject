@@ -19,7 +19,6 @@ export const useSignUp = (t: LocaleType) => {
     resetField,
     setError,
     setFocus,
-    trigger,
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
@@ -74,12 +73,6 @@ export const useSignUp = (t: LocaleType) => {
       }
     }
   }, [touchedFields.confirm, confirm, password, clearErrors, setError])
-
-  //TODO Найти решение по лучше
-  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
-  useEffect(() => {
-    trigger()
-  }, [t, trigger])
 
   return {
     control,
