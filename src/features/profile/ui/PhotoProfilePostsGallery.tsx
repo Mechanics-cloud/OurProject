@@ -12,7 +12,7 @@ export const PhotoProfilePostsGallery = observer(() => {
   const photos = profileStore?.photos
 
   const { inView, ref } = useInView({
-    threshold: 0.1,
+    threshold: 0.5,
   })
 
   useEffect(() => {
