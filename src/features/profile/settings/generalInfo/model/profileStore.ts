@@ -11,7 +11,7 @@ import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {
-  isProfileLoading: boolean = true
+  isLoading: boolean = true
   userProfile?: UserProfile
 
   constructor() {
@@ -39,7 +39,6 @@ class ProfileStore {
         format(userProfile.dateOfBirth, 'dd.MM.yyyy', { locale: ru })
 
       runInAction(() => {
-        this.isProfileLoading = false
         this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
       })
 
@@ -48,7 +47,7 @@ class ProfileStore {
       responseErrorHandler(error)
     } finally {
       runInAction(() => {
-        this.isProfileLoading = false
+        this.isLoading = false
       })
     }
   }
