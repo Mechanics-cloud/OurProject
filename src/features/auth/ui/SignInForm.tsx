@@ -9,7 +9,7 @@ import Link from 'next/link'
 const SignIn = observer(() => {
   const { t } = useTranslation()
 
-  const { control, handleSubmit, isLoading, isValid, onSubmit } = useSignIn(t)
+  const { control, isLoading, isValid, onSubmit } = useSignIn(t)
 
   return (
     <div
@@ -28,7 +28,7 @@ const SignIn = observer(() => {
         <form
           className={'flex flex-col w-full h-full'}
           noValidate
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={onSubmit}
         >
           <FormTextField
             control={control}

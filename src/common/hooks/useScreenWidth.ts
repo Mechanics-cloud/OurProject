@@ -1,25 +1,27 @@
 import { useEffect, useState } from 'react'
 
 import { ScreenWidths } from '@/common/enums'
-import { useDebounce } from '@/common/hooks/useDebounce'
+import { useDebounce } from '@/common/hooks'
 
 export const useScreenWidth = () => {
   const [width, setWidth] = useState(window.innerWidth)
   const breakpoint: number = ScreenWidths.lg
+  const smallBreakpoint = ScreenWidths.sm
 
   const debouncedWidth = useDebounce(width)
 
   const isTablet = debouncedWidth < breakpoint
+  const isMobile = debouncedWidth < smallBreakpoint
 
   useEffect(() => {
-    const handleWindowResize = () => setWidth(window.innerWidth)
+    const onWindowResize = () => setWidth(window.innerWidth)
 
-    window.addEventListener('resize', handleWindowResize)
+    window.addEventListener('resize', onWindowResize)
 
     return () => {
-      window.removeEventListener('resize', handleWindowResize)
+      window.removeEventListener('resize', onWindowResize)
     }
   }, [])
 
-  return { isTablet }
+  return { isMobile, isTablet }
 }

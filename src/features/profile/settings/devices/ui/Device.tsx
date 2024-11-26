@@ -11,7 +11,7 @@ import {
   Yandex,
 } from '@/assets/icons/filledIcons'
 import { Card, LinkWithIcon, Typography, cn } from '@/common'
-import { BrowserNames } from '@/features/profile/settings/devices/api'
+import { BrowserNames } from '@/features/profile/settings/devices'
 
 type Props = {
   browserName: BrowserNames

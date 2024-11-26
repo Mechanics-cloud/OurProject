@@ -1,11 +1,6 @@
 import { ReactNode } from 'react'
 
-import { Nullable } from '@/common'
-
-export type PhotoResult = {
-  photo: Nullable<string>
-  photoForServer: Nullable<Blob>
-}
+import { Nullable, PhotoResult } from '@/common'
 
 export type ModalPhotoSaveHandler = (item: PhotoResult) => void
 

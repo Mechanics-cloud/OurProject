@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Paths } from '@/common'
@@ -19,7 +18,6 @@ export const useSignIn = (t: LocaleType) => {
     handleSubmit,
     setError,
     setFocus,
-    trigger,
   } = useForm<SignInFields>({
     defaultValues: { email: '', password: '' },
     mode: 'onTouched',
@@ -27,7 +25,7 @@ export const useSignIn = (t: LocaleType) => {
   })
   const isLoadingStore = generalStore
 
-  const onSubmit = async (data: SignInFields) => {
+  const onSubmit = handleSubmit(async (data: SignInFields) => {
     isLoadingStore.turnOnLoading()
     data.email = data.email.toLowerCase()
     try {
@@ -42,17 +40,10 @@ export const useSignIn = (t: LocaleType) => {
     } finally {
       isLoadingStore.turnOffLoading()
     }
-  }
-
-  //TODO Найти решение по лучше
-  //данный useEffect необходим для изменения языка ошибок в форме при изменении языка
-  useEffect(() => {
-    trigger()
-  }, [t, trigger])
+  })
 
   return {
     control,
-    handleSubmit,
     isLoading: isLoadingStore.isLoading,
     isValid,
     onSubmit,
