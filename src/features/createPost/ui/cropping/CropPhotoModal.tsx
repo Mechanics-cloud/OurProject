@@ -19,7 +19,7 @@ export const CropPhotoModal = observer(() => {
     <DialogContent
       className={cn(
         'md:max-w-[492px] gap-0',
-        'md:bg-dark-300 bg-dark-700 md:border border-0 max-w-full h-full md:h-auto',
+        'md:bg-dark-300 bg-dark-700 md:border border-0 max-w-full h-full md:h-auto w-full',
         'md:top-[50%] md:translate-y-[-50%] top-0 translate-y-0 overflow-visible'
       )}
       crossOff
