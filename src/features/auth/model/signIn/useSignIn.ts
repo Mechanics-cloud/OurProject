@@ -25,7 +25,7 @@ export const useSignIn = (t: LocaleType) => {
   })
   const isLoadingStore = generalStore
 
-  const onSubmit = async (data: SignInFields) => {
+  const onSubmit = handleSubmit(async (data: SignInFields) => {
     isLoadingStore.turnOnLoading()
     data.email = data.email.toLowerCase()
     try {
@@ -40,11 +40,10 @@ export const useSignIn = (t: LocaleType) => {
     } finally {
       isLoadingStore.turnOffLoading()
     }
-  }
+  })
 
   return {
     control,
-    handleSubmit,
     isLoading: isLoadingStore.isLoading,
     isValid,
     onSubmit,
