@@ -47,13 +47,13 @@ export const useAvatarDialog = (onModalPhotoSave: ModalPhotoSaveHandler) => {
           outputCanvas.toBlob((blob) => {
             if (blob) {
               onModalPhotoSave({
-                photo: finalPhoto,
-                photoForServer: blob,
+                photoFile: blob,
+                photoUrl: finalPhoto,
               })
             } else {
               onModalPhotoSave({
-                photo: null,
-                photoForServer: null,
+                photoFile: null,
+                photoUrl: null,
               })
               toast.error(t.avatarModal.errors.unknownError)
             }

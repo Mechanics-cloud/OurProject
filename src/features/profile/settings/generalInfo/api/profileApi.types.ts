@@ -1,4 +1,4 @@
-import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
+import { PhotoResult } from '@/common'
 
 export type UpdatedProfile = {
   photoData?: PhotoResult

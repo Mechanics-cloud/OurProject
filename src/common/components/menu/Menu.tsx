@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
   Home,
@@ -14,9 +14,10 @@ import {
   PlusSquareOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
-import { Paths, useTranslation } from '@/common'
+import { Paths, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
+import { NewPostDialog } from '@/features/createPost/ui/adding/NewPostDialog'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -25,12 +26,11 @@ export const Menu = () => {
   const { t } = useTranslation()
   const href = router.asPath
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
-  if (isModalOpen) {
-    setIsModalOpen(false)
-    alert('Hey')
-  }
+  const {
+    isModalOpen: isNewPostModalOpen,
+    onModalClose: onNewPostModalClose,
+    openModal: openNewPostModal,
+  } = useModal()
 
   return (
     <nav
@@ -54,9 +54,7 @@ export const Menu = () => {
         <li className={'group'}>
           <Tooltip title={t.menu.create}>
             <button
-              onClick={() => {
-                setIsModalOpen(true)
-              }}
+              onClick={openNewPostModal}
               type={'button'}
             >
               <PlusSquareOutline
@@ -108,6 +106,11 @@ export const Menu = () => {
           </Tooltip>
         </li>
       </ul>
+      <NewPostDialog
+        onClose={onNewPostModalClose}
+        onOpenChange={onNewPostModalClose}
+        open={isNewPostModalOpen}
+      />
     </nav>
   )
 }

@@ -4,7 +4,7 @@ export const getTextAreaClasses = (
 ): string => {
   const cls = {
     active: 'active:outline-light-100',
-    base: 'block w-full rounded py-1.5 px-3 box-border text-m text-light-900 placeholder-current font-400 leading-[24px] border-none outline outline-1 cursor-auto',
+    base: 'block w-full rounded-sm py-1.5 px-3 box-border text-m text-light-900 placeholder-current font-400 leading-[24px] border-none outline outline-1 outline-dark-100 cursor-auto bg-dark-500',
     disabled:
       'disabled:cursor-not-allowed disabled:outline-1 disabled:outline-dark-100 disabled:text-dark-100',
     error: error ? 'outline-1 outline-danger-500' : 'outline-light-900',
