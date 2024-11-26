@@ -27,7 +27,7 @@ const Tabs = React.forwardRef<
       defaultValue={tabsData[0].id}
       ref={ref}
     >
-      <TabsPrimitive.List className={clsx('flex w-full bg-dark-700')}>
+      <TabsPrimitive.List className={clsx('flex w-full')}>
         {tabsData.map(({ disabled, id, title }) => (
           <TabsPrimitive.Trigger
             className={cn(
@@ -53,7 +53,6 @@ const Tabs = React.forwardRef<
       </TabsPrimitive.List>
       {tabsData.map(({ content, id }) => (
         <TabsPrimitive.Content
-          className={clsx('bg-dark-700')}
           key={`tab-content-${id}`}
           value={id}
         >

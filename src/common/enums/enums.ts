@@ -15,5 +15,6 @@ export enum ScreenWidths {
 }
 
 export enum FileSizes {
+  PostPhotoSize = 20 * oneMB,
   UserPhotoSize = 10 * oneMB,
 }

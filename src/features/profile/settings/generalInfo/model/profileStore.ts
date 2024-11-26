@@ -1,6 +1,10 @@
-import { createFileForUpload, responseErrorHandler } from '@/common'
 import {
   PhotoResult,
+  createFileForUpload,
+  responseErrorHandler,
+} from '@/common'
+import { generalStore } from '@/core/store'
+import {
   UpdatedProfile,
   UserInfo,
   UserProfile,
@@ -40,6 +44,7 @@ class ProfileStore {
 
       runInAction(() => {
         this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
+        generalStore.addUserAvatar(userProfile.avatars[0].url)
       })
 
       return userProfile
@@ -80,7 +85,7 @@ class ProfileStore {
   }
   async uploadAvatar(photoData: PhotoResult) {
     try {
-      if (photoData.photoForServer) {
+      if (photoData.photoFile) {
         const file = createFileForUpload(photoData)
 
         if (!file) {
@@ -89,9 +94,9 @@ class ProfileStore {
         await profileAPi.uploadAvatar(file)
 
         runInAction(() => {
-          if (this.userProfile && photoData.photo) {
+          if (this.userProfile && photoData.photoUrl) {
             this.userProfile.avatars = [
-              { ...this.userProfile.avatars[0], url: photoData.photo },
+              { ...this.userProfile.avatars[0], url: photoData.photoUrl },
             ]
           }
         })

@@ -1,6 +1,6 @@
+import { instance } from '@/common/api'
 import { Endpoints } from '@/features/auth/api/auth.endpoints'
 import { Profile } from '@/features/auth/api/authApi.types'
-import { instance } from '@/features/auth/api/instance'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import {
   EmailResendRequestData,
@@ -53,11 +53,6 @@ class AuthApi {
 
   public async signUp(data: SignUpRequestData): Promise<AxiosResponse> {
     return this.instance.post(Endpoints.SignUp, data)
-  }
-  public async updateToken() {
-    return instance
-      .post(Endpoints.updateToken)
-      .then((res) => res.data.accessToken)
   }
 }
 
