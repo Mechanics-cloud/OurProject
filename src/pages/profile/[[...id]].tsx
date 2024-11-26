@@ -1,14 +1,12 @@
 import { Paid } from '@/assets/icons'
 import { Button, Paths, Typography, useTranslation } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import {
   PhotoProfilePostsGallery,
   ProfileAboutMe,
-  ProfilePosts,
   ProfileStatistics,
-  profileStore,
 } from '@/features/profile'
+import { profileStore } from '@/features/profile/settings/generalInfo/model/profileStore'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -20,6 +18,7 @@ const Profile = observer(() => {
   const { t } = useTranslation()
   const { followers, following, publications, settingsButton } = t.profilePage
   const userProfile = profileStore.userProfile
+  const userName = profileStore.userProfile?.firstName
   const avatar = userProfile?.avatars[0]?.url
 
   // const { isMobile, isTablet } = useScreenWidth()
@@ -27,6 +26,7 @@ const Profile = observer(() => {
   const isTablet = false
 
   console.log(userProfile)
+  console.log(userName)
 
   return (
     <div className={'flex w-full'}>
@@ -97,7 +97,7 @@ const Profile = observer(() => {
   )
 })
 
-export default withProtection(Profile, true)
+export default withProtection(Profile)
 
 // const Profile = observer(() => {
 //   const { t } = useTranslation()

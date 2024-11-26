@@ -1,6 +1,5 @@
-import { log } from 'console'
-
 import {
+  Nullable,
   PhotoResult,
   createFileForUpload,
   responseErrorHandler,
@@ -22,7 +21,8 @@ class ProfileStore {
   pageNumber: number = 1
   photos: Photo[] = []
   stopRequest: boolean = false
-  userProfile?: UserProfile
+  // userProfile?: UserProfile
+  userProfile: Nullable<UserProfile> = null
 
   constructor() {
     makeAutoObservable(this, undefined, { autoBind: true })
@@ -37,7 +37,7 @@ class ProfileStore {
     this.photos.length = 0
     this.pageNumber = 1
     this.stopRequest = false
-    this.userProfile = undefined
+    this.userProfile = null
   }
 
   async deleteAvatar() {

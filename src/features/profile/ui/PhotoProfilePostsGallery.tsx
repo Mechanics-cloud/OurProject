@@ -1,4 +1,4 @@
-import React, { LegacyRef, useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { Skeleton, cn } from '@/common'
@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { profileStore } from '../settings'
+import { profileStore } from '../settings/generalInfo/model/profileStore'
 
 export const PhotoProfilePostsGallery = observer(() => {
   const photos = profileStore?.photos
