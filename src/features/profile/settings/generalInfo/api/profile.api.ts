@@ -1,9 +1,6 @@
-import { instance } from '@/features/auth'
+import { instance } from '@/common/api'
+import { UpdatedProfile, UserProfile } from '@/features/profile'
 import { ImageData } from '@/features/profile/model/types'
-import {
-  UpdatedProfile,
-  UserProfile,
-} from '@/features/profile/settings/generalInfo/api'
 import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
 import { AxiosInstance, AxiosResponse } from 'axios'
 

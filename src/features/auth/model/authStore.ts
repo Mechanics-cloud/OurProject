@@ -1,11 +1,10 @@
+import { clearAllData, responseErrorHandler } from '@/common'
 import { StatusCode, StorageKeys } from '@/common/enums'
-import { clearAllData } from '@/common/utils/clearAllData'
 import { setToLocalStorage } from '@/common/utils/localStorage'
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
-import { authApi, instance } from '@/features/auth'
+import { authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
-import { InternalAxiosRequestConfig, isAxiosError } from 'axios'
+import { isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AuthStore {
@@ -71,24 +70,6 @@ class AuthStore {
         return
       }
       throw { error }
-    }
-  }
-
-  async updateToken(params: InternalAxiosRequestConfig | undefined) {
-    try {
-      if (localStorage.getItem(StorageKeys.AccessToken)) {
-        const newToken = await authApi.updateToken()
-
-        setToLocalStorage(StorageKeys.AccessToken, newToken)
-
-        if (params) {
-          params.headers.Authorization = `Bearer ${newToken}`
-
-          return await instance.request(params)
-        }
-      }
-    } catch (error) {
-      return Promise.reject(error)
     }
   }
 }

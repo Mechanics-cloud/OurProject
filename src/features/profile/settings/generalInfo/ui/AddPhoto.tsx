@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { CloseOutline, ImageOutline } from '@/assets/icons'
-import { Button, cn, useTranslation } from '@/common'
-import { AvatarDialog, PhotoResult } from '@/features/profile'
+import { Button, PhotoResult, cn, useTranslation } from '@/common'
+import { AvatarDialog } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 
@@ -21,25 +21,25 @@ export const AddPhoto = observer(
     const onDeleteAvatar = () => {
       setIsPhotoChanged(true)
       setPhotoObj({
-        photo: null,
-        photoForServer: null,
+        photoFile: null,
+        photoUrl: null,
       })
     }
 
     return (
       <div className={'flex items-center flex-col gap-6'}>
-        {photoObj.photo ? (
+        {photoObj.photoUrl ? (
           <div className={cn('relative object-cover', imageClass)}>
-            {photoObj.photo && (
+            {photoObj.photoUrl && (
               <Image
                 alt={'avatar'}
                 className={'rounded-full pr-0'}
                 height={200}
-                src={photoObj.photo}
+                src={photoObj.photoUrl}
                 width={200}
               />
             )}
-            {photoObj.photo && (
+            {photoObj.photoUrl && (
               <button
                 className={
                   'absolute bg-red-800 rounded-full top-2 right-8 h-6 w-6 flex items-center justify-center border-4 border-dark-700'
