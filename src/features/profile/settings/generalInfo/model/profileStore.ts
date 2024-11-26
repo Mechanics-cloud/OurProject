@@ -1,3 +1,5 @@
+import { log } from 'console'
+
 import {
   PhotoResult,
   createFileForUpload,
@@ -23,7 +25,19 @@ class ProfileStore {
   userProfile?: UserProfile
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, undefined, { autoBind: true })
+  }
+
+  changeLoading(value: boolean) {
+    this.isLoading = value
+  }
+
+  cleanUp() {
+    this.isLoading = false
+    this.photos.length = 0
+    this.pageNumber = 1
+    this.stopRequest = false
+    this.userProfile = undefined
   }
 
   async deleteAvatar() {
@@ -47,7 +61,7 @@ class ProfileStore {
       if (this.isLoading || this.stopRequest) {
         return
       }
-      this.isLoading = true
+      this.changeLoading(true)
 
       if (this.userProfile) {
         const res = await profileAPi.getProfilePosts(
@@ -81,13 +95,14 @@ class ProfileStore {
         responseErrorHandler(error)
       }
     } finally {
-      this.isLoading = false
+      this.changeLoading(false)
     }
   }
 
   async getProfile() {
     try {
       const userProfile = await profileAPi.getProfile()
+
       const formattedDate =
         userProfile.dateOfBirth &&
         format(userProfile.dateOfBirth, 'dd.MM.yyyy', { locale: ru })
@@ -96,8 +111,6 @@ class ProfileStore {
         this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
         generalStore.addUserAvatar(userProfile.avatars[0].url)
       })
-
-      return userProfile
     } catch (error) {
       responseErrorHandler(error)
     } finally {
