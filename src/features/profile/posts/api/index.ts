@@ -1,2 +1,2 @@
-export * from './post.api'
-export * from './post.endpoints'
+export * from './posts.api'
+export * from './posts.endpoints'

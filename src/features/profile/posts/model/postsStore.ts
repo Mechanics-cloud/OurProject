@@ -1,7 +1,7 @@
 import { responseErrorHandler } from '@/common'
 import { makeAutoObservable } from 'mobx'
 
-import { postApi } from '../api/post.api'
+import { postsApi } from '../api/posts.api'
 
 class PostsStore {
   constructor() {
@@ -9,7 +9,7 @@ class PostsStore {
   }
   async deletePost(postId: number) {
     try {
-      await postApi.deletePost(postId)
+      await postsApi.deletePost(postId)
 
       //todo: отфильтровать удаленный пост из стора
     } catch (error) {
