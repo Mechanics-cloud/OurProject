@@ -21,7 +21,6 @@ class ProfileStore {
   pageNumber: number = 1
   photos: Photo[] = []
   stopRequest: boolean = false
-  // userProfile?: UserProfile
   userProfile: Nullable<UserProfile> = null
 
   constructor() {

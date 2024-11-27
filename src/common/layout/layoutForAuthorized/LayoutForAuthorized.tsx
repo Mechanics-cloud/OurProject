@@ -2,8 +2,7 @@ import { PropsWithChildren, useEffect, useState } from 'react'
 
 import { Layout, Loader, SideBar } from '@/common'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
-import { profileStore } from '@/features/profile/settings/generalInfo/model/profileStore'
-// import { profileStore } from '@/features/profile'
+import { profileStore } from '@/features/profile'
 import { NextPage } from 'next'
 
 export const LayoutForAuthorized: NextPage<PropsWithChildren> = ({

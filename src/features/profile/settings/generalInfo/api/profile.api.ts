@@ -1,6 +1,6 @@
 import { instance } from '@/common/api'
 import { UpdatedProfile, UserProfile } from '@/features/profile'
-import { ImageData } from '@/features/profile/model/types'
+import { ImagesData } from '@/features/profile/model/types'
 import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
@@ -20,7 +20,7 @@ class ProfileApi {
     signal?: AbortSignal,
     pageSize: number = 8
   ) {
-    const res = await this.instance.get<ImageData>(
+    const res = await this.instance.get<ImagesData>(
       ProfileEndpoints.posts(userName),
       {
         params: {

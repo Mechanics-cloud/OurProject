@@ -10,7 +10,7 @@ export type Photo = {
   id: number
   images: Images[]
 }
-type Item = {
+type ImageData = {
   avatarOwner: string
   avatarWhoLikes: string[]
   createdAt: string
@@ -28,8 +28,8 @@ type Item = {
   updatedAt: string
   userName: string
 }
-export type ImageData = {
-  items: Item[]
+export type ImagesData = {
+  items: ImageData[]
   page: number
   pageSize: number
   pagesCount: number
