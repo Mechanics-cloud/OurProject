@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx'
 
 import { postApi } from '../api/post.api'
 
-class PostStore {
+class PostsStore {
   constructor() {
     makeAutoObservable(this)
   }
@@ -11,10 +11,10 @@ class PostStore {
     try {
       await postApi.deletePost(postId)
 
-      //удалить пост из стора
+      //todo: отфильтровать удаленный пост из стора
     } catch (error) {
       responseErrorHandler(error)
     }
   }
 }
-export const postStore = new PostStore()
+export const postsStore = new PostsStore()

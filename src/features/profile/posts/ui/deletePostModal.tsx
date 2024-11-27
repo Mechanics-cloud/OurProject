@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-
 import {
   Button,
   Dialog,
@@ -14,30 +12,30 @@ import {
   useModal,
   useTranslation,
 } from '@/common'
-
-import { postStore } from '../model/postStore'
+import { DialogTriggerProps } from '@radix-ui/react-dialog'
 
 type Props = {
-  children: ReactNode
+  onDeletePost: (postId: number) => void
   postId: number
-}
+} & DialogTriggerProps
 
-export const DeletePost = ({ children: TriggerButton, postId }: Props) => {
+export const DeletePostModal = ({ onDeletePost, postId, ...rest }: Props) => {
   const { t } = useTranslation()
-  const { onModalClose, openModal } = useModal(() => {
-    postStore.deletePost(postId)
-  })
+
+  const {
+    isModalOpen: status,
+    onModalClose: close,
+    openModal: open,
+  } = useModal()
 
   return (
     <>
-      <Dialog>
-        <DialogTrigger
-          asChild
-          onClick={openModal}
-        >
-          {TriggerButton}
-        </DialogTrigger>
-        <DialogContent>
+      <Dialog
+        onOpenChange={status ? close : open}
+        open={status}
+      >
+        <DialogTrigger {...rest} />
+        <DialogContent className={'w-12'}>
           <DialogHeader>
             <DialogTitle>{t.post.modalTitle}</DialogTitle>
           </DialogHeader>
@@ -53,7 +51,7 @@ export const DeletePost = ({ children: TriggerButton, postId }: Props) => {
               className={'w-[96px]'}
             >
               <Button
-                onClick={onModalClose}
+                onClick={() => onDeletePost(postId)}
                 variant={'outline'}
               >
                 {t.post.yes}

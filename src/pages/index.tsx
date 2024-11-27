@@ -1,10 +1,14 @@
 import { withProtection } from '@/common/HOC/withProtection'
 import { Button } from '@/common/components/button'
 import { typographyVariants } from '@/common/components/typography'
-import { DeletePost } from '@/features/profile/post/ui/deletePost'
+import { DeletePostModal, postsStore } from '@/features/profile/posts'
 import Link from 'next/link'
 
 function Home() {
+  const onDeletePost = (postId: number) => {
+    postsStore.deletePost(postId)
+  }
+
   return (
     <div className={'flex flex-col justify-center items-center gap-5'}>
       <Button
@@ -20,9 +24,12 @@ function Home() {
         <Link href={'/publication'}>publication</Link>
       </Button>
 
-      <DeletePost postId={1}>
+      <DeletePostModal
+        onDeletePost={onDeletePost}
+        postId={3338}
+      >
         <Button>Delete Post</Button>
-      </DeletePost>
+      </DeletePostModal>
     </div>
   )
 }
