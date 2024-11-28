@@ -34,7 +34,7 @@ class ProfileStore {
   cleanUp() {
     this.isLoading = false
     this.photos.length = 0
-    this.pageNumber = 1
+    this.pageNumber = 0
     this.stopRequest = false
     this.userProfile = null
   }
@@ -63,9 +63,11 @@ class ProfileStore {
       this.changeLoading(true)
 
       if (this.userProfile) {
+        this.pageNumber += 1
         const res = await profileAPi.getProfilePosts(
           this.pageNumber,
-          this.userProfile?.userName,
+          // this.userProfile?.userName,
+          'Evgenia',
           signal,
           pageSize
         )
@@ -83,7 +85,7 @@ class ProfileStore {
 
         runInAction(() => {
           this.photos.push(...newPhotos)
-          this.pageNumber += 1
+
           this.isLoading = false
         })
       }
