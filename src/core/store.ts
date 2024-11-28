@@ -3,7 +3,7 @@ import { Profile } from '@/features/auth'
 import { makeAutoObservable } from 'mobx'
 
 class GeneralStore {
-  isLoading = false
+  isLoading = true
   user: Nullable<Profile> = null
   userAvatar: Nullable<ImageUrl> = null
 

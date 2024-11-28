@@ -3,8 +3,7 @@ import type { AppProps } from 'next/app'
 
 import { ReactElement, ReactNode } from 'react'
 
-import { Environments, Loader, useTranslation } from '@/common'
-import { useMe } from '@/common/hooks/useMe'
+import { Environments, useTranslation } from '@/common'
 import { setTranslation } from '@/common/utils/setTranslation'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
@@ -26,13 +25,8 @@ type AppPropsWithLayout = {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
   const { t } = useTranslation()
-  const { loading } = useMe()
 
   setTranslation(t)
-
-  if (loading) {
-    return <Loader />
-  }
 
   return getLayout(
     <GoogleOAuthProvider clientId={Environments.CLIENT_ID!}>

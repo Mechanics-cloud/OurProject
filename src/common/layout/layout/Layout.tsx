@@ -1,4 +1,4 @@
-import React, { ElementRef, ReactElement, forwardRef } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 
 import {
   GoTopButton,
@@ -17,7 +17,7 @@ type Props = {
   className?: string
 }
 
-export const Layout = forwardRef<ElementRef<'div'>, Props>(
+const Layout = forwardRef<ElementRef<'div'>, Props>(
   ({ children, className }, ref) => {
     const isLoading = generalStore.isLoading
 
@@ -50,8 +50,4 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
 )
 
 Layout.displayName = 'Layout'
-const LayoutWithStore = observer(Layout)
-
-export const getBaseLayout = (page: ReactElement) => {
-  return <LayoutWithStore>{page}</LayoutWithStore>
-}
+export const LayoutWithStore = observer(Layout)
