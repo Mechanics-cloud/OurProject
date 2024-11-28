@@ -2,23 +2,21 @@ import * as React from 'react'
 
 import { Button, LangSelect, cn, useTranslation } from '@/common'
 import { Typography } from '@/common/components/typography'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Paths } from '@/common/paths'
 import { generalStore } from '@/core/store'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
-const Header = () => {
+const Header = observer(() => {
   const { t } = useTranslation()
   const isAuth = !!generalStore.user
-  const { isTablet } = useScreenWidth()
 
   return (
     <header
       className={cn(
-        'fixed top-0 z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300',
-        !isTablet && 'pr-scrollbar'
+        'fixed top-0 z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300 lg:pr-scrollbar'
       )}
     >
       <div
@@ -31,7 +29,7 @@ const Header = () => {
           variant={'large'}
         >
           <Link
-            href={Paths.home}
+            href={isAuth ? Paths.home : Paths.publicMainPage}
             title={'Go Home'}
           >
             Inctagram
@@ -66,6 +64,6 @@ const Header = () => {
       </div>
     </header>
   )
-}
+})
 
 export { Header }

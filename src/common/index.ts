@@ -1,3 +1,4 @@
+export * from './HOC'
 export * from './components'
 export * from './enviroments'
 export * from './form'

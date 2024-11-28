@@ -1,13 +1,14 @@
+import { useEffect } from 'react'
+
 import { Paid } from '@/assets/icons'
 import {
   Button,
-  Loader,
   Paths,
   Typography,
   useScreenWidth,
   useTranslation,
+  withProtection,
 } from '@/common'
-import { withProtection } from '@/common/HOC/withProtection'
 import {
   PhotoProfilePostsGallery,
   ProfileAboutMe,
@@ -30,9 +31,9 @@ const Profile = observer(() => {
 
   const { isMobile, isTablet } = useScreenWidth()
 
-  if (!profileStore.userProfile) {
-    return <Loader />
-  }
+  useEffect(() => {
+    profileStore.getProfile()
+  }, [])
 
   return (
     <div className={'flex w-full'}>

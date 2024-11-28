@@ -3,8 +3,8 @@ import {
   Button,
   Paths,
   Typography,
-  getBaseLayout,
   useTranslation,
+  withProtection,
 } from '@/common'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -44,6 +44,4 @@ const ExpiredSession = () => {
   )
 }
 
-ExpiredSession.getLayout = getBaseLayout
-
-export default ExpiredSession
+export default withProtection(ExpiredSession, true, true)
