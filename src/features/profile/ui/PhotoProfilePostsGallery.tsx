@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { Skeleton, cn } from '@/common'
@@ -10,50 +10,38 @@ import { profileStore } from '../settings'
 
 export const PhotoProfilePostsGallery = observer(() => {
   const photos = profileStore?.photos
-  const [isNeedLoading, setIsNeedLoading] = useState(0)
-
-  const fetchPosts = useCallback(
-    async (signal: AbortSignal) => {
-      await profileStore.getPhotoUser({ signal })
-      setIsNeedLoading((prevState) => prevState + 1)
-    },
-    [setIsNeedLoading]
-  )
+  const [isNeedLoading, setIsNeedLoading] = useState(true)
 
   const { inView, ref } = useInView({
-    threshold: 0.1,
+    threshold: 0.5,
+    triggerOnce: false,
+  })
+
+  const { inView: inViewWhole, ref: refWhole } = useInView({
+    initialInView: false,
+    threshold: 1,
+    triggerOnce: true,
   })
 
   useEffect(() => {
+    const fetchPosts = async (signal: AbortSignal) => {
+      await profileStore.getUserPhoto({ signal })
+      if (inViewWhole && isNeedLoading) {
+        setIsNeedLoading(false)
+      }
+    }
     const controller = new AbortController()
 
     const signal = controller.signal
 
-    if (inView) {
+    if (inView || isNeedLoading) {
       fetchPosts(signal)
     }
 
     return () => {
       controller.abort()
     }
-  }, [inView, fetchPosts])
-
-  useEffect(() => {
-    const imageContainer = document.querySelector('.imageContainer')
-    const controller = new AbortController()
-    const signal = controller.signal
-
-    if (!isNeedLoading || !imageContainer) {
-      return
-    }
-    if (imageContainer.clientHeight < document.body.clientHeight - 300) {
-      fetchPosts(signal)
-    }
-
-    return () => {
-      controller.abort()
-    }
-  }, [isNeedLoading, fetchPosts])
+  }, [inView, isNeedLoading, inViewWhole])
 
   return (
     <>
@@ -62,6 +50,7 @@ export const PhotoProfilePostsGallery = observer(() => {
           'grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full h-full',
           'imageContainer'
         )}
+        ref={refWhole}
       >
         {photos.map((item) => (
           <Link
@@ -81,11 +70,13 @@ export const PhotoProfilePostsGallery = observer(() => {
       </div>
       <div
         className={`w-full ${
-          profileStore.stopRequest ? 'h-[1px]' : 'h-[15px]'
+          profileStore.stopRequest ? 'h-[1px]' : 'h-[75px]'
         }`}
         ref={ref}
       >
-        {profileStore.isLoading && <Skeleton className={'w-full h-[228px]'} />}
+        {profileStore.isLoading && (
+          <Skeleton className={'w-full h-[228px] mt-3'} />
+        )}
       </div>
     </>
   )

@@ -34,7 +34,7 @@ class ProfileStore {
   cleanUp() {
     this.isLoading = false
     this.photos.length = 0
-    this.pageNumber = 0
+    this.pageNumber = 1
     this.stopRequest = false
     this.userProfile = null
   }
@@ -52,7 +52,28 @@ class ProfileStore {
     }
   }
 
-  async getPhotoUser({
+  async getProfile() {
+    try {
+      const userProfile = await profileAPi.getProfile()
+
+      const formattedDate =
+        userProfile.dateOfBirth &&
+        format(userProfile.dateOfBirth, 'dd.MM.yyyy', { locale: ru })
+
+      runInAction(() => {
+        this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
+        generalStore.addUserAvatar(userProfile.avatars[0].url)
+      })
+    } catch (error) {
+      responseErrorHandler(error)
+    } finally {
+      runInAction(() => {
+        this.isLoading = false
+      })
+    }
+  }
+
+  async getUserPhoto({
     pageSize,
     signal,
   }: { pageSize?: number; signal?: AbortSignal } = {}) {
@@ -63,11 +84,9 @@ class ProfileStore {
       this.changeLoading(true)
 
       if (this.userProfile) {
-        // this.pageNumber += 1
         const res = await profileAPi.getProfilePosts(
           this.pageNumber,
-          // this.userProfile?.userName,
-          'Evgenia',
+          this.userProfile?.userName,
           signal,
           pageSize
         )
@@ -97,27 +116,6 @@ class ProfileStore {
       }
     } finally {
       this.changeLoading(false)
-    }
-  }
-
-  async getProfile() {
-    try {
-      const userProfile = await profileAPi.getProfile()
-
-      const formattedDate =
-        userProfile.dateOfBirth &&
-        format(userProfile.dateOfBirth, 'dd.MM.yyyy', { locale: ru })
-
-      runInAction(() => {
-        this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
-        generalStore.addUserAvatar(userProfile.avatars[0].url)
-      })
-    } catch (error) {
-      responseErrorHandler(error)
-    } finally {
-      runInAction(() => {
-        this.isLoading = false
-      })
     }
   }
 
