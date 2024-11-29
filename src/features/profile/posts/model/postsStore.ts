@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify'
+
 import { responseErrorHandler } from '@/common'
 import { makeAutoObservable } from 'mobx'
 
@@ -12,6 +14,7 @@ class PostsStore {
       await postsApi.deletePost(postId)
 
       //todo: отфильтровать удаленный пост из стора
+      toast.success('The post was successfully deleted')
     } catch (error) {
       responseErrorHandler(error)
     }

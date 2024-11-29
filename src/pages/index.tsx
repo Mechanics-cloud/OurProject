@@ -26,7 +26,7 @@ function Home() {
 
       <DeletePostModal
         onDeletePost={onDeletePost}
-        postId={3338}
+        postId={3368}
       >
         <Button>Delete Post</Button>
       </DeletePostModal>

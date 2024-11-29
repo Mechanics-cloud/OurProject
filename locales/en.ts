@@ -115,6 +115,7 @@ export const en: LocaleType = {
     modalText: 'Are you sure you want to delete this post?',
     modalTitle: 'Delete Post',
     no: 'No',
+    successMessage: 'The post was successfully deleted',
     yes: 'Yes',
   },
   profileInputs: {

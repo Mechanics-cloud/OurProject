@@ -113,6 +113,7 @@ export const ru = {
     modalText: 'Вы уверены, что хотите удалить этот пост?',
     modalTitle: 'Удалить пост',
     no: 'Нет',
+    successMessage: 'Публикация была успешно удалена',
     yes: 'Да',
   },
   profileInputs: {
