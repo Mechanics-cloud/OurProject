@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { Skeleton, cn } from '@/common'
@@ -10,33 +10,57 @@ import { profileStore } from '../settings'
 
 export const PhotoProfilePostsGallery = observer(() => {
   const photos = profileStore?.photos
+  const [isNeedLoading, setIsNeedLoading] = useState(0)
+
+  const fetchPosts = useCallback(
+    async (signal: AbortSignal) => {
+      await profileStore.getPhotoUser({ signal })
+      setIsNeedLoading((prevState) => prevState + 1)
+    },
+    [setIsNeedLoading]
+  )
 
   const { inView, ref } = useInView({
-    threshold: 0.5,
+    threshold: 0.1,
   })
 
   useEffect(() => {
-    const windowHeight = document.documentElement.clientHeight
-
     const controller = new AbortController()
+
     const signal = controller.signal
 
-    if (inView && windowHeight > 965) {
-      profileStore.getPhotoUser({ pageSize: 16, signal })
-    } else if (inView) {
-      profileStore.getPhotoUser({ signal })
+    if (inView) {
+      fetchPosts(signal)
     }
 
     return () => {
       controller.abort()
     }
-  }, [inView])
+  }, [inView, fetchPosts])
+
+  useEffect(() => {
+    const imageContainer = document.querySelector('.imageContainer')
+    const controller = new AbortController()
+    const signal = controller.signal
+
+    if (!isNeedLoading || !imageContainer) {
+      return
+    }
+    if (imageContainer.clientHeight < document.body.clientHeight - 300) {
+      fetchPosts(signal)
+    }
+
+    return () => {
+      controller.abort()
+    }
+  }, [isNeedLoading, fetchPosts])
 
   return (
     <>
       <div
         className={cn(
-          'grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full'
+          'grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full h-full',
+          'imageContainer'
         )}
       >
         {photos.map((item) => (
