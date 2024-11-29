@@ -111,9 +111,8 @@ class ProfileStore {
     } catch (error) {
       if ((error as Error).name !== 'AbortError') {
         return
-      } else {
-        responseErrorHandler(error)
       }
+      responseErrorHandler(error)
     } finally {
       this.changeLoading(false)
     }

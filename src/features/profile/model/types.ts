@@ -1,4 +1,4 @@
-type Images = {
+type Image = {
   createdAt: string
   fileSize: number
   height: number
@@ -8,7 +8,7 @@ type Images = {
 }
 export type Photo = {
   id: number
-  images: Images[]
+  images: Image[]
 }
 type ImageData = {
   avatarOwner: string
@@ -16,7 +16,7 @@ type ImageData = {
   createdAt: string
   description: string
   id: number
-  images: Images[]
+  images: Image[]
   isLiked: boolean
   likesCount: number
   location: null | string
