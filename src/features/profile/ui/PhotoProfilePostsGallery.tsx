@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { Skeleton, cn } from '@/common'
@@ -10,62 +10,58 @@ import { profileStore } from '../settings'
 
 export const PhotoProfilePostsGallery = observer(() => {
   const photos = profileStore?.photos
+  const [isNeedLoading, setIsNeedLoading] = useState(0)
+
+  const fetchPosts = useCallback(
+    async (signal: AbortSignal) => {
+      await profileStore.getPhotoUser({ signal })
+      setIsNeedLoading((prevState) => prevState + 1)
+    },
+    [setIsNeedLoading]
+  )
+
   const { inView, ref } = useInView({
-    threshold: 0.5,
+    threshold: 0.1,
   })
 
-  const containerRef = useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    const controller = new AbortController()
+
+    const signal = controller.signal
+
+    if (inView) {
+      fetchPosts(signal)
+    }
+
+    return () => {
+      controller.abort()
+    }
+  }, [inView, fetchPosts])
 
   useEffect(() => {
-    const windowHeight = document.documentElement.clientHeight
+    const imageContainer = document.querySelector('.imageContainer')
     const controller = new AbortController()
     const signal = controller.signal
 
-    const checkLoadMore = () => {
-      if (!containerRef.current) {
-        return
-      }
-      const containerRect = containerRef.current.getBoundingClientRect()
-      const spaceBelow = windowHeight - containerRect.bottom
-
-      console.log('containerRect', containerRect)
-      console.log('spaceBelow', spaceBelow)
-
-      if (inView && spaceBelow > 200) {
-        if (windowHeight > 965) {
-          profileStore.getPhotoUser({ pageSize: 16, signal })
-        } else {
-          profileStore.getPhotoUser({ signal })
-        }
-      }
+    if (!isNeedLoading || !imageContainer) {
+      return
     }
-
-    // const handleScroll = () => {
-    //   console.log('load')
-    //   checkLoadMore()
-    // }
-
-    setTimeout(() => {
-      console.log('load')
-      checkLoadMore()
-    }, 1000)
-    // window.addEventListener('load', handleScroll)
-
-    checkLoadMore()
+    if (imageContainer.clientHeight < document.body.clientHeight - 300) {
+      fetchPosts(signal)
+    }
 
     return () => {
-      // window.removeEventListener('load', handleScroll)
       controller.abort()
     }
-  }, [inView, photos])
+  }, [isNeedLoading, fetchPosts])
 
   return (
     <>
       <div
         className={cn(
-          'grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full'
+          'grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full h-full',
+          'imageContainer'
         )}
-        ref={containerRef}
       >
         {photos.map((item) => (
           <Link
@@ -85,7 +81,7 @@ export const PhotoProfilePostsGallery = observer(() => {
       </div>
       <div
         className={`w-full ${
-          profileStore.stopRequest ? 'h-[1px]' : 'h-[115px]'
+          profileStore.stopRequest ? 'h-[1px]' : 'h-[15px]'
         }`}
         ref={ref}
       >
