@@ -12,8 +12,8 @@ import {
   PhotoProfilePostsGallery,
   ProfileAboutMe,
   ProfileStatistics,
-  profileStore,
 } from '@/features/profile'
+import { profileStore } from '@/features/profile/model/profileStore'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
