@@ -95,4 +95,3 @@ Before you begin, ensure you have met the following requirements:
 ├── README.md               # Project documentation
 └── tailwind.config.js      # Tailwind CSS configuration
 ```
-
