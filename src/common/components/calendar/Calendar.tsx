@@ -45,7 +45,7 @@ export const Calendar = ({ ...restProps }: Props) => {
 
         range_start: 'bg-accent-900  rounded-l-full rounded-none',
 
-        root: 'bg-dark-500 text-white w-[300px]  px-6 py-4 ',
+        root: 'bg-dark-500 text-white w-[300px] px-6 py-4 z-50',
         selected: 'bg-accent-900  ',
 
         today: 'text-accent-500 !font-bold',

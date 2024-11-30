@@ -12,3 +12,8 @@ export type ErrorResponse = {
   messages: ErrorMessage[]
   statusCode: HttpStatusCode
 }
+
+export type PhotoResult = {
+  photoFile: Nullable<Blob>
+  photoUrl: Nullable<string>
+}

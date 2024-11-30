@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 
-import { Nullable, responseErrorHandler } from '@/common'
+import { Nullable, clearAllData, responseErrorHandler } from '@/common'
 import {
   DeviceType,
   profileDevicesApi,
@@ -66,6 +66,7 @@ class ProfileSessionsStore {
       runInAction(() => {
         this.otherSession = []
       })
+      //todo переводы в store
       toast.success('Success')
     } catch (error) {
       responseErrorHandler(error)

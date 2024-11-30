@@ -1,6 +1,6 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 
-import { Layout, Loader, SideBar } from '@/common'
+import { Layout, SideBar } from '@/common'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { profileStore } from '@/features/profile'
 import { NextPage } from 'next'
@@ -8,16 +8,11 @@ import { NextPage } from 'next'
 export const LayoutForAuthorized: NextPage<PropsWithChildren> = ({
   children,
 }) => {
-  const [loading, setLoading] = useState<boolean>(true)
   const { isTablet } = useScreenWidth()
 
   useEffect(() => {
-    profileStore.getProfile().finally(() => setLoading(false))
+    profileStore.getProfile()
   }, [])
-
-  if (loading) {
-    return <Loader />
-  }
 
   return (
     <Layout className={'flex'}>

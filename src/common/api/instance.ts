@@ -1,9 +1,10 @@
 import { Paths } from '@/common'
+import { updateToken } from '@/common/api/utils/updateToken'
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
-import { clearAllData } from '@/common/utils/clearAllData'
-import { Endpoints, authStore } from '@/features/auth'
 import axios, { AxiosResponse, isAxiosError } from 'axios'
+
+import { CommonEndpoints } from './common.endpoints'
 
 export const instance = axios.create({
   baseURL: Environments.API_URL,
@@ -20,23 +21,27 @@ instance.interceptors.response.use(
     return response
   },
   async (error: unknown) => {
-    if (isAxiosError(error)) {
-      if (error.response?.status === StatusCode.Unauthorized) {
-        if (error.config?.url === Endpoints.updateToken) {
-          await clearAllData(Paths.signIn)
-
-          return Promise.reject(error)
-        } else {
-          try {
-            return await authStore.updateToken(error.config)
-          } catch (updateError) {
-            return Promise.reject(updateError)
-          }
-        }
-      }
+    if (!isAxiosError(error)) {
+      return Promise.reject(error)
     }
 
-    return Promise.reject(error)
+    if (error.response?.status !== StatusCode.Unauthorized) {
+      return Promise.reject(error)
+    }
+
+    if (error.config?.url === CommonEndpoints.updateToken) {
+      const { clearAllData } = await import('@/common/utils/clearAllData')
+
+      await clearAllData(Paths.signIn)
+
+      return Promise.reject(error)
+    }
+
+    try {
+      return await updateToken(error.config)
+    } catch (updateError) {
+      return Promise.reject(updateError)
+    }
   }
 )
 

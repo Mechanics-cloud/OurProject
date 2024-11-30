@@ -18,7 +18,6 @@ export const useSignUp = (t: LocaleType) => {
     reset,
     resetField,
     setError,
-    setFocus,
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
@@ -49,8 +48,11 @@ export const useSignUp = (t: LocaleType) => {
       }
     } catch (error: unknown) {
       responseErrorHandler(error, setError)
-      setFocus('confirm')
       resetField('confirm')
+      setError('confirm', {
+        message: t.signUpForm.labels.confirm,
+        type: 'manual',
+      })
     }
     isLoadingStore.turnOffLoading()
   })

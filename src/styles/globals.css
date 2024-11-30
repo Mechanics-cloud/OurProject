@@ -1,6 +1,6 @@
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
+@tailwind base;
 
 :root {
   --header-height: 3.75rem;
@@ -59,4 +59,115 @@ input[type='password']::-ms-clear {
 .swiper-button-prev::after,
 .swiper-button-next::after {
   content: '' !important;
+}
+
+/* styles for new post creation */
+
+.addPost .swiper-button-prev {
+  width: 36px;
+  height: 36px;
+
+  background-color: rgb(23 23 23 / 80%);
+  background-image: none !important;
+  background-size: 10px !important;
+  border-radius: 2px;
+}
+
+.addPost .swiper-button-next {
+  width: 36px;
+  height: 36px;
+
+  background-color: rgb(23 23 23 / 80%);
+  background-image: none !important;
+  background-size: 10px !important;
+  border-radius: 2px;
+}
+
+.addPost .swiper-button-prev::after,
+.addPost .swiper-button-next::after {
+  content: '' !important;
+
+  transform: translateX(-1px);
+
+  width: 24px;
+  height: 24px;
+
+  background-image: url('/Vector.svg') !important;
+  background-repeat: no-repeat;
+  background-position: center !important;
+  background-size: 10px !important;
+}
+
+.addPost .swiper-button-prev:hover,
+.addPost .swiper-button-next:hover {
+  filter: none;
+}
+
+.addPost .swiper-button-prev:hover::after,
+.addPost .swiper-button-next:hover::after {
+  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
+    hue-rotate(199deg) brightness(103%) contrast(101%);
+}
+
+@media screen and (width <= 768px) {
+  .addPost .swiper-pagination {
+    display: none;
+    opacity: 0;
+  }
+}
+
+.addPost .swiper-pagination {
+  left: 246px;
+  transform: translateX(-50%);
+
+  display: flex;
+  gap: 12px;
+
+  width: auto;
+  margin-bottom: 8px;
+  padding: 8px;
+}
+
+.addPost .swiper-pagination-bullet {
+  display: block;
+
+  width: 8px;
+  height: 8px;
+  margin: 0 !important;
+  padding: 0;
+
+  background-color: white;
+}
+
+.addPost .swiper-pagination-bullet-active {
+  background-color: rgb(57 125 246);
+}
+
+.addFilter .swiper-pagination {
+  background-color: rgb(51 51 51 / 50%);
+  border-radius: 2px;
+}
+
+.addFilter .swiper-pagination-lock.swiper-pagination {
+  background-color: transparent;
+}
+
+@media (width <= 768px) {
+  .radix-dialog {
+    width: 100%;
+  }
+}
+
+@layer components {
+  .popoverOpacity {
+    @apply relative z-50 bg-transparent before:top-0 before:left-0 before:right-0 before:bottom-0 before:absolute before:bg-dark-500 before:-z-10 before:opacity-80 before:rounded-sm;
+  }
+
+  .sliderCenter {
+    @apply relative after:absolute after:-z-10 after:w-0.5 after:h-4 after:bg-light-900 after:left-[34%] after:-translate-x-[50%];
+  }
+
+  .arrowBack {
+    @apply absolute top-[18px] left-6 cursor-pointer hover:text-accent-500 transition hover:-translate-x-1;
+  }
 }

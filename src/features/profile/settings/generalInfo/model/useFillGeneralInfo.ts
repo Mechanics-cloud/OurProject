@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { responseErrorHandler } from '@/common/utils'
-import { generalStore } from '@/core/store'
 import {
   UserInfo,
   generalInfoSchema,
@@ -19,7 +18,6 @@ export const useFillGeneralInfo = () => {
     setIsPhotoChanged,
     setPhotoObj,
   } = useAvatarUpload()
-  const profile = generalStore.user
   const userProfile = profileStore.userProfile
 
   const {
@@ -36,7 +34,7 @@ export const useFillGeneralInfo = () => {
       dateOfBirth: userProfile?.dateOfBirth || '',
       firstName: userProfile?.firstName || '',
       lastName: userProfile?.lastName || '',
-      userName: userProfile?.userName || profile?.userName,
+      userName: userProfile?.userName || '',
     },
     mode: 'onChange',
     resolver: zodResolver(generalInfoSchema),
@@ -52,7 +50,8 @@ export const useFillGeneralInfo = () => {
         setIsPhotoChanged(false)
         await profileStore.uploadAvatar(photoObj)
       }
-      if (!photoObj.photo && !photoObj.photoForServer && isPhotoChanged) {
+
+      if (!photoObj.photoUrl && !photoObj.photoFile && isPhotoChanged) {
         await profileStore.deleteAvatar()
       }
       toast.success('Your settings are saved!')
@@ -63,7 +62,6 @@ export const useFillGeneralInfo = () => {
 
   return {
     control,
-    handleSubmit,
     isDirty,
     isPhotoChanged,
     isSubmitting,

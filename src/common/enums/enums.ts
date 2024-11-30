@@ -11,9 +11,11 @@ export enum StorageKeys {
 export enum ScreenWidths {
   lg = 1024,
   md = 768,
+  sm = 500,
 }
 
 export enum FileSizes {
+  PostPhotoSize = 20 * oneMB,
   UserPhotoSize = 10 * oneMB,
 }
 
