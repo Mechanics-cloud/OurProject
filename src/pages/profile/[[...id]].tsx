@@ -1,31 +1,40 @@
 import { Paid } from '@/assets/icons'
-import { Button, Paths, Typography, useTranslation } from '@/common'
-import { withProtection } from '@/common/HOC/withProtection'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import {
+  Button,
+  Loader,
+  Paths,
+  Typography,
+  useScreenWidth,
+  useTranslation,
+} from '@/common'
+import { withProtection } from '@/common/HOC/withProtection'
+import {
+  PhotoProfilePostsGallery,
   ProfileAboutMe,
-  ProfilePosts,
   ProfileStatistics,
-  profileStore,
 } from '@/features/profile'
+import { profileStore } from '@/features/profile/model/profileStore'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
 
-//todo: remove avatarPlaceholder and place another placeholder image
+//todo: remove avatarPlaceholder
 const Profile = observer(() => {
   const { t } = useTranslation()
   const { followers, following, publications, settingsButton } = t.profilePage
   const { isLoading, userProfile } = profileStore
+
   const avatar = userProfile?.avatars[0]?.url
 
   const { isMobile, isTablet } = useScreenWidth()
 
-  return isLoading ? (
-    <div>Loading...</div> //временная заглушка
-  ) : (
+  if (!profileStore.userProfile) {
+    return <Loader />
+  }
+
+  return (
     <div className={'flex w-full'}>
       <div className={'flex flex-col w-full'}>
         <div
@@ -37,6 +46,7 @@ const Profile = observer(() => {
             alt={'avatar'}
             className={'rounded-full pr-0'}
             height={isMobile ? 100 : 200}
+            priority
             src={avatar || avatarPlaceholder}
             width={isMobile ? 100 : 200}
           />
@@ -86,7 +96,7 @@ const Profile = observer(() => {
           className={isTablet ? 'mb-7' : 'hidden'}
           isMobile={isMobile}
         />
-        <ProfilePosts />
+        <PhotoProfilePostsGallery />
       </div>
     </div>
   )
