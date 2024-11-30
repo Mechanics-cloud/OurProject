@@ -8,6 +8,7 @@ const config: Config = {
     './src/common/HOC/**/*.{js,ts,jsx,tsx,mdx}',
     './src/core/**/*.{js,ts,jsx,tsx,mdx}',
     './src/features/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/assets/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   plugins: [require('tailwindcss-radix')()],
   theme: {
@@ -75,10 +76,10 @@ const config: Config = {
         '700': '700',
       },
       gridTemplateColumns: {
-        gallery: 'repeat(auto-fit, minmax(250px, 1fr))',
+        gallery: 'repeat(auto-fill, minmax(250px, 1fr))',
       },
       height: {
-        headCalc: 'calc(100vh - var(--header-height))',
+        headCalc: 'calc(100vh - var(--header-height) - 2px)',
       },
       keyframes: {
         animationLoader: {

@@ -1,17 +1,17 @@
 import { useForm } from 'react-hook-form'
 
-import { Paths, useTranslation } from '@/common'
+import { Paths } from '@/common'
 import { generalStore } from '@/core/store'
-import authStore from '@/features/auth/model/authStore'
+import { authStore } from '@/features/auth'
 import {
   SignInFields,
   signInSchema,
 } from '@/features/auth/model/signIn/singInSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 import Router from 'next/router'
 
-export const useSignIn = () => {
-  const { t } = useTranslation()
+export const useSignIn = (t: LocaleType) => {
   const {
     control,
     formState: { isValid },
@@ -21,12 +21,13 @@ export const useSignIn = () => {
   } = useForm<SignInFields>({
     defaultValues: { email: '', password: '' },
     mode: 'onTouched',
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signInSchema(t)),
   })
   const isLoadingStore = generalStore
 
-  const onSubmit = async (data: SignInFields) => {
+  const onSubmit = handleSubmit(async (data: SignInFields) => {
     isLoadingStore.turnOnLoading()
+    data.email = data.email.toLowerCase()
     try {
       await authStore.login(data)
       await Router.push(Paths.home)
@@ -39,11 +40,10 @@ export const useSignIn = () => {
     } finally {
       isLoadingStore.turnOffLoading()
     }
-  }
+  })
 
   return {
     control,
-    handleSubmit,
     isLoading: isLoadingStore.isLoading,
     isValid,
     onSubmit,

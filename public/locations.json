@@ -1,0 +1,77 @@
+[
+  {
+    "country": "United States",
+    "cities": [
+      "Chicago",
+      "Los Angeles",
+      "New York",
+      "San Francisco",
+      "Miami",
+      "Seattle"
+    ]
+  },
+  {
+    "country": "Canada",
+    "cities": [
+      "Toronto",
+      "Vancouver",
+      "Montreal",
+      "Calgary",
+      "Ottawa",
+      "Edmonton"
+    ]
+  },
+  {
+    "country": "United Kingdom",
+    "cities": [
+      "Birmingham",
+      "London",
+      "Manchester",
+      "Glasgow",
+      "Edinburgh",
+      "Bristol"
+    ]
+  },
+  {
+    "country": "Austria",
+    "cities": ["Linz", "Salzburg", "Vienna", "Graz", "Innsbruck", "Klagenfurt"]
+  },
+  {
+    "country": "Russia",
+    "cities": [
+      "Yekaterinburg",
+      "Moscow",
+      "St Petersburg",
+      "Novosibirsk",
+      "Kazan",
+      "Nizhny Novgorod"
+    ]
+  },
+  {
+    "country": "Germany",
+    "cities": [
+      "Berlin",
+      "Hamburg",
+      "Munich",
+      "Cologne",
+      "Frankfurt",
+      "Stuttgart"
+    ]
+  },
+  {
+    "country": "France",
+    "cities": ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Bordeaux"]
+  },
+  {
+    "country": "Italy",
+    "cities": ["Rome", "Milan", "Naples", "Turin", "Palermo", "Genoa"]
+  },
+  {
+    "country": "Spain",
+    "cities": ["Madrid", "Barcelona", "Valencia", "Seville", "Bilbao", "Malaga"]
+  },
+  {
+    "country": "Japan",
+    "cities": ["Tokyo", "Osaka", "Kyoto", "Yokohama", "Sapporo", "Nagoya"]
+  }
+]

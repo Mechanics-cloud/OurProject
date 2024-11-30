@@ -3,7 +3,7 @@ import { useRecoveryPassword } from '@/features/auth/model/forgotPassword/useRec
 
 export const RecoveryPasswordForm = () => {
   const { t } = useTranslation()
-  const { control, isSubmitting, isValid, onSubmit } = useRecoveryPassword()
+  const { control, isSubmitting, isValid, onSubmit } = useRecoveryPassword(t)
 
   return (
     <div className={'flex flex-col items-center w-full gap-4'}>

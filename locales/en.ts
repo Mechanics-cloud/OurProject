@@ -1,7 +1,67 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  avatarModal: {
+    chooseButton: 'Select from Computer',
+    errors: {
+      chooseFile: 'Choose file.',
+      error: 'Error!',
+      fileSize: 'Photo size must be less than 10 MB!',
+      fileType: 'The format of the uploaded photo must be PNG or JPG/JPEG.',
+      unknownError: 'Unknown error.',
+    },
+    saveButton: 'Save',
+    title: 'Add a Profile Photo',
+  },
   basicError: 'Something went wrong',
+  createPost: {
+    adding: {
+      buttonDraft: 'Open draft',
+      buttonNew: 'Select from computer',
+      errors: {
+        basic: 'Something went wrong',
+        countLimit: 'Limit is ',
+        tooBig: 'Photo is too big',
+        type: 'Wrong type',
+      },
+      title: 'Add post',
+    },
+    alt: 'Photo in carousel',
+    closeModal: {
+      description: 'Do you really want to close the creation of a publication?',
+      discard: 'Discard',
+      save: 'Save draft',
+      title: 'Close',
+    },
+    cropping: {
+      add: 'Add',
+      crop: 'Crop',
+      originalRatio: 'Original',
+      title: 'Cropping',
+      zoom: 'Zoom',
+    },
+    filtering: {
+      filters: 'Filters library',
+      settings: 'Filters settings',
+      settingsData: {
+        brightness: 'Brightness',
+        contrast: 'Contrast',
+        grayscale: 'Grayscale',
+        saturate: 'Saturation',
+        sepia: 'Sepia',
+      },
+      title: 'Filters',
+    },
+    next: 'Next',
+    publication: {
+      description: 'Add publication descriptions',
+      location: 'Add location',
+      locationPlaceholder: 'Enter city name...',
+      publishButton: 'Publish',
+      success: 'Published successfully',
+      title: 'Publication',
+    },
+  },
   expiredSession: {
     emailExpired: 'Email verification link expired',
     pictureExpired: 'Picture of the expired link',
@@ -26,6 +86,7 @@ export const en: LocaleType = {
     sendAgain: 'Send Link Again',
     title: 'Forgot Password',
   },
+  goToTop: 'Go to top',
   logIn: 'Log In',
   menu: {
     create: 'Create',
@@ -50,6 +111,37 @@ export const en: LocaleType = {
     goBack: 'Go Back',
     goForward: 'Go forward',
   },
+  profileInputs: {
+    aboutMe: 'About me',
+    addProfilePhoto: 'Add a profile photo',
+    city: 'Select your city',
+    country: 'Select your country',
+    dateOfBirth: 'Date of birth',
+    firstName: 'First name',
+    lastName: 'Last name',
+    placeholders: {
+      city: 'City',
+      country: 'Country',
+    },
+    saveChanges: 'Save changes',
+    updateStatusMessages: {
+      error: 'Something went wrong',
+      success: 'Your settings are saved!',
+    },
+    userName: 'User name',
+  },
+  profilePage: {
+    followers: 'Followers',
+    following: 'Following',
+    publications: 'Publications',
+    settingsButton: 'Profile settings',
+  },
+  profileSessions: {
+    activeSessions: 'Active sessions',
+    currentSession: 'Current device',
+    lastVisit: 'Last visit',
+    terminateAll: 'Terminate all other session',
+  },
   recoveryPassword: {
     createNewPassword: 'Create New Password',
     newPassword: 'New Password',
@@ -69,12 +161,26 @@ export const en: LocaleType = {
       title: 'Email verification link expired',
     },
   },
+  serverError: 'Something went wrong on our end. Please try again later.',
+  session: {
+    activeSession: 'Active session',
+    currentDevice: 'Current device',
+    devices: 'Devices',
+    lastVisit: 'Last visit',
+    logOut: 'Log out',
+    terminateAll: 'Terminate all other session',
+  },
+  showText: {
+    less: 'Hide',
+    more: 'Show more',
+  },
   signIn: 'Sign In',
   signInForm: {
     errorResponse: 'The email or password are incorrect. Try again please',
     labelEmail: 'Email',
     labelPassword: 'Password',
     passwordRecovery: 'Forgot Password',
+    placeholderPassword: 'Enter your password',
     signUpTitle: 'Sign Up',
     text: 'Don’t have an account?',
     title: 'Sign In',
@@ -96,22 +202,41 @@ export const en: LocaleType = {
       userName: 'User name',
     },
     placeholders: {
-      confirm: 'Confirm your password',
+      confirm: 'Password confirmation',
       email: 'Enter your email',
-      password: 'Enter your password',
+      password: 'Enter a password',
       userName: 'Enter your username',
     },
     policy: 'Privacy Policy',
+    schemaErrors: {
+      userNameComposition: 'Input must contain only',
+    },
     signUpGithub: 'Sign Up with Github',
     signUpGoogle: 'Sign Up with Google',
     terms: 'Terms of Service',
     text: 'Do you have an account?',
     title: 'Sign Up',
   },
+  tabs: {
+    accountManagement: 'Account management',
+    devices: 'Devices',
+    generalInfo: 'General information',
+    myPayments: 'My payments',
+  },
   termsPolicyPage: {
     back: 'Back',
   },
   validation: {
+    email: {
+      composition: 'The email must match the format example@example.com',
+      required: 'Email is required',
+    },
+    password: {
+      composition: 'Password must contain',
+      match: 'Passwords must match',
+      maxChar: 'Maximum number of characters 20',
+      minChar: 'Minimum number of characters 6',
+    },
     recaptchaRequired: 'Recaptcha is required',
   },
 }

@@ -1,6 +1,6 @@
+import { instance } from '@/common/api'
 import { Endpoints } from '@/features/auth/api/auth.endpoints'
 import { Profile } from '@/features/auth/api/authApi.types'
-import { instance } from '@/features/auth/api/instance'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
 import {
   EmailResendRequestData,
@@ -27,7 +27,7 @@ class AuthApi {
     return this.instance.post(Endpoints.EmailResending, emailResendData)
   }
 
-  public async login(data: SignInFields) {
+  public login(data: SignInFields) {
     return instance
       .post(Endpoints.login, data)
       .then((res) => res.data.accessToken)
@@ -37,8 +37,8 @@ class AuthApi {
     return instance.post(Endpoints.logout)
   }
 
-  public async me(): Promise<Profile> {
-    return instance.get(Endpoints.me)
+  public me(): Promise<Profile> {
+    return instance.get(Endpoints.me).then((res) => res.data)
   }
 
   public async newPassword(data: NewPasswordData): Promise<AxiosResponse> {
@@ -53,11 +53,6 @@ class AuthApi {
 
   public async signUp(data: SignUpRequestData): Promise<AxiosResponse> {
     return this.instance.post(Endpoints.SignUp, data)
-  }
-  public async updateToken() {
-    return instance
-      .post(Endpoints.updateToken)
-      .then((res) => res.data.accessToken)
   }
 }
 

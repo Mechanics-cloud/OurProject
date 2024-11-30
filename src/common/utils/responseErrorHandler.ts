@@ -29,7 +29,7 @@ export const responseErrorHandler = (error: unknown, setError?: Function) => {
   const errorData = error.response?.data as ErrorResponse
 
   if (!setError) {
-    toast.error(errorData.messages[0].message ?? basicErrorMessage)
+    toast.error(errorData.messages[0]?.message ?? basicErrorMessage)
 
     return
   }
@@ -38,5 +38,3 @@ export const responseErrorHandler = (error: unknown, setError?: Function) => {
     setError(field as keyof SignUpFields, { message })
   })
 }
-
-export const responseServerErrorHandler = () => {}

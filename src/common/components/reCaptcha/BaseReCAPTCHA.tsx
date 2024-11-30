@@ -2,8 +2,10 @@ import { ElementRef, forwardRef } from 'react'
 // eslint-disable-next-line import/no-named-as-default
 import ReCAPTCHA, { ReCAPTCHAProps } from 'react-google-recaptcha'
 
+import { Environments } from '@/common/enviroments'
+
 // valid key
-const RECAPTCHA_KEY = '6LeY2y0mAAAAANwI_paCWfoksCgBm1n2z9J0nwNQ'
+const RECAPTCHA_KEY = Environments.RECAPTCHA_KEY as string
 
 export const BaseReCAPTCHA = forwardRef<
   ElementRef<typeof ReCAPTCHA>,

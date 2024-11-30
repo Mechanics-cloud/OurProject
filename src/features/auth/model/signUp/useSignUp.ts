@@ -7,8 +7,9 @@ import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import { SignUpFields, authApi, signUpSchema } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 
-export const useSignUp = () => {
+export const useSignUp = (t: LocaleType) => {
   const {
     clearErrors,
     control,
@@ -17,7 +18,6 @@ export const useSignUp = () => {
     reset,
     resetField,
     setError,
-    setFocus,
     watch,
   } = useForm<SignUpFields>({
     defaultValues: {
@@ -27,8 +27,8 @@ export const useSignUp = () => {
       password: '',
       userName: '',
     },
-    mode: 'onChange',
-    resolver: zodResolver(signUpSchema),
+    mode: 'onTouched',
+    resolver: zodResolver(signUpSchema(t)),
   })
   const isLoadingStore = generalStore
   const { isModalOpen, onModalClose, openModal } = useModal(() => {
@@ -48,8 +48,11 @@ export const useSignUp = () => {
       }
     } catch (error: unknown) {
       responseErrorHandler(error, setError)
-      setFocus('confirm')
       resetField('confirm')
+      setError('confirm', {
+        message: t.signUpForm.labels.confirm,
+        type: 'manual',
+      })
     }
     isLoadingStore.turnOffLoading()
   })

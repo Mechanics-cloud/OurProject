@@ -1,5 +1,65 @@
 export const ru = {
+  avatarModal: {
+    chooseButton: 'Выбрать с компьютера',
+    errors: {
+      chooseFile: 'Выберите файл.',
+      error: 'Ошибка!',
+      fileSize: 'Размер файла должен быть не более 10 MB!',
+      fileType: 'Формат загружаемого файла должен быть PNG или JPG/JPEG.',
+      unknownError: 'Неизвестная ошибка.',
+    },
+    saveButton: 'Сохранить',
+    title: 'Добавить фотографию профиля',
+  },
   basicError: 'Что-то пошло не так',
+  createPost: {
+    adding: {
+      buttonDraft: 'Открыть черновик',
+      buttonNew: 'Загрузить фото',
+      errors: {
+        basic: 'Что-то пошло не так',
+        countLimit: 'Лимит ',
+        tooBig: 'Фото слишком большое',
+        type: 'Неверный тип файла',
+      },
+      title: 'Добавить пост',
+    },
+    alt: 'Фото в карусели',
+    closeModal: {
+      description: 'Вы действительно хотите закрыть создание публикации?',
+      discard: 'Отмена',
+      save: 'Сохранить черновик',
+      title: 'Закрыть',
+    },
+    cropping: {
+      add: 'Добавить',
+      crop: 'Обрезать',
+      originalRatio: 'Оригинал',
+      title: 'Обрезка',
+      zoom: 'Приблизить',
+    },
+    filtering: {
+      filters: 'Библиотека фильтров',
+      settings: 'Настройки фильтров',
+      settingsData: {
+        brightness: 'Яркость',
+        contrast: 'Контрастность',
+        grayscale: 'Оттенки серого',
+        saturate: 'Насыщенность',
+        sepia: 'Сепия',
+      },
+      title: 'Фильтры',
+    },
+    next: 'Дальше',
+    publication: {
+      description: 'Добавить описание',
+      location: 'Добавить локацию',
+      locationPlaceholder: 'Введите название города...',
+      publishButton: 'Опубликовать',
+      success: 'Это успех :)',
+      title: 'Публикация',
+    },
+  },
   expiredSession: {
     emailExpired: 'Ссылка для подтверждения электронной почты истекла',
     pictureExpired: 'Изображение истекшей ссылки',
@@ -24,6 +84,7 @@ export const ru = {
     sendAgain: 'Отправить ссылку снова',
     title: 'Забыли пароль',
   },
+  goToTop: 'Вверх',
   logIn: 'Вход',
   menu: {
     create: 'Создать',
@@ -48,6 +109,37 @@ export const ru = {
     goBack: 'Назад',
     goForward: 'Вперед',
   },
+  profileInputs: {
+    aboutMe: 'Обо мне',
+    addProfilePhoto: 'Загрузить фото',
+    city: 'Выьерите ваш город',
+    country: 'Выьерите вашу страну',
+    dateOfBirth: 'Дата рождения',
+    firstName: 'Имя',
+    lastName: 'Фамилия',
+    placeholders: {
+      city: 'Город',
+      country: 'Страна',
+    },
+    saveChanges: 'Сохранить изменения',
+    updateStatusMessages: {
+      error: 'Что-то пошло не так',
+      success: 'Ваши данные сохранены',
+    },
+    userName: 'Имя пользователя',
+  },
+  profilePage: {
+    followers: 'Подписчики',
+    following: 'Подписки',
+    publications: 'Публикации',
+    settingsButton: 'Настройки профиля',
+  },
+  profileSessions: {
+    activeSessions: 'Активные сессии',
+    currentSession: 'Текущее устройство',
+    lastVisit: 'Последний визит',
+    terminateAll: 'Завершить все другие сессии',
+  },
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
@@ -67,6 +159,20 @@ export const ru = {
       title: 'Срок действия ссылки для подтверждения электронной почты истек',
     },
   },
+  serverError:
+    'Что-то пошло не так с нашей стороны. Пожалуйста, повторите попытку позже.',
+  session: {
+    activeSession: 'Активные сессии',
+    currentDevice: 'Текущее устройство',
+    devices: 'Устройства',
+    lastVisit: 'Последнее посещение',
+    logOut: 'Выйти',
+    terminateAll: 'Завершить все остальные сеансы',
+  },
+  showText: {
+    less: 'Свернуть',
+    more: 'Развернуть',
+  },
   signIn: 'Вход',
   signInForm: {
     errorResponse:
@@ -74,8 +180,8 @@ export const ru = {
     labelEmail: 'Электронная почта',
     labelPassword: 'Пароль',
     passwordRecovery: 'Забыли пароль',
+    placeholderPassword: 'Введите пароль',
     signUpTitle: 'Зарегистрироваться',
-
     text: 'У вас нет учетной записи?',
     title: 'Вход',
   },
@@ -102,16 +208,36 @@ export const ru = {
       userName: 'Введите имя пользователя',
     },
     policy: 'Политикой конфиденциальности',
+    schemaErrors: {
+      userNameComposition: 'Ввод должен содержать только',
+    },
     signUpGithub: 'Регистрация с помощью Github',
     signUpGoogle: 'Регистрация с помощью Google',
     terms: 'Условиями использования',
     text: 'Уже есть аккаунт?',
     title: 'Регистрация',
   },
+  tabs: {
+    accountManagement: 'Управление аккаунтом',
+    devices: 'Устройства',
+    generalInfo: 'Общая информация',
+    myPayments: 'Мои платежи',
+  },
   termsPolicyPage: {
     back: 'Назад',
   },
   validation: {
+    email: {
+      composition:
+        'Электронное письмо должно соответствовать формату example@example.com.',
+      required: 'Требуется электронная почта',
+    },
+    password: {
+      composition: 'Пароль должен содержать',
+      match: 'Пароли должны совпадать',
+      maxChar: 'Максимальное количество символов 20',
+      minChar: 'Минимальное количество символов 6',
+    },
     recaptchaRequired: 'Требуется Recaptcha',
   },
 }

@@ -1,4 +1,4 @@
-import { Button, Card, Typography } from '@/common'
+import { Button, Card, Typography, useTranslation } from '@/common'
 import { FormTextField } from '@/common/form'
 import { Paths } from '@/common/paths'
 import { ExternalServicesRegistration } from '@/features/auth'
@@ -7,7 +7,9 @@ import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 const SignIn = observer(() => {
-  const { control, handleSubmit, isLoading, isValid, onSubmit, t } = useSignIn()
+  const { t } = useTranslation()
+
+  const { control, isLoading, isValid, onSubmit } = useSignIn(t)
 
   return (
     <div
@@ -26,14 +28,14 @@ const SignIn = observer(() => {
         <form
           className={'flex flex-col w-full h-full'}
           noValidate
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={onSubmit}
         >
           <FormTextField
             control={control}
             disabled={isLoading}
             label={t.signInForm.labelEmail}
             name={'email'}
-            placeholder={'Epam@epam.com'}
+            placeholder={'epam@epam.com'}
             type={'email'}
           />
           <FormTextField
@@ -41,13 +43,13 @@ const SignIn = observer(() => {
             disabled={isLoading}
             label={t.signInForm.labelPassword}
             name={'password'}
-            placeholder={'**********'}
+            placeholder={t.signInForm.placeholderPassword}
             type={'password'}
           />
 
           <Link
             className={'self-end mt-3 mb-6 text-light-900'}
-            href={'/*'}
+            href={Paths.forgotPassword}
           >
             {t.signInForm.passwordRecovery}
           </Link>

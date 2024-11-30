@@ -1,11 +1,11 @@
-import { ElementType, forwardRef, useState } from 'react'
+import React, { ElementType, forwardRef, useState } from 'react'
 
 import {
   EyeOffOutline,
   EyeOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
-import { Typography } from '@/common/components'
+import { Tooltip, Typography } from '@/common/components'
 import {
   PolymorphicRef,
   TextFieldProps,
@@ -23,6 +23,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     className,
     disabled,
     error,
+    errorMode = 'text',
     label,
     required = false,
     type = 'text',
@@ -31,14 +32,14 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
 
   let marginForError = '24px'
 
-  if (error) {
+  if (error && errorMode === 'text') {
     const margin = `${Math.ceil(error.length / 50) * 24}px`
 
     marginForError = error.length > 50 ? margin : marginForError
   }
 
   const cls = {
-    container: cn('flex flex-col relative mb-6', className),
+    container: cn('flex flex-col relative', className),
     error: 'text-danger-500 absolute top-[100%] leading-1',
     input: getInputClasses(Boolean(error), type),
     inputContainer: 'relative',
@@ -50,7 +51,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     star: 'text-danger-500 ml-1',
   }
 
-  const handleToggle = () => setOpen((prev) => !prev)
+  const onToggle = () => setOpen((prev) => !prev)
 
   return (
     <label
@@ -68,32 +69,38 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
       )}
       <div className={cls.inputContainer}>
         {type === 'search' && <SearchOutline className={cls.leftIcon} />}
-        <input
-          className={cls.input}
-          disabled={disabled}
-          ref={ref}
-          required={required}
-          type={type === 'search' || open ? 'text' : type}
-          {...rest}
-        />
+        <Tooltip
+          open={errorMode === 'tooltip' && !!error}
+          title={error ?? ''}
+        >
+          <input
+            className={cls.input}
+            disabled={disabled}
+            ref={ref}
+            required={required}
+            type={type === 'search' || open ? 'text' : type}
+            {...rest}
+          />
+        </Tooltip>
         {type === 'password' &&
           (open ? (
             <EyeOutline
               className={cls.rightIcon}
               height={24}
-              onClick={handleToggle}
+              onClick={onToggle}
               width={24}
             />
           ) : (
             <EyeOffOutline
               className={cls.rightIcon}
               height={24}
-              onClick={handleToggle}
+              onClick={onToggle}
               width={24}
             />
           ))}
       </div>
-      {error && (
+
+      {errorMode === 'text' && error && (
         <Typography
           className={cls.error}
           variant={'reg14'}

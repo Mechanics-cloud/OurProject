@@ -1,15 +1,18 @@
 import { ChangeEvent, useState } from 'react'
 import { DateRange } from 'react-day-picker'
 
+import CalendarClosed from '@/assets/icons/filledIcons/CalendarFilled'
+import CalendarOpen from '@/assets/icons/outlineIcons/CalendarOutline'
+import {
+  Calendar,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Typography,
+} from '@/common'
 import { cn } from '@/common/utils/cn'
 import { format, isValid, parse } from 'date-fns'
 import { ru } from 'date-fns/locale'
-
-import { Calendar } from '../calendar/Calendar'
-import { Popover, PopoverContent, PopoverTrigger } from '../popover/Popover'
-import { Typography } from '../typography'
-import CalendarClosed from './../../../assets/icons/filledIcons/Calendar'
-import CalendarOpen from './../../../assets/icons/outlineIcons/CalendarOutline'
 
 type Props = {
   disabled: boolean
@@ -32,7 +35,7 @@ export function DatePickerWithRange({
 
   const [inputValue, setInputValue] = useState('')
 
-  const handleDayPickerSelect = (date: Date | undefined) => {
+  const onDayPickerSelect = (date: Date | undefined) => {
     if (!date) {
       setInputValue('')
       setSelectedDate(undefined)
@@ -44,7 +47,7 @@ export function DatePickerWithRange({
     }
   }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setInputValue(e.target.value)
 
@@ -89,7 +92,7 @@ export function DatePickerWithRange({
                   disabled && 'cursor-default'
                 )}
                 disabled={disabled}
-                onChange={handleInputChange}
+                onChange={onInputChange}
                 placeholder={'dd/mm/yyyy'}
                 type={'text'}
                 value={inputValue}
@@ -142,7 +145,7 @@ export function DatePickerWithRange({
               mode={'single'}
               month={month}
               onMonthChange={setMonth}
-              onSelect={handleDayPickerSelect}
+              onSelect={onDayPickerSelect}
               selected={selectedDate}
             />
           ) : (
