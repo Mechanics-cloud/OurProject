@@ -1,5 +1,5 @@
+import { instance } from '@/common/api'
 import { LikeStatus } from '@/common/enums'
-import { instance } from '@/features/auth/api/instance'
 import { AxiosInstance } from 'axios'
 
 import { PostsComments, PostsLikes } from '../model'

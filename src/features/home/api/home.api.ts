@@ -1,4 +1,4 @@
-import { instance } from '@/features/auth/api/instance'
+import { instance } from '@/common/api'
 import { AxiosInstance } from 'axios'
 
 import { HomePageQuery, HomePageRootInterface } from '../model/home.types'

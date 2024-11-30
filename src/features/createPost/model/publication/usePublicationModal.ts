@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 import { responseErrorHandler, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
 import { addPostStore } from '@/features/createPost'
+import { profileStore } from '@/features/profile'
 
 export const usePublicationModal = (onPostUpload: () => void) => {
   const { t } = useTranslation()
