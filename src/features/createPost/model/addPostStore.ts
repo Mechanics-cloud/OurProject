@@ -23,6 +23,7 @@ import {
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
+import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AddPostStore {
@@ -267,6 +268,7 @@ class AddPostStore {
 
       await addPostApi.uploadPostDescription(post)
       this.resetData()
+      profileStore.cleanUpFotosData()
     } catch (error) {
       responseErrorHandler(error)
     }
