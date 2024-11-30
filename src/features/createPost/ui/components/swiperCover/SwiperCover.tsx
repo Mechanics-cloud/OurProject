@@ -3,6 +3,7 @@ import { ComponentPropsWithoutRef, createContext } from 'react'
 
 import { Nullable, cn } from '@/common'
 import { observer } from 'mobx-react-lite'
+import { Swiper as SwiperInstance } from 'swiper'
 import {
   EffectFade,
   HashNavigation,
@@ -45,7 +46,7 @@ export const SwiperCover = observer(
           noSwiping
           noSwipingSelector={'button'}
           onSlideChange={onSlideChange}
-          onSwiper={(swiperInstance: typeof Swiper) => {
+          onSwiper={(swiperInstance: SwiperInstance) => {
             swiperRef.current = swiperInstance
           }}
           pagination={{
