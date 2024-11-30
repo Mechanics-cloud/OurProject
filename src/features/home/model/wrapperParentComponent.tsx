@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 
 import { AddCommentGroup, ViewAllCommentsButton } from '../ui'
 import { CommentsStoreContext } from './homeContext'
-import { CommentsStore } from './posts/postsStore'
+import { CommentsStore } from './posts/commentsStore'
 
 export const WrapperParentComponent = ({ postId }: { postId: number }) => {
   const commentsStore = useMemo(() => new CommentsStore(), [])
