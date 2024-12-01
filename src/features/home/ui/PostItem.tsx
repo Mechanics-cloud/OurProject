@@ -25,7 +25,7 @@ const PostItem = ({ item, router }: Props) => {
   return (
     <div
       className={
-        'w-[491px] min-h-[816px] border-b mt-[24px] ml-[8%] flex flex-col pb-2 justify-between'
+        'w-[491px] min-h-[816px] border-b mt-[24px] ml-[8%] mb-[56px] flex flex-col pb-2 justify-between'
       }
     >
       <div className={'w-full h-9 mb-3 flex  items-center justify-between'}>
