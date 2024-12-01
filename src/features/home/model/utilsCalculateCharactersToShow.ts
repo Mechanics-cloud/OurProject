@@ -1,5 +1,5 @@
 const CYRILLIC_LENGTH = 145
-const LATIN_LENGTH = 175
+const LATIN_LENGTH = 173
 
 export const calculateCharactersToShow = (
   description: string,

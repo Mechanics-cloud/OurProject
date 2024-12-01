@@ -8,12 +8,12 @@ type Props = {
 
 export const LinkProfile = ({ userId, userName }: Props) => {
   return (
-    <Link href={`${Paths.profile}/${userId}`}>
+    <Link href={`${Paths.profileLink(userId)}`}>
       <Typography
         className={'inline'}
         variant={'bold16'}
       >
-        {userName}{' '}
+        {userName}
       </Typography>
     </Link>
   )

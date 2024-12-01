@@ -7,6 +7,9 @@ export const Paths = {
   messenger: '/messenger',
   privacyPolicy: '/auth/privacy-policy',
   profile: '/profile',
+  profileLink: (userId: number | undefined) => {
+    return `/profile/${userId}`
+  },
   profileSettings: '/profile/settings',
   recoveryPassword: '/auth/recovery',
   registrationEmailResending: '/auth/registration-email-resending',

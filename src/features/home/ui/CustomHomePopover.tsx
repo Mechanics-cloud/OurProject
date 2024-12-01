@@ -6,7 +6,6 @@ import {
   PersonRemoveOutline,
 } from '@/assets/icons/outlineIcons'
 import {
-  Card,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -15,8 +14,8 @@ import {
 import Link from 'next/link'
 
 export const CustomHomePopover = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const { t } = useTranslation()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
     <Popover

@@ -83,10 +83,12 @@ const PostItem = ({ item, router }: Props) => {
           )}
           className={'text-justify break-words'}
           link={
-            <LinkProfile
-              userId={item.ownerId}
-              userName={item.userName}
-            />
+            <div className={'mr-2 inline-block'}>
+              <LinkProfile
+                userId={item.ownerId}
+                userName={item.userName}
+              />
+            </div>
           }
         >
           {item.description}
