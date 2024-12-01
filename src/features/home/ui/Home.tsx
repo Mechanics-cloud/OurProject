@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { Loader, useTranslation } from '@/common'
+import { Loader } from '@/common'
 import { observer } from 'mobx-react-lite'
 import { NextRouter, useRouter } from 'next/router'
 

@@ -22,9 +22,9 @@ type ItemProps = {
 }
 //TODO to change (in progress) вынести логику, добавить логику на кнопки
 export const LinksGroup = observer(({ item }: ItemProps) => {
+  const { t } = useTranslation()
   const [isChangeLike, setIsChangeLike] = useState<boolean>(false)
   const [loadingRequestFlag, setLoadingRequestFlag] = useState<boolean>(false)
-  const { t } = useTranslation()
 
   const onLiked = async () => {
     if (loadingRequestFlag) {

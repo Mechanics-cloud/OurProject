@@ -17,19 +17,18 @@ type ViewAllComments = {
 
 //TODO to change (in progress) добавить стили, отрисовать слайдер, в поповер добавить логику
 export const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
-  const commentsStore = useCommentsStore()
   const { t } = useTranslation()
-
   const [isOpen, setIsOpen] = useState<boolean>(false)
-
-  useEffect(() => {
-    commentsStore.getComments(postId)
-  }, [postId, commentsStore])
+  const commentsStore = useCommentsStore()
 
   const isButtonDisabled =
     commentsStore.isLoading ||
     commentsStore.comments === null ||
     commentsStore.comments.totalCount === 0
+
+  useEffect(() => {
+    commentsStore.getComments(postId)
+  }, [postId, commentsStore])
 
   return (
     <div className={'w-full h-6 mb-4 flex items-center '}>

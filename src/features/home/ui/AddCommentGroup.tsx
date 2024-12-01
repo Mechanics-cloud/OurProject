@@ -7,9 +7,9 @@ import { observer } from 'mobx-react-lite'
 import { useCommentsStore } from '../model/homeContext'
 
 export const AddCommentGroup = observer(({ postId }: { postId: number }) => {
+  const { t } = useTranslation()
   const [comment, setComment] = useState<string>('')
   const commentsStore = useCommentsStore()
-  const { t } = useTranslation()
 
   const onBlur = () => {
     setComment(comment.trim())

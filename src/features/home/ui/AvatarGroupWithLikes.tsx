@@ -12,8 +12,9 @@ type ItemProps = {
 }
 
 export const AvatarGroupWithLikes = observer(({ item }: ItemProps) => {
-  const likesStore = useMemo(() => new LikesStore(), [])
   const { t } = useTranslation()
+
+  const likesStore = useMemo(() => new LikesStore(), [])
   const firstThreeAvatarImages = likesStore.avatarImages
   const likesCount = item.likesCount
   const postId = item.id
