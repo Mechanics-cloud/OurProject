@@ -22,18 +22,9 @@ type Props = {
 export const DeletePostModal = ({ onDeletePost, postId, ...rest }: Props) => {
   const { t } = useTranslation()
 
-  const {
-    isModalOpen: status,
-    onModalClose: close,
-    openModal: open,
-  } = useModal()
-
   return (
     <>
-      <Dialog
-        onOpenChange={status ? close : open}
-        open={status}
-      >
+      <Dialog>
         <DialogTrigger {...rest} />
         <DialogContent className={'w-12'}>
           <DialogHeader>
