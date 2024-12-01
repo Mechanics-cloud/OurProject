@@ -262,7 +262,9 @@ class AddPostStore {
       }
       const res = await addPostApi.uploadPhotos(formData)
       const post: UploadPost = {
-        childrenMetadata: [{ uploadId: res.data.images[0].uploadId }],
+        childrenMetadata: res.data.images.map((photoData) => ({
+          uploadId: photoData.uploadId,
+        })),
         description: this.postDescription,
       }
 
