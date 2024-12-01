@@ -12,11 +12,7 @@ type UploadPhoto = {
 }
 
 export type UploadPost = {
-  childrenMetadata: [
-    {
-      uploadId: string
-    },
-  ]
+  childrenMetadata: { uploadId: string }[]
   description: string
 }
 
