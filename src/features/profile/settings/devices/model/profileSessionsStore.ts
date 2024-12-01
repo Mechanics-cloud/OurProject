@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify'
 
-import { Nullable, clearAllData, responseErrorHandler } from '@/common'
+import { Nullable, responseErrorHandler } from '@/common'
+import { translationForStore } from '@/common/utils/setTranslation'
 import {
   DeviceType,
   profileDevicesApi,
@@ -28,8 +29,7 @@ class ProfileSessionsStore {
           )
         }
       })
-      //todo переводы в store
-      toast.success('Success')
+      toast.success(translationForStore.t.session.successLogout)
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -66,8 +66,7 @@ class ProfileSessionsStore {
       runInAction(() => {
         this.otherSession = []
       })
-      //todo переводы в store
-      toast.success('Success')
+      toast.success(translationForStore.t.session.successLogout)
     } catch (error) {
       responseErrorHandler(error)
     }

@@ -174,6 +174,7 @@ export const ru = {
     devices: 'Устройства',
     lastVisit: 'Последнее посещение',
     logOut: 'Выйти',
+    successLogout: 'Сессия была успешно завершена',
     terminateAll: 'Завершить все остальные сеансы',
   },
   showText: {

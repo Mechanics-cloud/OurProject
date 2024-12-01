@@ -1,13 +1,14 @@
 import { useCallback, useRef } from 'react'
 
+import { Nullable } from '@/common'
 import { addPostStore } from '@/features/createPost'
-import { Swiper } from 'swiper/react'
+import { Swiper as SwiperInstance } from 'swiper'
 
 export const useSwiperCover = () => {
-  const swiperRef = useRef<typeof Swiper>(null)
+  const swiperRef = useRef<Nullable<SwiperInstance>>(null)
   const addCurrentSliderIndex = addPostStore.addCurrentSliderIndex
 
-  const onSlideChange = (swiper: typeof Swiper) => {
+  const onSlideChange = (swiper: SwiperInstance) => {
     addCurrentSliderIndex(swiper.activeIndex)
   }
 

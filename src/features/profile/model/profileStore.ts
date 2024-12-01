@@ -1,4 +1,5 @@
 import {
+  Nullable,
   PhotoResult,
   createFileForUpload,
   responseErrorHandler,
@@ -10,16 +11,32 @@ import {
   UserProfile,
   profileAPi,
 } from '@/features/profile'
+import { Photo } from '@/features/profile/model/types'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class ProfileStore {
-  isLoading: boolean = true
-  userProfile?: UserProfile
+  isLoading: boolean = false
+  pageNumber: number = 1
+  photos: Photo[] = []
+  stopRequest: boolean = false
+  userProfile: Nullable<UserProfile> = null
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, undefined, { autoBind: true })
+  }
+
+  changeLoading(value: boolean) {
+    this.isLoading = value
+  }
+
+  cleanUp() {
+    this.isLoading = false
+    this.photos.length = 0
+    this.pageNumber = 1
+    this.stopRequest = false
+    this.userProfile = null
   }
 
   async deleteAvatar() {
@@ -38,6 +55,7 @@ class ProfileStore {
   async getProfile() {
     try {
       const userProfile = await profileAPi.getProfile()
+
       const formattedDate =
         userProfile.dateOfBirth &&
         format(userProfile.dateOfBirth, 'dd.MM.yyyy', { locale: ru })
@@ -46,14 +64,57 @@ class ProfileStore {
         this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
         generalStore.addUserAvatar(userProfile.avatars[0].url)
       })
-
-      return userProfile
     } catch (error) {
       responseErrorHandler(error)
     } finally {
       runInAction(() => {
         this.isLoading = false
       })
+    }
+  }
+
+  async getUserPhoto({
+    pageSize,
+    signal,
+  }: { pageSize?: number; signal?: AbortSignal } = {}) {
+    try {
+      if (this.isLoading || this.stopRequest) {
+        return
+      }
+      this.changeLoading(true)
+
+      if (this.userProfile) {
+        const res = await profileAPi.getProfilePosts(
+          this.pageNumber,
+          this.userProfile?.userName,
+          signal,
+          pageSize
+        )
+
+        let newPhotos: Photo[] = []
+
+        if (res.items.length !== 0) {
+          newPhotos = res.items.map((item) => ({
+            id: item.id,
+            images: item.images,
+          }))
+        } else {
+          this.stopRequest = true
+        }
+
+        runInAction(() => {
+          this.photos.push(...newPhotos)
+          this.pageNumber += 1
+          this.isLoading = false
+        })
+      }
+    } catch (error) {
+      if ((error as Error).name !== 'AbortError') {
+        return
+      }
+      responseErrorHandler(error)
+    } finally {
+      this.changeLoading(false)
     }
   }
 
