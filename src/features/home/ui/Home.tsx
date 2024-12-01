@@ -16,7 +16,7 @@ export const Home = observer(() => {
     homePageStore.getPostsPublicationsFollowers()
   }, [])
 
-  if (homePageStore.isLoadingHomePage) {
+  if (homePageStore.isLoading) {
     return (
       <>
         <Loader />
@@ -25,7 +25,7 @@ export const Home = observer(() => {
     )
   }
 
-  if (state?.length === 0 && !homePageStore.isLoadingHomePage) {
+  if (state?.length === 0 && !homePageStore.isLoading) {
     return (
       <div
         className={

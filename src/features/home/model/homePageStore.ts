@@ -6,7 +6,7 @@ import { HomePageRootInterface } from './home.types'
 import { PostsLikes } from './posts/posts.types'
 
 class HomePageStore {
-  isLoadingHomePage: boolean = true
+  isLoading: boolean = true
   likes: PostsLikes | null = null
   loadingRequestFlag: boolean = false
   publicationsFollowers: HomePageRootInterface | null = null
@@ -46,13 +46,13 @@ class HomePageStore {
 
       runInAction(() => {
         this.publicationsFollowers = response
-        this.isLoadingHomePage = false
+        this.isLoading = false
         this.loadingRequestFlag = false
       })
     } catch (error) {
       responseErrorHandler(error)
       runInAction(() => {
-        this.isLoadingHomePage = false
+        this.isLoading = false
       })
     }
   }
