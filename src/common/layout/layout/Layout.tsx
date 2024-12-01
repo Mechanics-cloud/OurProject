@@ -1,38 +1,21 @@
-import React, { ElementRef, ReactElement, forwardRef } from 'react'
+import React, { ElementRef, forwardRef } from 'react'
 
-import {
-  GoTopButton,
-  Header,
-  Loader,
-  ScrollArea,
-  ToastContainer,
-} from '@/common'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
+import { GoTopButton, Header, ScrollArea, ToastContainer } from '@/common'
 import { cn } from '@/common/utils/cn'
-import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
-import NextTopLoader from 'nextjs-toploader'
 
 type Props = {
   children: React.ReactNode
   className?: string
 }
 
-export const Layout = forwardRef<ElementRef<'div'>, Props>(
+const Layout = forwardRef<ElementRef<'div'>, Props>(
   ({ children, className }, ref) => {
-    const isLoading = generalStore.isLoading
-    const { isTablet } = useScreenWidth()
-
     return (
       <>
-        {isLoading && <Loader />}
-        <NextTopLoader
-          color={'#397DF6'}
-          showSpinner={false}
-        />
         <ToastContainer />
         {/*todo заменить тег на mobile header*/}
-        {isTablet ? <Header /> : <Header />}
+        <Header />
         <ScrollArea
           className={'w-full h-full pt-[var(--header-height)] box-border'}
         >
@@ -53,8 +36,4 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
 )
 
 Layout.displayName = 'Layout'
-const LayoutWithStore = observer(Layout)
-
-export const getBaseLayout = (page: ReactElement) => {
-  return <LayoutWithStore>{page}</LayoutWithStore>
-}
+export const LayoutWithStore = observer(Layout)

@@ -1,4 +1,4 @@
-import { withProtection } from '@/common/HOC/withProtection'
+import { withProtection } from '@/common'
 import { Menu } from '@/common/components/menu'
 
 function Publication() {

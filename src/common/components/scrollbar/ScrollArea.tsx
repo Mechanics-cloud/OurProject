@@ -1,7 +1,6 @@
 import * as React from 'react'
 
 import { ScrollBar } from '@/common/components/scrollbar/Scrollbar'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { cn } from '@/common/utils/cn'
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'
 
@@ -13,15 +12,9 @@ export const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
   Props
 >(({ children, className, orientation, ...props }, ref) => {
-  const { isTablet } = useScreenWidth()
-
   return (
     <ScrollAreaPrimitive.Root
-      className={cn(
-        'relative overflow-hidden',
-        !isTablet && 'pr-scrollbar',
-        className
-      )}
+      className={cn('relative overflow-hidden lg:pr-scrollbar', className)}
       ref={ref}
       {...props}
     >

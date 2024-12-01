@@ -1,5 +1,4 @@
-import { Button, useTranslation } from '@/common'
-import { withProtection } from '@/common/HOC/withProtection'
+import { Button, useTranslation, withProtection } from '@/common'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
