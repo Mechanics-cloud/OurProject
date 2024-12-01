@@ -1,6 +1,6 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 
-import { Layout, Loader, SideBar } from '@/common'
+import { Layout, SideBar } from '@/common'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { profileStore } from '@/features/profile'
 import { NextPage } from 'next'
