@@ -168,6 +168,7 @@ export const en: LocaleType = {
     devices: 'Devices',
     lastVisit: 'Last visit',
     logOut: 'Log out',
+    successLogout: 'The session was successfully completed',
     terminateAll: 'Terminate all other session',
   },
   showText: {
