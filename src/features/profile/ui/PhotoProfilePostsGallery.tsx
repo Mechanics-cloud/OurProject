@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
+import { ImageOutline } from '@/assets/icons'
 import { Skeleton, cn } from '@/common'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -64,14 +65,26 @@ export const PhotoProfilePostsGallery = observer(() => {
             href={`/${item.id}`}
             key={item.id}
           >
-            <Image
-              alt={'image'}
-              className={'w-full h-auto object-cover'}
-              height={228}
-              priority
-              src={item.images[0]?.url || ''}
-              width={342}
-            />
+            <div className={'relative'}>
+              <Image
+                alt={'image'}
+                className={'w-full h-auto object-cover'}
+                height={228}
+                priority
+                src={item.images[0]?.url || ''}
+                width={342}
+              />
+              {item.images.length > 1 && (
+                <div
+                  className={
+                    'absolute bottom-1 left-1 bg-dark-700 text-white px-1.5 py-[2px] text-sm flex items-center gap-1'
+                  }
+                >
+                  <ImageOutline className={'size-3.5'} />
+                  {item.images.length}
+                </div>
+              )}
+            </div>
           </Link>
         ))}
       </div>
