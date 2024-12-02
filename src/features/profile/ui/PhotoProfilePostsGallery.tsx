@@ -24,7 +24,7 @@ export const PhotoProfilePostsGallery = observer(() => {
       await profileStore.getUserPhoto({ signal })
     }
 
-    const trigerRerender = () => {
+    const triggerRerender = () => {
       if (!containerRef.current) {
         return 0
       }
@@ -43,7 +43,7 @@ export const PhotoProfilePostsGallery = observer(() => {
 
     if (inView) {
       fetchPosts(signal).then(() => {
-        trigerRerender()
+        triggerRerender()
       })
     }
 
@@ -77,7 +77,7 @@ export const PhotoProfilePostsGallery = observer(() => {
               {item.images.length > 1 && (
                 <div
                   className={
-                    'absolute bottom-1 left-1 bg-dark-700 text-white px-1.5 py-[2px] text-sm flex items-center gap-1'
+                    'absolute bottom-1 left-1 bg-dark-700 text-white px-1.5 py-[2px] text-sm flex items-center gap-1 rounded-sm opacity-60'
                   }
                 >
                   <ImageOutline className={'size-3.5'} />

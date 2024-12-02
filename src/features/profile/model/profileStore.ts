@@ -16,11 +16,11 @@ import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-const DEFOULT_PAGE_NUMBER = 0
+import { DEFAULT_PAGE_NUMBER } from './constants'
 
 class ProfileStore {
   isLoading: boolean = false
-  pageNumber: number = DEFOULT_PAGE_NUMBER
+  pageNumber: number = DEFAULT_PAGE_NUMBER
   photos: Photo[] = []
   stopRequest: boolean = false
   userProfile: Nullable<UserProfile> = null
@@ -43,14 +43,14 @@ class ProfileStore {
   cleanUp() {
     this.stopRequest = false
     this.photos.length = 0
-    this.pageNumber = DEFOULT_PAGE_NUMBER
+    this.pageNumber = DEFAULT_PAGE_NUMBER
     this.isLoading = false
     this.userProfile = null
   }
 
   cleanUpFotosData() {
     this.stopRequest = false
-    this.pageNumber = DEFOULT_PAGE_NUMBER
+    this.pageNumber = DEFAULT_PAGE_NUMBER
     this.photos.length = 0
     this.getUserPhoto()
   }
