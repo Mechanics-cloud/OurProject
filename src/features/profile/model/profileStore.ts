@@ -62,7 +62,7 @@ class ProfileStore {
 
       runInAction(() => {
         this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
-        generalStore.addUserAvatar(userProfile.avatars[0].url)
+        generalStore.addUserAvatar(userProfile.avatars[0]?.url ?? null)
       })
     } catch (error) {
       responseErrorHandler(error)
