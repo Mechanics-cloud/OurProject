@@ -109,6 +109,13 @@ export const ru = {
     goBack: 'Назад',
     goForward: 'Вперед',
   },
+  post: {
+    modalText: 'Вы уверены, что хотите удалить этот пост?',
+    modalTitle: 'Удалить пост',
+    no: 'Нет',
+    successMessage: 'Публикация была успешно удалена',
+    yes: 'Да',
+  },
   profileInputs: {
     aboutMe: 'Обо мне',
     addProfilePhoto: 'Загрузить фото',
