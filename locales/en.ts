@@ -127,6 +127,13 @@ export const en: LocaleType = {
     goBack: 'Go Back',
     goForward: 'Go forward',
   },
+  post: {
+    modalText: 'Are you sure you want to delete this post?',
+    modalTitle: 'Delete Post',
+    no: 'No',
+    successMessage: 'The post was successfully deleted',
+    yes: 'Yes',
+  },
   profileInputs: {
     aboutMe: 'About me',
     addProfilePhoto: 'Add a profile photo',
