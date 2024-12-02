@@ -11,6 +11,7 @@ import Link from 'next/link'
 export const PhotoProfilePostsGallery = observer(() => {
   const photos = profileStore?.photos
   const [isNeedLoading, setIsNeedLoading] = useState(true)
+  const isNoPostsToShow = profileStore.stopRequest && photos?.length === 0
 
   const { inView, ref } = useInView({
     threshold: 0.5,
@@ -45,7 +46,7 @@ export const PhotoProfilePostsGallery = observer(() => {
 
   return (
     <>
-      {profileStore.stopRequest ? (
+      {isNoPostsToShow ? (
         <NoPosts />
       ) : (
         <>
