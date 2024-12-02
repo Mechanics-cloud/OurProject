@@ -1,16 +1,22 @@
 import * as React from 'react'
 
-import { Button, Paths, Typography, useTranslation } from '@/common'
+import { Button, Typography, useModal, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
+import { NewPostDialog } from '@/features/createPost'
 import { useUserId } from '@/features/profile/model/UserIdProvider'
 import Image from 'next/image'
-import Link from 'next/link'
 
 import noPostImage from '/src/assets/images/noUserPosts.svg'
 
 export const NoPosts = () => {
   const { t } = useTranslation()
   const isPersonalPage = useUserId() === generalStore.user?.userId
+
+  const {
+    isModalOpen: isNewPostModalOpen,
+    onModalClose: onNewPostModalClose,
+    openModal: openNewPostModal,
+  } = useModal()
 
   return (
     <div className={'flex flex-col gap-8'}>
@@ -29,12 +35,17 @@ export const NoPosts = () => {
       </Typography>
       {isPersonalPage && (
         <Button
-          asChild
           className={'text-center m-auto'}
+          onClick={openNewPostModal}
         >
-          <Link href={Paths.search}>{t.profilePage.noPosts.button}</Link>
+          {t.profilePage.noPosts.button}
         </Button>
       )}
+      <NewPostDialog
+        onClose={onNewPostModalClose}
+        onOpenChange={onNewPostModalClose}
+        open={isNewPostModalOpen}
+      />
     </div>
   )
 }
