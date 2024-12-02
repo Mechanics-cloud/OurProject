@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { Skeleton, cn } from '@/common'
+import { profileStore } from '@/features/profile'
+import { NoPosts } from '@/features/profile/ui/NoPosts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { profileStore } from '../model/profileStore'
 
 export const PhotoProfilePostsGallery = observer(() => {
   const photos = profileStore?.photos
@@ -45,6 +45,7 @@ export const PhotoProfilePostsGallery = observer(() => {
 
   return (
     <>
+      <NoPosts />
       <div
         className={cn(
           'grid gap-3 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 w-full h-full',
