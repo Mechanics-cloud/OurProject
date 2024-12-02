@@ -2,7 +2,7 @@ import { instance } from '@/common/api'
 import { LikeStatus } from '@/common/enums'
 import { AxiosInstance } from 'axios'
 
-import { PostsComments, PostsLikes } from '../model'
+import { PostsComments, PostsLikes } from '../../NewsFeed/model'
 import { PostsRequestEndpoints } from './posts.endpoints'
 
 class PostsApi {

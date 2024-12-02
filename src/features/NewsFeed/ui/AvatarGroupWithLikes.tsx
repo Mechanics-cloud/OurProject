@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite'
 import Image, { StaticImageData } from 'next/image'
 
 import { LikesStore } from '../model'
-import { Item } from '../model/home.types'
+import { Item } from '../model/newsFeed.types'
 
 type ItemProps = {
   item: Item
@@ -26,7 +26,11 @@ export const AvatarGroupWithLikes = observer(({ item }: ItemProps) => {
   }, [likesCount, postId, likesStore])
 
   return (
-    <div className={'w-full h-6 flex gap-4 mt-3 mb-6'}>
+    <div
+      className={`w-full h-6 flex mt-3 mb-6 ${
+        firstThreeAvatarImages ? 'gap-4' : ''
+      }`}
+    >
       <div className={'flex'}>
         {firstThreeAvatarImages &&
           firstThreeAvatarImages.map(

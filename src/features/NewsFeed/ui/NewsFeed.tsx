@@ -4,19 +4,19 @@ import { Loader } from '@/common'
 import { observer } from 'mobx-react-lite'
 import { NextRouter, useRouter } from 'next/router'
 
-import homePageStore from '../model/homePageStore'
+import newsFeedStore from '../model/newsFeedStore'
 import PostItem from './PostItem'
 import { PostSkeleton } from './PostSkeleton'
 
-export const Home = observer(() => {
-  const state = homePageStore.publicationsFollowers?.items
+export const NewsFeed = observer(() => {
+  const state = newsFeedStore.publicationsFollowers?.items
   const router: NextRouter = useRouter()
 
   useEffect(() => {
-    homePageStore.getPostsPublicationsFollowers()
+    newsFeedStore.getPostsPublicationsFollowers()
   }, [])
 
-  if (homePageStore.isLoading) {
+  if (newsFeedStore.isLoading) {
     return (
       <>
         <Loader />
@@ -25,7 +25,7 @@ export const Home = observer(() => {
     )
   }
 
-  if (state?.length === 0 && !homePageStore.isLoading) {
+  if (state?.length === 0 && !newsFeedStore.isLoading) {
     return (
       <div
         className={

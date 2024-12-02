@@ -10,7 +10,7 @@ import { Item, calculateCharactersToShow } from '../model'
 import { timeAgo } from '../model/utilsDate'
 import { WrapperParentComponent } from '../model/wrapperParentComponent'
 import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
-import { CustomHomePopover } from './CustomHomePopover'
+import { CustomNewsFeedPopover } from './CustomNewsFeedPopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
 
@@ -58,7 +58,7 @@ const PostItem = ({ item, router }: Props) => {
             </div>
           </div>
         </span>
-        <CustomHomePopover />
+        <CustomNewsFeedPopover />
       </div>
       <section className={'h-[504px] mb-3'}>
         {item.images.length > 0 ? (

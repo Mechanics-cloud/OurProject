@@ -1,4 +1,4 @@
-export interface HomePageRootInterface {
+export type NewsFeedRootType = {
   items: Item[]
   nextCursor: number
   page: number
@@ -8,7 +8,7 @@ export interface HomePageRootInterface {
   totalCount: number
 }
 
-export interface Item {
+export type Item = {
   avatarOwner: string
   createdAt: string
   description: string
@@ -23,12 +23,12 @@ export interface Item {
   userName: string
 }
 
-export interface Owner {
+export type Owner = {
   firstName: string
   lastName: string
 }
 
-export interface Image {
+export type Image = {
   createdAt: string
   fileSize: number
   height: number
@@ -36,7 +36,8 @@ export interface Image {
   url: string
   width: number
 }
-export interface HomePageQuery {
+
+export type NewsFeedQuery = {
   endCursorPostId: number
   pageNumber: number
   pageSize: number

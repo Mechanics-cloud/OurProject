@@ -2,8 +2,8 @@ import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { makeAutoObservable, runInAction } from 'mobx'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
-import { postsApi } from '../../api'
-import { PostsLikes } from './posts.types'
+import { postsApi } from '../../posts/model/posts.api'
+import { PostsLikes } from '../../posts/model/posts.types'
 
 export class LikesStore {
   isLoading: boolean = false

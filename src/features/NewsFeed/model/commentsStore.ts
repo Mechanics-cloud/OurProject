@@ -1,8 +1,8 @@
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { makeAutoObservable, runInAction, toJS } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 
-import { postsApi } from '../../api'
-import { PostsComments } from './posts.types'
+import { postsApi } from '../../posts/model/posts.api'
+import { PostsComments } from '../../posts/model/posts.types'
 
 export class CommentsStore {
   comments: PostsComments | null = null

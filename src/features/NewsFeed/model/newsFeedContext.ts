@@ -2,7 +2,7 @@ import { createContext, useContext } from 'react'
 
 import { Nullable } from '@/common'
 
-import { CommentsStore } from './posts'
+import { CommentsStore } from './commentsStore'
 
 export const CommentsStoreContext = createContext<Nullable<CommentsStore>>(null)
 

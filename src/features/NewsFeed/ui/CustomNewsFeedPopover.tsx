@@ -13,7 +13,7 @@ import {
 } from '@/common'
 import Link from 'next/link'
 
-export const CustomHomePopover = () => {
+export const CustomNewsFeedPopover = () => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState<boolean>(false)
 

@@ -4,7 +4,7 @@ import { Button, cn, typographyVariants, useTranslation } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { observer } from 'mobx-react-lite'
 
-import { useCommentsStore } from '../model/homeContext'
+import { useCommentsStore } from '../model/newsFeedContext'
 
 export const AddCommentGroup = observer(({ postId }: { postId: number }) => {
   const { t } = useTranslation()

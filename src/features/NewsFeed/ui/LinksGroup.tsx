@@ -13,9 +13,9 @@ import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-import { postsApi } from '../api'
-import { Item } from '../model/home.types'
-import homePageStore from '../model/homePageStore'
+import { postsApi } from '../model'
+import { Item } from '../model/newsFeed.types'
+import homePageStore from '../model/newsFeedStore'
 
 type ItemProps = {
   item: Item

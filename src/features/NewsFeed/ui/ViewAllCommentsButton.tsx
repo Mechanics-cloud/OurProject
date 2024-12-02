@@ -8,7 +8,7 @@ import {
 } from '@/common'
 import { observer } from 'mobx-react-lite'
 
-import { useCommentsStore } from '../model/homeContext'
+import { useCommentsStore } from '../model/newsFeedContext'
 import { PostDescription } from './PostDescription'
 
 type ViewAllComments = {

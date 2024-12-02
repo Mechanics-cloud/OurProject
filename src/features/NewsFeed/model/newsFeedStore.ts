@@ -1,15 +1,15 @@
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-import { homeApi } from '../api/home.api'
-import { HomePageRootInterface } from './home.types'
-import { PostsLikes } from './posts/posts.types'
+import { PostsLikes } from '../../posts/model/posts.types'
+import { homeApi } from '../api/newsFeed.api'
+import { NewsFeedRoot } from './newsFeed.types'
 
-class HomePageStore {
+class NewsFeedStore {
   isLoading: boolean = true
   likes: PostsLikes | null = null
   loadingRequestFlag: boolean = false
-  publicationsFollowers: HomePageRootInterface | null = null
+  publicationsFollowers: NewsFeedRoot | null = null
 
   constructor() {
     makeAutoObservable(this, undefined, { autoBind: true })
@@ -58,4 +58,4 @@ class HomePageStore {
   }
 }
 
-export default new HomePageStore()
+export default new NewsFeedStore()

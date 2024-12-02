@@ -1,9 +1,9 @@
 import { withProtection } from '@/common/HOC/withProtection'
 
-import { Home } from '../../features/home/ui/Home'
+import { NewsFeed } from '../../features/NewsFeed/ui/NewsFeed'
 
 const HomePage = () => {
-  return <Home />
+  return <NewsFeed />
 }
 
 export default withProtection(HomePage)
