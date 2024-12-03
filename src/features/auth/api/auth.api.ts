@@ -28,7 +28,7 @@ class AuthApi {
   }
 
   public login(data: SignInFields) {
-    return instance
+    return this.instance
       .post(Endpoints.login, data)
       .then((res) => res.data.accessToken)
   }

@@ -1,6 +1,6 @@
 import React, { ReactElement, ReactNode, useEffect } from 'react'
 
-import { LayoutWithStore } from '@/common'
+import { LayoutWithStore, getFromLocalStorage } from '@/common'
 import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 import { NextPage } from 'next'
@@ -16,7 +16,9 @@ export const withServerSide = <P extends object>(
     useEffect(() => {
       const controller = new AbortController()
       const authMe = async () => {
-        await authStore.me()
+        if (getFromLocalStorage('accessToken')) {
+          await authStore.me(controller.signal)
+        }
       }
 
       authMe()
