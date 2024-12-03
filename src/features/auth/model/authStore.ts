@@ -53,9 +53,9 @@ class AuthStore {
     }
   }
 
-  async me() {
+  async me(signal?: AbortSignal) {
     try {
-      const user = await authApi.me()
+      const user = await authApi.me(signal)
 
       runInAction(() => {
         generalStore.user = user

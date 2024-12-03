@@ -28,17 +28,17 @@ class AuthApi {
   }
 
   public login(data: SignInFields) {
-    return instance
+    return this.instance
       .post(Endpoints.login, data)
       .then((res) => res.data.accessToken)
   }
 
   public async logout() {
-    return instance.post(Endpoints.logout)
+    return this.instance.post(Endpoints.logout)
   }
 
-  public me(): Promise<Profile> {
-    return instance.get(Endpoints.me).then((res) => res.data)
+  public async me(signal?: AbortSignal): Promise<Profile> {
+    return this.instance.get(Endpoints.me, { signal }).then((res) => res.data)
   }
 
   public async newPassword(data: NewPasswordData): Promise<AxiosResponse> {

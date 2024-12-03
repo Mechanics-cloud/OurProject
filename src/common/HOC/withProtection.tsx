@@ -1,6 +1,12 @@
 import React, { ReactElement, ReactNode, useEffect } from 'react'
 
-import { FullScreenLoader, LayoutWithStore, Paths, SideBar } from '@/common'
+import {
+  FullScreenLoader,
+  LayoutWithStore,
+  Paths,
+  SideBar,
+  getFromLocalStorage,
+} from '@/common'
 import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
@@ -24,7 +30,9 @@ export const withProtection = <P extends object>(
       const controller = new AbortController()
       const authMe = async () => {
         generalStore.turnOnLoading()
-        await authStore.me()
+        if (getFromLocalStorage('accessToken')) {
+          await authStore.me(controller.signal)
+        }
         if (generalStore.user && isNotForAuthorizedUsers) {
           await router.replace(Paths.profile)
         }
