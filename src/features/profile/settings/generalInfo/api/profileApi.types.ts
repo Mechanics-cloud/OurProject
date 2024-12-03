@@ -28,3 +28,17 @@ export type UserInfo = {
   lastName: string
   userName: string
 }
+
+export type UserMetadata = {
+  followers: number
+  following: number
+  publications: number
+}
+
+export type PublicProfile = {
+  aboutMe: string
+  avatars: Avatar[]
+  id: number
+  userMetadata: UserMetadata
+  userName: string
+}

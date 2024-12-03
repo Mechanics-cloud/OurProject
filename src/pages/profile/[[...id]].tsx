@@ -1,38 +1,55 @@
 import { Paid } from '@/assets/icons'
 import {
   Button,
-  Loader,
   Paths,
   Typography,
   useScreenWidth,
   useTranslation,
 } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
+import { generalStore } from '@/core/store'
 import {
   PhotoProfilePostsGallery,
   ProfileAboutMe,
   ProfileStatistics,
+  PublicProfile,
+  profileAPi,
 } from '@/features/profile'
-import { profileStore } from '@/features/profile/model/profileStore'
-import { observer } from 'mobx-react-lite'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import avatarPlaceholder from '../../assets/images/avatar.jpg'
 
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
+  const { params } = context
+
+  if (!params || !params.id) {
+    return {
+      notFound: true,
+    }
+  }
+  try {
+    const userProfile = await profileAPi.getPublicUser(params.id[0])
+
+    return { props: userProfile }
+  } catch {
+    return {
+      notFound: true,
+    }
+  }
+}
+
 //todo: remove avatarPlaceholder
-const Profile = observer(() => {
+const Profile = (userProfile: PublicProfile) => {
   const { t } = useTranslation()
   const { followers, following, publications, settingsButton } = t.profilePage
-  const { isLoading, userProfile } = profileStore
 
   const avatar = userProfile?.avatars[0]?.url
 
   const { isMobile, isTablet } = useScreenWidth()
-
-  if (!profileStore.userProfile) {
-    return <Loader />
-  }
 
   return (
     <div className={'flex w-full'}>
@@ -64,18 +81,21 @@ const Profile = observer(() => {
                 <Paid />
               </Typography>
 
-              <Button
-                className={'hidden md:block'}
-                variant={'secondary'}
-              >
-                <Link href={Paths.profileSettings}>{settingsButton}</Link>
-              </Button>
+              {generalStore.user?.userId && (
+                <Button
+                  className={'hidden md:block'}
+                  variant={'secondary'}
+                >
+                  <Link href={Paths.profileSettings}>{settingsButton}</Link>
+                </Button>
+              )}
             </div>
             <ProfileStatistics
               followers={followers}
               following={following}
               isMobile={isMobile}
               publications={publications}
+              userMetadata={userProfile.userMetadata}
             />
             <ProfileAboutMe
               aboutMe={userProfile?.aboutMe}
@@ -100,6 +120,6 @@ const Profile = observer(() => {
       </div>
     </div>
   )
-})
+}
 
 export default withProtection(Profile, true)
