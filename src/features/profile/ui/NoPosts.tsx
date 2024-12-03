@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { Button, Typography, useModal, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
-import { NewPostDialog } from '@/features/createPost'
+import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { useUserId } from '@/features/profile/model/UserIdProvider'
 import Image from 'next/image'
 
