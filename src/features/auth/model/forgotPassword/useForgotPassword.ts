@@ -3,13 +3,7 @@ import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import {
-  Environments,
-  Nullable,
-  Paths,
-  useModal,
-  useTranslation,
-} from '@/common'
+import { Environments, Nullable, Paths, useModal } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import {
   ForgotPasswordFields,
@@ -17,10 +11,10 @@ import {
   forgotPasswordSchema,
 } from '@/features/auth'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 import { useRouter } from 'next/router'
 
-export const useForgotPassword = () => {
-  const { t } = useTranslation()
+export const useForgotPassword = (t: LocaleType) => {
   const router = useRouter()
   const recaptchaRef = useRef<Nullable<ReCAPTCHA>>(null)
 
@@ -40,7 +34,7 @@ export const useForgotPassword = () => {
       recaptcha: '',
     },
     mode: 'onChange',
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: zodResolver(forgotPasswordSchema(t)),
   })
 
   const onChangeRecaptcha = (token: Nullable<string>) =>

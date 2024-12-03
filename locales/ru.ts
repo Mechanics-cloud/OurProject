@@ -12,6 +12,54 @@ export const ru = {
     title: 'Добавить фотографию профиля',
   },
   basicError: 'Что-то пошло не так',
+  createPost: {
+    adding: {
+      buttonDraft: 'Открыть черновик',
+      buttonNew: 'Загрузить фото',
+      errors: {
+        basic: 'Что-то пошло не так',
+        countLimit: 'Лимит ',
+        tooBig: 'Фото слишком большое',
+        type: 'Неверный тип файла',
+      },
+      title: 'Добавить пост',
+    },
+    alt: 'Фото в карусели',
+    closeModal: {
+      description: 'Вы действительно хотите закрыть создание публикации?',
+      discard: 'Отмена',
+      save: 'Сохранить черновик',
+      title: 'Закрыть',
+    },
+    cropping: {
+      add: 'Добавить',
+      crop: 'Обрезать',
+      originalRatio: 'Оригинал',
+      title: 'Обрезка',
+      zoom: 'Приблизить',
+    },
+    filtering: {
+      filters: 'Библиотека фильтров',
+      settings: 'Настройки фильтров',
+      settingsData: {
+        brightness: 'Яркость',
+        contrast: 'Контрастность',
+        grayscale: 'Оттенки серого',
+        saturate: 'Насыщенность',
+        sepia: 'Сепия',
+      },
+      title: 'Фильтры',
+    },
+    next: 'Дальше',
+    publication: {
+      description: 'Добавить описание',
+      location: 'Добавить локацию',
+      locationPlaceholder: 'Введите название города...',
+      publishButton: 'Опубликовать',
+      success: 'Это успех :)',
+      title: 'Публикация',
+    },
+  },
   expiredSession: {
     emailExpired: 'Ссылка для подтверждения электронной почты истекла',
     pictureExpired: 'Изображение истекшей ссылки',
@@ -60,6 +108,13 @@ export const ru = {
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',
+  },
+  post: {
+    modalText: 'Вы уверены, что хотите удалить этот пост?',
+    modalTitle: 'Удалить пост',
+    no: 'Нет',
+    successMessage: 'Публикация была успешно удалена',
+    yes: 'Да',
   },
   profileInputs: {
     aboutMe: 'Обо мне',
@@ -111,12 +166,15 @@ export const ru = {
       title: 'Срок действия ссылки для подтверждения электронной почты истек',
     },
   },
+  serverError:
+    'Что-то пошло не так с нашей стороны. Пожалуйста, повторите попытку позже.',
   session: {
     activeSession: 'Активные сессии',
     currentDevice: 'Текущее устройство',
     devices: 'Устройства',
     lastVisit: 'Последнее посещение',
     logOut: 'Выйти',
+    successLogout: 'Сессия была успешно завершена',
     terminateAll: 'Завершить все остальные сеансы',
   },
   showText: {
@@ -132,7 +190,6 @@ export const ru = {
     passwordRecovery: 'Забыли пароль',
     placeholderPassword: 'Введите пароль',
     signUpTitle: 'Зарегистрироваться',
-
     text: 'У вас нет учетной записи?',
     title: 'Вход',
   },
@@ -159,6 +216,9 @@ export const ru = {
       userName: 'Введите имя пользователя',
     },
     policy: 'Политикой конфиденциальности',
+    schemaErrors: {
+      userNameComposition: 'Ввод должен содержать только',
+    },
     signUpGithub: 'Регистрация с помощью Github',
     signUpGoogle: 'Регистрация с помощью Google',
     terms: 'Условиями использования',
@@ -175,6 +235,17 @@ export const ru = {
     back: 'Назад',
   },
   validation: {
+    email: {
+      composition:
+        'Электронное письмо должно соответствовать формату example@example.com.',
+      required: 'Требуется электронная почта',
+    },
+    password: {
+      composition: 'Пароль должен содержать',
+      match: 'Пароли должны совпадать',
+      maxChar: 'Максимальное количество символов 20',
+      minChar: 'Минимальное количество символов 6',
+    },
     recaptchaRequired: 'Требуется Recaptcha',
   },
 }

@@ -1,6 +1,8 @@
-import { instance } from '@/features/auth'
-import { Sessions } from '@/features/profile/settings/devices/api/ProfileDevicesApi.types'
-import { ProfileDevicesEndpoints } from '@/features/profile/settings/devices/api/profile.devices.endpoints'
+import { instance } from '@/common/api'
+import {
+  ProfileDevicesEndpoints,
+  Sessions,
+} from '@/features/profile/settings/devices'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
 class ProfileDevicesApi {

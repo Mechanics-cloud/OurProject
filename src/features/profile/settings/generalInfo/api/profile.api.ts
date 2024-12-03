@@ -1,10 +1,7 @@
 import { Environments } from '@/common'
-import { instance } from '@/features/auth'
-import {
-  PublicProfile,
-  UpdatedProfile,
-  UserProfile,
-} from '@/features/profile/settings/generalInfo/api'
+import { instance } from '@/common/api'
+import { PublicProfile, UpdatedProfile, UserProfile } from '@/features/profile'
+import { ImagesData } from '@/features/profile/model/types'
 import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
@@ -18,14 +15,36 @@ class ProfileApi {
 
     return res.data
   }
+  public async getProfilePosts(
+    page: number,
+    userName: string,
+    signal?: AbortSignal,
+    pageSize: number = 8
+  ) {
+    const res = await this.instance.get<ImagesData>(
+      ProfileEndpoints.posts(userName),
+      {
+        params: {
+          endCursorPostId: 0,
+          pageNumber: page,
+          pageSize: pageSize,
+        },
+        signal: signal,
+      }
+    )
+
+    return res.data
+  }
   public async getPublicUser(profileId: string): Promise<PublicProfile> {
     return axios(
       Environments.API_URL + ProfileEndpoints.publicProfile(profileId)
     ).then((res) => res.data)
   }
+
   public updateProfile(profileData: UpdatedProfile): Promise<AxiosResponse> {
     return this.instance.put(ProfileEndpoints.profile, profileData)
   }
+
   public async uploadAvatar(file: File): Promise<void> {
     const formData = new FormData()
 
