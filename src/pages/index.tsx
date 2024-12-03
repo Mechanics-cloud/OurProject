@@ -1,35 +1,33 @@
+import { Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { Button } from '@/common/components/button'
-import { typographyVariants } from '@/common/components/typography'
-import { DeletePostModal, postsStore } from '@/features/profile/posts'
-import Link from 'next/link'
+import {
+  PublicPostsDto,
+  RegisteredUsersCounter,
+  publicPostsApi,
+} from '@/features/publicPosts'
+import { GetStaticPropsResult, InferGetStaticPropsType } from 'next'
 
-function Home() {
-  const onDeletePost = async (postId: number) => {
-    await postsStore.deletePost(postId)
+export async function getStaticProps(): Promise<
+  GetStaticPropsResult<{ posts: PublicPostsDto }>
+> {
+  const posts = await publicPostsApi.fetchPublicPosts({
+    pageSize: 4,
+    sortDirection: 'desc',
+  })
+
+  if (!posts) {
+    return {
+      notFound: true,
+    }
   }
 
-  return (
-    <div className={'flex flex-col justify-center items-center gap-5'}>
-      <Button
-        asChild
-        className={typographyVariants({ variant: 'h3' })}
-      >
-        <Link href={'/profile'}>profile</Link>
-      </Button>
-      <Button
-        asChild
-        className={typographyVariants({ variant: 'h3' })}
-      >
-        <Link href={'/publication'}>publication</Link>
-      </Button>
+  return { props: { posts }, revalidate: 60 }
+}
 
-      <DeletePostModal
-        onDeletePost={onDeletePost}
-        postId={3368}
-      >
-        <Button>Delete Post</Button>
-      </DeletePostModal>
+function Home(props: InferGetStaticPropsType<typeof getStaticProps>) {
+  return (
+    <div className={'flex flex-col justify-start w-full h-headCalc pt-6'}>
+      <RegisteredUsersCounter totalUsers={props.posts.totalUsers} />
     </div>
   )
 }
