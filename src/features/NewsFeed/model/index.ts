@@ -1,4 +1,3 @@
-export * from '../../posts/model'
 export * from './commentsStore'
 export * from './likesStore'
 export * from './newsFeed.types'

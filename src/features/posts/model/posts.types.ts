@@ -1,12 +1,12 @@
 import { StaticImageData } from 'next/image'
 
 export type PostsLikes = {
-  items: ItemLikes[]
+  items: Likes[]
   pageSize: number
   totalCount: number
 }
 
-export type ItemLikes = {
+export type Likes = {
   avatars: Avatar[]
   createdAt: string
   id: number
@@ -24,15 +24,15 @@ export type Avatar = {
   width: number
 }
 
-export type PostsComments = {
-  items: ItemComment[]
+export type PostComments = {
+  items: Comment[]
   page: number
   pageSize: number
   pagesCount: number
   totalCount: number
 }
 
-export type ItemComment = {
+export type Comment = {
   answerCount: number
   content: string
   createdAt: string

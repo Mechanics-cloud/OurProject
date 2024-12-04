@@ -1,15 +1,17 @@
-import * as React from 'react'
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Person } from '@/assets/icons'
 import { Typography, cn } from '@/common'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
+import { Variant } from '../typography/Typography'
+
 type Props = {
-  userAvatarSrc: string
+  userAvatarSrc: StaticImageData | string
   userName: string
   userProfileLink: string
+  variant?: Variant
 } & ComponentPropsWithoutRef<'a'>
 
 export const UserMiniLink = ({
@@ -18,6 +20,7 @@ export const UserMiniLink = ({
   userAvatarSrc,
   userName,
   userProfileLink,
+  variant = 'reg16',
 }: Props) => {
   return (
     <Link
@@ -47,8 +50,7 @@ export const UserMiniLink = ({
           />
         </span>
       )}
-
-      <Typography variant={'reg16'}>{userName}</Typography>
+      <Typography variant={variant}>{userName}</Typography>
     </Link>
   )
 }

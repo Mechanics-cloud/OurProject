@@ -2,8 +2,8 @@ import { instance } from '@/common/api'
 import { LikeStatus } from '@/common/enums'
 import { AxiosInstance } from 'axios'
 
-import { PostsComments, PostsLikes } from '../../NewsFeed/model'
 import { PostsRequestEndpoints } from './posts.endpoints'
+import { PostComments, PostsLikes } from './posts.types'
 
 class PostsApi {
   constructor(private instance: AxiosInstance) {}
@@ -16,7 +16,7 @@ class PostsApi {
 
   public getPostIdComments(postId: number) {
     return this.instance
-      .get<PostsComments>(PostsRequestEndpoints.idComments(postId))
+      .get<PostComments>(PostsRequestEndpoints.idComments(postId))
       .then((res) => res.data)
   }
   public getPostLikes({ postId }: { postId: number }) {

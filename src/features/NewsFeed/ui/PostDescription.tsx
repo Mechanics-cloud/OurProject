@@ -1,13 +1,13 @@
 import { TextUnfolding } from '@/common'
+import { Comment } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
-import { ItemComment } from '../model'
 import { LinkProfile } from './LinkProfile'
 
 //TODO доработать или заменить (для постов в открытом окне, когда перейдем ко всем постам)
-export const PostDescription = observer(({ item }: { item: ItemComment }) => {
+export const PostDescription = observer(({ item }: { item: Comment }) => {
   return (
     <div className={'max-h-[300px] '}>
       <div className={'inline-block'}>

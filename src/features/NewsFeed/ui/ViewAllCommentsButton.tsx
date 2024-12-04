@@ -11,12 +11,12 @@ import { observer } from 'mobx-react-lite'
 import { useCommentsStore } from '../model/newsFeedContext'
 import { PostDescription } from './PostDescription'
 
-type ViewAllComments = {
+type Props = {
   postId: number
 }
 
 //TODO to change (in progress) добавить стили, отрисовать слайдер, в поповер добавить логику
-export const ViewAllCommentsButton = observer(({ postId }: ViewAllComments) => {
+export const ViewAllCommentsButton = observer(({ postId }: Props) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const commentsStore = useCommentsStore()

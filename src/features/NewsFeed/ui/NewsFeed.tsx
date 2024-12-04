@@ -4,7 +4,7 @@ import { Loader } from '@/common'
 import { observer } from 'mobx-react-lite'
 import { NextRouter, useRouter } from 'next/router'
 
-import newsFeedStore from '../model/newsFeedStore'
+import { newsFeedStore } from '../model/newsFeedStore'
 import PostItem from './PostItem'
 import { PostSkeleton } from './PostSkeleton'
 
@@ -25,7 +25,7 @@ export const NewsFeed = observer(() => {
     )
   }
 
-  if (state?.length === 0 && !newsFeedStore.isLoading) {
+  if (state?.length === 0) {
     return (
       <div
         className={

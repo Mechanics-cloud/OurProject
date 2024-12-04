@@ -1,15 +1,16 @@
+import { Nullable } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { PostsLikes } from '@/features/posts'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-import { PostsLikes } from '../../posts/model/posts.types'
-import { homeApi } from '../api/newsFeed.api'
+import { homeApi } from '../api'
 import { NewsFeedRoot } from './newsFeed.types'
 
 class NewsFeedStore {
   isLoading: boolean = true
-  likes: PostsLikes | null = null
+  likes: Nullable<PostsLikes> = null
   loadingRequestFlag: boolean = false
-  publicationsFollowers: NewsFeedRoot | null = null
+  publicationsFollowers: Nullable<NewsFeedRoot> = null
 
   constructor() {
     makeAutoObservable(this, undefined, { autoBind: true })
@@ -58,4 +59,4 @@ class NewsFeedStore {
   }
 }
 
-export default new NewsFeedStore()
+export const newsFeedStore = new NewsFeedStore()

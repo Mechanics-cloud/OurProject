@@ -11,7 +11,7 @@ export const LinkProfile = ({ userId, userName }: Props) => {
     <Link href={`${Paths.profileLink(userId)}`}>
       <Typography
         className={'inline'}
-        variant={'bold16'}
+        variant={'h3'}
       >
         {userName}
       </Typography>

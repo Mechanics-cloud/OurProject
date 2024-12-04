@@ -1,11 +1,10 @@
+import { Nullable } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { PostComments, postsApi } from '@/features/posts'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-import { postsApi } from '../../posts/model/posts.api'
-import { PostsComments } from '../../posts/model/posts.types'
-
 export class CommentsStore {
-  comments: PostsComments | null = null
+  comments: Nullable<PostComments> = null
   isLoading: boolean = false
 
   constructor() {

@@ -1,5 +1,5 @@
-export type NewsFeedRootType = {
-  items: Item[]
+export type NewsFeedRoot = {
+  items: Post[]
   nextCursor: number
   page: number
   pageSize: number
@@ -8,7 +8,7 @@ export type NewsFeedRootType = {
   totalCount: number
 }
 
-export type Item = {
+export type Post = {
   avatarOwner: string
   createdAt: string
   description: string

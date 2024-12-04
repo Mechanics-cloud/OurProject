@@ -93,8 +93,8 @@ export const ru = {
   goToTop: 'Вверх',
   homePage: {
     addComments: 'Добавить комментарий...',
-    like: 'Нравиться',
-    likes: 'Нравиться',
+    like: 'Нравится',
+    likes: 'Нравится',
     loading: 'Загрузка...',
     publish: 'Опубликовать',
     viewAllComments: 'Посмотреть все комментарии',

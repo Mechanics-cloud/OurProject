@@ -4,14 +4,13 @@ import { Typography, useTranslation } from '@/common'
 import { observer } from 'mobx-react-lite'
 import Image, { StaticImageData } from 'next/image'
 
-import { LikesStore } from '../model'
-import { Item } from '../model/newsFeed.types'
+import { LikesStore, Post } from '../model'
 
-type ItemProps = {
-  item: Item
+type Props = {
+  item: Post
 }
 
-export const AvatarGroupWithLikes = observer(({ item }: ItemProps) => {
+export const AvatarGroupWithLikes = observer(({ item }: Props) => {
   const { t } = useTranslation()
 
   const likesStore = useMemo(() => new LikesStore(), [])

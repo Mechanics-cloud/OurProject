@@ -9,19 +9,19 @@ import {
 } from '@/assets/icons/outlineIcons'
 import { Tooltip, useTranslation } from '@/common'
 import { LikeStatus } from '@/common/enums'
+import { postsApi } from '@/features/posts'
 import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-import { postsApi } from '../model'
-import { Item } from '../model/newsFeed.types'
-import homePageStore from '../model/newsFeedStore'
+import { Post } from '../model/newsFeed.types'
+import { newsFeedStore } from '../model/newsFeedStore'
 
-type ItemProps = {
-  item: Item
+type Props = {
+  item: Post
 }
 //TODO to change (in progress) вынести логику, добавить логику на кнопки
-export const LinksGroup = observer(({ item }: ItemProps) => {
+export const LinksGroup = observer(({ item }: Props) => {
   const { t } = useTranslation()
   const [isChangeLike, setIsChangeLike] = useState<boolean>(false)
   const [loadingRequestFlag, setLoadingRequestFlag] = useState<boolean>(false)
@@ -39,7 +39,7 @@ export const LinksGroup = observer(({ item }: ItemProps) => {
       await postsApi.updateLikeStatus({ newLikeStatus, postId: item.id })
 
       runInAction(() => {
-        homePageStore.changeLikesCount(item.id, !item.isLiked)
+        newsFeedStore.changeLikesCount(item.id, !item.isLiked)
         setIsChangeLike(false)
         setLoadingRequestFlag(false)
       })

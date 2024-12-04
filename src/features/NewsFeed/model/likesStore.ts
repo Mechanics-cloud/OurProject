@@ -1,13 +1,12 @@
+import { Nullable } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { PostsLikes, postsApi } from '@/features/posts'
 import { makeAutoObservable, runInAction } from 'mobx'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
-import { postsApi } from '../../posts/model/posts.api'
-import { PostsLikes } from '../../posts/model/posts.types'
-
 export class LikesStore {
   isLoading: boolean = false
-  likes: PostsLikes | null = null
+  likes: Nullable<PostsLikes> = null
 
   constructor() {
     makeAutoObservable(this)
