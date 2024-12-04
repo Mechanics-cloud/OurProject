@@ -65,13 +65,15 @@ const PostItem = ({ item, router }: Props) => {
       </section>
       <LinksGroup item={item} />
       <div className={'w-full inline-flex gap-3'}>
-        <Image
-          alt={'Avatar'}
-          className={'size-9 rounded-full mt-[5px]'}
-          height={36}
-          src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
-          width={36}
-        />
+        <div className={'min-w-[36px] flex items-center pb-6'}>
+          <Image
+            alt={'Avatar'}
+            className={'size-9 rounded-full'}
+            height={36}
+            src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
+            width={36}
+          />
+        </div>
         <TextUnfolding
           charactersToShow={calculateCharactersToShow(
             item.description,
