@@ -9,15 +9,9 @@ class PublicPostsApi {
   public async fetchPublicPosts<T = PublicPostsDto>(
     queries: RequestQueries
   ): Promise<T> {
-    const URL =
-      Environments.API_URL +
-      Endpoints.allPublicPosts +
-      '/,?pageSize=4&sortDirection=desc'
+    const URL = Environments.API_URL + Endpoints.allPublicPosts
 
-    return this.instance
-      .get(URL)
-      .then((res) => res.data)
-      .catch((e) => console.log(e))
+    return this.instance.get(URL, { params: queries }).then((res) => res.data)
   }
 }
 
