@@ -33,6 +33,11 @@ class NewsFeedStore {
     )
   }
 
+  cleanUp() {
+    this.publicationsFollowers = null
+    this.likes = null
+  }
+
   async getPostsPublicationsFollowers() {
     if (this.loadingRequestFlag) {
       return
