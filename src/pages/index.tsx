@@ -1,10 +1,6 @@
-import { Typography } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import {
-  PublicPostsDto,
-  RegisteredUsersCounter,
-  publicPostsApi,
-} from '@/features/publicPosts'
+import { PublicPostsDto, publicPostsApi } from '@/features/publicPosts'
+import { PublicPosts } from '@/features/publicPosts/ui/PublicPosts'
 import { GetStaticPropsResult, InferGetStaticPropsType } from 'next'
 
 export async function getStaticProps(): Promise<
@@ -24,12 +20,12 @@ export async function getStaticProps(): Promise<
   return { props: { posts }, revalidate: 60 }
 }
 
-function Home(props: InferGetStaticPropsType<typeof getStaticProps>) {
-  return (
-    <div className={'flex flex-col justify-start w-full h-headCalc pt-6'}>
-      <RegisteredUsersCounter totalUsers={props.posts.totalUsers} />
-    </div>
-  )
+function PublicPostsPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
+  const publicPosts = props.posts
+
+  return <PublicPosts posts={publicPosts} />
 }
 
-export default withProtection(Home, true)
+export default withProtection(PublicPostsPage, true)
