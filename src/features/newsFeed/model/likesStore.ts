@@ -32,7 +32,7 @@ export class LikesStore {
 
   get avatarImages() {
     let avatarUrls = null
-    const isLiked = this.likes?.items.length != 0
+    const isLiked = this.likes?.items.length !== 0
 
     if (isLiked) {
       const firstThreeLikes = this.likes?.items.slice(0, 3)

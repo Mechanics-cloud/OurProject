@@ -17,13 +17,13 @@ export type Post = {
   isLiked: boolean
   likesCount: number
   location: string
-  owner: Owner
+  owner: FullName
   ownerId: number
   updatedAt: string
   userName: string
 }
 
-export type Owner = {
+export type FullName = {
   firstName: string
   lastName: string
 }
