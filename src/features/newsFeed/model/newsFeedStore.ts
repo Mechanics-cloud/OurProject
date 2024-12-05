@@ -3,7 +3,7 @@ import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { PostsLikes } from '@/features/posts'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-import { homeApi } from '../api'
+import { newsFeedApi } from '../api'
 import { NewsFeedRoot } from './newsFeed.types'
 
 class NewsFeedStore {
@@ -44,7 +44,7 @@ class NewsFeedStore {
     }
     try {
       this.loadingRequestFlag = true
-      const response = await homeApi.getFollowersPublications({
+      const response = await newsFeedApi.getFollowersPublications({
         endCursorPostId: 0,
         pageNumber: 1,
         pageSize: 10,

@@ -5,6 +5,8 @@ import {
   TextUnfolding,
   Typography,
   UserMiniLink,
+  calculateCharactersToShow,
+  timeAgo,
   useTranslation,
 } from '@/common'
 import { CustomSwiper } from '@/common/components/swiper'
@@ -12,8 +14,7 @@ import Image from 'next/image'
 import { NextRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
-import { Post, calculateCharactersToShow } from '../model'
-import { timeAgo } from '../model/utilsDate'
+import { Post } from '../model'
 import { WrapperParentComponent } from '../model/wrapperParentComponent'
 import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
 import { CustomNewsFeedPopover } from './CustomNewsFeedPopover'

@@ -16,4 +16,4 @@ class NewsFeedApi {
   }
 }
 
-export const homeApi = new NewsFeedApi(instance)
+export const newsFeedApi = new NewsFeedApi(instance)

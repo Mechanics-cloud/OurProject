@@ -11,7 +11,13 @@ type TimeRangesObj = {
   [key in TimeRangeKey]: number
 }
 
-export function timeAgo(input: Date | string, locale: string | undefined) {
+export function timeAgo(
+  input: Date | null | string,
+  locale: string | undefined
+) {
+  if (!input) {
+    return ''
+  }
   const date = input instanceof Date ? input : new Date(input)
   const formatter = new Intl.RelativeTimeFormat(locale)
   const ranges: TimeRangesObj = {

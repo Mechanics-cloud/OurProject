@@ -1,4 +1,7 @@
-import { CYRILLIC_LENGTH, LATIN_LENGTH } from './constants'
+import {
+  CYRILLIC_LENGTH,
+  LATIN_LENGTH,
+} from '../../features/newsFeed/model/constants'
 
 export const calculateCharactersToShow = (
   description: string,

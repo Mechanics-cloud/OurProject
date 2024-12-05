@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 import { Button, cn, typographyVariants, useTranslation } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
@@ -28,6 +28,10 @@ export const AddCommentGroup = observer(({ postId }: { postId: number }) => {
     }
   }
 
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setComment(event.target.value)
+  }
+
   return (
     <div className={'w-full'}>
       <form
@@ -40,11 +44,11 @@ export const AddCommentGroup = observer(({ postId }: { postId: number }) => {
           }
           maxLength={300}
           onBlur={onBlur}
-          onChange={(e) => setComment(e.target.value)}
+          onChange={onChange}
           placeholder={t.homePage.addComments}
           type={'text'}
           value={comment}
-        ></input>
+        />
         <Button
           className={cn(typographyVariants({ variant: 'h3' }), 'px-3')}
           disabled={!comment}

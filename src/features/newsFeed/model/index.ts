@@ -1,5 +1,4 @@
 export * from './commentsStore'
 export * from './likesStore'
 export * from './newsFeed.types'
-export * from './utilsCalculateCharactersToShow'
-export * from './utilsDate'
+export * from './newsFeedStore'

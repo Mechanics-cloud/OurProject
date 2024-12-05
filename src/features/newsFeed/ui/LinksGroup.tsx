@@ -44,7 +44,6 @@ export const LinksGroup = observer(({ item }: Props) => {
         setLoadingRequestFlag(false)
       })
     } catch (error) {
-      console.error('Error liking the post:', error)
       setIsChangeLike(false)
       setLoadingRequestFlag(false)
     }

@@ -1,8 +1,8 @@
 import { Paths, removeFromLocalStorage } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
-import { newsFeedStore } from '@/features/NewsFeed/model/newsFeedStore'
 import { addPostStore } from '@/features/createPost/model/addPostStore'
+import { newsFeedStore } from '@/features/newsFeed'
 import { profileStore } from '@/features/profile'
 import Router from 'next/router'
 
