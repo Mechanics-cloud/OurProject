@@ -94,7 +94,7 @@ export const en: LocaleType = {
   },
   goToTop: 'Go to top',
   homePage: {
-    addComments: 'Add a Comments...',
+    addComments: 'Add a comment',
     emptyPostsButton: 'Find friends',
     like: 'Like',
     likes: 'Likes',
@@ -162,6 +162,12 @@ export const en: LocaleType = {
   profilePage: {
     followers: 'Followers',
     following: 'Following',
+    noPosts: {
+      alt: 'No user post image',
+      button: 'Add new post',
+      strangeText: 'The user has not published any posts yet',
+      userText: 'Your feed is empty. Publish your first post',
+    },
     publications: 'Publications',
     settingsButton: 'Profile settings',
   },

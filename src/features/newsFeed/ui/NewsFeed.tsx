@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 
 import { Loader } from '@/common'
+import { newsFeedStore } from '@/features/newsFeed'
 import { EmptyFeed } from '@/features/newsFeed/ui/EmptyFeed'
 import { observer } from 'mobx-react-lite'
 import { NextRouter, useRouter } from 'next/router'
 
-import { newsFeedStore } from '../model/newsFeedStore'
 import PostItem from './PostItem'
 import { PostSkeleton } from './PostSkeleton'
 

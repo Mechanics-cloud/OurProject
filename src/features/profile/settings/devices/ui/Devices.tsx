@@ -1,12 +1,11 @@
 import { AsyncComponent, Typography, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
-import {
-  Device,
-  DevicesSkeleton,
-  OtherSessions,
-  useDevices,
-} from '@/features/profile/settings/devices'
+import { useDevices } from '@/features/profile/settings/devices'
 import { observer } from 'mobx-react-lite'
+
+import { Device } from './Device'
+import { DevicesSkeleton } from './DevicesSkeleton'
+import { OtherSessions } from './OtherSessions'
 
 export const Devices = observer(() => {
   const { t } = useTranslation()

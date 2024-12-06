@@ -1,4 +1,4 @@
-import { Paths, Typography } from '@/common'
+import { Paths, Typography, typographyVariants } from '@/common'
 import Link from 'next/link'
 
 type Props = {
@@ -9,12 +9,7 @@ type Props = {
 export const LinkProfile = ({ userId, userName }: Props) => {
   return (
     <Link href={`${Paths.profileLink(userId)}`}>
-      <Typography
-        className={'inline'}
-        variant={'h3'}
-      >
-        {userName}
-      </Typography>
+      <span className={typographyVariants({ variant: 'h3' })}>{userName}</span>
     </Link>
   )
 }
