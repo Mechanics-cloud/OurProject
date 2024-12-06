@@ -39,7 +39,7 @@ export const useGoToTopButton = () => {
     }
   }, [scrollYProgress, controls])
 
-  function scrollToTopHandler() {
+  function onScrollToTop() {
     window.scrollTo({ behavior: 'smooth', top: 0 })
   }
 
@@ -47,7 +47,7 @@ export const useGoToTopButton = () => {
     controls,
     isBrowser,
     isTablet,
-    scrollToTopHandler,
+    onScrollToTop,
     scrollToTopVariants,
     t,
   }

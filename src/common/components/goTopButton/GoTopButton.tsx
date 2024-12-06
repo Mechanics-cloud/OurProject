@@ -8,7 +8,7 @@ export const GoTopButton = () => {
     controls,
     isBrowser,
     isTablet,
-    scrollToTopHandler,
+    onScrollToTop,
     scrollToTopVariants,
     t,
   } = useGoToTopButton()
@@ -25,7 +25,7 @@ export const GoTopButton = () => {
         isTablet ? 'bottom-20' : ''
       )}
       initial={'hide'}
-      onClick={scrollToTopHandler}
+      onClick={onScrollToTop}
       type={'button'}
       variants={scrollToTopVariants}
     >
