@@ -18,15 +18,15 @@ export const AddTextPost = observer(() => {
     <div className={'border-l-[1px] border-dark-100 w-full text-left'}>
       <div className={'p-6 border-b-[1px] border-dark-100 flex flex-col'}>
         <UserMiniLink
+          avatarSrc={userAvatar}
           className={
             'hover:text-light-100 cursor-auto pointer-events-none mb-6'
           }
+          name={userName}
           onClick={(e) => {
             e.preventDefault()
           }}
-          userAvatarSrc={userAvatar}
-          userName={userName}
-          userProfileLink={''}
+          profileLink={''}
         />
         <TextArea
           className={'h-[120px] resize-none'}

@@ -86,7 +86,7 @@ export const SideBar = observer(({ className }: Props) => {
               <LinkWithIcon
                 ActiveIcon={Person}
                 DefaultIcon={PersonOutline}
-                href={`${Paths.profile}/${userId}`}
+                href={Paths.profileLink(userId)}
               >
                 {t.menu.profile}
               </LinkWithIcon>
