@@ -1,12 +1,6 @@
 import React, { ElementRef, ReactElement, forwardRef } from 'react'
 
-import {
-  GoTopButton,
-  Header,
-  Loader,
-  ScrollArea,
-  ToastContainer,
-} from '@/common'
+import { Header, Loader, ScrollArea, ToastContainer } from '@/common'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { cn } from '@/common/utils/cn'
 import { generalStore } from '@/core/store'
@@ -20,8 +14,8 @@ type Props = {
 
 export const Layout = forwardRef<ElementRef<'div'>, Props>(
   ({ children, className }, ref) => {
-    const isLoading = generalStore.isLoading
     const { isTablet } = useScreenWidth()
+    const isLoading = generalStore.isLoading
 
     return (
       <>
@@ -35,18 +29,18 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         {isTablet ? <Header /> : <Header />}
         <ScrollArea
           className={'w-full h-full pt-[var(--header-height)] box-border'}
+          isGoToTop
+          ref={ref}
         >
           <main
             className={cn(
               'border-t-[1px] border-transparent w-full max-w-screen-2xl mx-auto px-6 md:px-10 lg:px-16',
               className
             )}
-            ref={ref}
           >
             {children}
           </main>
         </ScrollArea>
-        <GoTopButton />
       </>
     )
   }

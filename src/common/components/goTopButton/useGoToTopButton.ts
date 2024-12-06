@@ -1,33 +1,56 @@
-import { useEffect } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 
-import { useTranslation } from '@/common'
+import { Nullable, useTranslation } from '@/common'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Variants, useAnimationControls, useScroll } from 'framer-motion'
 
-export const useGoToTopButton = () => {
+const scrollToTopVariants: Variants = {
+  hide: { opacity: 0, y: 100 },
+  show: { opacity: 1, y: 0 },
+}
+
+export const useGoToTopButton = (
+  scrollInElementRef: Nullable<RefObject<HTMLDivElement>> = null
+) => {
   const { t } = useTranslation()
-  const isBrowser = () => typeof window !== 'undefined'
-
-  const { scrollYProgress } = useScroll()
+  const { isTablet } = useScreenWidth()
   const controls = useAnimationControls()
+  const { scrollYProgress } = useScroll()
 
-  const scrollToTopVariants: Variants = {
-    hide: { opacity: 0, y: 100 },
-    show: { opacity: 1, y: 0 },
-  }
+  const isBrowser = typeof window !== 'undefined'
+
+  const [scrollHeight, setScrollHeight] = useState(
+    scrollInElementRef?.current?.scrollHeight ?? 0
+  )
 
   useEffect(() => {
-    const scrollableHeight =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight
+    const observer = new MutationObserver(() => {
+      if (scrollInElementRef?.current) {
+        setScrollHeight(scrollInElementRef.current.scrollHeight)
+      }
+    })
 
-    if (scrollableHeight > 0) {
-      scrollYProgress.on('change', (latestValue) => {
-        if (latestValue > 0.5) {
-          controls.start('show')
-        } else {
-          controls.start('hide')
-        }
+    if (scrollInElementRef?.current) {
+      observer.observe(scrollInElementRef.current, {
+        childList: true,
+        subtree: true,
       })
+    }
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [scrollInElementRef])
+
+  useEffect(() => {
+    const scrollableHeight = scrollInElementRef
+      ? scrollHeight
+      : document.documentElement.clientHeight
+    const isShowButton =
+      scrollableHeight - document.documentElement.clientHeight > 0
+
+    if (isShowButton) {
+      controls.start('show')
     } else {
       controls.start('hide')
     }
@@ -35,11 +58,23 @@ export const useGoToTopButton = () => {
     return () => {
       scrollYProgress.destroy()
     }
-  }, [scrollYProgress, controls])
+  }, [controls, scrollHeight, scrollInElementRef, scrollYProgress])
 
-  function scrollToTopHandler() {
+  const onScrollToTop = () => {
+    if (scrollInElementRef && scrollInElementRef.current) {
+      scrollInElementRef.current.scrollTo({ behavior: 'smooth', top: 0 })
+
+      return
+    }
     window.scrollTo({ behavior: 'smooth', top: 0 })
   }
 
-  return { controls, isBrowser, scrollToTopHandler, scrollToTopVariants, t }
+  return {
+    controls,
+    isBrowser,
+    isTablet,
+    onScrollToTop,
+    scrollToTopVariants,
+    t,
+  }
 }
