@@ -18,3 +18,9 @@ export enum FileSizes {
   PostPhotoSize = 20 * oneMB,
   UserPhotoSize = 10 * oneMB,
 }
+
+export enum LikeStatus {
+  Dislike = 'DISLIKE',
+  Like = 'LIKE',
+  None = 'NONE',
+}

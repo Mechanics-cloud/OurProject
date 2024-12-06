@@ -1,19 +1,21 @@
 import { useEffect } from 'react'
 
 import { useTranslation } from '@/common'
+import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Variants, useAnimationControls, useScroll } from 'framer-motion'
+
+const scrollToTopVariants: Variants = {
+  hide: { opacity: 0, y: 100 },
+  show: { opacity: 1, y: 0 },
+}
 
 export const useGoToTopButton = () => {
   const { t } = useTranslation()
-  const isBrowser = () => typeof window !== 'undefined'
-
-  const { scrollYProgress } = useScroll()
+  const { isTablet } = useScreenWidth()
   const controls = useAnimationControls()
+  const { scrollYProgress } = useScroll()
 
-  const scrollToTopVariants: Variants = {
-    hide: { opacity: 0, y: 100 },
-    show: { opacity: 1, y: 0 },
-  }
+  const isBrowser = typeof window !== 'undefined'
 
   useEffect(() => {
     const scrollableHeight =
@@ -37,9 +39,16 @@ export const useGoToTopButton = () => {
     }
   }, [scrollYProgress, controls])
 
-  function scrollToTopHandler() {
+  function onScrollToTop() {
     window.scrollTo({ behavior: 'smooth', top: 0 })
   }
 
-  return { controls, isBrowser, scrollToTopHandler, scrollToTopVariants, t }
+  return {
+    controls,
+    isBrowser,
+    isTablet,
+    onScrollToTop,
+    scrollToTopVariants,
+    t,
+  }
 }

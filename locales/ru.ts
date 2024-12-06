@@ -1,4 +1,10 @@
 export const ru = {
+  actionIconsGroup: {
+    addFavorite: 'Добавить в избранное',
+    isLiked: 'Нравится',
+    message: 'Сообщения',
+    share: 'Поделиться',
+  },
   avatarModal: {
     chooseButton: 'Выбрать с компьютера',
     errors: {
@@ -85,8 +91,21 @@ export const ru = {
     title: 'Забыли пароль',
   },
   goToTop: 'Вверх',
+  homePage: {
+    addComments: 'Добавить комментарий...',
+    emptyPostsButton: 'Найти друзей',
+    like: 'Нравится',
+    likes: 'Нравится',
+    loading: 'Загрузка...',
+    noPostsAlt: 'Нет постов',
+    noPostsText:
+      'Лента пуста. Чтобы увидеть посты друзей, необходимо на них подписаться',
+    publish: 'Опубликовать',
+    viewAllComments: 'Посмотреть все комментарии',
+  },
   logIn: 'Вход',
   menu: {
+    copyLink: 'Скопировать ссылку',
     create: 'Создать',
     favorites: 'Избранное',
     home: 'Домой',
@@ -103,11 +122,21 @@ export const ru = {
     profile: 'Профиль',
     search: 'Поиск',
     statistics: 'Статистика',
+    unfollow: 'Отписаться',
   },
   notFoundButton: 'Вернуться назад',
+  notFoundText:
+    'Здесь, кажется, ничего нет. Ты можешь вернуться назад или воспользоваться меню.',
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',
+  },
+  post: {
+    modalText: 'Вы уверены, что хотите удалить этот пост?',
+    modalTitle: 'Удалить пост',
+    no: 'Нет',
+    successMessage: 'Публикация была успешно удалена',
+    yes: 'Да',
   },
   profileInputs: {
     aboutMe: 'Обо мне',
@@ -131,15 +160,23 @@ export const ru = {
   profilePage: {
     followers: 'Подписчики',
     following: 'Подписки',
+    noPosts: {
+      alt: 'Нет постов пользователя',
+      button: 'Создать пост',
+      strangeText: 'Пользователь еще не опубликовал ни одного поста',
+      userText: 'Ваша лента пуста. Опубликуйте ваш первый пост',
+    },
     publications: 'Публикации',
     settingsButton: 'Настройки профиля',
   },
+
   profileSessions: {
     activeSessions: 'Активные сессии',
     currentSession: 'Текущее устройство',
     lastVisit: 'Последний визит',
     terminateAll: 'Завершить все другие сессии',
   },
+
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
@@ -167,6 +204,7 @@ export const ru = {
     devices: 'Устройства',
     lastVisit: 'Последнее посещение',
     logOut: 'Выйти',
+    successLogout: 'Сессия была успешно завершена',
     terminateAll: 'Завершить все остальные сеансы',
   },
   showText: {
@@ -216,6 +254,9 @@ export const ru = {
     terms: 'Условиями использования',
     text: 'Уже есть аккаунт?',
     title: 'Регистрация',
+  },
+  slider: {
+    noText: 'Нет картинок для поста!',
   },
   tabs: {
     accountManagement: 'Управление аккаунтом',
