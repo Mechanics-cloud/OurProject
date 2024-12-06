@@ -111,6 +111,13 @@ export const en: LocaleType = {
     goBack: 'Go Back',
     goForward: 'Go forward',
   },
+  post: {
+    modalText: 'Are you sure you want to delete this post?',
+    modalTitle: 'Delete Post',
+    no: 'No',
+    successMessage: 'The post was successfully deleted',
+    yes: 'Yes',
+  },
   profileInputs: {
     aboutMe: 'About me',
     addProfilePhoto: 'Add a profile photo',
@@ -133,6 +140,12 @@ export const en: LocaleType = {
   profilePage: {
     followers: 'Followers',
     following: 'Following',
+    noPosts: {
+      alt: 'No user post image',
+      button: 'Add new post',
+      strangeText: 'The user has not published any posts yet',
+      userText: 'Your feed is empty. Publish your first post',
+    },
     publications: 'Publications',
     settingsButton: 'Profile settings',
   },
@@ -168,6 +181,7 @@ export const en: LocaleType = {
     devices: 'Devices',
     lastVisit: 'Last visit',
     logOut: 'Log out',
+    successLogout: 'The session was successfully completed',
     terminateAll: 'Terminate all other session',
   },
   showText: {

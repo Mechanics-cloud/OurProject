@@ -1,8 +1,8 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 
-import { Layout, Loader, Menu, SideBar } from '@/common'
+import { Layout, Menu, SideBar } from '@/common'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
-import { profileStore } from '@/features/profile/model/profileStore'
+import { profileStore } from '@/features/profile'
 import { NextPage } from 'next'
 
 export const LayoutForAuthorized: NextPage<PropsWithChildren> = ({

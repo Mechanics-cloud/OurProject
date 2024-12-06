@@ -17,7 +17,7 @@ import {
 import { Paths, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
-import { NewPostDialog } from '@/features/createPost/ui/adding/NewPostDialog'
+import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 

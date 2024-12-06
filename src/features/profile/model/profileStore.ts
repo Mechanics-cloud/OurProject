@@ -16,9 +16,11 @@ import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
+import { DEFAULT_PAGE_NUMBER } from './constants'
+
 class ProfileStore {
   isLoading: boolean = false
-  pageNumber: number = 1
+  pageNumber: number = DEFAULT_PAGE_NUMBER
   photos: Photo[] = []
   stopRequest: boolean = false
   userProfile: Nullable<UserProfile> = null
@@ -27,16 +29,30 @@ class ProfileStore {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
+  private mapItemsToPhotos(items: any[]): Photo[] {
+    return items.map((item) => ({
+      id: item.id,
+      images: item.images,
+    }))
+  }
+
   changeLoading(value: boolean) {
     this.isLoading = value
   }
 
   cleanUp() {
-    this.isLoading = false
-    this.photos.length = 0
-    this.pageNumber = 1
     this.stopRequest = false
+    this.photos.length = 0
+    this.pageNumber = DEFAULT_PAGE_NUMBER
+    this.isLoading = false
     this.userProfile = null
+  }
+
+  cleanUpFotosData() {
+    this.stopRequest = false
+    this.pageNumber = DEFAULT_PAGE_NUMBER
+    this.photos.length = 0
+    this.getUserPhoto()
   }
 
   async deleteAvatar() {
@@ -62,7 +78,7 @@ class ProfileStore {
 
       runInAction(() => {
         this.userProfile = { ...userProfile, dateOfBirth: formattedDate }
-        generalStore.addUserAvatar(userProfile.avatars[0].url)
+        generalStore.addUserAvatar(userProfile.avatars[0]?.url ?? null)
       })
     } catch (error) {
       responseErrorHandler(error)
@@ -82,6 +98,7 @@ class ProfileStore {
         return
       }
       this.changeLoading(true)
+      this.setUpPageNumber()
 
       if (this.userProfile) {
         const res = await profileAPi.getProfilePosts(
@@ -91,31 +108,33 @@ class ProfileStore {
           pageSize
         )
 
-        let newPhotos: Photo[] = []
-
-        if (res.items.length !== 0) {
-          newPhotos = res.items.map((item) => ({
-            id: item.id,
-            images: item.images,
-          }))
-        } else {
-          this.stopRequest = true
-        }
+        const newPhotos = this.mapItemsToPhotos(res.items)
 
         runInAction(() => {
           this.photos.push(...newPhotos)
-          this.pageNumber += 1
           this.isLoading = false
+          if (res.items.length < 8) {
+            this.stopRequest = true
+          }
         })
       }
     } catch (error) {
       if ((error as Error).name !== 'AbortError') {
+        this.setDownPageNumber()
+
         return
       }
       responseErrorHandler(error)
     } finally {
       this.changeLoading(false)
     }
+  }
+  setDownPageNumber() {
+    this.pageNumber--
+  }
+
+  setUpPageNumber() {
+    this.pageNumber++
   }
 
   async updateProfile(data: UserInfo) {
@@ -144,6 +163,7 @@ class ProfileStore {
       responseErrorHandler(error)
     }
   }
+
   async uploadAvatar(photoData: PhotoResult) {
     try {
       if (photoData.photoFile) {

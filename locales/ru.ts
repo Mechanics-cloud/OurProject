@@ -109,6 +109,13 @@ export const ru = {
     goBack: 'Назад',
     goForward: 'Вперед',
   },
+  post: {
+    modalText: 'Вы уверены, что хотите удалить этот пост?',
+    modalTitle: 'Удалить пост',
+    no: 'Нет',
+    successMessage: 'Публикация была успешно удалена',
+    yes: 'Да',
+  },
   profileInputs: {
     aboutMe: 'Обо мне',
     addProfilePhoto: 'Загрузить фото',
@@ -131,6 +138,12 @@ export const ru = {
   profilePage: {
     followers: 'Подписчики',
     following: 'Подписки',
+    noPosts: {
+      alt: 'Нет постов пользователя',
+      button: 'Создать пост',
+      strangeText: 'Пользователь еще не опубликовал ни одного поста',
+      userText: 'Ваша лента пуста. Опубликуйте ваш первый пост',
+    },
     publications: 'Публикации',
     settingsButton: 'Настройки профиля',
   },
@@ -167,6 +180,7 @@ export const ru = {
     devices: 'Устройства',
     lastVisit: 'Последнее посещение',
     logOut: 'Выйти',
+    successLogout: 'Сессия была успешно завершена',
     terminateAll: 'Завершить все остальные сеансы',
   },
   showText: {

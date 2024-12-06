@@ -24,7 +24,7 @@ import { LogOutModal } from '@/common/components/logOutModal'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
-import { NewPostDialog } from '@/features/createPost/ui/adding/NewPostDialog'
+import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { observer } from 'mobx-react-lite'
 import Router from 'next/router'
 
