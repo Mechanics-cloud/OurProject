@@ -10,20 +10,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export const PhotoProfilePostsGallery = observer(() => {
+  const [triggerLoading, setTriggerLoading] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
   const photos = profileStore?.photos
   const isNoPostsToShow = profileStore.stopRequest && photos?.length === 0
-  const [triggerLoading, setTriggerLoading] = useState(false)
-
-  const containerRef = useRef<HTMLDivElement>(null)
   const { inView, ref } = useInView({
     threshold: 0.5,
     triggerOnce: false,
-  })
-
-  const { inView: inViewWhole, ref: refWhole } = useInView({
-    initialInView: false,
-    threshold: 1,
-    triggerOnce: true,
   })
 
   useEffect(() => {

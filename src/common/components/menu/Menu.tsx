@@ -33,7 +33,11 @@ export const Menu = () => {
   } = useModal()
 
   return (
-    <nav className={'min-w-[360px] w-full bg-dark-00 border-t border-dark-300'}>
+    <nav
+      className={
+        'min-w-[360px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50]'
+      }
+    >
       <ul className={'flex w-full justify-evenly py-[18px]'}>
         <li>
           <Tooltip title={t.menu.home}>
