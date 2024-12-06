@@ -1,8 +1,6 @@
 import { Button, Typography, useTranslation } from '@/common'
-import {
-  Device,
-  profileSessionsStore,
-} from '@/features/profile/settings/devices'
+import { profileSessionsStore } from '@/features/profile/settings/devices'
+import { Device } from '@/features/profile/settings/devices/ui/Device'
 import { observer } from 'mobx-react-lite'
 
 type Props = {

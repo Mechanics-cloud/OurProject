@@ -1,11 +1,17 @@
 import { ArrowBackOutline } from '@/assets/icons/outlineIcons'
-import { Tooltip } from '@/common'
+import { Tooltip, cn } from '@/common'
 import { useGoToTopButton } from '@/common/components/goTopButton/useGoToTopButton'
 import { motion } from 'framer-motion'
 
 export const GoTopButton = () => {
-  const { controls, isBrowser, scrollToTopHandler, scrollToTopVariants, t } =
-    useGoToTopButton()
+  const {
+    controls,
+    isBrowser,
+    isTablet,
+    onScrollToTop,
+    scrollToTopVariants,
+    t,
+  } = useGoToTopButton()
 
   if (!isBrowser) {
     return
@@ -14,9 +20,12 @@ export const GoTopButton = () => {
   return (
     <motion.button
       animate={controls}
-      className={'bg-dark-300 fixed right-7 bottom-7 p-2 rounded-sm'}
+      className={cn(
+        'bg-dark-300 fixed right-7 bottom-7 p-2 rounded-sm',
+        isTablet ? 'bottom-20' : ''
+      )}
       initial={'hide'}
-      onClick={scrollToTopHandler}
+      onClick={onScrollToTop}
       type={'button'}
       variants={scrollToTopVariants}
     >

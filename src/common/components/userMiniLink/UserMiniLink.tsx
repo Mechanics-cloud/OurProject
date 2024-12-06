@@ -1,23 +1,26 @@
-import * as React from 'react'
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Person } from '@/assets/icons'
-import { Typography, cn } from '@/common'
-import Image from 'next/image'
+import { Typography, cn, typographyVariants } from '@/common'
+import Image, { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
+import { Variant } from '../typography/Typography'
+
 type Props = {
-  userAvatarSrc: string
-  userName: string
-  userProfileLink: string
+  avatarSrc: StaticImageData | string
+  name: string
+  profileLink: string
+  variant?: Variant
 } & ComponentPropsWithoutRef<'a'>
 
 export const UserMiniLink = ({
+  avatarSrc,
   className,
+  name,
   onClick,
-  userAvatarSrc,
-  userName,
-  userProfileLink,
+  profileLink,
+  variant = 'reg16',
 }: Props) => {
   return (
     <Link
@@ -25,15 +28,15 @@ export const UserMiniLink = ({
         'flex gap-3 items-center hover:text-accent-500 transition',
         className
       )}
-      href={userProfileLink}
+      href={profileLink}
       onClick={onClick}
     >
-      {userAvatarSrc ? (
+      {avatarSrc ? (
         <Image
-          alt={userName}
+          alt={name}
           className={'w-9 h-9 rounded-full'}
           height={36}
-          src={userAvatarSrc}
+          src={avatarSrc}
           width={36}
         />
       ) : (
@@ -47,8 +50,7 @@ export const UserMiniLink = ({
           />
         </span>
       )}
-
-      <Typography variant={'reg16'}>{userName}</Typography>
+      <span className={typographyVariants({ variant: variant })}>{name}</span>
     </Link>
   )
 }

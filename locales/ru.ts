@@ -1,4 +1,10 @@
 export const ru = {
+  actionIconsGroup: {
+    addFavorite: 'Добавить в избранное',
+    isLiked: 'Нравится',
+    message: 'Сообщения',
+    share: 'Поделиться',
+  },
   auth: {
     welcome: 'Добро пожаловать! Пожалуйста, войдите.',
   },
@@ -88,8 +94,21 @@ export const ru = {
     title: 'Забыли пароль',
   },
   goToTop: 'Вверх',
+  homePage: {
+    addComments: 'Добавить комментарий...',
+    emptyPostsButton: 'Найти друзей',
+    like: 'Нравится',
+    likes: 'Нравится',
+    loading: 'Загрузка...',
+    noPostsAlt: 'Нет постов',
+    noPostsText:
+      'Лента пуста. Чтобы увидеть посты друзей, необходимо на них подписаться',
+    publish: 'Опубликовать',
+    viewAllComments: 'Посмотреть все комментарии',
+  },
   logIn: 'Вход',
   menu: {
+    copyLink: 'Скопировать ссылку',
     create: 'Создать',
     favorites: 'Избранное',
     home: 'Домой',
@@ -106,8 +125,11 @@ export const ru = {
     profile: 'Профиль',
     search: 'Поиск',
     statistics: 'Статистика',
+    unfollow: 'Отписаться',
   },
   notFoundButton: 'Вернуться назад',
+  notFoundText:
+    'Здесь, кажется, ничего нет. Ты можешь вернуться назад или воспользоваться меню.',
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',
@@ -150,12 +172,14 @@ export const ru = {
     publications: 'Публикации',
     settingsButton: 'Настройки профиля',
   },
+
   profileSessions: {
     activeSessions: 'Активные сессии',
     currentSession: 'Текущее устройство',
     lastVisit: 'Последний визит',
     terminateAll: 'Завершить все другие сессии',
   },
+
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
@@ -233,6 +257,9 @@ export const ru = {
     terms: 'Условиями использования',
     text: 'Уже есть аккаунт?',
     title: 'Регистрация',
+  },
+  slider: {
+    noText: 'Нет картинок для поста!',
   },
   tabs: {
     accountManagement: 'Управление аккаунтом',

@@ -1,6 +1,12 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  actionIconsGroup: {
+    addFavorite: 'Add to Favorites',
+    isLiked: 'Like',
+    message: 'Message',
+    share: 'Share',
+  },
   auth: {
     welcome: 'Welcome! Please sign in.',
   },
@@ -90,8 +96,21 @@ export const en: LocaleType = {
     title: 'Forgot Password',
   },
   goToTop: 'Go to top',
+  homePage: {
+    addComments: 'Add a comment',
+    emptyPostsButton: 'Find friends',
+    like: 'Like',
+    likes: 'Likes',
+    loading: 'Loading...',
+    noPostsAlt: 'No posts',
+    noPostsText:
+      "The feed is empty. To see your friends' posts, you need to follow them.",
+    publish: 'Publish',
+    viewAllComments: 'View All Comments',
+  },
   logIn: 'Log In',
   menu: {
+    copyLink: 'Copy Link',
     create: 'Create',
     favorites: 'Favorites',
     home: 'Home',
@@ -108,8 +127,11 @@ export const en: LocaleType = {
     profile: 'Profile',
     search: 'Search',
     statistics: 'Statistics',
+    unfollow: 'Unfollow',
   },
   notFoundButton: 'Go back',
+  notFoundText:
+    'There seems to be nothing here. You can go back or use the menu.',
   pagination: {
     goBack: 'Go Back',
     goForward: 'Go forward',
@@ -233,6 +255,9 @@ export const en: LocaleType = {
     terms: 'Terms of Service',
     text: 'Do you have an account?',
     title: 'Sign Up',
+  },
+  slider: {
+    noText: 'No pictures for this post!',
   },
   tabs: {
     accountManagement: 'Account management',
