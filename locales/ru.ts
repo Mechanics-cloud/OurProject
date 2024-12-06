@@ -1,4 +1,10 @@
 export const ru = {
+  actionIconsGroup: {
+    addFavorite: 'Добавить в избранное',
+    isLiked: 'Нравиться',
+    message: 'Сообщения',
+    share: 'Поделиться',
+  },
   avatarModal: {
     chooseButton: 'Выбрать с компьютера',
     errors: {
@@ -85,8 +91,17 @@ export const ru = {
     title: 'Забыли пароль',
   },
   goToTop: 'Вверх',
+  homePage: {
+    addComments: 'Добавить комментарий...',
+    like: 'Нравится',
+    likes: 'Нравится',
+    loading: 'Загрузка...',
+    publish: 'Опубликовать',
+    viewAllComments: 'Посмотреть все комментарии',
+  },
   logIn: 'Вход',
   menu: {
+    copyLink: 'Скопировать ссылку',
     create: 'Создать',
     favorites: 'Избранное',
     home: 'Домой',
@@ -103,6 +118,7 @@ export const ru = {
     profile: 'Профиль',
     search: 'Поиск',
     statistics: 'Статистика',
+    unfollow: 'Отписаться',
   },
   notFoundButton: 'Вернуться назад',
   pagination: {
@@ -147,12 +163,14 @@ export const ru = {
     publications: 'Публикации',
     settingsButton: 'Настройки профиля',
   },
+
   profileSessions: {
     activeSessions: 'Активные сессии',
     currentSession: 'Текущее устройство',
     lastVisit: 'Последний визит',
     terminateAll: 'Завершить все другие сессии',
   },
+
   recoveryPassword: {
     createNewPassword: 'Создать новый пароль',
     newPassword: 'Новый пароль',
@@ -230,6 +248,9 @@ export const ru = {
     terms: 'Условиями использования',
     text: 'Уже есть аккаунт?',
     title: 'Регистрация',
+  },
+  slider: {
+    noText: 'Нет картинок для поста!',
   },
   tabs: {
     accountManagement: 'Управление аккаунтом',

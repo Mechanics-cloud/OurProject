@@ -1,6 +1,12 @@
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
+  actionIconsGroup: {
+    addFavorite: 'Add to Favorites',
+    isLiked: 'Like',
+    message: 'Message',
+    share: 'Share',
+  },
   avatarModal: {
     chooseButton: 'Select from Computer',
     errors: {
@@ -87,8 +93,17 @@ export const en: LocaleType = {
     title: 'Forgot Password',
   },
   goToTop: 'Go to top',
+  homePage: {
+    addComments: 'Add a Comments...',
+    like: 'Like',
+    likes: 'Likes',
+    loading: 'Loading...',
+    publish: 'Publish',
+    viewAllComments: 'View All Comments',
+  },
   logIn: 'Log In',
   menu: {
+    copyLink: 'Copy Link',
     create: 'Create',
     favorites: 'Favorites',
     home: 'Home',
@@ -105,6 +120,7 @@ export const en: LocaleType = {
     profile: 'Profile',
     search: 'Search',
     statistics: 'Statistics',
+    unfollow: 'Unfollow',
   },
   notFoundButton: 'Go back',
   pagination: {
@@ -230,6 +246,9 @@ export const en: LocaleType = {
     terms: 'Terms of Service',
     text: 'Do you have an account?',
     title: 'Sign Up',
+  },
+  slider: {
+    noText: 'No pictures for this post!',
   },
   tabs: {
     accountManagement: 'Account management',
