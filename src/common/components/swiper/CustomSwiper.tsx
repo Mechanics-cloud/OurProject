@@ -55,6 +55,7 @@ const CustomSwiper = ({ images }: ImagesTypes) => {
             alt={'picture from post'}
             className={'block h-full w-full object-cover'}
             fill
+            priority
             sizes={'(max-width: 768px) 100vw, 33vw'}
             src={image.url}
           />

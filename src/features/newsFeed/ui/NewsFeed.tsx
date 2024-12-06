@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 
 import { Loader } from '@/common'
+import { newsFeedStore } from '@/features/newsFeed'
+import { EmptyFeed } from '@/features/newsFeed/ui/EmptyFeed'
 import { observer } from 'mobx-react-lite'
 import { NextRouter, useRouter } from 'next/router'
 
-import { newsFeedStore } from '../model/newsFeedStore'
 import PostItem from './PostItem'
 import { PostSkeleton } from './PostSkeleton'
 
@@ -25,16 +26,8 @@ export const NewsFeed = observer(() => {
     )
   }
 
-  if (state?.length === 0) {
-    return (
-      <div
-        className={
-          'w-[491px] h-40 border-b mt-[24px] ml-[10.9375rem] flex justify-center items-center bg-dark-100'
-        }
-      >
-        На данный момент нет постов
-      </div>
-    )
+  if (state?.length === 0 && !newsFeedStore.isLoading) {
+    return <EmptyFeed />
   }
 
   return state?.map((item) => (

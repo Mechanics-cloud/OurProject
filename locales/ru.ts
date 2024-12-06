@@ -1,7 +1,7 @@
 export const ru = {
   actionIconsGroup: {
     addFavorite: 'Добавить в избранное',
-    isLiked: 'Нравиться',
+    isLiked: 'Нравится',
     message: 'Сообщения',
     share: 'Поделиться',
   },
@@ -93,9 +93,13 @@ export const ru = {
   goToTop: 'Вверх',
   homePage: {
     addComments: 'Добавить комментарий...',
+    emptyPostsButton: 'Найти друзей',
     like: 'Нравится',
     likes: 'Нравится',
     loading: 'Загрузка...',
+    noPostsAlt: 'Нет постов',
+    noPostsText:
+      'Лента пуста. Чтобы увидеть посты друзей, необходимо на них подписаться',
     publish: 'Опубликовать',
     viewAllComments: 'Посмотреть все комментарии',
   },
@@ -121,6 +125,8 @@ export const ru = {
     unfollow: 'Отписаться',
   },
   notFoundButton: 'Вернуться назад',
+  notFoundText:
+    'Здесь, кажется, ничего нет. Ты можешь вернуться назад или воспользоваться меню.',
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',
