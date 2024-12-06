@@ -6,9 +6,9 @@ import Avatar from '/src/assets/images/image4.jpg'
 
 const meta = {
   args: {
-    userAvatarSrc: Avatar.src,
-    userName: 'John Doe',
-    userProfileLink: '',
+    avatarSrc: Avatar.src,
+    name: 'John Doe',
+    profileLink: '',
   },
   component: UserMiniLink,
   parameters: {

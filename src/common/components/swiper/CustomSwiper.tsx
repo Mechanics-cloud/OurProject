@@ -14,7 +14,7 @@ type ImageType = {
   fileSize?: number
   height?: number
   uploadId?: string
-  url: StaticImageData | string // TODO StaticImageData временно, после добавления картинок с сервера, удалить
+  url: string
   width?: number
 }
 
@@ -49,7 +49,7 @@ const CustomSwiper = ({ images }: ImagesTypes) => {
       {images.map((image, index) => (
         <SwiperSlide
           className={'w-full'}
-          key={index}
+          key={image.url}
         >
           <Image
             alt={'picture from post'}
