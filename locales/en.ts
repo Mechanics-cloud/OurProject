@@ -140,6 +140,12 @@ export const en: LocaleType = {
   profilePage: {
     followers: 'Followers',
     following: 'Following',
+    noPosts: {
+      alt: 'No user post image',
+      button: 'Add new post',
+      strangeText: 'The user has not published any posts yet',
+      userText: 'Your feed is empty. Publish your first post',
+    },
     publications: 'Publications',
     settingsButton: 'Profile settings',
   },

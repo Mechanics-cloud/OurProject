@@ -11,7 +11,7 @@ class GeneralStore {
     makeAutoObservable(this)
   }
 
-  addUserAvatar(src: string) {
+  addUserAvatar(src: Nullable<string>) {
     this.userAvatar = src
   }
 
