@@ -154,6 +154,12 @@ export const ru = {
   profilePage: {
     followers: 'Подписчики',
     following: 'Подписки',
+    noPosts: {
+      alt: 'Нет постов пользователя',
+      button: 'Создать пост',
+      strangeText: 'Пользователь еще не опубликовал ни одного поста',
+      userText: 'Ваша лента пуста. Опубликуйте ваш первый пост',
+    },
     publications: 'Публикации',
     settingsButton: 'Настройки профиля',
   },
