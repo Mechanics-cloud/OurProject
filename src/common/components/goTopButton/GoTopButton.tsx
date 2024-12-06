@@ -1,9 +1,15 @@
+import { RefObject } from 'react'
+
 import { ArrowBackOutline } from '@/assets/icons/outlineIcons'
-import { Tooltip, cn } from '@/common'
+import { Nullable, Tooltip, cn } from '@/common'
 import { useGoToTopButton } from '@/common/components/goTopButton/useGoToTopButton'
 import { motion } from 'framer-motion'
 
-export const GoTopButton = () => {
+type Props = {
+  scrollInElementRef?: Nullable<RefObject<HTMLDivElement>>
+}
+
+export const GoTopButton = ({ scrollInElementRef }: Props) => {
   const {
     controls,
     isBrowser,
@@ -11,7 +17,7 @@ export const GoTopButton = () => {
     onScrollToTop,
     scrollToTopVariants,
     t,
-  } = useGoToTopButton()
+  } = useGoToTopButton(scrollInElementRef)
 
   if (!isBrowser) {
     return
