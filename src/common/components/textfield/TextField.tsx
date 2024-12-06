@@ -51,7 +51,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     star: 'text-danger-500 ml-1',
   }
 
-  const handleToggle = () => setOpen((prev) => !prev)
+  const onToggle = () => setOpen((prev) => !prev)
 
   return (
     <label
@@ -87,14 +87,14 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
             <EyeOutline
               className={cls.rightIcon}
               height={24}
-              onClick={handleToggle}
+              onClick={onToggle}
               width={24}
             />
           ) : (
             <EyeOffOutline
               className={cls.rightIcon}
               height={24}
-              onClick={handleToggle}
+              onClick={onToggle}
               width={24}
             />
           ))}

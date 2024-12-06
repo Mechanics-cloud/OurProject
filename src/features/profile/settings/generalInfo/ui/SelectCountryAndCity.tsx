@@ -16,7 +16,7 @@ export const SelectCountryAndCity = <T extends FieldValues>({
     useFetchLocations(control)
 
   return (
-    <div className={'flex gap-6'}>
+    <div className={'flex gap-6 lg:flex-row flex-col'}>
       <FormSelect
         className={'w-full'}
         control={control}

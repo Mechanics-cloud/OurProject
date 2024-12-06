@@ -35,7 +35,7 @@ export function DatePickerWithRange({
 
   const [inputValue, setInputValue] = useState('')
 
-  const handleDayPickerSelect = (date: Date | undefined) => {
+  const onDayPickerSelect = (date: Date | undefined) => {
     if (!date) {
       setInputValue('')
       setSelectedDate(undefined)
@@ -47,7 +47,7 @@ export function DatePickerWithRange({
     }
   }
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     setInputValue(e.target.value)
 
@@ -92,7 +92,7 @@ export function DatePickerWithRange({
                   disabled && 'cursor-default'
                 )}
                 disabled={disabled}
-                onChange={handleInputChange}
+                onChange={onInputChange}
                 placeholder={'dd/mm/yyyy'}
                 type={'text'}
                 value={inputValue}
@@ -145,7 +145,7 @@ export function DatePickerWithRange({
               mode={'single'}
               month={month}
               onMonthChange={setMonth}
-              onSelect={handleDayPickerSelect}
+              onSelect={onDayPickerSelect}
               selected={selectedDate}
             />
           ) : (

@@ -46,7 +46,6 @@ export const useRecoveryPassword = (t: LocaleType) => {
   return {
     control,
     errors,
-    handleSubmit,
     isSubmitting,
     isValid,
     onSubmit,

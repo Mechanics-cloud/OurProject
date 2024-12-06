@@ -5,6 +5,7 @@ module.exports = {
     'plugin:@next/next/recommended',
   ],
   rules: {
+    'import/no-cycle': ['error', { maxDepth: 1 }],
     'prettier/prettier': [
       'error',
       {

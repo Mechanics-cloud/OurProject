@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react'
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,

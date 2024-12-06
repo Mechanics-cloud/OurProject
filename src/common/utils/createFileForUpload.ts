@@ -1,12 +1,12 @@
-import { PhotoResult } from '@/features/profile/settings/avatarDialog/model'
+import { PhotoResult } from '@/common'
 
 export const createFileForUpload = (photoData: PhotoResult) => {
-  if (photoData.photoForServer) {
-    const mimeType = photoData.photoForServer.type
+  if (photoData.photoFile) {
+    const mimeType = photoData.photoFile.type
 
-    const filename = photoData.photo?.split('/').pop() || 'avatar.jpg'
+    const filename = photoData.photoUrl?.split('/').pop() || 'avatar.jpg'
 
-    return new File([photoData.photoForServer], filename, { type: mimeType })
+    return new File([photoData.photoFile], filename, { type: mimeType })
   }
 
   return null

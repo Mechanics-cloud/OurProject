@@ -1,13 +1,21 @@
-import React from 'react'
+import { forwardRef } from 'react'
 
-import { Button, FormTextField, useTranslation } from '@/common'
-import { FormTextArea } from '@/common/form/FormTextArea'
-import { useFillGeneralInfo } from '@/features/profile/settings/generalInfo/model/useFillGeneralInfo'
-import { AddPhoto } from '@/features/profile/settings/generalInfo/ui/AddPhoto'
-import { FormCalendar } from '@/features/profile/settings/generalInfo/ui/FormCalendar'
-import { SelectCountryAndCity } from '@/features/profile/settings/generalInfo/ui/SelectCountryAndCity'
+import {
+  Button,
+  FormTextArea,
+  FormTextField,
+  useScreenWidth,
+  useTranslation,
+} from '@/common'
+import {
+  AddPhoto,
+  FormCalendar,
+  SelectCountryAndCity,
+  useFillGeneralInfo,
+} from '@/features/profile'
+import { observer } from 'mobx-react-lite'
 
-export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
+export const GeneralInfoComponent = forwardRef<HTMLFormElement>((_, ref) => {
   const { t } = useTranslation()
   const {
     control,
@@ -22,11 +30,12 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
     setPhotoObj,
     setValue,
   } = useFillGeneralInfo()
+  const { isTablet } = useScreenWidth()
 
   return (
     <div
       className={
-        'flex gap-10 w-full mt-6 relative after:absolute after:contain-content after:h-[1px] after:top-[90%] after:left-0 after:w-full after:bg-dark-300'
+        'flex flex-col lg:flex-row gap-10 w-full mt-6 relative after:absolute after:contain-content after:h-[1px] after:bottom-[5%] lg:after:top-[90%] after:left-0 after:w-full after:bg-dark-300'
       }
     >
       <AddPhoto
@@ -40,7 +49,7 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
         onSubmit={onSubmit}
         ref={ref}
       >
-        <div className={'w-full flex flex-col gap-6'}>
+        <div className={'w-full flex flex-col lg:gap-6'}>
           <FormTextField
             control={control}
             label={t.profileInputs.userName}
@@ -75,6 +84,7 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
           />
           <div className={'flex justify-end mt-12'}>
             <Button
+              className={isTablet ? 'w-full' : ''}
               disabled={
                 !isValid || isSubmitting || (!isDirty && !isPhotoChanged)
               }
@@ -89,3 +99,5 @@ export const GeneralInfo = React.forwardRef<HTMLFormElement>((_, ref) => {
     </div>
   )
 })
+
+export const GeneralInfo = observer(GeneralInfoComponent)
