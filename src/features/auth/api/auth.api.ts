@@ -34,11 +34,17 @@ class AuthApi {
   }
 
   public async logout() {
-    return instance.post(Endpoints.logout)
+    return this.instance.post(Endpoints.logout)
   }
 
-  public me(): Promise<Profile> {
-    return instance.get(Endpoints.me).then((res) => res.data)
+  public me(): Promise<Profile | undefined> {
+    return this.instance.get(Endpoints.me).then((res) => {
+      if (res) {
+        return res.data
+      }
+
+      return Promise.reject('Some error occurred')
+    })
   }
 
   public async newPassword(data: NewPasswordData): Promise<AxiosResponse> {

@@ -54,23 +54,15 @@ class AuthStore {
   }
 
   async me() {
-    try {
-      const user = await authApi.me()
+    const user = await authApi.me()
 
-      runInAction(() => {
+    runInAction(() => {
+      if (user) {
         generalStore.user = user
-      })
-
-      return user
-    } catch (error) {
-      if (
-        isAxiosError(error) &&
-        error?.response?.status === StatusCode.Unauthorized
-      ) {
-        return
       }
-      throw { error }
-    }
+    })
+
+    return user
   }
 }
 
