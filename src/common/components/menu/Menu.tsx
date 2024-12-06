@@ -17,7 +17,7 @@ import {
 import { Paths, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
-import { NewPostDialog } from '@/features/createPost/ui/adding/NewPostDialog'
+import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -33,7 +33,11 @@ export const Menu = () => {
   } = useModal()
 
   return (
-    <nav className={'min-w-[360px] w-full bg-dark-00 border-t border-dark-300'}>
+    <nav
+      className={
+        'min-w-[360px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50]'
+      }
+    >
       <ul className={'flex w-full justify-evenly py-[18px]'}>
         <li>
           <Tooltip title={t.menu.home}>

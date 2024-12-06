@@ -23,6 +23,7 @@ import {
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
+import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AddPostStore {
@@ -261,12 +262,15 @@ class AddPostStore {
       }
       const res = await addPostApi.uploadPhotos(formData)
       const post: UploadPost = {
-        childrenMetadata: [{ uploadId: res.data.images[0].uploadId }],
+        childrenMetadata: res.data.images.map((photoData) => ({
+          uploadId: photoData.uploadId,
+        })),
         description: this.postDescription,
       }
 
       await addPostApi.uploadPostDescription(post)
       this.resetData()
+      profileStore.cleanUpFotosData()
     } catch (error) {
       responseErrorHandler(error)
     }

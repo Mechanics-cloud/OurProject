@@ -3,10 +3,13 @@ export const Paths = {
   favorites: '/favorites',
   forgotPassword: '/auth/forgot-password',
   generalInfo: '/settings',
-  home: '/',
+  home: '/home',
   messenger: '/messenger',
   privacyPolicy: '/auth/privacy-policy',
   profile: '/profile',
+  profileLink: (userId: number | undefined) => {
+    return `/profile/${userId}`
+  },
   profileSettings: '/profile/settings',
   recoveryPassword: '/auth/recovery',
   registrationEmailResending: '/auth/registration-email-resending',
