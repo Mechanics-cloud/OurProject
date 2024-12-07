@@ -11,6 +11,7 @@ import {
   PhotoProfilePostsGallery,
   ProfileAboutMe,
   ProfileStatistics,
+  PublicProfile,
 } from '@/features/profile'
 import { UserIdProvider } from '@/features/profile/model/UserIdProvider'
 import { profileStore } from '@/features/profile/model/profileStore'
@@ -20,13 +21,14 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 import avatarPlaceholder from '../../../assets/images/avatar.jpg'
-
+type Props = {
+  userProfile: PublicProfile
+}
 //todo: remove avatarPlaceholder
-export const Profile = observer(() => {
+export const Profile = observer(({ userProfile }: Props) => {
   const { t } = useTranslation()
   const { id } = useParams()
   const { followers, following, publications, settingsButton } = t.profilePage
-  const { userProfile } = profileStore
 
   const avatar = userProfile?.avatars[0]?.url
 
@@ -79,6 +81,7 @@ export const Profile = observer(() => {
                 following={following}
                 isMobile={isMobile}
                 publications={publications}
+                userMetadata={userProfile.userMetadata}
               />
               <ProfileAboutMe
                 aboutMe={userProfile?.aboutMe}
