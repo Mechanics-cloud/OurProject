@@ -7,6 +7,9 @@ export const en: LocaleType = {
     message: 'Message',
     share: 'Share',
   },
+  auth: {
+    welcome: 'Welcome! Please sign in.',
+  },
   avatarModal: {
     chooseButton: 'Select from Computer',
     errors: {
