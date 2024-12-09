@@ -3,6 +3,8 @@ import { ComponentProps, ReactNode, useState } from 'react'
 
 import { Button, Typography, cn, useTranslation } from '@/common'
 
+import { charactersCalculation } from './languageChecker'
+
 type Props = {
   charactersToShow?: number
   children: string
@@ -16,7 +18,11 @@ export const TextUnfolding = ({
 }: Props) => {
   const { t } = useTranslation()
   const [showMore, setShowMore] = useState<Boolean>(false)
-  const isLongEnough = children.length > charactersToShow
+  const charactersCountToShow = charactersCalculation(
+    children,
+    charactersToShow
+  )
+  const isLongEnough = children.length > charactersCountToShow
 
   return (
     <Typography
@@ -27,7 +33,7 @@ export const TextUnfolding = ({
       {showMore
         ? children
         : `${
-            children.substring(0, charactersToShow) +
+            children.substring(0, charactersCountToShow) +
             (isLongEnough ? '...' : '')
           }`}
       {isLongEnough && (
