@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { ComponentProps, ReactNode, useState } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
-import { Button, Typography, cn, useTranslation } from '@/common'
+import { Button, Typography, cn, useToggle, useTranslation } from '@/common'
 
 import { charactersCalculation } from './languageChecker'
 
@@ -17,7 +17,7 @@ export const TextUnfolding = ({
   link,
 }: Props) => {
   const { t } = useTranslation()
-  const [showMore, setShowMore] = useState<Boolean>(false)
+  const { state: showMore, toggle: toggleShowMore } = useToggle()
   const charactersCountToShow = charactersCalculation(
     children,
     charactersToShow
@@ -41,9 +41,7 @@ export const TextUnfolding = ({
           &nbsp;
           <Button
             className={cn('focus-within:outline-0 underline p-0 float-right')}
-            onClick={() => {
-              setShowMore((prevState) => !prevState)
-            }}
+            onClick={toggleShowMore}
             variant={'text'}
           >
             {showMore ? t.showText.less : t.showText.more}
