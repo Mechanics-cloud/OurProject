@@ -26,7 +26,7 @@ export const TextUnfolding = ({
 
   return (
     <Typography
-      className={cn('relative', className, 'pb-6')}
+      className={cn('relative break-all', className, 'pb-6')}
       variant={'reg14'}
     >
       {link && <>{link}&nbsp;</>}
