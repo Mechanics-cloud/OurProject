@@ -59,3 +59,12 @@ export const LongTextWithLink: Story = {
     ),
   },
 }
+
+export const LongTextEnglish: Story = {
+  args: {
+    charactersToShow: 250,
+    children:
+      'Detective Clara Redwood adjusted her red fedora and stepped out of her vintage car, the sun casting a warm glow over the grand estate before her. The Vanishing Heiress, they called it—a mystery that had the town buzzing. Clara had a knack for solving the unsolvable, and this case was no exception."The estate belonged to the wealthy Wentworth family, whose daughter, Evelyn Wentworth, had mysteriously disappeared a week ago. Clara had been hired by Evelyn\'s frantic parents, who were desperate for answers."As Clara approached the grand entrance, the butler, Mr. Thompson, greeted her with a solemn nod. "Detective Redwood, welcome. The family is in the drawing room."Clara followed the butler through the opulent halls, her keen eyes taking in every detail. The drawing room was a study in elegance, with plush furniture and intricate tapestries. Mr. and Mrs. Wentworth sat by the fireplace, their faces etched with worry. "Thank you for coming, Detective," Mr. Wentworth said, his voice strained. "We need to find our daughter."Clara nodded, her mind already piecing together the puzzle. "Tell me everything from the beginning."',
+    className: 'w-[300px] border rounded-sm p-6',
+  },
+}

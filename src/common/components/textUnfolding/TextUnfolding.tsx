@@ -1,7 +1,9 @@
 import * as React from 'react'
-import { ComponentProps, ReactNode, useState } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
-import { Button, Typography, cn, useTranslation } from '@/common'
+import { Button, Typography, cn, useToggle, useTranslation } from '@/common'
+
+import { charactersCalculation } from './languageChecker'
 
 type Props = {
   charactersToShow?: number
@@ -15,19 +17,23 @@ export const TextUnfolding = ({
   link,
 }: Props) => {
   const { t } = useTranslation()
-  const [showMore, setShowMore] = useState<Boolean>(false)
-  const isLongEnough = children.length > charactersToShow
+  const { state: showMore, toggle: toggleShowMore } = useToggle()
+  const charactersCountToShow = charactersCalculation(
+    children,
+    charactersToShow
+  )
+  const isLongEnough = children.length > charactersCountToShow
 
   return (
     <Typography
-      className={cn('relative', className, 'pb-6')}
+      className={cn('relative break-all', className, 'pb-6')}
       variant={'reg14'}
     >
       {link && <>{link}&nbsp;</>}
       {showMore
         ? children
         : `${
-            children.substring(0, charactersToShow) +
+            children.substring(0, charactersCountToShow) +
             (isLongEnough ? '...' : '')
           }`}
       {isLongEnough && (
@@ -35,9 +41,7 @@ export const TextUnfolding = ({
           &nbsp;
           <Button
             className={cn('focus-within:outline-0 underline p-0 float-right')}
-            onClick={() => {
-              setShowMore((prevState) => !prevState)
-            }}
+            onClick={toggleShowMore}
             variant={'text'}
           >
             {showMore ? t.showText.less : t.showText.more}
