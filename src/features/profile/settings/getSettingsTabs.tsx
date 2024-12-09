@@ -3,7 +3,7 @@ import React from 'react'
 import { Chrome, CreditCard, Person, Settings } from '@/assets/icons'
 import { TabsType, Typography } from '@/common'
 import { GeneralInfoPage } from '@/features/profile'
-import { Devices } from '@/features/profile/settings/devices/ui/Devices'
+import { Devices } from '@/features/profile/settings/devices'
 import { LocaleType } from '@locales/ru'
 
 export const getSettingsTabs = (

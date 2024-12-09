@@ -1,7 +1,8 @@
 import { Button, Typography, useTranslation } from '@/common'
 import { profileSessionsStore } from '@/features/profile/settings/devices'
-import { Device } from '@/features/profile/settings/devices/ui/Device'
 import { observer } from 'mobx-react-lite'
+
+import { Device } from './Device'
 
 type Props = {
   onLogoutDeviceClick: (deviceId: number) => void
