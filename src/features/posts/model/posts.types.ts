@@ -14,10 +14,6 @@ export type Likes = {
   userName: string
 }
 
-export type PostComments = {
-  items: Comment[]
-} & PagesInfo
-
 export type Comment = {
   answerCount: number
   content: string
@@ -28,6 +24,10 @@ export type Comment = {
   likeCount: number
   postId: number
 }
+
+export type PostComments = {
+  items: Comment[]
+} & PagesInfo
 
 export type FromWhom = {
   avatars: ImageFile[]
