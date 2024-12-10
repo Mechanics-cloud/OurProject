@@ -1,13 +1,11 @@
-import { StaticImageData } from 'next/image'
+import { ImageFile, PagesInfo } from '@/common'
 
 export type PostsLikes = {
   items: Likes[]
-  pageSize: number
-  totalCount: number
-}
+} & Pick<PagesInfo, 'pageSize' | 'totalCount'>
 
 export type Likes = {
-  avatars: Avatar[]
+  avatars: ImageFile[]
   createdAt: string
   id: number
   isFollowedBy: boolean
@@ -16,35 +14,23 @@ export type Likes = {
   userName: string
 }
 
-export type Avatar = {
-  createdAt: string
-  fileSize: number
-  height: number
-  url: StaticImageData | string
-  width: number
-}
-
-export type PostComments = {
-  items: Comment[]
-  page: number
-  pageSize: number
-  pagesCount: number
-  totalCount: number
-}
-
 export type Comment = {
   answerCount: number
   content: string
   createdAt: string
-  from: From
+  from: FromWhom
   id: number
   isLiked: boolean
   likeCount: number
   postId: number
 }
 
-export type From = {
-  avatars: Avatar[]
+export type PostComments = {
+  items: Comment[]
+} & PagesInfo
+
+export type FromWhom = {
+  avatars: ImageFile[]
   id: number
   username: string
 }

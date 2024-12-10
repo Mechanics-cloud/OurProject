@@ -7,18 +7,16 @@ import {
   MessageCircleOutline,
   PaperPlaneOutline,
 } from '@/assets/icons/outlineIcons'
-import { Tooltip, useTranslation } from '@/common'
+import { BasicPost, Tooltip, useTranslation } from '@/common'
 import { LikeStatus } from '@/common/enums'
+import { newsFeedStore } from '@/features/newsFeed'
 import { postsApi } from '@/features/posts'
 import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
-import { Post } from '../model/newsFeed.types'
-import { newsFeedStore } from '../model/newsFeedStore'
-
 type Props = {
-  item: Post
+  item: BasicPost
 }
 //TODO to change (in progress) вынести логику, добавить логику на кнопки
 export const LinksGroup = observer(({ item }: Props) => {

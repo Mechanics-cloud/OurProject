@@ -1,14 +1,7 @@
-export type UploadPhotoResponse = {
-  images: UploadPhoto[]
-}
+import { BasicPost, UploadImage } from '@/common'
 
-type UploadPhoto = {
-  createdAt: string
-  fileSize: number
-  height: number
-  uploadId: string
-  url: string
-  width: number
+export type UploadPhotoResponse = {
+  images: UploadImage[]
 }
 
 export type UploadPost = {
@@ -17,20 +10,5 @@ export type UploadPost = {
 }
 
 export type UploadPostResponse = {
-  avatarOwner: string
   avatarWhoLikes: boolean
-  createdAt: string
-  description: string
-  id: number
-  images: UploadPhoto[]
-  isLiked: boolean
-  likesCount: number
-  location: string
-  owner: {
-    firstName: string
-    lastName: string
-  }
-  ownerId: number
-  updatedAt: string
-  userName: string
-}
+} & BasicPost

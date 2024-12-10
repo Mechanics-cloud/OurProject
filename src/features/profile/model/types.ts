@@ -1,37 +1,14 @@
-type Image = {
-  createdAt: string
-  fileSize: number
-  height: number
-  uploadId: string
-  url: string
-  width: number
-}
+import { BasicPost, PagesInfo, UploadImage } from '@/common'
+
 export type Photo = {
   id: number
-  images: Image[]
+  images: UploadImage[]
 }
+
 type ImageData = {
-  avatarOwner: string
   avatarWhoLikes: string[]
-  createdAt: string
-  description: string
-  id: number
-  images: Image[]
-  isLiked: boolean
-  likesCount: number
-  location: null | string
-  owner: {
-    firstName: string
-    lastName: string
-  }
-  ownerId: number
-  updatedAt: string
-  userName: string
-}
+} & BasicPost
+
 export type ImagesData = {
   items: ImageData[]
-  page: number
-  pageSize: number
-  pagesCount: number
-  totalCount: number
-}
+} & PagesInfo
