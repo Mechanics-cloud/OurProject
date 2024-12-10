@@ -46,7 +46,7 @@ export type BasicPost = {
   images: UploadImage[]
   isLiked: boolean
   likesCount: number
-  location: string
+  location: Nullable<string>
   owner: FullName
   ownerId: number
   updatedAt: string

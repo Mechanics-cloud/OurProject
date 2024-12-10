@@ -38,7 +38,7 @@ const CustomSwiper = ({ images }: ImagesTypes) => {
       spaceBetween={30}
       watchSlidesProgress
     >
-      {images.map((image, index) => (
+      {images.map((image) => (
         <SwiperSlide
           className={'w-full'}
           key={String(image.url)}
