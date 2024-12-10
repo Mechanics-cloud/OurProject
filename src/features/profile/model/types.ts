@@ -1,37 +1,26 @@
-type Image = {
-  createdAt: string
-  fileSize: number
-  height: number
-  uploadId: string
-  url: string
-  width: number
-}
+import { FullName, Nullable, PagesInfo, UploadImage } from '@/common'
+
 export type Photo = {
   id: number
-  images: Image[]
+  images: UploadImage[]
 }
+
 type ImageData = {
   avatarOwner: string
   avatarWhoLikes: string[]
   createdAt: string
   description: string
   id: number
-  images: Image[]
+  images: UploadImage[]
   isLiked: boolean
   likesCount: number
-  location: null | string
-  owner: {
-    firstName: string
-    lastName: string
-  }
+  location: Nullable<string>
+  owner: FullName
   ownerId: number
   updatedAt: string
   userName: string
 }
+
 export type ImagesData = {
   items: ImageData[]
-  page: number
-  pageSize: number
-  pagesCount: number
-  totalCount: number
-}
+} & PagesInfo

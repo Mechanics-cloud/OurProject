@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {
+  BasicPost,
   Paths,
   TextUnfolding,
   Typography,
@@ -10,19 +11,20 @@ import {
   useTranslation,
 } from '@/common'
 import { CustomSwiper } from '@/common/components/swiper'
+import {
+  AvatarGroupWithLikes,
+  CustomNewsFeedPopover,
+} from '@/features/newsFeed'
 import Image from 'next/image'
 import { NextRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
-import { Post } from '../model'
 import { WrapperParentComponent } from '../model/wrapperParentComponent'
-import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
-import { CustomNewsFeedPopover } from './CustomNewsFeedPopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
 
 type Props = {
-  item: Post
+  item: BasicPost
   router: NextRouter
 }
 

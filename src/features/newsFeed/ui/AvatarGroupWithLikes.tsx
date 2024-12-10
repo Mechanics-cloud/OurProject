@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from 'react'
 
-import { Typography, useTranslation } from '@/common'
+import { BasicPost, Typography, useTranslation } from '@/common'
 import { observer } from 'mobx-react-lite'
 import Image, { StaticImageData } from 'next/image'
 
-import { LikesStore, Post } from '../model'
+import { LikesStore } from '../model'
 
 type Props = {
-  item: Post
+  item: BasicPost
 }
 
 export const AvatarGroupWithLikes = observer(({ item }: Props) => {

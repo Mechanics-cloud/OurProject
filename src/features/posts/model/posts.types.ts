@@ -1,13 +1,11 @@
-import { PhotoFile } from '@/common'
+import { ImageFile, PagesInfo } from '@/common'
 
 export type PostsLikes = {
   items: Likes[]
-  pageSize: number
-  totalCount: number
-}
+} & Pick<PagesInfo, 'pageSize' | 'totalCount'>
 
 export type Likes = {
-  avatars: PhotoFile[]
+  avatars: ImageFile[]
   createdAt: string
   id: number
   isFollowedBy: boolean
@@ -18,11 +16,7 @@ export type Likes = {
 
 export type PostComments = {
   items: Comment[]
-  page: number
-  pageSize: number
-  pagesCount: number
-  totalCount: number
-}
+} & PagesInfo
 
 export type Comment = {
   answerCount: number
@@ -36,7 +30,7 @@ export type Comment = {
 }
 
 export type FromWhom = {
-  avatars: PhotoFile[]
+  avatars: ImageFile[]
   id: number
   username: string
 }
