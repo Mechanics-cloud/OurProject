@@ -35,6 +35,23 @@ class ProfileApi {
 
     return res.data
   }
+  public async getPublicPosts(
+    userId: number,
+    endCursorPostId: number = 0,
+    signal?: AbortSignal,
+    pageSize: number = 8
+  ): Promise<AxiosResponse> {
+    return axios(
+      Environments.API_URL +
+        ProfileEndpoints.publicPosts(userId, endCursorPostId),
+      {
+        params: {
+          pageSize,
+        },
+        signal,
+      }
+    )
+  }
   public async getPublicUser(profileId: string): Promise<PublicProfile> {
     return axios(
       Environments.API_URL + ProfileEndpoints.publicProfile(profileId)

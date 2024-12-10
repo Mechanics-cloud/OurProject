@@ -1,7 +1,6 @@
 import { Paid } from '@/assets/icons'
 import {
   Button,
-  Loader,
   Paths,
   Typography,
   useScreenWidth,
@@ -11,7 +10,6 @@ import {
   PhotoProfilePostsGallery,
   ProfileAboutMe,
   ProfileStatistics,
-  PublicProfile,
 } from '@/features/profile'
 import { UserIdProvider } from '@/features/profile/model/UserIdProvider'
 import { profileStore } from '@/features/profile/model/profileStore'
@@ -21,22 +19,19 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 import avatarPlaceholder from '../../../assets/images/avatar.jpg'
+import { HydrateProfileStore } from '../model/hydrateProfileStore'
 type Props = {
-  userProfile: PublicProfile
+  store: HydrateProfileStore
 }
 //todo: remove avatarPlaceholder
-export const Profile = observer(({ userProfile }: Props) => {
+export const Profile = observer(({ store }: Props) => {
   const { t } = useTranslation()
   const { id } = useParams()
   const { followers, following, publications, settingsButton } = t.profilePage
 
-  const avatar = userProfile?.avatars[0]?.url
+  const avatar = store.userProfile?.avatars[0]?.url
 
   const { isMobile, isTablet } = useScreenWidth()
-
-  if (!profileStore.userProfile) {
-    return <Loader />
-  }
 
   return (
     <UserIdProvider ctx={+id}>
@@ -65,26 +60,27 @@ export const Profile = observer(({ userProfile }: Props) => {
                   className={'flex text-light-100 items-center gap-3'}
                   variant={'h1'}
                 >
-                  {userProfile?.userName ?? 'URL Profile'}
+                  {store.userProfile?.userName ?? 'URL Profile'}
                   <Paid />
                 </Typography>
-
-                <Button
-                  className={'hidden md:block'}
-                  variant={'secondary'}
-                >
-                  <Link href={Paths.profileSettings}>{settingsButton}</Link>
-                </Button>
+                {profileStore.userProfile?.id === store.userProfile.id && (
+                  <Button
+                    className={'hidden md:block'}
+                    variant={'secondary'}
+                  >
+                    <Link href={Paths.profileSettings}>{settingsButton}</Link>
+                  </Button>
+                )}
               </div>
               <ProfileStatistics
                 followers={followers}
                 following={following}
                 isMobile={isMobile}
                 publications={publications}
-                userMetadata={userProfile.userMetadata}
+                userMetadata={store.userProfile.userMetadata}
               />
               <ProfileAboutMe
-                aboutMe={userProfile?.aboutMe}
+                aboutMe={store.userProfile?.aboutMe}
                 className={isTablet ? 'hidden' : 'mt-6'}
                 isMobile={isMobile}
               />
@@ -94,15 +90,15 @@ export const Profile = observer(({ userProfile }: Props) => {
             className={'md:hidden flex text-light-100 items-center gap-3 mb-3'}
             variant={'h1'}
           >
-            {userProfile?.userName ?? 'URL Profile'}
+            {store.userProfile?.userName ?? 'URL Profile'}
             <Paid />
           </Typography>
           <ProfileAboutMe
-            aboutMe={userProfile?.aboutMe}
+            aboutMe={store.userProfile?.aboutMe}
             className={isTablet ? 'mb-7' : 'hidden'}
             isMobile={isMobile}
           />
-          <PhotoProfilePostsGallery />
+          <PhotoProfilePostsGallery posts={store.postsData} />
         </div>
       </div>
     </UserIdProvider>

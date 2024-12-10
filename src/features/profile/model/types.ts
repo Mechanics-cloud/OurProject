@@ -1,3 +1,10 @@
+import { PublicProfile } from '../settings'
+
+export type ServerSideProfilePage = {
+  posts: ImagesData
+  userProfile: PublicProfile
+}
+
 type Image = {
   createdAt: string
   fileSize: number
@@ -34,4 +41,5 @@ export type ImagesData = {
   pageSize: number
   pagesCount: number
   totalCount: number
+  //totalUsers :839
 }

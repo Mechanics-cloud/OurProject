@@ -3,25 +3,31 @@ import { useInView } from 'react-intersection-observer'
 
 import { ImageOutline } from '@/assets/icons'
 import { Skeleton, cn } from '@/common'
-import { profileStore } from '@/features/profile'
+import { ImagesData, profileStore } from '@/features/profile'
 import { NoPosts } from '@/features/profile/ui/NoPosts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export const PhotoProfilePostsGallery = observer(() => {
+import { hydrateProfileStore } from '../model/hydrateProfileStore'
+type Props = {
+  posts: ImagesData
+}
+
+export const PhotoProfilePostsGallery = observer(({ posts }: Props) => {
   const [triggerLoading, setTriggerLoading] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const photos = profileStore?.photos
-  const isNoPostsToShow = profileStore.stopRequest && photos?.length === 0
+  const isNoPostsToShow = !posts.items.length
   const { inView, ref } = useInView({
     threshold: 0.5,
     triggerOnce: false,
   })
 
+  // console.log('PhotoProfilePostsGallery: ' + posts)
+
   useEffect(() => {
     const fetchPosts = async (signal: AbortSignal) => {
-      await profileStore.getUserPhoto({ signal })
+      await hydrateProfileStore?.getUserPhoto(signal)
     }
 
     const triggerRerender = () => {
@@ -64,7 +70,7 @@ export const PhotoProfilePostsGallery = observer(() => {
             )}
             ref={containerRef}
           >
-            {photos.map((item) => (
+            {posts.items.map((item) => (
               <Link
                 href={`/${item.id}`}
                 key={item.id}
