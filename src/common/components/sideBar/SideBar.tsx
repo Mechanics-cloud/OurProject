@@ -57,13 +57,14 @@ export const SideBar = observer(({ className }: Props) => {
 
   return (
     <>
-      <aside className={cn('flex flex-col min-w-56 h-full', className)}>
+      <aside className={cn('min-w-56 h-full pr-2', className)}>
         <nav className={'pt-[72px]'}>
-          <ul className={`mb-[60px] [&_li]:mb-6`}>
+          <ul className={`mb-[60px] [&_li]:mb-4`}>
             <li>
               <LinkWithIcon
                 ActiveIcon={Home}
                 DefaultIcon={HomeOutline}
+                className={'py-2'}
                 href={Paths.home}
               >
                 {t.menu.home}
