@@ -13,7 +13,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const HeaderIsAuthorizedUzer: Story = {
+export const HeaderIsAuthorizedUser: Story = {
   args: {
     isAuth: true,
   },

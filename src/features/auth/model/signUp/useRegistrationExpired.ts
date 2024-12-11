@@ -17,8 +17,8 @@ export const useRegistrationExpired = () => {
   const [userEmail, setUserEmail] = useState('')
   const router = useRouter()
 
-  const { isModalOpen, onModalClose, openModal } = useModal(() => {
-    router.push(Paths.signIn)
+  const { isModalOpen, onModalClose, openModal } = useModal(async () => {
+    await router.push(Paths.signIn)
   })
 
   const emailCheck = z.string().email()
