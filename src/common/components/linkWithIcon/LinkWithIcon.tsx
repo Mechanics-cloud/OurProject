@@ -53,7 +53,8 @@ export const LinkWithIcon = React.forwardRef<HTMLElement, Props<ElementType>>(
           className,
           styles.link,
           isActive && styles.activeLink,
-          disabled && 'pointer-events-none text-dark-100'
+          disabled && 'pointer-events-none text-dark-100',
+          'py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent-300 w-full'
         )}
         ref={ref}
         tabIndex={disabled ? -1 : undefined}

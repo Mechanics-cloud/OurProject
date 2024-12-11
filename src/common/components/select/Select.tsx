@@ -128,7 +128,7 @@ const Select = React.forwardRef<
     <SelectBasic {...props}>
       <SelectGroup className={className}>
         {label && <SelectLabel>{label}</SelectLabel>}
-        <SelectTrigger>
+        <SelectTrigger ref={ref}>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>{children}</SelectContent>

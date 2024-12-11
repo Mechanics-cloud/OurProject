@@ -125,6 +125,7 @@ export const en: LocaleType = {
     },
     messenger: 'Messenger',
     profile: 'Profile',
+    profileSettings: 'Profile settings',
     search: 'Search',
     statistics: 'Statistics',
     unfollow: 'Unfollow',
