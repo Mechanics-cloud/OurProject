@@ -21,31 +21,16 @@ import {
 } from '@/assets/icons/outlineIcons'
 import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { logOut } from '@/common/utils/logOut'
 import { generalStore } from '@/core/store'
-import { authStore } from '@/features/auth'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { observer } from 'mobx-react-lite'
-import Router from 'next/router'
 
 type Props = ComponentProps<'aside'>
 
 export const SideBar = observer(({ className }: Props) => {
   const { t } = useTranslation()
-  const { isModalOpen: isLogOutModalOpen, onModalClose: onLogOutModalClose } =
-    useModal(async () => {
-      const isLoadingStore = generalStore
-
-      isLoadingStore.turnOnLoading()
-      try {
-        await authStore.logout()
-        await Router.push(Paths.signIn)
-      } catch (error: unknown) {
-        responseErrorHandler(error)
-      } finally {
-        isLoadingStore.turnOffLoading()
-      }
-    })
+  const { onModalClose: onLogOutModalClose } = useModal(logOut)
 
   const {
     isModalOpen: isNewPostModalOpen,
@@ -76,7 +61,6 @@ export const SideBar = observer(({ className }: Props) => {
                 ActiveIcon={PlusSquare}
                 DefaultIcon={PlusSquareOutline}
                 as={'button'}
-                iconTrigger={isLogOutModalOpen}
                 onClick={openNewPostModal}
               >
                 {t.menu.create}
@@ -136,23 +120,19 @@ export const SideBar = observer(({ className }: Props) => {
             </li>
           </ul>
 
-          <ul className={'mb-9'}>
-            <LogOutModal
-              logOutModalHandler={onLogOutModalClose}
-              triggerButton={
-                <li>
-                  <LinkWithIcon
-                    ActiveIcon={LogOut}
-                    DefaultIcon={LogOut}
-                    as={'button'}
-                  >
-                    {t.menu.logOut}
-                  </LinkWithIcon>
-                </li>
-              }
-              userEmail={generalStore.user?.email ?? ''}
-            />
-          </ul>
+          <LogOutModal
+            logOutModalHandler={onLogOutModalClose}
+            triggerButton={
+              <LinkWithIcon
+                ActiveIcon={LogOut}
+                DefaultIcon={LogOut}
+                as={'button'}
+              >
+                {t.menu.logOut}
+              </LinkWithIcon>
+            }
+            userEmail={generalStore.user?.email ?? ''}
+          />
         </nav>
       </aside>
       <NewPostDialog

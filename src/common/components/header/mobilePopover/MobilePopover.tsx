@@ -3,7 +3,7 @@ import { ComponentProps } from 'react'
 
 import {
   BookmarkOutline,
-  LogOutOutline,
+  LogOut,
   MoreHorizontalOutline,
   SettingsOutline,
   TrendingUpOutline,
@@ -15,11 +15,17 @@ import {
   PopoverContent,
   PopoverTrigger,
   Typography,
+  useModal,
   useTranslation,
 } from '@/common'
+import { LogOutModal } from '@/common/components/logOutModal'
+import { logOut } from '@/common/utils/logOut'
+import { generalStore } from '@/core/store'
 
 export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
   const { t } = useTranslation()
+
+  const { onModalClose: onLogOutModalClose } = useModal(logOut)
 
   return (
     <Popover>
@@ -32,12 +38,13 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
           type={'button'}
         >
           <MoreHorizontalOutline
-            aria-label={'вызов настроек'}
+            aria-label={'Mobile menu'}
             className={'w-6 h-6 active:text-accent-500 focus:text-accent-500'}
           />
         </button>
       </PopoverTrigger>
-      <PopoverContent className={'z-50 block lg:hidden mr-4 py-3   px-4'}>
+
+      <PopoverContent className={'z-50 block lg:hidden mr-4 py-3 px-4'}>
         <nav>
           <ul className={'flex flex-col gap-3'}>
             <li>
@@ -73,13 +80,19 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
             </li>
 
             <li>
-              <LinkWithIcon
-                DefaultIcon={LogOutOutline}
-                as={'button'}
-                className={'py-2'}
-              >
-                <Typography variant={'reg14'}>{t.menu.logOut}</Typography>
-              </LinkWithIcon>
+              <LogOutModal
+                logOutModalHandler={onLogOutModalClose}
+                triggerButton={
+                  <LinkWithIcon
+                    DefaultIcon={LogOut}
+                    as={'button'}
+                    className={'py-2'}
+                  >
+                    <Typography variant={'reg14'}>{t.menu.logOut}</Typography>
+                  </LinkWithIcon>
+                }
+                userEmail={generalStore.user?.email ?? ''}
+              />
             </li>
           </ul>
         </nav>

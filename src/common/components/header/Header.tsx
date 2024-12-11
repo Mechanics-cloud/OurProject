@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import { OutlineBell } from '@/assets/icons'
 import { Button, LangSelect, cn, useTranslation } from '@/common'
 import { MobilePopover } from '@/common/components/header/mobilePopover'
 import { Typography } from '@/common/components/typography'
@@ -7,8 +8,6 @@ import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Paths } from '@/common/paths'
 import { generalStore } from '@/core/store'
 import Link from 'next/link'
-
-import OutlineBell from '../../../assets/icons/outlineIcons/OutlineBell'
 
 const Header = () => {
   const { t } = useTranslation()

@@ -30,7 +30,7 @@ export const LangSelect = () => {
         <span className={'hidden sm:inline'}>English</span>
       </SelectItem>
       <SelectItem
-        className={'[&>span]:gap-3 outline-0 border-0'}
+        className={'[&>span]:gap-3'}
         value={'ru'}
       >
         <FlagRussia
