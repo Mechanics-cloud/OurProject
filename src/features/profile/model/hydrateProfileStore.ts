@@ -1,14 +1,14 @@
-import { Nullable } from '@/common'
-import { makeAutoObservable, runInAction, toJS } from 'mobx'
+import { Nullable, responseErrorHandler } from '@/common'
+import { makeAutoObservable, runInAction } from 'mobx'
 
 import { PublicProfile, profileAPi } from '../settings'
-import { ImagesData, ServerSideProfilePage } from './types'
+import { ImagesData, SSRProfileProps } from './types'
 
 export class HydrateProfileStore {
-  postsData: ImagesData = {} as ImagesData
-  userProfile: PublicProfile = {} as PublicProfile
+  postsData: ImagesData
+  userProfile: PublicProfile
 
-  constructor(initialState: ServerSideProfilePage) {
+  constructor(initialState: SSRProfileProps) {
     this.postsData = initialState.posts || {}
     this.userProfile = initialState.userProfile || {}
     makeAutoObservable(this)
@@ -23,7 +23,8 @@ export class HydrateProfileStore {
       const newPosts = await profileAPi.getPublicPosts(
         ownerId,
         endCursorPostId,
-        signal
+        signal,
+        9
       )
 
       runInAction(() => {
@@ -32,12 +33,12 @@ export class HydrateProfileStore {
           items: [...this.postsData.items, ...newPosts.data.items],
         }
       })
-    } catch (e) {
-      console.log(e)
+    } catch (error) {
+      responseErrorHandler(error)
     }
   }
 
-  setNewData(data: any) {
+  setNewData(data: SSRProfileProps) {
     this.postsData = data.posts
     this.userProfile = data.userProfile
   }
@@ -45,7 +46,7 @@ export class HydrateProfileStore {
 
 export let hydrateProfileStore: Nullable<HydrateProfileStore> = null
 
-export const initializeStore = (initialData: ServerSideProfilePage) => {
+export const initializeStore = (initialData: SSRProfileProps) => {
   const serverStore =
     hydrateProfileStore ?? new HydrateProfileStore(initialData)
 

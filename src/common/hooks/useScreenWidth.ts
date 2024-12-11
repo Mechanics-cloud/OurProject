@@ -15,6 +15,8 @@ export const useScreenWidth = () => {
   const isMobile = debouncedWidth < smallBreakpoint
 
   useEffect(() => {
+    setWidth(window.innerWidth)
+
     const onWindowResize = () => setWidth(window.innerWidth)
 
     window.addEventListener('resize', onWindowResize)

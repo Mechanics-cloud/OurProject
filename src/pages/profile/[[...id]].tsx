@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import { withProtection } from '@/common/HOC/withProtection'
-import { ServerSideProfilePage, profileAPi } from '@/features/profile'
+import { SSRProfileProps, profileAPi } from '@/features/profile'
 import {
   hydrateProfileStore,
   initializeStore,
@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 }
 
-const ProfilePage = observer((props: ServerSideProfilePage) => {
+const ProfilePage = observer((props: SSRProfileProps) => {
   const store = initializeStore(props)
 
   useEffect(() => {

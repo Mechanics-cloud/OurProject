@@ -1,6 +1,6 @@
 import { PublicProfile } from '../settings'
 
-export type ServerSideProfilePage = {
+export type SSRProfileProps = {
   posts: ImagesData
   userProfile: PublicProfile
 }
