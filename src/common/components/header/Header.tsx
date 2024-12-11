@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { Button, LangSelect, cn, useTranslation } from '@/common'
+import { MobilePopover } from '@/common/components/header/mobilePopover'
 import { Typography } from '@/common/components/typography'
 import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Paths } from '@/common/paths'
@@ -41,7 +42,7 @@ const Header = () => {
         <div className={'flex items-center '}>
           {isAuth && (
             <button
-              className={'cursor-pointer mr-12'}
+              className={'cursor-pointer mr-12 hidden lg:block'}
               onClick={() => alert('Картинка нажата!')}
               type={'button'}
             >
@@ -49,6 +50,7 @@ const Header = () => {
             </button>
           )}
           <LangSelect />
+          {isAuth && <MobilePopover className={'ml-3'} />}
           {!isAuth && (
             <>
               <Button

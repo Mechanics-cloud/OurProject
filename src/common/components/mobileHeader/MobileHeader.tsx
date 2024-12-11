@@ -20,8 +20,6 @@ import {
 import { Typography } from '@/common/components/typography'
 import Link from 'next/link'
 
-import { Card } from '../card'
-
 type HeaderProps = {
   isAuth?: boolean
 }
@@ -108,51 +106,46 @@ export const MobileHeader = ({ isAuth }: HeaderProps) => {
               </button>
             </PopoverTrigger>
             <PopoverContent className={'z-50'}>
-              <Card
-                asChild
-                className={'w-[160px] h-[200px] mr-4 mt-0.25 px-3'}
-              >
-                <nav>
-                  <ul>
-                    <Link
-                      className={
-                        'flex items-center gap-2 mb-6  hover:text-accent-500'
-                      }
-                      href={'/'}
-                    >
-                      <SettingsOutline className={'w-6 h-6'} />
-                      <span className={'text-sm'}>Profile Settings</span>
-                    </Link>
-                    <Link
-                      className={
-                        'flex items-center gap-2 mb-6  hover:text-accent-500'
-                      }
-                      href={'/'}
-                    >
-                      <TrendingUpOutline className={'w-6 h-6'} />
-                      <span className={'text-sm'}>Statistics</span>
-                    </Link>
-                    <Link
-                      className={
-                        'flex items-center gap-2 mb-6  hover:text-accent-500'
-                      }
-                      href={'/'}
-                    >
-                      <BookmarkOutline className={'w-6 h-6'} />
-                      <span className={'text-sm'}>Favorites</span>
-                    </Link>
-                    <Link
-                      className={
-                        'flex items-center gap-2 mb-6  hover:text-accent-500'
-                      }
-                      href={'/'}
-                    >
-                      <LogOutOutline className={'w-6 h-6'} />
-                      <span className={'text-sm'}>Log Out</span>
-                    </Link>
-                  </ul>
-                </nav>
-              </Card>
+              <nav>
+                <ul>
+                  <Link
+                    className={
+                      'flex items-center gap-2 mb-6  hover:text-accent-500'
+                    }
+                    href={'/'}
+                  >
+                    <SettingsOutline className={'w-6 h-6'} />
+                    <span className={'text-sm'}>Profile Settings</span>
+                  </Link>
+                  <Link
+                    className={
+                      'flex items-center gap-2 mb-6  hover:text-accent-500'
+                    }
+                    href={'/'}
+                  >
+                    <TrendingUpOutline className={'w-6 h-6'} />
+                    <span className={'text-sm'}>Statistics</span>
+                  </Link>
+                  <Link
+                    className={
+                      'flex items-center gap-2 mb-6  hover:text-accent-500'
+                    }
+                    href={'/'}
+                  >
+                    <BookmarkOutline className={'w-6 h-6'} />
+                    <span className={'text-sm'}>Favorites</span>
+                  </Link>
+                  <Link
+                    className={
+                      'flex items-center gap-2 mb-6  hover:text-accent-500'
+                    }
+                    href={'/'}
+                  >
+                    <LogOutOutline className={'w-6 h-6'} />
+                    <span className={'text-sm'}>Log Out</span>
+                  </Link>
+                </ul>
+              </nav>
             </PopoverContent>
           </Popover>
         )}

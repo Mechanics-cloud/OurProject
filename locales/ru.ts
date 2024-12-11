@@ -123,6 +123,7 @@ export const ru = {
     },
     messenger: 'Сообщения',
     profile: 'Профиль',
+    profileSettings: 'Настройки профиля',
     search: 'Поиск',
     statistics: 'Статистика',
     unfollow: 'Отписаться',
