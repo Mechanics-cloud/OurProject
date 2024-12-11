@@ -1,17 +1,17 @@
-import { Nullable } from '@/common'
+import { ImageUrl, Nullable } from '@/common'
 import { Profile } from '@/features/auth'
 import { makeAutoObservable } from 'mobx'
 
 class GeneralStore {
   isLoading = false
   user: Nullable<Profile> = null
-  userAvatar: Nullable<string> = null
+  userAvatar: Nullable<ImageUrl> = null
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  addUserAvatar(src: Nullable<string>) {
+  addUserAvatar(src: Nullable<ImageUrl>) {
     this.userAvatar = src
   }
 

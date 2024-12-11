@@ -1,25 +1,25 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Person } from '@/assets/icons'
-import { Typography, cn, typographyVariants } from '@/common'
-import Image, { StaticImageData } from 'next/image'
+import { ImageUrl, cn, typographyVariants } from '@/common'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { Variant } from '../typography/Typography'
 
 type Props = {
-  avatarSrc: StaticImageData | string
   name: string
   profileLink: string
+  src: ImageUrl
   variant?: Variant
 } & ComponentPropsWithoutRef<'a'>
 
 export const UserMiniLink = ({
-  avatarSrc,
   className,
   name,
   onClick,
   profileLink,
+  src,
   variant = 'reg16',
 }: Props) => {
   return (
@@ -31,12 +31,12 @@ export const UserMiniLink = ({
       href={profileLink}
       onClick={onClick}
     >
-      {avatarSrc ? (
+      {src ? (
         <Image
           alt={name}
           className={'w-9 h-9 rounded-full'}
           height={36}
-          src={avatarSrc}
+          src={src}
           width={36}
         />
       ) : (

@@ -1,3 +1,4 @@
+import { ImageUrl } from '@/common'
 import Image, { StaticImageData } from 'next/image'
 import {
   EffectFade,
@@ -9,18 +10,11 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
 
-type ImageType = {
-  createdAt?: string
-  fileSize?: number
-  height?: number
-  uploadId?: string
-  url: StaticImageData | string
-  width?: number
+type ImagesTypes = {
+  images: Array<{ url: ImageUrl }>
 }
 
-type ImagesTypes = {
-  images: Array<ImageType>
-}
+//todo remove component
 const Slider = ({ images }: ImagesTypes) => {
   if (images.length === 0) {
     return <p>Нет изображений для отображения</p>
@@ -51,13 +45,11 @@ const Slider = ({ images }: ImagesTypes) => {
           className={'w-full'}
           key={index}
         >
-          {/* <div className={'flex h-full w-auto items-center justify-center'}> */}
           <Image
             alt={''}
             className={'block h-full w-full object-cover'}
             src={image.url}
           />
-          {/* </div> */}
         </SwiperSlide>
       ))}
     </Swiper>
