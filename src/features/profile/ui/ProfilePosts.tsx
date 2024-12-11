@@ -17,6 +17,7 @@ const placeholderImages = [
   { id: 8, img: image4 },
 ]
 
+//todo check. Now it's not used
 export const ProfilePosts = () => {
   return (
     <div

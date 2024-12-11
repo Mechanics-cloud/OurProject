@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
   Typography,
-  useModal,
   useTranslation,
 } from '@/common'
 import { DialogTriggerProps } from '@radix-ui/react-dialog'

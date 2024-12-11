@@ -45,6 +45,7 @@ export const en: LocaleType = {
     cropping: {
       add: 'Add',
       crop: 'Crop',
+      delete: 'Delete',
       originalRatio: 'Original',
       title: 'Cropping',
       zoom: 'Zoom',
