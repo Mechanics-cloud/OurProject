@@ -40,9 +40,9 @@ const PostItem = ({ item, router }: Props) => {
       <div className={'w-full h-9 mb-3 flex  items-center justify-between'}>
         <span className={'flex  items-center space-x-2'}>
           <UserMiniLink
-            avatarSrc={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
             name={item.userName}
             profileLink={`${Paths.profileLink(item.ownerId)}`}
+            src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
           />
           <span
             className={'size-1 bg-light-100 rounded-full relative top-[1px]'}

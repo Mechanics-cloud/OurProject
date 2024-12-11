@@ -16,7 +16,7 @@ export type ErrorResponse = {
 
 export type PhotoResult = {
   photoFile: Nullable<Blob>
-  photoUrl: Nullable<string>
+  photoUrl: Nullable<ImageUrl>
 }
 
 export type ImageUrl = StaticImageData | string

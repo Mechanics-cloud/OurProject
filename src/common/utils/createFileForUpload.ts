@@ -4,7 +4,11 @@ export const createFileForUpload = (photoData: PhotoResult) => {
   if (photoData.photoFile) {
     const mimeType = photoData.photoFile.type
 
-    const filename = photoData.photoUrl?.split('/').pop() || 'avatar.jpg'
+    let filename = 'avatar.jpg'
+
+    if (typeof photoData.photoUrl === 'string') {
+      filename = photoData.photoUrl?.split('/').pop() ?? filename
+    }
 
     return new File([photoData.photoFile], filename, { type: mimeType })
   }
