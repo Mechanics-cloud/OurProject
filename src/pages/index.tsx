@@ -5,8 +5,8 @@ import { DeletePostModal, postsStore } from '@/features/profile/posts'
 import Link from 'next/link'
 
 function Home() {
-  const onDeletePost = (postId: number) => {
-    postsStore.deletePost(postId)
+  const onDeletePost = async (postId: number) => {
+    await postsStore.deletePost(postId)
   }
 
   return (
