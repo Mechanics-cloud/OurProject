@@ -23,7 +23,7 @@ export const useRegistrationConfirmation = () => {
         setIsConfirm(true)
       } catch (error) {
         responseErrorHandler(error)
-        push({
+        await push({
           pathname: Paths.registrationEmailResending,
           query: { code: confirmationCode, email: query.email as string },
         })
