@@ -35,7 +35,7 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
       const containerRect = containerRef.current.getBoundingClientRect()
       const spaceBelow = windowHeight - containerRect.bottom > 40
 
-      if (spaceBelow && !profileStore.stopRequest) {
+      if (spaceBelow && !store.stopRequest) {
         setTriggerLoading((prev) => !prev)
       }
     }

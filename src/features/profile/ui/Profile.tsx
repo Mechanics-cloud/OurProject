@@ -24,7 +24,7 @@ import avatarPlaceholder from '../../../assets/images/avatar.jpg'
 type Props = {
   store: HydrateProfileStore
 }
-
+//todo: remove avatarPlaceholder
 export const Profile = observer(({ store }: Props) => {
   const { t } = useTranslation()
   const { id } = useParams()

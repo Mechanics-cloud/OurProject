@@ -16,6 +16,9 @@ export class HydrateProfileStore {
     makeAutoObservable(this)
   }
   // cleanUp
+  changeLoading(status: boolean) {
+    this.isLoading = status
+  }
   async getUserPhoto(signal?: AbortSignal, pageSize: number = 9) {
     const lastElement = this.postsData.items[this.postsData.items.length - 1]
     const endCursorPostId = lastElement?.id
@@ -25,8 +28,7 @@ export class HydrateProfileStore {
       if (this.isLoading || this.stopRequest) {
         return
       }
-      this.isLoading = true
-
+      this.changeLoading(true)
       const newPosts = await profileAPi.getPublicPosts(
         ownerId,
         endCursorPostId,
@@ -48,11 +50,13 @@ export class HydrateProfileStore {
     } catch (error) {
       responseErrorHandler(error)
     } finally {
-      this.isLoading = false
+      this.changeLoading(false)
     }
   }
 
   setNewData(data: ProfileData) {
+    this.isLoading = false
+    this.stopRequest = false
     this.postsData = data.postsData
     this.userProfile = data.userProfile
   }
