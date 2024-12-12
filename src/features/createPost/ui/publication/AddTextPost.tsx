@@ -25,7 +25,6 @@ export const AddTextPost = observer(() => {
           onClick={(e) => {
             e.preventDefault()
           }}
-          profileLink={''}
           src={userAvatar}
         />
         <TextArea

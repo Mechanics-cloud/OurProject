@@ -8,17 +8,17 @@ import Link from 'next/link'
 import { Variant } from '../typography/Typography'
 
 type Props = {
+  href?: string
   name: string
-  profileLink: string
   src: ImageUrl
   variant?: Variant
 } & ComponentPropsWithoutRef<'a'>
 
 export const UserMiniLink = ({
   className,
+  href = '',
   name,
   onClick,
-  profileLink,
   src,
   variant = 'reg16',
 }: Props) => {
@@ -28,7 +28,7 @@ export const UserMiniLink = ({
         'flex gap-3 items-center hover:text-accent-500 transition',
         className
       )}
-      href={profileLink}
+      href={href}
       onClick={onClick}
     >
       {src ? (
