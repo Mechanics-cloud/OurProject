@@ -36,7 +36,7 @@ export const MiniaturePhoto = observer(
         />
         <Tooltip
           delayDuration={800}
-          title={'Delete'}
+          title={t.createPost.cropping.delete}
         >
           {!isLastPhoto && (
             <span

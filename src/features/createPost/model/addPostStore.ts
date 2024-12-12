@@ -270,7 +270,7 @@ class AddPostStore {
 
       await addPostApi.uploadPostDescription(post)
       this.resetData()
-      profileStore.cleanUpFotosData()
+      profileStore.cleanUpPhotosData()
     } catch (error) {
       responseErrorHandler(error)
     }

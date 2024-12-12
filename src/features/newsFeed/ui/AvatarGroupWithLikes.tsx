@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from 'react'
 
-import { Typography, useTranslation } from '@/common'
+import { BasicPost, ImageUrl, Typography, useTranslation } from '@/common'
 import { observer } from 'mobx-react-lite'
-import Image, { StaticImageData } from 'next/image'
+import Image from 'next/image'
 
-import { LikesStore, Post } from '../model'
+import { LikesStore } from '../model'
 
 type Props = {
-  item: Post
+  item: BasicPost
 }
 
 export const AvatarGroupWithLikes = observer(({ item }: Props) => {
@@ -32,20 +32,18 @@ export const AvatarGroupWithLikes = observer(({ item }: Props) => {
     >
       <div className={'flex'}>
         {firstThreeAvatarImages &&
-          firstThreeAvatarImages.map(
-            (avaUrl: StaticImageData | string, i: number) => {
-              return (
-                <Image
-                  alt={'Avatar'}
-                  className={`size-6 rounded-full ${i > 0 ? `-ml-2` : ''}`}
-                  height={45}
-                  key={i}
-                  src={avaUrl}
-                  width={45}
-                />
-              )
-            }
-          )}
+          firstThreeAvatarImages.map((avaUrl: ImageUrl, i: number) => {
+            return (
+              <Image
+                alt={'Avatar'}
+                className={`size-6 rounded-full ${i > 0 ? `-ml-2` : ''}`}
+                height={45}
+                key={i}
+                src={avaUrl}
+                width={45}
+              />
+            )
+          })}
       </div>
       <span className={'text-[14px] leading-[24px]'}>
         {item.likesCount} &ldquo;

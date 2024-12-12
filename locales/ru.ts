@@ -43,6 +43,7 @@ export const ru = {
     cropping: {
       add: 'Добавить',
       crop: 'Обрезать',
+      delete: 'Удалить',
       originalRatio: 'Оригинал',
       title: 'Обрезка',
       zoom: 'Приблизить',

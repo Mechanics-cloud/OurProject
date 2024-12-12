@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ComponentPropsWithoutRef } from 'react'
 
-import { Typography, cn } from '@/common'
+import { ImageUrl, Typography, cn } from '@/common'
 import { FiltersState } from '@/features/createPost'
 import { prepareFilterStyles } from '@/features/createPost/model/utils/prepareFilterStyles'
 import Image from 'next/image'
@@ -9,7 +9,7 @@ import Image from 'next/image'
 type Props = {
   filterName: string
   filterSettings: FiltersState
-  imageSrc: string
+  imageSrc: ImageUrl
 } & ComponentPropsWithoutRef<'span'>
 
 export const InstFilter = ({

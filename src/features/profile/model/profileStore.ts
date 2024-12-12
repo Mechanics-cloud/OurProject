@@ -48,11 +48,11 @@ class ProfileStore {
     this.userProfile = null
   }
 
-  cleanUpFotosData() {
+  async cleanUpPhotosData() {
     this.stopRequest = false
     this.pageNumber = DEFAULT_PAGE_NUMBER
     this.photos.length = 0
-    this.getUserPhoto()
+    await this.getUserPhoto()
   }
 
   async deleteAvatar() {
