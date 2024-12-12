@@ -1,7 +1,7 @@
 import { PublicProfile } from '../settings'
 
-export type SSRProfileProps = {
-  posts: ImagesData
+export type ProfileData = {
+  postsData: PostData
   userProfile: PublicProfile
 }
 
@@ -13,11 +13,13 @@ type Image = {
   url: string
   width: number
 }
-export type Photo = {
-  id: number
-  images: Image[]
+
+type FullName = {
+  firstName: string
+  lastName: string
 }
-type ImageData = {
+
+type PostItem = {
   avatarOwner: string
   avatarWhoLikes: string[]
   createdAt: string
@@ -27,19 +29,15 @@ type ImageData = {
   isLiked: boolean
   likesCount: number
   location: null | string
-  owner: {
-    firstName: string
-    lastName: string
-  }
+  owner: FullName
   ownerId: number
   updatedAt: string
   userName: string
 }
-export type ImagesData = {
-  items: ImageData[]
-  page: number
+
+export type PostData = {
+  items: PostItem[]
   pageSize: number
-  pagesCount: number
   totalCount: number
-  //totalUsers :839
+  totalUsers: number
 }

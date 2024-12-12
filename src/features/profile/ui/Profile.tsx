@@ -7,6 +7,7 @@ import {
   useTranslation,
 } from '@/common'
 import {
+  HydrateProfileStore,
   PhotoProfilePostsGallery,
   ProfileAboutMe,
   ProfileStatistics,
@@ -19,11 +20,11 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 
 import avatarPlaceholder from '../../../assets/images/avatar.jpg'
-import { HydrateProfileStore } from '../model/hydrateProfileStore'
+
 type Props = {
   store: HydrateProfileStore
 }
-//todo: remove avatarPlaceholder
+
 export const Profile = observer(({ store }: Props) => {
   const { t } = useTranslation()
   const { id } = useParams()
@@ -98,7 +99,7 @@ export const Profile = observer(({ store }: Props) => {
             className={isTablet ? 'mb-7' : 'hidden'}
             isMobile={isMobile}
           />
-          <PhotoProfilePostsGallery posts={store.postsData} />
+          <PhotoProfilePostsGallery store={store} />
         </div>
       </div>
     </UserIdProvider>

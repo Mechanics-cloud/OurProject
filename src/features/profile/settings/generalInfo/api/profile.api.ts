@@ -1,7 +1,11 @@
 import { Environments } from '@/common'
 import { instance } from '@/common/api'
-import { PublicProfile, UpdatedProfile, UserProfile } from '@/features/profile'
-import { ImagesData } from '@/features/profile/model/types'
+import {
+  PostData,
+  PublicProfile,
+  UpdatedProfile,
+  UserProfile,
+} from '@/features/profile'
 import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
@@ -15,32 +19,13 @@ class ProfileApi {
 
     return res.data
   }
-  public async getProfilePosts(
-    page: number,
-    userName: string,
-    signal?: AbortSignal,
-    pageSize: number = 8
-  ) {
-    const res = await this.instance.get<ImagesData>(
-      ProfileEndpoints.posts(userName),
-      {
-        params: {
-          endCursorPostId: 0,
-          pageNumber: page,
-          pageSize: pageSize,
-        },
-        signal: signal,
-      }
-    )
 
-    return res.data
-  }
   public async getPublicPosts(
     userId: number,
     endCursorPostId: number = 0,
     signal?: AbortSignal,
     pageSize: number = 8
-  ): Promise<AxiosResponse> {
+  ): Promise<PostData> {
     return axios(
       Environments.API_URL +
         ProfileEndpoints.publicPosts(userId, endCursorPostId),
@@ -50,7 +35,7 @@ class ProfileApi {
         },
         signal,
       }
-    )
+    ).then((res) => res.data)
   }
   public async getPublicUser(profileId: string): Promise<PublicProfile> {
     return axios(

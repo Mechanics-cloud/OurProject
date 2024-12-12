@@ -3,27 +3,24 @@ import { useInView } from 'react-intersection-observer'
 
 import { ImageOutline } from '@/assets/icons'
 import { Skeleton, cn } from '@/common'
-import { ImagesData, profileStore } from '@/features/profile'
+import { HydrateProfileStore, hydrateProfileStore } from '@/features/profile'
 import { NoPosts } from '@/features/profile/ui/NoPosts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { hydrateProfileStore } from '../model/hydrateProfileStore'
 type Props = {
-  posts: ImagesData
+  store: HydrateProfileStore
 }
 
-export const PhotoProfilePostsGallery = observer(({ posts }: Props) => {
+export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
   const [triggerLoading, setTriggerLoading] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const isNoPostsToShow = !posts.items.length
+  const isNoPostsToShow = !store.postsData.items.length
   const { inView, ref } = useInView({
     threshold: 0.5,
     triggerOnce: false,
   })
-
-  // console.log('PhotoProfilePostsGallery: ' + posts)
 
   useEffect(() => {
     const fetchPosts = async (signal: AbortSignal) => {
@@ -70,7 +67,7 @@ export const PhotoProfilePostsGallery = observer(({ posts }: Props) => {
             )}
             ref={containerRef}
           >
-            {posts.items.map((item) => (
+            {store.postsData.items.map((item) => (
               <Link
                 href={`/${item.id}`}
                 key={item.id}
@@ -99,12 +96,10 @@ export const PhotoProfilePostsGallery = observer(({ posts }: Props) => {
             ))}
           </div>
           <div
-            className={`w-full ${
-              profileStore.stopRequest ? 'h-[1px]' : 'h-[75px]'
-            }`}
+            className={`w-full ${store.stopRequest ? 'h-[1px]' : 'h-[75px]'}`}
             ref={ref}
           >
-            {profileStore.isLoading && (
+            {store.isLoading && (
               <Skeleton className={'w-full h-[228px] mt-3'} />
             )}
           </div>

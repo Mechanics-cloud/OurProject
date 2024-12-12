@@ -2,51 +2,75 @@ import { Nullable, responseErrorHandler } from '@/common'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { PublicProfile, profileAPi } from '../settings'
-import { ImagesData, SSRProfileProps } from './types'
+import { PostData, ProfileData } from './types'
 
 export class HydrateProfileStore {
-  postsData: ImagesData
+  isLoading: boolean = false
+  postsData: PostData
+  stopRequest: boolean = false
   userProfile: PublicProfile
 
-  constructor(initialState: SSRProfileProps) {
-    this.postsData = initialState.posts || {}
+  constructor(initialState: ProfileData) {
+    this.postsData = initialState.postsData || {}
     this.userProfile = initialState.userProfile || {}
     makeAutoObservable(this)
   }
-
-  async getUserPhoto(signal?: AbortSignal) {
+  // cleanUp
+  async getUserPhoto(signal?: AbortSignal, pageSize: number = 9) {
     const lastElement = this.postsData.items[this.postsData.items.length - 1]
-    const endCursorPostId = lastElement.id
-    const ownerId = lastElement.ownerId
+    const endCursorPostId = lastElement?.id
+    const ownerId = this.userProfile.id
 
     try {
+      if (this.isLoading || this.stopRequest) {
+        return
+      }
+      this.isLoading = true
+
       const newPosts = await profileAPi.getPublicPosts(
         ownerId,
         endCursorPostId,
         signal,
-        9
+        pageSize
       )
 
       runInAction(() => {
         this.postsData = {
           ...this.postsData,
-          items: [...this.postsData.items, ...newPosts.data.items],
+          items: [...this.postsData.items, ...newPosts.items],
         }
+        if (newPosts.items.length < 8) {
+          this.stopRequest = true
+        }
+
+        return newPosts.items
       })
     } catch (error) {
       responseErrorHandler(error)
+    } finally {
+      this.isLoading = false
     }
   }
 
-  setNewData(data: SSRProfileProps) {
-    this.postsData = data.posts
+  setNewData(data: ProfileData) {
+    this.postsData = data.postsData
     this.userProfile = data.userProfile
+  }
+
+  async updatePhotosData() {
+    this.isLoading = false
+    this.stopRequest = false
+    const newPosts = await profileAPi.getPublicPosts(this.userProfile.id)
+
+    runInAction(() => {
+      this.postsData = newPosts
+    })
   }
 }
 
 export let hydrateProfileStore: Nullable<HydrateProfileStore> = null
 
-export const initializeStore = (initialData: SSRProfileProps) => {
+export const initializeStore = (initialData: ProfileData) => {
   const serverStore =
     hydrateProfileStore ?? new HydrateProfileStore(initialData)
 

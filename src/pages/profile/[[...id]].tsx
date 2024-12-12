@@ -1,12 +1,15 @@
 import { useEffect } from 'react'
 
+import { Environments } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { SSRProfileProps, profileAPi } from '@/features/profile'
 import {
+  ProfileData,
   hydrateProfileStore,
   initializeStore,
-} from '@/features/profile/model/hydrateProfileStore'
+  profileAPi,
+} from '@/features/profile'
 import { Profile } from '@/features/profile/ui/Profile'
+import axios from 'axios'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
@@ -22,11 +25,9 @@ export const getServerSideProps: GetServerSideProps = async (
   }
   try {
     const userProfile = await profileAPi.getPublicUser(params.id[0])
-    const posts = await profileAPi
-      .getPublicPosts(userProfile.id)
-      .then((res) => res.data)
+    const postsData = await profileAPi.getPublicPosts(userProfile.id)
 
-    return { props: { posts, userProfile } }
+    return { props: { postsData, userProfile } }
   } catch {
     return {
       notFound: true,
@@ -34,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 }
 
-const ProfilePage = observer((props: SSRProfileProps) => {
+const ProfilePage = observer((props: ProfileData) => {
   const store = initializeStore(props)
 
   useEffect(() => {
