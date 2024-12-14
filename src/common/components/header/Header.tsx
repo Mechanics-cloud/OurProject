@@ -53,12 +53,16 @@ const Header = () => {
           {!isAuth && (
             <>
               <Button
-                className={'mr-6 ml-9'}
+                asChild
+                className={'mr-3 px-4 md:ml-9 md:mr-6 md:px-6'}
                 variant={'text'}
               >
                 <Link href={Paths.signIn}>{t.logIn}</Link>
               </Button>
-              <Button asChild>
+              <Button
+                asChild
+                className={'px-4 md:px-6'}
+              >
                 <Link href={Paths.signUp}>{t.signUp}</Link>
               </Button>
             </>
