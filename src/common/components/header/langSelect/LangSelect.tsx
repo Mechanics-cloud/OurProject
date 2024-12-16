@@ -13,7 +13,9 @@ export const LangSelect = () => {
 
   return (
     <Select
-      className={'[&>button]:border-none'}
+      className={
+        '[&>button]:border-none focus-within:outline-2 focus-within:outline'
+      }
       defaultValue={locale ?? 'ru'}
       onValueChange={changeLangHandler}
     >
@@ -22,7 +24,7 @@ export const LangSelect = () => {
         value={'en'}
       >
         <FlagUnitedKingdom
-          aria-label={'английский язык'}
+          aria-label={'Switch to english'}
           className={'size-6'}
         />
         <span className={'hidden sm:inline'}>English</span>
@@ -32,7 +34,7 @@ export const LangSelect = () => {
         value={'ru'}
       >
         <FlagRussia
-          aria-label={'русский язык'}
+          aria-label={'Переключиться на русский язык'}
           className={'size-6'}
         />
         <span className={'hidden sm:inline'}>Русский</span>

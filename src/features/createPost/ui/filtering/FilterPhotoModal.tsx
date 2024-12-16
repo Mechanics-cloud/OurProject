@@ -21,7 +21,7 @@ export const FilterPhotoModal = observer(() => {
       className={cn(
         'md:max-w-[972px] gap-0',
         'max-w-full md:bg-dark-300 bg-dark-700 md:border border-0 w-full',
-        'md:top-[50%] md:translate-y-[-50%] top-0 translate-y-0 overflow-y-auto h-full'
+        'md:top-[50%] md:translate-y-[-50%] top-0 translate-y-0 overflow-y-auto h-full md:h-auto'
       )}
       crossOff
     >
