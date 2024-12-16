@@ -16,7 +16,7 @@ export const ClassicFilters = observer(() => {
   }
 
   return (
-    <ScrollArea className={'h-[430px]'}>
+    <ScrollArea className={'md:h-[430px]'}>
       <div
         className={
           'grid grid-cols-[min-content_1fr] gap-x-5 gap-y-12 pt-14 px-[53px]'
