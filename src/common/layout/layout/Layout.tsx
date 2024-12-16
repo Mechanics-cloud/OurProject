@@ -32,18 +32,18 @@ export const Layout = forwardRef<ElementRef<'div'>, Props>(
         <Header />
         <ScrollArea
           className={'w-full h-full pt-[var(--header-height)] box-border'}
+          isGoToTop
+          ref={ref}
         >
           <main
             className={cn(
-              'border-t-[1px] border-transparent w-full max-w-screen-2xl mx-auto px-6 md:px-10 lg:px-16',
+              'border-t-[1px] border-transparent w-full max-w-screen-2xl mx-auto px-6 md:px-10 lg:px-16 lg:h-headCalc',
               className
             )}
-            ref={ref}
           >
             {children}
           </main>
         </ScrollArea>
-        <GoTopButton />
       </>
     )
   }
