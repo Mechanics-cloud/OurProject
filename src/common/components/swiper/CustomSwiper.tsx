@@ -1,4 +1,4 @@
-import { ImageUrl } from '@/common'
+import { ImageUrl, cn } from '@/common'
 import Image from 'next/image'
 import {
   EffectFade,
@@ -6,21 +6,24 @@ import {
   Navigation,
   Pagination,
 } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
 
 type ImagesTypes = {
+  className?: string
   images: Array<{ url: ImageUrl }>
-}
-const CustomSwiper = ({ images }: ImagesTypes) => {
+} & Omit<SwiperProps, 'className' | 'images'>
+
+const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
   if (images.length === 0) {
     return <p>Нет изображений для отображения</p>
+    //TODO t.slider.noText - возможно вернуть заставку, что картинку поста неудалось загрузить
   }
 
   return (
     <Swiper
-      className={'h-full w-full'}
+      className={cn('h-full w-full', className)}
       effect={'fade'}
       hashNavigation={{
         watchState: true,
@@ -35,6 +38,7 @@ const CustomSwiper = ({ images }: ImagesTypes) => {
       pagination={{
         clickable: true,
       }}
+      {...restProps}
       spaceBetween={30}
       watchSlidesProgress
     >
