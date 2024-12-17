@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ComponentProps, useState } from 'react'
 
 import { Heart } from '@/assets/icons/filledIcons'
 import {
@@ -7,7 +7,7 @@ import {
   MessageCircleOutline,
   PaperPlaneOutline,
 } from '@/assets/icons/outlineIcons'
-import { BasicPost, Tooltip, useTranslation } from '@/common'
+import { BasicPost, Tooltip, cn, useTranslation } from '@/common'
 import { LikeStatus } from '@/common/enums'
 import { newsFeedStore } from '@/features/newsFeed'
 import { postsApi } from '@/features/posts'
@@ -17,9 +17,9 @@ import Link from 'next/link'
 
 type Props = {
   item: BasicPost
-}
+} & ComponentProps<'div'>
 //TODO to change (in progress) вынести логику, добавить логику на кнопки
-export const LinksGroup = observer(({ item }: Props) => {
+export const LinksGroup = observer(({ className, item }: Props) => {
   const { t } = useTranslation()
   const [isChangeLike, setIsChangeLike] = useState<boolean>(false)
   const [loadingRequestFlag, setLoadingRequestFlag] = useState<boolean>(false)
@@ -48,7 +48,12 @@ export const LinksGroup = observer(({ item }: Props) => {
   }
 
   return (
-    <div className={'w-full h-6 flex items-center justify-between mb-4'}>
+    <div
+      className={cn(
+        'w-full h-6 flex items-center justify-between mb-4',
+        className
+      )}
+    >
       <div className={'flex items-center gap-5'}>
         <button
           disabled={isChangeLike}

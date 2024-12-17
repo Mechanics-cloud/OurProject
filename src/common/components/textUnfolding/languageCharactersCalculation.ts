@@ -4,7 +4,7 @@ const containsCyrillic = (text: string): boolean => {
   return cyrillicPattern.test(text)
 }
 
-export const charactersCalculation = (
+export const languageCharactersCalculation = (
   text: string,
   charactersCount: number
 ): number => {

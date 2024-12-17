@@ -63,9 +63,12 @@ const PostItem = ({ item, router }: Props) => {
           t.slider.noText
         )}
       </section>
-      <LinksGroup item={item} />
-      <div className={'w-full inline-flex gap-3'}>
-        <div className={'min-w-[36px] flex items-center pb-6'}>
+      <LinksGroup
+        className={'mb-5'}
+        item={item}
+      />
+      <div className={'w-full inline-flex gap-3 items-start'}>
+        <div className={'min-w-[36px] flex items-center align-top -mt-1'}>
           <Image
             alt={'Avatar'}
             className={'size-9 rounded-full'}
@@ -75,10 +78,7 @@ const PostItem = ({ item, router }: Props) => {
           />
         </div>
         <TextUnfolding
-          charactersToShow={calculateCharactersToShow(
-            item.description,
-            item.userName
-          )}
+          charactersToShow={calculateCharactersToShow(170, item.userName)}
           className={'text-justify break-words'}
           link={
             <span className={'mr-2 inline-block'}>

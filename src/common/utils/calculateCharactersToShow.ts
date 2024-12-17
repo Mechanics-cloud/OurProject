@@ -1,6 +1,8 @@
 export const calculateCharactersToShow = (
-  description: string,
+  fullText: number | string,
   userName: string
 ) => {
-  return description.length - userName.length
+  const textLenght = typeof fullText === 'string' ? fullText.length : fullText
+
+  return textLenght - userName.length
 }

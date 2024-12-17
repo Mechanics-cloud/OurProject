@@ -2,14 +2,14 @@ import * as React from 'react'
 import { ComponentProps, ReactNode } from 'react'
 
 import { Button, Typography, cn, useToggle, useTranslation } from '@/common'
-
-import { charactersCalculation } from './languageChecker'
+import { languageCharactersCalculation } from 'src/common/components/textUnfolding/languageCharactersCalculation'
 
 type Props = {
   charactersToShow?: number
   children: string
   link?: ReactNode
 } & ComponentProps<'p'>
+
 export const TextUnfolding = ({
   charactersToShow = 250,
   children,
@@ -18,7 +18,7 @@ export const TextUnfolding = ({
 }: Props) => {
   const { t } = useTranslation()
   const { state: showMore, toggle: toggleShowMore } = useToggle()
-  const charactersCountToShow = charactersCalculation(
+  const charactersCountToShow = languageCharactersCalculation(
     children,
     charactersToShow
   )
