@@ -1,7 +1,7 @@
 import { Environments } from '@/common'
 import { instance } from '@/common/api'
 import {
-  PostData,
+  ImagesData,
   PublicProfile,
   UpdatedProfile,
   UserProfile,
@@ -25,7 +25,7 @@ class ProfileApi {
     endCursorPostId: number = 0,
     signal?: AbortSignal,
     pageSize: number = 8
-  ): Promise<PostData> {
+  ): Promise<ImagesData> {
     return axios(
       Environments.API_URL +
         ProfileEndpoints.publicPosts(userId, endCursorPostId),

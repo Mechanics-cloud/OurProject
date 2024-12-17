@@ -1,13 +1,13 @@
 import { Typography } from '@/common'
 
-import { UserMetadata } from '../settings'
+import { UserStats } from '../settings'
 
 type Props = {
   followers: string
   following: string
   isMobile: boolean
   publications: string
-  userMetadata: UserMetadata
+  userMetadata: UserStats
 }
 export const ProfileStatistics = ({
   followers,

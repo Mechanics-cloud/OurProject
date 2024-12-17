@@ -2,11 +2,12 @@ import { Nullable, responseErrorHandler } from '@/common'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { PublicProfile, profileAPi } from '../settings'
-import { PostData, ProfileData } from './types'
+import { ImagesData, ProfileData } from './types'
 
 export class HydrateProfileStore {
   isLoading: boolean = false
-  postsData: PostData
+  isUpdatePost: boolean = false
+  postsData: ImagesData
   stopRequest: boolean = false
   userProfile: PublicProfile
 
@@ -15,9 +16,11 @@ export class HydrateProfileStore {
     this.userProfile = initialState.userProfile || {}
     makeAutoObservable(this)
   }
-  // cleanUp
   changeLoading(status: boolean) {
     this.isLoading = status
+  }
+  changeUpdatePost(status: boolean) {
+    this.isUpdatePost = status
   }
   async getUserPhoto(signal?: AbortSignal, pageSize: number = 9) {
     const lastElement = this.postsData.items[this.postsData.items.length - 1]
@@ -64,11 +67,18 @@ export class HydrateProfileStore {
   async updatePhotosData() {
     this.isLoading = false
     this.stopRequest = false
-    const newPosts = await profileAPi.getPublicPosts(this.userProfile.id)
+    this.changeUpdatePost(true)
+    try {
+      const newPosts = await profileAPi.getPublicPosts(this.userProfile.id)
 
-    runInAction(() => {
-      this.postsData = newPosts
-    })
+      runInAction(() => {
+        this.postsData = newPosts
+      })
+    } catch (error) {
+      responseErrorHandler(error)
+    } finally {
+      this.changeUpdatePost(false)
+    }
   }
 }
 

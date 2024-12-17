@@ -45,6 +45,7 @@ export const en: LocaleType = {
     cropping: {
       add: 'Add',
       crop: 'Crop',
+      delete: 'Delete',
       originalRatio: 'Original',
       title: 'Cropping',
       zoom: 'Zoom',
@@ -125,6 +126,7 @@ export const en: LocaleType = {
     },
     messenger: 'Messenger',
     profile: 'Profile',
+    profileSettings: 'Profile settings',
     search: 'Search',
     statistics: 'Statistics',
     unfollow: 'Unfollow',

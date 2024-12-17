@@ -1,43 +1,17 @@
+import { BasicPost, PagesInfo } from '@/common'
+
 import { PublicProfile } from '../settings'
 
 export type ProfileData = {
-  postsData: PostData
+  postsData: ImagesData
   userProfile: PublicProfile
 }
 
-type Image = {
-  createdAt: string
-  fileSize: number
-  height: number
-  uploadId: string
-  url: string
-  width: number
-}
-
-type FullName = {
-  firstName: string
-  lastName: string
-}
-
-type PostItem = {
-  avatarOwner: string
+type ImageData = {
   avatarWhoLikes: string[]
-  createdAt: string
-  description: string
-  id: number
-  images: Image[]
-  isLiked: boolean
-  likesCount: number
-  location: null | string
-  owner: FullName
-  ownerId: number
-  updatedAt: string
-  userName: string
-}
+} & BasicPost
 
-export type PostData = {
-  items: PostItem[]
-  pageSize: number
-  totalCount: number
+export type ImagesData = {
+  items: ImageData[]
   totalUsers: number
-}
+} & Omit<PagesInfo, 'pagesCount'>

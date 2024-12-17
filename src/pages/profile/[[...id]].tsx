@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 
-import { Environments } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import {
   ProfileData,
@@ -9,7 +8,6 @@ import {
   profileAPi,
 } from '@/features/profile'
 import { Profile } from '@/features/profile/ui/Profile'
-import axios from 'axios'
 import { observer } from 'mobx-react-lite'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 

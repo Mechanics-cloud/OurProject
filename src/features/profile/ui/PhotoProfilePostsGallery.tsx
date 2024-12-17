@@ -4,10 +4,11 @@ import { useInView } from 'react-intersection-observer'
 import { ImageOutline } from '@/assets/icons'
 import { Skeleton, cn } from '@/common'
 import { HydrateProfileStore, hydrateProfileStore } from '@/features/profile'
-import { NoPosts } from '@/features/profile/ui/NoPosts'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
+
+import { NoPosts } from './NoPosts'
 
 type Props = {
   store: HydrateProfileStore
@@ -53,7 +54,7 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
     return () => {
       controller.abort()
     }
-  }, [inView, triggerLoading])
+  }, [inView, triggerLoading, store.stopRequest])
 
   return (
     <>
@@ -67,6 +68,7 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
             )}
             ref={containerRef}
           >
+            {store.isUpdatePost && <Skeleton className={'rounded-none'} />}
             {store.postsData.items.map((item) => (
               <Link
                 href={`/${item.id}`}

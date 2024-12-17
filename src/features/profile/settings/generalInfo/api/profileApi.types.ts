@@ -1,4 +1,4 @@
-import { PhotoResult } from '@/common'
+import { FullName, ImageFile, PhotoResult } from '@/common'
 
 export type UpdatedProfile = {
   photoData?: PhotoResult
@@ -6,30 +6,20 @@ export type UpdatedProfile = {
 } & Omit<Required<UserInfo>, 'photoData'>
 
 export type UserProfile = {
-  avatars: Avatar[]
+  avatars: ImageFile[]
   createdAt: string
   id: number
 } & Omit<UpdatedProfile, 'photoData'>
-
-export type Avatar = {
-  createdAt: string
-  fileSize: number
-  height: number
-  url: string
-  width: number
-}
 
 export type UserInfo = {
   aboutMe?: string
   city?: string
   country?: string
   dateOfBirth?: string
-  firstName: string
-  lastName: string
   userName: string
-}
+} & FullName
 
-export type UserMetadata = {
+export type UserStats = {
   followers: number
   following: number
   publications: number
@@ -37,8 +27,8 @@ export type UserMetadata = {
 
 export type PublicProfile = {
   aboutMe: string
-  avatars: Avatar[]
+  avatars: ImageFile[]
   id: number
-  userMetadata: UserMetadata
+  userMetadata: UserStats
   userName: string
 }

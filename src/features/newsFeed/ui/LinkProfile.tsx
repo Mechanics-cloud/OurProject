@@ -1,4 +1,4 @@
-import { Paths, Typography, typographyVariants } from '@/common'
+import { Paths, typographyVariants } from '@/common'
 import Link from 'next/link'
 
 type Props = {

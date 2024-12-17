@@ -43,6 +43,7 @@ export const ru = {
     cropping: {
       add: 'Добавить',
       crop: 'Обрезать',
+      delete: 'Удалить',
       originalRatio: 'Оригинал',
       title: 'Обрезка',
       zoom: 'Приблизить',
@@ -123,6 +124,7 @@ export const ru = {
     },
     messenger: 'Сообщения',
     profile: 'Профиль',
+    profileSettings: 'Настройки профиля',
     search: 'Поиск',
     statistics: 'Статистика',
     unfollow: 'Отписаться',
