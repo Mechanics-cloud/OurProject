@@ -1,28 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
-import { useTranslation } from '@/common'
+import { getFromLocalStorage, useTranslation } from '@/common'
+import { StorageKeys } from '@/common/enums'
 import { authStore } from '@/features/auth'
+import { runInAction } from 'mobx'
 
 export const useMe = () => {
   const { t } = useTranslation()
 
-  const [loading, setLoading] = useState(true)
-
   useEffect(() => {
-    const controller = new AbortController()
-
-    authStore
-      .me()
-      .catch(() => {
+    if (getFromLocalStorage(StorageKeys.AccessToken)) {
+      authStore.me().catch(() => {
         toast.success(t.auth.welcome, { closeButton: false })
       })
-      .finally(() => setLoading(false))
-
-    return () => {
-      controller.abort()
+    } else {
+      runInAction(() => {
+        authStore.isAuthenticated = 'no'
+      })
     }
   }, [t.auth.welcome])
-
-  return { loading }
 }

@@ -13,7 +13,6 @@ type Props = {
 export const ScrollArea = forwardRef<
   ElementRef<typeof ScrollAreaPrimitive.Root>,
   Props
->(({ children, className, orientation, ...props }, ref) => {
 >(({ children, className, isGoToTop = false, orientation, ...props }, ref) => {
   const scrollableRef = useRef<HTMLDivElement>(null)
 

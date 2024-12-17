@@ -33,4 +33,7 @@ function ServerError() {
   )
 }
 
-export default withProtection(ServerError, true, true)
+export default withProtection(ServerError, {
+  isNotForAuthorizedUsers: true,
+  isPublic: true,
+})

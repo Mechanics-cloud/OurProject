@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 
 import { ReactElement, ReactNode } from 'react'
 
-import { Environments, useTranslation } from '@/common'
+import { Environments, useMe, useTranslation } from '@/common'
 import { setTranslation } from '@/common/utils/setTranslation'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
   const { t } = useTranslation()
 
+  useMe()
   setTranslation(t)
 
   return getLayout(

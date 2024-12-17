@@ -1,7 +1,9 @@
 import React, { ReactElement, ReactNode, useEffect } from 'react'
 
-import { LayoutWithStore, getFromLocalStorage } from '@/common'
-import { authStore } from '@/features/auth'
+import { LayoutWithStore, SideBar, getFromLocalStorage } from '@/common'
+import { StorageKeys } from '@/common/enums'
+import { generalStore } from '@/core/store'
+import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import { NextPage } from 'next'
 
@@ -14,19 +16,25 @@ export const withServerSide = <P extends object>(
 ): NextPageWithLayout<P> =>
   observer((props) => {
     useEffect(() => {
-      const controller = new AbortController()
-      const authMe = async () => {
-        if (getFromLocalStorage('accessToken')) {
-          await authStore.me(controller.signal)
-        }
-      }
-
-      authMe()
-
-      return () => {
-        controller.abort()
+      if (getFromLocalStorage(StorageKeys.AccessToken)) {
+        profileStore.getProfile()
       }
     }, [])
+
+    if (generalStore.user) {
+      return (
+        <LayoutWithStore className={'flex'}>
+          <SideBar />
+          <div
+            className={
+              'lg:pl-9 w-full lg:border-l-2 lg:border-dark-300 lg:h-headCalc'
+            }
+          >
+            <PageComponent {...props} />
+          </div>
+        </LayoutWithStore>
+      )
+    }
 
     return (
       <LayoutWithStore>

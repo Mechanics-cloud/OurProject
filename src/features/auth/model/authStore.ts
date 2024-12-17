@@ -8,12 +8,16 @@ import { isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AuthStore {
+  isAuthenticated: 'error' | 'no' | 'pending' | 'yes' = 'pending'
   constructor() {
     makeAutoObservable(this)
   }
 
   async authWithGoogle(code: string) {
     try {
+      runInAction(() => {
+        this.isAuthenticated = 'pending'
+      })
       const res = await authApi.authWithGoogle(code)
 
       setToLocalStorage(StorageKeys.AccessToken, res.data.accessToken)
@@ -22,11 +26,17 @@ class AuthStore {
       return { res, userInfo }
     } catch (error) {
       responseErrorHandler(error)
+      runInAction(() => {
+        this.isAuthenticated = 'error'
+      })
     }
   }
 
   async login(data: SignInFields) {
     try {
+      runInAction(() => {
+        this.isAuthenticated = 'pending'
+      })
       const accessToken = await authApi.login(data)
 
       setToLocalStorage(StorageKeys.AccessToken, accessToken)
@@ -34,6 +44,9 @@ class AuthStore {
       await this.me()
     } catch (error) {
       responseErrorHandler(error)
+      runInAction(() => {
+        this.isAuthenticated = 'error'
+      })
 
       return Promise.reject(error)
     }
@@ -41,8 +54,14 @@ class AuthStore {
 
   async logout() {
     try {
+      runInAction(() => {
+        this.isAuthenticated = 'pending'
+      })
       await authApi.logout()
       await clearAllData()
+      runInAction(() => {
+        this.isAuthenticated = 'no'
+      })
     } catch (error) {
       if (isAxiosError(error)) {
         if (error.response?.status === StatusCode.Unauthorized) {
@@ -50,19 +69,36 @@ class AuthStore {
         }
       }
       responseErrorHandler(error)
+      runInAction(() => {
+        this.isAuthenticated = 'error'
+      })
     }
   }
 
-  async me(signal?: AbortSignal) {
-    const user = await authApi.me(signal)
+  async me() {
+    if (this.isAuthenticated === 'yes' || this.isAuthenticated === 'no') {
+      return
+    }
+    try {
+      runInAction(() => {
+        this.isAuthenticated = 'pending'
+      })
+      const user = await authApi.me()
 
-    runInAction(() => {
-      if (user) {
-        generalStore.user = user
-      }
-    })
+      runInAction(() => {
+        if (user) {
+          generalStore.user = user
+          this.isAuthenticated = 'yes'
+        }
+      })
 
-    return user
+      return user
+    } catch (error) {
+      runInAction(() => {
+        this.isAuthenticated = 'error'
+      })
+      // console.log(error)
+    }
   }
 }
 

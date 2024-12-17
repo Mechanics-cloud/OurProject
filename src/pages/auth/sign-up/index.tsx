@@ -5,4 +5,7 @@ const SignUp = () => {
   return <SignUpForm />
 }
 
-export default withProtection(SignUp, true, true)
+export default withProtection(SignUp, {
+  isNotForAuthorizedUsers: true,
+  isPublic: true,
+})

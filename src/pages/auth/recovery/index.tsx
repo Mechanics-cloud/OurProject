@@ -13,4 +13,7 @@ function RecoveryPassword() {
   )
 }
 
-export default withProtection(RecoveryPassword, true, true)
+export default withProtection(RecoveryPassword, {
+  isNotForAuthorizedUsers: true,
+  isPublic: true,
+})

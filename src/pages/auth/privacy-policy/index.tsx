@@ -95,4 +95,4 @@ function PrivacyPolicy() {
   )
 }
 
-export default withProtection(PrivacyPolicy, true)
+export default withProtection(PrivacyPolicy, { isPublic: true })

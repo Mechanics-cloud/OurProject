@@ -44,4 +44,7 @@ const ExpiredSession = () => {
   )
 }
 
-export default withProtection(ExpiredSession, true, true)
+export default withProtection(ExpiredSession, {
+  isNotForAuthorizedUsers: true,
+  isPublic: true,
+})
