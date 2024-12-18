@@ -1,16 +1,20 @@
 import { Typography } from '@/common'
 
+import { UserStats } from '../settings'
+
 type Props = {
   followers: string
   following: string
   isMobile: boolean
   publications: string
+  userMetadata: UserStats
 }
 export const ProfileStatistics = ({
   followers,
   following,
   isMobile,
   publications,
+  userMetadata,
 }: Props) => {
   return (
     <div
@@ -19,19 +23,25 @@ export const ProfileStatistics = ({
       }
     >
       <div className={'flex flex-col text-center'}>
-        <Typography variant={isMobile ? 'small' : 'reg14'}>2218</Typography>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>
+          {userMetadata.following}
+        </Typography>
         <Typography variant={isMobile ? 'small' : 'reg14'}>
           {following}
         </Typography>
       </div>
       <div className={'flex flex-col text-center'}>
-        <Typography variant={isMobile ? 'small' : 'reg14'}>2218</Typography>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>
+          {userMetadata.followers}
+        </Typography>
         <Typography variant={isMobile ? 'small' : 'reg14'}>
           {followers}
         </Typography>
       </div>
       <div className={'flex flex-col text-center'}>
-        <Typography variant={isMobile ? 'small' : 'reg14'}>2218</Typography>
+        <Typography variant={isMobile ? 'small' : 'reg14'}>
+          {userMetadata.publications}
+        </Typography>
         <Typography variant={isMobile ? 'small' : 'reg14'}>
           {publications}
         </Typography>

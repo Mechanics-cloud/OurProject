@@ -1,13 +1,13 @@
 import { Paid } from '@/assets/icons'
 import {
   Button,
-  Loader,
   Paths,
   Typography,
   useScreenWidth,
   useTranslation,
 } from '@/common'
 import {
+  HydrateProfileStore,
   PhotoProfilePostsGallery,
   ProfileAboutMe,
   ProfileStatistics,
@@ -21,20 +21,18 @@ import { useRouter } from 'next/router'
 
 import avatarPlaceholder from '../../../assets/images/avatar.jpg'
 
+type Props = {
+  store: HydrateProfileStore
+}
 //todo: remove avatarPlaceholder
-export const Profile = observer(() => {
+export const Profile = observer(({ store }: Props) => {
   const { t } = useTranslation()
   const { query } = useRouter()
   const { followers, following, publications, settingsButton } = t.profilePage
-  const { userProfile } = profileStore
 
-  const avatar = userProfile?.avatars[0]?.url
+  const avatar = store.userProfile?.avatars[0]?.url
 
   const { isMobile, isTablet } = useScreenWidth()
-
-  if (!profileStore.userProfile) {
-    return <Loader />
-  }
 
   return (
     <UserIdProvider ctx={query.id ? +query.id[0] : null}>
@@ -63,25 +61,27 @@ export const Profile = observer(() => {
                   className={'flex text-light-100 items-center gap-3'}
                   variant={'h1'}
                 >
-                  {userProfile?.userName ?? 'URL Profile'}
+                  {store.userProfile?.userName ?? 'URL Profile'}
                   <Paid />
                 </Typography>
-
-                <Button
-                  className={'hidden md:block'}
-                  variant={'secondary'}
-                >
-                  <Link href={Paths.profileSettings}>{settingsButton}</Link>
-                </Button>
+                {profileStore.userProfile?.id === store.userProfile.id && (
+                  <Button
+                    className={'hidden md:block'}
+                    variant={'secondary'}
+                  >
+                    <Link href={Paths.profileSettings}>{settingsButton}</Link>
+                  </Button>
+                )}
               </div>
               <ProfileStatistics
                 followers={followers}
                 following={following}
                 isMobile={isMobile}
                 publications={publications}
+                userMetadata={store.userProfile.userMetadata}
               />
               <ProfileAboutMe
-                aboutMe={userProfile?.aboutMe}
+                aboutMe={store.userProfile?.aboutMe}
                 className={isTablet ? 'hidden' : 'mt-6'}
                 isMobile={isMobile}
               />
@@ -91,15 +91,15 @@ export const Profile = observer(() => {
             className={'md:hidden flex text-light-100 items-center gap-3 mb-3'}
             variant={'h1'}
           >
-            {userProfile?.userName ?? 'URL Profile'}
+            {store.userProfile?.userName ?? 'URL Profile'}
             <Paid />
           </Typography>
           <ProfileAboutMe
-            aboutMe={userProfile?.aboutMe}
+            aboutMe={store.userProfile?.aboutMe}
             className={isTablet ? 'mb-7' : 'hidden'}
             isMobile={isMobile}
           />
-          <PhotoProfilePostsGallery />
+          <PhotoProfilePostsGallery store={store} />
         </div>
       </div>
     </UserIdProvider>

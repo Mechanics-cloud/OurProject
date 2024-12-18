@@ -3,17 +3,21 @@ import { useInView } from 'react-intersection-observer'
 
 import { ImageOutline } from '@/assets/icons'
 import { Skeleton, cn } from '@/common'
-import { profileStore } from '@/features/profile'
-import { NoPosts } from '@/features/profile/ui/NoPosts'
+import { HydrateProfileStore, hydrateProfileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export const PhotoProfilePostsGallery = observer(() => {
+import { NoPosts } from './NoPosts'
+
+type Props = {
+  store: HydrateProfileStore
+}
+
+export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
   const [triggerLoading, setTriggerLoading] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  const photos = profileStore?.photos
-  const isNoPostsToShow = profileStore.stopRequest && photos?.length === 0
+  const isNoPostsToShow = !store.postsData.items.length
   const { inView, ref } = useInView({
     threshold: 0.5,
     triggerOnce: false,
@@ -21,7 +25,7 @@ export const PhotoProfilePostsGallery = observer(() => {
 
   useEffect(() => {
     const fetchPosts = async (signal: AbortSignal) => {
-      await profileStore.getUserPhoto({ signal })
+      await hydrateProfileStore?.getUserPhoto(signal)
     }
 
     const triggerRerender = () => {
@@ -32,7 +36,7 @@ export const PhotoProfilePostsGallery = observer(() => {
       const containerRect = containerRef.current.getBoundingClientRect()
       const spaceBelow = windowHeight - containerRect.bottom > 40
 
-      if (spaceBelow && !profileStore.stopRequest) {
+      if (spaceBelow && !store.stopRequest) {
         setTriggerLoading((prev) => !prev)
       }
     }
@@ -50,7 +54,7 @@ export const PhotoProfilePostsGallery = observer(() => {
     return () => {
       controller.abort()
     }
-  }, [inView, triggerLoading])
+  }, [inView, triggerLoading, store.stopRequest])
 
   return (
     <>
@@ -64,7 +68,8 @@ export const PhotoProfilePostsGallery = observer(() => {
             )}
             ref={containerRef}
           >
-            {photos.map((item) => (
+            {store.isUpdatePost && <Skeleton className={'rounded-none'} />}
+            {store.postsData.items.map((item) => (
               <Link
                 href={`/${item.id}`}
                 key={item.id}
@@ -93,12 +98,10 @@ export const PhotoProfilePostsGallery = observer(() => {
             ))}
           </div>
           <div
-            className={`w-full ${
-              profileStore.stopRequest ? 'h-[1px]' : 'h-[75px]'
-            }`}
+            className={`w-full ${store.stopRequest ? 'h-[1px]' : 'h-[75px]'}`}
             ref={ref}
           >
-            {profileStore.isLoading && (
+            {store.isLoading && (
               <Skeleton className={'w-full h-[228px] mt-3'} />
             )}
           </div>

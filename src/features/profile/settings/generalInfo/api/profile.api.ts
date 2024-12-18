@@ -1,8 +1,13 @@
+import { Environments } from '@/common'
 import { instance } from '@/common/api'
-import { UpdatedProfile, UserProfile } from '@/features/profile'
-import { ImagesData } from '@/features/profile/model/types'
+import {
+  ImagesData,
+  PublicProfile,
+  UpdatedProfile,
+  UserProfile,
+} from '@/features/profile'
 import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
-import { AxiosInstance, AxiosResponse } from 'axios'
+import axios, { AxiosInstance, AxiosResponse } from 'axios'
 
 class ProfileApi {
   constructor(private instance: AxiosInstance) {}
@@ -14,25 +19,28 @@ class ProfileApi {
 
     return res.data
   }
-  public async getProfilePosts(
-    page: number,
-    userName: string,
+
+  public async getPublicPosts(
+    userId: number,
+    endCursorPostId: number = 0,
     signal?: AbortSignal,
     pageSize: number = 8
-  ) {
-    const res = await this.instance.get<ImagesData>(
-      ProfileEndpoints.posts(userName),
+  ): Promise<ImagesData> {
+    return axios(
+      Environments.API_URL +
+        ProfileEndpoints.publicPosts(userId, endCursorPostId),
       {
         params: {
-          endCursorPostId: 0,
-          pageNumber: page,
-          pageSize: pageSize,
+          pageSize,
         },
-        signal: signal,
+        signal,
       }
-    )
-
-    return res.data
+    ).then((res) => res.data)
+  }
+  public async getPublicUser(profileId: string): Promise<PublicProfile> {
+    return axios(
+      Environments.API_URL + ProfileEndpoints.publicProfile(profileId)
+    ).then((res) => res.data)
   }
 
   public updateProfile(profileData: UpdatedProfile): Promise<AxiosResponse> {

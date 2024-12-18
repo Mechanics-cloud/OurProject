@@ -18,3 +18,17 @@ export type UserInfo = {
   dateOfBirth?: string
   userName: string
 } & FullName
+
+export type UserStats = {
+  followers: number
+  following: number
+  publications: number
+}
+
+export type PublicProfile = {
+  aboutMe: string
+  avatars: ImageFile[]
+  id: number
+  userMetadata: UserStats
+  userName: string
+}

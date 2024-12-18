@@ -1,8 +1,10 @@
-import { BasicPost, PagesInfo, UploadImage } from '@/common'
+import { BasicPost, PagesInfo } from '@/common'
 
-export type Photo = {
-  id: number
-  images: UploadImage[]
+import { PublicProfile } from '../settings'
+
+export type ProfileData = {
+  postsData: ImagesData
+  userProfile: PublicProfile
 }
 
 type ImageData = {
@@ -11,4 +13,5 @@ type ImageData = {
 
 export type ImagesData = {
   items: ImageData[]
-} & PagesInfo
+  totalUsers: number
+} & Omit<PagesInfo, 'pagesCount'>
