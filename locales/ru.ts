@@ -272,6 +272,9 @@ export const ru = {
   termsPolicyPage: {
     back: 'Назад',
   },
+  userCounter: {
+    text: 'Зарегистрированных пользователей:',
+  },
   validation: {
     email: {
       composition:
