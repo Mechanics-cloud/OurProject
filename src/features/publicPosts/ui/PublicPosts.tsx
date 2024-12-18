@@ -1,19 +1,11 @@
-import { calculateCharactersToShow, timeAgo } from '@/common'
+import { TextUnfolding, calculateCharactersToShow } from '@/common'
 import {
   LinkProfile,
   PublicPostsDto,
   RegisteredUsersCounter,
-  TextUnfolding,
   TimeAgo,
 } from '@/features/publicPosts'
-import Image from 'next/image'
-import {
-  EffectFade,
-  HashNavigation,
-  Navigation,
-  Pagination,
-} from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import CustomSwiper from 'src/common/components/swiper/CustomSwiper'
 
 import 'swiper/swiper-bundle.css'
 
@@ -21,8 +13,6 @@ type Props = {
   posts: PublicPostsDto
 }
 export const PublicPosts = ({ posts }: Props) => {
-  console.log(posts)
-
   return (
     <div
       className={
@@ -31,54 +21,17 @@ export const PublicPosts = ({ posts }: Props) => {
     >
       <RegisteredUsersCounter totalUsers={posts.totalUsers} />
       <div className={'flex justify-center gap-3'}>
-        {posts.items.map((post, i) => {
+        {posts.items.map((post) => {
           return (
             <div
               className={'flex flex-col gap-3'}
-              key={i}
+              key={post.id}
             >
               <div className={'relative w-60 h-60'}>
-                <Swiper
-                  allowTouchMove={false}
-                  className={
-                    'absolute w-full h-full top-0 left-0 m-0 shrink-0 bg-dark-500 mx-auto'
-                  }
-                  effect={'fade'}
-                  grabCursor={false}
-                  hashNavigation={{
-                    watchState: true,
-                  }}
-                  keyboard={{
-                    enabled: true,
-                  }}
-                  modules={[Navigation, Pagination, EffectFade, HashNavigation]}
-                  navigation
-                  noSwiping
-                  noSwipingSelector={'button'}
-                  pagination={{
-                    clickable: true,
-                  }}
-                  simulateTouch={false}
-                  spaceBetween={30}
-                  touchStartPreventDefault={false}
-                  watchSlidesProgress
-                >
-                  {post.images.map((post, i) => {
-                    return (
-                      <SwiperSlide
-                        className={'w-full'}
-                        key={i}
-                      >
-                        <Image
-                          alt={'post photo'}
-                          height={240}
-                          src={post.url}
-                          width={240}
-                        />
-                      </SwiperSlide>
-                    )
-                  })}
-                </Swiper>
+                <CustomSwiper
+                  className={'publicPost'}
+                  images={post.images}
+                />
               </div>
               <div className={'w-60 flex flex-col gap-2'}>
                 <LinkProfile

@@ -1,4 +1,4 @@
-import { ImageUrl } from '@/common'
+import { ImageUrl, cn } from '@/common'
 import Image from 'next/image'
 import {
   EffectFade,
@@ -11,16 +11,17 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.css'
 
 type ImagesTypes = {
+  className?: string
   images: Array<{ url: ImageUrl }>
 }
-const CustomSwiper = ({ images }: ImagesTypes) => {
+const CustomSwiper = ({ className, images }: ImagesTypes) => {
   if (images.length === 0) {
     return <p>Нет изображений для отображения</p>
   }
 
   return (
     <Swiper
-      className={'h-full w-full'}
+      className={cn('h-full w-full', className)}
       effect={'fade'}
       hashNavigation={{
         watchState: true,

@@ -1,10 +1,11 @@
-import { Typography } from '@/common'
+import { Typography, useTranslation } from '@/common'
 
 export const RegisteredUsersCounter = ({
   totalUsers,
 }: {
   totalUsers: number
 }) => {
+  const { t } = useTranslation()
   const totalUsersCountArr =
     totalUsers.toString().padStart(6, '0').split('') || []
 
@@ -14,7 +15,7 @@ export const RegisteredUsersCounter = ({
         'flex justify-between items-center rounded-sm border border-dark-300 bg-dark-500 py-3 px-6 w-full max-w-[996px]'
       }
     >
-      <Typography variant={'h2'}>Registered users:</Typography>
+      <Typography variant={'h2'}>{t.userCounter.text}</Typography>
       <div
         className={
           'flex flex-nowrap p-3 bg-dark-700 rounded-sm border border-dark-300'
