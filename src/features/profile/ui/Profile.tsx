@@ -17,14 +17,14 @@ import { profileStore } from '@/features/profile/model/profileStore'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
+import { useRouter } from 'next/router'
 
 import avatarPlaceholder from '../../../assets/images/avatar.jpg'
 
 //todo: remove avatarPlaceholder
 export const Profile = observer(() => {
   const { t } = useTranslation()
-  const { id } = useParams()
+  const { query } = useRouter()
   const { followers, following, publications, settingsButton } = t.profilePage
   const { userProfile } = profileStore
 
@@ -37,7 +37,7 @@ export const Profile = observer(() => {
   }
 
   return (
-    <UserIdProvider ctx={+id}>
+    <UserIdProvider ctx={query.id ? +query.id[0] : null}>
       <div className={'flex w-full'}>
         <div className={'flex flex-col w-full'}>
           <div

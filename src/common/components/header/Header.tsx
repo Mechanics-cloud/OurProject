@@ -4,7 +4,6 @@ import { OutlineBell } from '@/assets/icons'
 import { Button, LangSelect, cn, useTranslation } from '@/common'
 import { MobilePopover } from '@/common/components/header/mobilePopover'
 import { Typography } from '@/common/components/typography'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Paths } from '@/common/paths'
 import { generalStore } from '@/core/store'
 import Link from 'next/link'
@@ -12,13 +11,11 @@ import Link from 'next/link'
 const Header = () => {
   const { t } = useTranslation()
   const isAuth = !!generalStore.user
-  const { isTablet } = useScreenWidth()
 
   return (
     <header
       className={cn(
-        'fixed top-0 z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300',
-        !isTablet && 'pr-scrollbar'
+        'fixed top-0 z-50 w-full max-h-[var(--header-height)] bg-dark-700 text-light-100 border-b border-b-dark-300 lg:pr-scrollbar'
       )}
     >
       <div
@@ -31,7 +28,7 @@ const Header = () => {
           variant={'large'}
         >
           <Link
-            href={Paths.home}
+            href={isAuth ? Paths.home : Paths.publicMainPage}
             title={'Go Home'}
           >
             Inctagram

@@ -12,5 +12,5 @@ export const clearAllData = async (path?: string) => {
   profileStore.cleanUp()
   newsFeedStore.cleanUp()
   removeFromLocalStorage(StorageKeys.AccessToken)
-  await Router.push(path ? path : Paths.home)
+  await Router.push(path ? path : Paths.publicMainPage)
 }

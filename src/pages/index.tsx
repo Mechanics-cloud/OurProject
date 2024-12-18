@@ -1,4 +1,4 @@
-import { withProtection } from '@/common/HOC/withProtection'
+import { withServerSide } from '@/common'
 import { PublicPostsDto, publicPostsApi } from '@/features/publicPosts'
 import { PublicPosts } from '@/features/publicPosts/ui/PublicPosts'
 import { GetStaticPropsResult, InferGetStaticPropsType } from 'next'
@@ -28,4 +28,4 @@ function PublicPostsPage(
   return <PublicPosts posts={publicPosts} />
 }
 
-export default withProtection(PublicPostsPage, true)
+export default withServerSide(PublicPostsPage)

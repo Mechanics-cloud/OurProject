@@ -1,5 +1,4 @@
-import { getBaseLayout } from '@/common'
-import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
+import { withProtection } from '@/common'
 import RegistrationExpired from '@/features/auth/ui/signUp/RegistrationExpired'
 
 const Expired = () => {
@@ -10,6 +9,4 @@ const Expired = () => {
   )
 }
 
-Expired.getLayout = getBaseLayout
-
-export default withRedirectForAuthorize(Expired)
+export default withProtection(Expired, { isNotForAuthorizedUsers: true })

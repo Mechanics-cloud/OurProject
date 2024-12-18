@@ -1,7 +1,6 @@
 import { RefObject, useEffect, useState } from 'react'
 
 import { Nullable, useTranslation } from '@/common'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { Variants, useAnimationControls, useScroll } from 'framer-motion'
 
 const scrollToTopVariants: Variants = {
@@ -13,7 +12,6 @@ export const useGoToTopButton = (
   scrollInElementRef: Nullable<RefObject<HTMLDivElement>> = null
 ) => {
   const { t } = useTranslation()
-  const { isTablet } = useScreenWidth()
   const controls = useAnimationControls()
   const { scrollYProgress } = useScroll()
 
@@ -72,7 +70,6 @@ export const useGoToTopButton = (
   return {
     controls,
     isBrowser,
-    isTablet,
     onScrollToTop,
     scrollToTopVariants,
     t,
