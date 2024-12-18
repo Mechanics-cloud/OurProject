@@ -15,7 +15,7 @@ import { observer } from 'mobx-react-lite'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
-type NextPageWithLayout<P = {}, IP = P> = {
+export type NextPageWithLayout<P = {}, IP = P> = {
   getLayout?: (page: ReactElement) => ReactNode
 } & NextPage<P, IP>
 
@@ -37,13 +37,18 @@ export const withProtection = <P extends object>(
 
     useEffect(() => {
       const onRedirect = async () => {
-        if (!(authStore.isAuthenticated === 'pending')) {
-          if (authStore.isAuthenticated === 'yes' && isNotForAuthorizedUsers) {
-            await router.replace(Paths.home)
-          }
-          if (authStore.isAuthenticated === 'error' && !isPublic) {
-            await router.replace(Paths.signIn)
-          }
+        if (authStore.isAuthenticated === 'pending') {
+          return
+        }
+        if (authStore.isAuthenticated === 'yes' && isNotForAuthorizedUsers) {
+          await router.replace(Paths.home)
+        }
+        if (
+          (authStore.isAuthenticated === 'error' ||
+            authStore.isAuthenticated === 'no') &&
+          !isPublic
+        ) {
+          await router.replace(Paths.signIn)
         }
       }
 

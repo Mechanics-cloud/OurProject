@@ -1,12 +1,6 @@
 import React, { ElementRef, forwardRef } from 'react'
 
-import {
-  GoTopButton,
-  Header,
-  Loader,
-  ScrollArea,
-  ToastContainer,
-} from '@/common'
+import { Header, Loader, ScrollArea, ToastContainer } from '@/common'
 import { cn } from '@/common/utils/cn'
 import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'

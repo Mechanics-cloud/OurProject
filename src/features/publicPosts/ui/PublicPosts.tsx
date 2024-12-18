@@ -42,7 +42,7 @@ export const PublicPosts = ({ posts }: Props) => {
                 <TimeAgo createdAt={post.createdAt} />
                 <TextUnfolding
                   charactersToShow={calculateCharactersToShow(
-                    post.description,
+                    85,
                     post.userName
                   )}
                 >

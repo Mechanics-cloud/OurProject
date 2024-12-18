@@ -1,15 +1,15 @@
-import React, { ReactElement, ReactNode, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
-import { LayoutWithStore, SideBar, getFromLocalStorage } from '@/common'
+import {
+  LayoutWithStore,
+  NextPageWithLayout,
+  SideBar,
+  getFromLocalStorage,
+} from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
-import { NextPage } from 'next'
-
-type NextPageWithLayout<P = {}, IP = P> = {
-  getLayout?: (page: ReactElement) => ReactNode
-} & NextPage<P, IP>
 
 export const withServerSide = <P extends object>(
   PageComponent: NextPageWithLayout<P>

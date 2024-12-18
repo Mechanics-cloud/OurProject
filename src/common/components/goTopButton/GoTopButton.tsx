@@ -21,7 +21,7 @@ export const GoTopButton = ({ scrollInElementRef }: Props) => {
     <motion.button
       animate={controls}
       className={cn(
-        'bg-dark-300 fixed right-7 p-2 rounded-sm bottom-20 lg:bottom-7'
+        'hidden lg:block bg-dark-300 fixed right-7 p-2 rounded-sm bottom-20 lg:bottom-7'
       )}
       initial={'hide'}
       onClick={onScrollToTop}

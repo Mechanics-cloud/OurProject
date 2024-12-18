@@ -97,7 +97,6 @@ class AuthStore {
       runInAction(() => {
         this.isAuthenticated = 'error'
       })
-      // console.log(error)
     }
   }
 }
