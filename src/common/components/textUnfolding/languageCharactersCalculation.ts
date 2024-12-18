@@ -1,7 +1,7 @@
-import { cyrillicPattern } from '@/common/constants'
+import { CYRILLIC_PATTERN } from '@/common/constants'
 
 const containsCyrillic = (text: string): boolean => {
-  return cyrillicPattern.test(text)
+  return CYRILLIC_PATTERN.test(text)
 }
 
 export const languageCharactersCalculation = (
@@ -12,5 +12,5 @@ export const languageCharactersCalculation = (
     return charactersCount
   }
 
-  return charactersCount * 1.15
+  return charactersCount * 1.1
 }
