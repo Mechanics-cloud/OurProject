@@ -1,16 +1,8 @@
-import {
-  CYRILLIC_LENGTH,
-  LATIN_LENGTH,
-} from '@/features/newsFeed/model/constants'
-
 export const calculateCharactersToShow = (
-  description: string,
+  fullText: number | string,
   userName: string
 ) => {
-  const cyrillicRegex = /[а-яА-Я]/
-  const baseLength = cyrillicRegex.test(description)
-    ? CYRILLIC_LENGTH
-    : LATIN_LENGTH
+  const textLenght = typeof fullText === 'string' ? fullText.length : fullText
 
-  return baseLength - userName.length
+  return textLenght - userName.length
 }
