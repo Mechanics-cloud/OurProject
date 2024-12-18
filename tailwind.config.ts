@@ -15,6 +15,7 @@ const config: Config = {
     extend: {
       animation: {
         loader: 'animationLoader 2s ease-in-out infinite',
+        spin: 'animationSpin 4s infinite',
       },
       backgroundImage: {
         'gradient-conic':
@@ -85,6 +86,16 @@ const config: Config = {
         animationLoader: {
           '0%': { left: '0', transform: 'translateX(-100%)' },
           '100%': { left: '100%', transform: 'translateX(0%)' },
+        },
+        animationSpin: {
+          '10%': { transform: 'translateY(-102%)' },
+          '25%': { transform: 'translateY(-100%)' },
+          '35%': { transform: 'translateY(-202%)' },
+          '50%': { transform: 'translateY(-200%)' },
+          '60%': { transform: 'translateY(-302%)' },
+          '75%': { transform: 'translateY(-300%)' },
+          '85%': { transform: 'translateY(-402%)' },
+          '100%': { transform: 'translateY(-400%)' },
         },
       },
       spacing: {

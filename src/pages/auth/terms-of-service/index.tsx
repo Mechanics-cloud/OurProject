@@ -1,5 +1,4 @@
-import { getBaseLayout } from '@/common'
-import { withRedirectForAuthorize } from '@/common/HOC/withRedirectForAuthorize'
+import { withProtection } from '@/common'
 import { Typography } from '@/common/components'
 import { TermsPolicyLayout } from '@/common/components/termsPolicyLayout'
 
@@ -96,5 +95,4 @@ function TermsOfService() {
   )
 }
 
-TermsOfService.getLayout = getBaseLayout
-export default withRedirectForAuthorize(TermsOfService)
+export default withProtection(TermsOfService)

@@ -42,7 +42,12 @@ export const SideBar = observer(({ className }: Props) => {
 
   return (
     <>
-      <aside className={cn('min-w-56 h-full pr-2', className)}>
+      <aside
+        className={cn(
+          'hidden lg:flex lg:flex-col lg:min-w-56 lg:h-full',
+          className
+        )}
+      >
         <nav className={'pt-[72px]'}>
           <ul className={`mb-[60px] [&_li]:mb-4`}>
             <li>

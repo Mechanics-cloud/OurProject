@@ -24,7 +24,6 @@ export const PostDescription = observer(({ item }: { item: Comment }) => {
       <div className={'inline-block w-[500px]'}>
         <TextUnfolding
           charactersToShow={170}
-          className={'break-words'}
           link={
             <LinkProfile
               userId={item.from.id}

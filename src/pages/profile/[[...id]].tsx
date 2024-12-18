@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import { withServerSide } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import {
   ProfileData,
@@ -43,4 +44,4 @@ const ProfilePage = observer((props: ProfileData) => {
   return <Profile store={store} />
 })
 
-export default withProtection(ProfilePage, true)
+export default withServerSide(ProfilePage)
