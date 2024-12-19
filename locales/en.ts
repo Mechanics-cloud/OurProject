@@ -7,6 +7,9 @@ export const en: LocaleType = {
     message: 'Message',
     share: 'Share',
   },
+  auth: {
+    welcome: 'Welcome! Please sign in.',
+  },
   avatarModal: {
     chooseButton: 'Select from Computer',
     errors: {
@@ -42,6 +45,7 @@ export const en: LocaleType = {
     cropping: {
       add: 'Add',
       crop: 'Crop',
+      delete: 'Delete',
       originalRatio: 'Original',
       title: 'Cropping',
       zoom: 'Zoom',
@@ -122,6 +126,7 @@ export const en: LocaleType = {
     },
     messenger: 'Messenger',
     profile: 'Profile',
+    profileSettings: 'Profile settings',
     search: 'Search',
     statistics: 'Statistics',
     unfollow: 'Unfollow',
@@ -264,6 +269,9 @@ export const en: LocaleType = {
   },
   termsPolicyPage: {
     back: 'Back',
+  },
+  userCounter: {
+    text: 'Registered users:',
   },
   validation: {
     email: {

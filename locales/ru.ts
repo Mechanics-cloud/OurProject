@@ -5,6 +5,9 @@ export const ru = {
     message: 'Сообщения',
     share: 'Поделиться',
   },
+  auth: {
+    welcome: 'Добро пожаловать! Пожалуйста, войдите.',
+  },
   avatarModal: {
     chooseButton: 'Выбрать с компьютера',
     errors: {
@@ -40,6 +43,7 @@ export const ru = {
     cropping: {
       add: 'Добавить',
       crop: 'Обрезать',
+      delete: 'Удалить',
       originalRatio: 'Оригинал',
       title: 'Обрезка',
       zoom: 'Приблизить',
@@ -120,6 +124,7 @@ export const ru = {
     },
     messenger: 'Сообщения',
     profile: 'Профиль',
+    profileSettings: 'Настройки профиля',
     search: 'Поиск',
     statistics: 'Статистика',
     unfollow: 'Отписаться',
@@ -266,6 +271,9 @@ export const ru = {
   },
   termsPolicyPage: {
     back: 'Назад',
+  },
+  userCounter: {
+    text: 'Зарегистрированных пользователей:',
   },
   validation: {
     email: {

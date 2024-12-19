@@ -6,4 +6,4 @@ const ProfilePage = observer(() => {
   return <Profile />
 })
 
-export default withProtection(ProfilePage, true)
+export default withProtection(ProfilePage, { isPublic: true })

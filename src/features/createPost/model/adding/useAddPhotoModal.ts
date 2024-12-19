@@ -18,7 +18,9 @@ export const useAddPhotoModal = () => {
       setIsNotNewDialog()
       clearOldData()
       await addPhotosCheck(files, totalCount, t, addPostPhoto)
-      await nextStage()
+      if (totalCount > 0) {
+        await nextStage()
+      }
     },
     [nextStage, addPostPhoto, t, totalCount, setIsNotNewDialog, clearOldData]
   )

@@ -1,4 +1,4 @@
-import { Card, getBaseLayout } from '@/common'
+import { Card, withProtection } from '@/common'
 import { RecoveryPasswordForm } from '@/features/auth'
 
 function RecoveryPassword() {
@@ -13,6 +13,7 @@ function RecoveryPassword() {
   )
 }
 
-RecoveryPassword.getLayout = getBaseLayout
-
-export default RecoveryPassword
+export default withProtection(RecoveryPassword, {
+  isNotForAuthorizedUsers: true,
+  isPublic: true,
+})

@@ -1,37 +1,31 @@
-import { withProtection } from '@/common/HOC/withProtection'
-import { Button } from '@/common/components/button'
-import { typographyVariants } from '@/common/components/typography'
-import { DeletePostModal, postsStore } from '@/features/profile/posts'
-import Link from 'next/link'
+import { withServerSide } from '@/common'
+import { PublicPostsDto, publicPostsApi } from '@/features/publicPosts'
+import { PublicPosts } from '@/features/publicPosts/ui/PublicPosts'
+import { GetStaticPropsResult, InferGetStaticPropsType } from 'next'
 
-function Home() {
-  const onDeletePost = (postId: number) => {
-    postsStore.deletePost(postId)
+export async function getStaticProps(): Promise<
+  GetStaticPropsResult<{ posts: PublicPostsDto }>
+> {
+  const posts = await publicPostsApi.fetchPublicPosts({
+    pageSize: 4,
+    sortDirection: 'desc',
+  })
+
+  if (!posts) {
+    return {
+      notFound: true,
+    }
   }
 
-  return (
-    <div className={'flex flex-col justify-center items-center gap-5'}>
-      <Button
-        asChild
-        className={typographyVariants({ variant: 'h3' })}
-      >
-        <Link href={'/profile'}>profile</Link>
-      </Button>
-      <Button
-        asChild
-        className={typographyVariants({ variant: 'h3' })}
-      >
-        <Link href={'/publication'}>publication</Link>
-      </Button>
-
-      <DeletePostModal
-        onDeletePost={onDeletePost}
-        postId={3368}
-      >
-        <Button>Delete Post</Button>
-      </DeletePostModal>
-    </div>
-  )
+  return { props: { posts }, revalidate: 60 }
 }
 
-export default withProtection(Home, true)
+function PublicPostsPage(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
+  const publicPosts = props.posts
+
+  return <PublicPosts posts={publicPosts} />
+}
+
+export default withServerSide(PublicPostsPage)

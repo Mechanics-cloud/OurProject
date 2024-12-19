@@ -11,6 +11,7 @@ export const Paths = {
     return `/profile/${userId}`
   },
   profileSettings: '/profile/settings',
+  publicMainPage: '/',
   recoveryPassword: '/auth/recovery',
   registrationEmailResending: '/auth/registration-email-resending',
   search: '/search',

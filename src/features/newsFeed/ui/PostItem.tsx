@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {
+  BasicPost,
   Paths,
   TextUnfolding,
   Typography,
@@ -10,19 +11,20 @@ import {
   useTranslation,
 } from '@/common'
 import { CustomSwiper } from '@/common/components/swiper'
+import {
+  AvatarGroupWithLikes,
+  CustomNewsFeedPopover,
+} from '@/features/newsFeed'
 import Image from 'next/image'
 import { NextRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
-import { Post } from '../model'
 import { WrapperParentComponent } from '../model/wrapperParentComponent'
-import { AvatarGroupWithLikes } from './AvatarGroupWithLikes'
-import { CustomNewsFeedPopover } from './CustomNewsFeedPopover'
 import { LinkProfile } from './LinkProfile'
 import { LinksGroup } from './LinksGroup'
 
 type Props = {
-  item: Post
+  item: BasicPost
   router: NextRouter
 }
 
@@ -38,9 +40,9 @@ const PostItem = ({ item, router }: Props) => {
       <div className={'w-full h-9 mb-3 flex  items-center justify-between'}>
         <span className={'flex  items-center space-x-2'}>
           <UserMiniLink
-            avatarSrc={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
+            href={`${Paths.profileLink(item.ownerId)}`}
             name={item.userName}
-            profileLink={`${Paths.profileLink(item.ownerId)}`}
+            src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
           />
           <span
             className={'size-1 bg-light-100 rounded-full relative top-[1px]'}
@@ -61,9 +63,12 @@ const PostItem = ({ item, router }: Props) => {
           t.slider.noText
         )}
       </section>
-      <LinksGroup item={item} />
-      <div className={'w-full inline-flex gap-3'}>
-        <div className={'min-w-[36px] flex items-center pb-6'}>
+      <LinksGroup
+        className={'mb-5'}
+        item={item}
+      />
+      <div className={'w-full inline-flex gap-3 items-start'}>
+        <div className={'min-w-[36px] flex items-center align-top -mt-1'}>
           <Image
             alt={'Avatar'}
             className={'size-9 rounded-full'}
@@ -73,10 +78,7 @@ const PostItem = ({ item, router }: Props) => {
           />
         </div>
         <TextUnfolding
-          charactersToShow={calculateCharactersToShow(
-            item.description,
-            item.userName
-          )}
+          charactersToShow={calculateCharactersToShow(170, item.userName)}
           className={'text-justify break-words'}
           link={
             <span className={'mr-2 inline-block'}>

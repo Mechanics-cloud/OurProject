@@ -61,22 +61,49 @@ input[type='password']::-ms-clear {
   content: '' !important;
 }
 
+/* styles for public post */
+
+.publicPost .swiper-button-prev,
+.publicPost .swiper-button-next {
+  top: var(--swiper-navigation-top-offset, 55%);
+  width: 24px;
+  height: 24px;
+}
+
+.publicPost .swiper-button-prev::after,
+.publicPost .swiper-button-next::after {
+  width: 24px;
+  height: 24px;
+  background-size: 7px !important;
+}
+
 /* styles for new post creation */
 
-.addPost .swiper-button-prev {
+.addPost .swiper-button-prev,
+.addPost .swiper-button-next {
   width: 36px;
   height: 36px;
+}
 
+.addPost .swiper-button-prev::after,
+.addPost .swiper-button-next::after {
+  width: 24px;
+  height: 24px;
+  background-size: 10px !important;
+}
+
+/* styles for new post creation and public post */
+
+.addPost .swiper-button-prev,
+.publicPost .swiper-button-prev {
   background-color: rgb(23 23 23 / 80%);
   background-image: none !important;
   background-size: 10px !important;
   border-radius: 2px;
 }
 
-.addPost .swiper-button-next {
-  width: 36px;
-  height: 36px;
-
+.addPost .swiper-button-next,
+.publicPost .swiper-button-next {
   background-color: rgb(23 23 23 / 80%);
   background-image: none !important;
   background-size: 10px !important;
@@ -84,27 +111,29 @@ input[type='password']::-ms-clear {
 }
 
 .addPost .swiper-button-prev::after,
-.addPost .swiper-button-next::after {
+.addPost .swiper-button-next::after,
+.publicPost .swiper-button-prev::after,
+.publicPost .swiper-button-next::after {
   content: '' !important;
 
   transform: translateX(-1px);
 
-  width: 24px;
-  height: 24px;
-
   background-image: url('/Vector.svg') !important;
   background-repeat: no-repeat;
   background-position: center !important;
-  background-size: 10px !important;
 }
 
 .addPost .swiper-button-prev:hover,
-.addPost .swiper-button-next:hover {
+.addPost .swiper-button-next:hover,
+.publicPost .swiper-button-prev:hover,
+.publicPost .swiper-button-next:hover {
   filter: none;
 }
 
 .addPost .swiper-button-prev:hover::after,
-.addPost .swiper-button-next:hover::after {
+.addPost .swiper-button-next:hover::after,
+.publicPost .swiper-button-prev:hover::after,
+.publicPost .swiper-button-next:hover::after {
   filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
     hue-rotate(199deg) brightness(103%) contrast(101%);
 }

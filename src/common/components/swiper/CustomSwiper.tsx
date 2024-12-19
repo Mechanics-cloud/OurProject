@@ -1,4 +1,5 @@
-import Image, { StaticImageData } from 'next/image'
+import { ImageUrl, cn } from '@/common'
+import Image from 'next/image'
 import {
   EffectFade,
   HashNavigation,
@@ -9,26 +10,18 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
 
-type ImageType = {
-  createdAt?: string
-  fileSize?: number
-  height?: number
-  uploadId?: string
-  url: string
-  width?: number
-}
-
 type ImagesTypes = {
-  images: Array<ImageType>
+  className?: string
+  images: Array<{ url: ImageUrl }>
 }
-const CustomSwiper = ({ images }: ImagesTypes) => {
+const CustomSwiper = ({ className, images }: ImagesTypes) => {
   if (images.length === 0) {
     return <p>Нет изображений для отображения</p>
   }
 
   return (
     <Swiper
-      className={'h-full w-full'}
+      className={cn('h-full w-full', className)}
       effect={'fade'}
       hashNavigation={{
         watchState: true,
@@ -46,10 +39,10 @@ const CustomSwiper = ({ images }: ImagesTypes) => {
       spaceBetween={30}
       watchSlidesProgress
     >
-      {images.map((image, index) => (
+      {images.map((image) => (
         <SwiperSlide
           className={'w-full'}
-          key={image.url}
+          key={String(image.url)}
         >
           <Image
             alt={'picture from post'}

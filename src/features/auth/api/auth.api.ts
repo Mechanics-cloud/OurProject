@@ -27,18 +27,24 @@ class AuthApi {
     return this.instance.post(Endpoints.EmailResending, emailResendData)
   }
 
-  public login(data: SignInFields) {
-    return instance
+  public async login(data: SignInFields) {
+    return this.instance
       .post(Endpoints.login, data)
       .then((res) => res.data.accessToken)
   }
 
   public async logout() {
-    return instance.post(Endpoints.logout)
+    return this.instance.post(Endpoints.logout)
   }
 
-  public me(): Promise<Profile> {
-    return instance.get(Endpoints.me).then((res) => res.data)
+  public async me(): Promise<Profile | undefined> {
+    return this.instance.get(Endpoints.me).then((res) => {
+      if (res) {
+        return res.data
+      }
+
+      return Promise.reject('Some error occurred')
+    })
   }
 
   public async newPassword(data: NewPasswordData): Promise<AxiosResponse> {

@@ -1,4 +1,4 @@
-import { withProtection } from '@/common/HOC/withProtection'
+import { withProtection } from '@/common'
 import { Menu } from '@/common/components/menu'
 
 function Messenger() {
@@ -9,4 +9,4 @@ function Messenger() {
   )
 }
 
-export default withProtection(Messenger, true)
+export default withProtection(Messenger)
