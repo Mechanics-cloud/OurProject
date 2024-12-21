@@ -1,7 +1,6 @@
 import * as React from 'react'
 
-import { Button, Typography, useTranslation } from '@/common'
-import { withProtection } from '@/common/HOC/withProtection'
+import { Button, Typography, useTranslation, withProtection } from '@/common'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
@@ -34,4 +33,7 @@ function ServerError() {
   )
 }
 
-export default withProtection(ServerError, true)
+export default withProtection(ServerError, {
+  isNotForAuthorizedUsers: true,
+  isPublic: true,
+})

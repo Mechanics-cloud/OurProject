@@ -2,7 +2,6 @@ import { ComponentPropsWithoutRef, ElementRef, forwardRef, useRef } from 'react'
 
 import { GoTopButton } from '@/common'
 import { ScrollBar } from '@/common/components/scrollbar/Scrollbar'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
 import { cn } from '@/common/utils/cn'
 import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area'
 
@@ -15,16 +14,11 @@ export const ScrollArea = forwardRef<
   ElementRef<typeof ScrollAreaPrimitive.Root>,
   Props
 >(({ children, className, isGoToTop = false, orientation, ...props }, ref) => {
-  const { isTablet } = useScreenWidth()
   const scrollableRef = useRef<HTMLDivElement>(null)
 
   return (
     <ScrollAreaPrimitive.Root
-      className={cn(
-        'relative overflow-hidden',
-        !isTablet && 'pr-scrollbar',
-        className
-      )}
+      className={cn('relative overflow-hidden lg:pr-scrollbar', className)}
       ref={ref}
       {...props}
     >

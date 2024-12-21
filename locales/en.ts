@@ -270,6 +270,9 @@ export const en: LocaleType = {
   termsPolicyPage: {
     back: 'Back',
   },
+  userCounter: {
+    text: 'Registered users:',
+  },
   validation: {
     email: {
       composition: 'The email must match the format example@example.com',

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Loader, Paths } from '@/common'
+import { FullScreenLoader, Paths } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { setToLocalStorage } from '@/common/utils/localStorage'
 import { authStore } from '@/features/auth'
@@ -24,7 +24,7 @@ const GitHubCallback = () => {
     }
   }, [router])
 
-  return <Loader />
+  return <FullScreenLoader />
 }
 
 export default GitHubCallback
