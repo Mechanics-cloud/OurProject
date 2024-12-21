@@ -1,4 +1,4 @@
-import { ImageUrl, cn, useTranslation } from '@/common'
+import { ImageUrl, Typography, cn, useTranslation } from '@/common'
 import Image from 'next/image'
 import {
   EffectFade,
@@ -22,19 +22,20 @@ const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
 
   if (images.length === 0) {
     return (
-      <>
+      <div className={'flex flex-col items-center justify-center h-full'}>
         <Image
           alt={t.profilePage.noPosts.alt}
-          className={'w-full m-auto pt-16 mt-16 opacity-90'}
+          className={'w-full opacity-90 '}
           src={noPostImage}
         />
-        <p className={'w-full text-center pt-4'}>
-          Не удалось отобразить фотографии поста. Пожайлуста обратитесь в
-          поддержку или повторите попытку позже!
-        </p>
-      </>
+        <Typography
+          className={'text-light-900'}
+          variant={'small'}
+        >
+          {t.slider.noImages}
+        </Typography>
+      </div>
     )
-    //TODO t.slider.noText - возможно вернуть заставку, что картинку поста неудалось загрузить
   }
 
   return (
