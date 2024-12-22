@@ -4,6 +4,7 @@
 
 :root {
   --header-height: 3.75rem;
+  --swiper-color-background: rgb(33 33 33 / 60%);
 
   font-family: Inter, sans-serif;
   color-scheme: dark;
@@ -35,7 +36,7 @@ input[type='password']::-ms-clear {
   width: 48px;
   height: 48px;
 
-  background-color: rgb(23 23 23 / 80%);
+  background-color: var(--swiper-color-background);
   background-image: none !important;
   background-size: 10px !important;
   border-radius: 2px;
@@ -51,8 +52,8 @@ input[type='password']::-ms-clear {
 
   transform: translateX(-1px);
 
-  width: 34px;
-  height: 34px;
+  width: 14px;
+  height: 28px;
 
   background-image: url('/Vector.svg') !important;
   background-repeat: no-repeat;
@@ -107,40 +108,83 @@ input[type='password']::-ms-clear {
   }
 }
 
-.addPost .swiper-pagination {
-  left: 246px;
-  transform: translateX(-50%);
-
-  display: flex;
-  gap: 12px;
-
-  width: auto;
-  margin-bottom: 8px;
-  padding: 8px;
+.swiper-pagination {
+  bottom: var(--swiper-pagination-bottom, 14px) !important;
 }
 
-.addPost .swiper-pagination-bullet {
-  display: block;
+.addPost .swiper-pagination {
+  bottom: var(--swiper-pagination-bottom, 18px) !important;
+}
 
-  width: 8px;
-  height: 8px;
-  margin: 0 !important;
-  padding: 0;
+.publicPost .swiper-pagination {
+  bottom: var(--swiper-pagination-bottom, 10px) !important;
+}
 
+.swiper-pagination-bullet {
+  position: relative;
+
+  display: inline-block;
+
+  margin: 0 var(--swiper-pagination-bullet-horizontal-gap, 6px) !important;
+
+  opacity: 1;
   background-color: white;
 }
 
-.addPost .swiper-pagination-bullet-active {
+.swiper-pagination-bullet::before {
+  content: ' ';
+
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: block;
+
+  width: 20px;
+  height: 24px;
+
+  background-color: var(--swiper-color-background);
+  border-radius: 0;
+}
+
+.swiper-pagination-bullet:first-child::after {
+  content: '';
+
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  left: -10px;
+  transform: translateY(-50%);
+
+  width: 4px;
+  height: 24px;
+
+  background-color: var(--swiper-color-background);
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.swiper-pagination-bullet:last-child::after {
+  content: '';
+
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  right: -10px;
+  transform: translateY(-50%);
+
+  width: 4px;
+  height: 24px;
+
+  background-color: var(--swiper-color-background);
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.swiper-pagination-bullet-active {
   background-color: rgb(57 125 246);
-}
-
-.addFilter .swiper-pagination {
-  background-color: rgb(51 51 51 / 50%);
-  border-radius: 2px;
-}
-
-.addFilter .swiper-pagination-lock.swiper-pagination {
-  background-color: transparent;
 }
 
 @media (width <= 768px) {
