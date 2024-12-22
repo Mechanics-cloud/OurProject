@@ -29,42 +29,51 @@ input[type='password']::-ms-clear {
   display: none;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-  color: #fff !important;
-}
-
+/* General styles for CustomSwiper */
+.swiper-button-next,
 .swiper-button-prev {
-  background-image: url('/Vector.svg') !important;
-  background-repeat: no-repeat;
-  background-position: center !important;
-  background-size: auto !important;
+  width: 48px;
+  height: 48px;
+
+  background-color: rgb(23 23 23 / 80%);
+  background-image: none !important;
+  background-size: 10px !important;
+  border-radius: 2px;
 }
 
 .swiper-button-next {
   transform: rotate(180deg);
-
-  background-image: url('/Vector.svg') !important;
-  background-repeat: no-repeat;
-  background-position: center !important;
-  background-size: auto !important;
-}
-
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
-    hue-rotate(199deg) brightness(103%) contrast(101%);
 }
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
   content: '' !important;
+
+  transform: translateX(-1px);
+
+  width: 34px;
+  height: 34px;
+
+  background-image: url('/Vector.svg') !important;
+  background-repeat: no-repeat;
+  background-position: center !important;
+  background-size: 14px !important;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  filter: none;
+}
+
+.swiper-button-prev:hover::after,
+.swiper-button-next:hover::after {
+  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
+    hue-rotate(199deg) brightness(103%) contrast(101%);
 }
 
 /* styles for public post */
-
-.publicPost .swiper-button-prev,
-.publicPost .swiper-button-next {
+.publicPost .swiper-button-next,
+.publicPost .swiper-button-prev {
   top: var(--swiper-navigation-top-offset, 55%);
   width: 24px;
   height: 24px;
@@ -78,9 +87,8 @@ input[type='password']::-ms-clear {
 }
 
 /* styles for new post creation */
-
-.addPost .swiper-button-prev,
-.addPost .swiper-button-next {
+.addPost .swiper-button-next,
+.addPost .swiper-button-prev {
   width: 36px;
   height: 36px;
 }
@@ -90,52 +98,6 @@ input[type='password']::-ms-clear {
   width: 24px;
   height: 24px;
   background-size: 10px !important;
-}
-
-/* styles for new post creation and public post */
-
-.addPost .swiper-button-prev,
-.publicPost .swiper-button-prev {
-  background-color: rgb(23 23 23 / 80%);
-  background-image: none !important;
-  background-size: 10px !important;
-  border-radius: 2px;
-}
-
-.addPost .swiper-button-next,
-.publicPost .swiper-button-next {
-  background-color: rgb(23 23 23 / 80%);
-  background-image: none !important;
-  background-size: 10px !important;
-  border-radius: 2px;
-}
-
-.addPost .swiper-button-prev::after,
-.addPost .swiper-button-next::after,
-.publicPost .swiper-button-prev::after,
-.publicPost .swiper-button-next::after {
-  content: '' !important;
-
-  transform: translateX(-1px);
-
-  background-image: url('/Vector.svg') !important;
-  background-repeat: no-repeat;
-  background-position: center !important;
-}
-
-.addPost .swiper-button-prev:hover,
-.addPost .swiper-button-next:hover,
-.publicPost .swiper-button-prev:hover,
-.publicPost .swiper-button-next:hover {
-  filter: none;
-}
-
-.addPost .swiper-button-prev:hover::after,
-.addPost .swiper-button-next:hover::after,
-.publicPost .swiper-button-prev:hover::after,
-.publicPost .swiper-button-next:hover::after {
-  filter: brightness(0) saturate(100%) invert(44%) sepia(98%) saturate(4000%)
-    hue-rotate(199deg) brightness(103%) contrast(101%);
 }
 
 @media screen and (width <= 768px) {
