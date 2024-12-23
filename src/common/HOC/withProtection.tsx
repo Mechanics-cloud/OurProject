@@ -34,17 +34,18 @@ export const withProtection = <P extends object>(
     const { isNotForAuthorizedUsers, isPublic } = options
     const router = useRouter()
     const loading = authStore.isAuthenticated === 'pending'
+    const currentAuthState = authStore.isAuthenticated
 
     useEffect(() => {
       const onRedirect = async () => {
-        if (authStore.isAuthenticated === 'pending') {
+        if (currentAuthState === 'pending') {
           return
         }
-        if (authStore.isAuthenticated === 'yes' && isNotForAuthorizedUsers) {
+        if (currentAuthState === 'yes' && isNotForAuthorizedUsers) {
           await router.replace(Paths.home)
         }
         if (
-          (authStore.isAuthenticated === 'error' ||
+          (currentAuthState === 'error' ||
             authStore.isAuthenticated === 'no') &&
           !isPublic
         ) {
@@ -53,7 +54,7 @@ export const withProtection = <P extends object>(
       }
 
       onRedirect()
-    }, [isNotForAuthorizedUsers, isPublic, router, authStore.isAuthenticated])
+    }, [isNotForAuthorizedUsers, isPublic, router, currentAuthState])
 
     useEffect(() => {
       if (getFromLocalStorage(StorageKeys.AccessToken)) {
