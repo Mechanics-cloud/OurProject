@@ -1,11 +1,7 @@
 import React, { useEffect } from 'react'
 
-import {
-  LayoutWithStore,
-  NextPageWithLayout,
-  SideBar,
-  getFromLocalStorage,
-} from '@/common'
+import { LayoutWithStore, SideBar, getFromLocalStorage } from '@/common'
+import { NextPageWithLayout } from '@/common/HOC/types'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { profileStore } from '@/features/profile'

@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import {
   FullScreenLoader,
@@ -7,22 +7,19 @@ import {
   SideBar,
   getFromLocalStorage,
 } from '@/common'
+import { NextPageWithLayout } from '@/common/HOC/types'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
 import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
-import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-
-export type NextPageWithLayout<P = {}, IP = P> = {
-  getLayout?: (page: ReactElement) => ReactNode
-} & NextPage<P, IP>
 
 interface WithProtectionOptions {
   isNotForAuthorizedUsers?: boolean
   isPublic?: boolean
 }
+
 export const withProtection = <P extends object>(
   PageComponent: NextPageWithLayout<P>,
   options: WithProtectionOptions = {

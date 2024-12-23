@@ -1,6 +1,9 @@
 import { withServerSide } from '@/common'
-import { PublicPostsDto, publicPostsApi } from '@/features/publicPosts'
-import { PublicPosts } from '@/features/publicPosts/ui/PublicPosts'
+import {
+  PublicPosts,
+  PublicPostsDto,
+  publicPostsApi,
+} from '@/features/publicPosts'
 import { GetStaticPropsResult, InferGetStaticPropsType } from 'next'
 
 export async function getStaticProps(): Promise<
