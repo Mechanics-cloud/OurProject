@@ -1,7 +1,10 @@
 import {
+  basic,
+  createPost,
   expiredSession,
   forgotPassword,
   recoveryPassword,
+  registration,
   signIn,
   signUp,
 } from '@locales/translations/ru'
@@ -13,9 +16,7 @@ export const ru = {
     message: 'Сообщения',
     share: 'Поделиться',
   },
-  auth: {
-    welcome: 'Добро пожаловать! Пожалуйста, войдите.',
-  },
+
   avatarModal: {
     chooseButton: 'Выбрать с компьютера',
     errors: {
@@ -28,59 +29,14 @@ export const ru = {
     saveButton: 'Сохранить',
     title: 'Добавить фотографию профиля',
   },
+
+  basic: { ...basic },
+
   basicError: 'Что-то пошло не так',
-  createPost: {
-    adding: {
-      buttonDraft: 'Открыть черновик',
-      buttonNew: 'Загрузить фото',
-      errors: {
-        basic: 'Что-то пошло не так',
-        countLimit: 'Лимит ',
-        tooBig: 'Фото слишком большое',
-        type: 'Неверный тип файла',
-      },
-      title: 'Добавить пост',
-    },
-    alt: 'Фото в карусели',
-    closeModal: {
-      description: 'Вы действительно хотите закрыть создание публикации?',
-      discard: 'Отмена',
-      save: 'Сохранить черновик',
-      title: 'Закрыть',
-    },
-    cropping: {
-      add: 'Добавить',
-      crop: 'Обрезать',
-      delete: 'Удалить',
-      originalRatio: 'Оригинал',
-      title: 'Обрезка',
-      zoom: 'Приблизить',
-    },
-    filtering: {
-      filters: 'Библиотека фильтров',
-      settings: 'Настройки фильтров',
-      settingsData: {
-        brightness: 'Яркость',
-        contrast: 'Контрастность',
-        grayscale: 'Оттенки серого',
-        saturate: 'Насыщенность',
-        sepia: 'Сепия',
-      },
-      title: 'Фильтры',
-    },
-    next: 'Дальше',
-    publication: {
-      description: 'Добавить описание',
-      location: 'Добавить локацию',
-      locationPlaceholder: 'Введите название города...',
-      publishButton: 'Опубликовать',
-      success: 'Это успех :)',
-      title: 'Публикация',
-    },
-  },
+  createPost: { ...createPost },
   expiredSession: { ...expiredSession },
   forgotPassword: { ...forgotPassword },
-  goToTop: 'Вверх',
+
   homePage: {
     addComments: 'Добавить комментарий...',
     emptyPostsButton: 'Найти друзей',
@@ -173,18 +129,9 @@ export const ru = {
   },
 
   recoveryPassword: { ...recoveryPassword },
-  registration: {
-    confirmation: {
-      buttonTitle: 'Войти',
-      text: 'Ваша почта подтверждена',
-      title: 'Поздравляем!',
-    },
-    expired: {
-      buttonTitle: 'Повторно отправить ссылку для подтверждения',
-      text: 'Похоже, срок действия ссылки для подтверждения истек. Не волнуйтесь, мы можем отправить ссылку еще раз.',
-      title: 'Срок действия ссылки для подтверждения электронной почты истек',
-    },
-  },
+
+  registration: { ...registration },
+
   serverError:
     'Что-то пошло не так с нашей стороны. Пожалуйста, повторите попытку позже.',
   session: {
