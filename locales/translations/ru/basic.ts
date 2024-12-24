@@ -1,4 +1,7 @@
-const errors = {}
+const errors = {
+  server: 'Something went wrong on our end. Please try again later.',
+  unknown: 'Что-то пошло не так',
+}
 
 export const basic = {
   errors: { ...errors },

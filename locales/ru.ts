@@ -32,7 +32,6 @@ export const ru = {
 
   basic: { ...basic },
 
-  basicError: 'Что-то пошло не так',
   createPost: { ...createPost },
   expiredSession: { ...expiredSession },
   forgotPassword: { ...forgotPassword },
@@ -132,8 +131,6 @@ export const ru = {
 
   registration: { ...registration },
 
-  serverError:
-    'Что-то пошло не так с нашей стороны. Пожалуйста, повторите попытку позже.',
   session: {
     activeSession: 'Активные сессии',
     currentDevice: 'Текущее устройство',

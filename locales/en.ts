@@ -34,7 +34,6 @@ export const en: LocaleType = {
 
   basic: { ...basic },
 
-  basicError: 'Something went wrong',
   createPost: { ...createPost },
   expiredSession: { ...expiredSession },
   forgotPassword: { ...forgotPassword },
@@ -87,6 +86,7 @@ export const en: LocaleType = {
     successMessage: 'The post was successfully deleted',
     yes: 'Yes',
   },
+
   profileInputs: {
     aboutMe: 'About me',
     addProfilePhoto: 'Add a profile photo',
@@ -128,7 +128,6 @@ export const en: LocaleType = {
   recoveryPassword: { ...recoveryPassword },
   registration: { ...registration },
 
-  serverError: 'Something went wrong on our end. Please try again later.',
   session: {
     activeSession: 'Active session',
     currentDevice: 'Current device',
