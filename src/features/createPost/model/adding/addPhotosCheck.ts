@@ -25,12 +25,15 @@ export const addPhotosCheck = async (
     return
   }
 
+  if (photosCount === 0) {
+    throw new Error(t.basic.errors.type)
+  }
+
   for (let i = 0; i < photosCount; i++) {
     if (i === MaxPhotoCount) {
       toast.error(t.createPost.adding.countLimit(MaxPhotoCount))
       break
     }
-
     const photoData: AddPhotoSchema = {
       photoSize: files[i].size,
       photoType: files[i].type,
