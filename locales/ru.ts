@@ -63,9 +63,7 @@ export const ru = {
   post: {
     modalText: 'Вы уверены, что хотите удалить этот пост?',
     modalTitle: 'Удалить пост',
-    no: 'Нет',
     successMessage: 'Публикация была успешно удалена',
-    yes: 'Да',
   },
 
   profilePage: { ...profilePage },
@@ -83,6 +81,7 @@ export const ru = {
     successLogout: 'Сессия была успешно завершена',
     terminateAll: 'Завершить все остальные сеансы',
   },
+
   showText: {
     less: 'Свернуть',
     more: 'Развернуть',
@@ -90,9 +89,9 @@ export const ru = {
   signIn: { ...signIn },
   signUp: { ...signUp },
 
-  slider: {
-    noText: 'Нет картинок для поста!',
-  },
+  // slider: {
+  //   noText: 'Нет картинок для поста!',
+  // },
   tabs: {
     accountManagement: 'Управление аккаунтом',
     devices: 'Устройства',

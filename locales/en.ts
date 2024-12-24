@@ -65,9 +65,7 @@ export const en: LocaleType = {
   post: {
     modalText: 'Are you sure you want to delete this post?',
     modalTitle: 'Delete Post',
-    no: 'No',
     successMessage: 'The post was successfully deleted',
-    yes: 'Yes',
   },
 
   profilePage: { ...profilePage },
@@ -91,9 +89,10 @@ export const en: LocaleType = {
   },
   signIn: { ...signIn },
   signUp: { ...signUp },
-  slider: {
-    noText: 'No pictures for this post!',
-  },
+
+  // slider: {
+  //   noText: 'No pictures for this post!',
+  // },
   tabs: {
     accountManagement: 'Account management',
     devices: 'Devices',

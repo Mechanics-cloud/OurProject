@@ -1,4 +1,5 @@
 const errors = {
+  emptySlider: 'No pictures',
   server: 'Something went wrong on our end. Please try again later.',
   tooBigFile: (size: number) => `File is too big. Max size is ${size}MB`,
   type: 'Wrong file type',

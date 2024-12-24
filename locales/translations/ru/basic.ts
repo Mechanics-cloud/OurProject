@@ -1,4 +1,5 @@
 const errors = {
+  emptySlider: 'Нет картинок',
   server: 'Something went wrong on our end. Please try again later.',
   tooBigFile: (size: number) =>
     `Файл слишком большой. Максимальный размер файла ${size}MB`,
