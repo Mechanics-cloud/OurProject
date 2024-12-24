@@ -1,5 +1,4 @@
-import { TextField } from '@/common/components'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
+import { TextField, useScreenWidth } from '@/common'
 import { Meta, StoryObj } from '@storybook/react'
 
 const meta: Meta<typeof TextField> = {
