@@ -21,7 +21,6 @@ import {
 } from '@/assets/icons/outlineIcons'
 import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
-import { logOut } from '@/common/utils/logOut'
 import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { observer } from 'mobx-react-lite'
@@ -30,7 +29,11 @@ type Props = ComponentProps<'aside'>
 
 export const SideBar = observer(({ className }: Props) => {
   const { t } = useTranslation()
-  const { onModalClose: onLogOutModalClose } = useModal(logOut)
+  const {
+    isModalOpen: isLogOutModalOpen,
+    onModalClose: onLogOutModalClose,
+    openModal: openLogOutModal,
+  } = useModal()
 
   const {
     isModalOpen: isNewPostModalOpen,
@@ -44,12 +47,12 @@ export const SideBar = observer(({ className }: Props) => {
     <>
       <aside
         className={cn(
-          'hidden lg:flex lg:flex-col lg:min-w-56 lg:h-full',
+          'hidden lg:block lg:min-w-56 lg:h-headCalc lg:fixed',
           className
         )}
       >
-        <nav className={'pt-[72px]'}>
-          <ul className={`mb-[60px] [&_li]:mb-4`}>
+        <nav className={'pt-[72px] h-full'}>
+          <ul className={`mb-[60px] [&_li]:mb-4 flex-col flex h-full`}>
             <li>
               <LinkWithIcon
                 ActiveIcon={Home}
@@ -101,10 +104,8 @@ export const SideBar = observer(({ className }: Props) => {
                 {t.menu.search}
               </LinkWithIcon>
             </li>
-          </ul>
 
-          <ul className={`mb-[180px] [&_li]:mb-6`}>
-            <li>
+            <li className={'mt-14'}>
               <LinkWithIcon
                 ActiveIcon={TrendingUp}
                 DefaultIcon={TrendingUpOutline}
@@ -123,23 +124,28 @@ export const SideBar = observer(({ className }: Props) => {
                 {t.menu.favorites}
               </LinkWithIcon>
             </li>
-          </ul>
 
-          <LogOutModal
-            logOutModalHandler={onLogOutModalClose}
-            triggerButton={
+            <li className={'mt-auto pb-4'}>
               <LinkWithIcon
                 ActiveIcon={LogOut}
                 DefaultIcon={LogOut}
                 as={'button'}
+                onClick={openLogOutModal}
               >
                 {t.menu.logOut}
               </LinkWithIcon>
-            }
-            userEmail={generalStore.user?.email ?? ''}
-          />
+            </li>
+          </ul>
         </nav>
       </aside>
+
+      <LogOutModal
+        logOutModalHandler={onLogOutModalClose}
+        onClose={onLogOutModalClose}
+        open={isLogOutModalOpen}
+        userEmail={generalStore.user?.email ?? ''}
+      />
+
       <NewPostDialog
         onClose={onNewPostModalClose}
         onOpenChange={onNewPostModalClose}
