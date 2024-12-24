@@ -1,6 +1,7 @@
 import {
   expiredSession,
   forgotPassword,
+  recoveryPassword,
   signIn,
   signUp,
 } from '@locales/translations/en'
@@ -29,7 +30,9 @@ export const en: LocaleType = {
     saveButton: 'Save',
     title: 'Add a Profile Photo',
   },
+
   basicError: 'Something went wrong',
+
   createPost: {
     adding: {
       buttonDraft: 'Open draft',
@@ -79,9 +82,12 @@ export const en: LocaleType = {
       title: 'Publication',
     },
   },
+
   expiredSession: { ...expiredSession },
   forgotPassword: { ...forgotPassword },
+
   goToTop: 'Go to top',
+
   homePage: {
     addComments: 'Add a comment',
     emptyPostsButton: 'Find friends',
@@ -94,7 +100,7 @@ export const en: LocaleType = {
     publish: 'Publish',
     viewAllComments: 'View All Comments',
   },
-  logIn: 'Log In',
+
   menu: {
     copyLink: 'Copy Link',
     create: 'Create',
@@ -167,13 +173,9 @@ export const en: LocaleType = {
     lastVisit: 'Last visit',
     terminateAll: 'Terminate all other session',
   },
-  recoveryPassword: {
-    createNewPassword: 'Create New Password',
-    newPassword: 'New Password',
-    passwordChanged: 'Password was successfully changed!',
-    passwordConfirmation: 'Password confirmation',
-    passwordValidation: 'Your password must be between 6 and 20 characters',
-  },
+
+  recoveryPassword: { ...recoveryPassword },
+
   registration: {
     confirmation: {
       buttonTitle: 'Sign in',

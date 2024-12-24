@@ -1,6 +1,7 @@
 import {
   expiredSession,
   forgotPassword,
+  recoveryPassword,
   signIn,
   signUp,
 } from '@locales/translations/ru'
@@ -92,7 +93,7 @@ export const ru = {
     publish: 'Опубликовать',
     viewAllComments: 'Посмотреть все комментарии',
   },
-  logIn: 'Вход',
+
   menu: {
     copyLink: 'Скопировать ссылку',
     create: 'Создать',
@@ -114,6 +115,7 @@ export const ru = {
     statistics: 'Статистика',
     unfollow: 'Отписаться',
   },
+
   notFoundButton: 'Вернуться назад',
   notFoundText:
     'Здесь, кажется, ничего нет. Ты можешь вернуться назад или воспользоваться меню.',
@@ -121,6 +123,7 @@ export const ru = {
     goBack: 'Назад',
     goForward: 'Вперед',
   },
+
   post: {
     modalText: 'Вы уверены, что хотите удалить этот пост?',
     modalTitle: 'Удалить пост',
@@ -128,6 +131,7 @@ export const ru = {
     successMessage: 'Публикация была успешно удалена',
     yes: 'Да',
   },
+
   profileInputs: {
     aboutMe: 'Обо мне',
     addProfilePhoto: 'Загрузить фото',
@@ -147,6 +151,7 @@ export const ru = {
     },
     userName: 'Имя пользователя',
   },
+
   profilePage: {
     followers: 'Подписчики',
     following: 'Подписки',
@@ -167,13 +172,7 @@ export const ru = {
     terminateAll: 'Завершить все другие сессии',
   },
 
-  recoveryPassword: {
-    createNewPassword: 'Создать новый пароль',
-    newPassword: 'Новый пароль',
-    passwordChanged: 'Пароль был успешно изменен!',
-    passwordConfirmation: 'Подтверждение пароля',
-    passwordValidation: 'Ваш пароль должен содержать от 6 до 20 символов',
-  },
+  recoveryPassword: { ...recoveryPassword },
   registration: {
     confirmation: {
       buttonTitle: 'Войти',

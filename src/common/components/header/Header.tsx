@@ -54,7 +54,7 @@ const Header = () => {
                 className={'mr-3 px-4 md:ml-9 md:mr-6 md:px-6'}
                 variant={'text'}
               >
-                <Link href={Paths.signIn}>{t.logIn}</Link>
+                <Link href={Paths.signIn}>{t.signIn.title}</Link>
               </Button>
               <Button
                 asChild
