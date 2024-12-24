@@ -19,6 +19,8 @@ export const profileSessions = {
   activeSessions: 'Active sessions',
   currentSession: 'Current device',
   lastVisit: 'Last visit',
+  noOtherSession: 'You have not yet logged in from other devices',
+  successLogout: 'The session was successfully completed',
   terminateAll: 'Terminate all other session',
 }
 

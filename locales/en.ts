@@ -23,7 +23,6 @@ import { LocaleType } from './ru'
 
 export const en: LocaleType = {
   actionIconsGroup: { ...actionIconsGroup },
-
   avatarModal: { ...avatarModal },
   basic: { ...basic },
   createPost: { ...createPost },
@@ -38,17 +37,6 @@ export const en: LocaleType = {
   profileSettingsTabs: { ...profileSettingsTabs },
   recoveryPassword: { ...recoveryPassword },
   registration: { ...registration },
-
-  session: {
-    activeSession: 'Active session',
-    currentDevice: 'Current device',
-    devices: 'Devices',
-    lastVisit: 'Last visit',
-    logOut: 'Log out',
-    successLogout: 'The session was successfully completed',
-    terminateAll: 'Terminate all other session',
-  },
-
   signIn: { ...signIn },
   signUp: { ...signUp },
   validation: { ...validation },

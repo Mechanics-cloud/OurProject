@@ -18,7 +18,9 @@ export const profileSettings = {
 export const profileSessions = {
   activeSessions: 'Активные сессии',
   currentSession: 'Текущее устройство',
-  lastVisit: 'Последний визит',
+  lastVisit: 'Последнее посещение',
+  noOtherSession: 'Вы еще не входили в систему с других устройств',
+  successLogout: 'Сессия была успешно завершена',
   terminateAll: 'Завершить все другие сессии',
 }
 

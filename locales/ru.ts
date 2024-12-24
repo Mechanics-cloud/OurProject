@@ -35,17 +35,6 @@ export const ru = {
   profileSettingsTabs: { ...profileSettingsTabs },
   recoveryPassword: { ...recoveryPassword },
   registration: { ...registration },
-
-  session: {
-    activeSession: 'Активные сессии',
-    currentDevice: 'Текущее устройство',
-    devices: 'Устройства',
-    lastVisit: 'Последнее посещение',
-    logOut: 'Выйти',
-    successLogout: 'Сессия была успешно завершена',
-    terminateAll: 'Завершить все остальные сеансы',
-  },
-
   signIn: { ...signIn },
   signUp: { ...signUp },
   validation: { ...validation },
