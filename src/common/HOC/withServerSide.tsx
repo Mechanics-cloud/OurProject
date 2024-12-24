@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 
 import { LayoutWithStore, SideBar, getFromLocalStorage } from '@/common'
-import { NextPageWithLayout } from '@/common/HOC/types'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
+
+import { NextPageWithLayout } from './types'
 
 export const withServerSide = <P extends object>(
   PageComponent: NextPageWithLayout<P>
