@@ -1,6 +1,0 @@
-export * from './expiredSession'
-export * from './forgotPassword'
-export * from './recoveryPassword'
-export * from './registration'
-export * from './signIn'
-export * from './signUp'

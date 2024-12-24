@@ -3,6 +3,9 @@ import {
   createPost,
   expiredSession,
   forgotPassword,
+  profilePage,
+  profileSessions,
+  profileSettings,
   recoveryPassword,
   registration,
   signIn,
@@ -87,48 +90,10 @@ export const ru = {
     yes: 'Да',
   },
 
-  profileInputs: {
-    aboutMe: 'Обо мне',
-    addProfilePhoto: 'Загрузить фото',
-    city: 'Выьерите ваш город',
-    country: 'Выьерите вашу страну',
-    dateOfBirth: 'Дата рождения',
-    firstName: 'Имя',
-    lastName: 'Фамилия',
-    placeholders: {
-      city: 'Город',
-      country: 'Страна',
-    },
-    saveChanges: 'Сохранить изменения',
-    updateStatusMessages: {
-      error: 'Что-то пошло не так',
-      success: 'Ваши данные сохранены',
-    },
-    userName: 'Имя пользователя',
-  },
-
-  profilePage: {
-    followers: 'Подписчики',
-    following: 'Подписки',
-    noPosts: {
-      alt: 'Нет постов пользователя',
-      button: 'Создать пост',
-      strangeText: 'Пользователь еще не опубликовал ни одного поста',
-      userText: 'Ваша лента пуста. Опубликуйте ваш первый пост',
-    },
-    publications: 'Публикации',
-    settingsButton: 'Настройки профиля',
-  },
-
-  profileSessions: {
-    activeSessions: 'Активные сессии',
-    currentSession: 'Текущее устройство',
-    lastVisit: 'Последний визит',
-    terminateAll: 'Завершить все другие сессии',
-  },
-
+  profilePage: { ...profilePage },
+  profileSessions: { ...profileSessions },
+  profileSettings: { ...profileSettings },
   recoveryPassword: { ...recoveryPassword },
-
   registration: { ...registration },
 
   session: {

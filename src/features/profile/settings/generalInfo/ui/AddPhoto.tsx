@@ -66,7 +66,7 @@ export const AddPhoto = observer(
               className={'min-w-[196px]'}
               variant={'outline'}
             >
-              {t.profileInputs.addProfilePhoto}
+              {t.profileSettings.addProfilePhoto}
             </Button>
           }
         />

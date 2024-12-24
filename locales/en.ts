@@ -3,6 +3,9 @@ import {
   createPost,
   expiredSession,
   forgotPassword,
+  profilePage,
+  profileSessions,
+  profileSettings,
   recoveryPassword,
   registration,
   signIn,
@@ -87,44 +90,9 @@ export const en: LocaleType = {
     yes: 'Yes',
   },
 
-  profileInputs: {
-    aboutMe: 'About me',
-    addProfilePhoto: 'Add a profile photo',
-    city: 'Select your city',
-    country: 'Select your country',
-    dateOfBirth: 'Date of birth',
-    firstName: 'First name',
-    lastName: 'Last name',
-    placeholders: {
-      city: 'City',
-      country: 'Country',
-    },
-    saveChanges: 'Save changes',
-    updateStatusMessages: {
-      error: 'Something went wrong',
-      success: 'Your settings are saved!',
-    },
-    userName: 'User name',
-  },
-  profilePage: {
-    followers: 'Followers',
-    following: 'Following',
-    noPosts: {
-      alt: 'No user post image',
-      button: 'Add new post',
-      strangeText: 'The user has not published any posts yet',
-      userText: 'Your feed is empty. Publish your first post',
-    },
-    publications: 'Publications',
-    settingsButton: 'Profile settings',
-  },
-  profileSessions: {
-    activeSessions: 'Active sessions',
-    currentSession: 'Current device',
-    lastVisit: 'Last visit',
-    terminateAll: 'Terminate all other session',
-  },
-
+  profilePage: { ...profilePage },
+  profileSessions: { ...profileSessions },
+  profileSettings: { ...profileSettings },
   recoveryPassword: { ...recoveryPassword },
   registration: { ...registration },
 
