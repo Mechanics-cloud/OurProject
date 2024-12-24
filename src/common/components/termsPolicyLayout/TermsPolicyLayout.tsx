@@ -21,7 +21,7 @@ export const TermsPolicyLayout = ({ children, title }: Props) => {
           onClick={() => router.back()}
           type={'button'}
         >
-          {t.termsPolicyPage.back}
+          {t.basic.pagination.goBack}
         </button>
       </div>
       <Typography

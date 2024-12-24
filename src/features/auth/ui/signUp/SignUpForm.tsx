@@ -41,7 +41,7 @@ export const SignUpForm = observer(() => {
           className={'text-center mb-3'}
           variant={'h1'}
         >
-          {t.signUpForm.title}
+          {t.signUp.title}
         </Typography>
         <ExternalServicesRegistration />
 
@@ -52,31 +52,31 @@ export const SignUpForm = observer(() => {
           <FormTextField
             control={control}
             disabled={isLoading}
-            label={t.signUpForm.labels.userName}
+            label={t.signUp.labels.userName}
             name={'userName'}
-            placeholder={t.signUpForm.placeholders.userName}
+            placeholder={t.signUp.placeholders.userName}
           />
           <FormTextField
             control={control}
             disabled={isLoading}
-            label={t.signUpForm.labels.email}
+            label={t.signUp.labels.email}
             name={'email'}
-            placeholder={t.signUpForm.placeholders.email}
+            placeholder={t.signUp.placeholders.email}
           />
           <FormTextField
             control={control}
             disabled={isLoading}
-            label={t.signUpForm.labels.password}
+            label={t.signUp.labels.password}
             name={'password'}
-            placeholder={t.signUpForm.placeholders.password}
+            placeholder={t.signUp.placeholders.password}
             type={'password'}
           />
           <FormTextField
             control={control}
             disabled={isLoading}
-            label={t.signUpForm.labels.confirm}
+            label={t.signUp.labels.confirm}
             name={'confirm'}
-            placeholder={t.signUpForm.placeholders.confirm}
+            placeholder={t.signUp.placeholders.confirm}
             type={'password'}
           />
           <div className={'mb-3'}>
@@ -94,7 +94,7 @@ export const SignUpForm = observer(() => {
             disabled={!isValid || isLoading}
             type={'submit'}
           >
-            {t.signUp}
+            {t.signUp.title}
           </Button>
         </form>
 
@@ -105,7 +105,7 @@ export const SignUpForm = observer(() => {
         />
 
         <div className={'flex flex-col gap-3 items-center'}>
-          <span>{t.signUpForm.text}</span>
+          <span>{t.signUp.text}</span>
           <Button
             asChild
             variant={'text'}
@@ -117,7 +117,7 @@ export const SignUpForm = observer(() => {
               )}
               href={Paths.signIn}
             >
-              {t.signIn}
+              {t.signIn.title}
             </Link>
           </Button>
         </div>

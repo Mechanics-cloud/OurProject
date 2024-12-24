@@ -14,7 +14,7 @@ export const GeneralInfoLoading = () => {
     firstName,
     lastName,
     userName,
-  } = t.profileInputs
+  } = t.profileSettings
 
   const { isTablet } = useScreenWidth()
 

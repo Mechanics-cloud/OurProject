@@ -21,9 +21,9 @@ export const SelectCountryAndCity = <T extends FieldValues>({
         className={'w-full'}
         control={control}
         disabled={loading}
-        label={t.profileInputs.country}
+        label={t.profileSettings.country}
         name={'country' as Path<T>}
-        placeholder={t.profileInputs.placeholders.country}
+        placeholder={t.profileSettings.placeholders.country}
       >
         {countriesData?.map((country) => (
           <SelectItem
@@ -38,9 +38,9 @@ export const SelectCountryAndCity = <T extends FieldValues>({
         className={'w-full'}
         control={control}
         disabled={!countryValue || loading}
-        label={t.profileInputs.city}
+        label={t.profileSettings.city}
         name={'city' as Path<T>}
-        placeholder={t.profileInputs.placeholders.city}
+        placeholder={t.profileSettings.placeholders.city}
       >
         {cities?.map((city) => (
           <SelectItem

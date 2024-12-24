@@ -14,12 +14,20 @@ export const getSettingsTabs = (
     {
       content: <GeneralInfoPage />,
       id: 'tab1',
-      title: isMobile ? <Settings className={'w-full'} /> : t.tabs.generalInfo,
+      title: isMobile ? (
+        <Settings className={'w-full'} />
+      ) : (
+        t.profileSettingsTabs.generalInfo
+      ),
     },
     {
       content: <Devices />,
       id: 'tab2',
-      title: isMobile ? <Chrome className={'w-full'} /> : t.tabs.devices,
+      title: isMobile ? (
+        <Chrome className={'w-full'} />
+      ) : (
+        t.profileSettingsTabs.devices
+      ),
     },
     {
       content: <Typography variant={'reg16'}>Account Management</Typography>,
@@ -27,13 +35,17 @@ export const getSettingsTabs = (
       title: isMobile ? (
         <Person className={'w-full'} />
       ) : (
-        t.tabs.accountManagement
+        t.profileSettingsTabs.accountManagement
       ),
     },
     {
       content: <Typography variant={'reg16'}>My payments</Typography>,
       id: 'tab4',
-      title: isMobile ? <CreditCard className={'w-full'} /> : t.tabs.myPayments,
+      title: isMobile ? (
+        <CreditCard className={'w-full'} />
+      ) : (
+        t.profileSettingsTabs.myPayments
+      ),
     },
   ]
 }

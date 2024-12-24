@@ -12,12 +12,12 @@ export const useMe = () => {
   useEffect(() => {
     if (getFromLocalStorage(StorageKeys.AccessToken)) {
       authStore.me().catch(() => {
-        toast.success(t.auth.welcome, { closeButton: false })
+        toast.success(t.basic.welcome, { closeButton: false })
       })
     } else {
       runInAction(() => {
         authStore.isAuthenticated = 'no'
       })
     }
-  }, [t.auth.welcome])
+  }, [t.basic.welcome])
 }

@@ -50,7 +50,7 @@ export const useSignUp = (t: LocaleType) => {
       responseErrorHandler(error, setError)
       resetField('confirm')
       setError('confirm', {
-        message: t.signUpForm.labels.confirm,
+        message: t.signUp.labels.confirm,
         type: 'manual',
       })
     }

@@ -6,21 +6,21 @@ export const AgreementWithTheTerms = () => {
 
   return (
     <div className={`flex items-center gap-1 flex-wrap`}>
-      <span>{t.signUpForm.labels.agree}</span>
+      <span>{t.signUp.labels.agree}</span>
       <Typography
         className={'whitespace-nowrap'}
         href={Paths.termsOfService}
         variant={'smallLink'}
       >
-        {t.signUpForm.terms}
+        {t.signUp.terms}
       </Typography>
-      {t.signUpForm.labels.and}
+      {t.signUp.labels.and}
       <Typography
         className={'whitespace-nowrap'}
         href={Paths.privacyPolicy}
         variant={'smallLink'}
       >
-        {t.signUpForm.policy}
+        {t.signUp.policy}
       </Typography>
     </div>
   )

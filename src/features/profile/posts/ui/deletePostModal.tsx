@@ -44,14 +44,14 @@ export const DeletePostModal = ({ onDeletePost, postId, ...rest }: Props) => {
                 onClick={() => onDeletePost(postId)}
                 variant={'outline'}
               >
-                {t.post.yes}
+                {t.basic.yes}
               </Button>
             </DialogClose>
             <DialogClose
               asChild
               className={'w-[96px]'}
             >
-              <Button>{t.post.no}</Button>
+              <Button>{t.basic.no}</Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

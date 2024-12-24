@@ -1,4 +1,4 @@
-const oneMB = 1024 * 1024
+export const oneMB = 1024 * 1024
 
 export enum StatusCode {
   Unauthorized = 401,

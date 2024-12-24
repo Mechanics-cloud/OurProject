@@ -22,7 +22,7 @@ const SignIn = observer(() => {
           className={'text-center'}
           variant={'h1'}
         >
-          {t.signInForm.title}
+          {t.signIn.title}
         </Typography>
         <ExternalServicesRegistration />
         <form
@@ -33,7 +33,7 @@ const SignIn = observer(() => {
           <FormTextField
             control={control}
             disabled={isLoading}
-            label={t.signInForm.labelEmail}
+            label={t.signIn.labelEmail}
             name={'email'}
             placeholder={'epam@epam.com'}
             type={'email'}
@@ -41,9 +41,9 @@ const SignIn = observer(() => {
           <FormTextField
             control={control}
             disabled={isLoading}
-            label={t.signInForm.labelPassword}
+            label={t.signIn.labelPassword}
             name={'password'}
-            placeholder={t.signInForm.placeholderPassword}
+            placeholder={t.signIn.placeholderPassword}
             type={'password'}
           />
 
@@ -51,23 +51,23 @@ const SignIn = observer(() => {
             className={'self-end mt-3 mb-6 text-light-900'}
             href={Paths.forgotPassword}
           >
-            {t.signInForm.passwordRecovery}
+            {t.signIn.passwordRecovery}
           </Link>
 
           <Button
             disabled={!isValid || isLoading}
             type={'submit'}
           >
-            {t.signInForm.title}
+            {t.signIn.title}
           </Button>
         </form>
         <div className={'flex flex-col gap-1 items-center mt-4'}>
-          <Typography variant={'reg16'}>{t.signInForm.text}</Typography>
+          <Typography variant={'reg16'}>{t.signIn.text}</Typography>
           <Button
             asChild
             variant={'text'}
           >
-            <Link href={Paths.signUp}>{t.signInForm.signUpTitle}</Link>
+            <Link href={Paths.signUp}>{t.signIn.signUpTitle}</Link>
           </Button>
         </div>
       </Card>

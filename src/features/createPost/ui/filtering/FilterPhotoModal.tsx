@@ -27,7 +27,7 @@ export const FilterPhotoModal = observer(() => {
     >
       <ModalHeader
         onRightButtonClick={nextStage}
-        rightButtonTitle={t.createPost.next}
+        rightButtonTitle={t.basic.next}
         title={t.createPost.filtering.title}
       />
 

@@ -9,8 +9,9 @@ import {
   useAvatarUpload,
 } from '@/features/profile'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { LocaleType } from '@locales/ru'
 
-export const useFillGeneralInfo = () => {
+export const useFillGeneralInfo = (t: LocaleType) => {
   const {
     isPhotoChanged,
     onModalPhotoSave,
@@ -54,7 +55,7 @@ export const useFillGeneralInfo = () => {
       if (!photoObj.photoUrl && !photoObj.photoFile && isPhotoChanged) {
         await profileStore.deleteAvatar()
       }
-      toast.success('Your settings are saved!')
+      toast.success(t.profileSettings.updateStatusMessages)
     } catch (error) {
       responseErrorHandler(error)
     }

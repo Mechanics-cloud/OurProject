@@ -29,7 +29,7 @@ class ProfileSessionsStore {
           )
         }
       })
-      toast.success(translationForStore.t.session.successLogout)
+      toast.success(translationForStore.t.profileSessions.successLogout)
     } catch (error) {
       responseErrorHandler(error)
     }

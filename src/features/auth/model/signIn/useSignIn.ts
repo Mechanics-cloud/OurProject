@@ -33,7 +33,7 @@ export const useSignIn = (t: LocaleType) => {
       await Router.push(Paths.home)
     } catch (error: unknown) {
       setError('email', {
-        message: t.signInForm.errorResponse,
+        message: t.signIn.errorResponse,
         type: 'manual',
       })
       setFocus('email')

@@ -1,5 +1,6 @@
 import { useCallback, useMemo } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { toast } from 'react-toastify'
 
 import { useTranslation } from '@/common'
 import { addPhotosCheck, addPostStore } from '@/features/createPost'
@@ -15,11 +16,13 @@ export const useAddPhotoModal = () => {
 
   const onPhotoDrop = useCallback(
     async (files: File[]) => {
-      setIsNotNewDialog()
-      clearOldData()
-      await addPhotosCheck(files, totalCount, t, addPostPhoto)
-      if (totalCount > 0) {
+      try {
+        setIsNotNewDialog()
+        clearOldData()
+        await addPhotosCheck(files, totalCount, t, addPostPhoto)
         await nextStage()
+      } catch (error) {
+        toast.error((error as Error).message)
       }
     },
     [nextStage, addPostPhoto, t, totalCount, setIsNotNewDialog, clearOldData]

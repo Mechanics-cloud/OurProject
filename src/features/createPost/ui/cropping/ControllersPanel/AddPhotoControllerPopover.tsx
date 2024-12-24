@@ -27,7 +27,7 @@ export const AddPhotoControllerPopover = observer(() => {
     >
       <PopoverTrigger asChild>
         <PhotoControllerButton className={'ml-auto'}>
-          <Tooltip title={t.createPost.cropping.add}>
+          <Tooltip title={t.createPost.cropping.gallery}>
             {isOpen ? (
               <Image
                 className={'w-[28px] h-[28px] self-start text-accent-500'}
@@ -59,21 +59,23 @@ export const AddPhotoControllerPopover = observer(() => {
               />
             ))}
         </div>
-        <label className={'justify-self-end'}>
-          <PlusCircleOutline
-            className={cn(
-              'w-7 h-7 hover:text-accent-500',
-              isAddingDisabled ? 'opacity-50 hover:text-light-100' : ''
-            )}
-          />
-          <input
-            accept={'image/*, .png, .jpg, .jpeg'}
-            className={'sr-only'}
-            disabled={isAddingDisabled}
-            onChange={onPhotoChoose}
-            type={'file'}
-          />
-        </label>
+        <Tooltip title={t.createPost.cropping.add}>
+          <label className={'justify-self-end'}>
+            <PlusCircleOutline
+              className={cn(
+                'w-7 h-7 hover:text-accent-500',
+                isAddingDisabled ? 'opacity-50 hover:text-light-100' : ''
+              )}
+            />
+            <input
+              accept={'image/*, .png, .jpg, .jpeg'}
+              className={'sr-only'}
+              disabled={isAddingDisabled}
+              onChange={onPhotoChoose}
+              type={'file'}
+            />
+          </label>
+        </Tooltip>
       </PopoverContent>
     </Popover>
   )

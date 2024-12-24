@@ -60,7 +60,7 @@ const PostItem = ({ item, router }: Props) => {
         {item.images.length > 0 ? (
           <CustomSwiper images={item.images} />
         ) : (
-          t.slider.noText
+          t.basic.errors.emptySlider
         )}
       </section>
       <LinksGroup
