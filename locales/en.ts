@@ -259,6 +259,8 @@ export const en: LocaleType = {
     title: 'Sign Up',
   },
   slider: {
+    noImages:
+      'Failed to display post photos. Please contact support or try again later!',
     noText: 'No pictures for this post!',
   },
   tabs: {

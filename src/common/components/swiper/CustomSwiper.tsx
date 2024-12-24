@@ -1,4 +1,4 @@
-import { ImageUrl, cn } from '@/common'
+import { ImageUrl, Typography, cn, useTranslation } from '@/common'
 import Image from 'next/image'
 import {
   EffectFade,
@@ -6,17 +6,36 @@ import {
   Navigation,
   Pagination,
 } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
+import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
+
+import noPostImage from '/src/assets/images/noUserPosts.svg'
 
 type ImagesTypes = {
   className?: string
   images: Array<{ url: ImageUrl }>
-}
-const CustomSwiper = ({ className, images }: ImagesTypes) => {
+} & Omit<SwiperProps, 'className' | 'images'>
+
+const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
+  const { t } = useTranslation()
+
   if (images.length === 0) {
-    return <p>Нет изображений для отображения</p>
+    return (
+      <div className={'flex flex-col items-center justify-center h-full'}>
+        <Image
+          alt={t.profilePage.noPosts.alt}
+          className={'w-full opacity-90 '}
+          src={noPostImage}
+        />
+        <Typography
+          className={'text-light-900'}
+          variant={'small'}
+        >
+          {t.slider.noImages}
+        </Typography>
+      </div>
+    )
   }
 
   return (
@@ -36,6 +55,7 @@ const CustomSwiper = ({ className, images }: ImagesTypes) => {
       pagination={{
         clickable: true,
       }}
+      {...restProps}
       spaceBetween={30}
       watchSlidesProgress
     >
