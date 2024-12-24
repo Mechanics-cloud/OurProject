@@ -60,7 +60,7 @@ const Header = () => {
                 asChild
                 className={'px-4 md:px-6'}
               >
-                <Link href={Paths.signUp}>{t.signUp}</Link>
+                <Link href={Paths.signUp}>{t.signUp.title}</Link>
               </Button>
             </>
           )}
