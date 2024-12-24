@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import {
   FullScreenLoader,
   LayoutWithStore,
+  Menu,
   Paths,
   SideBar,
   getFromLocalStorage,
@@ -63,6 +64,7 @@ export const withProtection = <P extends object>(
       return (
         <LayoutWithStore className={'flex'}>
           <SideBar />
+          <Menu />
           <div className={'lg:pl-9 w-full lg:h-headCalc lg:ml-56'}>
             {loading ? <FullScreenLoader /> : <PageComponent {...props} />}
           </div>
