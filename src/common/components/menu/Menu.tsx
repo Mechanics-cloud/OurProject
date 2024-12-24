@@ -14,7 +14,7 @@ import {
   PlusSquareOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
-import { Paths, useModal, useTranslation } from '@/common'
+import { Paths, cn, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
@@ -34,9 +34,10 @@ export const Menu = () => {
 
   return (
     <nav
-      className={
-        'min-w-[360px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50]'
-      }
+      className={cn(
+        'min-w-[360px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50]',
+        'lg:hidden'
+      )}
     >
       <ul className={'flex w-full justify-evenly py-[18px]'}>
         <li>
