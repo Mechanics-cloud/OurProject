@@ -2,29 +2,28 @@ export const createPost = {
   adding: {
     buttonDraft: 'Open draft',
     buttonNew: 'Select from computer',
-    errors: {
-      basic: 'Something went wrong',
-      countLimit: 'Limit is ',
-      tooBig: 'Photo is too big',
-      type: 'Wrong type',
-    },
+    countLimit: (count: number) => `Limit is ${count} files`,
     title: 'Add post',
   },
+
   alt: 'Photo in carousel',
+
   closeModal: {
     description: 'Do you really want to close the creation of a publication?',
-    discard: 'Discard',
     save: 'Save draft',
     title: 'Close',
   },
+
   cropping: {
     add: 'Add',
     crop: 'Crop',
     delete: 'Delete',
+    gallery: 'Watch adding photos',
     originalRatio: 'Original',
     title: 'Cropping',
     zoom: 'Zoom',
   },
+
   filtering: {
     filters: 'Filters library',
     settings: 'Filters settings',
@@ -37,7 +36,7 @@ export const createPost = {
     },
     title: 'Filters',
   },
-  next: 'Next',
+
   publication: {
     description: 'Add publication descriptions',
     location: 'Add location',
