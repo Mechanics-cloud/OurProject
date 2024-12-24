@@ -7,6 +7,7 @@ import {
   profilePage,
   profileSessions,
   profileSettings,
+  profileSettingsTabs,
   recoveryPassword,
   registration,
   signIn,
@@ -69,7 +70,9 @@ export const ru = {
   profilePage: { ...profilePage },
   profileSessions: { ...profileSessions },
   profileSettings: { ...profileSettings },
+  profileSettingsTabs: { ...profileSettingsTabs },
   recoveryPassword: { ...recoveryPassword },
+
   registration: { ...registration },
 
   session: {
@@ -81,7 +84,6 @@ export const ru = {
     successLogout: 'Сессия была успешно завершена',
     terminateAll: 'Завершить все остальные сеансы',
   },
-
   showText: {
     less: 'Свернуть',
     more: 'Развернуть',
@@ -89,18 +91,6 @@ export const ru = {
   signIn: { ...signIn },
   signUp: { ...signUp },
 
-  // slider: {
-  //   noText: 'Нет картинок для поста!',
-  // },
-  tabs: {
-    accountManagement: 'Управление аккаунтом',
-    devices: 'Устройства',
-    generalInfo: 'Общая информация',
-    myPayments: 'Мои платежи',
-  },
-  termsPolicyPage: {
-    back: 'Назад',
-  },
   userCounter: {
     text: 'Зарегистрированных пользователей:',
   },

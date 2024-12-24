@@ -34,3 +34,10 @@ export const profilePage = {
   publications: 'Публикации',
   settingsButton: 'Настройки профиля',
 }
+
+export const profileSettingsTabs = {
+  accountManagement: 'Управление аккаунтом',
+  devices: 'Устройства',
+  generalInfo: 'Общая информация',
+  myPayments: 'Мои платежи',
+}

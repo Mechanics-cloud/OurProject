@@ -7,6 +7,7 @@ import {
   profilePage,
   profileSessions,
   profileSettings,
+  profileSettingsTabs,
   recoveryPassword,
   registration,
   signIn,
@@ -71,9 +72,10 @@ export const en: LocaleType = {
   profilePage: { ...profilePage },
   profileSessions: { ...profileSessions },
   profileSettings: { ...profileSettings },
+  profileSettingsTabs: { ...profileSettingsTabs },
   recoveryPassword: { ...recoveryPassword },
-  registration: { ...registration },
 
+  registration: { ...registration },
   session: {
     activeSession: 'Active session',
     currentDevice: 'Current device',
@@ -88,20 +90,9 @@ export const en: LocaleType = {
     more: 'Show more',
   },
   signIn: { ...signIn },
+
   signUp: { ...signUp },
 
-  // slider: {
-  //   noText: 'No pictures for this post!',
-  // },
-  tabs: {
-    accountManagement: 'Account management',
-    devices: 'Devices',
-    generalInfo: 'General information',
-    myPayments: 'My payments',
-  },
-  termsPolicyPage: {
-    back: 'Back',
-  },
   userCounter: {
     text: 'Registered users:',
   },
