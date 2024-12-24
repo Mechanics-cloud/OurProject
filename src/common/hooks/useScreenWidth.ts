@@ -5,7 +5,7 @@ import { ScreenWidths } from '@/common/enums'
 import { useDebounce } from './useDebounce'
 
 export const useScreenWidth = () => {
-  const [width, setWidth] = useState(2450)
+  const [width, setWidth] = useState(window.innerWidth)
   const breakpoint: number = ScreenWidths.lg
   const smallBreakpoint = ScreenWidths.sm
 
@@ -15,8 +15,6 @@ export const useScreenWidth = () => {
   const isMobile = debouncedWidth < smallBreakpoint
 
   useEffect(() => {
-    setWidth(window.innerWidth)
-
     const onWindowResize = () => setWidth(window.innerWidth)
 
     window.addEventListener('resize', onWindowResize)

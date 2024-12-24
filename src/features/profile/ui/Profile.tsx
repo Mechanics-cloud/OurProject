@@ -1,11 +1,5 @@
 import { Paid } from '@/assets/icons'
-import {
-  Button,
-  Paths,
-  Typography,
-  useScreenWidth,
-  useTranslation,
-} from '@/common'
+import { Button, Paths, Typography, useTranslation } from '@/common'
 import {
   HydrateProfileStore,
   PhotoProfilePostsGallery,
@@ -19,20 +13,17 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import avatarPlaceholder from '../../../assets/images/avatar.jpg'
+import avatarPlaceholder from '../../../assets/images/user-avatar-placeholder.jpg'
 
 type Props = {
   store: HydrateProfileStore
 }
-//todo: remove avatarPlaceholder
 export const Profile = observer(({ store }: Props) => {
   const { t } = useTranslation()
   const { query } = useRouter()
   const { followers, following, publications, settingsButton } = t.profilePage
 
   const avatar = store.userProfile?.avatars[0]?.url
-
-  const { isMobile, isTablet } = useScreenWidth()
 
   return (
     <UserIdProvider ctx={query.id ? +query.id[0] : null}>
@@ -46,10 +37,10 @@ export const Profile = observer(({ store }: Props) => {
             <Image
               alt={'avatar'}
               className={'rounded-full pr-0'}
-              height={isMobile ? 100 : 200}
+              height={200}
               priority
               src={avatar || avatarPlaceholder}
-              width={isMobile ? 100 : 200}
+              width={200}
             />
             <div className={'flex flex-col flex-wrap w-full'}>
               <div
@@ -76,14 +67,14 @@ export const Profile = observer(({ store }: Props) => {
               <ProfileStatistics
                 followers={followers}
                 following={following}
-                isMobile={isMobile}
+                isMobile={false}
                 publications={publications}
                 userMetadata={store.userProfile.userMetadata}
               />
               <ProfileAboutMe
                 aboutMe={store.userProfile?.aboutMe}
-                className={isTablet ? 'hidden' : 'mt-6'}
-                isMobile={isMobile}
+                className={'mt-6'}
+                isMobile={false}
               />
             </div>
           </div>
@@ -96,8 +87,8 @@ export const Profile = observer(({ store }: Props) => {
           </Typography>
           <ProfileAboutMe
             aboutMe={store.userProfile?.aboutMe}
-            className={isTablet ? 'mb-7' : 'hidden'}
-            isMobile={isMobile}
+            className={'hidden'}
+            isMobile={false}
           />
           <PhotoProfilePostsGallery store={store} />
         </div>

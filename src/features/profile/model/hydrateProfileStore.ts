@@ -1,7 +1,8 @@
 import { Nullable, responseErrorHandler } from '@/common'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-import { PublicProfile, profileAPi } from '../settings'
+import { publicProfileAPi } from '../api'
+import { PublicProfile } from '../settings'
 import { ImagesData, ProfileData } from './types'
 
 export class HydrateProfileStore {
@@ -32,7 +33,7 @@ export class HydrateProfileStore {
         return
       }
       this.changeLoading(true)
-      const newPosts = await profileAPi.getPublicPosts(
+      const newPosts = await publicProfileAPi.getPublicPosts(
         ownerId,
         endCursorPostId,
         signal,
@@ -69,7 +70,9 @@ export class HydrateProfileStore {
     this.stopRequest = false
     this.changeUpdatePost(true)
     try {
-      const newPosts = await profileAPi.getPublicPosts(this.userProfile.id)
+      const newPosts = await publicProfileAPi.getPublicPosts(
+        this.userProfile.id
+      )
 
       runInAction(() => {
         this.postsData = newPosts

@@ -1,12 +1,11 @@
 import { useEffect } from 'react'
 
 import { withServerSide } from '@/common'
-import { withProtection } from '@/common/HOC/withProtection'
 import {
   ProfileData,
   hydrateProfileStore,
   initializeStore,
-  profileAPi,
+  publicProfileAPi,
 } from '@/features/profile'
 import { Profile } from '@/features/profile/ui/Profile'
 import { observer } from 'mobx-react-lite'
@@ -23,8 +22,8 @@ export const getServerSideProps: GetServerSideProps = async (
     }
   }
   try {
-    const userProfile = await profileAPi.getPublicUser(params.id[0])
-    const postsData = await profileAPi.getPublicPosts(userProfile.id)
+    const userProfile = await publicProfileAPi.getPublicUser(params.id[0])
+    const postsData = await publicProfileAPi.getPublicPosts(userProfile.id)
 
     return { props: { postsData, userProfile } }
   } catch {
