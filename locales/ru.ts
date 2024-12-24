@@ -3,6 +3,7 @@ import {
   createPost,
   expiredSession,
   forgotPassword,
+  menu,
   profilePage,
   profileSessions,
   profileSettings,
@@ -52,35 +53,12 @@ export const ru = {
     viewAllComments: 'Посмотреть все комментарии',
   },
 
-  menu: {
-    copyLink: 'Скопировать ссылку',
-    create: 'Создать',
-    favorites: 'Избранное',
-    home: 'Домой',
-    logOut: 'Выход',
-    logOutModal: {
-      getText: (userEmail: string) => {
-        return `Вы действительно хотите выйти из своей учетной записи "${userEmail}"?`
-      },
-      no: 'Нет',
-      title: 'Выход',
-      yes: 'Да',
-    },
-    messenger: 'Сообщения',
-    profile: 'Профиль',
-    profileSettings: 'Настройки профиля',
-    search: 'Поиск',
-    statistics: 'Статистика',
-    unfollow: 'Отписаться',
-  },
+  menu: { ...menu },
 
   notFoundButton: 'Вернуться назад',
+
   notFoundText:
     'Здесь, кажется, ничего нет. Ты можешь вернуться назад или воспользоваться меню.',
-  pagination: {
-    goBack: 'Назад',
-    goForward: 'Вперед',
-  },
 
   post: {
     modalText: 'Вы уверены, что хотите удалить этот пост?',

@@ -9,6 +9,13 @@ export const basic = {
   discard: 'Discard',
   errors: { ...errors },
   goToTop: 'Go to top',
+  logOut: 'Log Out',
   next: 'Next',
+  no: 'No',
+  pagination: {
+    goBack: 'Go Back',
+    goForward: 'Go forward',
+  },
   welcome: 'Welcome! Please sign in.',
+  yes: 'Yes',
 }

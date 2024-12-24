@@ -10,6 +10,13 @@ export const basic = {
   discard: 'Отмена',
   errors: { ...errors },
   goToTop: 'Вверх',
+  logOut: 'Выход',
   next: 'Дальше',
+  no: 'Нет',
+  pagination: {
+    goBack: 'Назад',
+    goForward: 'Вперед',
+  },
   welcome: 'Добро пожаловать! Пожалуйста, войдите.',
+  yes: 'Да',
 }

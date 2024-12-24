@@ -3,6 +3,7 @@ import {
   createPost,
   expiredSession,
   forgotPassword,
+  menu,
   profilePage,
   profileSessions,
   profileSettings,
@@ -54,34 +55,13 @@ export const en: LocaleType = {
     viewAllComments: 'View All Comments',
   },
 
-  menu: {
-    copyLink: 'Copy Link',
-    create: 'Create',
-    favorites: 'Favorites',
-    home: 'Home',
-    logOut: 'Log Out',
-    logOutModal: {
-      getText: (userEmail: string) => {
-        return `Are you really want to log out of your account "${userEmail}"?`
-      },
-      no: 'No',
-      title: 'Log Out',
-      yes: 'Yes',
-    },
-    messenger: 'Messenger',
-    profile: 'Profile',
-    profileSettings: 'Profile settings',
-    search: 'Search',
-    statistics: 'Statistics',
-    unfollow: 'Unfollow',
-  },
+  menu: { ...menu },
+
   notFoundButton: 'Go back',
+
   notFoundText:
     'There seems to be nothing here. You can go back or use the menu.',
-  pagination: {
-    goBack: 'Go Back',
-    goForward: 'Go forward',
-  },
+
   post: {
     modalText: 'Are you sure you want to delete this post?',
     modalTitle: 'Delete Post',
