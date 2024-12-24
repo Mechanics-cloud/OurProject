@@ -36,7 +36,6 @@ export const ru = {
   },
 
   basic: { ...basic },
-
   createPost: { ...createPost },
   expiredSession: { ...expiredSession },
   forgotPassword: { ...forgotPassword },
@@ -55,8 +54,6 @@ export const ru = {
   },
 
   menu: { ...menu },
-
-  notFoundButton: 'Вернуться назад',
 
   notFoundText:
     'Здесь, кажется, ничего нет. Ты можешь вернуться назад или воспользоваться меню.',

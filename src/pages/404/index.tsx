@@ -28,7 +28,7 @@ function NotFound() {
       >
         {t.notFoundText}
       </Typography>
-      <Button onClick={onBackHandler}>{t.notFoundButton}</Button>
+      <Button onClick={onBackHandler}>{t.basic.pagination.goBack}</Button>
     </div>
   )
 }

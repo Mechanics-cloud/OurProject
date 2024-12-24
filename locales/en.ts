@@ -53,12 +53,10 @@ export const en: LocaleType = {
     noPostsText:
       "The feed is empty. To see your friends' posts, you need to follow them.",
     publish: 'Publish',
-    viewAllComments: 'View All Comments',
+    viewAllComments: 'View all comments',
   },
 
   menu: { ...menu },
-
-  notFoundButton: 'Go back',
 
   notFoundText:
     'There seems to be nothing here. You can go back or use the menu.',

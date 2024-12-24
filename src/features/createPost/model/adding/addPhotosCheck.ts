@@ -26,7 +26,7 @@ export const addPhotosCheck = async (
   }
 
   if (photosCount === 0) {
-    throw new Error(t.basic.errors.type)
+    throw new Error(t.basic.errors.type('PNG or JPG/JPEG'))
   }
 
   for (let i = 0; i < photosCount; i++) {
@@ -44,9 +44,9 @@ export const addPhotosCheck = async (
       addPostPhoto(files[i])
     } catch (error) {
       if (error instanceof z.ZodError) {
-        toast.error(error.errors[0].message)
+        throw new Error(error.errors[0].message)
       } else {
-        toast.error(t.basic.errors.unknown)
+        throw new Error(t.basic.errors.unknown)
       }
     }
   }

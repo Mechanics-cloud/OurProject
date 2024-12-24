@@ -12,7 +12,7 @@ export const addPhotoSchema = (t: LocaleType) => {
       .refine(
         (type) => ['image/jpeg', 'image/jpg', 'image/png'].includes(type),
         {
-          message: t.basic.errors.type,
+          message: t.basic.errors.type('PNG or JPG/JPEG'),
         }
       ),
   })

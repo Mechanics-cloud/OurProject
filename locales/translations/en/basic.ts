@@ -1,8 +1,9 @@
 const errors = {
   emptySlider: 'No pictures',
   server: 'Something went wrong on our end. Please try again later.',
-  tooBigFile: (size: number) => `File is too big. Max size is ${size}MB`,
-  type: 'Wrong file type',
+  tooBigFile: (size: number) =>
+    `File is too big. Photo size must be less than ${size}MB`,
+  type: (types: string) => `Wrong file type. You can upload ${types}`,
   unknown: 'Something went wrong',
 }
 
@@ -14,7 +15,7 @@ export const basic = {
   next: 'Next',
   no: 'No',
   pagination: {
-    goBack: 'Go Back',
+    goBack: 'Go back',
     goForward: 'Go forward',
   },
   welcome: 'Welcome! Please sign in.',
