@@ -1,4 +1,9 @@
-import { signIn, signUp } from '@locales/translations/en'
+import {
+  expiredSession,
+  forgotPassword,
+  signIn,
+  signUp,
+} from '@locales/translations/en'
 
 import { LocaleType } from './ru'
 
@@ -74,30 +79,8 @@ export const en: LocaleType = {
       title: 'Publication',
     },
   },
-  expiredSession: {
-    emailExpired: 'Email verification link expired',
-    pictureExpired: 'Picture of the expired link',
-    resendLink: 'Resend Link',
-    sendLinkAgain:
-      'Looks like the verification link has expired. Not to worry, we can send the link again',
-  },
-  forgotPassword: {
-    buttonTitle: 'Send Link',
-    description:
-      'Enter your email address and we will send you further instructions',
-    emailPlaceholder: 'Enter your email address',
-    link: 'Back to Sign In',
-    modalContent: {
-      getText: (userEmail: string) => {
-        return `We have sent a link to confirm your email to ${userEmail}`
-      },
-    },
-    modalTitle: 'Email sent',
-    resentEmail:
-      'The link has been sent by email. If you don’t receive an email send link again',
-    sendAgain: 'Send Link Again',
-    title: 'Forgot Password',
-  },
+  expiredSession: { ...expiredSession },
+  forgotPassword: { ...forgotPassword },
   goToTop: 'Go to top',
   homePage: {
     addComments: 'Add a comment',
