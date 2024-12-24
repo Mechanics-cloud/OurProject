@@ -47,12 +47,18 @@ export const SideBar = observer(({ className }: Props) => {
     <>
       <aside
         className={cn(
-          'hidden lg:block lg:min-w-56 lg:h-headCalc lg:fixed',
+          'hidden lg:block lg:min-w-56 lg:h-headCalc lg:fixed lg:border-r-2 lg:border-dark-300',
           className
         )}
       >
-        <nav className={'pt-[72px] h-full'}>
-          <ul className={`mb-[60px] [&_li]:mb-4 flex-col flex h-full`}>
+        <nav className={'h-full'}>
+          <ul
+            className={cn(
+              `[&_li]:mb-4 flex-col flex h-full`,
+              "before:content-[''] before:block before:h-16 before:shrink",
+              "after:content-[''] after:block after:h-28 after:shrink"
+            )}
+          >
             <li>
               <LinkWithIcon
                 ActiveIcon={Home}
@@ -105,7 +111,9 @@ export const SideBar = observer(({ className }: Props) => {
               </LinkWithIcon>
             </li>
 
-            <li className={'mt-14'}>
+            <span className={'h-14 shrink'}></span>
+
+            <li>
               <LinkWithIcon
                 ActiveIcon={TrendingUp}
                 DefaultIcon={TrendingUpOutline}
@@ -125,7 +133,7 @@ export const SideBar = observer(({ className }: Props) => {
               </LinkWithIcon>
             </li>
 
-            <li className={'mt-auto pb-4'}>
+            <li className={'mt-auto'}>
               <LinkWithIcon
                 ActiveIcon={LogOut}
                 DefaultIcon={LogOut}
