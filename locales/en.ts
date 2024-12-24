@@ -1,3 +1,5 @@
+import { signIn } from '@locales/translations/en'
+
 import { LocaleType } from './ru'
 
 export const en: LocaleType = {
@@ -215,17 +217,18 @@ export const en: LocaleType = {
     less: 'Hide',
     more: 'Show more',
   },
-  signIn: 'Sign In',
-  signInForm: {
-    errorResponse: 'The email or password are incorrect. Try again please',
-    labelEmail: 'Email',
-    labelPassword: 'Password',
-    passwordRecovery: 'Forgot Password',
-    placeholderPassword: 'Enter your password',
-    signUpTitle: 'Sign Up',
-    text: 'Don’t have an account?',
-    title: 'Sign In',
-  },
+  signIn: { ...signIn },
+  // signIn: 'Sign In',
+  // signInForm: {
+  //   errorResponse: 'The email or password are incorrect. Try again please',
+  //   labelEmail: 'Email',
+  //   labelPassword: 'Password',
+  //   passwordRecovery: 'Forgot Password',
+  //   placeholderPassword: 'Enter your password',
+  //   signUpTitle: 'Sign Up',
+  //   text: 'Don’t have an account?',
+  //   title: 'Sign In',
+  // },
   signUp: 'Sign Up',
   signUpForm: {
     confirmSignUpModal: {

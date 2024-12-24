@@ -117,7 +117,7 @@ export const SignUpForm = observer(() => {
               )}
               href={Paths.signIn}
             >
-              {t.signIn}
+              {t.signIn.title}
             </Link>
           </Button>
         </div>

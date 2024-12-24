@@ -1,3 +1,5 @@
+import { signIn } from '@locales/translations/ru'
+
 export const ru = {
   actionIconsGroup: {
     addFavorite: 'Добавить в избранное',
@@ -216,18 +218,18 @@ export const ru = {
     less: 'Свернуть',
     more: 'Развернуть',
   },
-  signIn: 'Вход',
-  signInForm: {
-    errorResponse:
-      'Указан неверный адрес электронной почты или пароль. Попробуйте еще раз, пожалуйста',
-    labelEmail: 'Электронная почта',
-    labelPassword: 'Пароль',
-    passwordRecovery: 'Забыли пароль',
-    placeholderPassword: 'Введите пароль',
-    signUpTitle: 'Зарегистрироваться',
-    text: 'У вас нет учетной записи?',
-    title: 'Вход',
-  },
+  signIn: { ...signIn },
+  // signInForm: {
+  //   errorResponse:
+  //     'Указан неверный адрес электронной почты или пароль. Попробуйте еще раз, пожалуйста',
+  //   labelEmail: 'Электронная почта',
+  //   labelPassword: 'Пароль',
+  //   passwordRecovery: 'Забыли пароль',
+  //   placeholderPassword: 'Введите пароль',
+  //   signUpTitle: 'Зарегистрироваться',
+  //   text: 'У вас нет учетной записи?',
+  //   title: 'Вход',
+  // },
   signUp: 'Регистрация',
   signUpForm: {
     confirmSignUpModal: {
