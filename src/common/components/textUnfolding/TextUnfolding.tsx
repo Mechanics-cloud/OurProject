@@ -44,7 +44,7 @@ export const TextUnfolding = ({
             onClick={toggleShowMore}
             variant={'text'}
           >
-            {showMore ? t.showText.less : t.showText.more}
+            {showMore ? t.basic.textFolding.less : t.basic.textFolding.more}
           </Button>
         </>
       )}

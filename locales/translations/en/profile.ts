@@ -41,3 +41,10 @@ export const profileSettingsTabs = {
   generalInfo: 'General information',
   myPayments: 'My payments',
 }
+
+export const avatarModal = {
+  chooseButton: 'Select from Computer',
+  noFile: 'File not selected',
+  saveButton: 'Save',
+  title: 'Add a Profile Photo',
+}

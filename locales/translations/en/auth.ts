@@ -87,3 +87,17 @@ export const signUp = {
   text: 'Do you have an account?',
   title: 'Sign Up',
 }
+
+export const validation = {
+  email: {
+    composition: 'The email must match the format example@example.com',
+    required: 'Email is required',
+  },
+  password: {
+    composition: 'Password must contain',
+    match: 'Passwords must match',
+    maxChar: 'Maximum number of characters 20',
+    minChar: 'Minimum number of characters 6',
+  },
+  recaptchaRequired: 'Recaptcha is required',
+}

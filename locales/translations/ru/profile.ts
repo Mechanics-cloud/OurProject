@@ -41,3 +41,10 @@ export const profileSettingsTabs = {
   generalInfo: 'Общая информация',
   myPayments: 'Мои платежи',
 }
+
+export const avatarModal = {
+  chooseButton: 'Выбрать с компьютера',
+  noFile: 'Файл не выбран',
+  saveButton: 'Сохранить',
+  title: 'Добавить фотографию профиля',
+}

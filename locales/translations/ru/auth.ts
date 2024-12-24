@@ -88,3 +88,18 @@ export const signUp = {
   text: 'Уже есть аккаунт?',
   title: 'Регистрация',
 }
+
+export const validation = {
+  email: {
+    composition:
+      'Электронное письмо должно соответствовать формату example@example.com.',
+    required: 'Требуется электронная почта',
+  },
+  password: {
+    composition: 'Пароль должен содержать',
+    match: 'Пароли должны совпадать',
+    maxChar: 'Максимальное количество символов 20',
+    minChar: 'Минимальное количество символов 6',
+  },
+  recaptchaRequired: 'Требуется Recaptcha',
+}

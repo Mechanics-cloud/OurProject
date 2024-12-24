@@ -14,10 +14,17 @@ export const basic = {
   logOut: 'Log Out',
   next: 'Next',
   no: 'No',
+  notFoundTitle:
+    'There seems to be nothing here. You can go back or use the menu.',
   pagination: {
     goBack: 'Go back',
     goForward: 'Go forward',
   },
+  textFolding: {
+    less: 'Hide',
+    more: 'Show more',
+  },
+  userCounter: 'Registered users:',
   welcome: 'Welcome! Please sign in.',
   yes: 'Yes',
 }

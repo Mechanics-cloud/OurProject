@@ -26,7 +26,7 @@ function NotFound() {
         className={'m-auto text-center font-normal'}
         variant={'h1'}
       >
-        {t.notFoundText}
+        {t.basic.notFoundTitle}
       </Typography>
       <Button onClick={onBackHandler}>{t.basic.pagination.goBack}</Button>
     </div>
