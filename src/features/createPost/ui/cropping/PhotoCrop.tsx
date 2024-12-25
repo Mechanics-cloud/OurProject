@@ -3,17 +3,18 @@ import Cropper, { Point } from 'react-easy-crop'
 
 import {
   ControllersPanel,
-  PostPhoto,
+  PhotoStore,
+  // PostPhoto,
   usePhotoCrop,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
-  photo: PostPhoto
+  photo: PhotoStore
 }
 
 export const PhotoCrop = observer(({ photo }: Props) => {
-  const { onCrop, onCropComplete, onZoom } = usePhotoCrop(photo)
+  const { addCrop, addZoom, onCropComplete } = usePhotoCrop(photo)
 
   return (
     <>
@@ -21,9 +22,9 @@ export const PhotoCrop = observer(({ photo }: Props) => {
         aspect={photo.aspect}
         crop={photo.crop as Point}
         image={photo.url as string}
-        onCropChange={onCrop}
+        onCropChange={addCrop || (() => {})}
         onCropComplete={onCropComplete}
-        onZoomChange={onZoom}
+        onZoomChange={addZoom}
         zoom={photo.zoom ?? 1}
       />
       <ControllersPanel id={photo.id} />

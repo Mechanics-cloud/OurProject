@@ -7,13 +7,15 @@ import { observer } from 'mobx-react-lite'
 
 export const ClassicFilters = observer(() => {
   const { t } = useTranslation()
-  const photos = addPostStore.photos
-  const changeClassicFilterSetting = addPostStore.changeFilterSetting
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
+  const photos = addPostStore.photos.getImages()
+  const changeClassicFilterSetting =
+    addPostStore.photos.getImages()[currentSliderIndex].changeFilterSetting
+  // const changeClassicFilterSetting = addPostStore.changeFilterSetting
 
-  const updateFilter = (filter: ClassicFiltersType, value: number) => {
-    changeClassicFilterSetting(currentSliderIndex, filter, value)
-  }
+  // const updateFilter = (filter: ClassicFiltersType, value: number) => {
+  //   changeClassicFilterSetting(filter, value)
+  // }
 
   return (
     <ScrollArea className={'md:h-[430px]'}>
@@ -29,7 +31,9 @@ export const ClassicFilters = observer(() => {
               className={setting.centered ? 'sliderCenter' : ''}
               max={setting.centered ? 3 : 1}
               min={0}
-              onValueChange={(value) => updateFilter(setting.field, value[0])}
+              onValueChange={(value) =>
+                changeClassicFilterSetting(setting.field, value[0])
+              }
               step={setting.centered ? 0.1 : 0.01}
               value={[photos[currentSliderIndex].filterSettings[setting.field]]}
             />

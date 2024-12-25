@@ -1,6 +1,7 @@
 export * from './addPostStore'
 export * from './adding'
 export * from './cropping'
+export * from './photoStore'
 export * from './publication'
 export * from './types'
 export * from './utils'

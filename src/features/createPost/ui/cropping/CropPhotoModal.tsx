@@ -12,8 +12,10 @@ import { SwiperSlide } from 'swiper/react'
 
 export const CropPhotoModal = observer(() => {
   const { t } = useTranslation()
-  const photos = addPostStore.photos
+  const photos = addPostStore.photos.getImages()
   const nextStage = addPostStore.nextStage
+
+  console.log(photos)
 
   return (
     <DialogContent

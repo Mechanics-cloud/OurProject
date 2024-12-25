@@ -5,36 +5,47 @@ import { PostPhoto, addPostStore } from '@/features/createPost'
 import { toJS } from 'mobx'
 
 export const usePhotoCrop = (photo: PostPhoto) => {
-  const addZoom = addPostStore.addZoom
-  const addCrop = addPostStore.addCrop
-  const addCroppedArea = addPostStore.addCroppedArea
+  //const addZoom = addPostStore.addZoom
+  // const addCrop = addPostStore.addCrop
+  // const addCroppedArea = addPostStore.addCroppedArea
+  const addCrop = addPostStore.photos.findImageById(photo.id)?.addCrop
+  const addZoom = addPostStore.photos.findImageById(photo.id)?.addZoom
+  const addCroppedArea = addPostStore.photos.findImageById(
+    photo.id
+  )?.addCroppedArea
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
-    addCroppedArea(photo.id, toJS(croppedAreaPixels))
+    if (addCroppedArea) {
+      addCroppedArea(toJS(croppedAreaPixels))
+    }
   }
 
-  const onZoom = (zoom: number) => {
-    addZoom(photo.id, zoom)
-  }
+  // const onZoom = (zoom: number) => {
+  //   if (addZoom) {
+  //     addZoom(zoom)
+  //   }
+  // }
 
-  const onCrop = useCallback(
-    (crop: Point) => {
-      addCrop(photo.id, crop)
-    },
-    [addCrop, photo.id]
-  )
+  // const onCrop = useCallback(
+  //   (crop: Point) => {
+  //     addCrop(photo.id, crop)
+  //   },
+  //   [addCrop, photo.id]
+  // )
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      onCrop(photo.cropDataSave ?? { x: 0, y: 0 })
+      if (addCrop) {
+        addCrop(photo.cropDataSave ?? { x: 0, y: 0 })
+      }
     }, 0)
 
     return () => clearTimeout(timeoutId)
-  }, [onCrop, photo.cropDataSave])
+  }, [addCrop, photo.cropDataSave])
 
   return {
-    onCrop,
+    addCrop,
+    addZoom,
     onCropComplete,
-    onZoom,
   }
 }

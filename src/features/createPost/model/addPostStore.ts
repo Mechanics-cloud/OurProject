@@ -1,28 +1,13 @@
-import { Area, Point } from 'react-easy-crop'
-
-import {
-  createFileForUpload,
-  findObjectById,
-  getCroppedImg,
-  responseErrorHandler,
-} from '@/common'
-import {
-  ClassicFiltersType,
-  FiltersState,
-  PostPhoto,
-  UploadPost,
-  addPostApi,
-  applyFilters,
-  prepareFilterStyles,
-} from '@/features/createPost'
+import { createFileForUpload, responseErrorHandler } from '@/common'
+import { PhotoStore, UploadPost, addPostApi } from '@/features/createPost'
 import {
   MaxDescriptionLength,
   PhotoEditorState,
   PhotoEditorStateType,
-  defaultClassicFiltersSettings,
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
+import { ImageCollection } from '@/features/createPost/model/imageCollection'
 import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
@@ -31,7 +16,7 @@ class AddPostStore {
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
   isNewDialog = true
   location: string[] = []
-  photos: PostPhoto[] = []
+  photos: ImageCollection = new ImageCollection()
   postDescription: string = ''
 
   prevStage = () => {
@@ -42,39 +27,41 @@ class AddPostStore {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
-  addCrop(id: string, crop: Point) {
-    const photo = findObjectById(this.photos, id)
+  // addCrop(id: string, crop: Point) {
+  //   const photo = findObjectById(this.photos, id)
+  //
+  //   if (photo) {
+  //     photo.crop = crop
+  //   }
+  // }
 
-    if (photo) {
-      photo.crop = crop
-    }
-  }
+  // addCroppedArea(id: string, croppedAreaPixels: Area) {
+  //   const photo = findObjectById(this.photos, id)
+  //
+  //   if (photo) {
+  //     photo.croppedArea = croppedAreaPixels
+  //   }
+  // }
 
-  addCroppedArea(id: string, croppedAreaPixels: Area) {
-    const photo = findObjectById(this.photos, id)
+  //todo перенесено на 1 фото локальное
 
-    if (photo) {
-      photo.croppedArea = croppedAreaPixels
-    }
-  }
-
-  async addCroppedImgUrl() {
-    for (const photo of this.photos) {
-      try {
-        const cropPhotoData = await getCroppedImg(photo.url, photo.croppedArea)
-
-        runInAction(() => {
-          photo.preparedImgData = {
-            photoFile: cropPhotoData.photoFile,
-            photoUrl: cropPhotoData.photoUrl,
-          }
-          photo.imgUrlToShow = cropPhotoData.photoUrl as string
-        })
-      } catch (error) {
-        throw new Error('Something went wrong')
-      }
-    }
-  }
+  // async addCroppedImgUrl() {
+  //   for (const photo of this.photos) {
+  //     try {
+  //       const cropPhotoData = await getCroppedImg(photo.url, photo.croppedArea)
+  //
+  //       runInAction(() => {
+  //         photo.preparedImgData = {
+  //           photoFile: cropPhotoData.photoFile,
+  //           photoUrl: cropPhotoData.photoUrl,
+  //         }
+  //         photo.imgUrlToShow = cropPhotoData.photoUrl as string
+  //       })
+  //     } catch (error) {
+  //       throw new Error('Something went wrong')
+  //     }
+  //   }
+  // }
 
   addCurrentSliderIndex(index: number) {
     runInAction(() => {
@@ -82,62 +69,65 @@ class AddPostStore {
     })
   }
 
-  async addFilteredImgUrl() {
-    for (const photo of this.photos) {
-      try {
-        if (photo.preparedImgData.photoFile && photo.filter) {
-          const filterPhotoData = await applyFilters(
-            photo.preparedImgData.photoFile,
-            photo.filter
-          )
+  //todo перенесено на 1 фото локальное
 
-          runInAction(() => {
-            photo.preparedImgData = {
-              photoFile: filterPhotoData.photoFile,
-              photoUrl: filterPhotoData.photoUrl,
-            }
-          })
-        }
-      } catch (error) {
-        throw new Error('Something went wrong')
-      }
-    }
-  }
+  // async addFilteredImgUrl() {
+  //   for (const photo of this.photos) {
+  //     try {
+  //       if (photo.preparedImgData.photoFile && photo.filter) {
+  //         const filterPhotoData = await applyFilters(
+  //           photo.preparedImgData.photoFile,
+  //           photo.filter
+  //         )
+  //
+  //         runInAction(() => {
+  //           photo.preparedImgData = {
+  //             photoFile: filterPhotoData.photoFile,
+  //             photoUrl: filterPhotoData.photoUrl,
+  //           }
+  //         })
+  //       }
+  //     } catch (error) {
+  //       throw new Error('Something went wrong')
+  //     }
+  //   }
+  // }
 
-  addInstFilter(index: number, filter: FiltersState) {
-    this.photos[index].filterSettings = filter
-    this.applyFilter(index)
-  }
+  // addInstFilter(index: number, filter: FiltersState) {
+  //   this.photos[index].filterSettings = filter
+  //   this.applyFilter(index)
+  // }
 
   addLocation(city: string, country: string) {
     this.location = [city, country]
   }
 
   addPhoto(file: File) {
-    const id = Math.random().toString(16).slice(2)
     const url = URL.createObjectURL(file)
 
-    this.photos = [
-      ...this.photos,
-      {
-        aspect: 1,
-        crop: { x: 0, y: 0 },
-        cropDataSave: null,
-        croppedArea: { height: 0, width: 0, x: 0, y: 0 },
-        filter: '',
-        filterSettings: defaultClassicFiltersSettings,
-        id,
-        imgUrlToShow: '',
-        originAspect: 1,
-        preparedImgData: {
-          photoFile: null,
-          photoUrl: null,
-        },
-        url,
-        zoom: 1,
-      },
-    ]
-    this.initOriginAspect(id, url)
+    this.photos.addImage(new PhotoStore(url))
+    // this.photos = [...this.photos, new PhotoStore(id, url)]
+    // this.photos = [
+    //   ...this.photos,
+    //   {
+    //     aspect: 1,
+    //     crop: { x: 0, y: 0 },
+    //     cropDataSave: null,
+    //     croppedArea: { height: 0, width: 0, x: 0, y: 0 },
+    //     filter: '',
+    //     filterSettings: defaultClassicFiltersSettings,
+    //     id,
+    //     imgUrlToShow: '',
+    //     originAspect: 1,
+    //     preparedImgData: {
+    //       photoFile: null,
+    //       photoUrl: null,
+    //     },
+    //     url,
+    //     zoom: 1,
+    //   },
+    // ]
+    // this.initOriginAspect(id, url)
   }
 
   addPostDescription(description: string) {
@@ -147,34 +137,34 @@ class AddPostStore {
     this.postDescription = description.toString()
   }
 
-  addZoom(id: string, zoom: number) {
-    this.photos = this.photos.map((photo) =>
-      photo.id === id ? { ...photo, zoom } : photo
-    )
-  }
+  // addZoom(id: string, zoom: number) {
+  //   this.photos = this.photos.map((photo) =>
+  //     photo.id === id ? { ...photo, zoom } : photo
+  //   )
+  // }
 
-  applyFilter(index: number) {
-    this.photos[index].filter = prepareFilterStyles(
-      this.photos[index].filterSettings
-    )
-  }
+  // applyFilter(index: number) {
+  //   this.photos[index].filter = prepareFilterStyles(
+  //     this.photos[index].filterSettings
+  //   )
+  // }
 
-  changeAspect(id: string, aspect: number) {
-    const photo = findObjectById(this.photos, id)
+  // changeAspect(id: string, aspect: number) {
+  //   const photo = findObjectById(this.photos, id)
+  //
+  //   if (photo) {
+  //     photo.aspect = aspect
+  //   }
+  // }
 
-    if (photo) {
-      photo.aspect = aspect
-    }
-  }
-
-  changeFilterSetting(
-    index: number,
-    filter: ClassicFiltersType,
-    value: number
-  ) {
-    this.photos[index].filterSettings[filter] = value
-    this.applyFilter(index)
-  }
+  // changeFilterSetting(
+  //   index: number,
+  //   filter: ClassicFiltersType,
+  //   value: number
+  // ) {
+  //   this.photos[index].filterSettings[filter] = value
+  //   this.applyFilter(index)
+  // }
 
   clearLocation() {
     this.location = []
@@ -187,49 +177,50 @@ class AddPostStore {
     }
   }
 
-  deletePhoto(id: string) {
-    this.photos = this.photos.filter((photo) => photo.id !== id)
-  }
+  // deletePhoto(id: string) {
+  //   this.photos = this.photos.filter((photo) => photo.id !== id)
+  // }
 
-  getAspect(id: string) {
-    return findObjectById(this.photos, id)?.aspect ?? 1
-  }
+  // getAspect(id: string) {
+  //   return findObjectById(this.photos, id)?.aspect ?? 1
+  // }
 
   getCurrentPhotosCount() {
-    return this.photos.length
+    return this.photos.getPhotoCount()
   }
 
-  getOriginAspect(id: string) {
-    return findObjectById(this.photos, id)?.originAspect ?? 1
-  }
+  // getOriginAspect(id: string) {
+  //   return findObjectById(this.photos, id)?.originAspect ?? 1
+  // }
 
-  getZoom(id: string) {
-    return findObjectById(this.photos, id)?.zoom ?? 1
-  }
+  // getZoom(id: string) {
+  //   return findObjectById(this.photos, id)?.zoom ?? 1
+  // }
 
-  initOriginAspect(id: string, url: string) {
-    const img = new Image()
-
-    img.src = url
-    const photo = findObjectById(this.photos, id)
-
-    img.onload = function () {
-      runInAction(() => {
-        if (photo) {
-          photo.originAspect = img.width / img.height
-
-          return
-        }
-      })
-    }
-  }
+  // initOriginAspect(id: string, url: string) {
+  //   const img = new Image()
+  //
+  //   img.src = url
+  //   const photo = findObjectById(this.photos, id)
+  //
+  //   img.onload = function () {
+  //     runInAction(() => {
+  //       if (photo) {
+  //         photo.originAspect = img.width / img.height
+  //
+  //         return
+  //       }
+  //     })
+  //   }
+  // }
 
   async nextStage() {
     if (this.currentStage === PhotoEditorState.cropping) {
-      await this.addCroppedImgUrl()
-      this.photos.forEach((photo) => {
-        photo.cropDataSave = photo.crop
-      })
+      //await this.addCroppedImgUrl()
+      // this.photos.forEach((photo) => {
+      //   photo.cropDataSave = photo.crop
+      // })
+      this.photos.applyCropAll()
     }
     runInAction(() => {
       this.currentStage = mapNext.get(this.currentStage) ?? this.currentStage
@@ -238,7 +229,7 @@ class AddPostStore {
 
   resetData() {
     this.currentStage = PhotoEditorState.adding
-    this.photos = []
+    this.photos = new ImageCollection()
     this.currentSliderIndex = 0
     this.location = []
     this.postDescription = ''
@@ -250,16 +241,23 @@ class AddPostStore {
 
   async uploadPost() {
     try {
-      await this.addFilteredImgUrl()
+      await this.photos.applyFilterAll()
       const formData = new FormData()
 
-      for (const photo of this.photos) {
-        const file = createFileForUpload(photo.preparedImgData)
+      this.photos.applyActionToAll((image) => {
+        const file = createFileForUpload(image.preparedImgData)
 
         if (file) {
           formData.append('file', file, file.name || 'Post photo')
         }
-      }
+      })
+      // for (const photo of this.photos) {
+      //   const file = createFileForUpload(photo.preparedImgData)
+      //
+      //   if (file) {
+      //     formData.append('file', file, file.name || 'Post photo')
+      //   }
+      // }
       const res = await addPostApi.uploadPhotos(formData)
       const post: UploadPost = {
         childrenMetadata: res.data.images.map((photoData) => ({
@@ -270,14 +268,14 @@ class AddPostStore {
 
       await addPostApi.uploadPostDescription(post)
       this.resetData()
-      profileStore.cleanUpPhotosData()
+      await profileStore.cleanUpPhotosData()
     } catch (error) {
       responseErrorHandler(error)
     }
   }
 
   get isDraft() {
-    return this.photos.length > 0
+    return this.getCurrentPhotosCount() > 0
   }
 }
 

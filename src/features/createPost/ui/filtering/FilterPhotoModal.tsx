@@ -44,7 +44,7 @@ export const FilterPhotoModal = observer(() => {
               'addPost addFilter'
             )}
           >
-            {photos.map((photo, index) => (
+            {photos.getImages().map((photo, index) => (
               <SwiperSlide
                 className={cn(
                   'm-0 shrink-0 bg-dark-500 relative flex',

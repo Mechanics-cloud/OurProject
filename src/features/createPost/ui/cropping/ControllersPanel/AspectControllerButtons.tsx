@@ -20,11 +20,14 @@ type Props = {
 
 export const AspectControllerButtons = observer(({ id }: Props) => {
   const { t } = useTranslation()
-  const changeAspect = addPostStore.changeAspect
-  const currentRatio = addPostStore.getAspect(id)
+  // const changeAspect = addPostStore.changeAspect
+  const changeAspect = addPostStore.photos.findImageById(id)?.changeAspect
+  // const currentRatio = addPostStore.getAspect(id)
+  const currentRatio = addPostStore.photos.findImageById(id)?.getAspect()
   const sizes: ScaleSizeButtonType[] = [
     {
-      aspect: addPostStore.getOriginAspect(id),
+      // aspect: addPostStore.getOriginAspect(id),
+      aspect: addPostStore.photos.findImageById(id)?.getOriginAspect() || 1,
       icon: ImageOutline,
       title: t.createPost.cropping.originalRatio,
     },
@@ -40,7 +43,7 @@ export const AspectControllerButtons = observer(({ id }: Props) => {
           icon={el.icon}
           isCurrent={currentRatio === el.aspect}
           key={index}
-          onClick={() => changeAspect(id, el.aspect)}
+          onClick={() => changeAspect && changeAspect(el.aspect)}
           title={el.title}
         />
       ))}
