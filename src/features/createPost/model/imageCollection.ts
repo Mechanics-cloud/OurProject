@@ -6,18 +6,19 @@ export class ImageCollection {
 
   constructor(images: PhotoStore[] = []) {
     this.images = images
-    makeAutoObservable(
-      this,
-      {
-        addImage: action,
-        applyActionToAll: action,
-        applyCropAll: action,
-        applyFilterAll: action,
-        deleteImage: action,
-        images: observable,
-      },
-      { autoBind: true }
-    )
+    // makeAutoObservable(
+    //   this,
+    //   {
+    //     addImage: action,
+    //     applyActionToAll: action,
+    //     applyCropAll: action,
+    //     applyFilterAll: action,
+    //     deleteImage: action,
+    //     images: observable,
+    //   },
+    //   { autoBind: true }
+    // )
+    makeAutoObservable(this)
   }
 
   addImage(image: PhotoStore) {

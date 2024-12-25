@@ -241,7 +241,7 @@ class AddPostStore {
 
   async uploadPost() {
     try {
-      await this.photos.applyFilterAll()
+      this.photos.applyFilterAll()
       const formData = new FormData()
 
       this.photos.applyActionToAll((image) => {

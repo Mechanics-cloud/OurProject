@@ -43,7 +43,7 @@ export const AddTextPost = observer(() => {
         </Typography>
       </div>
 
-      <div className={'p-6 flex flex-col'}>
+      <div className={'p-6 pb-1 flex flex-col'}>
         <CityAutocomplete />
         <Typography
           className={'-mt-3 ml-0.5'}
