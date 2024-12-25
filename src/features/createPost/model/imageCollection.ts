@@ -29,8 +29,13 @@ export class ImageCollection {
     this.images.forEach((image) => action(image))
   }
 
-  applyCropAll() {
-    this.applyActionToAll((image) => image.addCroppedImgUrl())
+  async applyCropAll() {
+    const promises = this.images.map(async (image) => {
+      await image.addCroppedImgUrl()
+    })
+
+    await Promise.all(promises)
+
     this.applyActionToAll((image) => (image.cropDataSave = image.crop))
   }
 

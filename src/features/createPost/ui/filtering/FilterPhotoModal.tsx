@@ -11,6 +11,8 @@ import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
+import imgTest from '/src/assets/images/image4.jpg'
+
 export const FilterPhotoModal = observer(() => {
   const { t } = useTranslation()
   const nextStage = addPostStore.nextStage
@@ -53,8 +55,7 @@ export const FilterPhotoModal = observer(() => {
                 key={index}
               >
                 <Image
-                  // alt={t.createPost.alt}
-                  alt={'hjhj' + photo.imgUrlToShow}
+                  alt={t.createPost.alt}
                   className={cn('object-center object-contain w-full h-auto')}
                   height={0}
                   src={photo.imgUrlToShow ?? photo.url}

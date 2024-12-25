@@ -22,7 +22,7 @@ export const PhotoCrop = observer(({ photo }: Props) => {
         aspect={photo.aspect}
         crop={photo.crop as Point}
         image={photo.url as string}
-        onCropChange={addCrop || (() => {})}
+        onCropChange={addCrop}
         onCropComplete={onCropComplete}
         onZoomChange={addZoom}
         zoom={photo.zoom ?? 1}

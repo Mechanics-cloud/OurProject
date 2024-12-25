@@ -12,7 +12,7 @@ import { generalStore } from '@/core/store'
 import { addPostStore } from '@/features/createPost'
 
 type Props = {
-  onRightButtonClick: () => void
+  onRightButtonClick: () => Promise<void>
   rightButtonTitle: string
   title: string
 }
@@ -53,7 +53,7 @@ export const ModalHeader = ({
             typographyVariants({ variant: 'h3' })
           )}
           disabled={generalStore.isLoading}
-          onClick={onRightButtonClick}
+          onClick={() => onRightButtonClick()}
           variant={'text'}
         >
           {rightButtonTitle}

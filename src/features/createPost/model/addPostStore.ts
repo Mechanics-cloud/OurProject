@@ -12,7 +12,7 @@ import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AddPostStore {
-  currentSliderIndex: number = 0
+  currentSliderIndex: number = 0 //вынести в коллекцию
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
   isNewDialog = true
   location: string[] = []
@@ -220,7 +220,7 @@ class AddPostStore {
       // this.photos.forEach((photo) => {
       //   photo.cropDataSave = photo.crop
       // })
-      this.photos.applyCropAll()
+      await this.photos.applyCropAll()
     }
     runInAction(() => {
       this.currentStage = mapNext.get(this.currentStage) ?? this.currentStage
@@ -267,8 +267,8 @@ class AddPostStore {
       }
 
       await addPostApi.uploadPostDescription(post)
-      this.resetData()
       await profileStore.cleanUpPhotosData()
+      this.resetData()
     } catch (error) {
       responseErrorHandler(error)
     }
