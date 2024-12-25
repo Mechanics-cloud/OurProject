@@ -6,7 +6,7 @@ import { addPostStore } from '@/features/createPost'
 
 export const usePublicationModal = (onPostUpload: () => void) => {
   const { t } = useTranslation()
-  const photos = addPostStore.photos
+  const photos = addPostStore.photos.toArray
   const isLoading = generalStore.isLoading
 
   const onPublishPost = async () => {

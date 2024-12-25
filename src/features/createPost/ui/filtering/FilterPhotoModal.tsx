@@ -14,7 +14,7 @@ import { SwiperSlide } from 'swiper/react'
 export const FilterPhotoModal = observer(() => {
   const { t } = useTranslation()
   const nextStage = addPostStore.nextStage
-  const photos = addPostStore.photos
+  const photos = addPostStore.photos.toArray
 
   return (
     <DialogContent
@@ -44,7 +44,7 @@ export const FilterPhotoModal = observer(() => {
               'addPost addFilter'
             )}
           >
-            {photos.getImages().map((photo, index) => (
+            {photos.map((photo, index) => (
               <SwiperSlide
                 className={cn(
                   'm-0 shrink-0 bg-dark-500 relative flex',
@@ -53,7 +53,8 @@ export const FilterPhotoModal = observer(() => {
                 key={index}
               >
                 <Image
-                  alt={t.createPost.alt}
+                  // alt={t.createPost.alt}
+                  alt={'hjhj' + photo.imgUrlToShow}
                   className={cn('object-center object-contain w-full h-auto')}
                   height={0}
                   src={photo.imgUrlToShow ?? photo.url}

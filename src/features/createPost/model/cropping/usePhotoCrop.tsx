@@ -1,18 +1,19 @@
 import { useCallback, useEffect } from 'react'
 import { Area, Point } from 'react-easy-crop'
 
-import { PostPhoto, addPostStore } from '@/features/createPost'
+import { PhotoStore, addPostStore } from '@/features/createPost'
 import { toJS } from 'mobx'
 
-export const usePhotoCrop = (photo: PostPhoto) => {
+export const usePhotoCrop = (photo: PhotoStore) => {
   //const addZoom = addPostStore.addZoom
   // const addCrop = addPostStore.addCrop
   // const addCroppedArea = addPostStore.addCroppedArea
-  const addCrop = addPostStore.photos.findImageById(photo.id)?.addCrop
-  const addZoom = addPostStore.photos.findImageById(photo.id)?.addZoom
-  const addCroppedArea = addPostStore.photos.findImageById(
-    photo.id
-  )?.addCroppedArea
+  // const addCrop = addPostStore.photos.findImageById(photo.id)?.addCrop
+  // const addZoom = addPostStore.photos.findImageById(photo.id)?.addZoom
+  // const addCroppedArea = addPostStore.photos.findImageById(photo.id)?.addCroppedArea
+  const addCrop = photo.addCrop
+  const addZoom = photo.addZoom
+  const addCroppedArea = photo.addCroppedArea
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
     if (addCroppedArea) {

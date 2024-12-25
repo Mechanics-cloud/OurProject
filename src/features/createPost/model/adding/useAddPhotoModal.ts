@@ -12,7 +12,7 @@ export const useAddPhotoModal = () => {
   const isDraft = addPostStore.isDraft
   const setIsNotNewDialog = addPostStore.continueDialog
   const addPostPhoto = addPostStore.addPhoto
-  const totalCount = addPostStore.getCurrentPhotosCount()
+  const totalCount = addPostStore.photos.photoCount
 
   const onPhotoDrop = useCallback(
     async (files: File[]) => {

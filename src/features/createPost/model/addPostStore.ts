@@ -185,9 +185,9 @@ class AddPostStore {
   //   return findObjectById(this.photos, id)?.aspect ?? 1
   // }
 
-  getCurrentPhotosCount() {
-    return this.photos.getPhotoCount()
-  }
+  // getCurrentPhotosCount() {
+  //   return this.photos.getPhotoCount()
+  // }
 
   // getOriginAspect(id: string) {
   //   return findObjectById(this.photos, id)?.originAspect ?? 1
@@ -275,7 +275,7 @@ class AddPostStore {
   }
 
   get isDraft() {
-    return this.getCurrentPhotosCount() > 0
+    return this.photos.photoCount > 0
   }
 }
 

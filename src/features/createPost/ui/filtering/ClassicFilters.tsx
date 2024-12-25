@@ -8,9 +8,9 @@ import { observer } from 'mobx-react-lite'
 export const ClassicFilters = observer(() => {
   const { t } = useTranslation()
   const currentSliderIndex = addPostStore.currentSliderIndex || 0
-  const photos = addPostStore.photos.getImages()
+  const photos = addPostStore.photos.toArray
   const changeClassicFilterSetting =
-    addPostStore.photos.getImages()[currentSliderIndex].changeFilterSetting
+    addPostStore.photos.toArray[currentSliderIndex].changeFilterSetting
   // const changeClassicFilterSetting = addPostStore.changeFilterSetting
 
   // const updateFilter = (filter: ClassicFiltersType, value: number) => {

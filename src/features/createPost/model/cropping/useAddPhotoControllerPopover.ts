@@ -13,8 +13,8 @@ export const useAddPhotoControllerPopover = () => {
   const context = useContext(SwiperContext)
   const [isOpen, setIsOpen] = useState(false)
   const addPostPhoto = addPostStore.addPhoto
-  const photos = addPostStore.photos
-  const totalCount = addPostStore.getCurrentPhotosCount()
+  const photos = addPostStore.photos.toArray
+  const totalCount = addPostStore.photos.photoCount
   const isAddingDisabled = totalCount === MaxPhotoCount
 
   if (!context) {
