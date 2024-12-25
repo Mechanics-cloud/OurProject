@@ -25,6 +25,10 @@ export const addPhotosCheck = async (
     return
   }
 
+  if (photosCount === 0) {
+    throw new Error('Wrong type (todo in 239)')
+  }
+
   for (let i = 0; i < photosCount; i++) {
     if (i === MaxPhotoCount) {
       toast.error(`${t.createPost.adding.errors.countLimit}${MaxPhotoCount}`)
@@ -41,9 +45,9 @@ export const addPhotosCheck = async (
       addPostPhoto(files[i])
     } catch (error) {
       if (error instanceof z.ZodError) {
-        toast.error(error.errors[0].message)
+        throw new Error(error.errors[0].message)
       } else {
-        toast.error(t.createPost.adding.errors.basic)
+        throw new Error(t.createPost.adding.errors.basic)
       }
     }
   }
