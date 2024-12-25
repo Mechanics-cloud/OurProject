@@ -1,1 +1,1 @@
-export * from 'src/common/components/header/mobilePopover/MobilePopover'
+export * from './MobilePopover'

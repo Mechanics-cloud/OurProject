@@ -1,5 +1,11 @@
 import { Paid } from '@/assets/icons'
-import { Button, Paths, Typography, useTranslation } from '@/common'
+import {
+  Button,
+  Paths,
+  Typography,
+  useScreenWidth,
+  useTranslation,
+} from '@/common'
 import {
   HydrateProfileStore,
   PhotoProfilePostsGallery,
@@ -25,6 +31,9 @@ export const Profile = observer(({ store }: Props) => {
 
   const avatar = store.userProfile?.avatars[0]?.url
 
+  const { isMobile, isTablet } = useScreenWidth()
+
+  // TODO: Заменить работу хука useScreenWidth
   return (
     <UserIdProvider ctx={query.id ? +query.id[0] : null}>
       <div className={'flex w-full'}>
@@ -37,10 +46,10 @@ export const Profile = observer(({ store }: Props) => {
             <Image
               alt={'avatar'}
               className={'rounded-full pr-0'}
-              height={200}
+              height={isMobile ? 100 : 200}
               priority
               src={avatar || avatarPlaceholder}
-              width={200}
+              width={isMobile ? 100 : 200}
             />
             <div className={'flex flex-col flex-wrap w-full'}>
               <div
@@ -67,14 +76,14 @@ export const Profile = observer(({ store }: Props) => {
               <ProfileStatistics
                 followers={followers}
                 following={following}
-                isMobile={false}
+                isMobile={isMobile}
                 publications={publications}
                 userMetadata={store.userProfile.userMetadata}
               />
               <ProfileAboutMe
                 aboutMe={store.userProfile?.aboutMe}
-                className={'mt-6'}
-                isMobile={false}
+                className={isTablet ? 'hidden' : 'mt-6'}
+                isMobile={isMobile}
               />
             </div>
           </div>
@@ -87,8 +96,8 @@ export const Profile = observer(({ store }: Props) => {
           </Typography>
           <ProfileAboutMe
             aboutMe={store.userProfile?.aboutMe}
-            className={'hidden'}
-            isMobile={false}
+            className={isTablet ? 'mb-7' : 'hidden'}
+            isMobile={isMobile}
           />
           <PhotoProfilePostsGallery store={store} />
         </div>
