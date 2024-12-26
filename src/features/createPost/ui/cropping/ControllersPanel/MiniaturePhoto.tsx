@@ -16,9 +16,7 @@ type Props = {
 export const MiniaturePhoto = observer(
   ({ className, id, onClick, src }: Props) => {
     const { t } = useTranslation()
-    // const deletePostPhoto = addPostStore.deletePhoto
-    const totalCount = addPostStore.images.count
-    const isLastPhoto = totalCount === 1
+    const isLastPhoto = addPostStore.images.count === 1
 
     return (
       <span

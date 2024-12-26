@@ -7,25 +7,21 @@ import { addPhotosCheck, addPostStore } from '@/features/createPost'
 
 export const useAddPhotoModal = () => {
   const { t } = useTranslation()
-  const nextStage = useMemo(() => addPostStore.nextStage, [])
-  const clearOldData = addPostStore.resetData
   const isDraft = addPostStore.isDraft
-  const setIsNotNewDialog = addPostStore.continueDialog
-  const addPostPhoto = addPostStore.addImage
   const totalCount = addPostStore.images.count
 
   const onPhotoDrop = useCallback(
     async (files: File[]) => {
       try {
-        setIsNotNewDialog()
-        clearOldData()
-        await addPhotosCheck(files, totalCount, t, addPostPhoto)
-        await nextStage()
+        addPostStore.continueDialog()
+        addPostStore.resetData()
+        await addPhotosCheck(files, totalCount, t, addPostStore.addImage)
+        await addPostStore.nextStage()
       } catch (error) {
         toast.error((error as Error).message)
       }
     },
-    [nextStage, addPostPhoto, t, totalCount, setIsNotNewDialog, clearOldData]
+    [t, totalCount]
   )
 
   const dropzoneOptions = useMemo(
@@ -49,7 +45,6 @@ export const useAddPhotoModal = () => {
     getRootProps,
     isDraft,
     isDragActive,
-    setIsNotNewDialog,
     t,
   }
 }

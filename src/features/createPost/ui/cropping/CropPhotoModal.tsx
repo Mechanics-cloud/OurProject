@@ -13,7 +13,6 @@ import { SwiperSlide } from 'swiper/react'
 export const CropPhotoModal = observer(() => {
   const { t } = useTranslation()
   const photos = addPostStore.images.allItems
-  const nextStage = addPostStore.nextStage
 
   return (
     <DialogContent
@@ -25,7 +24,7 @@ export const CropPhotoModal = observer(() => {
       crossOff
     >
       <ModalHeader
-        onRightButtonClick={nextStage}
+        onRightButtonClick={addPostStore.nextStage}
         rightButtonTitle={t.createPost.next}
         title={t.createPost.cropping.title}
       />

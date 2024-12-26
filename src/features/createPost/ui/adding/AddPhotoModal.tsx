@@ -9,17 +9,11 @@ import {
   DialogTitle,
   cn,
 } from '@/common'
-import { useAddPhotoModal } from '@/features/createPost'
+import { addPostStore, useAddPhotoModal } from '@/features/createPost'
 
 export const AddPhotoModal = () => {
-  const {
-    getInputProps,
-    getRootProps,
-    isDraft,
-    isDragActive,
-    setIsNotNewDialog,
-    t,
-  } = useAddPhotoModal()
+  const { getInputProps, getRootProps, isDraft, isDragActive, t } =
+    useAddPhotoModal()
 
   return (
     <DialogContent
@@ -78,7 +72,7 @@ export const AddPhotoModal = () => {
           </span>
           <Button
             disabled={!isDraft}
-            onClick={() => setIsNotNewDialog()}
+            onClick={() => addPostStore.continueDialog()}
             variant={'outline'}
           >
             {t.createPost.adding.buttonDraft}
