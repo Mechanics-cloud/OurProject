@@ -20,6 +20,7 @@ import { DEFAULT_PAGE_NUMBER } from './constants'
 
 class ProfileStore {
   isLoading: boolean = false
+  isProfileLoading: boolean = true
   pageNumber: number = DEFAULT_PAGE_NUMBER
   photos: Photo[] = []
   stopRequest: boolean = false
@@ -84,7 +85,7 @@ class ProfileStore {
       responseErrorHandler(error)
     } finally {
       runInAction(() => {
-        this.isLoading = false
+        this.isProfileLoading = false
       })
     }
   }
