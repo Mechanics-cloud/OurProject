@@ -35,11 +35,11 @@ export const Menu = () => {
   return (
     <nav
       className={cn(
-        'min-w-[360px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50]',
+        'min-w-[360px] w-full bg-dark-700 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50]',
         'lg:hidden'
       )}
     >
-      <ul className={'flex w-full justify-evenly py-[18px]'}>
+      <ul className={'flex w-full justify-evenly py-[16px]'}>
         <li>
           <Tooltip title={t.menu.home}>
             <Link href={Paths.home}>
