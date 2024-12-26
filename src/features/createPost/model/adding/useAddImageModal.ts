@@ -3,17 +3,17 @@ import { useDropzone } from 'react-dropzone'
 import { toast } from 'react-toastify'
 
 import { useTranslation } from '@/common'
-import { addPhotosCheck, addPostStore } from '@/features/createPost'
+import { addImageCheck, addPostStore } from '@/features/createPost'
 
-export const useAddPhotoModal = () => {
+export const useAddImageModal = () => {
   const { t } = useTranslation()
 
-  const onPhotoDrop = useCallback(
+  const onImageDrop = useCallback(
     async (files: File[]) => {
       try {
         addPostStore.continueDialog()
         addPostStore.resetData()
-        await addPhotosCheck(
+        await addImageCheck(
           files,
           addPostStore.images.count,
           t,
@@ -35,9 +35,9 @@ export const useAddPhotoModal = () => {
         'image/png': ['.png'],
       },
       multiple: true,
-      onDrop: onPhotoDrop,
+      onDrop: onImageDrop,
     }),
-    [onPhotoDrop]
+    [onImageDrop]
   )
 
   const { getInputProps, getRootProps, isDragActive } =

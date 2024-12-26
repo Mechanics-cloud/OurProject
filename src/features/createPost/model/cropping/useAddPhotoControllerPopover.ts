@@ -3,10 +3,10 @@ import { ChangeEvent, useContext, useState } from 'react'
 import { useTranslation } from '@/common'
 import {
   SwiperContext,
-  addPhotosCheck,
+  addImageCheck,
   addPostStore,
 } from '@/features/createPost'
-import { MaxPhotoCount } from '@/features/createPost/model/constants'
+import { MaxPostImagesCount } from '@/features/createPost/model/constants'
 
 export const useAddPhotoControllerPopover = () => {
   const { t } = useTranslation()
@@ -14,7 +14,7 @@ export const useAddPhotoControllerPopover = () => {
   const [isOpen, setIsOpen] = useState(false)
   const photos = addPostStore.images.allItems
   const totalCount = addPostStore.images.count
-  const isAddingDisabled = totalCount === MaxPhotoCount
+  const isAddingDisabled = totalCount === MaxPostImagesCount
 
   if (!context) {
     throw new Error('Slide must be used within a Swiper provider')
@@ -28,7 +28,7 @@ export const useAddPhotoControllerPopover = () => {
     if (fileList) {
       const files: File[] = Array.from(fileList)
 
-      await addPhotosCheck(files, totalCount, t, addPostStore.addImage)
+      await addImageCheck(files, totalCount, t, addPostStore.addImage)
       goToSlide(totalCount + 1)
     }
   }

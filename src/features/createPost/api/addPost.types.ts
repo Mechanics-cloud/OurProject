@@ -1,6 +1,6 @@
 import { BasicPost, UploadImage } from '@/common'
 
-export type UploadPhotoResponse = {
+export type UploadImagesResponse = {
   images: UploadImage[]
 }
 

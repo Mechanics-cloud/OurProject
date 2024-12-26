@@ -9,10 +9,10 @@ import {
   DialogTitle,
   cn,
 } from '@/common'
-import { addPostStore, useAddPhotoModal } from '@/features/createPost'
+import { addPostStore, useAddImageModal } from '@/features/createPost'
 
 export const AddPhotoModal = () => {
-  const { getInputProps, getRootProps, isDragActive, t } = useAddPhotoModal()
+  const { getInputProps, getRootProps, isDragActive, t } = useAddImageModal()
 
   return (
     <DialogContent

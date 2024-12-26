@@ -2,12 +2,12 @@ import { FileSizes } from '@/common/enums'
 import { LocaleType } from '@locales/ru'
 import { z } from 'zod'
 
-export const addPhotoSchema = (t: LocaleType) => {
+export const addImageSchema = (t: LocaleType) => {
   return z.object({
-    photoSize: z.number().max(FileSizes.PostPhotoSize, {
+    imageSize: z.number().max(FileSizes.PostPhotoSize, {
       message: t.createPost.adding.errors.tooBig,
     }),
-    photoType: z
+    imageType: z
       .string()
       .refine(
         (type) => ['image/jpeg', 'image/jpg', 'image/png'].includes(type),
@@ -18,4 +18,4 @@ export const addPhotoSchema = (t: LocaleType) => {
   })
 }
 
-export type AddPhotoSchema = z.infer<ReturnType<typeof addPhotoSchema>>
+export type AddImageSchema = z.infer<ReturnType<typeof addImageSchema>>

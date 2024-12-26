@@ -2,8 +2,8 @@ import { createFileForUpload, responseErrorHandler } from '@/common'
 import { UploadPost, addPostApi } from '@/features/createPost'
 import {
   MaxDescriptionLength,
-  PhotoEditorState,
-  PhotoEditorStateType,
+  PostEditorState,
+  PostEditorStateType,
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
@@ -14,7 +14,7 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import { ImageCollection } from './imageCollection'
 
 class AddPostStore {
-  currentStage: PhotoEditorStateType = PhotoEditorState.adding
+  currentStage: PostEditorStateType = PostEditorState.adding
   images: ImageCollection = new ImageCollection()
   isNewDialog = true
   location: string[] = []
@@ -51,13 +51,13 @@ class AddPostStore {
 
   continueDialog() {
     this.isNewDialog = false
-    if (this.currentStage === PhotoEditorState.adding) {
-      this.currentStage = PhotoEditorState.cropping
+    if (this.currentStage === PostEditorState.adding) {
+      this.currentStage = PostEditorState.cropping
     }
   }
 
   async nextStage() {
-    if (this.currentStage === PhotoEditorState.cropping) {
+    if (this.currentStage === PostEditorState.cropping) {
       await this.images.applyCropAll()
     }
     runInAction(() => {
@@ -66,7 +66,7 @@ class AddPostStore {
   }
 
   resetData() {
-    this.currentStage = PhotoEditorState.adding
+    this.currentStage = PostEditorState.adding
     this.images.clear()
     this.location = []
     this.postDescription = ''
@@ -85,13 +85,13 @@ class AddPostStore {
         const file = createFileForUpload(image.preparedImgData)
 
         if (file) {
-          formData.append('file', file, file.name || 'Post photo')
+          formData.append('file', file, file.name || 'Post image')
         }
       })
-      const res = await addPostApi.uploadPhotos(formData)
+      const res = await addPostApi.uploadImages(formData)
       const post: UploadPost = {
-        childrenMetadata: res.data.images.map((photoData) => ({
-          uploadId: photoData.uploadId,
+        childrenMetadata: res.data.images.map((imageData) => ({
+          uploadId: imageData.uploadId,
         })),
         description: this.postDescription,
       }

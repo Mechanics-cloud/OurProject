@@ -25,14 +25,14 @@ export class ImageStore {
 
   async applyCrop() {
     try {
-      const cropPhotoData = await getCroppedImg(this.url, this.crop.croppedArea)
+      const cropImageData = await getCroppedImg(this.url, this.crop.croppedArea)
 
       runInAction(() => {
         this.preparedImgData = {
-          photoFile: cropPhotoData.photoFile,
-          photoUrl: cropPhotoData.photoUrl,
+          photoFile: cropImageData.photoFile,
+          photoUrl: cropImageData.photoUrl,
         }
-        this.imgUrlToShow = cropPhotoData.photoUrl as string
+        this.imgUrlToShow = cropImageData.photoUrl as string
       })
     } catch (error) {
       throw new Error('Something went wrong')
@@ -42,15 +42,15 @@ export class ImageStore {
   async applyFilter() {
     try {
       if (this.preparedImgData.photoFile && this.filter.filterStyle) {
-        const filterPhotoData = await applyFilters(
+        const filterImageData = await applyFilters(
           this.preparedImgData.photoFile,
           this.filter.filterStyle
         )
 
         runInAction(() => {
           this.preparedImgData = {
-            photoFile: filterPhotoData.photoFile,
-            photoUrl: filterPhotoData.photoUrl,
+            photoFile: filterImageData.photoFile,
+            photoUrl: filterImageData.photoUrl,
           }
         })
       }
@@ -67,12 +67,12 @@ export class ImageStore {
     const img = new Image()
 
     img.src = url
-    const photo = this
+    const image = this
 
     img.onload = function () {
       runInAction(() => {
-        if (photo) {
-          photo.originAspect = img.width / img.height
+        if (image) {
+          image.originAspect = img.width / img.height
 
           return
         }
