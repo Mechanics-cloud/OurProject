@@ -1,5 +1,5 @@
 import { PhotoStore } from '@/features/createPost'
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, makeObservable } from 'mobx'
 
 class Collection<T extends { id: number | string }> {
   private currentIndex: number = 0
@@ -7,7 +7,8 @@ class Collection<T extends { id: number | string }> {
 
   constructor(items: T[] = []) {
     this.items = items
-    makeAutoObservable(this, undefined, { autoBind: true })
+    // makeObservable(this)
+    // makeAutoObservable(this, undefined, { autoBind: true })
   }
 
   addItem(item: T) {
@@ -41,27 +42,32 @@ class Collection<T extends { id: number | string }> {
     this.currentIndex = index
   }
 
-  get isEmpty() {
-    return this.items.length === 0
+  get allItems() {
+    return this.items
   }
 
-  get itemCount() {
+  get count() {
     return this.items.length
   }
 
-  get itemsArr() {
-    return this.items
+  get currentArrIndex() {
+    return this.currentIndex
+  }
+
+  get isEmpty() {
+    return this.items.length === 0
   }
 }
 
 export class ImageCollection extends Collection<PhotoStore> {
   constructor(images: PhotoStore[] = []) {
     super(images)
-    makeAutoObservable(this, undefined, { autoBind: true })
+    // makeObservable(this)
+    // makeAutoObservable(this, undefined, { autoBind: true })
   }
 
   async applyCropAll() {
-    const promises = this.itemsArr.map(async (image) => {
+    const promises = this.allItems.map(async (image) => {
       await image.addCroppedImgUrl()
     })
 

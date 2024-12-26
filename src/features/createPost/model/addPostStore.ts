@@ -105,7 +105,7 @@ class AddPostStore {
   addPhoto(file: File) {
     const url = URL.createObjectURL(file)
 
-    this.photos.addImage(new PhotoStore(url))
+    this.photos.addItem(new PhotoStore(url))
     // this.photos = [...this.photos, new PhotoStore(id, url)]
     // this.photos = [
     //   ...this.photos,
@@ -231,7 +231,7 @@ class AddPostStore {
     this.currentStage = PhotoEditorState.adding
     // this.photos = new ImageCollection()
     // this.currentSliderIndex = 0
-    this.photos.clearCollection()
+    this.photos.clear()
     this.location = []
     this.postDescription = ''
   }
@@ -276,7 +276,7 @@ class AddPostStore {
   }
 
   get isDraft() {
-    return this.photos.photoCount > 0
+    return this.photos.count > 0
   }
 }
 

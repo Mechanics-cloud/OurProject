@@ -8,11 +8,11 @@ import { observer } from 'mobx-react-lite'
 import { InstFilter } from './InstFilter'
 
 export const InstFilters = observer(() => {
-  const photos = addPostStore.photos.toArray
+  const photos = addPostStore.photos.allItems
   // const addInstFilter = addPostStore.addInstFilter
-  const currentSliderIndex = addPostStore.photos.currentIndex || 0
+  const currentSliderIndex = addPostStore.photos.currentArrIndex || 0
   const addInstFilter =
-    addPostStore.photos.toArray[currentSliderIndex].addInstFilter
+    addPostStore.photos.allItems[currentSliderIndex].addInstFilter
 
   return (
     <ScrollArea className={'md:h-[430px]'}>

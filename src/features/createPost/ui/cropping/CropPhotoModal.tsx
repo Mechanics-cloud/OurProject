@@ -12,7 +12,7 @@ import { SwiperSlide } from 'swiper/react'
 
 export const CropPhotoModal = observer(() => {
   const { t } = useTranslation()
-  const photos = addPostStore.photos.toArray
+  const photos = addPostStore.photos.allItems
   const nextStage = addPostStore.nextStage
 
   return (

@@ -7,10 +7,12 @@ import { observer } from 'mobx-react-lite'
 
 export const ClassicFilters = observer(() => {
   const { t } = useTranslation()
-  const currentSliderIndex = addPostStore.photos.currentIndex || 0
-  const photos = addPostStore.photos.toArray
+  const photos = addPostStore.photos.allItems
+  const currentSliderIndex = addPostStore.photos.currentArrIndex || 0
+  // const changeClassicFilterSetting =
+  //   addPostStore.photos.allItems[currentSliderIndex].changeFilterSetting
   const changeClassicFilterSetting =
-    addPostStore.photos.toArray[currentSliderIndex].changeFilterSetting
+    addPostStore.photos.getItemByIndex(currentSliderIndex).changeFilterSetting
   // const changeClassicFilterSetting = addPostStore.changeFilterSetting
 
   // const updateFilter = (filter: ClassicFiltersType, value: number) => {

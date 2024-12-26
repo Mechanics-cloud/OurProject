@@ -11,12 +11,10 @@ import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
-import imgTest from '/src/assets/images/image4.jpg'
-
 export const FilterPhotoModal = observer(() => {
   const { t } = useTranslation()
   const nextStage = addPostStore.nextStage
-  const photos = addPostStore.photos.toArray
+  const photos = addPostStore.photos.allItems
 
   return (
     <DialogContent
