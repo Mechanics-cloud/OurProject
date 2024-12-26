@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { ScrollArea, Typography, useTranslation } from '@/common'
-import { ClassicFiltersType, Slider, addPostStore } from '@/features/createPost'
+import { Slider, addPostStore } from '@/features/createPost'
 import { classicSettingsData } from '@/features/createPost/model/constants'
 import { observer } from 'mobx-react-lite'
 
