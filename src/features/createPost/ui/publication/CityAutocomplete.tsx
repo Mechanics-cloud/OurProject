@@ -3,14 +3,13 @@ import * as React from 'react'
 import { PinOutline } from '@/assets/icons'
 import { ScrollArea, TextField, cn } from '@/common'
 import { generalStore } from '@/core/store'
-import { useCityAutocomplete } from '@/features/createPost'
+import { addPostStore, useCityAutocomplete } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 
 export const CityAutocomplete = observer(() => {
   const {
     focusedIndex,
     handleKeyDown,
-    location,
     onLocationChange,
     onSelectCity,
     query,
@@ -28,7 +27,7 @@ export const CityAutocomplete = observer(() => {
         onChange={onLocationChange}
         onKeyDown={handleKeyDown}
         placeholder={t.createPost.publication.locationPlaceholder}
-        value={location[0] ?? query}
+        value={addPostStore.location[0] ?? query}
       />
       {suggestions.length > 0 && (
         <ScrollArea

@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { DialogContent, DialogDescription, cn } from '@/common'
+import { generalStore } from '@/core/store'
 import {
   AddTextPost,
   ModalHeader,
@@ -16,8 +17,7 @@ type Props = {
 }
 
 export const PublicationModal = observer(({ onPostUpload }: Props) => {
-  const { isLoading, onPublishPost, photos, t } =
-    usePublicationModal(onPostUpload)
+  const { onPublishPost, photos, t } = usePublicationModal(onPostUpload)
 
   return (
     <DialogContent
@@ -58,11 +58,11 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
                   alt={'Photo in carousel'}
                   className={cn(
                     'object-center object-contain w-full h-auto',
-                    isLoading ? 'animate-pulse' : ''
+                    generalStore.isLoading ? 'animate-pulse' : ''
                   )}
                   height={490}
                   src={
-                    isLoading
+                    generalStore.isLoading
                       ? (photo.imgUrlToShow ?? photo.url)
                       : (photo.preparedImgData.photoUrl ?? photo.url)
                   }

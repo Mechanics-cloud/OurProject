@@ -2,16 +2,12 @@ import { useEffect } from 'react'
 import { Area } from 'react-easy-crop'
 
 import { ImageStore } from '@/features/createPost'
-import { toJS } from 'mobx'
 
 export const usePhotoCrop = (photo: ImageStore) => {
   const cropObject = photo.crop
-  const addCroppedArea = photo.crop.changeCroppedArea
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
-    if (addCroppedArea) {
-      addCroppedArea(toJS(croppedAreaPixels))
-    }
+    cropObject.changeCroppedArea(croppedAreaPixels)
   }
 
   useEffect(() => {
