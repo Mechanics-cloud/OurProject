@@ -17,6 +17,10 @@ export class ImageCollection extends Collection<ImageStore> {
     await this.applyActionToAll(async (image) => {
       await image.applyCrop()
     })
+
+    await this.applyActionToAll((image) => {
+      image.crop.cropDataSave = image.crop.cropPointStart
+    })
   }
 
   async applyFilterAll() {
