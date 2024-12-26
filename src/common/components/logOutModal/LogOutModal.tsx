@@ -29,8 +29,8 @@ export const LogOutModal = ({
 }: Props) => {
   const { t } = useTranslation()
 
-  const onLogOut = () => {
-    logOut()
+  const onLogOut = async () => {
+    await logOut()
     logOutModalHandler()
   }
 
