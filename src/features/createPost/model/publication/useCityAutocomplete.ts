@@ -6,8 +6,6 @@ import { addPostStore } from '@/features/createPost'
 
 export const useCityAutocomplete = () => {
   const { t } = useTranslation()
-  const addLocation = addPostStore.addLocation
-  const clearLocation = addPostStore.clearLocation
   const location = addPostStore.location
   const [query, setQuery] = useState<string>('')
   const [suggestions, setSuggestions] = useState<string[]>([])
@@ -70,14 +68,14 @@ export const useCityAutocomplete = () => {
     }
 
     setQuery(selectedCity)
-    addLocation(selectedCity, country)
+    addPostStore.addLocation(selectedCity, country)
     setIsCitySelected(true)
     setSuggestions([])
     setFocusedIndex(-1)
   }
 
   const onLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
-    clearLocation()
+    addPostStore.clearLocation()
     setQuery(e.target.value)
     setIsCitySelected(false)
     setFocusedIndex(-1)

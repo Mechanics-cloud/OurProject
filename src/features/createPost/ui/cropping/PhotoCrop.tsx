@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const PhotoCrop = observer(({ photo }: Props) => {
-  const { addCrop, addZoom, onCropComplete } = usePhotoCrop(photo)
+  const { cropObject, onCropComplete } = usePhotoCrop(photo)
 
   return (
     <>
@@ -21,9 +21,9 @@ export const PhotoCrop = observer(({ photo }: Props) => {
         aspect={photo.crop.aspect}
         crop={photo.crop.cropPointStart as Point}
         image={photo.url as string}
-        onCropChange={addCrop}
+        onCropChange={cropObject.changeCropPointStart}
         onCropComplete={onCropComplete}
-        onZoomChange={addZoom}
+        onZoomChange={cropObject.changeZoom}
         zoom={photo.crop.zoom ?? 1}
       />
       <ControllersPanel id={photo.id} />

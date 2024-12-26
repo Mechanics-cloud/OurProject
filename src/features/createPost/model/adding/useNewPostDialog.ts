@@ -4,7 +4,6 @@ import { addPostStore } from '@/features/createPost'
 
 export const useNewPostDialog = (onClose: () => void) => {
   const currentState = addPostStore.currentStage
-  const setIsNewDialog = addPostStore.startNewDialog
   const isNewDialog = addPostStore.isNewDialog
   const {
     isModalOpen: isModalExitOpen,
@@ -15,12 +14,12 @@ export const useNewPostDialog = (onClose: () => void) => {
   const onClosePostCreating = () => {
     onModalExitClose()
     onClose()
-    setIsNewDialog()
+    addPostStore.startNewDialog()
   }
 
   const onPostUpload = () => {
     onClose()
-    setIsNewDialog()
+    addPostStore.startNewDialog()
   }
 
   const onCloseAddPost = () => {

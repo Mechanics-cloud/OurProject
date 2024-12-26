@@ -5,8 +5,7 @@ import { ImageStore } from '@/features/createPost'
 import { toJS } from 'mobx'
 
 export const usePhotoCrop = (photo: ImageStore) => {
-  const addCrop = photo.crop.changeCropPointStart
-  const addZoom = photo.crop.changeZoom
+  const cropObject = photo.crop
   const addCroppedArea = photo.crop.changeCroppedArea
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
@@ -17,17 +16,14 @@ export const usePhotoCrop = (photo: ImageStore) => {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (addCrop) {
-        addCrop(photo.crop.cropDataSave ?? { x: 0, y: 0 })
-      }
+      cropObject.changeCropPointStart(photo.crop.cropDataSave ?? { x: 0, y: 0 })
     }, 0)
 
     return () => clearTimeout(timeoutId)
-  }, [addCrop, photo.crop.cropDataSave])
+  }, [cropObject, photo.crop.cropDataSave])
 
   return {
-    addCrop,
-    addZoom,
+    cropObject,
     onCropComplete,
   }
 }

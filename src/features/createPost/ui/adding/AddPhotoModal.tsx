@@ -12,8 +12,7 @@ import {
 import { addPostStore, useAddPhotoModal } from '@/features/createPost'
 
 export const AddPhotoModal = () => {
-  const { getInputProps, getRootProps, isDraft, isDragActive, t } =
-    useAddPhotoModal()
+  const { getInputProps, getRootProps, isDragActive, t } = useAddPhotoModal()
 
   return (
     <DialogContent
@@ -71,7 +70,7 @@ export const AddPhotoModal = () => {
             </label>
           </span>
           <Button
-            disabled={!isDraft}
+            disabled={!addPostStore.isDraft}
             onClick={() => addPostStore.continueDialog()}
             variant={'outline'}
           >
