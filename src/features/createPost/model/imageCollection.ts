@@ -1,24 +1,37 @@
 import { PhotoStore } from '@/features/createPost'
-import { makeAutoObservable, makeObservable } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 
-class Collection<T extends { id: number | string }> {
+export class Collection {
   private currentIndex: number = 0
-  private items: T[] = []
+  private items: PhotoStore[] = []
 
-  constructor(items: T[] = []) {
+  constructor(items: PhotoStore[] = []) {
     this.items = items
-    // makeObservable(this)
-    // makeAutoObservable(this, undefined, { autoBind: true })
+    makeAutoObservable(this, undefined, { autoBind: true })
   }
 
-  addItem(item: T) {
-    const id = Math.random().toString(16).slice(2)
-
-    this.items.push({ ...item, id: item.id ?? id })
+  addItem(item: PhotoStore) {
+    this.items.push(item)
   }
 
-  applyActionToAll(action: (image: T) => void) {
-    this.items.forEach((item) => action(item))
+  applyActionToAll(action: (image: PhotoStore) => Promise<void> | void) {
+    const promises = this.items.map((item) => action(item))
+
+    return Promise.all(promises)
+  }
+
+  async applyCropAll() {
+    await this.applyActionToAll(async (image) => {
+      await image.addCroppedImgUrl()
+    })
+
+    await this.applyActionToAll((image) => {
+      image.cropDataSave = image.crop
+    })
+  }
+
+  async applyFilterAll() {
+    await this.applyActionToAll((image) => image.addFilteredImgUrl())
   }
 
   clear() {
@@ -26,7 +39,7 @@ class Collection<T extends { id: number | string }> {
     this.items = []
   }
 
-  getItemById(id: number | string): T | undefined {
+  getItemById(id: number | string): PhotoStore | undefined {
     return this.items.find((item) => item.id === id)
   }
 
@@ -59,27 +72,27 @@ class Collection<T extends { id: number | string }> {
   }
 }
 
-export class ImageCollection extends Collection<PhotoStore> {
-  constructor(images: PhotoStore[] = []) {
-    super(images)
-    // makeObservable(this)
-    // makeAutoObservable(this, undefined, { autoBind: true })
-  }
-
-  async applyCropAll() {
-    const promises = this.allItems.map(async (image) => {
-      await image.addCroppedImgUrl()
-    })
-
-    await Promise.all(promises)
-
-    this.applyActionToAll((image) => (image.cropDataSave = image.crop))
-  }
-
-  applyFilterAll() {
-    this.applyActionToAll((image) => image.addFilteredImgUrl())
-  }
-}
+// export class ImageCollection extends Collection<PhotoStore> {
+//   constructor(images: PhotoStore[] = []) {
+//     super(images)
+//     // makeObservable(this)
+//     // makeAutoObservable(this, undefined, { autoBind: true })
+//   }
+//
+//   async applyCropAll() {
+//     const promises = this.allItems.map(async (image) => {
+//       await image.addCroppedImgUrl()
+//     })
+//
+//     await Promise.all(promises)
+//
+//     this.applyActionToAll((image) => (image.cropDataSave = image.crop))
+//   }
+//
+//   applyFilterAll() {
+//     this.applyActionToAll((image) => image.addFilteredImgUrl())
+//   }
+// }
 
 // export class ImageCollection {
 //   currentIndex: number = 0

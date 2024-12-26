@@ -7,16 +7,15 @@ import {
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
-import { ImageCollection } from '@/features/createPost/model/imageCollection'
+import { Collection } from '@/features/createPost/model/imageCollection'
 import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AddPostStore {
-  // currentSliderIndex: number = 0 //вынести в коллекцию
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
   isNewDialog = true
   location: string[] = []
-  photos: ImageCollection = new ImageCollection()
+  photos: Collection = new Collection()
   postDescription: string = ''
 
   prevStage = () => {
@@ -242,10 +241,10 @@ class AddPostStore {
 
   async uploadPost() {
     try {
-      this.photos.applyFilterAll()
+      await this.photos.applyFilterAll()
       const formData = new FormData()
 
-      this.photos.applyActionToAll((image) => {
+      await this.photos.applyActionToAll((image) => {
         const file = createFileForUpload(image.preparedImgData)
 
         if (file) {
@@ -276,7 +275,7 @@ class AddPostStore {
   }
 
   get isDraft() {
-    return this.photos.count > 0
+    return !this.photos.isEmpty
   }
 }
 
