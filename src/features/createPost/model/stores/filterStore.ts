@@ -1,11 +1,10 @@
 import {
   ClassicFiltersType,
   FiltersState,
-  applyFilters,
   prepareFilterStyles,
 } from '@/features/createPost'
 import { defaultClassicFiltersSettings } from '@/features/createPost/model/constants'
-import { makeAutoObservable, runInAction } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 
 export class FilterStore {
   filterStyle: string = ''

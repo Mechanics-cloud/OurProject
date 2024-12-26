@@ -1,20 +1,10 @@
 import { PhotoResult, getCroppedImg } from '@/common'
-import {
-  ClassicFiltersType,
-  CropStore,
-  FiltersState,
-  applyFilters,
-  prepareFilterStyles,
-} from '@/features/createPost'
-import { defaultClassicFiltersSettings } from '@/features/createPost/model/constants'
-import { FilterStore } from '@/features/createPost/model/stores/filterStore'
+import { CropStore, FilterStore, applyFilters } from '@/features/createPost'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 export class PhotoStore {
   crop: CropStore = new CropStore()
-  // filter: string = ''
   filter: FilterStore = new FilterStore()
-  // filterSettings: FiltersState = defaultClassicFiltersSettings
   id: string = ''
   imgUrlToShow: string = ''
   originAspect: number = 1
@@ -47,11 +37,6 @@ export class PhotoStore {
     }
   }
 
-  // addInstFilter(filter: FiltersState) {
-  //   this.filterSettings = filter
-  //   this.applyFilter()
-  // }
-
   async applyFilter() {
     try {
       if (this.preparedImgData.photoFile && this.filter) {
@@ -71,15 +56,6 @@ export class PhotoStore {
       throw new Error('Something went wrong')
     }
   }
-
-  // applyFilter() {
-  //   this.filter = prepareFilterStyles(this.filterSettings)
-  // }
-
-  // changeFilterSetting(filter: ClassicFiltersType, value: number) {
-  //   this.filterSettings[filter] = value
-  //   this.applyFilter()
-  // }
 
   getOriginAspect() {
     return this.originAspect

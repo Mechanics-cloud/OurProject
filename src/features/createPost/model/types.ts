@@ -1,22 +1,4 @@
 import { ElementType } from 'react'
-import { Area, Point } from 'react-easy-crop'
-
-import { Nullable, PhotoResult } from '@/common'
-
-// export type PostPhoto = {
-//   aspect: number
-//   crop: Point
-//   cropDataSave: Nullable<Point>
-//   croppedArea: Area
-//   filter: string
-//   filterSettings: FiltersState
-//   id: string
-//   imgUrlToShow: string
-//   originAspect: number
-//   preparedImgData: PhotoResult
-//   url: string
-//   zoom?: number
-// }
 
 export type InstFilter = {
   name: string

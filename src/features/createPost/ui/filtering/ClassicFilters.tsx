@@ -9,15 +9,8 @@ export const ClassicFilters = observer(() => {
   const { t } = useTranslation()
   const photos = addPostStore.photos.allItems
   const currentSliderIndex = addPostStore.photos.currentArrIndex || 0
-  // const changeClassicFilterSetting =
-  //   addPostStore.photos.allItems[currentSliderIndex].changeFilterSetting
   const changeClassicFilterSetting =
     addPostStore.photos.getItemByIndex(currentSliderIndex).filter.changeSetting
-  // const changeClassicFilterSetting = addPostStore.changeFilterSetting
-
-  // const updateFilter = (filter: ClassicFiltersType, value: number) => {
-  //   changeClassicFilterSetting(filter, value)
-  // }
 
   return (
     <ScrollArea className={'md:h-[430px]'}>

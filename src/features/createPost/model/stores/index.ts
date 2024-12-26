@@ -1,4 +1,5 @@
 export * from './addPostStore'
 export * from './cropStore'
+export * from './filterStore'
 export * from './imageCollection'
 export * from './photoStore'

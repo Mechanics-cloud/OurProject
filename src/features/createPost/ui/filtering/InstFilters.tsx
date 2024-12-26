@@ -9,7 +9,6 @@ import { InstFilter } from './InstFilter'
 
 export const InstFilters = observer(() => {
   const photos = addPostStore.photos.allItems
-  // const addInstFilter = addPostStore.addInstFilter
   const currentSliderIndex = addPostStore.photos.currentArrIndex || 0
   const addInstFilter =
     addPostStore.photos.allItems[currentSliderIndex].filter.addInstFilter
