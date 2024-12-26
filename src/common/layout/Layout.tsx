@@ -25,7 +25,7 @@ const Layout = forwardRef<ElementRef<'div'>, Props>(
         <ToastContainer />
         <Header />
         <ScrollArea
-          className={'w-full h-full pt-[var(--header-height)] box-border'}
+          className={'w-full h-full mt-[var(--header-height)] box-border'}
           isGoToTop
           ref={ref}
         >
