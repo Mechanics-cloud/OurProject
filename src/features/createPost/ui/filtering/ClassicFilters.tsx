@@ -7,10 +7,10 @@ import { observer } from 'mobx-react-lite'
 
 export const ClassicFilters = observer(() => {
   const { t } = useTranslation()
-  const photos = addPostStore.photos.allItems
-  const currentSliderIndex = addPostStore.photos.currentArrIndex || 0
+  const photos = addPostStore.images.allItems
+  const currentSliderIndex = addPostStore.images.currentArrIndex || 0
   const changeClassicFilterSetting =
-    addPostStore.photos.getItemByIndex(currentSliderIndex).filter.changeSetting
+    addPostStore.images.getItemByIndex(currentSliderIndex).filter.changeSetting
 
   return (
     <ScrollArea className={'md:h-[430px]'}>

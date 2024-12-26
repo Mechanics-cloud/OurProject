@@ -4,7 +4,7 @@ import { addPostStore } from '@/features/createPost'
 
 export const useScaleControllerPopover = (id: string) => {
   const [isOpen, setIsOpen] = useState(false)
-  const changeZoom = addPostStore.photos.getItemById(id)?.crop.addZoom
+  const changeZoom = addPostStore.images.getItemById(id)?.crop.addZoom
 
   const onZoom = (zoom: number[]) => {
     if (changeZoom) {

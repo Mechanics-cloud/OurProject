@@ -27,7 +27,7 @@ export const getFiltersTabs = (t: LocaleType): TabsType[] => {
 export const Filters = observer(() => {
   const { t } = useTranslation()
 
-  addPostStore.photos.setCurrentIndex(0)
+  addPostStore.images.setCurrentIndex(0)
 
   return (
     <div className={'border-l-[1px] border-dark-100 w-full p-b-3'}>

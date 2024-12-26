@@ -1,37 +1,40 @@
 import { PhotoStore } from '@/features/createPost'
-import { makeAutoObservable } from 'mobx'
+import { action, computed, makeObservable, observable } from 'mobx'
 
-export class Collection {
-  private currentIndex: number = 0
-  private items: PhotoStore[] = []
+class Collection<T extends { id: number | string }> {
+  currentIndex: number = 0
+  items: T[] = []
 
-  constructor(items: PhotoStore[] = []) {
-    this.items = items
-    makeAutoObservable(this, undefined, { autoBind: true })
+  constructor() {
+    makeObservable(
+      this,
+      {
+        addItem: action,
+        allItems: computed,
+        applyActionToAll: action,
+        clear: action,
+        count: computed,
+        currentArrIndex: computed,
+        currentIndex: observable,
+        getItemById: action,
+        getItemByIndex: action,
+        isEmpty: computed,
+        items: observable,
+        removeItem: action,
+        setCurrentIndex: action,
+      },
+      { autoBind: true }
+    )
   }
 
-  addItem(item: PhotoStore) {
+  addItem(item: T) {
     this.items.push(item)
   }
 
-  applyActionToAll(action: (image: PhotoStore) => Promise<void> | void) {
+  applyActionToAll(action: (image: T) => Promise<void> | void) {
     const promises = this.items.map((item) => action(item))
 
     return Promise.all(promises)
-  }
-
-  async applyCropAll() {
-    await this.applyActionToAll(async (image) => {
-      await image.applyCrop()
-    })
-
-    await this.applyActionToAll((image) => {
-      image.crop.cropDataSave = image.crop.cropPointStart
-    })
-  }
-
-  async applyFilterAll() {
-    await this.applyActionToAll((image) => image.applyFilter())
   }
 
   clear() {
@@ -39,7 +42,7 @@ export class Collection {
     this.items = []
   }
 
-  getItemById(id: number | string): PhotoStore | undefined {
+  getItemById(id: number | string): T | undefined {
     return this.items.find((item) => item.id === id)
   }
 
@@ -72,7 +75,28 @@ export class Collection {
   }
 }
 
-//todo если выносить добавть метод создания фото
+export class ImageCollection extends Collection<PhotoStore> {
+  constructor() {
+    super()
+    makeObservable(this, {
+      applyCropAll: action,
+      applyFilterAll: action,
+    })
+    this.setCurrentIndex = this.setCurrentIndex.bind(this)
+  }
+
+  async applyCropAll() {
+    await this.applyActionToAll(async (image) => {
+      await image.applyCrop()
+    })
+  }
+
+  async applyFilterAll() {
+    await this.applyActionToAll((image) => image.applyFilter())
+  }
+}
+
+//todo если выносить добавь метод создания фото
 
 // export class ImageCollection extends Collection<PhotoStore> {
 //   constructor(images: PhotoStore[] = []) {

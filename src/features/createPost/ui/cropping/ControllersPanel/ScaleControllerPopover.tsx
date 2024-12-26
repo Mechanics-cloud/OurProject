@@ -48,7 +48,7 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
       >
         <Slider
           defaultValue={[
-            addPostStore.photos.getItemById(id)?.crop.getZoom() || 1,
+            addPostStore.images.getItemById(id)?.crop.getZoom() || 1,
           ]}
           max={3}
           min={1}

@@ -7,15 +7,16 @@ import {
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
-import { Collection } from '@/features/createPost/model/stores/imageCollection'
 import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
+import { ImageCollection } from './imageCollection'
+
 class AddPostStore {
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
+  images: ImageCollection = new ImageCollection()
   isNewDialog = true
   location: string[] = []
-  photos: Collection = new Collection()
   postDescription: string = ''
 
   prevStage = () => {
@@ -26,14 +27,14 @@ class AddPostStore {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
-  addLocation(city: string, country: string) {
-    this.location = [city, country]
-  }
-
-  addPhoto(file: File) {
+  addImage(file: File) {
     const url = URL.createObjectURL(file)
 
-    this.photos.addItem(new PhotoStore(url))
+    this.images.addItem(new PhotoStore(url))
+  }
+
+  addLocation(city: string, country: string) {
+    this.location = [city, country]
   }
 
   addPostDescription(description: string) {
@@ -56,7 +57,7 @@ class AddPostStore {
 
   async nextStage() {
     if (this.currentStage === PhotoEditorState.cropping) {
-      await this.photos.applyCropAll()
+      await this.images.applyCropAll()
     }
     runInAction(() => {
       this.currentStage = mapNext.get(this.currentStage) ?? this.currentStage
@@ -65,7 +66,7 @@ class AddPostStore {
 
   resetData() {
     this.currentStage = PhotoEditorState.adding
-    this.photos.clear()
+    this.images.clear()
     this.location = []
     this.postDescription = ''
   }
@@ -76,10 +77,10 @@ class AddPostStore {
 
   async uploadPost() {
     try {
-      await this.photos.applyFilterAll()
+      await this.images.applyFilterAll()
       const formData = new FormData()
 
-      await this.photos.applyActionToAll((image) => {
+      await this.images.applyActionToAll((image) => {
         const file = createFileForUpload(image.preparedImgData)
 
         if (file) {
@@ -103,7 +104,7 @@ class AddPostStore {
   }
 
   get isDraft() {
-    return !this.photos.isEmpty
+    return !this.images.isEmpty
   }
 }
 

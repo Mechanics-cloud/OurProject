@@ -6,7 +6,7 @@ import { Swiper as SwiperInstance } from 'swiper'
 
 export const useSwiperCover = () => {
   const swiperRef = useRef<Nullable<SwiperInstance>>(null)
-  const addCurrentSliderIndex = addPostStore.photos.setCurrentIndex
+  const addCurrentSliderIndex = addPostStore.images.setCurrentIndex
 
   const onSlideChange = (swiper: SwiperInstance) => {
     addCurrentSliderIndex(swiper.activeIndex)

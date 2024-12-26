@@ -14,7 +14,7 @@ import { SwiperSlide } from 'swiper/react'
 export const FilterPhotoModal = observer(() => {
   const { t } = useTranslation()
   const nextStage = addPostStore.nextStage
-  const photos = addPostStore.photos.allItems
+  const photos = addPostStore.images.allItems
 
   return (
     <DialogContent
