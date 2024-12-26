@@ -1,8 +1,9 @@
 import { PhotoStore } from '@/features/createPost'
-import { action, makeAutoObservable, observable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 
 export class ImageCollection {
-  images: PhotoStore[]
+  currentIndex: number = 0
+  images: PhotoStore[] //вынести в коллекцию
 
   constructor(images: PhotoStore[] = []) {
     this.images = images
@@ -18,7 +19,7 @@ export class ImageCollection {
     //   },
     //   { autoBind: true }
     // )
-    makeAutoObservable(this)
+    makeAutoObservable(this, undefined, { autoBind: true })
   }
 
   addImage(image: PhotoStore) {
@@ -43,12 +44,21 @@ export class ImageCollection {
     this.applyActionToAll((image) => image.addFilteredImgUrl())
   }
 
+  clearCollection() {
+    this.currentIndex = 0
+    this.images = []
+  }
+
   deleteImage(id: string) {
     this.images = this.images.filter((image) => image.id !== id)
   }
 
   findImageById(id: string): PhotoStore | undefined {
     return this.images.find((image) => image.id === id)
+  }
+
+  setCurrentIndex(index: number) {
+    this.currentIndex = index
   }
 
   get photoCount() {

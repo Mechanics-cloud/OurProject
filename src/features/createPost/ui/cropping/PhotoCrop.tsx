@@ -4,7 +4,6 @@ import Cropper, { Point } from 'react-easy-crop'
 import {
   ControllersPanel,
   PhotoStore,
-  // PostPhoto,
   usePhotoCrop,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'

@@ -26,7 +26,7 @@ export const getFiltersTabs = (t: LocaleType): TabsType[] => {
 
 export const Filters = observer(() => {
   const { t } = useTranslation()
-  const addCurrentSliderIndex = addPostStore.addCurrentSliderIndex
+  const addCurrentSliderIndex = addPostStore.photos.setCurrentIndex
 
   addCurrentSliderIndex(0)
 

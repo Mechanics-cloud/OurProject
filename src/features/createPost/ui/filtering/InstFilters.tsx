@@ -10,7 +10,7 @@ import { InstFilter } from './InstFilter'
 export const InstFilters = observer(() => {
   const photos = addPostStore.photos.toArray
   // const addInstFilter = addPostStore.addInstFilter
-  const currentSliderIndex = addPostStore.currentSliderIndex || 0
+  const currentSliderIndex = addPostStore.photos.currentIndex || 0
   const addInstFilter =
     addPostStore.photos.toArray[currentSliderIndex].addInstFilter
 

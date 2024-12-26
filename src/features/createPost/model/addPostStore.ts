@@ -12,7 +12,7 @@ import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AddPostStore {
-  currentSliderIndex: number = 0 //вынести в коллекцию
+  // currentSliderIndex: number = 0 //вынести в коллекцию
   currentStage: PhotoEditorStateType = PhotoEditorState.adding
   isNewDialog = true
   location: string[] = []
@@ -63,11 +63,11 @@ class AddPostStore {
   //   }
   // }
 
-  addCurrentSliderIndex(index: number) {
-    runInAction(() => {
-      this.currentSliderIndex = index
-    })
-  }
+  // addCurrentSliderIndex(index: number) {
+  //   runInAction(() => {
+  //     this.currentSliderIndex = index
+  //   })
+  // }
 
   //todo перенесено на 1 фото локальное
 
@@ -229,8 +229,9 @@ class AddPostStore {
 
   resetData() {
     this.currentStage = PhotoEditorState.adding
-    this.photos = new ImageCollection()
-    this.currentSliderIndex = 0
+    // this.photos = new ImageCollection()
+    // this.currentSliderIndex = 0
+    this.photos.clearCollection()
     this.location = []
     this.postDescription = ''
   }
