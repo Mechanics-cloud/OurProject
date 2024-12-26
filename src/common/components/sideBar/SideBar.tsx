@@ -56,7 +56,7 @@ export const SideBar = observer(({ className }: Props) => {
             className={cn(
               `[&_li]:mb-4 flex-col flex h-full`,
               "before:content-[''] before:block before:h-16 before:shrink",
-              "after:content-[''] after:block after:h-28 after:shrink"
+              "after:content-[''] after:block after:h-16 after:shrink"
             )}
           >
             <li>
