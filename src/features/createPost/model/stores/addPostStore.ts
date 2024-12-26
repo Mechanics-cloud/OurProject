@@ -7,7 +7,7 @@ import {
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
-import { Collection } from '@/features/createPost/model/imageCollection'
+import { Collection } from '@/features/createPost/model/stores/imageCollection'
 import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 

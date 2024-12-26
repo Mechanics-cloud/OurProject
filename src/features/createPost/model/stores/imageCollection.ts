@@ -22,11 +22,11 @@ export class Collection {
 
   async applyCropAll() {
     await this.applyActionToAll(async (image) => {
-      await image.addCroppedImgUrl()
+      await image.applyCrop()
     })
 
     await this.applyActionToAll((image) => {
-      image.cropDataSave = image.crop
+      image.crop.cropDataSave = image.crop.cropPointStart
     })
   }
 

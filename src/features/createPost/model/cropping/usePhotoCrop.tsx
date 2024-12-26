@@ -1,19 +1,13 @@
-import { useCallback, useEffect } from 'react'
-import { Area, Point } from 'react-easy-crop'
+import { useEffect } from 'react'
+import { Area } from 'react-easy-crop'
 
-import { PhotoStore, addPostStore } from '@/features/createPost'
+import { PhotoStore } from '@/features/createPost'
 import { toJS } from 'mobx'
 
 export const usePhotoCrop = (photo: PhotoStore) => {
-  //const addZoom = addPostStore.addZoom
-  // const addCrop = addPostStore.addCrop
-  // const addCroppedArea = addPostStore.addCroppedArea
-  // const addCrop = addPostStore.photos.findImageById(photo.id)?.addCrop
-  // const addZoom = addPostStore.photos.findImageById(photo.id)?.addZoom
-  // const addCroppedArea = addPostStore.photos.findImageById(photo.id)?.addCroppedArea
-  const addCrop = photo.addCrop
-  const addZoom = photo.addZoom
-  const addCroppedArea = photo.addCroppedArea
+  const addCrop = photo.crop.addCrop
+  const addZoom = photo.crop.addZoom
+  const addCroppedArea = photo.crop.addCroppedArea
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
     if (addCroppedArea) {
@@ -21,28 +15,15 @@ export const usePhotoCrop = (photo: PhotoStore) => {
     }
   }
 
-  // const onZoom = (zoom: number) => {
-  //   if (addZoom) {
-  //     addZoom(zoom)
-  //   }
-  // }
-
-  // const onCrop = useCallback(
-  //   (crop: Point) => {
-  //     addCrop(photo.id, crop)
-  //   },
-  //   [addCrop, photo.id]
-  // )
-
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       if (addCrop) {
-        addCrop(photo.cropDataSave ?? { x: 0, y: 0 })
+        addCrop(photo.crop.cropDataSave ?? { x: 0, y: 0 })
       }
     }, 0)
 
     return () => clearTimeout(timeoutId)
-  }, [addCrop, photo.cropDataSave])
+  }, [addCrop, photo.crop.cropDataSave])
 
   return {
     addCrop,

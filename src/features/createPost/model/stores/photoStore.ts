@@ -1,8 +1,7 @@
-import { Area, Point } from 'react-easy-crop'
-
-import { Nullable, PhotoResult, getCroppedImg } from '@/common'
+import { PhotoResult, getCroppedImg } from '@/common'
 import {
   ClassicFiltersType,
+  CropStore,
   FiltersState,
   applyFilters,
   prepareFilterStyles,
@@ -11,10 +10,7 @@ import { defaultClassicFiltersSettings } from '@/features/createPost/model/const
 import { makeAutoObservable, runInAction } from 'mobx'
 
 export class PhotoStore {
-  aspect: number = 1
-  crop: Point = { x: 0, y: 0 }
-  cropDataSave: Nullable<Point> = null
-  croppedArea: Area = { height: 0, width: 0, x: 0, y: 0 }
+  crop: CropStore = new CropStore()
   filter: string = ''
   filterSettings: FiltersState = defaultClassicFiltersSettings
   id: string = ''
@@ -25,37 +21,12 @@ export class PhotoStore {
     photoUrl: null,
   }
   url: string = ''
-  zoom?: number = 1
 
   constructor(url: string) {
     makeAutoObservable(this, undefined, { autoBind: true })
     this.id = Math.random().toString(16).slice(2)
     this.url = url
     this.initOriginAspect(url)
-  }
-
-  addCrop(crop: Point) {
-    this.crop = crop
-  }
-
-  addCroppedArea(croppedAreaPixels: Area) {
-    this.croppedArea = croppedAreaPixels
-  }
-
-  async addCroppedImgUrl() {
-    try {
-      const cropPhotoData = await getCroppedImg(this.url, this.croppedArea)
-
-      runInAction(() => {
-        this.preparedImgData = {
-          photoFile: cropPhotoData.photoFile,
-          photoUrl: cropPhotoData.photoUrl,
-        }
-        this.imgUrlToShow = cropPhotoData.photoUrl as string
-      })
-    } catch (error) {
-      throw new Error('Something went wrong')
-    }
   }
 
   async addFilteredImgUrl() {
@@ -83,16 +54,24 @@ export class PhotoStore {
     this.applyFilter()
   }
 
-  addZoom(zoom: number) {
-    this.zoom = zoom
+  async applyCrop() {
+    try {
+      const cropPhotoData = await getCroppedImg(this.url, this.crop.croppedArea)
+
+      runInAction(() => {
+        this.preparedImgData = {
+          photoFile: cropPhotoData.photoFile,
+          photoUrl: cropPhotoData.photoUrl,
+        }
+        this.imgUrlToShow = cropPhotoData.photoUrl as string
+      })
+    } catch (error) {
+      throw new Error('Something went wrong')
+    }
   }
 
   applyFilter() {
     this.filter = prepareFilterStyles(this.filterSettings)
-  }
-
-  changeAspect(aspect: number) {
-    this.aspect = aspect
   }
 
   changeFilterSetting(filter: ClassicFiltersType, value: number) {
@@ -100,16 +79,8 @@ export class PhotoStore {
     this.applyFilter()
   }
 
-  getAspect() {
-    return this.aspect
-  }
-
   getOriginAspect() {
     return this.originAspect
-  }
-
-  getZoom() {
-    return this.zoom
   }
 
   initOriginAspect(url: string) {
