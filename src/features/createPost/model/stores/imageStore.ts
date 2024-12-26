@@ -41,7 +41,7 @@ export class ImageStore {
 
   async applyFilter() {
     try {
-      if (this.preparedImgData.photoFile && this.filter) {
+      if (this.preparedImgData.photoFile && this.filter.filterStyle) {
         const filterPhotoData = await applyFilters(
           this.preparedImgData.photoFile,
           this.filter.filterStyle

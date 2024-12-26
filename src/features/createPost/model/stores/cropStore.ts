@@ -14,20 +14,20 @@ export class CropStore {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
-  addCrop(crop: Point) {
+  changeAspect(aspect: number) {
+    this.aspect = aspect
+  }
+
+  changeCropPointStart(crop: Point) {
     this.cropPointStart = crop
   }
 
-  addCroppedArea(croppedAreaPixels: Area) {
+  changeCroppedArea(croppedAreaPixels: Area) {
     this.croppedArea = croppedAreaPixels
   }
 
-  addZoom(zoom: number) {
+  changeZoom(zoom: number) {
     this.zoom = zoom
-  }
-
-  changeAspect(aspect: number) {
-    this.aspect = aspect
   }
 
   getAspect() {
