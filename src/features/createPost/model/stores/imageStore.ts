@@ -1,8 +1,10 @@
 import { PhotoResult, getCroppedImg } from '@/common'
-import { CropStore, FilterStore, applyFilters } from '@/features/createPost'
+import { applyFilters } from '@/features/createPost'
+import { CropStore } from '@/features/createPost/model/stores/cropStore'
+import { FilterStore } from '@/features/createPost/model/stores/filterStore'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-export class PhotoStore {
+export class ImageStore {
   crop: CropStore = new CropStore()
   filter: FilterStore = new FilterStore()
   id: string = ''

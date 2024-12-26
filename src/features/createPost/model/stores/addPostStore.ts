@@ -1,5 +1,5 @@
 import { createFileForUpload, responseErrorHandler } from '@/common'
-import { PhotoStore, UploadPost, addPostApi } from '@/features/createPost'
+import { UploadPost, addPostApi } from '@/features/createPost'
 import {
   MaxDescriptionLength,
   PhotoEditorState,
@@ -7,6 +7,7 @@ import {
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
+import { ImageStore } from '@/features/createPost/model/stores/imageStore'
 import { profileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
@@ -30,7 +31,7 @@ class AddPostStore {
   addImage(file: File) {
     const url = URL.createObjectURL(file)
 
-    this.images.addItem(new PhotoStore(url))
+    this.images.addItem(new ImageStore(url))
   }
 
   addLocation(city: string, country: string) {

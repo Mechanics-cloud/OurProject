@@ -3,13 +3,13 @@ import Cropper, { Point } from 'react-easy-crop'
 
 import {
   ControllersPanel,
-  PhotoStore,
+  ImageStore,
   usePhotoCrop,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
-  photo: PhotoStore
+  photo: ImageStore
 }
 
 export const PhotoCrop = observer(({ photo }: Props) => {

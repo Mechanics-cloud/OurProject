@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 import { Area } from 'react-easy-crop'
 
-import { PhotoStore } from '@/features/createPost'
+import { ImageStore } from '@/features/createPost'
 import { toJS } from 'mobx'
 
-export const usePhotoCrop = (photo: PhotoStore) => {
+export const usePhotoCrop = (photo: ImageStore) => {
   const addCrop = photo.crop.addCrop
   const addZoom = photo.crop.addZoom
   const addCroppedArea = photo.crop.addCroppedArea
