@@ -72,6 +72,8 @@ export class Collection {
   }
 }
 
+//todo если выносить добавть метод создания фото
+
 // export class ImageCollection extends Collection<PhotoStore> {
 //   constructor(images: PhotoStore[] = []) {
 //     super(images)
