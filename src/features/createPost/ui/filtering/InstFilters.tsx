@@ -12,7 +12,7 @@ export const InstFilters = observer(() => {
   // const addInstFilter = addPostStore.addInstFilter
   const currentSliderIndex = addPostStore.photos.currentArrIndex || 0
   const addInstFilter =
-    addPostStore.photos.allItems[currentSliderIndex].addInstFilter
+    addPostStore.photos.allItems[currentSliderIndex].filter.addInstFilter
 
   return (
     <ScrollArea className={'md:h-[430px]'}>

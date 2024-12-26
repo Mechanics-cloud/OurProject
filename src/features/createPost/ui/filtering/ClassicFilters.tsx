@@ -12,7 +12,7 @@ export const ClassicFilters = observer(() => {
   // const changeClassicFilterSetting =
   //   addPostStore.photos.allItems[currentSliderIndex].changeFilterSetting
   const changeClassicFilterSetting =
-    addPostStore.photos.getItemByIndex(currentSliderIndex).changeFilterSetting
+    addPostStore.photos.getItemByIndex(currentSliderIndex).filter.changeSetting
   // const changeClassicFilterSetting = addPostStore.changeFilterSetting
 
   // const updateFilter = (filter: ClassicFiltersType, value: number) => {
@@ -37,7 +37,9 @@ export const ClassicFilters = observer(() => {
                 changeClassicFilterSetting(setting.field, value[0])
               }
               step={setting.centered ? 0.1 : 0.01}
-              value={[photos[currentSliderIndex].filterSettings[setting.field]]}
+              value={[
+                photos[currentSliderIndex].filter.settings[setting.field],
+              ]}
             />
           </React.Fragment>
         ))}

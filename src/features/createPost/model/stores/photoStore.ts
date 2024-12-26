@@ -7,12 +7,14 @@ import {
   prepareFilterStyles,
 } from '@/features/createPost'
 import { defaultClassicFiltersSettings } from '@/features/createPost/model/constants'
+import { FilterStore } from '@/features/createPost/model/stores/filterStore'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 export class PhotoStore {
   crop: CropStore = new CropStore()
-  filter: string = ''
-  filterSettings: FiltersState = defaultClassicFiltersSettings
+  // filter: string = ''
+  filter: FilterStore = new FilterStore()
+  // filterSettings: FiltersState = defaultClassicFiltersSettings
   id: string = ''
   imgUrlToShow: string = ''
   originAspect: number = 1
@@ -27,31 +29,6 @@ export class PhotoStore {
     this.id = Math.random().toString(16).slice(2)
     this.url = url
     this.initOriginAspect(url)
-  }
-
-  async addFilteredImgUrl() {
-    try {
-      if (this.preparedImgData.photoFile && this.filter) {
-        const filterPhotoData = await applyFilters(
-          this.preparedImgData.photoFile,
-          this.filter
-        )
-
-        runInAction(() => {
-          this.preparedImgData = {
-            photoFile: filterPhotoData.photoFile,
-            photoUrl: filterPhotoData.photoUrl,
-          }
-        })
-      }
-    } catch (error) {
-      throw new Error('Something went wrong')
-    }
-  }
-
-  addInstFilter(filter: FiltersState) {
-    this.filterSettings = filter
-    this.applyFilter()
   }
 
   async applyCrop() {
@@ -70,14 +47,39 @@ export class PhotoStore {
     }
   }
 
-  applyFilter() {
-    this.filter = prepareFilterStyles(this.filterSettings)
+  // addInstFilter(filter: FiltersState) {
+  //   this.filterSettings = filter
+  //   this.applyFilter()
+  // }
+
+  async applyFilter() {
+    try {
+      if (this.preparedImgData.photoFile && this.filter) {
+        const filterPhotoData = await applyFilters(
+          this.preparedImgData.photoFile,
+          this.filter.filterStyle
+        )
+
+        runInAction(() => {
+          this.preparedImgData = {
+            photoFile: filterPhotoData.photoFile,
+            photoUrl: filterPhotoData.photoUrl,
+          }
+        })
+      }
+    } catch (error) {
+      throw new Error('Something went wrong')
+    }
   }
 
-  changeFilterSetting(filter: ClassicFiltersType, value: number) {
-    this.filterSettings[filter] = value
-    this.applyFilter()
-  }
+  // applyFilter() {
+  //   this.filter = prepareFilterStyles(this.filterSettings)
+  // }
+
+  // changeFilterSetting(filter: ClassicFiltersType, value: number) {
+  //   this.filterSettings[filter] = value
+  //   this.applyFilter()
+  // }
 
   getOriginAspect() {
     return this.originAspect

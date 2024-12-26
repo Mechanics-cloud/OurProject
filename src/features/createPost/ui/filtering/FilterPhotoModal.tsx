@@ -57,7 +57,7 @@ export const FilterPhotoModal = observer(() => {
                   className={cn('object-center object-contain w-full h-auto')}
                   height={0}
                   src={photo.imgUrlToShow ?? photo.url}
-                  style={{ filter: photo.filter }}
+                  style={{ filter: photo.filter.filterStyle }}
                   width={0}
                 />
               </SwiperSlide>

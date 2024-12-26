@@ -66,7 +66,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
                       ? (photo.imgUrlToShow ?? photo.url)
                       : (photo.preparedImgData.photoUrl ?? photo.url)
                   }
-                  style={{ filter: photo.filter }}
+                  style={{ filter: photo.filter.filterStyle }}
                   width={490}
                 />
               </SwiperSlide>

@@ -31,7 +31,7 @@ export class Collection {
   }
 
   async applyFilterAll() {
-    await this.applyActionToAll((image) => image.addFilteredImgUrl())
+    await this.applyActionToAll((image) => image.applyFilter())
   }
 
   clear() {
