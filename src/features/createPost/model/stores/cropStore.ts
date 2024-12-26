@@ -8,7 +8,7 @@ export class CropStore {
   cropDataSave: Nullable<Point> = null
   cropPointStart: Point = { x: 0, y: 0 }
   croppedArea: Area = { height: 0, width: 0, x: 0, y: 0 }
-  zoom?: number = 1
+  zoom: number = 1
 
   constructor() {
     makeAutoObservable(this, undefined, { autoBind: true })

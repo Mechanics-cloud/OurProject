@@ -41,7 +41,7 @@ export class Collection<T extends { id: number | string }> {
     this.items = []
   }
 
-  getItemById(id: number | string): T | undefined {
+  getItemById(id: number | string) {
     return this.items.find((item) => item.id === id)
   }
 
