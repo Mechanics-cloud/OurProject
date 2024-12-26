@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { withServerSide } from '@/common'
+import { getDeviceScreenWidth, withServerSide } from '@/common'
 import {
   ProfileData,
   hydrateProfileStore,
@@ -14,7 +14,9 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { params } = context
+  const { params, req } = context
+
+  const screenSize = getDeviceScreenWidth(req.headers['user-agent'] || '')
 
   if (!params || !params.id) {
     return {
@@ -25,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (
     const userProfile = await publicProfileAPi.getPublicUser(params.id[0])
     const postsData = await publicProfileAPi.getPublicPosts(userProfile.id)
 
-    return { props: { postsData, userProfile } }
+    return { props: { postsData, screenSize, userProfile } }
   } catch {
     return {
       notFound: true,
@@ -33,14 +35,25 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 }
 
-const ProfilePage = observer((props: ProfileData) => {
-  const store = initializeStore(props)
+const ProfilePage = observer(
+  ({
+    postsData,
+    screenSize,
+    userProfile,
+  }: { screenSize: number } & ProfileData) => {
+    const store = initializeStore({ postsData, userProfile })
 
-  useEffect(() => {
-    hydrateProfileStore?.setNewData(props)
-  }, [props])
+    useEffect(() => {
+      hydrateProfileStore?.setNewData({ postsData, userProfile })
+    }, [postsData, userProfile])
 
-  return <Profile store={store} />
-})
+    return (
+      <Profile
+        screenSize={screenSize}
+        store={store}
+      />
+    )
+  }
+)
 
 export default withServerSide(ProfilePage)

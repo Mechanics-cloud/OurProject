@@ -22,16 +22,17 @@ import { useRouter } from 'next/router'
 import avatarPlaceholder from '../../../assets/images/user-avatar-placeholder.jpg'
 
 type Props = {
+  screenSize: number
   store: HydrateProfileStore
 }
-export const Profile = observer(({ store }: Props) => {
+export const Profile = observer(({ screenSize, store }: Props) => {
   const { t } = useTranslation()
   const { query } = useRouter()
   const { followers, following, publications, settingsButton } = t.profilePage
 
   const avatar = store.userProfile?.avatars[0]?.url
 
-  const { isMobile, isTablet } = useScreenWidth()
+  const { isMobile, isTablet } = useScreenWidth(screenSize)
 
   // TODO: Заменить работу хука useScreenWidth
   return (
