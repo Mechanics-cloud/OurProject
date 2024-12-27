@@ -1,7 +1,7 @@
 const errors = {
   emptyImages:
     'Failed to display post photos. Please contact support or try again later!',
-  emptySlider: 'No pictures',
+  emptySwiper: 'No pictures',
   server: 'Something went wrong on our end. Please try again later.',
   tooBigFile: (size: number) =>
     `File is too big. Photo size must be less than ${size}MB`,

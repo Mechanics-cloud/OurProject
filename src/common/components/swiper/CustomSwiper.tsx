@@ -32,7 +32,7 @@ const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
           className={'text-light-900'}
           variant={'small'}
         >
-          {t.slider.noImages}
+          {t.basic.errors.emptyImages}
         </Typography>
       </div>
     )
