@@ -3,10 +3,10 @@ import { PropsWithChildren } from 'react'
 
 import { Dialog } from '@/common'
 import {
-  AddPhotoModal,
+  AddImageModal,
   ClosePostCreatingModal,
-  CropPhotoModal,
-  FilterPhotoModal,
+  CropImageModal,
+  FilterImageModal,
   PublicationModal,
   useNewPostDialog,
 } from '@/features/createPost'
@@ -38,18 +38,18 @@ export const NewPostDialog = observer(
           open={open}
           {...rest}
         >
-          {isNewDialog && <AddPhotoModal />}
+          {isNewDialog && <AddImageModal />}
 
           {!isNewDialog && currentState === PostCreationState.adding && (
-            <AddPhotoModal />
+            <AddImageModal />
           )}
 
           {!isNewDialog && currentState === PostCreationState.cropping && (
-            <CropPhotoModal />
+            <CropImageModal />
           )}
 
           {!isNewDialog && currentState === PostCreationState.filtering && (
-            <FilterPhotoModal />
+            <FilterImageModal />
           )}
 
           {!isNewDialog && currentState === PostCreationState.publication && (

@@ -6,7 +6,7 @@ import { createPostStore } from '@/features/createPost'
 
 export const usePublicationModal = (onPostUpload: () => void) => {
   const { t } = useTranslation()
-  const photos = createPostStore.images.allItems
+  const images = createPostStore.images.allItems
 
   const onPublishPost = async () => {
     try {
@@ -21,5 +21,5 @@ export const usePublicationModal = (onPostUpload: () => void) => {
     }
   }
 
-  return { onPublishPost, photos, t }
+  return { images, onPublishPost, t }
 }

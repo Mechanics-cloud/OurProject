@@ -8,11 +8,11 @@ import {
 } from '@/features/createPost'
 import { MaxPostImagesCount } from '@/features/createPost/model/constants'
 
-export const useAddPhotoControllerPopover = () => {
+export const useAddImageControllerPopover = () => {
   const { t } = useTranslation()
   const context = useContext(SwiperContext)
   const [isOpen, setIsOpen] = useState(false)
-  const photos = createPostStore.images.allItems
+  const images = createPostStore.images.allItems
   const totalCount = createPostStore.images.count
   const isAddingDisabled = totalCount === MaxPostImagesCount
 
@@ -35,10 +35,10 @@ export const useAddPhotoControllerPopover = () => {
 
   return {
     goToSlide,
+    images,
     isAddingDisabled,
     isOpen,
     onPhotoChoose,
-    photos,
     setIsOpen,
     t,
   }

@@ -9,7 +9,7 @@ import {
   useTranslation,
 } from '@/common'
 import {
-  PhotoControllerButton,
+  ControllerButton,
   Slider,
   createPostStore,
   useScaleControllerPopover,
@@ -30,7 +30,7 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
       open={isOpen}
     >
       <PopoverTrigger asChild>
-        <PhotoControllerButton>
+        <ControllerButton>
           <Tooltip title={t.createPost.cropping.zoom}>
             {isOpen ? (
               <Maximize className={'w-[28px] h-[28px] text-accent-500'} />
@@ -38,7 +38,7 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
               <MaximizeOutline className={'w-[28px] h-[28px]'} />
             )}
           </Tooltip>
-        </PhotoControllerButton>
+        </ControllerButton>
       </PopoverTrigger>
       <PopoverContent
         align={'start'}

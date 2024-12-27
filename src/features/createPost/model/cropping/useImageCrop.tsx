@@ -3,7 +3,7 @@ import { Area } from 'react-easy-crop'
 
 import { ImageStore } from '@/features/createPost'
 
-export const usePhotoCrop = (photo: ImageStore) => {
+export const useImageCrop = (photo: ImageStore) => {
   const cropImage = photo.crop
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {

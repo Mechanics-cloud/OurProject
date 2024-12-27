@@ -11,7 +11,7 @@ import {
 } from '@/common'
 import { createPostStore, useAddImageModal } from '@/features/createPost'
 
-export const AddPhotoModal = () => {
+export const AddImageModal = () => {
   const { getInputProps, getRootProps, isDragActive, t } = useAddImageModal()
 
   return (

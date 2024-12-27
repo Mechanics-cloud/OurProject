@@ -17,7 +17,7 @@ type Props = {
 }
 
 export const PublicationModal = observer(({ onPostUpload }: Props) => {
-  const { onPublishPost, photos, t } = usePublicationModal(onPostUpload)
+  const { images, onPublishPost, t } = usePublicationModal(onPostUpload)
 
   return (
     <DialogContent
@@ -46,7 +46,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
               'addPost addFilter'
             )}
           >
-            {photos.map((photo, index) => (
+            {images.map((image, index) => (
               <SwiperSlide
                 className={cn(
                   'm-0 shrink-0 bg-dark-500 relative flex',
@@ -63,10 +63,10 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
                   height={490}
                   src={
                     generalStore.isLoading
-                      ? (photo.imgUrlToShow ?? photo.url)
-                      : (photo.preparedImgData.photoUrl ?? photo.url)
+                      ? (image.imgUrlToShow ?? image.url)
+                      : (image.preparedImgData.photoUrl ?? image.url)
                   }
-                  style={{ filter: photo.filter.filterStyle }}
+                  style={{ filter: image.filter.filterStyle }}
                   width={490}
                 />
               </SwiperSlide>
