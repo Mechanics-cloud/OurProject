@@ -20,7 +20,7 @@ type Props = {
 
 export const AspectControllerButtons = observer(({ id }: Props) => {
   const { t } = useTranslation()
-  const cropObject = createPostStore.images.getItemById(id)?.crop
+  const cropImage = createPostStore.images.getItemById(id)?.crop
   const sizes: ScaleSizeButtonType[] = [
     {
       aspect: createPostStore.images.getItemById(id)?.getOriginAspect() || 1,
@@ -37,9 +37,9 @@ export const AspectControllerButtons = observer(({ id }: Props) => {
       {sizes.map((el, index) => (
         <AspectButton
           icon={el.icon}
-          isCurrent={cropObject?.getAspect() === el.aspect}
+          isCurrent={cropImage?.getAspect() === el.aspect}
           key={index}
-          onClick={() => cropObject?.changeAspect(el.aspect)}
+          onClick={() => cropImage?.changeAspect(el.aspect)}
           title={el.title}
         />
       ))}

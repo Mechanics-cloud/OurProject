@@ -18,6 +18,10 @@ export const MiniaturePhoto = observer(
     const { t } = useTranslation()
     const isLastPhoto = createPostStore.images.count === 1
 
+    const removeImage = () => {
+      createPostStore.images.removeItem(id)
+    }
+
     return (
       <span
         className={cn('relative shrink-0', className)}
@@ -42,9 +46,7 @@ export const MiniaturePhoto = observer(
                 'absolute z-10 top-0.5 right-0.5 p-0.5]',
                 'before:absolute before:bg-dark-500 before:top-0 before:bottom-0 before:left-0 before:right-0 before:rounded-sm before:-z-10 before:opacity-80'
               )}
-              onClick={() => {
-                createPostStore.images.removeItem(id)
-              }}
+              onClick={removeImage}
             >
               <Close className={'w-4 h-4 hover:text-accent-500 z-50'} />
             </span>

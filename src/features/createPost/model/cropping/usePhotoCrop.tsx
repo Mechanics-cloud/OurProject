@@ -4,22 +4,22 @@ import { Area } from 'react-easy-crop'
 import { ImageStore } from '@/features/createPost'
 
 export const usePhotoCrop = (photo: ImageStore) => {
-  const cropObject = photo.crop
+  const cropImage = photo.crop
 
   const onCropComplete = (_: Area, croppedAreaPixels: Area) => {
-    cropObject.changeCroppedArea(croppedAreaPixels)
+    cropImage.changeCroppedArea(croppedAreaPixels)
   }
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      cropObject.changeCropPointStart(photo.crop.cropDataSave ?? { x: 0, y: 0 })
+      cropImage.changeCropPointStart(photo.crop.cropDataSave ?? { x: 0, y: 0 })
     }, 0)
 
     return () => clearTimeout(timeoutId)
-  }, [cropObject, photo.crop.cropDataSave])
+  }, [cropImage, photo.crop.cropDataSave])
 
   return {
-    cropObject,
+    cropImage,
     onCropComplete,
   }
 }

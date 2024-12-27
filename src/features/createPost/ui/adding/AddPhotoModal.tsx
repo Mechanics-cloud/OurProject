@@ -71,7 +71,7 @@ export const AddPhotoModal = () => {
           </span>
           <Button
             disabled={!createPostStore.isDraft}
-            onClick={() => createPostStore.continueDialog()}
+            onClick={createPostStore.continueDialog}
             variant={'outline'}
           >
             {t.createPost.adding.buttonDraft}
