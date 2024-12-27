@@ -32,8 +32,7 @@ export const signUpSchema = (t: LocaleType) => {
         .max(30, { message: t.validation.password.maxChar })
         .regex(USER_NAME_REGEXP, {
           message:
-            t.signUpForm.schemaErrors.userNameComposition +
-            ' 0-9, A-Z, a-z, _, -',
+            t.signUp.schemaErrors.userNameComposition + ' 0-9, A-Z, a-z, _, -',
         }),
     })
     .refine((data) => data.password === data.confirm, {

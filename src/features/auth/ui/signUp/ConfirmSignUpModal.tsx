@@ -30,9 +30,9 @@ export const ConfirmSignUpModal = ({
       open={isOpen}
     >
       <DialogContent className={'w-96'}>
-        <DialogTitle>{t.signUpForm.confirmSignUpModal.title}</DialogTitle>
+        <DialogTitle>{t.signUp.confirmSignUpModal.title}</DialogTitle>
         <DialogDescription>
-          {t.signUpForm.confirmSignUpModal.getDescription(userEmail)}
+          {t.signUp.confirmSignUpModal.getDescription(userEmail)}
         </DialogDescription>
 
         <DialogFooter>

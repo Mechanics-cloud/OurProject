@@ -28,7 +28,7 @@ export const GoTopButton = ({ scrollInElementRef }: Props) => {
       type={'button'}
       variants={scrollToTopVariants}
     >
-      <Tooltip title={t.goToTop}>
+      <Tooltip title={t.basic.goToTop}>
         <ArrowBackOutline
           className={'rotate-90'}
           height={'20'}
