@@ -13,7 +13,7 @@ export const ExternalServicesRegistration = () => {
 
   return (
     <div className={'flex gap-14 justify-center mb-6 mt-4'}>
-      <Tooltip title={t.signUpForm.signUpGoogle}>
+      <Tooltip title={t.signUp.signUpGoogle}>
         <button
           onClick={googleLogin}
           type={'button'}
@@ -25,7 +25,7 @@ export const ExternalServicesRegistration = () => {
         </button>
       </Tooltip>
 
-      <Tooltip title={t.signUpForm.signUpGithub}>
+      <Tooltip title={t.signUp.signUpGithub}>
         <button
           onClick={githubLogin}
           type={'button'}

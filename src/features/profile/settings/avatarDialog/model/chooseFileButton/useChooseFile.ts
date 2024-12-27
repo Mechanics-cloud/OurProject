@@ -17,7 +17,7 @@ export function useChooseFile({
     const file = inputEvent.target.files ? inputEvent.target.files[0] : null
 
     if (!file) {
-      onErrorChange(t.avatarModal.errors.chooseFile)
+      onErrorChange(t.avatarModal.noFile)
 
       return
     }
@@ -35,7 +35,7 @@ export function useChooseFile({
       if (error instanceof z.ZodError) {
         onErrorChange(error.errors[0].message)
       } else {
-        onErrorChange(t.avatarModal.errors.unknownError)
+        onErrorChange(t.basic.errors.unknown)
       }
     }
   }

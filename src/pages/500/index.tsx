@@ -26,9 +26,9 @@ function ServerError() {
         className={'m-auto text-center font-normal'}
         variant={'h1'}
       >
-        {t.serverError}
+        {t.basic.errors.server}
       </Typography>
-      <Button onClick={onBackHandler}>{t.notFoundButton}</Button>
+      <Button onClick={onBackHandler}>{t.basic.pagination.goBack}</Button>
     </div>
   )
 }

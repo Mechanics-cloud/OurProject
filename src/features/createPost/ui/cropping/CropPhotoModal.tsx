@@ -25,7 +25,7 @@ export const CropPhotoModal = observer(() => {
     >
       <ModalHeader
         onRightButtonClick={createPostStore.nextStage}
-        rightButtonTitle={t.createPost.next}
+        rightButtonTitle={t.basic.next}
         title={t.createPost.cropping.title}
       />
 
