@@ -26,14 +26,12 @@ export const addImageCheck = async (
   }
 
   if (imagesCount === 0) {
-    throw new Error('Wrong type (todo in 239)')
+    throw new Error(t.basic.errors.type('PNG or JPG/JPEG'))
   }
 
   for (let i = 0; i < imagesCount; i++) {
     if (i === MaxPostImagesCount) {
-      toast.error(
-        `${t.createPost.adding.errors.countLimit}${MaxPostImagesCount}`
-      )
+      toast.error(t.createPost.adding.countLimit(MaxPostImagesCount))
       break
     }
 
@@ -49,7 +47,7 @@ export const addImageCheck = async (
       if (error instanceof z.ZodError) {
         throw new Error(error.errors[0].message)
       } else {
-        throw new Error(t.createPost.adding.errors.basic)
+        throw new Error(t.basic.errors.unknown)
       }
     }
   }
