@@ -2,20 +2,20 @@ import { LocaleType } from '@locales/ru'
 
 import { ClassicSetting, InstFilter } from './types'
 
-export const PostEditorState = {
+export const PostCreationState = {
   adding: 'ADDING',
   cropping: 'CROPPING',
   filtering: 'FILTERING',
   publication: 'PUBLICATION',
 } as const
 
-export type PostEditorStateType =
-  (typeof PostEditorState)[keyof typeof PostEditorState]
+export type PostCreationStateType =
+  (typeof PostCreationState)[keyof typeof PostCreationState]
 
-export const mapNext = new Map<PostEditorStateType, PostEditorStateType>([
-  [PostEditorState.adding, PostEditorState.cropping],
-  [PostEditorState.cropping, PostEditorState.filtering],
-  [PostEditorState.filtering, PostEditorState.publication],
+export const mapNext = new Map<PostCreationStateType, PostCreationStateType>([
+  [PostCreationState.adding, PostCreationState.cropping],
+  [PostCreationState.cropping, PostCreationState.filtering],
+  [PostCreationState.filtering, PostCreationState.publication],
 ])
 
 export const mapPrev = new Map()

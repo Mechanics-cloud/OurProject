@@ -4,7 +4,7 @@ import { useTranslation } from '@/common'
 import {
   SwiperContext,
   addImageCheck,
-  addPostStore,
+  createPostStore,
 } from '@/features/createPost'
 import { MaxPostImagesCount } from '@/features/createPost/model/constants'
 
@@ -12,8 +12,8 @@ export const useAddPhotoControllerPopover = () => {
   const { t } = useTranslation()
   const context = useContext(SwiperContext)
   const [isOpen, setIsOpen] = useState(false)
-  const photos = addPostStore.images.allItems
-  const totalCount = addPostStore.images.count
+  const photos = createPostStore.images.allItems
+  const totalCount = createPostStore.images.count
   const isAddingDisabled = totalCount === MaxPostImagesCount
 
   if (!context) {
@@ -28,7 +28,7 @@ export const useAddPhotoControllerPopover = () => {
     if (fileList) {
       const files: File[] = Array.from(fileList)
 
-      await addImageCheck(files, totalCount, t, addPostStore.addImage)
+      await addImageCheck(files, totalCount, t, createPostStore.addImage)
       goToSlide(totalCount + 1)
     }
   }

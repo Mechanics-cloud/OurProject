@@ -10,7 +10,7 @@ import { useTranslation } from '@/common'
 import {
   AspectButton,
   ScaleSizeButtonType,
-  addPostStore,
+  createPostStore,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 
@@ -20,10 +20,10 @@ type Props = {
 
 export const AspectControllerButtons = observer(({ id }: Props) => {
   const { t } = useTranslation()
-  const cropObject = addPostStore.images.getItemById(id)?.crop
+  const cropObject = createPostStore.images.getItemById(id)?.crop
   const sizes: ScaleSizeButtonType[] = [
     {
-      aspect: addPostStore.images.getItemById(id)?.getOriginAspect() || 1,
+      aspect: createPostStore.images.getItemById(id)?.getOriginAspect() || 1,
       icon: ImageOutline,
       title: t.createPost.cropping.originalRatio,
     },

@@ -41,6 +41,10 @@ export class Collection<T extends { id: number | string }> {
     this.items = []
   }
 
+  getItemByCurrentIndex() {
+    return this.items[this.currentIndex]
+  }
+
   getItemById(id: number | string) {
     return this.items.find((item) => item.id === id)
   }

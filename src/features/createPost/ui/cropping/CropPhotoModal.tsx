@@ -5,14 +5,14 @@ import {
   ModalHeader,
   PhotoCrop,
   SwiperCover,
-  addPostStore,
+  createPostStore,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import { SwiperSlide } from 'swiper/react'
 
 export const CropPhotoModal = observer(() => {
   const { t } = useTranslation()
-  const photos = addPostStore.images.allItems
+  const photos = createPostStore.images.allItems
 
   return (
     <DialogContent
@@ -24,7 +24,7 @@ export const CropPhotoModal = observer(() => {
       crossOff
     >
       <ModalHeader
-        onRightButtonClick={addPostStore.nextStage}
+        onRightButtonClick={createPostStore.nextStage}
         rightButtonTitle={t.createPost.next}
         title={t.createPost.cropping.title}
       />

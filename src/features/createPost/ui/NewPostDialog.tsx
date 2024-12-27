@@ -10,7 +10,7 @@ import {
   PublicationModal,
   useNewPostDialog,
 } from '@/features/createPost'
-import { PostEditorState } from '@/features/createPost/model/constants'
+import { PostCreationState } from '@/features/createPost/model/constants'
 import { DialogProps } from '@radix-ui/react-dialog'
 import { observer } from 'mobx-react-lite'
 
@@ -40,19 +40,19 @@ export const NewPostDialog = observer(
         >
           {isNewDialog && <AddPhotoModal />}
 
-          {!isNewDialog && currentState === PostEditorState.adding && (
+          {!isNewDialog && currentState === PostCreationState.adding && (
             <AddPhotoModal />
           )}
 
-          {!isNewDialog && currentState === PostEditorState.cropping && (
+          {!isNewDialog && currentState === PostCreationState.cropping && (
             <CropPhotoModal />
           )}
 
-          {!isNewDialog && currentState === PostEditorState.filtering && (
+          {!isNewDialog && currentState === PostCreationState.filtering && (
             <FilterPhotoModal />
           )}
 
-          {!isNewDialog && currentState === PostEditorState.publication && (
+          {!isNewDialog && currentState === PostCreationState.publication && (
             <PublicationModal onPostUpload={onPostUpload} />
           )}
         </Dialog>

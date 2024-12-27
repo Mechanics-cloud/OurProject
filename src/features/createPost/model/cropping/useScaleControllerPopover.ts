@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import { addPostStore } from '@/features/createPost'
+import { createPostStore } from '@/features/createPost'
 
 export const useScaleControllerPopover = (id: string) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const onZoom = (zoom: number[]) => {
-    addPostStore.images.getItemById(id)?.crop.changeZoom(zoom[0])
+    createPostStore.images.getItemById(id)?.crop.changeZoom(zoom[0])
   }
 
   const onClose = () => {

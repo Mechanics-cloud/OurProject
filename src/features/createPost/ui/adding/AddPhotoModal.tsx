@@ -9,7 +9,7 @@ import {
   DialogTitle,
   cn,
 } from '@/common'
-import { addPostStore, useAddImageModal } from '@/features/createPost'
+import { createPostStore, useAddImageModal } from '@/features/createPost'
 
 export const AddPhotoModal = () => {
   const { getInputProps, getRootProps, isDragActive, t } = useAddImageModal()
@@ -70,8 +70,8 @@ export const AddPhotoModal = () => {
             </label>
           </span>
           <Button
-            disabled={!addPostStore.isDraft}
-            onClick={() => addPostStore.continueDialog()}
+            disabled={!createPostStore.isDraft}
+            onClick={() => createPostStore.continueDialog()}
             variant={'outline'}
           >
             {t.createPost.adding.buttonDraft}

@@ -2,8 +2,8 @@ import { createFileForUpload, responseErrorHandler } from '@/common'
 import { UploadPost, addPostApi } from '@/features/createPost'
 import {
   MaxDescriptionLength,
-  PostEditorState,
-  PostEditorStateType,
+  PostCreationState,
+  PostCreationStateType,
   mapNext,
   mapPrev,
 } from '@/features/createPost/model/constants'
@@ -13,8 +13,8 @@ import { makeAutoObservable, runInAction } from 'mobx'
 
 import { ImageCollection } from './imageCollection'
 
-class AddPostStore {
-  currentStage: PostEditorStateType = PostEditorState.adding
+class CreatePostStore {
+  currentStage: PostCreationStateType = PostCreationState.adding
   images: ImageCollection = new ImageCollection()
   isNewDialog = true
   location: string[] = []
@@ -51,13 +51,13 @@ class AddPostStore {
 
   continueDialog() {
     this.isNewDialog = false
-    if (this.currentStage === PostEditorState.adding) {
-      this.currentStage = PostEditorState.cropping
+    if (this.currentStage === PostCreationState.adding) {
+      this.currentStage = PostCreationState.cropping
     }
   }
 
   async nextStage() {
-    if (this.currentStage === PostEditorState.cropping) {
+    if (this.currentStage === PostCreationState.cropping) {
       await this.images.applyCropAll()
     }
     runInAction(() => {
@@ -66,7 +66,7 @@ class AddPostStore {
   }
 
   resetData() {
-    this.currentStage = PostEditorState.adding
+    this.currentStage = PostCreationState.adding
     this.images.clear()
     this.location = []
     this.postDescription = ''
@@ -109,4 +109,4 @@ class AddPostStore {
   }
 }
 
-export const addPostStore = new AddPostStore()
+export const createPostStore = new CreatePostStore()

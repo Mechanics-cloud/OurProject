@@ -5,7 +5,7 @@ import {
   Filters,
   ModalHeader,
   SwiperCover,
-  addPostStore,
+  createPostStore,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -13,8 +13,7 @@ import { SwiperSlide } from 'swiper/react'
 
 export const FilterPhotoModal = observer(() => {
   const { t } = useTranslation()
-  const nextStage = addPostStore.nextStage
-  const photos = addPostStore.images.allItems
+  const photos = createPostStore.images.allItems
 
   return (
     <DialogContent
@@ -26,7 +25,7 @@ export const FilterPhotoModal = observer(() => {
       crossOff
     >
       <ModalHeader
-        onRightButtonClick={nextStage}
+        onRightButtonClick={createPostStore.nextStage}
         rightButtonTitle={t.createPost.next}
         title={t.createPost.filtering.title}
       />

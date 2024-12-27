@@ -11,7 +11,7 @@ import {
 import {
   PhotoControllerButton,
   Slider,
-  addPostStore,
+  createPostStore,
   useScaleControllerPopover,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
@@ -48,7 +48,7 @@ export const ScaleControllerPopover = observer(({ id }: Props) => {
       >
         <Slider
           defaultValue={[
-            addPostStore.images.getItemById(id)?.crop.getZoom() || 1,
+            createPostStore.images.getItemById(id)?.crop.getZoom() || 1,
           ]}
           max={3}
           min={1}
