@@ -88,7 +88,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                     as={'button'}
                     className={'py-2'}
                   >
-                    <Typography variant={'reg14'}>{t.menu.logOut}</Typography>
+                    <Typography variant={'reg14'}>{t.basic.logOut}</Typography>
                   </LinkWithIcon>
                 }
                 userEmail={generalStore.user?.email ?? ''}

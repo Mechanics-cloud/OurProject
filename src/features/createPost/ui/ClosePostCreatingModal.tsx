@@ -30,7 +30,7 @@ export const ClosePostCreatingModal = ({
           onClick={onBack}
           variant={'outline'}
         >
-          {t.createPost.closeModal.discard}
+          {t.basic.discard}
         </Button>
         <Button onClick={onClose}>{t.createPost.closeModal.save}</Button>
       </span>

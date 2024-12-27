@@ -133,7 +133,7 @@ export const SideBar = observer(({ className }: Props) => {
                 DefaultIcon={LogOut}
                 as={'button'}
               >
-                {t.menu.logOut}
+                {t.basic.logOut}
               </LinkWithIcon>
             }
             userEmail={generalStore.user?.email ?? ''}

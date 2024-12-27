@@ -31,10 +31,10 @@ export const LogOutModal = ({
       <DialogTrigger asChild>{triggerButton}</DialogTrigger>
       <DialogContent className={'gap-[30px] max-w-[440px]'}>
         <DialogHeader>
-          <DialogTitle>{t.menu.logOutModal.title}</DialogTitle>
+          <DialogTitle>{t.basic.logOut}</DialogTitle>
         </DialogHeader>
         <DialogDescription className={'text-left my-0'}>
-          {t.menu.logOutModal.getText(userEmail)}
+          {t.menu.logOutModal(userEmail)}
         </DialogDescription>
         <DialogFooter className={'flex justify-end gap-6'}>
           <DialogClose asChild>
@@ -44,7 +44,7 @@ export const LogOutModal = ({
               type={'button'}
               variant={'outline'}
             >
-              {t.menu.logOutModal.yes}
+              {t.basic.yes}
             </Button>
           </DialogClose>
           <DialogClose asChild>
@@ -52,7 +52,7 @@ export const LogOutModal = ({
               className={'w-[96px]'}
               type={'button'}
             >
-              {t.menu.logOutModal.no}
+              {t.basic.no}
             </Button>
           </DialogClose>
         </DialogFooter>

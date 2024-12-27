@@ -58,7 +58,7 @@ export const Pagination = ({
     <div className={'flex gap-8'}>
       <ul className={'flex gap-x-3 align-middle'}>
         <li className={'flex align-middle'}>
-          <Tooltip title={t.pagination.goBack}>
+          <Tooltip title={t.basic.pagination.goBack}>
             <PageButton
               disabled={isBackArrowDisabled}
               onClick={onPrevious}
@@ -68,7 +68,7 @@ export const Pagination = ({
                   `h-4 w-4 ${isBackArrowDisabled && 'text-dark-100'}`
                 )}
               />
-              <span className={'sr-only'}>{t.pagination.goBack}</span>
+              <span className={'sr-only'}>{t.basic.pagination.goBack}</span>
             </PageButton>
           </Tooltip>
         </li>
@@ -78,7 +78,7 @@ export const Pagination = ({
           paginationRange={paginationRange}
         />
         <li className={'flex align-middle'}>
-          <Tooltip title={t.pagination.goForward}>
+          <Tooltip title={t.basic.pagination.goForward}>
             <PageButton
               disabled={isForwardArrowDisabled}
               onClick={onNext}
@@ -88,7 +88,7 @@ export const Pagination = ({
                   `h-4 w-4 ${isForwardArrowDisabled && 'text-dark-100'}`
                 )}
               />
-              <span className={'sr-only'}>{t.pagination.goForward}</span>
+              <span className={'sr-only'}>{t.basic.pagination.goForward}</span>
             </PageButton>
           </Tooltip>
         </li>

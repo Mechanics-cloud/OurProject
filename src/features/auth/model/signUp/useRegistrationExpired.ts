@@ -25,7 +25,7 @@ export const useRegistrationExpired = () => {
 
   const onResendHandler = async () => {
     if (!query.email) {
-      toast.error(t.basicError)
+      toast.error(t.basic.errors.unknown)
     }
     try {
       isLoadingStore.turnOnLoading()

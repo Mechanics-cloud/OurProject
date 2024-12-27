@@ -29,7 +29,7 @@ export const GeneralInfoComponent = forwardRef<HTMLFormElement>((_, ref) => {
     setIsPhotoChanged,
     setPhotoObj,
     setValue,
-  } = useFillGeneralInfo()
+  } = useFillGeneralInfo(t)
   const { isTablet } = useScreenWidth()
 
   return (
@@ -52,26 +52,26 @@ export const GeneralInfoComponent = forwardRef<HTMLFormElement>((_, ref) => {
         <div className={'w-full flex flex-col lg:gap-6'}>
           <FormTextField
             control={control}
-            label={t.profileInputs.userName}
+            label={t.profileSettings.userName}
             name={'userName'}
             required
           />
           <FormTextField
             control={control}
-            label={t.profileInputs.firstName}
+            label={t.profileSettings.firstName}
             name={'firstName'}
             required
           />
           <FormTextField
             control={control}
-            label={t.profileInputs.lastName}
+            label={t.profileSettings.lastName}
             name={'lastName'}
             required
           />
           <div className={'flex flex-col'}>
             <FormCalendar
               control={control}
-              label={t.profileInputs.dateOfBirth}
+              label={t.profileSettings.dateOfBirth}
               name={'dateOfBirth'}
               setValue={setValue}
             />
@@ -79,7 +79,7 @@ export const GeneralInfoComponent = forwardRef<HTMLFormElement>((_, ref) => {
           </div>
           <FormTextArea
             control={control}
-            label={t.profileInputs.aboutMe}
+            label={t.profileSettings.aboutMe}
             name={'aboutMe'}
           />
           <div className={'flex justify-end mt-12'}>
@@ -91,7 +91,7 @@ export const GeneralInfoComponent = forwardRef<HTMLFormElement>((_, ref) => {
               type={'submit'}
               variant={'primary'}
             >
-              {t.profileInputs.saveChanges}
+              {t.profileSettings.saveChanges}
             </Button>
           </div>
         </div>

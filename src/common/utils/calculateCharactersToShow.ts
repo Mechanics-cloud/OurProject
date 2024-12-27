@@ -2,7 +2,7 @@ export const calculateCharactersToShow = (
   fullText: number | string,
   userName: string
 ) => {
-  const textLenght = typeof fullText === 'string' ? fullText.length : fullText
+  const textLength = typeof fullText === 'string' ? fullText.length : fullText
 
-  return textLenght - userName.length
+  return textLength - userName.length
 }
