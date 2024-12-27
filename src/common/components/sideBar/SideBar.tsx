@@ -140,7 +140,7 @@ export const SideBar = observer(({ className }: Props) => {
                 as={'button'}
                 onClick={openLogOutModal}
               >
-                {t.menu.logOut}
+                {t.basic.logOut}
               </LinkWithIcon>
             </li>
           </ul>

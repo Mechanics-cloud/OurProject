@@ -36,7 +36,7 @@ export const OtherSessions = observer(
             className={'text-center'}
             variant={'h2'}
           >
-            You have not yet logged in from other devices
+            {t.profileSessions.noOtherSession}
           </Typography>
         ) : (
           sessions.map((device) => (

@@ -55,7 +55,7 @@ export const useAvatarDialog = (onModalPhotoSave: ModalPhotoSaveHandler) => {
                 photoFile: null,
                 photoUrl: null,
               })
-              toast.error(t.avatarModal.errors.unknownError)
+              toast.error(t.basic.errors.unknown)
             }
           }, 'image/png')
         }

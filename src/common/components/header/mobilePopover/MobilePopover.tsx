@@ -90,7 +90,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                   as={'button'}
                   onClick={openLogOutModal}
                 >
-                  <Typography variant={'reg14'}>{t.menu.logOut}</Typography>
+                  <Typography variant={'reg14'}>{t.basic.logOut}</Typography>
                 </LinkWithIcon>
               </li>
             </ul>
