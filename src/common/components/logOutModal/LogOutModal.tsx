@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { ReactNode } from 'react'
 
 import {
   Button,
@@ -10,25 +9,37 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
   useTranslation,
 } from '@/common'
+import { logOut } from '@/common/utils/logOut'
+import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
   logOutModalHandler: () => void
-  triggerButton: ReactNode
+  onClose: () => void
   userEmail: string
-}
+} & DialogProps
+
 export const LogOutModal = ({
   logOutModalHandler,
-  triggerButton,
+  onClose,
+  open,
   userEmail,
+  ...rest
 }: Props) => {
   const { t } = useTranslation()
 
+  const onLogOut = async () => {
+    await logOut()
+    logOutModalHandler()
+  }
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>{triggerButton}</DialogTrigger>
+    <Dialog
+      onOpenChange={onClose}
+      open={open}
+      {...rest}
+    >
       <DialogContent className={'gap-[30px] max-w-[440px]'}>
         <DialogHeader>
           <DialogTitle>{t.basic.logOut}</DialogTitle>
@@ -40,7 +51,7 @@ export const LogOutModal = ({
           <DialogClose asChild>
             <Button
               className={'w-[96px]'}
-              onClick={logOutModalHandler}
+              onClick={onLogOut}
               type={'button'}
               variant={'outline'}
             >

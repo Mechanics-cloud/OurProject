@@ -83,6 +83,7 @@ export const Device = ({
         <LinkWithIcon
           DefaultIcon={LogOut}
           as={'button'}
+          className={'ml-auto w-auto'}
           onClick={onLogoutClick}
         >
           Log out
