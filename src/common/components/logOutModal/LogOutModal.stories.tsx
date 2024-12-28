@@ -1,6 +1,10 @@
-import { Button } from '@/common'
+import * as React from 'react'
+
+import { LogOut } from '@/assets/icons'
+import { LinkWithIcon, Typography, useModal } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal/LogOutModal'
-import { Meta, StoryObj } from '@storybook/react'
+import { generalStore } from '@/core/store'
+import { Meta } from '@storybook/react'
 
 const meta = {
   component: LogOutModal,
@@ -13,14 +17,29 @@ const meta = {
 
 export default meta
 
-type Story = StoryObj<typeof meta>
+export const BaseLogOutModal = () => {
+  const {
+    isModalOpen: isLogOutModalOpen,
+    onModalClose: onLogOutModalClose,
+    openModal: openLogOutModal,
+  } = useModal()
 
-export const BaseLogOutModal: Story = {
-  args: {
-    logOutModalHandler: () => {
-      alert('You are logged out!')
-    },
-    triggerButton: <Button type={'button'}>Log out</Button>,
-    userEmail: 'some@email.com',
-  },
+  return (
+    <>
+      <LinkWithIcon
+        ActiveIcon={LogOut}
+        DefaultIcon={LogOut}
+        as={'button'}
+        onClick={openLogOutModal}
+      >
+        <Typography variant={'reg14'}>Log out</Typography>
+      </LinkWithIcon>
+      <LogOutModal
+        logOutModalHandler={onLogOutModalClose}
+        onClose={onLogOutModalClose}
+        open={isLogOutModalOpen}
+        userEmail={generalStore.user?.email ?? ''}
+      />
+    </>
+  )
 }
