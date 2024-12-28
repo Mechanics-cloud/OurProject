@@ -21,7 +21,6 @@ import {
 } from '@/assets/icons/outlineIcons'
 import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
-import { logOut } from '@/common/utils/logOut'
 import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { observer } from 'mobx-react-lite'
@@ -30,7 +29,11 @@ type Props = ComponentProps<'aside'>
 
 export const SideBar = observer(({ className }: Props) => {
   const { t } = useTranslation()
-  const { onModalClose: onLogOutModalClose } = useModal(logOut)
+  const {
+    isModalOpen: isLogOutModalOpen,
+    onModalClose: onLogOutModalClose,
+    openModal: openLogOutModal,
+  } = useModal()
 
   const {
     isModalOpen: isNewPostModalOpen,
@@ -44,12 +47,18 @@ export const SideBar = observer(({ className }: Props) => {
     <>
       <aside
         className={cn(
-          'hidden lg:flex lg:flex-col lg:min-w-56 lg:h-full',
+          'hidden lg:block lg:min-w-56 lg:h-headCalc lg:fixed lg:border-r-2 lg:border-dark-300',
           className
         )}
       >
-        <nav className={'pt-[72px]'}>
-          <ul className={`mb-[60px] [&_li]:mb-4`}>
+        <nav className={'h-full'}>
+          <ul
+            className={cn(
+              `[&_li]:mb-4 flex-col flex h-full`,
+              "before:content-[''] before:block before:h-16 before:shrink",
+              "after:content-[''] after:block after:h-16 after:shrink"
+            )}
+          >
             <li>
               <LinkWithIcon
                 ActiveIcon={Home}
@@ -101,9 +110,9 @@ export const SideBar = observer(({ className }: Props) => {
                 {t.menu.search}
               </LinkWithIcon>
             </li>
-          </ul>
 
-          <ul className={`mb-[180px] [&_li]:mb-6`}>
+            <span className={'h-14 shrink'}></span>
+
             <li>
               <LinkWithIcon
                 ActiveIcon={TrendingUp}
@@ -123,23 +132,28 @@ export const SideBar = observer(({ className }: Props) => {
                 {t.menu.favorites}
               </LinkWithIcon>
             </li>
-          </ul>
 
-          <LogOutModal
-            logOutModalHandler={onLogOutModalClose}
-            triggerButton={
+            <li className={'mt-auto'}>
               <LinkWithIcon
                 ActiveIcon={LogOut}
                 DefaultIcon={LogOut}
                 as={'button'}
+                onClick={openLogOutModal}
               >
                 {t.basic.logOut}
               </LinkWithIcon>
-            }
-            userEmail={generalStore.user?.email ?? ''}
-          />
+            </li>
+          </ul>
         </nav>
       </aside>
+
+      <LogOutModal
+        logOutModalHandler={onLogOutModalClose}
+        onClose={onLogOutModalClose}
+        open={isLogOutModalOpen}
+        userEmail={generalStore.user?.email ?? ''}
+      />
+
       <NewPostDialog
         onClose={onNewPostModalClose}
         onOpenChange={onNewPostModalClose}
