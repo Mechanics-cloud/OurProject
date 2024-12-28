@@ -13,9 +13,8 @@ import 'swiper/swiper-bundle.css'
 import noPostImage from '/src/assets/images/noUserPosts.svg'
 
 type ImagesTypes = {
-  className?: string
   images: Array<{ url: ImageUrl }>
-} & Omit<SwiperProps, 'className' | 'images'>
+} & Omit<SwiperProps, 'images'>
 
 const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
   const { t } = useTranslation()
