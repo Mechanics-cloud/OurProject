@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ComponentPropsWithoutRef } from 'react'
 
 import {
   Home,
@@ -22,7 +22,7 @@ import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export const Menu = () => {
+export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
   const router = useRouter()
   const { t } = useTranslation()
   const href = router.asPath
@@ -39,7 +39,7 @@ export const Menu = () => {
     <nav
       className={cn(
         'min-w-[360px] w-full bg-dark-700 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50]',
-        'lg:hidden'
+        className
       )}
     >
       <ul className={'flex w-full justify-evenly py-[16px]'}>

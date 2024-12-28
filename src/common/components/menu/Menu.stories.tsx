@@ -4,6 +4,13 @@ import { Menu } from './Menu'
 
 const meta = {
   component: Menu,
+  decorators: [
+    (Story) => (
+      <div style={{ height: '667px', width: '375px' }}>
+        <Story />
+      </div>
+    ),
+  ],
   parameters: {
     layout: 'centered',
   },

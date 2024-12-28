@@ -64,7 +64,7 @@ export const withProtection = <P extends object>(
       return (
         <LayoutWithStore className={'flex'}>
           <SideBar />
-          <Menu />
+          <Menu className={'lg:hidden'} />
           <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>
             {loading ? <FullScreenLoader /> : <PageComponent {...props} />}
           </div>

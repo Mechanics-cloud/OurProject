@@ -4,9 +4,6 @@ import { Header } from '@/common'
 
 const meta = {
   component: Header,
-  parameters: {
-    layout: 'centered',
-  },
   title: 'Component/Header',
 } satisfies Meta<typeof Header>
 
