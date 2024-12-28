@@ -1,5 +1,4 @@
-import { withProtection } from '@/common'
-import { Menu } from '@/common/components/menu'
+import { Menu, withProtection } from '@/common'
 
 function Messenger() {
   return (
