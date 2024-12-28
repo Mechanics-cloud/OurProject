@@ -8,7 +8,7 @@ import {
   mapPrev,
 } from '@/features/createPost/model/constants'
 import { ImageStore } from '@/features/createPost/model/stores/imageStore'
-import { profileStore } from '@/features/profile'
+import { hydrateProfileStore } from '@/features/profile'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { ImageCollection } from './imageCollection'
@@ -97,7 +97,7 @@ class CreatePostStore {
       }
 
       await addPostApi.uploadPostDescription(post)
-      await profileStore.cleanUpPhotosData()
+      hydrateProfileStore?.updatePhotosData()
       this.resetData()
     } catch (error) {
       responseErrorHandler(error)
