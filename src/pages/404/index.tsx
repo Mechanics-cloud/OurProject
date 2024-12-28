@@ -14,7 +14,11 @@ function NotFound() {
   }
 
   return (
-    <div className={'mt-40 flex flex-col gap-8 items-center justify-center'}>
+    <div
+      className={
+        'mt-20 lg:mt-40 flex flex-col gap-8 items-center justify-center'
+      }
+    >
       <Image
         alt={'404 image'}
         className={'opacity-90'}

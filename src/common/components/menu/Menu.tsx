@@ -17,6 +17,7 @@ import {
 import { Paths, cn, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
+import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -31,6 +32,8 @@ export const Menu = () => {
     onModalClose: onNewPostModalClose,
     openModal: openNewPostModal,
   } = useModal()
+
+  const userId = generalStore.user?.userId
 
   return (
     <nav
@@ -96,7 +99,7 @@ export const Menu = () => {
         </li>
         <li>
           <Tooltip title={t.menu.profile}>
-            <Link href={Paths.profile}>
+            <Link href={Paths.profileLink(userId)}>
               {matchesPathname(href, Paths.profile) ? (
                 <Person className={'size-6 text-accent-500'} />
               ) : (
