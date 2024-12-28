@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react'
 
-import {
-  LayoutWithStore,
-  NextPageWithLayout,
-  SideBar,
-  getFromLocalStorage,
-} from '@/common'
+import { LayoutWithStore, Menu, SideBar, getFromLocalStorage } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
+
+import { NextPageWithLayout } from './types'
 
 export const withServerSide = <P extends object>(
   PageComponent: NextPageWithLayout<P>
@@ -25,11 +22,8 @@ export const withServerSide = <P extends object>(
       return (
         <LayoutWithStore className={'flex'}>
           <SideBar />
-          <div
-            className={
-              'lg:pl-9 w-full lg:border-l-2 lg:border-dark-300 lg:h-headCalc'
-            }
-          >
+          <Menu />
+          <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>
             <PageComponent {...props} />
           </div>
         </LayoutWithStore>

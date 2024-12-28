@@ -1,6 +1,5 @@
 import { instance } from '@/common/api'
 import { UpdatedProfile, UserProfile } from '@/features/profile'
-import { ImagesData } from '@/features/profile/model/types'
 import { ProfileEndpoints } from '@/features/profile/settings/generalInfo/api/profile.endpoints'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
@@ -11,26 +10,6 @@ class ProfileApi {
   }
   public async getProfile(): Promise<UserProfile> {
     const res = await this.instance.get(ProfileEndpoints.profile)
-
-    return res.data
-  }
-  public async getProfilePosts(
-    page: number,
-    userName: string,
-    signal?: AbortSignal,
-    pageSize: number = 8
-  ) {
-    const res = await this.instance.get<ImagesData>(
-      ProfileEndpoints.posts(userName),
-      {
-        params: {
-          endCursorPostId: 0,
-          pageNumber: page,
-          pageSize: pageSize,
-        },
-        signal: signal,
-      }
-    )
 
     return res.data
   }

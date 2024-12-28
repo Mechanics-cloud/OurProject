@@ -1,28 +1,26 @@
-import React, { ReactElement, ReactNode, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import {
   FullScreenLoader,
   LayoutWithStore,
+  Menu,
   Paths,
   SideBar,
   getFromLocalStorage,
 } from '@/common'
+import { NextPageWithLayout } from '@/common/HOC/types'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
 import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
-import { NextPage } from 'next'
 import { useRouter } from 'next/router'
-
-export type NextPageWithLayout<P = {}, IP = P> = {
-  getLayout?: (page: ReactElement) => ReactNode
-} & NextPage<P, IP>
 
 interface WithProtectionOptions {
   isNotForAuthorizedUsers?: boolean
   isPublic?: boolean
 }
+
 export const withProtection = <P extends object>(
   PageComponent: NextPageWithLayout<P>,
   options: WithProtectionOptions = {
@@ -34,17 +32,18 @@ export const withProtection = <P extends object>(
     const { isNotForAuthorizedUsers, isPublic } = options
     const router = useRouter()
     const loading = authStore.isAuthenticated === 'pending'
+    const currentAuthState = authStore.isAuthenticated
 
     useEffect(() => {
       const onRedirect = async () => {
-        if (authStore.isAuthenticated === 'pending') {
+        if (currentAuthState === 'pending') {
           return
         }
-        if (authStore.isAuthenticated === 'yes' && isNotForAuthorizedUsers) {
+        if (currentAuthState === 'yes' && isNotForAuthorizedUsers) {
           await router.replace(Paths.home)
         }
         if (
-          (authStore.isAuthenticated === 'error' ||
+          (currentAuthState === 'error' ||
             authStore.isAuthenticated === 'no') &&
           !isPublic
         ) {
@@ -53,7 +52,7 @@ export const withProtection = <P extends object>(
       }
 
       onRedirect()
-    }, [isNotForAuthorizedUsers, isPublic, router, authStore.isAuthenticated])
+    }, [isNotForAuthorizedUsers, isPublic, router, currentAuthState])
 
     useEffect(() => {
       if (getFromLocalStorage(StorageKeys.AccessToken)) {
@@ -65,11 +64,8 @@ export const withProtection = <P extends object>(
       return (
         <LayoutWithStore className={'flex'}>
           <SideBar />
-          <div
-            className={
-              'lg:pl-9 w-full lg:border-l-2 lg:border-dark-300 lg:h-headCalc'
-            }
-          >
+          <Menu />
+          <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>
             {loading ? <FullScreenLoader /> : <PageComponent {...props} />}
           </div>
         </LayoutWithStore>

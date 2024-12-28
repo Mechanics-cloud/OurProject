@@ -1,8 +1,12 @@
 import React from 'react'
 
-import { Tabs, TabsType, useTranslation } from '@/common'
-import { withProtection } from '@/common/HOC/withProtection'
-import { useScreenWidth } from '@/common/hooks/useScreenWidth'
+import {
+  Tabs,
+  TabsType,
+  useScreenWidth,
+  useTranslation,
+  withProtection,
+} from '@/common'
 import { getSettingsTabs } from '@/features/profile'
 
 const Settings = () => {

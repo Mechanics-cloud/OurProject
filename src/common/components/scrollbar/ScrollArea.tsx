@@ -1,4 +1,10 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, useRef } from 'react'
+import React, {
+  ComponentPropsWithoutRef,
+  ElementRef,
+  forwardRef,
+  useEffect,
+  useRef,
+} from 'react'
 
 import { GoTopButton } from '@/common'
 import { ScrollBar } from '@/common/components/scrollbar/Scrollbar'
@@ -15,6 +21,26 @@ export const ScrollArea = forwardRef<
   Props
 >(({ children, className, isGoToTop = false, orientation, ...props }, ref) => {
   const scrollableRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const scrollableElement = scrollableRef.current
+
+    if (!scrollableElement) {
+      return
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (scrollableElement) {
+        scrollableElement.scrollTop = scrollableElement.scrollHeight
+      }
+    })
+
+    resizeObserver.observe(scrollableElement)
+
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [children])
 
   return (
     <ScrollAreaPrimitive.Root
