@@ -1,4 +1,5 @@
 export * from './asyncComponent'
+export * from './avatar'
 export * from './baseModal'
 export * from './button'
 export * from './calendar'
