@@ -14,7 +14,7 @@ import {
   PlusSquareOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
-import { Paths, cn, useModal, useTranslation } from '@/common'
+import { PathService, Paths, cn, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
 import { generalStore } from '@/core/store'

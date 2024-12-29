@@ -4,6 +4,7 @@ export const Paths = {
   forgotPassword: '/auth/forgot-password',
   generalInfo: '/settings',
   home: '/home',
+  homePost: '/home/:postId',
   messenger: '/messenger',
   privacyPolicy: '/auth/privacy-policy',
   profile: '/profile',
@@ -19,4 +20,5 @@ export const Paths = {
   signUp: '/auth/sign-up',
   statistics: '/statistics',
   termsOfService: '/auth/terms-of-service',
+  userProfile: '/profile/:userId',
 }
