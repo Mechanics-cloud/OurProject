@@ -18,10 +18,12 @@ import { Paths, cn, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
+import { profileStore } from '@/features/profile'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export const Menu = () => {
+export const Menu = observer(() => {
   const router = useRouter()
   const { t } = useTranslation()
   const href = router.asPath
@@ -96,8 +98,11 @@ export const Menu = () => {
         </li>
         <li>
           <Tooltip title={t.menu.profile}>
-            <Link href={Paths.profile}>
-              {matchesPathname(href, Paths.profile) ? (
+            <Link href={Paths.profileLink(profileStore.userProfile?.id)}>
+              {matchesPathname(
+                href,
+                Paths.profileLink(profileStore.userProfile?.id)
+              ) ? (
                 <Person className={'size-6 text-accent-500'} />
               ) : (
                 <PersonOutline className={'size-6'} />
@@ -114,4 +119,4 @@ export const Menu = () => {
       />
     </nav>
   )
-}
+})
