@@ -22,4 +22,18 @@ export const post = {
   modalText: 'Are you sure you want to delete this post?',
   modalTitle: 'Delete Post',
   successMessage: 'The post was successfully deleted',
+  addComment: 'Add comment...',
+  copyLink: 'Copy link',
+  deletePost: 'Delete post',
+  editPost: 'Edit post',
+  likes: {
+    few: '{{value}} "Likes"',
+    many: '{{value}} "Likes"',
+    one: '{{value}} "Like"',
+  },
+  no: 'No',
+  noComments: 'No comments',
+  notFound: 'Not Found Post',
+  unfollow: 'Unfollow',
+  yes: 'Yes',
 }

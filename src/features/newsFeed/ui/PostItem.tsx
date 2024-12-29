@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {
+  PathService,
   BasicPost,
   Paths,
   TextUnfolding,
@@ -17,6 +18,7 @@ import {
   CustomNewsFeedPopover,
 } from '@/features/newsFeed'
 import Image from 'next/image'
+import Link from 'next/link'
 import { NextRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
@@ -57,6 +59,9 @@ const PostItem = ({ item, router }: Props) => {
         </span>
         <CustomNewsFeedPopover />
       </div>
+      <Link
+        href={PathService.generatePath(Paths.homePost, { postId: item.id })}
+      >
       <section className={'h-[504px] mb-3'}>
         {item.images.length > 0 ? (
           <CustomSwiper images={item.images} />
@@ -67,6 +72,7 @@ const PostItem = ({ item, router }: Props) => {
           />
         )}
       </section>
+      </Link>
       <LinksGroup
         className={'mb-5'}
         item={item}
