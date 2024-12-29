@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PathService, Paths, getBaseLayout } from '@/common'
+import { PathService, Paths } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
 import { Post, PostModal, PublicPostsEndpoints } from '@/features/posts'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
@@ -60,6 +60,4 @@ const PostView = ({
   )
 }
 
-PostView.getLayout = getBaseLayout
-
-export default withProtection(PostView, true)
+export default withProtection(PostView, { isPublic: true })
