@@ -1,10 +1,16 @@
-import { TextUnfolding, calculateCharactersToShow } from '@/common'
+import {
+  PathService,
+  Paths,
+  TextUnfolding,
+  calculateCharactersToShow,
+} from '@/common'
 import {
   LinkProfile,
   PublicPostsDto,
   RegisteredUsersCounter,
   TimeAgo,
 } from '@/features/publicPosts'
+import Link from 'next/link'
 import CustomSwiper from 'src/common/components/swiper/CustomSwiper'
 
 import 'swiper/swiper-bundle.css'
@@ -27,12 +33,18 @@ export const PublicPosts = ({ posts }: Props) => {
               className={'flex flex-col gap-3'}
               key={post.id}
             >
-              <div className={'relative w-60 h-60'}>
-                <CustomSwiper
-                  className={'publicPost'}
-                  images={post.images}
-                />
-              </div>
+              <Link
+                href={PathService.generatePath(Paths.publicMainPagePost, {
+                  postId: post.id,
+                })}
+              >
+                <div className={'relative w-60 h-60'}>
+                  <CustomSwiper
+                    className={'publicPost'}
+                    images={post.images}
+                  />
+                </div>
+              </Link>
               <div className={'w-60 flex flex-col gap-2'}>
                 <LinkProfile
                   avatarOwner={post.avatarOwner}
