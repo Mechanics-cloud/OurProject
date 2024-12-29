@@ -1,7 +1,7 @@
 import React, { MouseEvent, Ref, forwardRef } from 'react'
 
 import { Like, Nullable, Typography, cn } from '@/common'
-import { Avatar } from '@/common/components/avatar/Avatar'
+import { Avatar } from '@/common/components/avatar'
 import { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
