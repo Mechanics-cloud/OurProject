@@ -1,4 +1,10 @@
-import { ComponentPropsWithoutRef, ElementRef, forwardRef, useRef } from 'react'
+import {
+  ComponentPropsWithoutRef,
+  ElementRef,
+  forwardRef,
+  useEffect,
+  useRef,
+} from 'react'
 
 import { GoTopButton } from '@/common'
 import { ScrollBar } from '@/common/components/scrollbar/Scrollbar'
@@ -16,6 +22,14 @@ export const ScrollArea = forwardRef<
 >(({ children, className, isGoToTop = false, orientation, ...props }, ref) => {
   const scrollableRef = useRef<HTMLDivElement>(null)
 
+  useEffect(() => {
+    const element = document.querySelector('.viewport > div')
+
+    if (element instanceof HTMLElement) {
+      element.style.display = 'block'
+    }
+  }, [])
+
   return (
     <ScrollAreaPrimitive.Root
       className={cn('relative overflow-hidden lg:pr-scrollbar', className)}
@@ -23,7 +37,7 @@ export const ScrollArea = forwardRef<
       {...props}
     >
       <ScrollAreaPrimitive.Viewport
-        className={'h-full w-full rounded-[inherit]'}
+        className={cn('h-full w-full rounded-[inherit]', 'viewport')}
         ref={scrollableRef}
       >
         {children}
