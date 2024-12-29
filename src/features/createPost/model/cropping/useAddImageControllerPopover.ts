@@ -1,4 +1,5 @@
 import { ChangeEvent, useContext, useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { useTranslation } from '@/common'
 import {
@@ -26,10 +27,14 @@ export const useAddImageControllerPopover = () => {
     const fileList = inputEvent.target.files
 
     if (fileList) {
-      const files: File[] = Array.from(fileList)
+      try {
+        const files: File[] = Array.from(fileList)
 
-      await addImageCheck(files, totalCount, t, createPostStore.addImage)
-      goToSlide(totalCount + 1)
+        await addImageCheck(files, totalCount, t, createPostStore.addImage)
+        goToSlide(totalCount + 1)
+      } catch (error) {
+        toast.error((error as Error).message)
+      }
     }
   }
 
