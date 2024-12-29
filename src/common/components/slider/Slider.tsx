@@ -1,5 +1,5 @@
-import { ImageUrl } from '@/common'
-import Image from 'next/image'
+import { cn } from '@/common'
+import Image, { StaticImageData } from 'next/image'
 import {
   EffectFade,
   HashNavigation,
@@ -10,19 +10,27 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
 
-type ImagesTypes = {
-  images: Array<{ url: ImageUrl }>
+type ImageType = {
+  createdAt?: string
+  fileSize?: number
+  height?: number
+  uploadId?: string
+  url: StaticImageData | string
+  width?: number
 }
 
-//todo remove component
-const Slider = ({ images }: ImagesTypes) => {
+type ImagesTypes = {
+  className?: string
+  images: Array<ImageType>
+}
+const Slider = ({ className, images }: ImagesTypes) => {
   if (images.length === 0) {
     return <p>Нет изображений для отображения</p>
   }
 
   return (
     <Swiper
-      className={'h-full w-full'}
+      className={cn('h-full w-full', className)}
       effect={'fade'}
       hashNavigation={{
         watchState: true,
@@ -48,7 +56,9 @@ const Slider = ({ images }: ImagesTypes) => {
           <Image
             alt={''}
             className={'block h-full w-full object-cover'}
+            height={image.height}
             src={image.url}
+            width={image.width}
           />
         </SwiperSlide>
       ))}
