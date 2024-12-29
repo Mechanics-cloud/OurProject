@@ -19,9 +19,6 @@ export const actionIconsGroup = {
 }
 
 export const post = {
-  modalText: 'Вы уверены, что хотите удалить этот пост?',
-  modalTitle: 'Удалить пост',
-  successMessage: 'Публикация была успешно удалена',
   addComment: 'Добавить комментарий...',
   copyLink: 'Копировать ссылку',
   deletePost: 'Удалить пост',
@@ -31,9 +28,13 @@ export const post = {
     many: '{{value}} "Лайков"',
     one: '{{value}} "Лайк"',
   },
+  modalText: 'Вы уверены, что хотите удалить этот пост?',
+  modalTitle: 'Удалить пост',
   no: 'Нет',
   noComments: 'Нет комментариев',
   notFound: 'Пост не найден',
+  now: 'Сейчас',
+  successMessage: 'Публикация была успешно удалена',
   unfollow: 'Отписаться',
   yes: 'Да',
 }
