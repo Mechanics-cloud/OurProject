@@ -14,7 +14,7 @@ import {
   PlusSquareOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
-import { Paths, cn, useModal, useTranslation } from '@/common'
+import { PathService, Paths, cn, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { Tooltip } from '@/common/components/tooltip'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
@@ -96,7 +96,9 @@ export const Menu = () => {
         </li>
         <li>
           <Tooltip title={t.menu.profile}>
-            <Link href={Paths.profile}>
+            <Link
+              href={PathService.generatePath(Paths.userProfile, { userId: '' })}
+            >
               {matchesPathname(href, Paths.profile) ? (
                 <Person className={'size-6 text-accent-500'} />
               ) : (

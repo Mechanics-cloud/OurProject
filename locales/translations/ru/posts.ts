@@ -22,4 +22,18 @@ export const post = {
   modalText: 'Вы уверены, что хотите удалить этот пост?',
   modalTitle: 'Удалить пост',
   successMessage: 'Публикация была успешно удалена',
+  addComment: 'Добавить комментарий...',
+  copyLink: 'Копировать ссылку',
+  deletePost: 'Удалить пост',
+  editPost: 'Редактировать пост',
+  likes: {
+    few: '{{value}} "Лайка"',
+    many: '{{value}} "Лайков"',
+    one: '{{value}} "Лайк"',
+  },
+  no: 'Нет',
+  noComments: 'Нет комментариев',
+  notFound: 'Пост не найден',
+  unfollow: 'Отписаться',
+  yes: 'Да',
 }
