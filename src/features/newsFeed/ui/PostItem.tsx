@@ -1,8 +1,8 @@
 import React from 'react'
 
 import {
-  BasicPost,
   PathService,
+  BasicPost,
   Paths,
   TextUnfolding,
   Typography,
