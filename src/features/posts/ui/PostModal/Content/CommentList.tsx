@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from 'react'
 import {
   PathService,
   Paths,
-  ScrollArea,
   timeAgo,
   useElementOnScreen,
   useTranslation,
@@ -62,11 +61,10 @@ export const CommentList = observer(() => {
   }, [startRef, shouldScroll, setShouldScroll])
 
   return (
-    <ScrollArea
+    <div
       className={
-        'grow justify-end py-5 px-6 border-b border-dark-100 box-border'
+        'flex-col overflow-y-scroll grow justify-end py-5 px-6 border-b border-dark-100 box-border'
       }
-      orientation={'vertical'}
       ref={startRef}
     >
       {comments && comments?.length > 0 ? (
@@ -92,6 +90,6 @@ export const CommentList = observer(() => {
       )}
 
       <div ref={endRef} />
-    </ScrollArea>
+    </div>
   )
 })
