@@ -19,9 +19,6 @@ export const actionIconsGroup = {
 }
 
 export const post = {
-  modalText: 'Are you sure you want to delete this post?',
-  modalTitle: 'Delete Post',
-  successMessage: 'The post was successfully deleted',
   addComment: 'Add comment...',
   copyLink: 'Copy link',
   deletePost: 'Delete post',
@@ -31,9 +28,13 @@ export const post = {
     many: '{{value}} "Likes"',
     one: '{{value}} "Like"',
   },
+  modalText: 'Are you sure you want to delete this post?',
+  modalTitle: 'Delete Post',
   no: 'No',
   noComments: 'No comments',
   notFound: 'Not Found Post',
+  now: 'Now',
+  successMessage: 'The post was successfully deleted',
   unfollow: 'Unfollow',
   yes: 'Yes',
 }

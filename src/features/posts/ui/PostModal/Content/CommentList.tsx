@@ -82,7 +82,7 @@ export const CommentList = observer(() => {
             onLike={() => onChangeCommentLike(comment)}
             src={comment.from.avatars[0]?.url}
             text={comment.content}
-            time={timeAgo(comment.createdAt, router.locale) || 'now'}
+            time={timeAgo(comment.createdAt, router.locale) || t.post.now}
           />
         ))
       ) : (
