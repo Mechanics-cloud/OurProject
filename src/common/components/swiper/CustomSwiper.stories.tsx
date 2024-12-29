@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import '@/styles/customStylesForSwiper.css'
+
 import image1 from '../../../assets/images/image1.jpg'
 import CustomSwiper from './CustomSwiper'
 
@@ -22,9 +24,15 @@ export const emptyImages: Story = {
   },
 }
 
-export const manyImages: Story = {
+export const newsfeedPost: Story = {
   args: {
-    className: 'h-[500px] w-[500px]',
+    className: 'w-[491px]  h-[504px]',
+    images: [{ url: image1 }, { url: image1 }, { url: image1 }],
+  },
+}
+export const publicPost: Story = {
+  args: {
+    className: 'publicPost w-[240px]  h-[240px]',
     images: [{ url: image1 }, { url: image1 }, { url: image1 }],
   },
 }
