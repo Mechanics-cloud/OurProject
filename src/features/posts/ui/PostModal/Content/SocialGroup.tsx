@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { BookmarkOutline, PaperPlaneOutline } from '@/assets/icons'
 import { Like } from '@/common'
@@ -10,7 +10,7 @@ import { LikesGroup } from './LikesGroup'
 
 export const SocialGroup = observer(() => {
   const { likeStore, postStore } = usePostStore()
-  const { getLikes, isLiked, items, toggleLike } = likeStore
+  const { getLikes, isLiked, toggleLike } = likeStore
   const { user } = generalStore
 
   const onToggleLike = async () => {

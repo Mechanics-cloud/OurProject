@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Close } from '@/assets/icons'
-import { Nullable, Overlay, Paths } from '@/common'
+import { Nullable, Overlay } from '@/common'
 import { Post, PostComments } from '@/features/posts'
 import { PostContent } from '@/features/posts/ui/PostModal/Content/PostContent'
 

@@ -1,9 +1,9 @@
 import { PathService } from '@/common'
 import { instance } from '@/common/api'
 import { LikeStatus } from '@/common/enums'
+import { PostsRequestEndpoints, PublicPostsEndpoints } from '@/features/posts'
 import { AxiosInstance } from 'axios'
 
-import { PostsRequestEndpoints, PublicPostsEndpoints } from './posts.endpoints'
 import {
   Comment,
   PostComments,
