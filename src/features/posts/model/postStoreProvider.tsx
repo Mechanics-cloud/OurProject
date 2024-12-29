@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext, useContext, useMemo } from 'react'
 
 import { Nullable } from '@/common'
-import { Comment, Post, PostComments } from '@/features/posts'
+import { Post, PostComments } from '@/features/posts'
 import { CommentStore } from '@/features/posts/model/store/commentsStore'
 import { LikesStore } from '@/features/posts/model/store/likesStore'
 import { PostStore } from '@/features/posts/model/store/postStore'
