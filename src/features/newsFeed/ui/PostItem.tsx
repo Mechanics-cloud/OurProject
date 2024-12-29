@@ -7,9 +7,7 @@ import {
   Typography,
   UserMiniLink,
   calculateCharactersToShow,
-  cn,
   timeAgo,
-  useScreenWidth,
   useTranslation,
 } from '@/common'
 import { CustomSwiper } from '@/common/components/swiper'
@@ -32,7 +30,6 @@ type Props = {
 
 const PostItem = ({ item, router }: Props) => {
   const { t } = useTranslation()
-  const { isMobile } = useScreenWidth()
 
   return (
     <div
@@ -40,7 +37,11 @@ const PostItem = ({ item, router }: Props) => {
         'max-w-[491px] sm:min-h-[816px] border-b mt-[24px] sm:ml-[8%] mb-[56px] flex flex-col pb-2 justify-between'
       }
     >
-      <div className={'w-full h-9 mb-3 flex  items-center justify-between'}>
+      <div
+        className={
+          'w-full h-9 mb-3 flex  items-center justify-between relative'
+        }
+      >
         <span className={'flex  items-center space-x-2'}>
           <UserMiniLink
             href={`${Paths.profileLink(item.ownerId)}`}
@@ -59,7 +60,7 @@ const PostItem = ({ item, router }: Props) => {
         </span>
         <CustomNewsFeedPopover />
       </div>
-      <section className={cn('h-[504px] mb-3', isMobile && 'h-[324px]')}>
+      <section className={'sm:h-[504px] h-[324px] mb-3'}>
         {item.images.length > 0 ? (
           <CustomSwiper images={item.images} />
         ) : (
