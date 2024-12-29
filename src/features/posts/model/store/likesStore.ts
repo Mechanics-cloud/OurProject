@@ -15,8 +15,6 @@ export class LikesStore extends SortedStore<Likes> {
     }
     const response = await postsApi.getPostLikes(params)
 
-    debugger
-
     runInAction(() => {
       this.items = response.items
       this.isLiked = response.isLiked
