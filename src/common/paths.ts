@@ -13,6 +13,7 @@ export const Paths = {
   },
   profileSettings: '/profile/settings',
   publicMainPage: '/',
+  publicMainPagePost: '/:postId',
   recoveryPassword: '/auth/recovery',
   registrationEmailResending: '/auth/registration-email-resending',
   search: '/search',
