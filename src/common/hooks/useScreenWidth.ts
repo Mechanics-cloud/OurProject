@@ -4,8 +4,10 @@ import { ScreenWidths } from '@/common/enums'
 
 import { useDebounce } from './useDebounce'
 
-export const useScreenWidth = () => {
-  const [width, setWidth] = useState(window.innerWidth)
+export const useScreenWidth = (serverScreenSize?: number) => {
+  const [width, setWidth] = useState(
+    typeof window !== 'undefined' ? window.innerWidth : serverScreenSize || 0
+  )
   const breakpoint: number = ScreenWidths.lg
   const smallBreakpoint = ScreenWidths.sm
 

@@ -1,17 +1,18 @@
 import { Desktop } from '@/assets/icons/filledIcons'
 import Chrome from '@/assets/icons/filledIcons/Chrome'
-import { LinkWithIcon } from '@/common'
 import { Meta, StoryObj } from '@storybook/react'
 import Link from 'next/link'
+
+import { LinkWithIcon } from './LinkWithIcon'
 
 const meta = {
   args: {
     ActiveIcon: Chrome,
     DefaultIcon: Chrome,
-    as: Link,
+    as: 'a',
     children: 'Chrome',
     disabled: false,
-    href: '/123',
+    href: '#',
   },
   component: LinkWithIcon,
   parameters: {
@@ -28,10 +29,10 @@ export const LinkWithIconDefault: Story = {
   args: {
     ActiveIcon: Chrome,
     DefaultIcon: Chrome,
-    as: Link,
+    as: 'a',
     children: 'Chrome',
     disabled: false,
-    href: '/123',
+    href: '#',
   },
 }
 
