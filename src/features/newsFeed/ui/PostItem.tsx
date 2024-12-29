@@ -1,8 +1,8 @@
 import React from 'react'
 
 import {
-  PathService,
   BasicPost,
+  PathService,
   Paths,
   TextUnfolding,
   Typography,
@@ -61,13 +61,13 @@ const PostItem = ({ item, router }: Props) => {
       <Link
         href={PathService.generatePath(Paths.homePost, { postId: item.id })}
       >
-      <section className={'h-[504px] mb-3'}>
-        {item.images.length > 0 ? (
-          <CustomSwiper images={item.images} />
-        ) : (
-          t.basic.errors.emptySlider
-        )}
-      </section>
+        <section className={'h-[504px] mb-3'}>
+          {item.images.length > 0 ? (
+            <CustomSwiper images={item.images} />
+          ) : (
+            t.basic.errors.emptySlider
+          )}
+        </section>
       </Link>
       <LinksGroup
         className={'mb-5'}

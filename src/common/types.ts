@@ -60,11 +60,6 @@ export type PagesInfo = {
   totalCount: number
 }
 
-export type FullName = {
-  firstName: string
-  lastName: string
-}
-
 export type Image = {
   createdAt: string
   fileSize: number
