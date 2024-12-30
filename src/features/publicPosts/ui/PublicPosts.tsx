@@ -20,14 +20,18 @@ export const PublicPosts = ({ posts }: Props) => {
       }
     >
       <RegisteredUsersCounter totalUsers={posts.totalUsers} />
-      <div className={'flex justify-center gap-3 flex-wrap'}>
+      <div
+        className={
+          'grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3'
+        }
+      >
         {posts.items.map((post) => {
           return (
             <div
               className={'flex flex-col gap-3'}
               key={post.id}
             >
-              <div className={'relative w-60 h-60'}>
+              <div className={'relative w-60 h-60 lg:w-full xl:w-60'}>
                 <CustomSwiper
                   className={'publicPost'}
                   images={post.images}
