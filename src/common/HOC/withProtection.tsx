@@ -74,7 +74,7 @@ export const withProtection = <P extends object>(
 
     return (
       <LayoutWithStore>
-        <div className={'mx-24'}>
+        <div className={'lg:mx-24'}>
           {loading ? <FullScreenLoader /> : <PageComponent {...props} />}
         </div>
       </LayoutWithStore>

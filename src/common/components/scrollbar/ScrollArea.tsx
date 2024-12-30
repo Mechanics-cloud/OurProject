@@ -42,6 +42,14 @@ export const ScrollArea = forwardRef<
     }
   }, [children])
 
+  useEffect(() => {
+    const element = document.querySelector('.viewport > div')
+
+    if (element instanceof HTMLElement) {
+      element.style.display = 'block'
+    }
+  }, [])
+
   return (
     <ScrollAreaPrimitive.Root
       className={cn('relative overflow-hidden lg:pr-scrollbar', className)}
@@ -49,7 +57,7 @@ export const ScrollArea = forwardRef<
       {...props}
     >
       <ScrollAreaPrimitive.Viewport
-        className={'h-full w-full rounded-[inherit]'}
+        className={'h-full w-full rounded-[inherit] viewport'}
         ref={scrollableRef}
       >
         {children}

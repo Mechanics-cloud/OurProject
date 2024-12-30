@@ -20,7 +20,7 @@ export const PublicPosts = ({ posts }: Props) => {
       }
     >
       <RegisteredUsersCounter totalUsers={posts.totalUsers} />
-      <div className={'flex justify-center gap-3'}>
+      <div className={'flex justify-center gap-3 flex-wrap'}>
         {posts.items.map((post) => {
           return (
             <div
