@@ -13,7 +13,7 @@ export const EmptyFeed = () => {
     <div className={'flex flex-col gap-8'}>
       <Image
         alt={t.homePage.noPostsAlt}
-        className={'w-[700px] m-auto pt-16 mt-16 opacity-90'}
+        className={'w-[700px] m-auto pt-16 lg:mt-16 opacity-90'}
         src={noPostImage}
       />
       <Typography

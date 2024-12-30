@@ -24,7 +24,7 @@ const Header = () => {
         }
       >
         <Typography
-          className={'py-3'}
+          className={'py-3 text-[16px] md:text-[26px]'}
           variant={'large'}
         >
           <Link
@@ -35,7 +35,7 @@ const Header = () => {
           </Link>
         </Typography>
 
-        <div className={'flex items-center '}>
+        <div className={'flex items-center'}>
           {isAuth && (
             <button
               className={'cursor-pointer mr-12 hidden lg:block'}
@@ -51,14 +51,14 @@ const Header = () => {
             <>
               <Button
                 asChild
-                className={'mr-3 px-4 md:ml-9 md:mr-6 md:px-6'}
+                className={'mr-3 px-2 md:ml-9 md:mr-6 md:px-6'}
                 variant={'text'}
               >
                 <Link href={Paths.signIn}>{t.signIn.title}</Link>
               </Button>
               <Button
                 asChild
-                className={'px-4 md:px-6'}
+                className={'px-2 md:px-6'}
               >
                 <Link href={Paths.signUp}>{t.signUp.title}</Link>
               </Button>
