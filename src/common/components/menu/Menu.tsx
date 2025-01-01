@@ -37,9 +37,10 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
 
   return (
     <nav
-      className={
-        'min-w-[360px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50] lg:hidden'
-      }
+      className={cn(
+        'min-w-[360px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50] lg:hidden',
+        className
+      )}
     >
       <ul className={'flex w-full justify-evenly py-[16px]'}>
         <li>
