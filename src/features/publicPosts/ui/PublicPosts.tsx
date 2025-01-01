@@ -15,9 +15,7 @@ type Props = {
 export const PublicPosts = ({ posts }: Props) => {
   return (
     <div
-      className={
-        'w-full flex flex-col justify-start items-center h-headCalc pt-6 gap-9'
-      }
+      className={'w-full flex flex-col justify-start items-center pt-6 gap-9'}
     >
       <RegisteredUsersCounter totalUsers={posts.totalUsers} />
       <div
