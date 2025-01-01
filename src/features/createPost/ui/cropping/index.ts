@@ -1,3 +1,3 @@
 export * from './ControllersPanel'
-export * from './CropPhotoModal'
-export * from './PhotoCrop'
+export * from './CropImageModal'
+export * from './ImageCrop'

@@ -2,13 +2,10 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react'
 
 import { Nullable, useTranslation } from '@/common'
 import { CountryData, locationsApi } from '@/common/api'
-import { addPostStore } from '@/features/createPost'
+import { createPostStore } from '@/features/createPost'
 
 export const useCityAutocomplete = () => {
   const { t } = useTranslation()
-  const addLocation = addPostStore.addLocation
-  const clearLocation = addPostStore.clearLocation
-  const location = addPostStore.location
   const [query, setQuery] = useState<string>('')
   const [suggestions, setSuggestions] = useState<string[]>([])
   const [locationData, setLocationData] = useState<CountryData[]>([])
@@ -70,14 +67,14 @@ export const useCityAutocomplete = () => {
     }
 
     setQuery(selectedCity)
-    addLocation(selectedCity, country)
+    createPostStore.addLocation(selectedCity, country)
     setIsCitySelected(true)
     setSuggestions([])
     setFocusedIndex(-1)
   }
 
   const onLocationChange = (e: ChangeEvent<HTMLInputElement>) => {
-    clearLocation()
+    createPostStore.clearLocation()
     setQuery(e.target.value)
     setIsCitySelected(false)
     setFocusedIndex(-1)
@@ -115,7 +112,6 @@ export const useCityAutocomplete = () => {
   return {
     focusedIndex,
     handleKeyDown,
-    location,
     onLocationChange,
     onSelectCity,
     query,

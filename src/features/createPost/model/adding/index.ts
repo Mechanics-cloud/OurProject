@@ -1,4 +1,4 @@
-export * from './addPhotoSchema'
-export * from './addPhotosCheck'
-export * from './useAddPhotoModal'
+export * from './addImageCheck'
+export * from './addImageSchema'
+export * from './useAddImageModal'
 export * from './useNewPostDialog'

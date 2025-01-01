@@ -1,3 +1,3 @@
-export * from './useAddPhotoControllerPopover'
-export * from './usePhotoCrop'
+export * from './useAddImageControllerPopover'
+export * from './useImageCrop'
 export * from './useScaleControllerPopover'

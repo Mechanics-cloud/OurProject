@@ -3,7 +3,7 @@ import { ComponentPropsWithoutRef } from 'react'
 
 import { Close } from '@/assets/icons'
 import { Tooltip, cn, useTranslation } from '@/common'
-import { addPostStore } from '@/features/createPost'
+import { createPostStore } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 
@@ -16,9 +16,11 @@ type Props = {
 export const MiniaturePhoto = observer(
   ({ className, id, onClick, src }: Props) => {
     const { t } = useTranslation()
-    const deletePostPhoto = addPostStore.deletePhoto
-    const totalCount = addPostStore.getCurrentPhotosCount()
-    const isLastPhoto = totalCount === 1
+    const isLastPhoto = createPostStore.images.count === 1
+
+    const removeImage = () => {
+      createPostStore.images.removeItem(id)
+    }
 
     return (
       <span
@@ -44,9 +46,7 @@ export const MiniaturePhoto = observer(
                 'absolute z-10 top-0.5 right-0.5 p-0.5]',
                 'before:absolute before:bg-dark-500 before:top-0 before:bottom-0 before:left-0 before:right-0 before:rounded-sm before:-z-10 before:opacity-80'
               )}
-              onClick={() => {
-                deletePostPhoto(id)
-              }}
+              onClick={removeImage}
             >
               <Close className={'w-4 h-4 hover:text-accent-500 z-50'} />
             </span>

@@ -3,22 +3,22 @@ import * as React from 'react'
 import { Image, ImageOutline, PlusCircleOutline } from '@/assets/icons'
 import { Popover, PopoverContent, PopoverTrigger, Tooltip, cn } from '@/common'
 import {
+  ControllerButton,
   MiniaturePhoto,
-  PhotoControllerButton,
-  useAddPhotoControllerPopover,
+  useAddImageControllerPopover,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 
-export const AddPhotoControllerPopover = observer(() => {
+export const AddImageControllerPopover = observer(() => {
   const {
     goToSlide,
+    images,
     isAddingDisabled,
     isOpen,
     onPhotoChoose,
-    photos,
     setIsOpen,
     t,
-  } = useAddPhotoControllerPopover()
+  } = useAddImageControllerPopover()
 
   return (
     <Popover
@@ -26,7 +26,7 @@ export const AddPhotoControllerPopover = observer(() => {
       open={isOpen}
     >
       <PopoverTrigger asChild>
-        <PhotoControllerButton className={'ml-auto'}>
+        <ControllerButton className={'ml-auto'}>
           <Tooltip title={t.createPost.cropping.gallery}>
             {isOpen ? (
               <Image
@@ -36,7 +36,7 @@ export const AddPhotoControllerPopover = observer(() => {
               <ImageOutline className={'w-[28px] h-[28px] self-start'} />
             )}
           </Tooltip>
-        </PhotoControllerButton>
+        </ControllerButton>
       </PopoverTrigger>
       <PopoverContent
         align={'end'}
@@ -47,15 +47,15 @@ export const AddPhotoControllerPopover = observer(() => {
         sideOffset={2}
       >
         <div className={'flex gap-3 flex-wrap justify-end max-w-[360px]'}>
-          {photos.length > 0 &&
-            photos.map((photo, index) => (
+          {images.length > 0 &&
+            images.map((image, index) => (
               <MiniaturePhoto
-                id={photo.id}
-                key={photo.id}
+                id={image.id}
+                key={image.id}
                 onClick={() => {
                   goToSlide(index)
                 }}
-                src={photo.url}
+                src={image.url}
               />
             ))}
         </div>

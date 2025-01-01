@@ -1,11 +1,10 @@
 import { useModal } from '@/common'
 import { generalStore } from '@/core/store'
-import { addPostStore } from '@/features/createPost'
+import { createPostStore } from '@/features/createPost'
 
 export const useNewPostDialog = (onClose: () => void) => {
-  const currentState = addPostStore.currentStage
-  const setIsNewDialog = addPostStore.startNewDialog
-  const isNewDialog = addPostStore.isNewDialog
+  const currentState = createPostStore.currentStage
+  const isNewDialog = createPostStore.isNewDialog
   const {
     isModalOpen: isModalExitOpen,
     onModalClose: onModalExitClose,
@@ -15,12 +14,12 @@ export const useNewPostDialog = (onClose: () => void) => {
   const onClosePostCreating = () => {
     onModalExitClose()
     onClose()
-    setIsNewDialog()
+    createPostStore.startNewDialog()
   }
 
   const onPostUpload = () => {
     onClose()
-    setIsNewDialog()
+    createPostStore.startNewDialog()
   }
 
   const onCloseAddPost = () => {

@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { TextArea, Typography, UserMiniLink, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
-import { CityAutocomplete, addPostStore } from '@/features/createPost'
+import { CityAutocomplete, createPostStore } from '@/features/createPost'
 import { MaxDescriptionLength } from '@/features/createPost/model/constants'
 import { observer } from 'mobx-react-lite'
 
@@ -10,9 +10,9 @@ export const AddTextPost = observer(() => {
   const { t } = useTranslation()
   const userAvatar = generalStore.userAvatar ?? ''
   const userName = generalStore.user?.userName ?? ''
-  const location = addPostStore.location
-  const postDescription = addPostStore.postDescription
-  const addPostDescription = addPostStore.addPostDescription
+  const location = createPostStore.location
+  const postDescription = createPostStore.postDescription
+  const addPostDescription = createPostStore.addPostDescription
 
   return (
     <div className={'border-l-[1px] border-dark-100 w-full text-left'}>
@@ -43,7 +43,7 @@ export const AddTextPost = observer(() => {
         </Typography>
       </div>
 
-      <div className={'p-6 flex flex-col'}>
+      <div className={'p-6 pb-1 flex flex-col'}>
         <CityAutocomplete />
         <Typography
           className={'-mt-3 ml-0.5'}

@@ -4,7 +4,7 @@ import { Tabs, TabsType, useTranslation } from '@/common'
 import {
   ClassicFilters,
   InstFilters,
-  addPostStore,
+  createPostStore,
 } from '@/features/createPost'
 import { LocaleType } from '@locales/ru'
 import { observer } from 'mobx-react-lite'
@@ -26,9 +26,8 @@ export const getFiltersTabs = (t: LocaleType): TabsType[] => {
 
 export const Filters = observer(() => {
   const { t } = useTranslation()
-  const addCurrentSliderIndex = addPostStore.addCurrentSliderIndex
 
-  addCurrentSliderIndex(0)
+  createPostStore.images.setCurrentIndex(0)
 
   return (
     <div className={'border-l-[1px] border-dark-100 w-full p-b-3'}>
