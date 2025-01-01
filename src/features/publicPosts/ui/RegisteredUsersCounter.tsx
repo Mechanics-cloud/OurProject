@@ -12,10 +12,15 @@ export const RegisteredUsersCounter = ({
   return (
     <div
       className={
-        'flex justify-between items-center rounded-sm border border-dark-300 bg-dark-500 py-3 px-6 w-full max-w-[996px]'
+        'flex justify-between items-center rounded-sm border border-dark-300 bg-dark-500 py-3 px-6 w-full max-w-[996px] flex-wrap'
       }
     >
-      <Typography variant={'h2'}>{t.userCounter.text}</Typography>
+      <Typography
+        className={'mb-2'}
+        variant={'h2'}
+      >
+        {t.basic.userCounter}
+      </Typography>
       <div
         className={
           'flex flex-nowrap p-3 bg-dark-700 rounded-sm border border-dark-300'

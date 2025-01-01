@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { LayoutWithStore, SideBar, getFromLocalStorage } from '@/common'
+import { LayoutWithStore, Menu, SideBar, getFromLocalStorage } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { profileStore } from '@/features/profile'
@@ -22,11 +22,8 @@ export const withServerSide = <P extends object>(
       return (
         <LayoutWithStore className={'flex'}>
           <SideBar />
-          <div
-            className={
-              'lg:pl-9 w-full lg:border-l-2 lg:border-dark-300 lg:h-headCalc'
-            }
-          >
+          <Menu className={'lg:hidden'} />
+          <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>
             <PageComponent {...props} />
           </div>
         </LayoutWithStore>
@@ -35,7 +32,7 @@ export const withServerSide = <P extends object>(
 
     return (
       <LayoutWithStore>
-        <div className={'mx-24'}>
+        <div className={'lg:mx-24'}>
           <PageComponent {...props} />
         </div>
       </LayoutWithStore>

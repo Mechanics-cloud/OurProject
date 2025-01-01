@@ -52,7 +52,7 @@ export const AvatarDialog = ({
               }
             >
               <span className={'text-center text-balance'}>
-                <strong>{t.avatarModal.errors.error}</strong>
+                <strong>{t.basic.errors.unknown}</strong>
                 {` ${error}`}
               </span>
             </div>

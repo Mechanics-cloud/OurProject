@@ -14,7 +14,11 @@ function ServerError() {
   }
 
   return (
-    <div className={'mt-40 flex flex-col gap-8 items-center justify-center'}>
+    <div
+      className={
+        'mt-20 lg:mt-40 flex flex-col gap-8 items-center justify-center'
+      }
+    >
       <Image
         alt={'404 image'}
         className={'opacity-90'}
@@ -26,9 +30,9 @@ function ServerError() {
         className={'m-auto text-center font-normal'}
         variant={'h1'}
       >
-        {t.serverError}
+        {t.basic.errors.server}
       </Typography>
-      <Button onClick={onBackHandler}>{t.notFoundButton}</Button>
+      <Button onClick={onBackHandler}>{t.basic.pagination.goBack}</Button>
     </div>
   )
 }

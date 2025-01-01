@@ -11,49 +11,21 @@ import {
   UserProfile,
   profileAPi,
 } from '@/features/profile'
-import { Photo } from '@/features/profile/model/types'
 import { format } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
-import { DEFAULT_PAGE_NUMBER } from './constants'
-
-class ProfileStore {
+export class ProfileStore {
   isLoading: boolean = false
   isProfileLoading: boolean = true
-  pageNumber: number = DEFAULT_PAGE_NUMBER
-  photos: Photo[] = []
-  stopRequest: boolean = false
   userProfile: Nullable<UserProfile> = null
 
   constructor() {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
-  private mapItemsToPhotos(items: any[]): Photo[] {
-    return items.map((item) => ({
-      id: item.id,
-      images: item.images,
-    }))
-  }
-
-  changeLoading(value: boolean) {
-    this.isLoading = value
-  }
-
   cleanUp() {
-    this.stopRequest = false
-    this.photos.length = 0
-    this.pageNumber = DEFAULT_PAGE_NUMBER
-    this.isLoading = false
     this.userProfile = null
-  }
-
-  async cleanUpPhotosData() {
-    this.stopRequest = false
-    this.pageNumber = DEFAULT_PAGE_NUMBER
-    this.photos.length = 0
-    await this.getUserPhoto()
   }
 
   async deleteAvatar() {
@@ -88,54 +60,6 @@ class ProfileStore {
         this.isProfileLoading = false
       })
     }
-  }
-
-  async getUserPhoto({
-    pageSize,
-    signal,
-  }: { pageSize?: number; signal?: AbortSignal } = {}) {
-    try {
-      if (this.isLoading || this.stopRequest) {
-        return
-      }
-      this.changeLoading(true)
-      this.setUpPageNumber()
-
-      if (this.userProfile) {
-        const res = await profileAPi.getProfilePosts(
-          this.pageNumber,
-          this.userProfile?.userName,
-          signal,
-          pageSize
-        )
-
-        const newPhotos = this.mapItemsToPhotos(res.items)
-
-        runInAction(() => {
-          this.photos.push(...newPhotos)
-          this.isLoading = false
-          if (res.items.length < 8) {
-            this.stopRequest = true
-          }
-        })
-      }
-    } catch (error) {
-      if ((error as Error).name !== 'AbortError') {
-        this.setDownPageNumber()
-
-        return
-      }
-      responseErrorHandler(error)
-    } finally {
-      this.changeLoading(false)
-    }
-  }
-  setDownPageNumber() {
-    this.pageNumber--
-  }
-
-  setUpPageNumber() {
-    this.pageNumber++
   }
 
   async updateProfile(data: UserInfo) {

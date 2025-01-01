@@ -1,4 +1,4 @@
-import {
+import React, {
   ComponentPropsWithoutRef,
   ElementRef,
   forwardRef,
@@ -30,6 +30,26 @@ export const ScrollArea = forwardRef<
     }
   }, [])
 
+  useEffect(() => {
+    const scrollableElement = scrollableRef.current
+
+    if (!scrollableElement) {
+      return
+    }
+
+    const resizeObserver = new ResizeObserver(() => {
+      if (scrollableElement) {
+        scrollableElement.scrollTop = scrollableElement.scrollHeight
+      }
+    })
+
+    resizeObserver.observe(scrollableElement)
+
+    return () => {
+      resizeObserver.disconnect()
+    }
+  }, [children])
+
   return (
     <ScrollAreaPrimitive.Root
       className={cn('relative overflow-hidden lg:pr-scrollbar', className)}
@@ -37,7 +57,7 @@ export const ScrollArea = forwardRef<
       {...props}
     >
       <ScrollAreaPrimitive.Viewport
-        className={cn('h-full w-full rounded-[inherit]', 'viewport')}
+        className={'h-full w-full rounded-[inherit] viewport'}
         ref={scrollableRef}
       >
         {children}
