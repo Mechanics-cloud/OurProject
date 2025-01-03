@@ -22,7 +22,7 @@ export const withServerSide = <P extends object>(
       return (
         <LayoutWithStore className={'flex'}>
           <SideBar />
-          <Menu />
+          <Menu className={'lg:hidden'} />
           <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>
             <PageComponent {...props} />
           </div>
@@ -32,7 +32,7 @@ export const withServerSide = <P extends object>(
 
     return (
       <LayoutWithStore>
-        <div className={'mx-24'}>
+        <div className={'lg:mx-24'}>
           <PageComponent {...props} />
         </div>
       </LayoutWithStore>
