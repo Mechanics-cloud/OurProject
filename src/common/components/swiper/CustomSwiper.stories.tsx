@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import '@/styles/customStylesForSwiper.css'
+import './customStylesForSwiper.css'
 
 import image1 from '../../../assets/images/image1.jpg'
 import CustomSwiper from './CustomSwiper'
