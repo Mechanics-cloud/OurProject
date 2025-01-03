@@ -59,7 +59,7 @@ const PostItem = ({ item, router }: Props) => {
         </span>
         <CustomNewsFeedPopover />
       </div>
-      <section className={'sm:h-[504px] h-[324px] mb-3'}>
+      <section className={'relative w-full aspect-square overflow-hidden mb-3'}>
         {item.images.length > 0 ? (
           <CustomSwiper images={item.images} />
         ) : (
@@ -87,7 +87,6 @@ const PostItem = ({ item, router }: Props) => {
           {item.description}
         </TextUnfolding>
       )}
-      {/*<AvatarGroupWithLikes item={item} />*/}
       <WrapperParentComponent postId={item.id} />
     </div>
   )
