@@ -15,7 +15,6 @@ import {
   AvatarGroupWithLikes,
   CustomNewsFeedPopover,
 } from '@/features/newsFeed'
-import Image from 'next/image'
 import { NextRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
 
@@ -34,7 +33,7 @@ const PostItem = ({ item, router }: Props) => {
   return (
     <div
       className={
-        'max-w-[491px] sm:min-h-[816px] border-b mt-[24px] sm:ml-[8%] mb-[56px] flex flex-col pb-2 justify-between'
+        'max-w-[491px] border-b mt-[24px] sm:ml-[8%] mb-[56px] flex flex-col pb-2 justify-between'
       }
     >
       <div
@@ -68,19 +67,11 @@ const PostItem = ({ item, router }: Props) => {
         )}
       </section>
       <LinksGroup
-        className={'mb-5'}
+        className={'mb-4'}
         item={item}
       />
-      <div className={'w-full inline-flex gap-3 items-start'}>
-        <div className={'min-w-[36px] flex items-center align-top -mt-1'}>
-          <Image
-            alt={'Avatar'}
-            className={'size-9 rounded-full'}
-            height={36}
-            src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
-            width={36}
-          />
-        </div>
+      <AvatarGroupWithLikes item={item} />
+      {item.description && (
         <TextUnfolding
           charactersToShow={calculateCharactersToShow(170, item.userName)}
           className={'text-justify break-words'}
@@ -95,8 +86,8 @@ const PostItem = ({ item, router }: Props) => {
         >
           {item.description}
         </TextUnfolding>
-      </div>
-      <AvatarGroupWithLikes item={item} />
+      )}
+      {/*<AvatarGroupWithLikes item={item} />*/}
       <WrapperParentComponent postId={item.id} />
     </div>
   )
