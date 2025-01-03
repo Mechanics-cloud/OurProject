@@ -36,7 +36,7 @@ export const CustomNewsFeedPopover = () => {
         </button>
       </PopoverTrigger>
       <PopoverContent
-        className={'z-50 w-[144px] min-h-[85px] mr-[120px] px-2 py-3'}
+        className={'z-50 w-[144px] min-h-[85px] absolute px-2 py-3 right-0'}
         sideOffset={3}
       >
         <nav>

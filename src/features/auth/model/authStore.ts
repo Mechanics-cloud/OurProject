@@ -74,9 +74,9 @@ class AuthStore {
       })
     }
   }
-
+  //todo: removed this.isAuthenticated === 'no' from the if condition in me()
   async me() {
-    if (this.isAuthenticated === 'yes' || this.isAuthenticated === 'no') {
+    if (this.isAuthenticated === 'yes') {
       return
     }
     try {

@@ -49,10 +49,7 @@ export const LinksGroup = observer(({ className, item }: Props) => {
 
   return (
     <div
-      className={cn(
-        'w-full h-6 flex items-center justify-between mb-4',
-        className
-      )}
+      className={cn('w-full h-6 flex items-center justify-between', className)}
     >
       <div className={'flex items-center gap-5'}>
         <button
