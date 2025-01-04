@@ -32,7 +32,9 @@
   border-radius: 0;
 }
 
-.swiper-pagination-bullet:first-child::after {
+/* TODO потестить и удалить */
+
+/* .swiper-pagination-bullet:first-child::after {
   content: '';
 
   position: absolute;
@@ -64,6 +66,36 @@
   background-color: var(--swiper-color-background);
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
+} */
+.swiper-pagination-bullet:first-child::after,
+.swiper-pagination-bullet:last-child::after {
+  content: '';
+
+  position: absolute;
+  z-index: -10;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 4px;
+  height: 24px;
+
+  background-color: var(--swiper-color-background);
+}
+
+.swiper-pagination-bullet:first-child::after {
+  left: -10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.swiper-pagination-bullet:last-child::after {
+  right: -10px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(57 125 246);
 }
 
 .swiper-button-next,
@@ -72,8 +104,8 @@
   height: 48px;
 
   background-color: var(--swiper-color-background);
-  background-image: none !important;
-  background-size: 10px !important;
+  background-image: none;
+  background-size: 10px;
   border-radius: 2px;
 }
 
@@ -83,17 +115,17 @@
 
 .swiper-button-prev::after,
 .swiper-button-next::after {
-  content: '' !important;
+  content: '';
 
   transform: translateX(-1px);
 
   width: 14px;
   height: 28px;
 
-  background-image: url('/Vector.svg') !important;
+  background-image: url('/Vector.svg');
   background-repeat: no-repeat;
-  background-position: center !important;
-  background-size: 14px !important;
+  background-position: center;
+  background-size: 14px;
 }
 
 .swiper-button-prev:hover,
@@ -108,27 +140,28 @@
 }
 
 /* styles for public post */
-.publicPost .swiper-button-next,
-.publicPost .swiper-button-prev {
+.swiper-nav-top-55 .swiper-button-next,
+.swiper-nav-top-55 .swiper-button-prev {
   top: var(--swiper-navigation-top-offset, 55%);
+}
+
+.swiper-nav-small .swiper-button-next,
+.swiper-nav-small .swiper-button-prev {
   width: 24px;
   height: 24px;
 }
 
-.publicPost .swiper-button-prev::after,
-.publicPost .swiper-button-next::after {
-  width: 24px;
-  height: 24px;
-  background-size: 7px !important;
+.swiper-btn-bg-small .swiper-button-prev::after,
+.swiper-btn-bg-small .swiper-button-next::after {
+  background-size: 7px;
 }
 
-.publicPost .swiper-pagination {
+.swiper-pagination-bottom-8 .swiper-pagination {
   bottom: var(--swiper-pagination-bottom, 8px) !important;
 }
 
-.publicPost .swiper-pagination-bullet {
-  top: 4px !important;
-  bottom: var(--swiper-pagination-bottom, 10px) !important;
+.swiper-bullet-small .swiper-pagination-bullet {
+  top: 4px;
   width: var(
     --swiper-pagination-bullet-width,
     var(--swiper-pagination-bullet-size, 6px)
@@ -139,17 +172,17 @@
   );
 }
 
-.publicPost .swiper-pagination-bullet::before {
+.swiper-bullet-small .swiper-pagination-bullet::before {
   width: 18px;
   height: 12px;
 }
 
-.publicPost .swiper-pagination-bullet:first-child::after {
+.swiper-bullet-small .swiper-pagination-bullet:first-child::after {
   width: 4px;
   height: 12px;
 }
 
-.publicPost .swiper-pagination-bullet:last-child::after {
+.swiper-bullet-small .swiper-pagination-bullet:last-child::after {
   width: 4px;
   height: 12px;
 }
@@ -180,8 +213,4 @@
   left: 50%;
   transform: translateX(-50%);
   width: 50%;
-}
-
-.swiper-pagination-bullet-active {
-  background-color: rgb(57 125 246);
 }
