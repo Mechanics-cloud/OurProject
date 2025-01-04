@@ -30,7 +30,7 @@ export const SwiperCover = observer(
           allowTouchMove={false}
           className={cn(
             'absolute h-full w-full top-0 left-0 m-0 shrink-0,',
-            'addPost swiper-nav-medium swiper-btn-bg-medium swiper-pagination-bottom-18 swiper-center-horizontal swiper-pagination-mobile-hidden',
+            'addPost swiper-nav-medium swiper-btn-bg-medium swiper-pagination-bottom-18 swiper-pagination-mobile-hidden',
             className
           )}
           effect={'fade'}
