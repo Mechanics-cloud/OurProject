@@ -32,41 +32,6 @@
   border-radius: 0;
 }
 
-/* TODO потестить и удалить */
-
-/* .swiper-pagination-bullet:first-child::after {
-  content: '';
-
-  position: absolute;
-  z-index: -10;
-  top: 50%;
-  left: -10px;
-  transform: translateY(-50%);
-
-  width: 4px;
-  height: 24px;
-
-  background-color: var(--swiper-color-background);
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-
-.swiper-pagination-bullet:last-child::after {
-  content: '';
-
-  position: absolute;
-  z-index: -10;
-  top: 50%;
-  right: -10px;
-  transform: translateY(-50%);
-
-  width: 4px;
-  height: 24px;
-
-  background-color: var(--swiper-color-background);
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-} */
 .swiper-pagination-bullet:first-child::after,
 .swiper-pagination-bullet:last-child::after {
   content: '';
@@ -139,7 +104,6 @@
     hue-rotate(199deg) brightness(103%) contrast(101%);
 }
 
-/* styles for public post */
 .swiper-nav-top-55 .swiper-button-next,
 .swiper-nav-top-55 .swiper-button-prev {
   top: var(--swiper-navigation-top-offset, 55%);
@@ -151,13 +115,34 @@
   height: 24px;
 }
 
+.swiper-nav-medium .swiper-button-next,
+.swiper-nav-medium .swiper-button-prev {
+  width: 36px;
+  height: 36px;
+}
+
 .swiper-btn-bg-small .swiper-button-prev::after,
 .swiper-btn-bg-small .swiper-button-next::after {
   background-size: 7px;
 }
 
+.swiper-btn-bg-medium .swiper-button-prev::after,
+.swiper-btn-bg-medium .swiper-button-next::after {
+  background-size: 10px;
+}
+
 .swiper-pagination-bottom-8 .swiper-pagination {
   bottom: var(--swiper-pagination-bottom, 8px) !important;
+}
+
+.swiper-pagination-bottom-18 .swiper-pagination {
+  bottom: var(--swiper-pagination-bottom, 18px) !important;
+}
+
+.swiper-center-horizontal .swiper-pagination {
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
 }
 
 .swiper-bullet-small .swiper-pagination-bullet {
@@ -187,30 +172,9 @@
   height: 12px;
 }
 
-/* styles for new post creation */
-.addPost .swiper-button-next,
-.addPost .swiper-button-prev {
-  width: 36px;
-  height: 36px;
-}
-
-.addPost .swiper-button-prev::after,
-.addPost .swiper-button-next::after {
-  width: 24px;
-  height: 24px;
-  background-size: 10px !important;
-}
-
 @media screen and (width <= 768px) {
-  .addPost .swiper-pagination {
+  .swiper-pagination-mobile-hidden .swiper-pagination {
     display: none;
     opacity: 0;
   }
-}
-
-.addPost .swiper-pagination {
-  bottom: var(--swiper-pagination-bottom, 18px) !important;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
 }
