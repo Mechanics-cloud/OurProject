@@ -1,10 +1,14 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 
-import { getDeviceScreenWidth } from '@/common'
-import { ProfileData, publicProfileAPi } from '@/features/profile'
+import { getDeviceScreenWidth, withServerSide } from '@/common'
+import {
+  ProfileData,
+  hydrateProfileStore,
+  initializeStore,
+  publicProfileAPi,
+} from '@/features/profile'
+import { Profile } from '@/features/profile/ui/Profile'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-
-import Layout from './layout'
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -32,8 +36,19 @@ export const getServerSideProps: GetServerSideProps = async (
 
 type Props = { screenSize?: number } & ProfileData & PropsWithChildren
 
-const ProfilePage = ({ children, ...props }: Props) => (
-  <Layout {...props}>{children}</Layout>
-)
+const ProfilePage = ({ postsData, screenSize, userProfile }: Props) => {
+  const store = initializeStore({ postsData, userProfile })
 
-export default ProfilePage
+  useEffect(() => {
+    hydrateProfileStore?.setNewData({ postsData, userProfile })
+  }, [postsData, userProfile])
+
+  return (
+    <Profile
+      screenSize={screenSize}
+      store={store}
+    />
+  )
+}
+
+export default withServerSide(ProfilePage)

@@ -1,11 +1,8 @@
-import { PropsWithChildren } from 'react'
-
 import { withProtection } from '@/common/HOC/withProtection'
+import { NewsFeed } from '@/features/newsFeed'
 
-import Layout from './layout'
-
-const HomePage = ({ children }: PropsWithChildren) => {
-  return <Layout>{children}</Layout>
+const HomePage = () => {
+  return <NewsFeed />
 }
 
 export default withProtection(HomePage)
