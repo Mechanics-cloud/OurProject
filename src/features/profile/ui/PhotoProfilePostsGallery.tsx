@@ -3,7 +3,6 @@ import { useInView } from 'react-intersection-observer'
 
 import { ImageOutline } from '@/assets/icons'
 import { PathService, Paths, Skeleton, cn } from '@/common'
-import { generalStore } from '@/core/store'
 import { HydrateProfileStore, useFetchPosts } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -25,8 +24,6 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
   const { inView, ref: skeletonRef } = useInView(options)
   const { ref: containerRef } = useFetchPosts(inView, stopRequest)
 
-  const userId = generalStore.user?.userId
-
   return (
     <>
       {postsData.items.length ? (
@@ -40,9 +37,9 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
             {isUpdatePost && <Skeleton className={'rounded-none'} />}
             {postsData.items.map((post) => (
               <Link
-                href={PathService.generatePath(Paths.userProfile, {
+                href={PathService.generatePath(Paths.userPost, {
                   postId: post.id,
-                  userId,
+                  userId: post.ownerId,
                 })}
                 key={post.id}
               >

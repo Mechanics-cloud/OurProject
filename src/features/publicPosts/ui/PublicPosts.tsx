@@ -44,6 +44,7 @@ export const PublicPosts = ({ posts }: Props) => {
                     <Link
                       href={PathService.generatePath(Paths.publicMainPagePost, {
                         postId: post.id,
+                        userId: post.ownerId,
                       })}
                     >
                   <CustomSwiper

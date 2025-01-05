@@ -1,8 +1,8 @@
 import React from 'react'
 
 import {
-  PathService,
   BasicPost,
+  PathService,
   Paths,
   TextUnfolding,
   Typography,
@@ -60,7 +60,10 @@ const PostItem = ({ item, router }: Props) => {
         <CustomNewsFeedPopover />
       </div>
       <Link
-        href={PathService.generatePath(Paths.homePost, { postId: item.id })}
+        href={PathService.generatePath(Paths.userPost, {
+          postId: item.id,
+          userId: item.ownerId,
+        })}
       >
       <section className={'h-[504px] mb-3'}>
         {item.images.length > 0 ? (
