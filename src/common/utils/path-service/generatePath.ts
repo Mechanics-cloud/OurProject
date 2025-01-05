@@ -50,6 +50,6 @@ export const generatePath = (
   return Object.entries(entries).reduce((acc, arg) => {
     const [key, value] = arg
 
-    return acc.replace(`:${key}`, value ? String(value) : '')
+    return acc.replace(`/:${key}`, value ? `/${String(value)}` : '')
   }, url)
 }
