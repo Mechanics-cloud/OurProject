@@ -37,7 +37,7 @@ export class CommentsStore {
     }
     try {
       this.isLoading = true
-      const response = await postsApi.getPostIdComments(postId)
+      const response = await postsApi.getPostIdComments({ postId })
 
       runInAction(() => {
         this.comments = response
