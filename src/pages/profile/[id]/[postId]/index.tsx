@@ -2,13 +2,14 @@ import React from 'react'
 
 import { Paths } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
+import { generalStore } from '@/core/store'
 import { Post, PostModal, getPublicPostInfo } from '@/features/posts'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/navigation'
 
 export const getServerSideProps = (async (context) => {
-  const { id } = context.params || {}
-  const { comments, post } = await getPublicPostInfo(Number(id))
+  const { postId } = context.params || {}
+  const { comments, post } = await getPublicPostInfo(Number(postId))
 
   if (!post) {
     return {
@@ -30,15 +31,16 @@ const PostView = ({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter()
 
-  const onNavigateMainPage = () => router.replace(Paths.publicMainPage)
+  const onNavigateUserProfile = () =>
+    router.replace(Paths.profileLink(generalStore.user?.userId))
 
   return (
     <PostModal
       comments={comments}
-      onClose={onNavigateMainPage}
+      onClose={onNavigateUserProfile}
       post={post}
     />
   )
 }
 
-export default withProtection(PostView, { isPublic: true })
+export default withProtection(PostView, { isPublic: false })

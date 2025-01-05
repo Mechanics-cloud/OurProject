@@ -1,33 +1,14 @@
 import React from 'react'
 
-import { PathService, Paths } from '@/common'
+import { Paths } from '@/common'
 import { withProtection } from '@/common/HOC/withProtection'
-import { Post, PostModal, PublicPostsEndpoints } from '@/features/posts'
+import { Post, PostModal, getPublicPostInfo } from '@/features/posts'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/navigation'
 
 export const getServerSideProps = (async (context) => {
   const { id } = context.params || {}
-  const postId = Number(id)
-  const postEndpoint = PublicPostsEndpoints.idPost(postId)
-  const postResponse = await fetch(PathService.generateServerPath(postEndpoint))
-  const post = await postResponse.json()
-
-  const params = {
-    pageNumber: 1,
-    pageSize: 10,
-    sortBy: 'createdAt',
-    sortDirection: 'desc',
-  }
-
-  const commentsEndpoint = PublicPostsEndpoints.idComments(
-    postId,
-    PathService.getQueryParams(params)
-  )
-  const commentsResponse = await fetch(
-    PathService.generateServerPath(commentsEndpoint)
-  )
-  const comments = await commentsResponse.json()
+  const { comments, post } = await getPublicPostInfo(Number(id))
 
   if (!post) {
     return {
@@ -55,7 +36,7 @@ const PostView = ({
     <PostModal
       comments={comments}
       onClose={onNavigateHome}
-      post={!post || post.statusCode === 404 ? null : post}
+      post={post}
     />
   )
 }
