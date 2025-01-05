@@ -99,7 +99,9 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
         </li>
         <li>
           <Tooltip title={t.menu.profile}>
-            <Link href={Paths.profileLink(userId)}>
+            <Link
+              href={PathService.generatePath(Paths.userProfile, { userId })}
+            >
               {matchesPathname(href, Paths.profile) ? (
                 <Person className={'size-6 text-accent-500'} />
               ) : (
