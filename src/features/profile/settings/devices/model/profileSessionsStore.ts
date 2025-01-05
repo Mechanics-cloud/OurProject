@@ -66,7 +66,7 @@ class ProfileSessionsStore {
       runInAction(() => {
         this.otherSession = []
       })
-      toast.success(translationForStore.t.session.successLogout)
+      // toast.success(translationForStore.t.session.successLogout)
     } catch (error) {
       responseErrorHandler(error)
     }
