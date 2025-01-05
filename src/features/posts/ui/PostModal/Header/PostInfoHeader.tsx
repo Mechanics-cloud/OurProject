@@ -70,7 +70,7 @@ export const PostInfoHeader = () => {
             </button>
           </PopoverTrigger>
           <PopoverContent
-            className={'z-50 w-[144px] min-h-[85px] mr-[120px] px-3 py-3'}
+            className={'absolute z-50 min-w-max min-h-[85px] -right-3 p-3'}
             sideOffset={3}
           >
             <nav>
@@ -78,25 +78,27 @@ export const PostInfoHeader = () => {
                 {[
                   {
                     display: user.userId === postStore.post?.ownerId,
-                    icon: <Edit2Outline className={'size-6'} />,
+                    icon: <Edit2Outline className={'flex-shrink-0 size-6'} />,
                     id: 'edit',
                     text: t.post.editPost,
                   },
                   {
                     display: user.userId === postStore.post?.ownerId,
-                    icon: <TrashOutline className={'size-6'} />,
+                    icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
                     id: 'delete',
                     text: t.post.deletePost,
                   },
                   {
                     display: user.userId !== postStore.post?.ownerId,
-                    icon: <PersonRemoveOutline className={'size-6'} />,
+                    icon: (
+                      <PersonRemoveOutline className={'flex-shrink-0 size-6'} />
+                    ),
                     id: 'remove',
                     text: t.post.unfollow,
                   },
                   {
                     display: user.userId !== postStore.post?.ownerId,
-                    icon: <CopyOutline className={'size-6'} />,
+                    icon: <CopyOutline className={'flex-shrink-0 size-6'} />,
                     id: 'copy',
                     text: t.post.copyLink,
                   },
