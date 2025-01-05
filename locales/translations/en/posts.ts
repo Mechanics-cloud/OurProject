@@ -34,6 +34,7 @@ export const post = {
   noComments: 'No comments',
   notFound: 'Not Found Post',
   now: 'Now',
+  publish: 'Publish',
   successMessage: 'The post was successfully deleted',
   unfollow: 'Unfollow',
   yes: 'Yes',

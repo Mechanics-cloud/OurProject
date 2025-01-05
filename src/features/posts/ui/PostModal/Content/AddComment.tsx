@@ -45,7 +45,7 @@ export const AddComment = observer(() => {
         type={'submit'}
         variant={'text'}
       >
-        Publish
+        {t.post.publish}
       </Button>
     </div>
   ) : null

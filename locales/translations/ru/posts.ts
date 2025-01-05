@@ -34,6 +34,7 @@ export const post = {
   noComments: 'Нет комментариев',
   notFound: 'Пост не найден',
   now: 'Сейчас',
+  publish: 'Опубликовать',
   successMessage: 'Публикация была успешно удалена',
   unfollow: 'Отписаться',
   yes: 'Да',
