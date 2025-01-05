@@ -6,6 +6,7 @@ import {
   useScreenWidth,
   useTranslation,
 } from '@/common'
+import { ScreenWidths } from '@/common/enums'
 import {
   HydrateProfileStore,
   PhotoProfilePostsGallery,
@@ -22,7 +23,7 @@ import { useRouter } from 'next/router'
 import avatarPlaceholder from '../../../assets/images/user-avatar-placeholder.jpg'
 
 type Props = {
-  screenSize: number
+  screenSize?: ScreenWidths
   store: HydrateProfileStore
 }
 export const Profile = observer(({ screenSize, store }: Props) => {

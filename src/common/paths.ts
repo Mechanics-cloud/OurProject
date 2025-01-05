@@ -21,5 +21,5 @@ export const Paths = {
   signUp: '/auth/sign-up',
   statistics: '/statistics',
   termsOfService: '/auth/terms-of-service',
-  userProfile: '/profile/:userId',
+  userProfile: '/profile/:userId/:postId',
 }

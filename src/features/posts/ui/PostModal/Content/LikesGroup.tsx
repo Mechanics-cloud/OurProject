@@ -44,7 +44,7 @@ export const LikesGroup = observer(() => {
               key={index}
               priority
               size={36}
-              src={item.avatars[0].url}
+              src={item.avatars[0]?.url}
             />
           </Link>
         ))}
