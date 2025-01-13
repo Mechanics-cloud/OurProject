@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify'
 
-import { isCanAddToArray } from '@/common'
+import { isLimitExceeded } from '@/common'
 import { AddImageSchema, addImageSchema } from '@/features/createPost'
 import { MaxPostImagesCount } from '@/features/createPost/model/constants'
 import { LocaleType } from '@locales/ru'
@@ -21,7 +21,7 @@ export const addImageCheck = async (
 ) => {
   const imagesCount = files.length
 
-  if (!isCanAddToArray({ totalCount })) {
+  if (!isLimitExceeded({ value: totalCount })) {
     return
   }
 

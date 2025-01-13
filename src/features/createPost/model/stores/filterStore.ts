@@ -16,15 +16,15 @@ export class FilterStore {
 
   addInstFilter(filter: FiltersState) {
     this.settings = filter
-    this.setFilter()
+    this.generateFilter()
   }
 
   changeSetting(filter: ClassicFiltersType, value: number) {
     this.settings[filter] = value
-    this.setFilter()
+    this.generateFilter()
   }
 
-  setFilter() {
+  generateFilter() {
     this.filterStyle = prepareFilterStyles(this.settings)
   }
 }

@@ -8,23 +8,19 @@ import { addImageCheck, createPostStore } from '@/features/createPost'
 export const useAddImageModal = () => {
   const { t } = useTranslation()
 
+  const count = createPostStore.images.count
   const onImageDrop = useCallback(
     async (files: File[]) => {
       try {
         createPostStore.continueDialog()
         createPostStore.resetData()
-        await addImageCheck(
-          files,
-          createPostStore.images.count,
-          t,
-          createPostStore.addImage
-        )
+        await addImageCheck(files, count, t, createPostStore.addImage)
         await createPostStore.nextStage()
       } catch (error) {
         toast.error((error as Error).message)
       }
     },
-    [t]
+    [t, count]
   )
 
   const dropzoneOptions = useMemo(
