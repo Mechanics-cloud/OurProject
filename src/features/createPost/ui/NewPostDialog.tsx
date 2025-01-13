@@ -38,22 +38,21 @@ export const NewPostDialog = observer(
           open={open}
           {...rest}
         >
-          {isNewDialog && <AddImageModal />}
-
-          {!isNewDialog && currentState === PostCreationState.adding && (
+          {isNewDialog ? (
             <AddImageModal />
-          )}
-
-          {!isNewDialog && currentState === PostCreationState.cropping && (
-            <CropImageModal />
-          )}
-
-          {!isNewDialog && currentState === PostCreationState.filtering && (
-            <FilterImageModal />
-          )}
-
-          {!isNewDialog && currentState === PostCreationState.publication && (
-            <PublicationModal onPostUpload={onPostUpload} />
+          ) : (
+            <>
+              {currentState === PostCreationState.adding && <AddImageModal />}
+              {currentState === PostCreationState.cropping && (
+                <CropImageModal />
+              )}
+              {currentState === PostCreationState.filtering && (
+                <FilterImageModal />
+              )}
+              {currentState === PostCreationState.publication && (
+                <PublicationModal onPostUpload={onPostUpload} />
+              )}
+            </>
           )}
         </Dialog>
 

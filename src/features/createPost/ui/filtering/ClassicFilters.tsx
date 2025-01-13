@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite'
 
 export const ClassicFilters = observer(() => {
   const { t } = useTranslation()
-  const photo = createPostStore.images.getItemByCurrentIndex()
+  const photo = createPostStore.images.getByCurrentIndex()
 
   return (
     <ScrollArea className={'md:h-[430px]'}>

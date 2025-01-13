@@ -6,7 +6,7 @@ export const useScaleControllerPopover = (id: string) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const onZoom = (zoom: number[]) => {
-    createPostStore.images.getItemById(id)?.crop.changeZoom(zoom[0])
+    createPostStore.images.getById(id)?.crop.changeZoom(zoom[0])
   }
 
   const onClose = () => {

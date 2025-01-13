@@ -15,8 +15,8 @@ export class Collection<T extends { id: number | string }> {
         count: computed,
         currentArrIndex: computed,
         currentIndex: observable,
-        getItemById: action,
-        getItemByIndex: action,
+        getById: action,
+        getByIndex: action,
         isEmpty: computed,
         items: observable,
         removeItem: action,
@@ -41,15 +41,15 @@ export class Collection<T extends { id: number | string }> {
     this.items = []
   }
 
-  getItemByCurrentIndex() {
+  getByCurrentIndex() {
     return this.items[this.currentIndex]
   }
 
-  getItemById(id: number | string) {
+  getById(id: number | string) {
     return this.items.find((item) => item.id === id)
   }
 
-  getItemByIndex(index: number) {
+  getByIndex(index: number) {
     return this.items[index]
   }
 

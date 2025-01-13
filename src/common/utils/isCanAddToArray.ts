@@ -1,11 +1,16 @@
 import { MaxPostImagesCount } from '@/features/createPost/model/constants'
 
-export const isCanAddToArray = ({
-  maxCount = MaxPostImagesCount,
-  totalCount,
+/**
+ *
+ * @param limit - Maximum possible value
+ * @param value - Current value
+ */
+export const isLimitExceeded = ({
+  limit = MaxPostImagesCount,
+  value,
 }: {
-  maxCount?: number
-  totalCount: number
+  limit?: number
+  value: number
 }) => {
-  return totalCount !== maxCount
+  return value !== limit
 }
