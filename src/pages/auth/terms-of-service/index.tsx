@@ -95,4 +95,4 @@ function TermsOfService() {
   )
 }
 
-export default withProtection(TermsOfService)
+export default withProtection(TermsOfService, { isPublic: true })
