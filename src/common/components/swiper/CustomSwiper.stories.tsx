@@ -32,7 +32,8 @@ export const newsfeedPost: Story = {
 }
 export const publicPost: Story = {
   args: {
-    className: 'publicPost w-[240px]  h-[240px]',
+    className:
+      'w-[240px]  h-[240px] swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small',
     images: [{ url: image1 }, { url: image1 }, { url: image1 }],
   },
 }
