@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { FullScreenLoader, Paths } from '@/common'
+import { FullScreenLoader, Paths, withProtection } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { setToLocalStorage } from '@/common/utils/localStorage'
 import { authStore } from '@/features/auth'
@@ -15,9 +15,7 @@ const GitHubCallback = () => {
 
       if (accessToken) {
         setToLocalStorage(StorageKeys.AccessToken, accessToken as string)
-        authStore
-          .me()
-          .then((res) => router.push(`${Paths.profile}/${res?.userId}`))
+        authStore.me().then(() => router.push(`${Paths.home}`))
       } else {
         throw new Error('no token')
       }
@@ -27,4 +25,4 @@ const GitHubCallback = () => {
   return <FullScreenLoader />
 }
 
-export default GitHubCallback
+export default withProtection(GitHubCallback)
