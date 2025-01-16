@@ -33,7 +33,7 @@ const PostItem = ({ item, router }: Props) => {
   return (
     <div
       className={
-        'max-w-[491px] border-b mt-[24px] sm:ml-[8%] mb-[56px] flex flex-col pb-2 justify-between'
+        'max-w-[491px] border-b sm:mt-[24px] sm:ml-[8%] mb-[56px] flex flex-col pb-2 justify-between'
       }
     >
       <div
