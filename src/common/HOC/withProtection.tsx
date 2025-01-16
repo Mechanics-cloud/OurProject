@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import {
   FullScreenLoader,
@@ -6,13 +6,10 @@ import {
   Menu,
   Paths,
   SideBar,
-  getFromLocalStorage,
 } from '@/common'
 import { NextPageWithLayout } from '@/common/HOC/types'
-import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
-import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
@@ -34,31 +31,19 @@ export const withProtection = <P extends object>(
     const loading = authStore.isAuthenticated === 'pending'
     const currentAuthState = authStore.isAuthenticated
 
-    useEffect(() => {
-      const onRedirect = async () => {
-        if (currentAuthState === 'pending') {
-          return
-        }
-        if (currentAuthState === 'yes' && isNotForAuthorizedUsers) {
-          await router.replace(Paths.home)
-        }
-        if (
-          (currentAuthState === 'error' ||
-            authStore.isAuthenticated === 'no') &&
-          !isPublic
-        ) {
-          await router.replace(Paths.signIn)
-        }
-      }
+    if (currentAuthState === 'yes' && isNotForAuthorizedUsers) {
+      router.replace(Paths.home)
 
-      onRedirect()
-    }, [isNotForAuthorizedUsers, isPublic, router, currentAuthState])
+      return
+    }
+    if (
+      (currentAuthState === 'error' || authStore.isAuthenticated === 'no') &&
+      !isPublic
+    ) {
+      router.replace(Paths.signIn)
 
-    useEffect(() => {
-      if (getFromLocalStorage(StorageKeys.AccessToken)) {
-        profileStore.getProfile()
-      }
-    }, [])
+      return
+    }
 
     if (generalStore.user) {
       return (
