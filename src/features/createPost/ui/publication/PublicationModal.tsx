@@ -47,10 +47,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
           >
             {photos.map((photo, index) => (
               <SwiperSlide
-                className={cn(
-                  'm-0 shrink-0 bg-dark-500 relative flex',
-                  'addPost'
-                )}
+                className={cn('m-0 shrink-0 bg-dark-500 relative flex')}
                 key={index}
               >
                 <Image
