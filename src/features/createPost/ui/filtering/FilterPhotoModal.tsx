@@ -40,8 +40,7 @@ export const FilterPhotoModal = observer(() => {
         <div className={'flex relative'}>
           <SwiperCover
             className={cn(
-              'w-full max-w-[490px] h-[490px] m-0 shrink-0 bg-dark-500 relative mx-auto',
-              'addPost addFilter'
+              'w-full max-w-[490px] h-[490px] m-0 shrink-0 bg-dark-500 relative mx-auto'
             )}
           >
             {photos.map((photo, index) => (

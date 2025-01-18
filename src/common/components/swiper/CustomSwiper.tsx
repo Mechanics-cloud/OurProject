@@ -1,11 +1,6 @@
 import { ImageUrl, Typography, cn, useTranslation } from '@/common'
 import Image from 'next/image'
-import {
-  EffectFade,
-  HashNavigation,
-  Navigation,
-  Pagination,
-} from 'swiper/modules'
+import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
@@ -19,35 +14,14 @@ type ImagesTypes = {
 const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
   const { t } = useTranslation()
 
-  if (images.length === 0) {
-    return (
-      <div className={'flex flex-col items-center justify-center h-full'}>
-        <Image
-          alt={t.profilePage.noPosts.alt}
-          className={'w-full opacity-90 '}
-          src={noPostImage}
-        />
-        <Typography
-          className={'text-light-900'}
-          variant={'small'}
-        >
-          {t.basic.errors.emptyImages}
-        </Typography>
-      </div>
-    )
-  }
-
   return (
     <Swiper
       className={cn('h-full w-full', className)}
       effect={'fade'}
-      hashNavigation={{
-        watchState: true,
-      }}
       keyboard={{
         enabled: true,
       }}
-      modules={[Navigation, Pagination, EffectFade, HashNavigation]}
+      modules={[Navigation, Pagination, EffectFade]}
       navigation
       noSwiping
       noSwipingSelector={'button'}

@@ -8,8 +8,7 @@ type stubTypes = {
   alt: string
   className?: string
   imageClassName?: string
-  placeholder?: string
-  src: string
+  src?: string
   textClassName?: string
   title: string
 }
@@ -18,8 +17,7 @@ export const Stub = ({
   alt,
   className,
   imageClassName,
-  placeholder = noPostImage,
-  src,
+  src = noPostImage,
   textClassName,
   title,
 }: stubTypes) => {
@@ -44,5 +42,3 @@ export const Stub = ({
     </div>
   )
 }
-
-// Stub alt = { t.profilePage.noPosts.alt } text = { t.basic.errors.emptyImages } src = { noPostImage }

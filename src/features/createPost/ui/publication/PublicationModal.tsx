@@ -42,8 +42,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
         <div className={'flex relative'}>
           <SwiperCover
             className={cn(
-              'max-w-[490px] h-[490px] w-full m-0 shrink-0 bg-dark-500 relative mx-auto',
-              'addPost addFilter'
+              'max-w-[490px] h-[490px] w-full m-0 shrink-0 bg-dark-500 relative mx-auto'
             )}
           >
             {photos.map((photo, index) => (

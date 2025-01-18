@@ -10,6 +10,7 @@ import {
   timeAgo,
   useTranslation,
 } from '@/common'
+import { Stub } from '@/common/components/stub/Stub'
 import { CustomSwiper } from '@/common/components/swiper'
 import {
   AvatarGroupWithLikes,
@@ -60,7 +61,10 @@ const PostItem = ({ item, router }: Props) => {
         {item.images.length > 0 ? (
           <CustomSwiper images={item.images} />
         ) : (
-          t.basic.errors.emptySwiper
+          <Stub
+            alt={t.profilePage.noPosts.alt}
+            title={t.basic.errors.emptyImages}
+          />
         )}
       </section>
       <LinksGroup

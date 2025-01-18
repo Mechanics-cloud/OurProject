@@ -65,8 +65,8 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  width: 48px;
-  height: 48px;
+  width: 42px;
+  height: 42px;
 
   background-color: var(--swiper-color-background);
   background-image: none;

@@ -17,10 +17,11 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const emptyImages: Story = {
+export const addPost: Story = {
   args: {
-    className: '',
-    images: [],
+    className:
+      'w-[490px] h-[490px] swiper-nav-medium swiper-btn-bg-medium swiper-pagination-bottom-18 swiper-pagination-mobile-hidden',
+    images: [{ url: image1 }, { url: image1 }, { url: image1 }],
   },
 }
 

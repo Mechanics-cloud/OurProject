@@ -4,12 +4,7 @@ import { ComponentPropsWithoutRef, createContext } from 'react'
 import { Nullable, cn } from '@/common'
 import { observer } from 'mobx-react-lite'
 import { Swiper as SwiperInstance } from 'swiper'
-import {
-  EffectFade,
-  HashNavigation,
-  Navigation,
-  Pagination,
-} from 'swiper/modules'
+import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 import { Swiper } from 'swiper/react'
 
 import { useSwiperCover } from './useSwiperCover'
@@ -35,13 +30,10 @@ export const SwiperCover = observer(
           )}
           effect={'fade'}
           grabCursor={false}
-          hashNavigation={{
-            watchState: true,
-          }}
           keyboard={{
             enabled: true,
           }}
-          modules={[Navigation, Pagination, EffectFade, HashNavigation]}
+          modules={[Navigation, Pagination, EffectFade]}
           navigation
           noSwiping
           noSwipingSelector={'button'}
