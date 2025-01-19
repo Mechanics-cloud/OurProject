@@ -7,7 +7,7 @@ import {
   PersonRemoveOutline,
   TrashOutline,
 } from '@/assets/icons'
-import avatarPlaceholder from '@/assets/images/avatar.jpg'
+import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
 import {
   PathService,
   Paths,
@@ -45,7 +45,7 @@ export const PostInfoHeader = () => {
           className={'rounded-full pr-0'}
           height={36}
           priority
-          src={postStore.post?.avatarOwner || avatarPlaceholder}
+          src={postStore.post?.avatarOwner || anonymous}
           width={36}
         />
       </Link>
