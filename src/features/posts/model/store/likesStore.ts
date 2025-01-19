@@ -30,10 +30,8 @@ export class LikesStore extends SortedStore<Likes> {
   toggleLike = async ({ postId }: { postId: number }) => {
     const newLikeStatus = this.isLiked ? LikeStatus.None : LikeStatus.Like
 
+    this.isLiked = newLikeStatus === LikeStatus.Like
     await postsApi.updateLikeStatus({ newLikeStatus, postId })
-    runInAction(() => {
-      this.isLiked = !this.isLiked
-    })
   }
 
   constructor(sortDirection: SortDirection) {
