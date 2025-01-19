@@ -1,4 +1,9 @@
-import { TextUnfolding, calculateCharactersToShow } from '@/common'
+import {
+  TextUnfolding,
+  calculateCharactersToShow,
+  useTranslation,
+} from '@/common'
+import { Stub } from '@/common/components/stub/Stub'
 import {
   LinkProfile,
   PublicPostsDto,
@@ -13,6 +18,8 @@ type Props = {
   posts: PublicPostsDto
 }
 export const PublicPosts = ({ posts }: Props) => {
+  const { t } = useTranslation()
+
   return (
     <div
       className={'w-full flex flex-col justify-start items-center pt-6 gap-9'}
@@ -30,10 +37,19 @@ export const PublicPosts = ({ posts }: Props) => {
               key={post.id}
             >
               <div className={'relative w-60 h-60 lg:w-full xl:w-60'}>
-                <CustomSwiper
-                  className={'publicPost'}
-                  images={post.images}
-                />
+                {post.images.length > 0 ? (
+                  <CustomSwiper
+                    className={
+                      'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
+                    }
+                    images={post.images}
+                  />
+                ) : (
+                  <Stub
+                    alt={t.profilePage.noPosts.alt}
+                    title={t.basic.errors.emptyImages}
+                  />
+                )}
               </div>
               <div className={'w-60 flex flex-col gap-2'}>
                 <LinkProfile

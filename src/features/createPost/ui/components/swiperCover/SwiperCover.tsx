@@ -4,12 +4,7 @@ import { ComponentPropsWithoutRef, createContext } from 'react'
 import { Nullable, cn } from '@/common'
 import { observer } from 'mobx-react-lite'
 import { Swiper as SwiperInstance } from 'swiper'
-import {
-  EffectFade,
-  HashNavigation,
-  Navigation,
-  Pagination,
-} from 'swiper/modules'
+import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 import { Swiper } from 'swiper/react'
 
 import { useSwiperCover } from './useSwiperCover'
@@ -30,18 +25,15 @@ export const SwiperCover = observer(
           allowTouchMove={false}
           className={cn(
             'absolute h-full w-full top-0 left-0 m-0 shrink-0,',
-            'addPost',
+            'swiper-nav-medium swiper-btn-bg-medium swiper-pagination-bottom-18 swiper-pagination-mobile-hidden',
             className
           )}
           effect={'fade'}
           grabCursor={false}
-          hashNavigation={{
-            watchState: true,
-          }}
           keyboard={{
             enabled: true,
           }}
-          modules={[Navigation, Pagination, EffectFade, HashNavigation]}
+          modules={[Navigation, Pagination, EffectFade]}
           navigation
           noSwiping
           noSwipingSelector={'button'}
