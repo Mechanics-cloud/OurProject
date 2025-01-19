@@ -41,19 +41,19 @@ export const PublicPosts = ({ posts }: Props) => {
             >
               <div className={'relative w-60 h-60 lg:w-full xl:w-60'}>
                 {post.images.length > 0 ? (
-                    <Link
-                      href={PathService.generatePath(Paths.publicMainPagePost, {
-                        postId: post.id,
-                        userId: post.ownerId,
-                      })}
-                    >
-                  <CustomSwiper
-                    className={
-                      'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
-                    }
-                    images={post.images}
-                  />
-                    </Link>
+                  <Link
+                    href={PathService.generatePath(Paths.userPost, {
+                      postId: post.id,
+                      userId: post.ownerId,
+                    })}
+                  >
+                    <CustomSwiper
+                      className={
+                        'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
+                      }
+                      images={post.images}
+                    />
+                  </Link>
                 ) : (
                   <Stub
                     alt={t.profilePage.noPosts.alt}
