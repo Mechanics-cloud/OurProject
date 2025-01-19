@@ -26,30 +26,35 @@ export const LikesGroup = observer(() => {
   }, [postStore.post?.id, user, getLikes])
 
   return (
-    <section className={'flex items-center gap-3 min-h-9'}>
-      <div className={'relative flex items-center'}>
-        {items?.slice(0, 3).map((item, index, array) => (
-          <Link
-            className={`relative z-${(array.length - index) * 10}`}
-            href={PathService.generatePath(Paths.userProfile, {
-              userId: item.userId,
-            })}
-            key={item.id}
-            style={{
-              left: `-${index * 18}px`,
-            }}
-          >
-            <Avatar
-              alt={`${item.userName} avatar`}
-              key={index}
-              priority
-              size={36}
-              src={item.avatars[0]?.url}
-            />
-          </Link>
-        ))}
-      </div>
-      <Typography variant={'reg14'}>
+    <section className={'flex items-center min-h-9'}>
+      {items && !!items.length && (
+        <div className={'relative flex items-center'}>
+          {items?.slice(0, 3).map((item, index, array) => (
+            <Link
+              className={`relative z-${(array.length - index) * 10}`}
+              href={PathService.generatePath(Paths.userProfile, {
+                userId: item.userId,
+              })}
+              key={item.id}
+              style={{
+                left: `-${index * 18}px`,
+              }}
+            >
+              <Avatar
+                alt={`${item.userName} avatar`}
+                key={index}
+                priority
+                size={36}
+                src={item.avatars[0]?.url}
+              />
+            </Link>
+          ))}
+        </div>
+      )}
+      <Typography
+        className={'ml-2'}
+        variant={'reg14'}
+      >
         {getPluralForm({ key: t.post.likes, value: totalCount })}
       </Typography>
     </section>
