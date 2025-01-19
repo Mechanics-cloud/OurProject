@@ -40,6 +40,7 @@ export type FullName = {
 
 export type BasicPost = {
   avatarOwner: string
+  avatarWhoLikes?: boolean
   createdAt: string
   description: string
   id: number

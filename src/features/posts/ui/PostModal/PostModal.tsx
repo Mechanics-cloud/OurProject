@@ -1,15 +1,13 @@
 import React from 'react'
 
 import { Close } from '@/assets/icons'
-import { Nullable, Overlay } from '@/common'
-import { Post, PostComments } from '@/features/posts'
+import { Overlay } from '@/common'
+import { PublicPostInfo } from '@/features/posts'
 import { PostContent } from '@/features/posts/ui/PostModal/Content/PostContent'
 
 type Props = {
-  comments: Nullable<PostComments>
-  onClose: VoidFunction
-  post: Nullable<Post>
-}
+  onClose: () => void
+} & PublicPostInfo
 
 export const PostModal = ({ comments, onClose, post }: Props) => (
   <Overlay

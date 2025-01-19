@@ -79,6 +79,16 @@ const PostItem = ({ item, router }: Props) => {
           />
         )}
       </section>
+        <section className={'h-[504px] mb-3'}>
+          {item.images.length > 0 ? (
+            <CustomSwiper images={item.images} />
+          ) : (
+            <Stub
+              alt={t.profilePage.noPosts.alt}
+              title={t.basic.errors.emptyImages}
+            />
+          )}
+        </section>
       </Link>
       <LinksGroup
         className={'mb-4'}

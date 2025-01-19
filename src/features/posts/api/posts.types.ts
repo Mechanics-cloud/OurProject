@@ -1,11 +1,10 @@
-import { FullName, Image, Nullable, SortDirection, StaticImage } from '@/common'
-
-export type SortedResponse = {
-  page: number
-  pageSize: number
-  pagesCount: number
-  totalCount: number
-}
+import {
+  BasicPost,
+  Nullable,
+  PagesInfo,
+  SortDirection,
+  StaticImage,
+} from '@/common'
 
 export type Likes = {
   avatars: StaticImage[]
@@ -28,34 +27,18 @@ export type Comment = {
   postId: number
 }
 
-export type PostComments = { items: Comment[] } & SortedResponse
+export type PostComments = { items: Comment[] } & PagesInfo
 export type PostsLikes = {
   isLiked: boolean
   items: Likes[]
   nextCursor: Nullable<number>
   prevCursor: Nullable<number>
-} & SortedResponse
+} & PagesInfo
 
 export type From = {
   avatars: StaticImage[]
   id: number
   username: string
-}
-
-export type Post = {
-  avatarOwner: string
-  avatarWhoLikes: boolean
-  createdAt: string
-  description: string
-  id: number
-  images: Image[]
-  isLiked: boolean
-  likesCount: number
-  location: string
-  owner: FullName
-  ownerId: number
-  updatedAt: string
-  userName: string
 }
 
 export type PostInfoParamsRequest = {
@@ -68,5 +51,5 @@ export type PostInfoParamsRequest = {
 
 export type PublicPostInfo = {
   comments: Nullable<PostComments>
-  post: Nullable<Post>
+  post: Nullable<BasicPost>
 }
