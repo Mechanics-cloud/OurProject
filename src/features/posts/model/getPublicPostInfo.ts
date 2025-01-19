@@ -1,12 +1,18 @@
-import { Nullable, PathService } from '@/common'
-import { Post, PostComments, PublicPostsEndpoints } from '@/features/posts'
+import { PathService } from '@/common'
+import { PublicPostInfo, PublicPostsEndpoints } from '@/features/posts'
 
-type ReturnType = {
-  comments: Nullable<PostComments>
-  post: Nullable<Post>
+const defaultValues = {
+  comments: null,
+  post: null,
 }
 
-export const getPublicPostInfo = async (id: number): Promise<ReturnType> => {
+export const getPublicPostInfo = async (
+  id?: number
+): Promise<PublicPostInfo> => {
+  if (!id) {
+    return defaultValues
+  }
+
   const postEndpoint = PublicPostsEndpoints.idPost(id)
   const postResponse = await fetch(PathService.generateServerPath(postEndpoint))
   const post = await postResponse.json()
@@ -28,7 +34,7 @@ export const getPublicPostInfo = async (id: number): Promise<ReturnType> => {
   const comments = await commentsResponse.json()
 
   return {
-    comments: comments ?? null,
-    post: post ?? null,
+    comments: comments ?? defaultValues.comments,
+    post: post ?? defaultValues.post,
   }
 }

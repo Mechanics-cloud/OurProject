@@ -65,3 +65,8 @@ export type PostInfoParamsRequest = {
   sortBy?: string
   sortDirection?: SortDirection
 }
+
+export type PublicPostInfo = {
+  comments: Nullable<PostComments>
+  post: Nullable<Post>
+}
