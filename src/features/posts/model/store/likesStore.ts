@@ -42,7 +42,7 @@ export class LikesStore extends SortedStore<Likes> {
     makeObservable(this, {
       getLikes: action,
       isLiked: observable,
-      toggleLike: observable,
+      toggleLike: action,
     })
   }
 }
