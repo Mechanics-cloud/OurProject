@@ -20,7 +20,7 @@ import { useRouter } from 'next/router'
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
 ) => {
-  const { params, query, req } = context
+  const { params, req } = context
 
   const screenSize = getDeviceScreenWidth(req.headers['user-agent'] || '')
 
