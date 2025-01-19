@@ -2,8 +2,8 @@
 
 import React from 'react'
 
-import { Nullable, useTranslation } from '@/common'
-import { Post, PostComments } from '@/features/posts'
+import { useTranslation } from '@/common'
+import { PublicPostInfo } from '@/features/posts'
 import { PostStoreProvider } from '@/features/posts/model/postStoreProvider'
 import { AddComment } from '@/features/posts/ui/PostModal/Content/AddComment'
 import { CommentList } from '@/features/posts/ui/PostModal/Content/CommentList'
@@ -11,12 +11,7 @@ import { SocialGroup } from '@/features/posts/ui/PostModal/Content/SocialGroup'
 import { PostInfoHeader } from '@/features/posts/ui/PostModal/Header/PostInfoHeader'
 import { PostSlider } from '@/features/posts/ui/PostModal/Slider/PostSlider'
 
-type Props = {
-  comments?: Nullable<PostComments>
-  post?: Nullable<Post>
-}
-
-export const PostContent = ({ comments, post }: Props) => {
+export const PostContent = ({ comments, post }: PublicPostInfo) => {
   const { t } = useTranslation()
 
   if (!post) {
