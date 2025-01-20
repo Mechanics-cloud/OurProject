@@ -23,6 +23,14 @@ export const ScrollArea = forwardRef<
   const scrollableRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const element = document.querySelector('.viewport > div')
+
+    if (element instanceof HTMLElement) {
+      element.style.display = 'block'
+    }
+  }, [])
+
+  useEffect(() => {
     const scrollableElement = scrollableRef.current
 
     if (!scrollableElement) {
@@ -41,14 +49,6 @@ export const ScrollArea = forwardRef<
       resizeObserver.disconnect()
     }
   }, [children])
-
-  useEffect(() => {
-    const element = document.querySelector('.viewport > div')
-
-    if (element instanceof HTMLElement) {
-      element.style.display = 'block'
-    }
-  }, [])
 
   return (
     <ScrollAreaPrimitive.Root
