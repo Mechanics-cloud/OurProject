@@ -4,22 +4,44 @@ import { CommonEndpoints } from '@/common/api/common.endpoints'
 import { StorageKeys } from '@/common/enums'
 import { InternalAxiosRequestConfig } from 'axios'
 
+let isRefreshing = false
+
+let refreshPromise: Promise<string> | null = null
+
 export const updateToken = async (params?: InternalAxiosRequestConfig) => {
   try {
-    if (localStorage.getItem(StorageKeys.AccessToken)) {
-      const newToken = await instance
-        .post(CommonEndpoints.updateToken)
-        .then((res) => res.data.accessToken)
-
-      setToLocalStorage(StorageKeys.AccessToken, newToken)
+    if (isRefreshing && refreshPromise) {
+      const newToken = await refreshPromise
 
       if (params) {
         params.headers.Authorization = `Bearer ${newToken}`
 
-        return await instance.request(params)
+        return instance.request(params)
       }
+
+      return
+    }
+
+    isRefreshing = true
+    refreshPromise = instance.post(CommonEndpoints.updateToken).then((res) => {
+      const newToken = res.data.accessToken
+
+      setToLocalStorage(StorageKeys.AccessToken, newToken)
+
+      return newToken
+    })
+
+    const newToken = await refreshPromise
+
+    if (params) {
+      params.headers.Authorization = `Bearer ${newToken}`
+
+      return instance.request(params)
     }
   } catch (error) {
     return Promise.reject(error)
+  } finally {
+    isRefreshing = false
+    refreshPromise = null
   }
 }
