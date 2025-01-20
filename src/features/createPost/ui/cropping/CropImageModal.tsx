@@ -34,7 +34,7 @@ export const CropImageModal = observer(() => {
         className={'md:m-0 lg:m-0 p-0'}
       >
         <div className={'relative max-w-full md:max-w-[492px] h-[490px]'}>
-          <SwiperCover>
+          <SwiperCover className={'swiper-center-horizontal'}>
             {images.map((image, index) => (
               <SwiperSlide
                 className={'w-full bg-dark-500 relative'}
