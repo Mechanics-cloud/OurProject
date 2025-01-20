@@ -1,4 +1,4 @@
-import { setToLocalStorage } from '@/common'
+import { Nullable, setToLocalStorage } from '@/common'
 import { instance } from '@/common/api'
 import { CommonEndpoints } from '@/common/api/common.endpoints'
 import { StorageKeys } from '@/common/enums'
@@ -6,7 +6,7 @@ import { InternalAxiosRequestConfig } from 'axios'
 
 let isRefreshing = false
 
-let refreshPromise: Promise<string> | null = null
+let refreshPromise: Nullable<Promise<string>> = null
 
 export const updateToken = async (params?: InternalAxiosRequestConfig) => {
   try {
