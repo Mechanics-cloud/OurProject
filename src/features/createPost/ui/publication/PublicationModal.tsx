@@ -51,7 +51,7 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
                 key={index}
               >
                 <Image
-                  alt={'Photo in carousel'}
+                  alt={t.createPost.alt}
                   className={cn(
                     'object-center object-contain w-full h-auto',
                     generalStore.isLoading ? 'animate-pulse' : ''
