@@ -52,13 +52,13 @@ class NewsFeedStore {
 
       runInAction(() => {
         this.publicationsFollowers = response
-        this.isLoading = false
-        this.loadingRequestFlag = false
       })
     } catch (error) {
       responseErrorHandler(error)
+    } finally {
       runInAction(() => {
         this.isLoading = false
+        this.loadingRequestFlag = false
       })
     }
   }
