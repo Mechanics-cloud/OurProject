@@ -1,19 +1,13 @@
 import * as React from 'react'
 
 import { ScrollArea, Typography, useTranslation } from '@/common'
-import { ClassicFiltersType, Slider, addPostStore } from '@/features/createPost'
+import { Slider, createPostStore } from '@/features/createPost'
 import { classicSettingsData } from '@/features/createPost/model/constants'
 import { observer } from 'mobx-react-lite'
 
 export const ClassicFilters = observer(() => {
   const { t } = useTranslation()
-  const photos = addPostStore.photos
-  const changeClassicFilterSetting = addPostStore.changeFilterSetting
-  const currentSliderIndex = addPostStore.currentSliderIndex || 0
-
-  const updateFilter = (filter: ClassicFiltersType, value: number) => {
-    changeClassicFilterSetting(currentSliderIndex, filter, value)
-  }
+  const photo = createPostStore.images.getByCurrentIndex()
 
   return (
     <ScrollArea className={'md:h-[430px]'}>
@@ -29,9 +23,11 @@ export const ClassicFilters = observer(() => {
               className={setting.centered ? 'sliderCenter' : ''}
               max={setting.centered ? 3 : 1}
               min={0}
-              onValueChange={(value) => updateFilter(setting.field, value[0])}
+              onValueChange={(value) =>
+                photo.filter.changeSetting(setting.field, value[0])
+              }
               step={setting.centered ? 0.1 : 0.01}
-              value={[photos[currentSliderIndex].filterSettings[setting.field]]}
+              value={[photo.filter.settings[setting.field]]}
             />
           </React.Fragment>
         ))}

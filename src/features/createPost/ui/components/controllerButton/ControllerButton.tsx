@@ -5,7 +5,8 @@ import { cn } from '@/common'
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 
 type Props = ComponentPropsWithoutRef<'span'>
-export const PhotoControllerButton = forwardRef<
+
+export const ControllerButton = forwardRef<
   React.ElementRef<typeof PopoverPrimitive.Trigger>,
   Props
 >(({ children, className, onClick }: Props, ref) => {

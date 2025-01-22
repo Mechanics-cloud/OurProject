@@ -5,7 +5,7 @@ const errors = {
   server: 'Something went wrong on our end. Please try again later.',
   tooBigFile: (size: number) =>
     `Файл слишком большой. Файл должен быть не более ${size}MB`,
-  type: (types: string) => `Неверный тип файла. Загружить можно ${types}`,
+  type: (types: string) => `Неверный тип файла. Загрузить можно ${types}`,
   unknown: 'Что-то пошло не так',
 }
 
