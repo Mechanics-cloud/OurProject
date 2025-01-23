@@ -12,25 +12,25 @@ import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
 interface WithProtectionOptions {
-  isNotForAuthorizedUsers?: boolean
+  forUnauthorizedUsers?: boolean
   isPublic?: boolean
 }
 
 export const withProtection = <P extends object>(
   PageComponent: NextPageWithLayout<P>,
   options: WithProtectionOptions = {
-    isNotForAuthorizedUsers: false,
+    forUnauthorizedUsers: false,
     isPublic: false,
   }
 ): NextPageWithLayout<P> =>
   observer((props) => {
-    const { isNotForAuthorizedUsers, isPublic } = options
+    const { forUnauthorizedUsers, isPublic } = options
     const router = useRouter()
     const currentAuthState = authStore.isAuthenticated
 
     useEffect(() => {
       const onRedirect = async () => {
-        if (currentAuthState === 'yes' && isNotForAuthorizedUsers) {
+        if (currentAuthState === 'yes' && forUnauthorizedUsers) {
           await router.replace(Paths.home)
         }
         if (
@@ -43,10 +43,10 @@ export const withProtection = <P extends object>(
       }
 
       onRedirect()
-    }, [isNotForAuthorizedUsers, isPublic, router, currentAuthState])
+    }, [forUnauthorizedUsers, isPublic, router, currentAuthState])
 
     if (
-      (currentAuthState === 'yes' && isNotForAuthorizedUsers) ||
+      (currentAuthState === 'yes' && forUnauthorizedUsers) ||
       (currentAuthState === 'no' && !isPublic) ||
       currentAuthState === 'pending'
     ) {

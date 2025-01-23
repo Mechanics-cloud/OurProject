@@ -6,6 +6,6 @@ const SignUp = () => {
 }
 
 export default withProtection(SignUp, {
-  isNotForAuthorizedUsers: true,
+  forUnauthorizedUsers: true,
   isPublic: true,
 })

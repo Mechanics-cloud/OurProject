@@ -14,6 +14,6 @@ function ForgotPassword() {
 }
 
 export default withProtection(ForgotPassword, {
-  isNotForAuthorizedUsers: true,
+  forUnauthorizedUsers: true,
   isPublic: true,
 })
