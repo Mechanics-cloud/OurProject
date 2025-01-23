@@ -54,13 +54,23 @@ const Header = () => {
                 className={'mr-3 px-2 md:ml-9 md:mr-6 md:px-6'}
                 variant={'text'}
               >
-                <Link href={Paths.signIn}>{t.signIn.title}</Link>
+                <Link
+                  className={'text-xs xs:text-base'}
+                  href={Paths.signIn}
+                >
+                  {t.signIn.title}
+                </Link>
               </Button>
               <Button
                 asChild
                 className={'px-2 md:px-6'}
               >
-                <Link href={Paths.signUp}>{t.signUp.title}</Link>
+                <Link
+                  className={'text-xs xs:text-base'}
+                  href={Paths.signUp}
+                >
+                  {t.signUp.title}
+                </Link>
               </Button>
             </>
           )}
