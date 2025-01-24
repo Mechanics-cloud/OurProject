@@ -30,26 +30,6 @@ export const ScrollArea = forwardRef<
     }
   }, [])
 
-  useEffect(() => {
-    const scrollableElement = scrollableRef.current
-
-    if (!scrollableElement) {
-      return
-    }
-
-    const resizeObserver = new ResizeObserver(() => {
-      if (scrollableElement) {
-        scrollableElement.scrollTop = scrollableElement.scrollHeight
-      }
-    })
-
-    resizeObserver.observe(scrollableElement)
-
-    return () => {
-      resizeObserver.disconnect()
-    }
-  }, [children])
-
   return (
     <ScrollAreaPrimitive.Root
       className={cn('relative overflow-hidden lg:pr-scrollbar', className)}
