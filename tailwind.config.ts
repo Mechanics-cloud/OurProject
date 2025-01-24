@@ -98,6 +98,10 @@ const config: Config = {
           '100%': { transform: 'translateY(-400%)' },
         },
       },
+      screens: {
+        xs: '22.5rem',
+      },
+
       spacing: {
         scrollbar: '16px',
       },
