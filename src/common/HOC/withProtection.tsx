@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react'
 
-import {
-  BaseLayoutWithStore,
-  FullScreenLoader,
-  Paths,
-  ProtectedLayout,
-} from '@/common'
+import { FullScreenLoader, Paths, ProtectedLayout } from '@/common'
 import { NextPageWithLayout } from '@/common/HOC/types'
 import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
@@ -28,38 +23,33 @@ export const withProtection = <P extends object>(
     const router = useRouter()
     const currentAuthState = authStore.isAuthenticated
 
+    const isUserAuthorized =
+      currentAuthState === 'authenticated' && forUnauthorizedUsers
+
+    const isUserUnauthorized =
+      (currentAuthState === 'error' ||
+        currentAuthState === 'notAuthenticated') &&
+      !isPublic
+
+    const loadingCondition =
+      isUserAuthorized || isUserUnauthorized || currentAuthState === 'pending'
+
     useEffect(() => {
       const onRedirect = async () => {
-        if (currentAuthState === 'yes' && forUnauthorizedUsers) {
+        if (isUserAuthorized) {
           await router.replace(Paths.home)
         }
-        if (
-          (currentAuthState === 'error' ||
-            authStore.isAuthenticated === 'no') &&
-          !isPublic
-        ) {
+        if (isUserUnauthorized) {
           await router.replace(Paths.signIn)
         }
       }
 
       onRedirect()
-    }, [forUnauthorizedUsers, isPublic, router, currentAuthState])
-
-    if (
-      (currentAuthState === 'yes' && forUnauthorizedUsers) ||
-      (currentAuthState === 'no' && !isPublic) ||
-      currentAuthState === 'pending'
-    ) {
-      return (
-        <BaseLayoutWithStore>
-          <FullScreenLoader />
-        </BaseLayoutWithStore>
-      )
-    }
+    }, [isUserAuthorized, isUserUnauthorized, router])
 
     return (
       <ProtectedLayout>
-        <PageComponent {...props} />
+        {loadingCondition ? <FullScreenLoader /> : <PageComponent {...props} />}
       </ProtectedLayout>
     )
   })

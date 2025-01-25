@@ -9,4 +9,7 @@ const Expired = () => {
   )
 }
 
-export default withProtection(Expired, { forUnauthorizedUsers: true })
+export default withProtection(Expired, {
+  forUnauthorizedUsers: true,
+  isPublic: true,
+})

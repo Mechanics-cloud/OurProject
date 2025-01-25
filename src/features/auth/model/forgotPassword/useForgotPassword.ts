@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 
 import { Environments, Nullable, Paths, useModal } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
@@ -51,7 +50,9 @@ export const useForgotPassword = (t: LocaleType) => {
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.recaptcha) {
-      return toast.error(t.validation.recaptchaRequired)
+      responseErrorHandler(new Error(t.validation.recaptchaRequired))
+
+      return
     }
     try {
       await authApi.recoverPassword({

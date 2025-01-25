@@ -22,7 +22,7 @@ export const useMe = () => {
         }
       } else {
         runInAction(() => {
-          authStore.isAuthenticated = 'no'
+          authStore.isAuthenticated = 'notAuthenticated'
         })
       }
     }

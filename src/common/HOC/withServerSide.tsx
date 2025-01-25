@@ -1,10 +1,6 @@
 import React from 'react'
 
-import {
-  BaseLayoutWithStore,
-  FullScreenLoader,
-  ProtectedLayout,
-} from '@/common'
+import { FullScreenLoader, ProtectedLayout } from '@/common'
 import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
 
@@ -14,15 +10,11 @@ export const withServerSide = <P extends object>(
   PageComponent: NextPageWithLayout<P>
 ): NextPageWithLayout<P> =>
   observer((props) => {
-    const isLoadingStore = generalStore.isLoading
+    const loading = generalStore.isLoading
 
-    return isLoadingStore ? (
-      <BaseLayoutWithStore>
-        <FullScreenLoader />
-      </BaseLayoutWithStore>
-    ) : (
+    return (
       <ProtectedLayout>
-        <PageComponent {...props} />
+        {loading ? <FullScreenLoader /> : <PageComponent {...props} />}
       </ProtectedLayout>
     )
   })

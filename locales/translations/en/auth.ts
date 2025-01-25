@@ -38,6 +38,15 @@ export const registration = {
     text: 'Your email has been confirmed',
     title: 'Congratulations!',
   },
+  error: {
+    errorButton: 'Sign Up',
+    errorText:
+      'Your email has not been confirmed due to an unknown error. Try registering again.',
+    notConfirmedButton: 'Try again',
+    notConfirmedText:
+      'Your email has not been confirmed due to the code not being valid. Try sending the confirmation link again.',
+    title: 'Ops!!!',
+  },
   expired: {
     buttonTitle: 'Resend verification link',
     text: 'Looks like the verification link has expired. Not to worry, we can send the link again',

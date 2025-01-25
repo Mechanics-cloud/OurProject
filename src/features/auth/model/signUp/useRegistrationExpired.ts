@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { toast } from 'react-toastify'
 
 import { useModal, useTranslation } from '@/common'
 import { Environments } from '@/common/enviroments'
@@ -25,7 +24,9 @@ export const useRegistrationExpired = () => {
 
   const onResendHandler = async () => {
     if (!query.email) {
-      toast.error(t.basic.errors.unknown)
+      responseErrorHandler(new Error(t.basic.errors.unknown))
+
+      return
     }
     try {
       isLoadingStore.turnOnLoading()

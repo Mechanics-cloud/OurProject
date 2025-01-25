@@ -2,7 +2,8 @@ const errors = {
   emptyImages:
     'Не удалось отобразить фотографии поста. Пожайлуста обратитесь в поддержку или повторите попытку позже!',
   emptySwiper: 'Нет картинок',
-  server: 'Something went wrong on our end. Please try again later.',
+  server:
+    'Что-то пошло не так с нашей стороны. Пожалуйста, повторите попытку позже.',
   tooBigFile: (size: number) =>
     `Файл слишком большой. Файл должен быть не более ${size}MB`,
   type: (types: string) => `Неверный тип файла. Загрузить можно ${types}`,
