@@ -4,6 +4,7 @@ import { setToLocalStorage } from '@/common/utils/localStorage'
 import { generalStore } from '@/core/store'
 import { authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
+import { profileStore } from '@/features/profile'
 import { isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
@@ -85,6 +86,8 @@ class AuthStore {
         this.isAuthenticated = 'pending'
       })
       const user = await authApi.me()
+
+      await profileStore.getProfile()
 
       runInAction(() => {
         if (user) {
