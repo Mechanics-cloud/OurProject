@@ -21,6 +21,7 @@ const TLike = (
     />
   ) : (
     <HeartOutline
+      className={className}
       onClick={onClick}
       ref={ref}
       {...rest}

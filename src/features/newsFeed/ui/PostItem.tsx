@@ -17,7 +17,6 @@ import {
   AvatarGroupWithLikes,
   CustomNewsFeedPopover,
 } from '@/features/newsFeed'
-import Image from 'next/image'
 import Link from 'next/link'
 import { NextRouter } from 'next/router'
 import avatarPlaceholder from 'src/assets/images/user-avatar-placeholder.jpg'
@@ -69,17 +68,9 @@ const PostItem = ({ item, router }: Props) => {
           userId: item.ownerId,
         })}
       >
-      <section className={'relative w-full aspect-square overflow-hidden mb-3'}>
-        {item.images.length > 0 ? (
-          <CustomSwiper images={item.images} />
-        ) : (
-          <Stub
-            alt={t.profilePage.noPosts.alt}
-            title={t.basic.errors.emptyImages}
-          />
-        )}
-      </section>
-        <section className={'h-[504px] mb-3'}>
+        <section
+          className={'relative w-full aspect-square overflow-hidden mb-3'}
+        >
           {item.images.length > 0 ? (
             <CustomSwiper images={item.images} />
           ) : (

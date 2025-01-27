@@ -20,7 +20,7 @@ export const PostModal = ({ comments, onClose, post }: Props) => (
         post={post}
       />
       <Close
-        className={'absolute w-6 h-6 -top-8 -right-10 cursor-pointer'}
+        className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
         onClick={onClose}
       />
     </div>

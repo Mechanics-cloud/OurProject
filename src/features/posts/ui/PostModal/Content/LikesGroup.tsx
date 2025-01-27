@@ -26,7 +26,7 @@ export const LikesGroup = observer(() => {
   }, [postStore.post?.id, user, getLikes])
 
   return (
-    <section className={'flex items-center min-h-9'}>
+    <div className={'flex items-center min-h-9'}>
       {items && !!items.length && (
         <div className={'relative flex items-center'}>
           {items?.slice(0, 3).map((item, index, array) => (
@@ -57,6 +57,6 @@ export const LikesGroup = observer(() => {
       >
         {getPluralForm({ key: t.post.likes, value: totalCount })}
       </Typography>
-    </section>
+    </div>
   )
 })
