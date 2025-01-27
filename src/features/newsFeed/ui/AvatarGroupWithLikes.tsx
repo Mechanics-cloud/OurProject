@@ -26,7 +26,7 @@ export const AvatarGroupWithLikes = observer(({ item }: Props) => {
 
   return (
     <div
-      className={`w-full h-6 flex mt-3 mb-6 ${
+      className={`w-full h-6 flex mb-3 ${
         firstThreeAvatarImages ? 'gap-4' : ''
       }`}
     >

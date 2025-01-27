@@ -23,24 +23,12 @@ export const ScrollArea = forwardRef<
   const scrollableRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const scrollableElement = scrollableRef.current
+    const element = document.querySelector('.viewport > div')
 
-    if (!scrollableElement) {
-      return
+    if (element instanceof HTMLElement) {
+      element.style.display = 'block'
     }
-
-    const resizeObserver = new ResizeObserver(() => {
-      if (scrollableElement) {
-        scrollableElement.scrollTop = scrollableElement.scrollHeight
-      }
-    })
-
-    resizeObserver.observe(scrollableElement)
-
-    return () => {
-      resizeObserver.disconnect()
-    }
-  }, [children])
+  }, [])
 
   return (
     <ScrollAreaPrimitive.Root
@@ -49,7 +37,7 @@ export const ScrollArea = forwardRef<
       {...props}
     >
       <ScrollAreaPrimitive.Viewport
-        className={'h-full w-full rounded-[inherit]'}
+        className={'h-full w-full rounded-[inherit] viewport'}
         ref={scrollableRef}
       >
         {children}

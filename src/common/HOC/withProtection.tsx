@@ -1,45 +1,36 @@
 import React, { useEffect } from 'react'
 
 import {
+  BaseLayoutWithStore,
   FullScreenLoader,
-  LayoutWithStore,
-  Menu,
   Paths,
-  SideBar,
-  getFromLocalStorage,
+  ProtectedLayout,
 } from '@/common'
 import { NextPageWithLayout } from '@/common/HOC/types'
-import { StorageKeys } from '@/common/enums'
-import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
-import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
 interface WithProtectionOptions {
-  isNotForAuthorizedUsers?: boolean
+  forUnauthorizedUsers?: boolean
   isPublic?: boolean
 }
 
 export const withProtection = <P extends object>(
   PageComponent: NextPageWithLayout<P>,
   options: WithProtectionOptions = {
-    isNotForAuthorizedUsers: false,
+    forUnauthorizedUsers: false,
     isPublic: false,
   }
 ): NextPageWithLayout<P> =>
   observer((props) => {
-    const { isNotForAuthorizedUsers, isPublic } = options
+    const { forUnauthorizedUsers, isPublic } = options
     const router = useRouter()
-    const loading = authStore.isAuthenticated === 'pending'
     const currentAuthState = authStore.isAuthenticated
 
     useEffect(() => {
       const onRedirect = async () => {
-        if (currentAuthState === 'pending') {
-          return
-        }
-        if (currentAuthState === 'yes' && isNotForAuthorizedUsers) {
+        if (currentAuthState === 'yes' && forUnauthorizedUsers) {
           await router.replace(Paths.home)
         }
         if (
@@ -52,31 +43,23 @@ export const withProtection = <P extends object>(
       }
 
       onRedirect()
-    }, [isNotForAuthorizedUsers, isPublic, router, currentAuthState])
+    }, [forUnauthorizedUsers, isPublic, router, currentAuthState])
 
-    useEffect(() => {
-      if (getFromLocalStorage(StorageKeys.AccessToken)) {
-        profileStore.getProfile()
-      }
-    }, [])
-
-    if (generalStore.user) {
+    if (
+      (currentAuthState === 'yes' && forUnauthorizedUsers) ||
+      (currentAuthState === 'no' && !isPublic) ||
+      currentAuthState === 'pending'
+    ) {
       return (
-        <LayoutWithStore className={'flex'}>
-          <SideBar />
-          <Menu />
-          <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>
-            {loading ? <FullScreenLoader /> : <PageComponent {...props} />}
-          </div>
-        </LayoutWithStore>
+        <BaseLayoutWithStore>
+          <FullScreenLoader />
+        </BaseLayoutWithStore>
       )
     }
 
     return (
-      <LayoutWithStore>
-        <div className={'mx-24'}>
-          {loading ? <FullScreenLoader /> : <PageComponent {...props} />}
-        </div>
-      </LayoutWithStore>
+      <ProtectedLayout>
+        <PageComponent {...props} />
+      </ProtectedLayout>
     )
   })

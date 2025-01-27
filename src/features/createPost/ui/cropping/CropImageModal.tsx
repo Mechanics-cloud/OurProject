@@ -2,18 +2,17 @@ import * as React from 'react'
 
 import { DialogContent, DialogDescription, cn, useTranslation } from '@/common'
 import {
+  ImageCrop,
   ModalHeader,
-  PhotoCrop,
   SwiperCover,
-  addPostStore,
+  createPostStore,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import { SwiperSlide } from 'swiper/react'
 
-export const CropPhotoModal = observer(() => {
+export const CropImageModal = observer(() => {
   const { t } = useTranslation()
-  const photos = addPostStore.photos
-  const nextStage = addPostStore.nextStage
+  const images = createPostStore.images.allItems
 
   return (
     <DialogContent
@@ -25,7 +24,7 @@ export const CropPhotoModal = observer(() => {
       crossOff
     >
       <ModalHeader
-        onRightButtonClick={nextStage}
+        onRightButtonClick={createPostStore.nextStage}
         rightButtonTitle={t.basic.next}
         title={t.createPost.cropping.title}
       />
@@ -35,13 +34,13 @@ export const CropPhotoModal = observer(() => {
         className={'md:m-0 lg:m-0 p-0'}
       >
         <div className={'relative max-w-full md:max-w-[492px] h-[490px]'}>
-          <SwiperCover>
-            {photos.map((photo, index) => (
+          <SwiperCover className={'swiper-center-horizontal'}>
+            {images.map((image, index) => (
               <SwiperSlide
                 className={'w-full bg-dark-500 relative'}
                 key={index}
               >
-                <PhotoCrop photo={photo} />
+                <ImageCrop image={image} />
               </SwiperSlide>
             ))}
           </SwiperCover>

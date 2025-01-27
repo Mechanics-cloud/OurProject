@@ -1,7 +1,7 @@
 import { instance } from '@/common/api'
 import { AddPostEndpoints } from '@/features/createPost'
 import {
-  UploadPhotoResponse,
+  UploadImagesResponse,
   UploadPost,
   UploadPostResponse,
 } from '@/features/createPost/api/addPost.types'
@@ -10,10 +10,10 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 class AddPostApi {
   constructor(private instance: AxiosInstance) {}
 
-  public uploadPhotos(
+  public uploadImages(
     formData: FormData
-  ): Promise<AxiosResponse<UploadPhotoResponse>> {
-    return this.instance.post(AddPostEndpoints.uploadPhotos, formData, {
+  ): Promise<AxiosResponse<UploadImagesResponse>> {
+    return this.instance.post(AddPostEndpoints.uploadImages, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

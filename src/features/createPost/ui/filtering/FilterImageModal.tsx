@@ -5,16 +5,15 @@ import {
   Filters,
   ModalHeader,
   SwiperCover,
-  addPostStore,
+  createPostStore,
 } from '@/features/createPost'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { SwiperSlide } from 'swiper/react'
 
-export const FilterPhotoModal = observer(() => {
+export const FilterImageModal = observer(() => {
   const { t } = useTranslation()
-  const nextStage = addPostStore.nextStage
-  const photos = addPostStore.photos
+  const images = createPostStore.images.allItems
 
   return (
     <DialogContent
@@ -26,7 +25,7 @@ export const FilterPhotoModal = observer(() => {
       crossOff
     >
       <ModalHeader
-        onRightButtonClick={nextStage}
+        onRightButtonClick={createPostStore.nextStage}
         rightButtonTitle={t.basic.next}
         title={t.createPost.filtering.title}
       />
@@ -40,24 +39,20 @@ export const FilterPhotoModal = observer(() => {
         <div className={'flex relative'}>
           <SwiperCover
             className={cn(
-              'w-full max-w-[490px] h-[490px] m-0 shrink-0 bg-dark-500 relative mx-auto',
-              'addPost addFilter'
+              'w-full max-w-[490px] h-[490px] m-0 shrink-0 bg-dark-500 relative mx-auto'
             )}
           >
-            {photos.map((photo, index) => (
+            {images.map((image, index) => (
               <SwiperSlide
-                className={cn(
-                  'm-0 shrink-0 bg-dark-500 relative flex',
-                  'addPost'
-                )}
+                className={cn('m-0 shrink-0 bg-dark-500 relative flex')}
                 key={index}
               >
                 <Image
                   alt={t.createPost.alt}
                   className={cn('object-center object-contain w-full h-auto')}
                   height={0}
-                  src={photo.imgUrlToShow ?? photo.url}
-                  style={{ filter: photo.filter }}
+                  src={image.imgUrlToShow ?? image.url}
+                  style={{ filter: image.filter.filterStyle }}
                   width={0}
                 />
               </SwiperSlide>

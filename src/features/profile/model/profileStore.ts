@@ -17,6 +17,7 @@ import { makeAutoObservable, runInAction } from 'mobx'
 
 export class ProfileStore {
   isLoading: boolean = false
+  isProfileLoading: boolean = true
   userProfile: Nullable<UserProfile> = null
 
   constructor() {
@@ -56,7 +57,7 @@ export class ProfileStore {
       responseErrorHandler(error)
     } finally {
       runInAction(() => {
-        this.isLoading = false
+        this.isProfileLoading = false
       })
     }
   }

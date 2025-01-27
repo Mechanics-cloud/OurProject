@@ -1,6 +1,7 @@
 import * as React from 'react'
 
 import { DialogContent, DialogDescription, cn } from '@/common'
+import { generalStore } from '@/core/store'
 import {
   AddTextPost,
   ModalHeader,
@@ -16,8 +17,7 @@ type Props = {
 }
 
 export const PublicationModal = observer(({ onPostUpload }: Props) => {
-  const { isLoading, onPublishPost, photos, t } =
-    usePublicationModal(onPostUpload)
+  const { images, onPublishPost, t } = usePublicationModal(onPostUpload)
 
   return (
     <DialogContent
@@ -42,31 +42,27 @@ export const PublicationModal = observer(({ onPostUpload }: Props) => {
         <div className={'flex relative'}>
           <SwiperCover
             className={cn(
-              'max-w-[490px] h-[490px] w-full m-0 shrink-0 bg-dark-500 relative mx-auto',
-              'addPost addFilter'
+              'max-w-[490px] h-[490px] w-full m-0 shrink-0 bg-dark-500 relative mx-auto'
             )}
           >
-            {photos.map((photo, index) => (
+            {images.map((image, index) => (
               <SwiperSlide
-                className={cn(
-                  'm-0 shrink-0 bg-dark-500 relative flex',
-                  'addPost'
-                )}
+                className={cn('m-0 shrink-0 bg-dark-500 relative flex')}
                 key={index}
               >
                 <Image
-                  alt={'Photo in carousel'}
+                  alt={t.createPost.alt}
                   className={cn(
                     'object-center object-contain w-full h-auto',
-                    isLoading ? 'animate-pulse' : ''
+                    generalStore.isLoading ? 'animate-pulse' : ''
                   )}
                   height={490}
                   src={
-                    isLoading
-                      ? (photo.imgUrlToShow ?? photo.url)
-                      : (photo.preparedImgData.photoUrl ?? photo.url)
+                    generalStore.isLoading
+                      ? (image.imgUrlToShow ?? image.url)
+                      : (image.preparedImgData.photoUrl ?? image.url)
                   }
-                  style={{ filter: photo.filter }}
+                  style={{ filter: image.filter.filterStyle }}
                   width={490}
                 />
               </SwiperSlide>

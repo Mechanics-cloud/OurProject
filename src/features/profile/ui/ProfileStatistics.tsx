@@ -19,7 +19,7 @@ export const ProfileStatistics = ({
   return (
     <div
       className={
-        'flex gap-4 justify-between sm:gap-12 sm:justify-start lg:gap-25'
+        'flex gap-2 justify-between sm:gap-12 sm:justify-start lg:gap-25'
       }
     >
       <div className={'flex flex-col text-center'}>
