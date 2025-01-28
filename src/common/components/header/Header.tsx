@@ -1,10 +1,16 @@
 import * as React from 'react'
 
 import { OutlineBell } from '@/assets/icons'
-import { Button, LangSelect, cn, useTranslation } from '@/common'
+import {
+  Button,
+  LangSelect,
+  ProtectedPaths,
+  PublicPaths,
+  cn,
+  useTranslation,
+} from '@/common'
 import { MobilePopover } from '@/common/components/header/mobilePopover'
 import { Typography } from '@/common/components/typography'
-import { Paths } from '@/common/paths'
 import { generalStore } from '@/core/store'
 import Link from 'next/link'
 
@@ -28,7 +34,7 @@ const Header = () => {
           variant={'large'}
         >
           <Link
-            href={isAuth ? Paths.home : Paths.publicMainPage}
+            href={isAuth ? ProtectedPaths.home : PublicPaths.publicMainPage}
             title={'Go Home'}
           >
             Inctagram
@@ -56,7 +62,7 @@ const Header = () => {
               >
                 <Link
                   className={'text-xs xs:text-base'}
-                  href={Paths.signIn}
+                  href={PublicPaths.signIn}
                 >
                   {t.signIn.title}
                 </Link>
@@ -67,7 +73,7 @@ const Header = () => {
               >
                 <Link
                   className={'text-xs xs:text-base'}
-                  href={Paths.signUp}
+                  href={PublicPaths.signUp}
                 >
                   {t.signUp.title}
                 </Link>

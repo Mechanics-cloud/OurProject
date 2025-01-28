@@ -5,6 +5,4 @@ const GitHubPage = () => {
   return <GitHubCallback />
 }
 
-export default withProtection(GitHubPage, {
-  isPublic: true,
-})
+export default withProtection(GitHubPage)

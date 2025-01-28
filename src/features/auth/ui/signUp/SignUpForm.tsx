@@ -1,12 +1,12 @@
 import {
   Button,
   Card,
+  PublicPaths,
   Typography,
   typographyVariants,
   useTranslation,
 } from '@/common'
 import { FormCheckbox, FormTextField } from '@/common/form'
-import { Paths } from '@/common/paths'
 import { cn } from '@/common/utils/cn'
 import {
   AgreementWithTheTerms,
@@ -115,7 +115,7 @@ export const SignUpForm = observer(() => {
                 typographyVariants({ variant: 'h3' }),
                 'grow text-accent-500 w-full text-center'
               )}
-              href={Paths.signIn}
+              href={PublicPaths.signIn}
             >
               {t.signIn.title}
             </Link>

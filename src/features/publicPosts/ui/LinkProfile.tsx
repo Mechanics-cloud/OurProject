@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
-import { Paths, Typography } from '@/common'
+import { PublicPaths, Typography } from '@/common'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -15,7 +15,7 @@ export const LinkProfile = ({ avatarOwner, userId, userName }: Props) => {
   return (
     <Link
       className={'flex gap-3 items-center'}
-      href={`${Paths.profileLink(userId)}`}
+      href={`${PublicPaths.profileLink(userId)}`}
     >
       <Image
         alt={'Avatar'}

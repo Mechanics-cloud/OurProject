@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { ReCAPTCHA } from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 
-import { Environments, Nullable, Paths, useModal } from '@/common'
+import { Environments, Nullable, PublicPaths, useModal } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import {
   ForgotPasswordFields,
@@ -45,7 +45,7 @@ export const useForgotPassword = (t: LocaleType) => {
   }
 
   const onExpireRecaptcha = async () => {
-    await router.push(Paths.expiredSession)
+    await router.push(PublicPaths.expiredSession)
   }
 
   const onSubmit = handleSubmit(async (data) => {

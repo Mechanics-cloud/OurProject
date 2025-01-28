@@ -1,44 +1,52 @@
 import React, { useEffect } from 'react'
 
-import { FullScreenLoader, Paths, ProtectedLayout } from '@/common'
+import {
+  FullScreenLoader,
+  ProtectedLayout,
+  ProtectedPaths,
+  PublicPaths,
+} from '@/common'
 import { NextPageWithLayout } from '@/common/HOC/types'
 import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
-interface WithProtectionOptions {
-  isPublic?: boolean
-}
-
 export const withProtection = <P extends object>(
-  PageComponent: NextPageWithLayout<P>,
-  options: WithProtectionOptions = {
-    isPublic: false,
-  }
+  PageComponent: NextPageWithLayout<P>
 ): NextPageWithLayout<P> =>
   observer((props) => {
-    const { isPublic } = options
     const router = useRouter()
-    const currentAuthState = authStore.isAuthenticated
 
-    const isUserAuthorized = currentAuthState === 'authenticated' && isPublic
+    const isProtectedRoute = Object.values(ProtectedPaths).includes(
+      router.pathname
+    )
+    const isPublicRoute = Object.values(PublicPaths).includes(router.pathname)
+
+    const isUserAuthorized = authStore.isAuthenticated === 'authenticated'
 
     const isUserUnauthorized =
-      (currentAuthState === 'error' ||
-        currentAuthState === 'notAuthenticated') &&
-      !isPublic
+      authStore.isAuthenticated === 'error' ||
+      authStore.isAuthenticated === 'notAuthenticated'
 
     const loadingCondition =
-      isUserAuthorized || isUserUnauthorized || currentAuthState === 'pending'
+      authStore.isAuthenticated === 'pending' ||
+      (isUserAuthorized && isPublicRoute) ||
+      (isUserUnauthorized && isProtectedRoute)
 
     useEffect(() => {
-      if (isUserAuthorized) {
-        router.replace(Paths.home)
+      if (isUserAuthorized && isPublicRoute) {
+        router.replace(ProtectedPaths.home)
       }
-      if (isUserUnauthorized) {
-        router.replace(Paths.signIn)
+      if (isUserUnauthorized && isProtectedRoute) {
+        router.replace(PublicPaths.signIn)
       }
-    }, [isUserAuthorized, isUserUnauthorized, router])
+    }, [
+      isProtectedRoute,
+      isPublicRoute,
+      isUserAuthorized,
+      isUserUnauthorized,
+      router,
+    ])
 
     return (
       <ProtectedLayout>
