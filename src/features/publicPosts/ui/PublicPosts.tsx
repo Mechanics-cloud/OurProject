@@ -1,4 +1,6 @@
 import {
+  PathService,
+  Paths,
   TextUnfolding,
   calculateCharactersToShow,
   useTranslation,
@@ -10,6 +12,7 @@ import {
   RegisteredUsersCounter,
   TimeAgo,
 } from '@/features/publicPosts'
+import Link from 'next/link'
 import CustomSwiper from 'src/common/components/swiper/CustomSwiper'
 
 import 'swiper/swiper-bundle.css'
@@ -38,12 +41,19 @@ export const PublicPosts = ({ posts }: Props) => {
             >
               <div className={'relative w-60 h-60 lg:w-full xl:w-60'}>
                 {post.images.length > 0 ? (
-                  <CustomSwiper
-                    className={
-                      'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
-                    }
-                    images={post.images}
-                  />
+                  <Link
+                    href={PathService.generatePath(Paths.userPost, {
+                      postId: post.id,
+                      userId: post.ownerId,
+                    })}
+                  >
+                    <CustomSwiper
+                      className={
+                        'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
+                      }
+                      images={post.images}
+                    />
+                  </Link>
                 ) : (
                   <Stub
                     alt={t.profilePage.noPosts.alt}

@@ -1,5 +1,6 @@
 export * from './useClickOutside'
 export * from './useDebounce'
+export * from './useElementOnScreen'
 export * from './useMe'
 export * from './useModal'
 export * from './useScreenWidth'

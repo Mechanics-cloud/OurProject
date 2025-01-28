@@ -19,4 +19,6 @@ export const Paths = {
   signUp: '/auth/sign-up',
   statistics: '/statistics',
   termsOfService: '/auth/terms-of-service',
+  userPost: '/profile/:userId/:postId',
+  userProfile: '/profile/:userId',
 }
