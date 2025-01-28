@@ -4,7 +4,6 @@ import { toast } from 'react-toastify'
 import { getFromLocalStorage, useTranslation } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { authStore } from '@/features/auth'
-import { profileStore } from '@/features/profile'
 import { runInAction } from 'mobx'
 
 export const useMe = () => {
@@ -16,7 +15,6 @@ export const useMe = () => {
       if (accessToken) {
         try {
           await authStore.me()
-          await profileStore.getProfile()
         } catch (e) {
           toast.success(t.basic.welcome, { closeButton: false })
         }

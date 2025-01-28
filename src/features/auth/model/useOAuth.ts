@@ -7,7 +7,7 @@ export const useOAuth = () => {
   const googleLogin = useGoogleLogin({
     flow: 'auth-code',
     onError: () => {
-      responseErrorHandler('Oops something went wrong')
+      responseErrorHandler(new Error('Oops something went wrong'))
     },
     onSuccess: async (credentialResponse) => {
       if (credentialResponse.code) {
