@@ -10,6 +10,5 @@ const Confirmation = () => {
 }
 
 export default withProtection(Confirmation, {
-  forUnauthorizedUsers: true,
   isPublic: true,
 })

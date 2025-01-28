@@ -45,6 +45,5 @@ const ExpiredSession = () => {
 }
 
 export default withProtection(ExpiredSession, {
-  forUnauthorizedUsers: true,
   isPublic: true,
 })
