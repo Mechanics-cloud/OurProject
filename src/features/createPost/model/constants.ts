@@ -2,20 +2,20 @@ import { LocaleType } from '@locales/ru'
 
 import { ClassicSetting, InstFilter } from './types'
 
-export const PhotoEditorState = {
+export const PostCreationState = {
   adding: 'ADDING',
   cropping: 'CROPPING',
   filtering: 'FILTERING',
   publication: 'PUBLICATION',
 } as const
 
-export type PhotoEditorStateType =
-  (typeof PhotoEditorState)[keyof typeof PhotoEditorState]
+export type PostCreationStateType =
+  (typeof PostCreationState)[keyof typeof PostCreationState]
 
-export const mapNext = new Map<PhotoEditorStateType, PhotoEditorStateType>([
-  [PhotoEditorState.adding, PhotoEditorState.cropping],
-  [PhotoEditorState.cropping, PhotoEditorState.filtering],
-  [PhotoEditorState.filtering, PhotoEditorState.publication],
+export const mapNext = new Map<PostCreationStateType, PostCreationStateType>([
+  [PostCreationState.adding, PostCreationState.cropping],
+  [PostCreationState.cropping, PostCreationState.filtering],
+  [PostCreationState.filtering, PostCreationState.publication],
 ])
 
 export const mapPrev = new Map()
@@ -23,7 +23,7 @@ for (const [key, value] of mapNext) {
   mapPrev.set(value, key)
 }
 
-export const MaxPhotoCount = 10
+export const MaxPostImagesCount = 10
 export const MaxDescriptionLength = 500
 
 export const classicSettingsData = (t: LocaleType): ClassicSetting[] => {

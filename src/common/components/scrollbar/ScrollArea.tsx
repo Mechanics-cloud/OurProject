@@ -23,26 +23,6 @@ export const ScrollArea = forwardRef<
   const scrollableRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const scrollableElement = scrollableRef.current
-
-    if (!scrollableElement) {
-      return
-    }
-
-    const resizeObserver = new ResizeObserver(() => {
-      if (scrollableElement) {
-        scrollableElement.scrollTop = scrollableElement.scrollHeight
-      }
-    })
-
-    resizeObserver.observe(scrollableElement)
-
-    return () => {
-      resizeObserver.disconnect()
-    }
-  }, [children])
-
-  useEffect(() => {
     const element = document.querySelector('.viewport > div')
 
     if (element instanceof HTMLElement) {

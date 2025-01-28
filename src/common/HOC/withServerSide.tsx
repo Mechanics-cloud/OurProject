@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import { LayoutWithStore, Menu, SideBar, getFromLocalStorage } from '@/common'
-import { StorageKeys } from '@/common/enums'
+import { FullScreenLoader, ProtectedLayout } from '@/common'
 import { generalStore } from '@/core/store'
-import { profileStore } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 
 import { NextPageWithLayout } from './types'
@@ -12,29 +10,11 @@ export const withServerSide = <P extends object>(
   PageComponent: NextPageWithLayout<P>
 ): NextPageWithLayout<P> =>
   observer((props) => {
-    useEffect(() => {
-      if (getFromLocalStorage(StorageKeys.AccessToken)) {
-        profileStore.getProfile()
-      }
-    }, [])
-
-    if (generalStore.user) {
-      return (
-        <LayoutWithStore className={'flex'}>
-          <SideBar />
-          <Menu className={'lg:hidden'} />
-          <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>
-            <PageComponent {...props} />
-          </div>
-        </LayoutWithStore>
-      )
-    }
+    const loading = generalStore.isLoading
 
     return (
-      <LayoutWithStore>
-        <div className={'lg:mx-24'}>
-          <PageComponent {...props} />
-        </div>
-      </LayoutWithStore>
+      <ProtectedLayout>
+        {loading ? <FullScreenLoader /> : <PageComponent {...props} />}
+      </ProtectedLayout>
     )
   })

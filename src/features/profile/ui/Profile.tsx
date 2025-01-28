@@ -42,7 +42,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
         <div className={'flex flex-col w-full'}>
           <div
             className={
-              'mt-5 md:mt-9 flex items-center w-full gap-5 mb-3 lg:gap-9 lg:mb-[53px]'
+              'mt-5 md:mt-9 flex flex-col items-center w-full gap-5 mb-3 lg:gap-9 lg:mb-[53px] xs:flex-row'
             }
           >
             <Image

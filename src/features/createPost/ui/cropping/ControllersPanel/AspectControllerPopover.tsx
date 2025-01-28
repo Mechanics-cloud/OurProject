@@ -12,7 +12,7 @@ import {
 } from '@/common'
 import {
   AspectControllerButtons,
-  PhotoControllerButton,
+  ControllerButton,
 } from '@/features/createPost'
 
 type Props = {
@@ -29,7 +29,7 @@ export const AspectControllerPopover = ({ id }: Props) => {
       open={isOpen}
     >
       <PopoverTrigger asChild>
-        <PhotoControllerButton>
+        <ControllerButton>
           <Tooltip title={t.createPost.cropping.crop}>
             <Expand
               className={cn(
@@ -38,7 +38,7 @@ export const AspectControllerPopover = ({ id }: Props) => {
               )}
             />
           </Tooltip>
-        </PhotoControllerButton>
+        </ControllerButton>
       </PopoverTrigger>
       <PopoverContent
         align={'start'}

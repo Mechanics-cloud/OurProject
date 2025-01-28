@@ -16,6 +16,7 @@ import {
 } from '@/assets/icons/outlineIcons'
 import { PathService, Paths, cn, useModal, useTranslation } from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
+import { NavLink } from '@/common/components/navLink'
 import { Tooltip } from '@/common/components/tooltip'
 import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
@@ -38,8 +39,7 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
   return (
     <nav
       className={cn(
-        'min-w-[360px] w-full bg-dark-700 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50]',
-        'lg:hidden',
+        'min-w-[320px] w-full bg-dark-900 border-t border-dark-300 fixed bottom-0 left-0 right-0 z-[50] lg:hidden',
         className
       )}
     >
@@ -100,16 +100,12 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
         </li>
         <li>
           <Tooltip title={t.menu.profile}>
-            <Link
+            <NavLink
+              active={<Person className={'text-accent-500 size-6'} />}
               href={PathService.generatePath(Paths.userProfile, { userId })}
-            >
-              {matchesPathname(href, Paths.profile) ? (
-                <Person className={'size-6 text-accent-500'} />
-              ) : (
-                <PersonOutline className={'size-6'} />
-              )}
-              <span className={'sr-only'}>{t.menu.profile}</span>
-            </Link>
+              inactive={<PersonOutline className={'size-6'} />}
+              label={t.menu.profile}
+            />
           </Tooltip>
         </li>
       </ul>

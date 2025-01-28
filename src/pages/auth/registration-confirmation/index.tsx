@@ -9,4 +9,6 @@ const Confirmation = () => {
   )
 }
 
-export default withProtection(Confirmation, { isNotForAuthorizedUsers: true })
+export default withProtection(Confirmation, {
+  isPublic: true,
+})

@@ -1,16 +1,14 @@
 import * as React from 'react'
 
 import { ScrollArea } from '@/common'
-import { addPostStore } from '@/features/createPost'
+import { createPostStore } from '@/features/createPost'
 import { instFiltersData } from '@/features/createPost/model/constants'
 import { observer } from 'mobx-react-lite'
 
 import { InstFilter } from './InstFilter'
 
 export const InstFilters = observer(() => {
-  const photos = addPostStore.photos
-  const addInstFilter = addPostStore.addInstFilter
-  const currentSliderIndex = addPostStore.currentSliderIndex || 0
+  const photo = createPostStore.images.getByCurrentIndex()
 
   return (
     <ScrollArea className={'md:h-[430px]'}>
@@ -23,13 +21,10 @@ export const InstFilters = observer(() => {
           <InstFilter
             filterName={filter.name}
             filterSettings={filter.style}
-            imageSrc={
-              photos[currentSliderIndex].preparedImgData.photoUrl ??
-              photos[currentSliderIndex].url
-            }
+            imageSrc={photo.preparedImgData.photoUrl ?? photo.url}
             key={index}
             onClick={() => {
-              addInstFilter(currentSliderIndex, filter.style)
+              photo.filter.addInstFilter(filter.style)
             }}
           />
         ))}

@@ -30,7 +30,7 @@ export const PublicPosts = ({ posts }: Props) => {
       <RegisteredUsersCounter totalUsers={posts.totalUsers} />
       <div
         className={
-          'grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-3'
+          'grid xl:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-3'
         }
       >
         {posts.items.map((post) => {

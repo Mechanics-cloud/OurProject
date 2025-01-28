@@ -1,15 +1,14 @@
 import { useCallback, useRef } from 'react'
 
 import { Nullable } from '@/common'
-import { addPostStore } from '@/features/createPost'
+import { createPostStore } from '@/features/createPost'
 import { Swiper as SwiperInstance } from 'swiper'
 
 export const useSwiperCover = () => {
   const swiperRef = useRef<Nullable<SwiperInstance>>(null)
-  const addCurrentSliderIndex = addPostStore.addCurrentSliderIndex
 
   const onSlideChange = (swiper: SwiperInstance) => {
-    addCurrentSliderIndex(swiper.activeIndex)
+    createPostStore.images.setCurrentIndex(swiper.activeIndex)
   }
 
   const goToSlide = useCallback((index: number) => {

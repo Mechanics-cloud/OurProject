@@ -10,14 +10,21 @@ export const useMe = () => {
   const { t } = useTranslation()
 
   useEffect(() => {
-    if (getFromLocalStorage(StorageKeys.AccessToken)) {
-      authStore.me().catch(() => {
-        toast.success(t.basic.welcome, { closeButton: false })
-      })
-    } else {
-      runInAction(() => {
-        authStore.isAuthenticated = 'no'
-      })
+    const accessToken = getFromLocalStorage(StorageKeys.AccessToken)
+    const authMe = async () => {
+      if (accessToken) {
+        try {
+          await authStore.me()
+        } catch (e) {
+          toast.success(t.basic.welcome, { closeButton: false })
+        }
+      } else {
+        runInAction(() => {
+          authStore.isAuthenticated = 'notAuthenticated'
+        })
+      }
     }
+
+    authMe()
   }, [t.basic.welcome])
 }

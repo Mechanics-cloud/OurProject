@@ -3,14 +3,14 @@ import { PropsWithChildren } from 'react'
 
 import { Dialog } from '@/common'
 import {
-  AddPhotoModal,
+  AddImageModal,
   ClosePostCreatingModal,
-  CropPhotoModal,
-  FilterPhotoModal,
+  CropImageModal,
+  FilterImageModal,
   PublicationModal,
   useNewPostDialog,
 } from '@/features/createPost'
-import { PhotoEditorState } from '@/features/createPost/model/constants'
+import { PostCreationState } from '@/features/createPost/model/constants'
 import { DialogProps } from '@radix-ui/react-dialog'
 import { observer } from 'mobx-react-lite'
 
@@ -38,22 +38,21 @@ export const NewPostDialog = observer(
           open={open}
           {...rest}
         >
-          {isNewDialog && <AddPhotoModal />}
-
-          {!isNewDialog && currentState === PhotoEditorState.adding && (
-            <AddPhotoModal />
-          )}
-
-          {!isNewDialog && currentState === PhotoEditorState.cropping && (
-            <CropPhotoModal />
-          )}
-
-          {!isNewDialog && currentState === PhotoEditorState.filtering && (
-            <FilterPhotoModal />
-          )}
-
-          {!isNewDialog && currentState === PhotoEditorState.publication && (
-            <PublicationModal onPostUpload={onPostUpload} />
+          {isNewDialog ? (
+            <AddImageModal />
+          ) : (
+            <>
+              {currentState === PostCreationState.adding && <AddImageModal />}
+              {currentState === PostCreationState.cropping && (
+                <CropImageModal />
+              )}
+              {currentState === PostCreationState.filtering && (
+                <FilterImageModal />
+              )}
+              {currentState === PostCreationState.publication && (
+                <PublicationModal onPostUpload={onPostUpload} />
+              )}
+            </>
           )}
         </Dialog>
 

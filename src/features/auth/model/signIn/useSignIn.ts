@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form'
 
-import { Paths } from '@/common'
 import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
 import {
@@ -9,7 +8,6 @@ import {
 } from '@/features/auth/model/signIn/singInSchema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { LocaleType } from '@locales/ru'
-import Router from 'next/router'
 
 export const useSignIn = (t: LocaleType) => {
   const {
@@ -30,7 +28,6 @@ export const useSignIn = (t: LocaleType) => {
     data.email = data.email.toLowerCase()
     try {
       await authStore.login(data)
-      await Router.push(Paths.home)
     } catch (error: unknown) {
       setError('email', {
         message: t.signIn.errorResponse,

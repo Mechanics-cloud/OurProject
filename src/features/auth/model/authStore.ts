@@ -4,11 +4,13 @@ import { setToLocalStorage } from '@/common/utils/localStorage'
 import { generalStore } from '@/core/store'
 import { authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
+import { profileStore } from '@/features/profile'
 import { isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 class AuthStore {
-  isAuthenticated: 'error' | 'no' | 'pending' | 'yes' = 'pending'
+  isAuthenticated: 'authenticated' | 'error' | 'notAuthenticated' | 'pending' =
+    'pending'
   constructor() {
     makeAutoObservable(this)
   }
@@ -60,7 +62,7 @@ class AuthStore {
       await authApi.logout()
       await clearAllData()
       runInAction(() => {
-        this.isAuthenticated = 'no'
+        this.isAuthenticated = 'notAuthenticated'
       })
     } catch (error) {
       if (isAxiosError(error)) {
@@ -74,9 +76,9 @@ class AuthStore {
       })
     }
   }
-
+  //todo: removed this.isAuthenticated === 'notAuthenticated' from the if condition in me()
   async me() {
-    if (this.isAuthenticated === 'yes' || this.isAuthenticated === 'no') {
+    if (this.isAuthenticated === 'authenticated') {
       return
     }
     try {
@@ -85,10 +87,12 @@ class AuthStore {
       })
       const user = await authApi.me()
 
+      await profileStore.getProfile()
+
       runInAction(() => {
         if (user) {
           generalStore.user = user
-          this.isAuthenticated = 'yes'
+          this.isAuthenticated = 'authenticated'
         }
       })
 

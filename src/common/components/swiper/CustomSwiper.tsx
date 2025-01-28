@@ -34,12 +34,12 @@ const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
     >
       {images.map((image) => (
         <SwiperSlide
-          className={'w-full'}
+          className={'relative w-full h-full'}
           key={String(image.url)}
         >
           <Image
             alt={'picture from post'}
-            className={'block h-full w-full object-cover'}
+            className={'absolute inset-0 h-full w-full object-cover'}
             fill
             priority
             sizes={'(max-width: 768px) 100vw, 33vw'}

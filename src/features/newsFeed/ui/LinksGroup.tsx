@@ -1,13 +1,11 @@
 import { ComponentProps, useState } from 'react'
 
-import { Heart } from '@/assets/icons/filledIcons'
 import {
   BookmarkOutline,
-  HeartOutline,
   MessageCircleOutline,
   PaperPlaneOutline,
 } from '@/assets/icons/outlineIcons'
-import { BasicPost, Tooltip, cn, useTranslation } from '@/common'
+import { BasicPost, Like, Tooltip, cn, useTranslation } from '@/common'
 import { LikeStatus } from '@/common/enums'
 import { newsFeedStore } from '@/features/newsFeed'
 import { postsApi } from '@/features/posts'
@@ -49,10 +47,7 @@ export const LinksGroup = observer(({ className, item }: Props) => {
 
   return (
     <div
-      className={cn(
-        'w-full h-6 flex items-center justify-between mb-4',
-        className
-      )}
+      className={cn('w-full h-6 flex items-center justify-between', className)}
     >
       <div className={'flex items-center gap-5'}>
         <button
@@ -61,11 +56,10 @@ export const LinksGroup = observer(({ className, item }: Props) => {
           type={'button'}
         >
           <Tooltip title={t.actionIconsGroup.isLiked}>
-            {item.isLiked ? (
-              <Heart className={'size-6'} />
-            ) : (
-              <HeartOutline className={'size-6'} />
-            )}
+            <Like
+              active={item.isLiked}
+              className={'size-6'}
+            />
           </Tooltip>
         </button>
         <Link href={'/'}>

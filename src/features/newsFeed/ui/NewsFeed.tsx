@@ -12,12 +12,19 @@ import { PostSkeleton } from './PostSkeleton'
 export const NewsFeed = observer(() => {
   const state = newsFeedStore.publicationsFollowers?.items
   const router: NextRouter = useRouter()
+  const Component = state?.map((item) => (
+    <PostItem
+      item={item}
+      key={item.id}
+      router={router}
+    />
+  ))
 
   useEffect(() => {
     newsFeedStore.getPostsPublicationsFollowers()
   }, [])
 
-  if (newsFeedStore.isLoading) {
+  if (newsFeedStore.isLoading || !Component) {
     return (
       <>
         <Loader />
@@ -30,11 +37,5 @@ export const NewsFeed = observer(() => {
     return <EmptyFeed />
   }
 
-  return state?.map((item) => (
-    <PostItem
-      item={item}
-      key={item.id}
-      router={router}
-    />
-  ))
+  return Component
 })

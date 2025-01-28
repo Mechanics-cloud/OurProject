@@ -46,4 +46,4 @@ const Layout = forwardRef<ElementRef<'div'>, Props>(
 )
 
 Layout.displayName = 'Layout'
-export const LayoutWithStore = observer(Layout)
+export const BaseLayoutWithStore = observer(Layout)
