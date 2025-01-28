@@ -38,6 +38,5 @@ function ServerError() {
 }
 
 export default withProtection(ServerError, {
-  forUnauthorizedUsers: true,
   isPublic: true,
 })

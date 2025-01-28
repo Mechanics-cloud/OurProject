@@ -10,7 +10,7 @@ export type ErrorMessage = {
 
 export type ErrorResponse = {
   error: string
-  messages: ErrorMessage[]
+  messages: ErrorMessage[] | string
   statusCode: HttpStatusCode
 }
 
