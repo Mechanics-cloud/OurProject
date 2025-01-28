@@ -1,4 +1,5 @@
-import * as React from 'react'
+'use strict'
+import React, { ReactNode } from 'react'
 
 import {
   Button,
@@ -11,29 +12,17 @@ import {
   DialogTitle,
   useTranslation,
 } from '@/common'
-import { logOut } from '@/common/utils/logOut'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
-  logOutModalHandler: () => void
+  children: ReactNode
+  onClick: () => void
   onClose: () => void
-  userEmail: string
 } & DialogProps
 
-//todo: change to reusable Modal component
-export const LogOutModal = ({
-  logOutModalHandler,
-  onClose,
-  open,
-  userEmail,
-  ...rest
-}: Props) => {
+//todo: story
+export const Modal = ({ children, onClick, onClose, open, ...rest }: Props) => {
   const { t } = useTranslation()
-
-  const onLogOut = async () => {
-    await logOut()
-    logOutModalHandler()
-  }
 
   return (
     <Dialog
@@ -43,16 +32,16 @@ export const LogOutModal = ({
     >
       <DialogContent className={'gap-[30px] max-w-[440px]'}>
         <DialogHeader>
-          <DialogTitle>{t.basic.logOut}</DialogTitle>
+          <DialogTitle>Close Post</DialogTitle>
         </DialogHeader>
         <DialogDescription className={'text-left my-0'}>
-          {t.menu.logOutModal(userEmail)}
+          {children}
         </DialogDescription>
         <DialogFooter className={'flex justify-end gap-6'}>
           <DialogClose asChild>
             <Button
               className={'w-[96px]'}
-              onClick={onLogOut}
+              onClick={onClick}
               type={'button'}
               variant={'outline'}
             >
