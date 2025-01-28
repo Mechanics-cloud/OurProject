@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import { responseErrorHandler, setToLocalStorage } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { authStore } from '@/features/auth'
-import { profileStore } from '@/features/profile'
 import { useRouter } from 'next/router'
 
 export const useGitHubCallback = () => {
@@ -18,9 +17,7 @@ export const useGitHubCallback = () => {
           setToLocalStorage(StorageKeys.AccessToken, accessToken as string)
           try {
             await authStore.me()
-            await profileStore.getProfile()
           } catch (error) {
-            console.log(error)
             responseErrorHandler(error)
             setIsLoginViaGithub(false)
           }
