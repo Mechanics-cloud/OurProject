@@ -1,11 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react'
 
-import {
-  PathService,
-  Paths,
-  getDeviceScreenWidth,
-  withServerSide,
-} from '@/common'
+import { getDeviceScreenWidth, withServerSide } from '@/common'
 import { PostModal, PublicPostInfo, getPublicPostInfo } from '@/features/posts'
 import {
   ProfileData,
@@ -15,7 +10,6 @@ import {
 } from '@/features/profile'
 import { Profile } from '@/features/profile/ui/Profile'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -53,7 +47,6 @@ const ProfilePage = ({
   screenSize,
   userProfile,
 }: Props) => {
-  const router = useRouter()
   const store = initializeStore({ postsData, userProfile })
 
   useEffect(() => {
@@ -69,14 +62,8 @@ const ProfilePage = ({
       {post && (
         <PostModal
           comments={comments}
-          onClose={() =>
-            router.push(
-              PathService.generatePath(Paths.userProfile, {
-                userId: userProfile.id,
-              })
-            )
-          }
           post={post}
+          userProfileId={userProfile.id}
         />
       )}
     </>
