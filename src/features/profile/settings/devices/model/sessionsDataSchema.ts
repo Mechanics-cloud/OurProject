@@ -1,4 +1,4 @@
-import { IP_REGEXP } from '@/features/auth'
+import { IP_REGEXP } from '@/common/constants'
 import { z } from 'zod'
 
 export const sessionsDataSchema = z.object({

@@ -1,4 +1,4 @@
-import { DATE_REGEX, USER_NAME_REGEXP } from '@/features/auth'
+import { DATE_REGEX, USER_NAME_REGEXP } from '@/common/constants'
 import { z } from 'zod'
 
 export const generalInfoSchema = z.object({
