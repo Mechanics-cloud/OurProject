@@ -6,6 +6,5 @@ const GitHubPage = () => {
 }
 
 export default withProtection(GitHubPage, {
-  forUnauthorizedUsers: true,
   isPublic: true,
 })
