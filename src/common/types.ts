@@ -10,7 +10,7 @@ export type ErrorMessage = {
 
 export type ErrorResponse = {
   error: string
-  messages: ErrorMessage[]
+  messages: ErrorMessage[] | string
   statusCode: HttpStatusCode
 }
 
@@ -40,6 +40,7 @@ export type FullName = {
 
 export type BasicPost = {
   avatarOwner: string
+  avatarWhoLikes?: boolean
   createdAt: string
   description: string
   id: number
@@ -59,3 +60,10 @@ export type PagesInfo = {
   pagesCount: number
   totalCount: number
 }
+
+export type StaticImage = { url: StaticImageData | string } & Omit<
+  UploadImage,
+  'url'
+>
+
+export type SortDirection = 'asc' | 'desc'

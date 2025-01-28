@@ -14,6 +14,5 @@ function RecoveryPassword() {
 }
 
 export default withProtection(RecoveryPassword, {
-  forUnauthorizedUsers: true,
   isPublic: true,
 })

@@ -15,10 +15,17 @@ class AuthApi {
   public async authWithGoogle(code: string): Promise<AxiosResponse> {
     return this.instance.post(Endpoints.AuthWithGoogle, { code })
   }
-  public async emailConfirmation(code: string): Promise<AxiosResponse> {
-    return this.instance.post(Endpoints.EmailConfirmation, {
-      confirmationCode: code,
-    })
+  public async emailConfirmation(
+    code: string,
+    signal?: AbortSignal
+  ): Promise<AxiosResponse> {
+    return this.instance.post(
+      Endpoints.EmailConfirmation,
+      {
+        confirmationCode: code,
+      },
+      { signal }
+    )
   }
 
   public async emailResending(

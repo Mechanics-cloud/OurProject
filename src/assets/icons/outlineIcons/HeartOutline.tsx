@@ -4,7 +4,6 @@ const SvgHeartOutline = (
   ref: Ref<SVGSVGElement>
 ) => (
   <svg
-    fill={'none'}
     height={'1em'}
     ref={ref}
     viewBox={'0 0 24 24'}

@@ -1,4 +1,4 @@
-import { withProtection } from '@/common'
+import { withProtection } from '@/common/HOC/withProtection'
 import { NewsFeed } from '@/features/newsFeed'
 
 const HomePage = () => {

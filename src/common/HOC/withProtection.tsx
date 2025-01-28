@@ -1,65 +1,48 @@
 import React, { useEffect } from 'react'
 
-import {
-  BaseLayoutWithStore,
-  FullScreenLoader,
-  Paths,
-  ProtectedLayout,
-} from '@/common'
+import { FullScreenLoader, Paths, ProtectedLayout } from '@/common'
 import { NextPageWithLayout } from '@/common/HOC/types'
 import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
 interface WithProtectionOptions {
-  forUnauthorizedUsers?: boolean
   isPublic?: boolean
 }
 
 export const withProtection = <P extends object>(
   PageComponent: NextPageWithLayout<P>,
   options: WithProtectionOptions = {
-    forUnauthorizedUsers: false,
     isPublic: false,
   }
 ): NextPageWithLayout<P> =>
   observer((props) => {
-    const { forUnauthorizedUsers, isPublic } = options
+    const { isPublic } = options
     const router = useRouter()
     const currentAuthState = authStore.isAuthenticated
 
+    const isUserAuthorized = currentAuthState === 'authenticated' && isPublic
+
+    const isUserUnauthorized =
+      (currentAuthState === 'error' ||
+        currentAuthState === 'notAuthenticated') &&
+      !isPublic
+
+    const loadingCondition =
+      isUserAuthorized || isUserUnauthorized || currentAuthState === 'pending'
+
     useEffect(() => {
-      const onRedirect = async () => {
-        if (currentAuthState === 'yes' && forUnauthorizedUsers) {
-          await router.replace(Paths.home)
-        }
-        if (
-          (currentAuthState === 'error' ||
-            authStore.isAuthenticated === 'no') &&
-          !isPublic
-        ) {
-          await router.replace(Paths.signIn)
-        }
+      if (isUserAuthorized) {
+        router.replace(Paths.home)
       }
-
-      onRedirect()
-    }, [forUnauthorizedUsers, isPublic, router, currentAuthState])
-
-    if (
-      (currentAuthState === 'yes' && forUnauthorizedUsers) ||
-      (currentAuthState === 'no' && !isPublic) ||
-      currentAuthState === 'pending'
-    ) {
-      return (
-        <BaseLayoutWithStore>
-          <FullScreenLoader />
-        </BaseLayoutWithStore>
-      )
-    }
+      if (isUserUnauthorized) {
+        router.replace(Paths.signIn)
+      }
+    }, [isUserAuthorized, isUserUnauthorized, router])
 
     return (
       <ProtectedLayout>
-        <PageComponent {...props} />
+        {loadingCondition ? <FullScreenLoader /> : <PageComponent {...props} />}
       </ProtectedLayout>
     )
   })
