@@ -2,6 +2,8 @@
 
 import React from 'react'
 
+import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
+import { Typography } from '@/common'
 import { usePostStore } from '@/features/posts'
 import { AddComment } from '@/features/posts/ui/PostModal/Content/AddComment'
 import { CommentList } from '@/features/posts/ui/PostModal/Content/CommentList'
@@ -14,20 +16,40 @@ import { observer } from 'mobx-react-lite'
 
 export const PostInfo = observer(() => {
   const { postStore } = usePostStore()
-  const { isEditing } = postStore
+  const { isEditing, post } = postStore
 
-  return !isEditing ? (
+  return (
     <>
       <PostSlider />
       <div className={'flex flex-col w-full h-full bg-dark-300'}>
-        <PostInfoHeader />
-        <Description />
-        <CommentList />
-        <SocialGroup />
-        <AddComment />
+        {isEditing ? (
+          <Typography
+            className={
+              "pt-3 pb-3 pl-6 relative after:absolute after:content-[''] after:block after:w-full after:h-px after:bg-dark-100 after:left-0 after:bottom-0"
+            }
+            variant={'h1'}
+          >
+            Edit Post
+          </Typography>
+        ) : (
+          <PostInfoHeader />
+        )}
+        {isEditing ? (
+          <EditPost />
+        ) : (
+          <>
+            {post?.description && (
+              <Description
+                avatarOwner={postStore.post?.avatarOwner || anonymous}
+                description={postStore.post?.description}
+              />
+            )}
+            <CommentList />
+            <SocialGroup />
+            <AddComment />
+          </>
+        )}
       </div>
     </>
-  ) : (
-    <EditPost />
   )
 })
