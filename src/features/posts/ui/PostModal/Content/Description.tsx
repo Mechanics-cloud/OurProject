@@ -1,18 +1,16 @@
 import React from 'react'
 
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import { Nullable, Typography } from '@/common'
+import { Typography } from '@/common'
 import { usePostStore } from '@/features/posts'
+import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 
-type Props = {
-  description: Nullable<string>
-}
-export const Description = ({ description }: Props) => {
+export const Description = observer(() => {
   const { postStore } = usePostStore()
 
   return (
-    description && (
+    postStore.post?.description && (
       <div
         className={
           'flex items-center gap-3 py-5 px-6 border-b border-dark-100 box-border'
@@ -26,8 +24,9 @@ export const Description = ({ description }: Props) => {
           src={postStore.post?.avatarOwner || anonymous}
           width={36}
         />
-        <Typography variant={'reg16'}>{description}</Typography>
+
+        <Typography variant={'reg16'}>{postStore.post?.description}</Typography>
       </div>
     )
   )
-}
+})

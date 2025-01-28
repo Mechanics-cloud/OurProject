@@ -29,6 +29,11 @@ export const PostInfoHeader = () => {
 
   const [open, setOpen] = useState(false)
 
+  const onEditClick = () => {
+    postStore.startEditing()
+    setOpen(false)
+  }
+
   return (
     <div
       className={
@@ -80,12 +85,16 @@ export const PostInfoHeader = () => {
                     display: user.userId === postStore.post?.ownerId,
                     icon: <Edit2Outline className={'flex-shrink-0 size-6'} />,
                     id: 'edit',
+                    onClick: onEditClick,
                     text: t.post.editPost,
                   },
                   {
                     display: user.userId === postStore.post?.ownerId,
                     icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
                     id: 'delete',
+                    onClick: () => {
+                      alert('delete')
+                    },
                     text: t.post.deletePost,
                   },
                   {
@@ -94,12 +103,18 @@ export const PostInfoHeader = () => {
                       <PersonRemoveOutline className={'flex-shrink-0 size-6'} />
                     ),
                     id: 'remove',
+                    onClick: () => {
+                      alert('remove')
+                    },
                     text: t.post.unfollow,
                   },
                   {
                     display: user.userId !== postStore.post?.ownerId,
                     icon: <CopyOutline className={'flex-shrink-0 size-6'} />,
                     id: 'copy',
+                    onClick: () => {
+                      alert('copy')
+                    },
                     text: t.post.copyLink,
                   },
                 ].map((item) => (
@@ -108,6 +123,7 @@ export const PostInfoHeader = () => {
                       item.display ? 'inline' : 'hidden'
                     }`}
                     key={item.id}
+                    onClick={item.onClick}
                     type={'button'}
                   >
                     {item.icon}
