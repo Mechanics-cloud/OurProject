@@ -1,6 +1,7 @@
-import { PropsWithChildren, useEffect } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react'
 
 import {
+  AsyncComponent,
   PathService,
   Paths,
   getDeviceScreenWidth,
@@ -55,10 +56,22 @@ const ProfilePage = ({
 }: Props) => {
   const router = useRouter()
   const store = initializeStore({ postsData, userProfile })
+  const [isClosePost, setIsClosePost] = useState<boolean>(false)
 
   useEffect(() => {
     hydrateProfileStore?.setNewData({ postsData, userProfile })
   }, [postsData, userProfile])
+
+  const onClosePost = () => {
+    setIsClosePost(true)
+    router
+      .push(
+        PathService.generatePath(Paths.userProfile, {
+          userId: userProfile.id,
+        })
+      )
+      .then(() => setIsClosePost(false))
+  }
 
   return (
     <>
@@ -69,16 +82,11 @@ const ProfilePage = ({
       {post && (
         <PostModal
           comments={comments}
-          onClose={() =>
-            router.push(
-              PathService.generatePath(Paths.userProfile, {
-                userId: userProfile.id,
-              })
-            )
-          }
+          onClose={onClosePost}
           post={post}
         />
       )}
+      <AsyncComponent isLoading={isClosePost} />
     </>
   )
 }

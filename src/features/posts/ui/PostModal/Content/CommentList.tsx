@@ -62,7 +62,7 @@ export const CommentList = observer(() => {
   }, [startRef, shouldScroll, setShouldScroll])
 
   return (
-    <ScrollArea className={'border-b border-dark-100 box-border'}>
+    <ScrollArea className={'border-b border-dark-100 box-border h-full'}>
       <div
         className={'flex-col overflow-y-hidden grow justify-end py-5 px-6 '}
         ref={startRef}

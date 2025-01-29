@@ -13,6 +13,7 @@ export const PostModal = ({ comments, onClose, post }: Props) => (
   <Overlay
     className={'flex justify-center items-center'}
     isVisible
+    onClose={onClose}
   >
     <div className={'relative container mx-auto w-[972px] h-[564px]'}>
       <PostContent
