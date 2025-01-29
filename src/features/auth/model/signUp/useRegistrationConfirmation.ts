@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useTranslation } from '@/common'
-import { Paths } from '@/common/paths'
+import { PublicPaths, useTranslation } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { authApi } from '@/features/auth/api'
 import { useRouter } from 'next/router'
@@ -13,7 +12,7 @@ export const useRegistrationConfirmation = () => {
     'confirm' | 'error' | 'notConfirm' | 'pending'
   >('pending')
   const href = {
-    pathname: Paths.signIn,
+    pathname: PublicPaths.signIn,
     query: {},
   }
   let text = t.registration.confirmation.text
@@ -21,14 +20,14 @@ export const useRegistrationConfirmation = () => {
   let buttonText = t.registration.confirmation.buttonTitle
 
   if (isConfirm === 'error') {
-    href.pathname = Paths.signUp
+    href.pathname = PublicPaths.signUp
     text = t.registration.error.errorText
     title = t.registration.error.title
     buttonText = t.registration.error.errorButton
   }
 
   if (isConfirm === 'notConfirm') {
-    href.pathname = Paths.registrationEmailResending
+    href.pathname = PublicPaths.registrationEmailResending
     href.query = {
       code: query.code as string,
       email: query.email as string,

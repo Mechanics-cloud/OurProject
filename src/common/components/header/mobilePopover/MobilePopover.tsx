@@ -10,10 +10,10 @@ import {
 } from '@/assets/icons'
 import {
   LinkWithIcon,
-  Paths,
   Popover,
   PopoverContent,
   PopoverTrigger,
+  ProtectedPaths,
   Typography,
   useModal,
   useTranslation,
@@ -55,7 +55,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                 <LinkWithIcon
                   DefaultIcon={SettingsOutline}
                   className={'py-2'}
-                  href={Paths.profileSettings}
+                  href={ProtectedPaths.profileSettings}
                 >
                   <Typography variant={'reg14'}>
                     {t.menu.profileSettings}
@@ -67,7 +67,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                 <LinkWithIcon
                   DefaultIcon={TrendingUpOutline}
                   className={'py-2'}
-                  href={Paths.statistics}
+                  href={ProtectedPaths.statistics}
                 >
                   <Typography variant={'reg14'}>{t.menu.statistics}</Typography>
                 </LinkWithIcon>
@@ -77,7 +77,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                 <LinkWithIcon
                   DefaultIcon={BookmarkOutline}
                   className={'py-2'}
-                  href={Paths.favorites}
+                  href={ProtectedPaths.favorites}
                 >
                   <Typography variant={'reg14'}>{t.menu.favorites}</Typography>
                 </LinkWithIcon>

@@ -2,7 +2,7 @@ import { PropsWithChildren, useEffect } from 'react'
 
 import {
   PathService,
-  Paths,
+  PublicPaths,
   getDeviceScreenWidth,
   withServerSide,
 } from '@/common'
@@ -71,7 +71,7 @@ const ProfilePage = ({
           comments={comments}
           onClose={() =>
             router.push(
-              PathService.generatePath(Paths.userProfile, {
+              PathService.generatePath(PublicPaths.userProfile, {
                 userId: userProfile.id,
               })
             )

@@ -1,6 +1,5 @@
-import { Button, Card, Typography, useTranslation } from '@/common'
+import { Button, Card, PublicPaths, Typography, useTranslation } from '@/common'
 import { FormTextField } from '@/common/form'
-import { Paths } from '@/common/paths'
 import { ExternalServicesRegistration } from '@/features/auth'
 import { useSignIn } from '@/features/auth/model/signIn/useSignIn'
 import { observer } from 'mobx-react-lite'
@@ -49,7 +48,7 @@ const SignIn = observer(() => {
 
           <Link
             className={'self-end mt-3 mb-6 text-light-900'}
-            href={Paths.forgotPassword}
+            href={PublicPaths.forgotPassword}
           >
             {t.signIn.passwordRecovery}
           </Link>
@@ -67,7 +66,7 @@ const SignIn = observer(() => {
             asChild
             variant={'text'}
           >
-            <Link href={Paths.signUp}>{t.signIn.signUpTitle}</Link>
+            <Link href={PublicPaths.signUp}>{t.signIn.signUpTitle}</Link>
           </Button>
         </div>
       </Card>

@@ -1,7 +1,7 @@
 import Expired from '@/assets/images/registration/expired.webp'
 import {
   Button,
-  Paths,
+  PublicPaths,
   Typography,
   useTranslation,
   withProtection,
@@ -31,7 +31,9 @@ const ExpiredSession = () => {
           asChild
           className={'w-full mb-2.5'}
         >
-          <Link href={Paths.forgotPassword}>{t.expiredSession.resendLink}</Link>
+          <Link href={PublicPaths.forgotPassword}>
+            {t.expiredSession.resendLink}
+          </Link>
         </Button>
       </div>
       <Image
@@ -44,6 +46,4 @@ const ExpiredSession = () => {
   )
 }
 
-export default withProtection(ExpiredSession, {
-  isPublic: true,
-})
+export default withProtection(ExpiredSession)
