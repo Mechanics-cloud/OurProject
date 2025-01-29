@@ -20,7 +20,6 @@ type Props = {
   onClose: () => void
 } & DialogProps
 
-//todo: story
 export const Modal = ({ children, onClick, onClose, open, ...rest }: Props) => {
   const { t } = useTranslation()
 

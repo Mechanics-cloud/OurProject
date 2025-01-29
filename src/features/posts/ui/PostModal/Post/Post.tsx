@@ -6,6 +6,7 @@ import { PathService, Paths, useModal, useTranslation } from '@/common'
 import { usePostStore } from '@/features/posts'
 import { CancelEditModal } from '@/features/posts/ui/PostModal/CancelEditModal/CancelEditModal'
 import { PostInfo } from '@/features/posts/ui/PostModal/Content/PostInfo'
+import { EditPost } from '@/features/posts/ui/PostModal/Edit/EditPost'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
@@ -49,11 +50,14 @@ export const Post = observer(({ userId }: Props) => {
   return (
     <>
       <div className={'relative container mx-auto w-[972px] h-[564px]'}>
-        <PostInfo
-          avatarOwner={post.avatarOwner || anonymous}
-          description={post.description}
-          isEditing={isEditing}
-        />
+        {isEditing ? (
+          <EditPost />
+        ) : (
+          <PostInfo
+            avatarOwner={post.avatarOwner || anonymous}
+            description={post.description}
+          />
+        )}
         <Close
           className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
           onClick={onClose}
