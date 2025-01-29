@@ -1,20 +1,18 @@
 import React from 'react'
 
 import { Overlay } from '@/common'
-import { PostStoreProvider, PublicPostInfo } from '@/features/posts'
 import { Post } from '@/features/posts/ui/PostModal/Post/Post'
+import { observer } from 'mobx-react-lite'
 
 type Props = {
   userProfileId: number
-} & PublicPostInfo
+}
 
-export const PostModal = ({ comments, post, userProfileId }: Props) => (
+export const PostModal = observer(({ userProfileId }: Props) => (
   <Overlay
     className={'flex justify-center items-center'}
     isVisible
   >
-    <PostStoreProvider initialState={{ comments, post }}>
-      <Post userId={userProfileId} />
-    </PostStoreProvider>
+    <Post userId={userProfileId} />
   </Overlay>
-)
+))
