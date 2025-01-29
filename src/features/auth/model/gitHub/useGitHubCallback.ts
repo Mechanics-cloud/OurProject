@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 
-import { responseErrorHandler, setToLocalStorage } from '@/common'
+import {
+  ProtectedPaths,
+  responseErrorHandler,
+  setToLocalStorage,
+} from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { authStore } from '@/features/auth'
 import { useRouter } from 'next/router'
@@ -17,6 +21,7 @@ export const useGitHubCallback = () => {
           setToLocalStorage(StorageKeys.AccessToken, accessToken as string)
           try {
             await authStore.me()
+            await router.replace(ProtectedPaths.home)
           } catch (error) {
             responseErrorHandler(error)
             setIsLoginViaGithub(false)
