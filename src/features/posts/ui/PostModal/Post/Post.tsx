@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { Close } from '@/assets/icons'
-import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
 import { PathService, Paths, useModal, useTranslation } from '@/common'
 import { usePostStore } from '@/features/posts'
 import { CancelEditModal } from '@/features/posts/ui/PostModal/CancelEditModal/CancelEditModal'
@@ -50,14 +49,7 @@ export const Post = observer(({ userId }: Props) => {
   return (
     <>
       <div className={'relative container mx-auto w-[972px] h-[564px]'}>
-        {isEditing ? (
-          <EditPost />
-        ) : (
-          <PostInfo
-            avatarOwner={post.avatarOwner || anonymous}
-            description={post.description}
-          />
-        )}
+        {isEditing ? <EditPost /> : <PostInfo />}
         <Close
           className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
           onClick={onClose}

@@ -12,10 +12,11 @@ import { generalStore } from '@/core/store'
 import { Comment } from '@/features/posts'
 import { usePostStore } from '@/features/posts/model/postStoreProvider'
 import { CommentItem } from '@/features/posts/ui/PostModal/Content/Comment'
+import { Description } from '@/features/posts/ui/PostModal/Content/Description'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
-export const CommentList = observer(() => {
+export const PostContent = observer(() => {
   const { t } = useTranslation()
   const router = useRouter()
   const { commentStore, postStore } = usePostStore()
@@ -63,10 +64,16 @@ export const CommentList = observer(() => {
   return (
     <div
       className={
-        'flex-col overflow-y-scroll grow justify-end py-5 px-6 border-b border-dark-100 box-border'
+        'flex-col overflow-y-scroll grow justify-end py-1 px-6 border-b border-dark-100 box-border'
       }
       ref={startRef}
     >
+      {postStore.post?.description && (
+        <Description
+          avatarOwner={postStore.post.avatarOwner}
+          description={postStore.post.description}
+        />
+      )}
       {comments && comments?.length > 0 ? (
         comments.map((comment: Comment) => (
           <CommentItem
