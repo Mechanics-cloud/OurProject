@@ -37,6 +37,4 @@ function NotFound() {
   )
 }
 
-export default withProtection(NotFound, {
-  isPublic: true,
-})
+export default withProtection(NotFound)

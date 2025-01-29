@@ -1,7 +1,7 @@
 import { Paid } from '@/assets/icons'
 import {
   Button,
-  Paths,
+  ProtectedPaths,
   Typography,
   useScreenWidth,
   useTranslation,
@@ -71,7 +71,9 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                     className={'hidden md:block'}
                     variant={'secondary'}
                   >
-                    <Link href={Paths.profileSettings}>{settingsButton}</Link>
+                    <Link href={ProtectedPaths.profileSettings}>
+                      {settingsButton}
+                    </Link>
                   </Button>
                 )}
               </div>

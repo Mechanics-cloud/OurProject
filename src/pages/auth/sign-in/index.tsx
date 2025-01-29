@@ -5,6 +5,4 @@ const SignIn = () => {
   return <SignInForm />
 }
 
-export default withProtection(SignIn, {
-  isPublic: true,
-})
+export default withProtection(SignIn)
