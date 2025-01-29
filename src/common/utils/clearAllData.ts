@@ -1,4 +1,4 @@
-import { Paths, removeFromLocalStorage } from '@/common'
+import { PublicPaths, removeFromLocalStorage } from '@/common'
 import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { createPostStore } from '@/features/createPost'
@@ -12,5 +12,5 @@ export const clearAllData = async (path?: string) => {
   profileStore.cleanUp()
   newsFeedStore.cleanUp()
   removeFromLocalStorage(StorageKeys.AccessToken)
-  await Router.push(path ? path : Paths.publicMainPage)
+  await Router.push(path ? path : PublicPaths.publicMainPage)
 }

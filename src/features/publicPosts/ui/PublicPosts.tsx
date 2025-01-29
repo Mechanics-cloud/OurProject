@@ -1,6 +1,6 @@
 import {
   PathService,
-  Paths,
+  PublicPaths,
   TextUnfolding,
   calculateCharactersToShow,
   useTranslation,
@@ -42,7 +42,7 @@ export const PublicPosts = ({ posts }: Props) => {
               <div className={'relative w-60 h-60 lg:w-full xl:w-60'}>
                 {post.images.length > 0 ? (
                   <Link
-                    href={PathService.generatePath(Paths.userPost, {
+                    href={PathService.generatePath(PublicPaths.userPost, {
                       postId: post.id,
                       userId: post.ownerId,
                     })}

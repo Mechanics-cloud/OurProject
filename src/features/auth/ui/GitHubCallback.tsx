@@ -2,7 +2,7 @@ import githubError from '@/assets/images/serverError.svg'
 import {
   Button,
   FullScreenLoader,
-  Paths,
+  PublicPaths,
   Typography,
   useTranslation,
 } from '@/common'
@@ -42,7 +42,7 @@ export const GitHubCallback = () => {
           asChild
           className={'md:mb-[72px] mb-0 self-stretch md:self-auto'}
         >
-          <Link href={Paths.signIn}>
+          <Link href={PublicPaths.signIn}>
             {t.registration.confirmation.buttonTitle}
           </Link>
         </Button>

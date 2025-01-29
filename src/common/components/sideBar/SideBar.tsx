@@ -19,7 +19,14 @@ import {
   SearchOutline,
   TrendingUpOutline,
 } from '@/assets/icons/outlineIcons'
-import { LinkWithIcon, Paths, cn, useModal, useTranslation } from '@/common'
+import {
+  LinkWithIcon,
+  ProtectedPaths,
+  PublicPaths,
+  cn,
+  useModal,
+  useTranslation,
+} from '@/common'
 import { LogOutModal } from '@/common/components/logOutModal'
 import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
@@ -64,7 +71,7 @@ export const SideBar = observer(({ className }: Props) => {
                 ActiveIcon={Home}
                 DefaultIcon={HomeOutline}
                 className={'py-2'}
-                href={Paths.home}
+                href={ProtectedPaths.home}
               >
                 {t.menu.home}
               </LinkWithIcon>
@@ -85,7 +92,7 @@ export const SideBar = observer(({ className }: Props) => {
               <LinkWithIcon
                 ActiveIcon={Person}
                 DefaultIcon={PersonOutline}
-                href={Paths.profileLink(userId)}
+                href={PublicPaths.profileLink(userId)}
               >
                 {t.menu.profile}
               </LinkWithIcon>
@@ -95,7 +102,7 @@ export const SideBar = observer(({ className }: Props) => {
               <LinkWithIcon
                 ActiveIcon={MessageCircle}
                 DefaultIcon={MessageCircleOutline}
-                href={Paths.messenger}
+                href={ProtectedPaths.messenger}
               >
                 {t.menu.messenger}
               </LinkWithIcon>
@@ -105,7 +112,7 @@ export const SideBar = observer(({ className }: Props) => {
               <LinkWithIcon
                 ActiveIcon={Search}
                 DefaultIcon={SearchOutline}
-                href={Paths.search}
+                href={ProtectedPaths.search}
               >
                 {t.menu.search}
               </LinkWithIcon>
@@ -117,7 +124,7 @@ export const SideBar = observer(({ className }: Props) => {
               <LinkWithIcon
                 ActiveIcon={TrendingUp}
                 DefaultIcon={TrendingUpOutline}
-                href={Paths.statistics}
+                href={ProtectedPaths.statistics}
               >
                 {t.menu.statistics}
               </LinkWithIcon>
@@ -127,7 +134,7 @@ export const SideBar = observer(({ className }: Props) => {
               <LinkWithIcon
                 ActiveIcon={Bookmark}
                 DefaultIcon={BookmarkOutline}
-                href={Paths.favorites}
+                href={ProtectedPaths.favorites}
               >
                 {t.menu.favorites}
               </LinkWithIcon>

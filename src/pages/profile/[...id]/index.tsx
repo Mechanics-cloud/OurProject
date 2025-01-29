@@ -3,7 +3,7 @@ import { PropsWithChildren, useEffect, useState } from 'react'
 import {
   AsyncComponent,
   PathService,
-  Paths,
+  PublicPaths,
   getDeviceScreenWidth,
   withServerSide,
 } from '@/common'
@@ -66,7 +66,7 @@ const ProfilePage = ({
     setIsClosePost(true)
     router
       .push(
-        PathService.generatePath(Paths.userProfile, {
+        PathService.generatePath(PublicPaths.userProfile, {
           userId: userProfile.id,
         })
       )

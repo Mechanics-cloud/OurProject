@@ -3,7 +3,7 @@ import React from 'react'
 import {
   BasicPost,
   PathService,
-  Paths,
+  PublicPaths,
   TextUnfolding,
   Typography,
   UserMiniLink,
@@ -46,7 +46,7 @@ const PostItem = ({ item, router }: Props) => {
       >
         <span className={'flex  items-center space-x-2'}>
           <UserMiniLink
-            href={`${Paths.profileLink(item.ownerId)}`}
+            href={`${PublicPaths.profileLink(item.ownerId)}`}
             name={item.userName}
             src={item.avatarOwner ? item.avatarOwner : avatarPlaceholder}
           />
@@ -63,7 +63,7 @@ const PostItem = ({ item, router }: Props) => {
         <CustomNewsFeedPopover />
       </div>
       <Link
-        href={PathService.generatePath(Paths.userPost, {
+        href={PathService.generatePath(PublicPaths.userPost, {
           postId: item.id,
           userId: item.ownerId,
         })}

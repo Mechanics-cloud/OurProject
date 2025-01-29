@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Button, Paths, Typography, useTranslation } from '@/common'
+import { Button, ProtectedPaths, Typography, useTranslation } from '@/common'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -26,7 +26,7 @@ export const EmptyFeed = () => {
         asChild
         className={'text-center m-auto'}
       >
-        <Link href={Paths.search}>{t.homePage.emptyPostsButton}</Link>
+        <Link href={ProtectedPaths.search}>{t.homePage.emptyPostsButton}</Link>
       </Button>
     </div>
   )

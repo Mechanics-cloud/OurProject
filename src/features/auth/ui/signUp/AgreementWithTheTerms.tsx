@@ -1,5 +1,4 @@
-import { Typography, useTranslation } from '@/common'
-import { Paths } from '@/common/paths'
+import { PublicPaths, Typography, useTranslation } from '@/common'
 
 export const AgreementWithTheTerms = () => {
   const { t } = useTranslation()
@@ -9,7 +8,7 @@ export const AgreementWithTheTerms = () => {
       <span>{t.signUp.labels.agree}</span>
       <Typography
         className={'whitespace-nowrap'}
-        href={Paths.termsOfService}
+        href={PublicPaths.termsOfService}
         variant={'smallLink'}
       >
         {t.signUp.terms}
@@ -17,7 +16,7 @@ export const AgreementWithTheTerms = () => {
       {t.signUp.labels.and}
       <Typography
         className={'whitespace-nowrap'}
-        href={Paths.privacyPolicy}
+        href={PublicPaths.privacyPolicy}
         variant={'smallLink'}
       >
         {t.signUp.policy}

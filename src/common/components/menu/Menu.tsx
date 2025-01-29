@@ -14,7 +14,14 @@ import {
   PlusSquareOutline,
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
-import { PathService, Paths, cn, useModal, useTranslation } from '@/common'
+import {
+  PathService,
+  ProtectedPaths,
+  PublicPaths,
+  cn,
+  useModal,
+  useTranslation,
+} from '@/common'
 import { matchesPathname } from '@/common/components/menu/matchesPathname'
 import { NavLink } from '@/common/components/navLink'
 import { Tooltip } from '@/common/components/tooltip'
@@ -46,8 +53,8 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
       <ul className={'flex w-full justify-evenly py-[16px]'}>
         <li>
           <Tooltip title={t.menu.home}>
-            <Link href={Paths.home}>
-              {matchesPathname(href, Paths.home) ? (
+            <Link href={ProtectedPaths.home}>
+              {matchesPathname(href, ProtectedPaths.home) ? (
                 <Home className={'size-6 text-accent-500'} />
               ) : (
                 <HomeOutline className={'size-6'} />
@@ -76,8 +83,8 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
         </li>
         <li>
           <Tooltip title={t.menu.messenger}>
-            <Link href={Paths.messenger}>
-              {matchesPathname(href, Paths.messenger) ? (
+            <Link href={ProtectedPaths.messenger}>
+              {matchesPathname(href, ProtectedPaths.messenger) ? (
                 <MessageCircle className={'size-6 text-accent-500'} />
               ) : (
                 <MessageCircleOutline className={'size-6'} />
@@ -88,8 +95,8 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
         </li>
         <li>
           <Tooltip title={t.menu.search}>
-            <Link href={Paths.search}>
-              {matchesPathname(href, Paths.search) ? (
+            <Link href={ProtectedPaths.search}>
+              {matchesPathname(href, ProtectedPaths.search) ? (
                 <Search className={'size-6 text-accent-500'} />
               ) : (
                 <SearchOutline className={'size-6'} />
@@ -102,7 +109,9 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
           <Tooltip title={t.menu.profile}>
             <NavLink
               active={<Person className={'text-accent-500 size-6'} />}
-              href={PathService.generatePath(Paths.userProfile, { userId })}
+              href={PathService.generatePath(PublicPaths.userProfile, {
+                userId,
+              })}
               inactive={<PersonOutline className={'size-6'} />}
               label={t.menu.profile}
             />
