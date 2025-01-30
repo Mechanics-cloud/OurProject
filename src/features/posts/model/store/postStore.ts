@@ -1,4 +1,4 @@
-import { BasicPost, Nullable } from '@/common'
+import { BasicPost, Nullable, responseErrorHandler } from '@/common'
 import { postsApi } from '@/features/posts'
 import { action, makeObservable, observable, runInAction } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
@@ -49,7 +49,7 @@ export class PostStore {
         this.stopEditing()
       })
     } catch (error) {
-      await Promise.reject(error)
+      responseErrorHandler(error)
     }
   }
 

@@ -8,7 +8,6 @@ import { usePostStore } from '@/features/posts'
 import { PostSlider } from '@/features/posts/ui/PostModal/Slider/PostSlider'
 import Image from 'next/image'
 
-//todo: translation for Button
 export const EditPost = ({
   openConfirmModal,
 }: {
@@ -78,7 +77,7 @@ export const EditPost = ({
               <FormTextArea
                 className={'h-[120px] resize-none'}
                 control={control}
-                label={t.createPost.publication.description}
+                label={t.post.editDescription}
                 name={'description'}
               />
               <Typography
@@ -91,7 +90,7 @@ export const EditPost = ({
                 className={'max-w-[160px] ml-auto'}
                 disabled={!isDirty || isSubmitting}
               >
-                Save changes
+                {t.post.saveChanges}
               </Button>
             </form>
           </div>

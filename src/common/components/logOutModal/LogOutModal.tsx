@@ -20,7 +20,6 @@ type Props = {
   userEmail: string
 } & DialogProps
 
-//todo: change to reusable Modal component
 export const LogOutModal = ({
   logOutModalHandler,
   onClose,

@@ -20,8 +20,11 @@ export const actionIconsGroup = {
 
 export const post = {
   addComment: 'Добавить комментарий...',
+  cancelEdit:
+    'Вы действительно хотите отменить редактирование публикации? Если вы закроете изменения не будут сохранены',
   copyLink: 'Копировать ссылку',
   deletePost: 'Удалить пост',
+  editDescription: 'Редактировать публикацию',
   editPost: 'Редактировать пост',
   likes: {
     few: '{{value}} "Лайка"',
@@ -35,6 +38,7 @@ export const post = {
   notFound: 'Пост не найден',
   now: 'Сейчас',
   publish: 'Опубликовать',
+  saveChanges: 'Сохранить',
   successMessage: 'Публикация была успешно удалена',
   unfollow: 'Отписаться',
   yes: 'Да',
