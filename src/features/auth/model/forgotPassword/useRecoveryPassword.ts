@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { Paths } from '@/common'
+import { PublicPaths } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { authApi } from '@/features/auth'
 import {
@@ -37,7 +37,7 @@ export const useRecoveryPassword = (t: LocaleType) => {
         recoveryCode: searchParams?.get('code') ?? '',
       })
       toast.success(t.recoveryPassword.passwordChanged)
-      await router.push(Paths.signIn)
+      await router.push(PublicPaths.signIn)
     } catch (error: unknown) {
       responseErrorHandler(error)
     }

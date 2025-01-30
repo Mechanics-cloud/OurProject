@@ -1,4 +1,4 @@
-import { Paths } from '@/common'
+import { PublicPaths } from '@/common'
 import { updateToken } from '@/common/api/utils/updateToken'
 import { StatusCode, StorageKeys } from '@/common/enums'
 import { Environments } from '@/common/enviroments'
@@ -32,7 +32,7 @@ instance.interceptors.response.use(
     if (error.config?.url === CommonEndpoints.updateToken) {
       const { clearAllData } = await import('@/common/utils/clearAllData')
 
-      await clearAllData(Paths.signIn)
+      await clearAllData(PublicPaths.signIn)
 
       return Promise.reject(error)
     }

@@ -37,6 +37,4 @@ function ServerError() {
   )
 }
 
-export default withProtection(ServerError, {
-  isPublic: true,
-})
+export default withProtection(ServerError)

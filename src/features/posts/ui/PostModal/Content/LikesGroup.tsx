@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import {
   Avatar,
   PathService,
-  Paths,
+  PublicPaths,
   Typography,
   getPluralForm,
   useTranslation,
@@ -32,7 +32,7 @@ export const LikesGroup = observer(() => {
           {items?.slice(0, 3).map((item, index, array) => (
             <Link
               className={`relative z-${(array.length - index) * 10}`}
-              href={PathService.generatePath(Paths.userProfile, {
+              href={PathService.generatePath(PublicPaths.userProfile, {
                 userId: item.userId,
               })}
               key={item.id}

@@ -2,7 +2,7 @@ import React from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { ImageOutline } from '@/assets/icons'
-import { PathService, Paths, Skeleton, cn } from '@/common'
+import { PathService, PublicPaths, Skeleton, cn } from '@/common'
 import { HydrateProfileStore, useFetchPosts } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -37,7 +37,7 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
             {isUpdatePost && <Skeleton className={'rounded-none'} />}
             {postsData.items.map((post) => (
               <Link
-                href={PathService.generatePath(Paths.userPost, {
+                href={PathService.generatePath(PublicPaths.userPost, {
                   postId: post.id,
                   userId: post.ownerId,
                 })}

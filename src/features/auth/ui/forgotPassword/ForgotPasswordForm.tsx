@@ -2,7 +2,7 @@ import {
   BaseReCAPTCHA,
   Button,
   FormTextField,
-  Paths,
+  PublicPaths,
   SimpleModal,
   Typography,
   useTranslation,
@@ -76,7 +76,7 @@ export const ForgotPasswordForm = () => {
             disabled={isSubmitting}
             variant={'text'}
           >
-            <Link href={Paths.signIn}>{t.forgotPassword.link}</Link>
+            <Link href={PublicPaths.signIn}>{t.forgotPassword.link}</Link>
           </Button>
 
           <BaseReCAPTCHA

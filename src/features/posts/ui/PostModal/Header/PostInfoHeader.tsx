@@ -10,10 +10,10 @@ import {
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
 import {
   PathService,
-  Paths,
   Popover,
   PopoverContent,
   PopoverTrigger,
+  PublicPaths,
   Typography,
   useTranslation,
 } from '@/common'
@@ -41,7 +41,7 @@ export const PostInfoHeader = () => {
       }
     >
       <Link
-        href={PathService.generatePath(Paths.userProfile, {
+        href={PathService.generatePath(PublicPaths.userProfile, {
           userId: postStore.post?.ownerId,
         })}
       >

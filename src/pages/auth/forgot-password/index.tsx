@@ -13,6 +13,4 @@ function ForgotPassword() {
   )
 }
 
-export default withProtection(ForgotPassword, {
-  isPublic: true,
-})
+export default withProtection(ForgotPassword)

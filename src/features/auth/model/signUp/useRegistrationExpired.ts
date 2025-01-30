@@ -1,8 +1,7 @@
 import { useState } from 'react'
 
-import { useModal, useTranslation } from '@/common'
+import { PublicPaths, useModal, useTranslation } from '@/common'
 import { Environments } from '@/common/enviroments'
-import { Paths } from '@/common/paths'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { generalStore } from '@/core/store'
 import { authApi } from '@/features/auth/api'
@@ -17,7 +16,7 @@ export const useRegistrationExpired = () => {
   const router = useRouter()
 
   const { isModalOpen, onModalClose, openModal } = useModal(async () => {
-    await router.push(Paths.signIn)
+    await router.push(PublicPaths.signIn)
   })
 
   const emailCheck = z.string().email()
