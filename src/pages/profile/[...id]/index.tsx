@@ -1,5 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react'
 
+import { getDeviceScreenWidth, withServerSide } from '@/common'
 import {
   PostStoreProvider,
   PublicPostInfo,

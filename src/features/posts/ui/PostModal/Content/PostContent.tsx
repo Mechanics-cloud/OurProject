@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 
 import {
   PathService,
-  Paths,
+  PublicPaths,
   timeAgo,
   useElementOnScreen,
   useTranslation,
@@ -79,7 +79,7 @@ export const PostContent = observer(() => {
           <CommentItem
             alt={`${comment.from.username} photo image`}
             className={'mb-4'}
-            href={PathService.generatePath(Paths.userProfile, {
+            href={PathService.generatePath(PublicPaths.userProfile, {
               userId: comment.from.id,
             })}
             isLike={user ? comment.isLiked : null}

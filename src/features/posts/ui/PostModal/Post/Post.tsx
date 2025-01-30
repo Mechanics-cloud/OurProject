@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Close } from '@/assets/icons'
-import { PathService, Paths, useTranslation } from '@/common'
+import { PathService, PublicPaths, useTranslation } from '@/common'
 import { usePostStore } from '@/features/posts'
 import { PostInfo } from '@/features/posts/ui/PostModal/Content/PostInfo'
 import { observer } from 'mobx-react-lite'
@@ -29,7 +29,7 @@ export const Post = observer(({ userId }: Props) => {
 
   const onClose = async () => {
     await router.push(
-      PathService.generatePath(Paths.userProfile, { userId: userId })
+      PathService.generatePath(PublicPaths.userProfile, { userId: userId })
     )
   }
 
