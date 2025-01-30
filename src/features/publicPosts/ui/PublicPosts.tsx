@@ -25,12 +25,12 @@ export const PublicPosts = ({ posts }: Props) => {
 
   return (
     <div
-      className={'w-full flex flex-col justify-start items-center pt-6 gap-9'}
+      className={'w-full flex flex-col justify-center items-center pt-6 gap-9'}
     >
       <RegisteredUsersCounter totalUsers={posts.totalUsers} />
       <div
         className={
-          'grid xl:grid-cols-4 grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-3'
+          'max-w-[996px] w-full grid grid-cols-[repeat(auto-fill,_minmax(240px,_1fr))] gap-3'
         }
       >
         {posts.items.map((post) => {
@@ -39,7 +39,7 @@ export const PublicPosts = ({ posts }: Props) => {
               className={'flex flex-col gap-3'}
               key={post.id}
             >
-              <div className={'relative w-60 h-60 lg:w-full xl:w-60'}>
+              <div className={'relative h-60 w-full'}>
                 {post.images.length > 0 ? (
                   <Link
                     href={PathService.generatePath(PublicPaths.userPost, {
