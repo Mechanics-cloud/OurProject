@@ -25,9 +25,7 @@ export const EditModal = observer(() => {
       className={'flex justify-center items-center'}
       isVisible
     >
-      <div className={'relative container mx-auto w-[972px] h-[564px]'}>
-        <EditPost openConfirmModal={openConfirmModal} />
-      </div>
+      <EditPost openConfirmModal={openConfirmModal} />
       <CancelEditModal
         onCancelEdit={onCancelEdit}
         onClose={closeConfirmModal}

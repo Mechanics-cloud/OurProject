@@ -43,7 +43,11 @@ export const EditPost = ({
   }
 
   return (
-    <div className={'flex flex-col w-full h-full bg-dark-300 '}>
+    <div
+      className={
+        'flex flex-col  bg-dark-300 relative container mx-auto w-[972px] h-[564px]'
+      }
+    >
       <div
         className={
           "flex items-center justify-between p-[0.75rem] w-full relative after:absolute after:content-[''] after:block after:w-full after:h-px after:bg-dark-100 after:left-0 after:bottom-0"
