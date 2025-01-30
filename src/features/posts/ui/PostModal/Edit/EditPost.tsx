@@ -1,15 +1,27 @@
 import React, { useState } from 'react'
 
+import { Close } from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import { Button, TextArea, Typography, useTranslation } from '@/common'
+import {
+  Button,
+  Nullable,
+  TextArea,
+  Typography,
+  useTranslation,
+} from '@/common'
 import { generalStore } from '@/core/store'
 import { usePostStore } from '@/features/posts'
 import { PostSlider } from '@/features/posts/ui/PostModal/Slider/PostSlider'
 import Image from 'next/image'
 
-export const EditPost = () => {
+//todo: translation for Button
+export const EditPost = ({
+  openConfirmModal,
+}: {
+  openConfirmModal: () => void
+}) => {
   const { postStore } = usePostStore()
-  const [postText, setPostText] = useState<null | string>(
+  const [postText, setPostText] = useState<Nullable<string>>(
     postStore.post?.description || null
   )
   const { t } = useTranslation()
@@ -20,22 +32,25 @@ export const EditPost = () => {
     setPostText(e.target.value)
   }
 
-  const onSaveClick = () => {
+  const onSaveClick = async () => {
     if (postText) {
-      postStore.editPostDescription(postText)
+      await postStore.editPostDescription(postText)
     }
   }
 
   return (
     <div className={'flex flex-col w-full h-full bg-dark-300 '}>
-      <Typography
+      <div
         className={
-          "pt-3 pb-3 pl-6 relative after:absolute after:content-[''] after:block after:w-full after:h-px after:bg-dark-100 after:left-0 after:bottom-0"
+          "flex items-center justify-between p-[0.75rem] w-full relative after:absolute after:content-[''] after:block after:w-full after:h-px after:bg-dark-100 after:left-0 after:bottom-0"
         }
-        variant={'h1'}
       >
-        Edit Post
-      </Typography>
+        <Typography variant={'h1'}>Edit Post</Typography>
+        <Close
+          className={'w-6 h-6 cursor-pointer mr-1.5'}
+          onClick={openConfirmModal}
+        />
+      </div>
       <div className={'flex w-full h-full'}>
         <PostSlider />
         <div className={'flex flex-col w-full h-full p-6 justify-between'}>

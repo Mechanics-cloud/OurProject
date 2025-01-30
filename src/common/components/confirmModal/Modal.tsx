@@ -20,7 +20,13 @@ type Props = {
   onClose: () => void
 } & DialogProps
 
-export const Modal = ({ children, onClick, onClose, open, ...rest }: Props) => {
+export const ConfirmModal = ({
+  children,
+  onClick,
+  onClose,
+  open,
+  ...rest
+}: Props) => {
   const { t } = useTranslation()
 
   return (

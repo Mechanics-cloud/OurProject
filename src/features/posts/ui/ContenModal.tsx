@@ -12,6 +12,6 @@ export const ContentModal = observer(({ userProfileId }: Props) => {
   return !isEditing ? (
     <PostModal userProfileId={userProfileId} />
   ) : (
-    <EditModal userProfileId={userProfileId} />
+    <EditModal />
   )
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Modal } from '@/common/components/modal/Modal'
+import { ConfirmModal } from '@/common/components/confirmModal/Modal'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
@@ -11,13 +11,13 @@ type Props = {
 //todo: translation for the text
 export const CancelEditModal = ({ onCancelEdit, onClose, ...rest }: Props) => {
   return (
-    <Modal
+    <ConfirmModal
       onClick={onCancelEdit}
       onClose={onClose}
       {...rest}
     >
       Do you really want to close the edition of the publication? If you close
       changes won’t be saved
-    </Modal>
+    </ConfirmModal>
   )
 }

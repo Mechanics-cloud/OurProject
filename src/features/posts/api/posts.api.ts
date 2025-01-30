@@ -79,6 +79,25 @@ class PostsApi {
       })
       .then((res) => res.data)
   }
+
+  public async updatePostDescription({
+    description,
+    postId,
+  }: {
+    description: string
+    postId: number
+  }) {
+    const postEndpoint = PostsRequestEndpoints.idPost(postId)
+    const postResponse = await fetch(
+      PathService.generateServerPath(postEndpoint)
+    )
+
+    return this.instance
+      .put<void>(postResponse.url, {
+        description,
+      })
+      .then((res) => res.data)
+  }
 }
 
 export const postsApi = new PostsApi(instance)

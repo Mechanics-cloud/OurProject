@@ -1,4 +1,5 @@
 import { BasicPost, Nullable } from '@/common'
+import { postsApi } from '@/features/posts'
 import { action, makeObservable, observable, runInAction } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
 
@@ -32,15 +33,26 @@ export class PostStore {
     this.stopEditing = this.stopEditing.bind(this)
   }
 
-  editPostDescription(description: string) {
-    alert(description)
-    runInAction(() => {
-      if (this.post) {
-        this.post = { ...this.post, description }
+  async editPostDescription(description: string) {
+    try {
+      if (!this.post) {
+        return
       }
-      this.stopEditing()
-    })
+      await postsApi.updatePostDescription({
+        description,
+        postId: this.post?.id,
+      })
+      runInAction(() => {
+        if (this.post) {
+          this.post = { ...this.post, description }
+        }
+        this.stopEditing()
+      })
+    } catch (error) {
+      await Promise.reject(error)
+    }
   }
+
   startEditing() {
     this.isEditing = true
   }
