@@ -1,5 +1,6 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { Close } from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
@@ -31,6 +32,7 @@ export const EditPost = ({
   const onSaveClick: SubmitHandler<{ description: string }> = async (data) => {
     if (data.description) {
       await postStore.editPostDescription(data.description)
+      toast.success(t.post.successPostUpdate)
     }
   }
 
@@ -78,18 +80,20 @@ export const EditPost = ({
               className={'flex flex-col justify-between h-full'}
               onSubmit={handleSubmit(onSaveClick)}
             >
-              <FormTextArea
-                className={'h-[120px] resize-none'}
-                control={control}
-                label={t.post.editDescription}
-                name={'description'}
-              />
-              <Typography
-                className={'text-light-900 text-right'}
-                variant={'small'}
-              >
-                {postStore.post?.description.length}/{maxDescriptionLength}
-              </Typography>
+              <div>
+                <FormTextArea
+                  className={'h-[120px] resize-none'}
+                  control={control}
+                  label={t.post.editDescription}
+                  name={'description'}
+                />
+                <Typography
+                  className={'text-light-900 text-right'}
+                  variant={'small'}
+                >
+                  {postStore.post?.description.length}/{maxDescriptionLength}
+                </Typography>
+              </div>
               <Button
                 className={'max-w-[160px] ml-auto'}
                 disabled={!isDirty || isSubmitting}

@@ -40,6 +40,7 @@ export const post = {
   publish: 'Publish',
   saveChanges: 'Save changes',
   successMessage: 'The post was successfully deleted',
+  successPostUpdate: 'The post was successfully updated',
   unfollow: 'Unfollow',
   yes: 'Yes',
 }
