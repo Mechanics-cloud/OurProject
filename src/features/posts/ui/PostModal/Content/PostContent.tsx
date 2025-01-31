@@ -26,7 +26,10 @@ export const PostContent = ({ comments, post }: PublicPostInfo) => {
 
   return (
     <PostStoreProvider initialState={{ comments, post }}>
-      <div className={'flex w-full h-full border border-dark-100'}>
+      <div
+        className={'flex w-full h-full border border-dark-100'}
+        onClick={(e) => e.stopPropagation()}
+      >
         <PostSlider />
         <div className={'flex flex-col w-full h-full bg-dark-300'}>
           <PostInfoHeader />
