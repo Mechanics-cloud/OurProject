@@ -55,20 +55,19 @@ export const AddImageModal = () => {
               )}
             </span>
 
-            <label className={'mt-9'}>
-              <Button
-                asChild
-                className={'cursor-pointer'}
-              >
-                <span>{t.createPost.adding.buttonNew}</span>
-              </Button>
-              <input
-                className={'sr-only'}
-                type={'file'}
-                {...getInputProps()}
-              />
-            </label>
+            <Button
+              asChild
+              className={'cursor-pointer'}
+            >
+              <span className={'mt-9'}>{t.createPost.adding.buttonNew}</span>
+            </Button>
+            <input
+              className={'sr-only'}
+              type={'file'}
+              {...getInputProps()}
+            />
           </span>
+
           <Button
             disabled={!createPostStore.isDraft}
             onClick={createPostStore.continueDialog}
