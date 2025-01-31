@@ -31,6 +31,7 @@ export const post = {
     many: '{{value}} "Лайков"',
     one: '{{value}} "Лайк"',
   },
+  maxLengthMessage: 'Описание не может быть длиннее 500 символов',
   modalText: 'Вы уверены, что хотите удалить этот пост?',
   modalTitle: 'Удалить пост',
   no: 'Нет',

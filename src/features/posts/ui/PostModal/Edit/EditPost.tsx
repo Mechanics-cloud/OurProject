@@ -1,5 +1,5 @@
 import React from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { Close } from '@/assets/icons'
@@ -29,8 +29,10 @@ export const EditPost = ({
     },
   })
 
+  const description = useWatch({ control, name: 'description' })
+
   const onSaveClick: SubmitHandler<{ description: string }> = async (data) => {
-    if (data.description) {
+    if (data) {
       await postStore.editPostDescription(data.description)
       toast.success(t.post.successPostUpdate)
     }
@@ -85,14 +87,23 @@ export const EditPost = ({
                   className={'h-[120px] resize-none'}
                   control={control}
                   label={t.post.editDescription}
+                  maxLength={maxDescriptionLength}
                   name={'description'}
                 />
                 <Typography
                   className={'text-light-900 text-right'}
                   variant={'small'}
                 >
-                  {postStore.post?.description.length}/{maxDescriptionLength}
+                  {description?.length}/{maxDescriptionLength}
                 </Typography>
+                {description?.length === maxDescriptionLength && (
+                  <Typography
+                    className={'text-red-500 text-right'}
+                    variant={'small'}
+                  >
+                    {t.post.maxLengthMessage}
+                  </Typography>
+                )}
               </div>
               <Button
                 className={'max-w-[160px] ml-auto'}

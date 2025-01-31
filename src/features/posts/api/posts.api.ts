@@ -87,13 +87,8 @@ class PostsApi {
     description: string
     postId: number
   }) {
-    const postEndpoint = PostsRequestEndpoints.idPost(postId)
-    const postResponse = await fetch(
-      PathService.generateServerPath(postEndpoint)
-    )
-
     return this.instance
-      .put<void>(postResponse.url, {
+      .put<void>(PostsRequestEndpoints.idPost(postId), {
         description,
       })
       .then((res) => res.data)

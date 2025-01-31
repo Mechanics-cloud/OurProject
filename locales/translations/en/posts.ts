@@ -31,6 +31,7 @@ export const post = {
     many: '{{value}} "Likes"',
     one: '{{value}} "Like"',
   },
+  maxLengthMessage: 'The description cannot be longer than 500 symbols',
   modalText: 'Are you sure you want to delete this post?',
   modalTitle: 'Delete Post',
   no: 'No',
