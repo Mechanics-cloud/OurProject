@@ -1,4 +1,10 @@
-import { PropsWithChildren, createContext, useContext, useMemo } from 'react'
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 import { Nullable } from '@/common'
 import { PublicPostInfo } from '@/features/posts'
@@ -59,7 +65,17 @@ type Props = {
 } & PropsWithChildren
 
 export function PostStoreProvider({ children, initialState }: Props) {
-  const store = useMemo(() => initializeStore(initialState), [initialState])
+  const [store, setStore] = useState<CombinedStore | null>(null)
 
-  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+  useEffect(() => {
+    const initializedStore = initializeStore(initialState)
+
+    setStore(initializedStore)
+  }, [initialState])
+
+  return (
+    store && (
+      <StoreContext.Provider value={store}>{children}</StoreContext.Provider>
+    )
+  )
 }

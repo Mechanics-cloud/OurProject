@@ -90,20 +90,22 @@ export const EditPost = ({
                   maxLength={maxDescriptionLength}
                   name={'description'}
                 />
-                <Typography
-                  className={'text-light-900 text-right'}
-                  variant={'small'}
-                >
-                  {description?.length}/{maxDescriptionLength}
-                </Typography>
-                {description?.length === maxDescriptionLength && (
+                <div className={'flex items-center w-full'}>
+                  {description?.length === maxDescriptionLength && (
+                    <Typography
+                      className={'text-red-500 text-right'}
+                      variant={'small'}
+                    >
+                      {t.post.maxLengthMessage}
+                    </Typography>
+                  )}
                   <Typography
-                    className={'text-red-500 text-right'}
+                    className={'text-light-900 text-right ml-auto'}
                     variant={'small'}
                   >
-                    {t.post.maxLengthMessage}
+                    {description?.length}/{maxDescriptionLength}
                   </Typography>
-                )}
+                </div>
               </div>
               <Button
                 className={'max-w-[160px] ml-auto'}
