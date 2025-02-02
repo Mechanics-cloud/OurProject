@@ -117,19 +117,20 @@ export const PostInfoHeader = () => {
                     },
                     text: t.post.copyLink,
                   },
-                ].map((item) => (
-                  <button
-                    className={`flex items-center gap-2 hover:text-accent-500 ${
-                      item.display ? 'inline' : 'hidden'
-                    }`}
-                    key={item.id}
-                    onClick={item.onClick}
-                    type={'button'}
-                  >
-                    {item.icon}
-                    <span className={'text-sm'}>{item.text}</span>
-                  </button>
-                ))}
+                ].map(
+                  (item) =>
+                    item.display && (
+                      <button
+                        className={`flex items-center gap-2 hover:text-accent-500`}
+                        key={item.id}
+                        onClick={item.onClick}
+                        type={'button'}
+                      >
+                        {item.icon}
+                        <span className={'text-sm'}>{item.text}</span>
+                      </button>
+                    )
+                )}
               </ul>
             </nav>
           </PopoverContent>
