@@ -1,6 +1,6 @@
 import React from 'react'
 
-import avatarPlaceholder from '@/assets/images/avatar.jpg'
+import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
 import { Nullable, cn } from '@/common'
 import Image, { StaticImageData } from 'next/image'
 
