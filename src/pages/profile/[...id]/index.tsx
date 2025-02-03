@@ -1,12 +1,11 @@
 import { PropsWithChildren, useEffect } from 'react'
 
+import { getDeviceScreenWidth, withServerSide } from '@/common'
 import {
-  PathService,
-  PublicPaths,
-  getDeviceScreenWidth,
-  withServerSide,
-} from '@/common'
-import { PostModal, PublicPostInfo, getPublicPostInfo } from '@/features/posts'
+  ContentModal,
+  PublicPostInfo,
+  getPublicPostInfo,
+} from '@/features/posts'
 import {
   ProfileData,
   hydrateProfileStore,
@@ -15,7 +14,6 @@ import {
 } from '@/features/profile'
 import { Profile } from '@/features/profile/ui/Profile'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -53,7 +51,6 @@ const ProfilePage = ({
   screenSize,
   userProfile,
 }: Props) => {
-  const router = useRouter()
   const store = initializeStore({ postsData, userProfile })
 
   useEffect(() => {
@@ -66,19 +63,12 @@ const ProfilePage = ({
         screenSize={screenSize}
         store={store}
       />
-      {post && (
-        <PostModal
-          comments={comments}
-          onClose={() =>
-            router.push(
-              PathService.generatePath(PublicPaths.userProfile, {
-                userId: userProfile.id,
-              })
-            )
-          }
-          post={post}
-        />
-      )}
+      <ContentModal
+        comments={comments}
+        post={post}
+        postsData={postsData}
+        userProfile={userProfile}
+      />
     </>
   )
 }
