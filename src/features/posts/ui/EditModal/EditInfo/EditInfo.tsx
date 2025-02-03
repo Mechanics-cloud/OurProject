@@ -9,7 +9,7 @@ import { usePostStore } from '@/features/posts'
 import { PostSlider } from '@/features/posts/ui/PostModal/Slider/PostSlider'
 import Image from 'next/image'
 
-export const EditPost = ({
+export const EditInfo = ({
   openConfirmModal,
 }: {
   openConfirmModal: () => void

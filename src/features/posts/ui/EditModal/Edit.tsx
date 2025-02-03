@@ -1,12 +1,12 @@
 import React from 'react'
 
-import { Overlay, useModal } from '@/common'
+import { useModal } from '@/common'
 import { usePostStore } from '@/features/posts'
+import { EditInfo } from '@/features/posts/ui/EditModal/EditInfo/EditInfo'
 import { CancelEditModal } from '@/features/posts/ui/PostModal/CancelEditModal/CancelEditModal'
-import { EditPost } from '@/features/posts/ui/PostModal/Edit/EditPost'
 import { observer } from 'mobx-react-lite'
 
-export const EditModal = observer(() => {
+export const Edit = observer(() => {
   const { postStore } = usePostStore()
   const { stopEditing } = postStore
 
@@ -21,16 +21,13 @@ export const EditModal = observer(() => {
   }
 
   return (
-    <Overlay
-      className={'flex justify-center items-center'}
-      isVisible
-    >
-      <EditPost openConfirmModal={openConfirmModal} />
+    <>
+      <EditInfo openConfirmModal={openConfirmModal} />
       <CancelEditModal
         onCancelEdit={onCancelEdit}
         onClose={closeConfirmModal}
         open={isModalOpen}
       />
-    </Overlay>
+    </>
   )
 })

@@ -2,11 +2,10 @@ import { PropsWithChildren, useEffect } from 'react'
 
 import { getDeviceScreenWidth, withServerSide } from '@/common'
 import {
-  PostStoreProvider,
+  ContentModal,
   PublicPostInfo,
   getPublicPostInfo,
 } from '@/features/posts'
-import { ContentModal } from '@/features/posts/ui/ContenModal'
 import {
   ProfileData,
   hydrateProfileStore,
@@ -64,9 +63,12 @@ const ProfilePage = ({
         screenSize={screenSize}
         store={store}
       />
-      <PostStoreProvider initialState={{ comments, post }}>
-        {post && <ContentModal userProfileId={userProfile.id} />}
-      </PostStoreProvider>
+      <ContentModal
+        comments={comments}
+        post={post}
+        postsData={postsData}
+        userProfile={userProfile}
+      />
     </>
   )
 }

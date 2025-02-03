@@ -24,8 +24,8 @@ export const post = {
     'Do you really want to close the edition of the publication? If you close changes won’t be saved',
   copyLink: 'Copy link',
   deletePost: 'Delete post',
-  editDescription: 'Edit description',
-  editPost: 'Edit post',
+  editDescription: 'EditI description',
+  editPost: 'EditI post',
   likes: {
     few: '{{value}} "Likes"',
     many: '{{value}} "Likes"',

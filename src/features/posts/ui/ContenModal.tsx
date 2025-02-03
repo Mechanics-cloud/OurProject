@@ -1,17 +1,25 @@
-import { PostModal, usePostStore } from '@/features/posts'
-import { EditModal } from '@/features/posts/ui/EditModal/EditModal'
-import { observer } from 'mobx-react-lite'
+import React, { PropsWithChildren } from 'react'
 
-type Props = {
-  userProfileId: number
-}
-export const ContentModal = observer(({ userProfileId }: Props) => {
-  const { postStore } = usePostStore()
-  const { isEditing } = postStore
+import { Overlay } from '@/common'
+import {
+  ModalWrapper,
+  PostStoreProvider,
+  PublicPostInfo,
+} from '@/features/posts'
+import { ProfileData } from '@/features/profile'
 
-  return !isEditing ? (
-    <PostModal userProfileId={userProfileId} />
-  ) : (
-    <EditModal />
+type Props = { screenSize?: number } & ProfileData &
+  PropsWithChildren &
+  PublicPostInfo
+export const ContentModal = ({ comments, post, userProfile }: Props) => {
+  return (
+    <Overlay
+      className={'flex items-center justify-center'}
+      isVisible={!!post}
+    >
+      <PostStoreProvider initialState={{ comments, post }}>
+        <ModalWrapper userProfileId={userProfile.id} />
+      </PostStoreProvider>
+    </Overlay>
   )
-})
+}

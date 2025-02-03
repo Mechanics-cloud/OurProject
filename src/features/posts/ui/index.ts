@@ -1,1 +1,2 @@
-export * from './PostModal/PostModal'
+export * from './ContenModal'
+export * from './ModalWrapper'
