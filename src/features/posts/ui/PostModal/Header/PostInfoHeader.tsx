@@ -34,6 +34,43 @@ export const PostInfoHeader = () => {
     setOpen(false)
   }
 
+  const infoHeaderData = [
+    {
+      display: user?.userId === postStore.post?.ownerId,
+      icon: <Edit2Outline className={'flex-shrink-0 size-6'} />,
+      id: 'edit',
+      onClick: onEditClick,
+      text: t.post.editPost,
+    },
+    {
+      display: user?.userId === postStore.post?.ownerId,
+      icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
+      id: 'delete',
+      onClick: () => {
+        alert('delete')
+      },
+      text: t.post.deletePost,
+    },
+    {
+      display: user?.userId !== postStore.post?.ownerId,
+      icon: <PersonRemoveOutline className={'flex-shrink-0 size-6'} />,
+      id: 'remove',
+      onClick: () => {
+        alert('remove')
+      },
+      text: t.post.unfollow,
+    },
+    {
+      display: user?.userId !== postStore.post?.ownerId,
+      icon: <CopyOutline className={'flex-shrink-0 size-6'} />,
+      id: 'copy',
+      onClick: () => {
+        alert('copy')
+      },
+      text: t.post.copyLink,
+    },
+  ]
+
   return (
     <div
       className={
@@ -80,44 +117,7 @@ export const PostInfoHeader = () => {
           >
             <nav>
               <ul className={'flex flex-col gap-3'}>
-                {[
-                  {
-                    display: user.userId === postStore.post?.ownerId,
-                    icon: <Edit2Outline className={'flex-shrink-0 size-6'} />,
-                    id: 'edit',
-                    onClick: onEditClick,
-                    text: t.post.editPost,
-                  },
-                  {
-                    display: user.userId === postStore.post?.ownerId,
-                    icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
-                    id: 'delete',
-                    onClick: () => {
-                      alert('delete')
-                    },
-                    text: t.post.deletePost,
-                  },
-                  {
-                    display: user.userId !== postStore.post?.ownerId,
-                    icon: (
-                      <PersonRemoveOutline className={'flex-shrink-0 size-6'} />
-                    ),
-                    id: 'remove',
-                    onClick: () => {
-                      alert('remove')
-                    },
-                    text: t.post.unfollow,
-                  },
-                  {
-                    display: user.userId !== postStore.post?.ownerId,
-                    icon: <CopyOutline className={'flex-shrink-0 size-6'} />,
-                    id: 'copy',
-                    onClick: () => {
-                      alert('copy')
-                    },
-                    text: t.post.copyLink,
-                  },
-                ].map(
+                {infoHeaderData.map(
                   (item) =>
                     item.display && (
                       <button
