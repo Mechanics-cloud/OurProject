@@ -1,13 +1,17 @@
 import { Ref, SVGProps, forwardRef, memo } from 'react'
-const SvgClose = (props: SVGProps<SVGSVGElement>, ref: Ref<SVGSVGElement>) => (
+const SvgClose = (
+  { className, height, onClick, width }: SVGProps<SVGSVGElement>,
+  ref: Ref<SVGSVGElement>
+) => (
   <svg
+    className={className}
     fill={'none'}
-    height={'1em'}
+    height={height || '1em'}
+    onClick={onClick}
     ref={ref}
     viewBox={'0 0 24 24'}
-    width={'1em'}
+    width={width || '1em'}
     xmlns={'http://www.w3.org/2000/svg'}
-    {...props}
   >
     <g clipPath={'url(#close_svg__a)'}>
       <path

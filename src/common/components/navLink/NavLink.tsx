@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -10,13 +10,20 @@ type Props = {
   label?: string
 }
 
-export const NavLink = ({ active, href, inactive, label }: Props) => {
-  const { asPath } = useRouter()
+export const NavLink = React.forwardRef<HTMLSpanElement, Props>(
+  ({ active, href, inactive, label }, ref) => {
+    const { asPath } = useRouter()
 
-  return (
-    <Link href={href}>
-      {href === asPath ? active : inactive}
-      <span className={'sr-only'}>{label}</span>
-    </Link>
-  )
-}
+    return (
+      <Link href={href}>
+        {href === asPath ? active : inactive}
+        <span
+          className={'sr-only'}
+          ref={ref}
+        >
+          {label}
+        </span>
+      </Link>
+    )
+  }
+)

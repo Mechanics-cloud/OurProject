@@ -1,9 +1,9 @@
 import { Environments } from '@/common'
+import { PublicProfileEndpoints } from '@/features/profile'
 import axios from 'axios'
 
 import { ImagesData } from '../model'
 import { PublicProfile } from '../settings'
-import { PublicProfileEndpoints } from './publicProfile.endpoints'
 
 class PublicProfileAPi {
   constructor() {}
