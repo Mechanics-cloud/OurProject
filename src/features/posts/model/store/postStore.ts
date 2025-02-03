@@ -50,6 +50,7 @@ export class PostStore {
       })
     } catch (error) {
       responseErrorHandler(error)
+      throw error
     }
   }
 

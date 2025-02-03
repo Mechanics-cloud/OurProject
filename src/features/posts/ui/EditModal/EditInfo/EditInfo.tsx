@@ -5,8 +5,7 @@ import { toast } from 'react-toastify'
 import { Close } from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
 import { Button, FormTextArea, Typography, useTranslation } from '@/common'
-import { usePostStore } from '@/features/posts'
-import { PostSlider } from '@/features/posts/ui/PostModal/Slider/PostSlider'
+import { PostSlider, usePostStore } from '@/features/posts'
 import Image from 'next/image'
 
 export const EditInfo = ({
@@ -32,9 +31,13 @@ export const EditInfo = ({
   const description = useWatch({ control, name: 'description' })
 
   const onSaveClick: SubmitHandler<{ description: string }> = async (data) => {
-    if (data) {
-      await postStore.editPostDescription(data.description)
-      toast.success(t.post.successPostUpdate)
+    try {
+      if (data) {
+        await postStore.editPostDescription(data.description)
+        toast.success(t.post.successPostUpdate)
+      }
+    } catch (error) {
+      console.error(error)
     }
   }
 
