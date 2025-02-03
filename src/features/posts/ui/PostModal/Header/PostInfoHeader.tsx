@@ -3,25 +3,25 @@ import React, { useState } from 'react'
 import {
   CopyOutline,
   Edit2Outline,
-  MoreHorizontalOutline,
   PersonRemoveOutline,
   TrashOutline,
 } from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import {
-  PathService,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  PublicPaths,
-  Typography,
-  useTranslation,
-} from '@/common'
+import { PathService, PublicPaths, Typography, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
+import { PostHeaderPopover } from '@/features/posts'
 import { usePostStore } from '@/features/posts/model/postStoreProvider'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+export type MappedData = {
+  display: boolean
+  icon: React.JSX.Element
+  id: string
+  onClick: () => void
+  text: string
+}
 
 export const PostInfoHeader = () => {
   const { t } = useTranslation()
@@ -51,7 +51,7 @@ export const PostInfoHeader = () => {
     }
   }
 
-  const infoHeaderData = [
+  const infoHeaderData: MappedData[] = [
     {
       display: user?.userId === postStore.post?.ownerId,
       icon: <Edit2Outline className={'flex-shrink-0 size-6'} />,
@@ -108,48 +108,11 @@ export const PostInfoHeader = () => {
       </Link>
       <Typography variant={'h3'}>{postStore.post?.userName}</Typography>
       {user && (
-        <Popover
-          onOpenChange={setOpen}
+        <PostHeaderPopover
+          data={infoHeaderData}
           open={open}
-        >
-          <PopoverTrigger asChild>
-            <button
-              className={'ml-auto'}
-              title={'menu'}
-              type={'button'}
-            >
-              <MoreHorizontalOutline
-                aria-label={'Call settings'}
-                className={`size-6 active:text-accent-500 hover:text-accent-500 cursor-pointer ${
-                  open ? 'text-accent-500' : ''
-                }`}
-              />
-            </button>
-          </PopoverTrigger>
-          <PopoverContent
-            className={'absolute z-50 min-w-max min-h-[85px] -right-3 p-3'}
-            sideOffset={3}
-          >
-            <nav>
-              <ul className={'flex flex-col gap-3'}>
-                {infoHeaderData.map(
-                  (item) =>
-                    item.display && (
-                      <button
-                        className={`flex items-center gap-2 hover:text-accent-500`}
-                        key={item.id}
-                        onClick={item.onClick}
-                        type={'button'}
-                      >
-                        {item.icon}
-                        <span className={'text-sm'}>{item.text}</span>
-                      </button>
-                    )
-                )}
-              </ul>
-            </nav>
-          </PopoverContent>
-        </Popover>
+          setOpen={setOpen}
+        />
       )}
     </div>
   )

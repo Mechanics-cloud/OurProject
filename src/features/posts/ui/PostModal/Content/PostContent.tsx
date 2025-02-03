@@ -1,63 +1,25 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 
+import { PathService, PublicPaths, timeAgo } from '@/common'
 import {
-  PathService,
-  PublicPaths,
-  timeAgo,
-  useElementOnScreen,
-  useTranslation,
-} from '@/common'
-import { LikeStatus } from '@/common/enums'
-import { generalStore } from '@/core/store'
-import { Comment, CommentItem, Description } from '@/features/posts'
-import { usePostStore } from '@/features/posts/model/postStoreProvider'
+  Comment,
+  CommentItem,
+  Description,
+  usePostContent,
+} from '@/features/posts'
 import { observer } from 'mobx-react-lite'
-import { useRouter } from 'next/router'
 
 export const PostContent = observer(() => {
-  const { t } = useTranslation()
-  const router = useRouter()
-  const { commentStore, postStore } = usePostStore()
   const {
-    getComments,
+    endRef,
     items: comments,
-    pageNumber,
-    pagesCount,
-    setShouldScroll,
-    shouldScroll,
-    updateCommentLike,
-  } = commentStore
-  const { user } = generalStore
-
-  const startRef = useRef<HTMLDivElement>(null)
-  const { ref: endRef, visible } = useElementOnScreen<HTMLDivElement>()
-
-  const onChangeCommentLike = (comment: Comment) => {
-    if (postStore.post?.id) {
-      updateCommentLike({
-        commentId: comment.id,
-        likeStatus: comment.isLiked ? LikeStatus.None : LikeStatus.Like,
-        postId: postStore.post.id,
-      })
-    }
-  }
-
-  useEffect(() => {
-    if (visible && postStore.post?.id && pageNumber < pagesCount) {
-      getComments({
-        pageNumber: pageNumber + 1,
-        postId: postStore.post?.id,
-        type: user ? 'private' : 'public',
-      })
-    }
-  }, [visible, postStore.post?.id, pageNumber, pagesCount, user, getComments])
-
-  useEffect(() => {
-    if (startRef.current && shouldScroll) {
-      startRef.current.scrollTo({ behavior: 'smooth', top: 0 })
-      setShouldScroll(false)
-    }
-  }, [startRef, shouldScroll, setShouldScroll])
+    onChangeCommentLike,
+    postStore,
+    router,
+    startRef,
+    t,
+    user,
+  } = usePostContent()
 
   return (
     <div
