@@ -1,9 +1,7 @@
 import React from 'react'
 
 import { useModal } from '@/common'
-import { usePostStore } from '@/features/posts'
-import { EditInfo } from '@/features/posts/ui/EditModal/EditInfo/EditInfo'
-import { CancelEditModal } from '@/features/posts/ui/PostModal/CancelEditModal/CancelEditModal'
+import { CancelEditModal, EditInfo, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 
 export const Edit = observer(() => {

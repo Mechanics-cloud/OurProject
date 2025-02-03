@@ -9,10 +9,8 @@ import {
 } from '@/common'
 import { LikeStatus } from '@/common/enums'
 import { generalStore } from '@/core/store'
-import { Comment } from '@/features/posts'
+import { Comment, CommentItem, Description } from '@/features/posts'
 import { usePostStore } from '@/features/posts/model/postStoreProvider'
-import { CommentItem } from '@/features/posts/ui/PostModal/Content/Comment'
-import { Description } from '@/features/posts/ui/PostModal/Content/Description'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 

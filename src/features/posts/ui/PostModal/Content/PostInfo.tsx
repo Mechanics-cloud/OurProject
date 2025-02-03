@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { AddComment } from '@/features/posts/ui/PostModal/Content/AddComment'
-import { PostContent } from '@/features/posts/ui/PostModal/Content/PostContent'
-import { SocialGroup } from '@/features/posts/ui/PostModal/Content/SocialGroup'
-import { PostInfoHeader } from '@/features/posts/ui/PostModal/Header/PostInfoHeader'
-import { PostSlider } from '@/features/posts/ui/PostModal/Slider/PostSlider'
+import {
+  AddComment,
+  PostContent,
+  PostInfoHeader,
+  PostSlider,
+  SocialGroup,
+} from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 
 export const PostInfo = observer(() => {

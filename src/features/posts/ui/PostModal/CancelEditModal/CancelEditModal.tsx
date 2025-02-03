@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { useTranslation } from '@/common'
-import { ConfirmModal } from '@/common/components/confirmModal/Modal'
+import { ConfirmModal, useTranslation } from '@/common'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {

@@ -2,8 +2,7 @@ import React from 'react'
 
 import { Close } from '@/assets/icons'
 import { PathService, PublicPaths, useTranslation } from '@/common'
-import { usePostStore } from '@/features/posts'
-import { PostInfo } from '@/features/posts/ui/PostModal/Content/PostInfo'
+import { PostInfo, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 

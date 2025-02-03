@@ -1,0 +1,7 @@
+export * from './AddComment'
+export * from './Comment'
+export * from './Description'
+export * from './LikesGroup'
+export * from './PostContent'
+export * from './PostInfo'
+export * from './SocialGroup'

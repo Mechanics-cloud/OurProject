@@ -1,8 +1,6 @@
 import React from 'react'
 
-import { usePostStore } from '@/features/posts'
-import { Edit } from '@/features/posts/ui/EditModal/Edit'
-import { Post } from '@/features/posts/ui/PostModal/Post'
+import { Edit, Post, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
