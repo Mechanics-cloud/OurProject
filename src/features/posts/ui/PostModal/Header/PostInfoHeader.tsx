@@ -21,17 +21,34 @@ import { generalStore } from '@/core/store'
 import { usePostStore } from '@/features/posts/model/postStoreProvider'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export const PostInfoHeader = () => {
   const { t } = useTranslation()
   const { postStore } = usePostStore()
   const { user } = generalStore
+  const router = useRouter()
 
   const [open, setOpen] = useState(false)
 
   const onEditClick = () => {
     postStore.startEditing()
     setOpen(false)
+  }
+
+  const onDeletePost = async () => {
+    try {
+      if (postStore?.post) {
+        await postStore.deletePost(postStore?.post?.id)
+        await router.push(
+          PathService.generatePath(PublicPaths.userProfile, {
+            userId: user?.userId,
+          })
+        )
+      }
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const infoHeaderData = [
@@ -46,9 +63,7 @@ export const PostInfoHeader = () => {
       display: user?.userId === postStore.post?.ownerId,
       icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
       id: 'delete',
-      onClick: () => {
-        alert('delete')
-      },
+      onClick: onDeletePost,
       text: t.post.deletePost,
     },
     {

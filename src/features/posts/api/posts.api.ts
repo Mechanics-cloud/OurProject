@@ -2,7 +2,8 @@ import { PathService } from '@/common'
 import { instance } from '@/common/api'
 import { LikeStatus } from '@/common/enums'
 import { PostsRequestEndpoints, PublicPostsEndpoints } from '@/features/posts'
-import { AxiosInstance } from 'axios'
+import { PostsEndpoints } from '@/features/profile/posts'
+import { AxiosInstance, AxiosResponse } from 'axios'
 
 import {
   Comment,
@@ -64,6 +65,10 @@ class PostsApi {
         content: comment,
       })
       .then((res) => res.data)
+  }
+
+  public async deletePost(postId: number): Promise<AxiosResponse> {
+    return this.instance.delete(PostsEndpoints.deletePost(postId))
   }
 
   public updateLikeStatus({

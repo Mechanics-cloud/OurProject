@@ -1,4 +1,7 @@
+import { toast } from 'react-toastify'
+
 import { BasicPost, Nullable, responseErrorHandler } from '@/common'
+import { translationForStore } from '@/common/utils/setTranslation'
 import { postsApi } from '@/features/posts'
 import { action, makeObservable, observable, runInAction } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
@@ -20,6 +23,7 @@ export class PostStore {
     this.isEditing = false
 
     makeObservable(this, {
+      deletePost: action,
       editPostDescription: action,
       hydrate: action,
       isEditing: observable,
@@ -31,6 +35,21 @@ export class PostStore {
 
     this.startEditing = this.startEditing.bind(this)
     this.stopEditing = this.stopEditing.bind(this)
+  }
+
+  async deletePost(postId: number) {
+    try {
+      await postsApi.deletePost(postId)
+      runInAction(() => {
+        this.post = null
+      })
+
+      //todo: отфильтровать удаленный пост из стора
+      toast.success(translationForStore.t.post.successMessage)
+    } catch (error) {
+      responseErrorHandler(error)
+      throw error
+    }
   }
 
   async editPostDescription(description: string) {
