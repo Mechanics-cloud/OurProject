@@ -25,7 +25,7 @@ export const post = {
   copyLink: 'Copy link',
   deletePost: 'Delete post',
   editDescription: 'EditI description',
-  editPost: 'EditI post',
+  editPost: 'Edit post',
   likes: {
     few: '{{value}} "Likes"',
     many: '{{value}} "Likes"',

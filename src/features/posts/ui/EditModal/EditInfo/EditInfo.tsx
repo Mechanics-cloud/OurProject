@@ -57,7 +57,12 @@ export const EditInfo = ({
           "flex items-center justify-between p-[0.75rem] w-full relative after:absolute after:content-[''] after:block after:w-full after:h-px after:bg-dark-100 after:left-0 after:bottom-0"
         }
       >
-        <Typography variant={'h1'}>Edit Post</Typography>
+        <Typography
+          className={'pl-8'}
+          variant={'h1'}
+        >
+          {t.post.editPost}
+        </Typography>
         <Close
           className={'w-6 h-6 cursor-pointer mr-1.5'}
           onClick={onCloseClick}
@@ -84,7 +89,7 @@ export const EditInfo = ({
             >
               <div>
                 <FormTextArea
-                  className={'h-[120px] resize-none'}
+                  className={'h-[250px] resize-none'}
                   control={control}
                   label={t.post.editDescription}
                   maxLength={maxDescriptionLength}
