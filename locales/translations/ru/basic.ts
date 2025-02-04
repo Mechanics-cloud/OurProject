@@ -13,6 +13,7 @@ const errors = {
 export const basic = {
   discard: 'Отмена',
   errors: { ...errors },
+  gallery: 'Картинка в карусели',
   goToTop: 'Вверх',
   logOut: 'Выход',
   next: 'Дальше',

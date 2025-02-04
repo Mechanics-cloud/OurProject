@@ -40,7 +40,7 @@ const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
           key={String(image.url)}
         >
           <Image
-            alt={'picture from post'}
+            alt={t.basic.gallery}
             className={'absolute inset-0 h-full w-full object-cover'}
             fill
             priority
