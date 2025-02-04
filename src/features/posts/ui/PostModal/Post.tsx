@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Close } from '@/assets/icons'
-import { PathService, PublicPaths, useTranslation } from '@/common'
+import { Loader, PathService, PublicPaths, useTranslation } from '@/common'
 import { PostInfo, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
@@ -11,6 +11,7 @@ type Props = {
 }
 
 export const Post = observer(({ userId }: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()
   const { postStore } = usePostStore()
   const { post } = postStore
@@ -27,18 +28,31 @@ export const Post = observer(({ userId }: Props) => {
   }
 
   const onClose = async () => {
+    setIsLoading(true)
     await router.push(
       PathService.generatePath(PublicPaths.userProfile, { userId: userId })
     )
+    setIsLoading(false)
   }
 
   return (
-    <div className={'relative container mx-auto w-[972px] h-[564px]'}>
-      <PostInfo />
-      <Close
-        className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
+    <>
+      {isLoading && <Loader />}
+      <div
+        className={'w-full h-full flex items-center '}
         onClick={onClose}
-      />
-    </div>
+      >
+        <div
+          className={'relative container mx-auto w-[972px] h-[564px]'}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <PostInfo />
+          <Close
+            className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
+            onClick={onClose}
+          />
+        </div>
+      </div>
+    </>
   )
 })
