@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect } from 'react'
 
 import { getDeviceScreenWidth, withServerSide } from '@/common'
 import {
@@ -52,22 +52,10 @@ const ProfilePage = ({
   userProfile,
 }: Props) => {
   const store = initializeStore({ postsData, userProfile })
-  const [isClosePost, setIsClosePost] = useState<boolean>(false)
 
   useEffect(() => {
     hydrateProfileStore?.setNewData({ postsData, userProfile })
   }, [postsData, userProfile])
-
-  const onClosePost = () => {
-    setIsClosePost(true)
-    router
-      .push(
-        PathService.generatePath(PublicPaths.userProfile, {
-          userId: userProfile.id,
-        })
-      )
-      .then(() => setIsClosePost(false))
-  }
 
   return (
     <>
