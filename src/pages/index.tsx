@@ -10,7 +10,7 @@ export async function getStaticProps(): Promise<
   GetStaticPropsResult<{ posts: PublicPostsDto }>
 > {
   const posts = await publicPostsApi.fetchPublicPosts({
-    pageSize: 4,
+    pageSize: 8,
     sortDirection: 'desc',
   })
 
