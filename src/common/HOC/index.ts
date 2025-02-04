@@ -1,2 +1,2 @@
+export * from './withLoader'
 export * from './withProtection'
-export * from './withServerSide'

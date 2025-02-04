@@ -12,6 +12,7 @@ const errors = {
 export const basic = {
   discard: 'Discard',
   errors: { ...errors },
+  gallery: 'Image in gallery',
   goToTop: 'Go to top',
   logOut: 'Log Out',
   next: 'Next',

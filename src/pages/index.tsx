@@ -1,4 +1,4 @@
-import { withServerSide } from '@/common'
+import { withLoader } from '@/common'
 import {
   PublicPosts,
   PublicPostsDto,
@@ -10,7 +10,7 @@ export async function getStaticProps(): Promise<
   GetStaticPropsResult<{ posts: PublicPostsDto }>
 > {
   const posts = await publicPostsApi.fetchPublicPosts({
-    pageSize: 4,
+    pageSize: 8,
     sortDirection: 'desc',
   })
 
@@ -31,4 +31,4 @@ function PublicPostsPage(
   return <PublicPosts posts={publicPosts} />
 }
 
-export default withServerSide(PublicPostsPage)
+export default withLoader(PublicPostsPage)
