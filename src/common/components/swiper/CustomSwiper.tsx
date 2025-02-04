@@ -22,6 +22,7 @@ const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
       keyboard={{
         enabled: true,
       }}
+      loop
       modules={[Navigation, Pagination, EffectFade]}
       navigation
       noSwiping
