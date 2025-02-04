@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect } from 'react'
 
-import { getDeviceScreenWidth, withServerSide } from '@/common'
+import { getDeviceScreenWidth, withLoader } from '@/common'
 import {
   ContentModal,
   PublicPostInfo,
@@ -73,4 +73,4 @@ const ProfilePage = ({
   )
 }
 
-export default withServerSide(ProfilePage)
+export default withLoader(ProfilePage)

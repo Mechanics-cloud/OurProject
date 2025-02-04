@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite'
 
 import { NextPageWithLayout } from './types'
 
-export const withServerSide = <P extends object>(
+export const withLoader = <P extends object>(
   PageComponent: NextPageWithLayout<P>
 ): NextPageWithLayout<P> =>
   observer((props) => {
