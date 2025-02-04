@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 
 import { getDeviceScreenWidth, withLoader } from '@/common'
 import {
@@ -6,6 +6,7 @@ import {
   PublicPostInfo,
   getPublicPostInfo,
 } from '@/features/posts'
+import { MobilePost } from '@/features/posts/ui/mobilePost/MobilePost'
 import {
   ProfileData,
   hydrateProfileStore,
@@ -14,6 +15,7 @@ import {
 } from '@/features/profile'
 import { Profile } from '@/features/profile/ui/Profile'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { useRouter } from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -57,6 +59,23 @@ const ProfilePage = ({
     hydrateProfileStore?.setNewData({ postsData, userProfile })
   }, [postsData, userProfile])
 
+  const mobileWidth = 768
+  const isMobile = screenSize && screenSize <= mobileWidth
+  const router = useRouter()
+  const params = router.query
+
+  if (params.id && params.id[1] && isMobile) {
+    return (
+      <MobilePost
+        comments={comments}
+        post={post}
+        postsData={postsData}
+        screenSize={screenSize}
+        userProfile={userProfile}
+      />
+    )
+  }
+
   return (
     <>
       <Profile
@@ -67,6 +86,7 @@ const ProfilePage = ({
         comments={comments}
         post={post}
         postsData={postsData}
+        screenSize={screenSize}
         userProfile={userProfile}
       />
     </>

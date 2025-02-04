@@ -1,30 +1,34 @@
 import React, { PropsWithChildren } from 'react'
 
-import { Overlay } from '@/common'
 import {
-  ModalWrapper,
+  PostContent,
+  PostInfoHeader,
+  PostSlider,
   PostStoreProvider,
   PublicPostInfo,
+  SocialGroup,
 } from '@/features/posts'
 import { ProfileData } from '@/features/profile'
 
 type Props = { screenSize?: number } & ProfileData &
   PropsWithChildren &
   PublicPostInfo
-export const ContentModal = ({
+
+export const MobilePost = ({
   comments,
   post,
+  postsData,
   screenSize,
   userProfile,
 }: Props) => {
   return (
     <PostStoreProvider initialState={{ comments, post }}>
-      <Overlay
-        className={'flex items-center justify-center'}
-        isVisible={!!post}
-      >
-        <ModalWrapper userProfileId={userProfile.id} />
-      </Overlay>
+      <div className={'w-full h-full flex flex-col items-center'}>
+        <PostInfoHeader />
+        <PostSlider />
+        <SocialGroup />
+        <PostContent />
+      </div>
     </PostStoreProvider>
   )
 }
