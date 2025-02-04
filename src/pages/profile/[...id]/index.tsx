@@ -15,7 +15,6 @@ import {
 } from '@/features/profile'
 import { Profile } from '@/features/profile/ui/Profile'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -34,7 +33,9 @@ export const getServerSideProps: GetServerSideProps = async (
     const postsData = await publicProfileAPi.getPublicPosts(userProfile.id)
     const { comments, post } = await getPublicPostInfo(Number(params.id[1]))
 
-    return { props: { comments, post, postsData, screenSize, userProfile } }
+    return {
+      props: { comments, params, post, postsData, screenSize, userProfile },
+    }
   } catch {
     return {
       notFound: true,
@@ -42,12 +43,16 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 }
 
-type Props = { screenSize?: number } & ProfileData &
+type Props = {
+  params: { id?: string | string[] }
+  screenSize?: number
+} & ProfileData &
   PropsWithChildren &
   PublicPostInfo
 
 const ProfilePage = ({
   comments,
+  params,
   post,
   postsData,
   screenSize,
@@ -61,8 +66,6 @@ const ProfilePage = ({
 
   const mobileWidth = 768
   const isMobile = screenSize && screenSize <= mobileWidth
-  const router = useRouter()
-  const params = router.query
 
   if (params.id && params.id[1] && isMobile) {
     return (

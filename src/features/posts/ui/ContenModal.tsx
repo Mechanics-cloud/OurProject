@@ -18,13 +18,13 @@ export const ContentModal = ({
   userProfile,
 }: Props) => {
   return (
-    <PostStoreProvider initialState={{ comments, post }}>
-      <Overlay
-        className={'flex items-center justify-center'}
-        isVisible={!!post}
-      >
+    <Overlay
+      className={'flex items-center justify-center'}
+      isVisible={!!post}
+    >
+      <PostStoreProvider initialState={{ comments, post }}>
         <ModalWrapper userProfileId={userProfile.id} />
-      </Overlay>
-    </PostStoreProvider>
+      </PostStoreProvider>
+    </Overlay>
   )
 }
