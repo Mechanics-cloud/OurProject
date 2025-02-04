@@ -5,9 +5,10 @@ export const PostsRequestEndpoints = {
   idComments: (postId: number, queryParams?: string) =>
     PathService.generateQueryPath(`/v1/posts/${postId}/comments`, queryParams),
   idLikeStatus: (postId: number) => `/v1/posts/${postId}/like-status`,
-
   idLikes: (postId: number, queryParams?: string) =>
     PathService.generateQueryPath(`/v1/posts/${postId}/likes`, queryParams),
+
+  idPost: (postId: number) => `/v1/posts/${postId}`,
 }
 
 export const PublicPostsEndpoints = {

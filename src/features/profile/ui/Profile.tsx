@@ -33,7 +33,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
 
   const avatar = store.userProfile?.avatars[0]?.url
 
-  const { isMobile, isTablet } = useScreenWidth(screenSize)
+  const { isMobile } = useScreenWidth(screenSize)
 
   // TODO: Заменить работу хука useScreenWidth
   return (
@@ -86,7 +86,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
               />
               <ProfileAboutMe
                 aboutMe={store.userProfile?.aboutMe}
-                className={isTablet ? 'hidden' : 'mt-6'}
+                className={'hidden lg:block lg:mt-6'}
                 isMobile={isMobile}
               />
             </div>
@@ -100,7 +100,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
           </Typography>
           <ProfileAboutMe
             aboutMe={store.userProfile?.aboutMe}
-            className={isTablet ? 'mb-7' : 'hidden'}
+            className={'lg:hidden block mt-7'}
             isMobile={isMobile}
           />
           <PhotoProfilePostsGallery store={store} />

@@ -14,8 +14,6 @@ type CombinedStore = {
 
 type InitialState = PublicPostInfo
 
-let store: CombinedStore
-
 export const StoreContext = createContext<CombinedStore | undefined>(undefined)
 
 export function usePostStore() {
@@ -29,7 +27,7 @@ export function usePostStore() {
 }
 
 function initializeStore(initialData: Nullable<InitialState> = null) {
-  const _store = store ?? {
+  const _store: CombinedStore = {
     commentStore: new CommentStore('desc'),
     likeStore: new LikesStore('desc'),
     postStore: new PostStore(),
@@ -45,10 +43,6 @@ function initializeStore(initialData: Nullable<InitialState> = null) {
 
   if (typeof window === 'undefined') {
     return _store
-  }
-
-  if (!store) {
-    store = _store
   }
 
   return _store

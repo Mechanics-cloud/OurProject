@@ -1,13 +1,11 @@
 import { PropsWithChildren, useEffect, useState } from 'react'
 
+import { getDeviceScreenWidth, withServerSide } from '@/common'
 import {
-  AsyncComponent,
-  PathService,
-  PublicPaths,
-  getDeviceScreenWidth,
-  withServerSide,
-} from '@/common'
-import { PostModal, PublicPostInfo, getPublicPostInfo } from '@/features/posts'
+  ContentModal,
+  PublicPostInfo,
+  getPublicPostInfo,
+} from '@/features/posts'
 import {
   ProfileData,
   hydrateProfileStore,
@@ -16,7 +14,6 @@ import {
 } from '@/features/profile'
 import { Profile } from '@/features/profile/ui/Profile'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { useRouter } from 'next/router'
 
 export const getServerSideProps: GetServerSideProps = async (
   context: GetServerSidePropsContext
@@ -54,7 +51,6 @@ const ProfilePage = ({
   screenSize,
   userProfile,
 }: Props) => {
-  const router = useRouter()
   const store = initializeStore({ postsData, userProfile })
   const [isClosePost, setIsClosePost] = useState<boolean>(false)
 
@@ -79,14 +75,12 @@ const ProfilePage = ({
         screenSize={screenSize}
         store={store}
       />
-      {post && (
-        <PostModal
-          comments={comments}
-          onClose={onClosePost}
-          post={post}
-        />
-      )}
-      <AsyncComponent isLoading={isClosePost} />
+      <ContentModal
+        comments={comments}
+        post={post}
+        postsData={postsData}
+        userProfile={userProfile}
+      />
     </>
   )
 }
