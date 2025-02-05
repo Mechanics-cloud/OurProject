@@ -7,9 +7,16 @@ import {
   TrashOutline,
 } from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import { PathService, PublicPaths, Typography, useTranslation } from '@/common'
+import {
+  PathService,
+  PublicPaths,
+  Typography,
+  useModal,
+  useTranslation,
+} from '@/common'
 import { generalStore } from '@/core/store'
 import { PostHeaderPopover, usePostStore } from '@/features/posts'
+import { DeleteModal } from '@/features/posts/ui/PostModal/DeleteModal/DeleteModal'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -28,8 +35,19 @@ export const PostInfoHeader = () => {
   const { user } = generalStore
   const router = useRouter()
 
+  const {
+    isModalOpen,
+    onModalClose: closeDeleteModal,
+    openModal: openDeleteModal,
+  } = useModal()
+
   const onEditClick = () => {
     postStore.startEditing()
+  }
+
+  const onDeleteClick = () => {
+    openDeleteModal()
+    postStore.startDeleting()
   }
 
   const onDeletePost = async () => {
@@ -59,8 +77,8 @@ export const PostInfoHeader = () => {
       display: user?.userId === postStore.post?.ownerId,
       icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
       id: 'delete',
-      onClick: onDeletePost,
-      text: t.post.deletePost,
+      onClick: onDeleteClick,
+      text: t.post.deletePostTitle,
     },
     {
       display: user?.userId !== postStore.post?.ownerId,
@@ -105,13 +123,12 @@ export const PostInfoHeader = () => {
         </Link>
         <Typography variant={'h3'}>{postStore.post?.userName}</Typography>
       </div>
-      {user && (
-        <PostHeaderPopover
-          data={infoHeaderData}
-          /*open={open}
-          setOpen={setOpen}*/
-        />
-      )}
+      {user && <PostHeaderPopover data={infoHeaderData} />}
+      <DeleteModal
+        onClose={closeDeleteModal}
+        onDelete={onDeletePost}
+        open={isModalOpen}
+      />
     </div>
   )
 }

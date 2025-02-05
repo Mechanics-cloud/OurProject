@@ -31,7 +31,12 @@ export const MobileEdit = () => {
     <>
       <div className={'flex items-center justify-between w-full'}>
         <Button variant={'text'}>Cancel</Button>
-        <Typography variant={'h2'}>{t.post.editPost}</Typography>
+        <Typography
+          className={'text-center'}
+          variant={'h2'}
+        >
+          {t.post.editPost}
+        </Typography>
         <Button variant={'text'}>Save</Button>
       </div>
       <PostSlider className={'mt-[19px] mb-3 px-9'} />

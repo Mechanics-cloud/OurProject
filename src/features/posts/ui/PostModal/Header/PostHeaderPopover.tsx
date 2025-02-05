@@ -2,12 +2,11 @@ import React from 'react'
 
 import { UserHeaderPopover } from '@/common'
 import { MappedData } from '@/features/posts'
-import { observer } from 'mobx-react-lite'
 
 type Props = {
   data: MappedData[]
 }
-export const PostHeaderPopover = observer(({ data }: Props) => {
+export const PostHeaderPopover = ({ data }: Props) => {
   return (
     <UserHeaderPopover>
       <nav>
@@ -30,4 +29,4 @@ export const PostHeaderPopover = observer(({ data }: Props) => {
       </nav>
     </UserHeaderPopover>
   )
-})
+}

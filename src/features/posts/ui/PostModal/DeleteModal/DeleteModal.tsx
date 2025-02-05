@@ -4,21 +4,21 @@ import { ConfirmModal, useTranslation } from '@/common'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
-  onCancelEdit: () => void
   onClose: () => void
+  onDelete: () => void
 } & DialogProps
 
-export const CancelEditModal = ({ onCancelEdit, onClose, ...rest }: Props) => {
+export const DeleteModal = ({ onClose, onDelete, ...rest }: Props) => {
   const { t } = useTranslation()
 
   return (
     <ConfirmModal
-      onClick={onCancelEdit}
+      onClick={onDelete}
       onClose={onClose}
-      title={t.post.cancelEditTitle}
+      title={t.post.deletePostTitle}
       {...rest}
     >
-      {t.post.cancelEdit}
+      {t.post.deletePost}
     </ConfirmModal>
   )
 }

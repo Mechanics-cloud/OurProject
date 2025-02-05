@@ -12,6 +12,7 @@ export class PostStore {
   hydrate = (data?: BasicPost) => {
     this.post = data || null
   }
+  isDeleting: boolean
   isEditing: boolean
   isLoading: boolean
 
@@ -21,20 +22,26 @@ export class PostStore {
     this.isLoading = true
     this.post = null
     this.isEditing = false
+    this.isDeleting = false
 
     makeObservable(this, {
       deletePost: action,
       editPostDescription: action,
       hydrate: action,
+      isDeleting: observable,
       isEditing: observable,
       isLoading: observable,
       post: observable,
+      startDeleting: action,
       startEditing: action,
+      stopDeleting: action,
       stopEditing: action,
     })
 
     this.startEditing = this.startEditing.bind(this)
     this.stopEditing = this.stopEditing.bind(this)
+    this.stopDeleting = this.stopDeleting.bind(this)
+    this.startDeleting = this.startDeleting.bind(this)
   }
 
   async deletePost(postId: number) {
@@ -42,6 +49,7 @@ export class PostStore {
       await postsApi.deletePost(postId)
       runInAction(() => {
         this.post = null
+        this.stopDeleting()
       })
 
       //todo: отфильтровать удаленный пост из стора
@@ -73,8 +81,16 @@ export class PostStore {
     }
   }
 
+  startDeleting() {
+    this.isDeleting = true
+  }
+
   startEditing() {
     this.isEditing = true
+  }
+
+  stopDeleting() {
+    this.isDeleting = false
   }
 
   stopEditing() {

@@ -28,7 +28,7 @@ export const UserHeaderPopover = ({ children }: Props) => {
         </button>
       </PopoverTrigger>
       <PopoverContent
-        className={'z-50 w-[144px] min-h-[85px] absolute px-2 py-3 right-0'}
+        className={'z-50 w-[200px] min-h-[85px] absolute px-2 py-3 right-0'}
         sideOffset={3}
       >
         {children}

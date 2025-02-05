@@ -7,9 +7,8 @@ import {
   PostSlider,
   SocialGroup,
 } from '@/features/posts'
-import { observer } from 'mobx-react-lite'
 
-export const PostInfo = observer(() => {
+export const PostInfo = () => {
   return (
     <div className={'flex w-full h-full border border-dark-100'}>
       <div className={'flex w-full h-full'}>
@@ -23,4 +22,4 @@ export const PostInfo = observer(() => {
       </div>
     </div>
   )
-})
+}
