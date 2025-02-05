@@ -22,6 +22,7 @@ export const post = {
   addComment: 'Add comment...',
   cancelEdit:
     'Do you really want to close the edition of the publication? If you close changes won’t be saved',
+  closePost: 'Close Post',
   copyLink: 'Copy link',
   deletePost: 'Delete post',
   editDescription: 'EditI description',

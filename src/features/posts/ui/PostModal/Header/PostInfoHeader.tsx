@@ -8,10 +8,12 @@ import {
 } from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
 import {
+  ConfirmModal,
   Loader,
   PathService,
   PublicPaths,
   Typography,
+  useModal,
   useTranslation,
 } from '@/common'
 import { generalStore } from '@/core/store'
@@ -36,6 +38,12 @@ export const PostInfoHeader = observer(() => {
 
   const [open, setOpen] = useState(false)
 
+  const {
+    isModalOpen,
+    onModalClose: closeConfirmModal,
+    openModal: openConfirmModal,
+  } = useModal()
+
   const onEditClick = () => {
     postStore.startEditing()
     setOpen(false)
@@ -59,7 +67,7 @@ export const PostInfoHeader = observer(() => {
       display: user?.userId === postStore.post?.ownerId,
       icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
       id: 'delete',
-      onClick: onDeletePost,
+      onClick: openConfirmModal,
       text: t.post.deletePost,
     },
     {
@@ -113,6 +121,15 @@ export const PostInfoHeader = observer(() => {
           />
         )}
       </div>
+
+      <ConfirmModal
+        onClick={onDeletePost}
+        onClose={closeConfirmModal}
+        open={isModalOpen}
+        title={t.post.modalTitle}
+      >
+        {t.post.modalText}
+      </ConfirmModal>
     </>
   )
 })
