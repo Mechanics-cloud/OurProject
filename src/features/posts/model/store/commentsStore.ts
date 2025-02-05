@@ -11,7 +11,10 @@ import { action, makeObservable, observable, runInAction } from 'mobx'
 
 export class CommentStore extends SortedStore<Comment> {
   createComment = async (params: { comment: string; postId: number }) => {
-    const response = await postsApi.addComment(params)
+    this.isLoading = true
+    const response = await postsApi.addComment(params).finally(() => {
+      this.isLoading = false
+    })
 
     if (response) {
       runInAction(() => {
@@ -75,6 +78,8 @@ export class CommentStore extends SortedStore<Comment> {
       this.setShouldScroll(false)
     })
   }
+
+  isLoading: boolean = false
 
   setComments = (comments: Comment[]) => {
     if (this.items) {
