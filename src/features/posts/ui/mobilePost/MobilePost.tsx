@@ -1,27 +1,18 @@
 import React, { PropsWithChildren } from 'react'
 
-import {
-  PostContent,
-  PostInfoHeader,
-  PostSlider,
-  PostStoreProvider,
-  PublicPostInfo,
-  SocialGroup,
-} from '@/features/posts'
+import { PostStoreProvider, PublicPostInfo } from '@/features/posts'
+import { MobileContent } from '@/features/posts/ui/mobilePost/MobileContent'
 import { ProfileData } from '@/features/profile'
 
 type Props = { screenSize?: number } & ProfileData &
   PropsWithChildren &
   PublicPostInfo
 
-export const MobilePost = ({ comments, post, screenSize }: Props) => {
+export const MobilePost = ({ comments, post }: Props) => {
   return (
     <PostStoreProvider initialState={{ comments, post }}>
       <div className={'w-full h-full flex flex-col items-center'}>
-        <PostInfoHeader />
-        <PostSlider />
-        <SocialGroup />
-        <PostContent screenSize={screenSize} />
+        <MobileContent />
       </div>
     </PostStoreProvider>
   )
