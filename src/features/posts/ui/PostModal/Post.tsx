@@ -17,16 +17,6 @@ export const Post = observer(({ userId }: Props) => {
   const { post } = postStore
   const router = useRouter()
 
-  if (!post) {
-    return (
-      <div
-        className={'flex justify-center items-center w-full h-full bg-dark-300'}
-      >
-        {t.post.notFound}
-      </div>
-    )
-  }
-
   const onClose = async () => {
     setIsLoading(true)
     await router.push(
@@ -46,7 +36,17 @@ export const Post = observer(({ userId }: Props) => {
           className={'relative container mx-auto w-[972px] h-[564px]'}
           onClick={(e) => e.stopPropagation()}
         >
-          <PostInfo />
+          {!post?.id || !post ? (
+            <div
+              className={
+                'w-full h-full bg-dark-300 flex items-center justify-center'
+              }
+            >
+              {t.post.notFound}
+            </div>
+          ) : (
+            <PostInfo />
+          )}
           <Close
             className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
             onClick={onClose}
