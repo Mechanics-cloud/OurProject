@@ -42,7 +42,7 @@ const Template = (
       <Link href={href}>
         <Avatar
           alt={alt || `user ${name} photo`}
-          className={'rounded-full mt-0'}
+          className={'mt-0'}
           priority={src !== undefined}
           size={36}
           src={src}

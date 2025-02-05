@@ -24,7 +24,7 @@ export const Avatar = ({
 }: Props) => (
   <Image
     alt={alt || ''}
-    className={cn('shrink-0', className)}
+    className={cn('shrink-0 rounded-full', className)}
     height={size}
     priority={priority}
     src={src || placeholder || avatarPlaceholder}
