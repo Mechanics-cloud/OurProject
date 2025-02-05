@@ -9,7 +9,11 @@ import {
 } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 
-export const PostContent = observer(() => {
+type Props = {
+  screenSize?: number
+}
+
+export const PostContent = observer(({ screenSize }: Props) => {
   const {
     endRef,
     items: comments,
@@ -20,17 +24,19 @@ export const PostContent = observer(() => {
     t,
     user,
   } = usePostContent()
+  const isAvatarHidden = !!screenSize && screenSize < 768
 
   return (
     <ScrollArea className={'border-b border-dark-100 box-border h-full'}>
       <div
-        className={'flex-col overflow-y-hidden grow justify-end py-5 px-6 '}
+        className={'flex-col overflow-y-hidden grow justify-end py-5 md:px-6 '}
         ref={startRef}
       >
         {postStore.post?.description && (
           <Description
             avatarOwner={postStore.post.avatarOwner}
             description={postStore.post.description}
+            isAvatarHidden={isAvatarHidden}
           />
         )}
         {comments && comments?.length > 0 ? (
@@ -41,6 +47,7 @@ export const PostContent = observer(() => {
               href={PathService.generatePath(PublicPaths.userProfile, {
                 userId: comment.from.id,
               })}
+              isAvatarHidden={isAvatarHidden}
               isLike={user ? comment.isLiked : null}
               key={comment.id}
               likes={comment.likeCount ? `Likes: ${comment.likeCount}` : ''}

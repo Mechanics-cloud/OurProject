@@ -14,20 +14,14 @@ type Props = { screenSize?: number } & ProfileData &
   PropsWithChildren &
   PublicPostInfo
 
-export const MobilePost = ({
-  comments,
-  post,
-  postsData,
-  screenSize,
-  userProfile,
-}: Props) => {
+export const MobilePost = ({ comments, post, screenSize }: Props) => {
   return (
     <PostStoreProvider initialState={{ comments, post }}>
       <div className={'w-full h-full flex flex-col items-center'}>
         <PostInfoHeader />
         <PostSlider />
         <SocialGroup />
-        <PostContent />
+        <PostContent screenSize={screenSize} />
       </div>
     </PostStoreProvider>
   )

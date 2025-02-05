@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import {
   CopyOutline,
@@ -9,8 +9,7 @@ import {
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
 import { PathService, PublicPaths, Typography, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
-import { PostHeaderPopover } from '@/features/posts'
-import { usePostStore } from '@/features/posts/model/postStoreProvider'
+import { PostHeaderPopover, usePostStore } from '@/features/posts'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -29,11 +28,8 @@ export const PostInfoHeader = () => {
   const { user } = generalStore
   const router = useRouter()
 
-  const [open, setOpen] = useState(false)
-
   const onEditClick = () => {
     postStore.startEditing()
-    setOpen(false)
   }
 
   const onDeletePost = async () => {
@@ -89,29 +85,31 @@ export const PostInfoHeader = () => {
   return (
     <div
       className={
-        'flex items-center gap-3 py-3 md:px-6 px-1 border-b border-dark-100 box-border w-full'
+        'flex items-center gap-3 py-3 md:px-6 px-1 border-b border-dark-100 box-border w-full justify-between'
       }
     >
-      <Link
-        href={PathService.generatePath(PublicPaths.userProfile, {
-          userId: postStore.post?.ownerId,
-        })}
-      >
-        <Image
-          alt={`Post owner avatar`}
-          className={'rounded-full pr-0'}
-          height={36}
-          priority
-          src={postStore.post?.avatarOwner || anonymous}
-          width={36}
-        />
-      </Link>
-      <Typography variant={'h3'}>{postStore.post?.userName}</Typography>
+      <div className={'flex items-center gap-3'}>
+        <Link
+          href={PathService.generatePath(PublicPaths.userProfile, {
+            userId: postStore.post?.ownerId,
+          })}
+        >
+          <Image
+            alt={`Post owner avatar`}
+            className={'rounded-full pr-0'}
+            height={36}
+            priority
+            src={postStore.post?.avatarOwner || anonymous}
+            width={36}
+          />
+        </Link>
+        <Typography variant={'h3'}>{postStore.post?.userName}</Typography>
+      </div>
       {user && (
         <PostHeaderPopover
           data={infoHeaderData}
-          open={open}
-          setOpen={setOpen}
+          /*open={open}
+          setOpen={setOpen}*/
         />
       )}
     </div>

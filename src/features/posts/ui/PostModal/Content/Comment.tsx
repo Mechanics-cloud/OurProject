@@ -8,6 +8,7 @@ type Props = {
   alt?: Nullable<string>
   className?: string
   href: string
+  isAvatarHidden?: boolean
   isLike?: Nullable<boolean>
   likes?: Nullable<string>
   name?: Nullable<string>
@@ -23,6 +24,7 @@ const Template = (
     alt,
     className,
     href,
+    isAvatarHidden = false,
     isLike,
     likes,
     name,
@@ -39,15 +41,17 @@ const Template = (
       className={cn('flex gap-3 items-start', className)}
       ref={ref}
     >
-      <Link href={href}>
-        <Avatar
-          alt={alt || `user ${name} photo`}
-          className={'rounded-full mt-0'}
-          priority={src !== undefined}
-          size={36}
-          src={src}
-        />
-      </Link>
+      {!isAvatarHidden && (
+        <Link href={href}>
+          <Avatar
+            alt={alt || `user ${name} photo`}
+            className={'rounded-full mt-0'}
+            priority={src !== undefined}
+            size={36}
+            src={src}
+          />
+        </Link>
+      )}
 
       <div className={'flex-col'}>
         <p>
