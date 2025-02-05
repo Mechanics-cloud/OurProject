@@ -24,6 +24,7 @@ export const post = {
     'Do you really want to close the edition of the publication? If you close changes won’t be saved',
   closePost: 'Close Post',
   copyLink: 'Copy link',
+  createTime: 'Just now',
   deletePost: 'Delete post',
   editDescription: 'EditI description',
   editPost: 'Edit post',
