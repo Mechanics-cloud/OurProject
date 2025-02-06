@@ -1,6 +1,7 @@
 import React from 'react'
 
 import {
+  AddComment,
   MobileEdit,
   PostContent,
   PostInfoHeader,
@@ -10,7 +11,10 @@ import {
 } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 
-export const MobileContent = observer(() => {
+type Props = {
+  screenSize?: number
+}
+export const MobileContent = observer(({ screenSize }: Props) => {
   const { postStore } = usePostStore()
   const { isEditing } = postStore
 
@@ -19,7 +23,8 @@ export const MobileContent = observer(() => {
       <PostInfoHeader />
       <PostSlider />
       <SocialGroup />
-      <PostContent />
+      <PostContent screenSize={screenSize} />
+      <AddComment />
     </div>
   ) : (
     <MobileEdit />

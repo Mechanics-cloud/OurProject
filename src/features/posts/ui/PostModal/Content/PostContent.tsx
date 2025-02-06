@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PathService, PublicPaths, ScrollArea, timeAgo } from '@/common'
+import { Button, PathService, PublicPaths, ScrollArea, timeAgo } from '@/common'
 import {
   Comment,
   CommentItem,
@@ -24,7 +24,10 @@ export const PostContent = observer(({ screenSize }: Props) => {
     t,
     user,
   } = usePostContent()
-  const isAvatarHidden = !!screenSize && screenSize < 768
+  const isAvatarHidden = !!screenSize && screenSize <= 768
+  const isMobile = !!screenSize && screenSize <= 768
+  const mapComments =
+    comments?.length && isMobile ? comments.slice(0, 2) : comments
 
   return (
     <ScrollArea className={'border-b border-dark-100 box-border h-full'}>
@@ -39,8 +42,8 @@ export const PostContent = observer(({ screenSize }: Props) => {
             isAvatarHidden={isAvatarHidden}
           />
         )}
-        {comments && comments?.length > 0 ? (
-          comments.map((comment: Comment) => (
+        {mapComments ? (
+          mapComments?.map((comment: Comment) => (
             <CommentItem
               alt={`${comment.from.username} photo image`}
               className={'mb-4'}
@@ -60,6 +63,14 @@ export const PostContent = observer(({ screenSize }: Props) => {
           ))
         ) : (
           <p>{t.post.noComments}</p>
+        )}
+        {isMobile && (
+          <Button
+            className={'w-full h-6 mb-4 text-light-900 text-left'}
+            variant={'text'}
+          >
+            {`View all comments (${comments?.length})`}
+          </Button>
         )}
 
         <div ref={endRef} />

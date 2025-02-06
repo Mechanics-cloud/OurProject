@@ -27,10 +27,10 @@ export const AddComment = observer(() => {
     setValue(e.currentTarget.value)
 
   return user ? (
-    <div className={'flex items-center'}>
+    <div className={'flex items-center w-full'}>
       <input
         className={
-          'bg-transparent focus:outline-none text-[14px] font-400  leading-[24px] w-full py-4 px-6'
+          'bg-transparent focus:outline-none text-[14px] font-400 leading-[24px] w-full py-4 px-6'
         }
         maxLength={300}
         onChange={onChange}

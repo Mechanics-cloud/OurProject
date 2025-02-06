@@ -8,10 +8,10 @@ type Props = { screenSize?: number } & ProfileData &
   PropsWithChildren &
   PublicPostInfo
 
-export const MobilePost = ({ comments, post }: Props) => {
+export const MobilePost = ({ comments, post, screenSize }: Props) => {
   return (
     <PostStoreProvider initialState={{ comments, post }}>
-      <MobileContent />
+      <MobileContent screenSize={screenSize} />
     </PostStoreProvider>
   )
 }

@@ -65,7 +65,7 @@ const ProfilePage = ({
   }, [postsData, userProfile])
 
   const mobileWidth = 768
-  const isMobile = screenSize && screenSize < mobileWidth
+  const isMobile = screenSize && screenSize <= mobileWidth
 
   if (params.id && params.id[1] && isMobile) {
     return (
