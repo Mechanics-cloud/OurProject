@@ -8,9 +8,12 @@ import {
   Typography,
   UserMiniLink,
 } from '@/common'
-import { CancelEditModal, PostSlider } from '@/features/posts'
-import { EditDescription } from '@/features/posts/ui/EditModal/EditDescription'
-import { useEditMode } from '@/features/posts/ui/EditModal/useEditMode'
+import {
+  CancelEditModal,
+  EditDescription,
+  PostSlider,
+  useEditMode,
+} from '@/features/posts'
 
 export const MobileEdit = () => {
   const {

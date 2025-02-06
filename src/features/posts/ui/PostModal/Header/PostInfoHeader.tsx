@@ -2,9 +2,11 @@ import React from 'react'
 
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
 import { PathService, PublicPaths, UserMiniLink } from '@/common'
-import { PostHeaderPopover } from '@/features/posts'
-import { DeleteModal } from '@/features/posts/ui/PostModal/DeleteModal/DeleteModal'
-import { usePostInfoHeader } from '@/features/posts/ui/PostModal/Header/usePostInfoHeader'
+import {
+  DeleteModal,
+  PostHeaderPopover,
+  usePostInfoHeader,
+} from '@/features/posts'
 
 export type MappedData = {
   display: boolean

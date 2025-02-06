@@ -6,7 +6,7 @@ import {
   PublicPostInfo,
   getPublicPostInfo,
 } from '@/features/posts'
-import { MobilePost } from '@/features/posts/ui/mobilePost/MobilePost'
+import { MobilePost } from '@/features/posts/ui/Mobile/MobilePost'
 import {
   ProfileData,
   hydrateProfileStore,

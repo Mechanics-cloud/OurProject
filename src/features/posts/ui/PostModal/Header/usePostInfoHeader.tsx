@@ -9,6 +9,7 @@ import {
 import { useModal, useTranslation } from '@/common'
 import { generalStore } from '@/core/store'
 import { MappedData, usePostStore } from '@/features/posts'
+
 export const usePostInfoHeader = () => {
   const { t } = useTranslation()
   const { postStore } = usePostStore()

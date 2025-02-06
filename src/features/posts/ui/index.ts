@@ -1,4 +1,5 @@
 export * from './ContenModal'
 export * from './EditModal'
+export * from './Mobile'
 export * from './ModalWrapper'
 export * from './PostModal'
