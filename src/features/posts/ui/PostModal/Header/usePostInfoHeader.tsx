@@ -26,7 +26,6 @@ export const usePostInfoHeader = () => {
 
   const onDeleteClick = () => {
     openDeleteModal()
-    postStore.startDeleting()
   }
 
   const onDeletePost = async () => {
