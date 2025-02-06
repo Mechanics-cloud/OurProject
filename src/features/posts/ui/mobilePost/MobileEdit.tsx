@@ -1,5 +1,4 @@
 import React from 'react'
-import { useForm, useWatch } from 'react-hook-form'
 
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
 import {
@@ -8,42 +7,57 @@ import {
   PathService,
   PublicPaths,
   Typography,
-  useTranslation,
 } from '@/common'
-import { PostSlider, usePostStore } from '@/features/posts'
+import { CancelEditModal, PostSlider } from '@/features/posts'
+import { useEditMode } from '@/features/posts/ui/EditModal/useEditMode'
 import Image from 'next/image'
 import Link from 'next/link'
 
 export const MobileEdit = () => {
-  const { t } = useTranslation()
-  const { postStore } = usePostStore()
-  const maxDescriptionLength = 500
-
-  const { control } = useForm<{ description: string }>({
-    defaultValues: {
-      description: postStore.post?.description || '',
-    },
-  })
-
-  const description = useWatch({ control, name: 'description' })
+  const {
+    closeConfirmModal,
+    control,
+    description,
+    isDirty,
+    isModalOpen,
+    isSubmitting,
+    maxDescriptionLength,
+    onCancelEdit,
+    onCloseClick,
+    onSubmit,
+    post,
+    t,
+  } = useEditMode()
 
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <div className={'flex items-center justify-between w-full'}>
-        <Button variant={'text'}>Cancel</Button>
+        <Button
+          onClick={onCloseClick}
+          type={'button'}
+          variant={'text'}
+        >
+          Cancel
+        </Button>
         <Typography
           className={'text-center'}
           variant={'h2'}
         >
           {t.post.editPost}
         </Typography>
-        <Button variant={'text'}>Save</Button>
+        <Button
+          disabled={!isDirty || isSubmitting}
+          type={'submit'}
+          variant={'text'}
+        >
+          Save
+        </Button>
       </div>
       <PostSlider className={'mt-[19px] mb-3 px-9'} />
       <div className={'flex items-center gap-3 w-full mb-6'}>
         <Link
           href={PathService.generatePath(PublicPaths.userProfile, {
-            userId: postStore.post?.ownerId,
+            userId: post?.ownerId,
           })}
         >
           <Image
@@ -51,13 +65,13 @@ export const MobileEdit = () => {
             className={'rounded-full pr-0'}
             height={36}
             priority
-            src={postStore.post?.avatarOwner || anonymous}
+            src={post?.avatarOwner || anonymous}
             width={36}
           />
         </Link>
-        <Typography variant={'h3'}>{postStore.post?.userName}</Typography>
+        <Typography variant={'h3'}>{post?.userName}</Typography>
       </div>
-      <form className={'w-full'}>
+      <div className={'w-full'}>
         <FormTextArea
           className={'h-[120px] resize-none'}
           control={control}
@@ -81,7 +95,12 @@ export const MobileEdit = () => {
             {description?.length}/{maxDescriptionLength}
           </Typography>
         </div>
-      </form>
-    </>
+      </div>
+      <CancelEditModal
+        onCancelEdit={onCancelEdit}
+        onClose={closeConfirmModal}
+        open={isModalOpen}
+      />
+    </form>
   )
 }
