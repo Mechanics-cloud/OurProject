@@ -1,14 +1,9 @@
 import React from 'react'
 
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import {
-  Button,
-  FormTextArea,
-  PathService,
-  PublicPaths,
-  Typography,
-} from '@/common'
+import { Button, PathService, PublicPaths, Typography } from '@/common'
 import { CancelEditModal, PostSlider } from '@/features/posts'
+import { EditDescription } from '@/features/posts/ui/EditModal/EditDescription'
 import { useEditMode } from '@/features/posts/ui/EditModal/useEditMode'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -22,10 +17,10 @@ export const MobileEdit = () => {
     isModalOpen,
     isSubmitting,
     maxDescriptionLength,
-    onCancelEdit,
     onCloseClick,
     onSubmit,
     post,
+    stopEditing,
     t,
   } = useEditMode()
 
@@ -71,33 +66,16 @@ export const MobileEdit = () => {
         </Link>
         <Typography variant={'h3'}>{post?.userName}</Typography>
       </div>
-      <div className={'w-full'}>
-        <FormTextArea
-          className={'h-[120px] resize-none'}
-          control={control}
-          label={t.post.editDescription}
-          maxLength={maxDescriptionLength}
-          name={'description'}
-        />
-        <div className={'flex items-center w-full'}>
-          {description?.length === maxDescriptionLength && (
-            <Typography
-              className={'text-red-500 text-right'}
-              variant={'small'}
-            >
-              {t.post.maxLengthMessage}
-            </Typography>
-          )}
-          <Typography
-            className={'text-light-900 text-right ml-auto'}
-            variant={'small'}
-          >
-            {description?.length}/{maxDescriptionLength}
-          </Typography>
-        </div>
-      </div>
+      <EditDescription
+        control={control}
+        description={description}
+        label={t.post.editDescription}
+        maxLength={maxDescriptionLength}
+        maxLengthMessage={t.post.maxLengthMessage}
+        name={'description'}
+      />
       <CancelEditModal
-        onCancelEdit={onCancelEdit}
+        onCancelEdit={stopEditing}
         onClose={closeConfirmModal}
         open={isModalOpen}
       />

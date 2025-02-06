@@ -2,11 +2,13 @@ import React from 'react'
 
 import { Close } from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import { Button, FormTextArea, Typography } from '@/common'
+import { Button, PathService, PublicPaths, Typography } from '@/common'
 import { CancelEditModal, PostSlider } from '@/features/posts'
+import { EditDescription } from '@/features/posts/ui/EditModal/EditDescription'
 import { useEditMode } from '@/features/posts/ui/EditModal/useEditMode'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export const Edit = observer(() => {
   const {
@@ -17,10 +19,10 @@ export const Edit = observer(() => {
     isModalOpen,
     isSubmitting,
     maxDescriptionLength,
-    onCancelEdit,
     onCloseClick,
     onSubmit,
     post,
+    stopEditing,
     t,
   } = useEditMode()
 
@@ -51,45 +53,34 @@ export const Edit = observer(() => {
         <div className={'flex flex-col w-full h-full p-6 justify-between'}>
           <div className={'flex flex-col gap-3 h-full'}>
             <div className={'flex items-center gap-3'}>
-              <Image
-                alt={`Post owner avatar`}
-                className={'rounded-full pr-0'}
-                height={36}
-                priority
-                src={post?.avatarOwner || anonymous}
-                width={36}
-              />
+              <Link
+                href={PathService.generatePath(PublicPaths.userProfile, {
+                  userId: post?.ownerId,
+                })}
+              >
+                <Image
+                  alt={`Post owner avatar`}
+                  className={'rounded-full pr-0'}
+                  height={36}
+                  priority
+                  src={post?.avatarOwner || anonymous}
+                  width={36}
+                />
+              </Link>
               <Typography variant={'reg16'}>{post?.userName}</Typography>
             </div>
             <form
               className={'flex flex-col justify-between h-full'}
               onSubmit={onSubmit}
             >
-              <div>
-                <FormTextArea
-                  className={'h-[250px] resize-none'}
-                  control={control}
-                  label={t.post.editDescription}
-                  maxLength={maxDescriptionLength}
-                  name={'description'}
-                />
-                <div className={'flex items-center w-full'}>
-                  {description?.length === maxDescriptionLength && (
-                    <Typography
-                      className={'text-red-500 text-right'}
-                      variant={'small'}
-                    >
-                      {t.post.maxLengthMessage}
-                    </Typography>
-                  )}
-                  <Typography
-                    className={'text-light-900 text-right ml-auto'}
-                    variant={'small'}
-                  >
-                    {description?.length}/{maxDescriptionLength}
-                  </Typography>
-                </div>
-              </div>
+              <EditDescription
+                control={control}
+                description={description}
+                label={t.post.editDescription}
+                maxLength={maxDescriptionLength}
+                maxLengthMessage={t.post.maxLengthMessage}
+                name={'description'}
+              />
               <Button
                 className={'max-w-[160px] ml-auto'}
                 disabled={!isDirty || isSubmitting}
@@ -101,7 +92,7 @@ export const Edit = observer(() => {
         </div>
       </div>
       <CancelEditModal
-        onCancelEdit={onCancelEdit}
+        onCancelEdit={stopEditing}
         onClose={closeConfirmModal}
         open={isModalOpen}
       />
