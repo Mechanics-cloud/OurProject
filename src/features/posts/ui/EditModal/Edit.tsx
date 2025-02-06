@@ -2,13 +2,17 @@ import React from 'react'
 
 import { Close } from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import { Button, PathService, PublicPaths, Typography } from '@/common'
+import {
+  Button,
+  PathService,
+  PublicPaths,
+  Typography,
+  UserMiniLink,
+} from '@/common'
 import { CancelEditModal, PostSlider } from '@/features/posts'
 import { EditDescription } from '@/features/posts/ui/EditModal/EditDescription'
 import { useEditMode } from '@/features/posts/ui/EditModal/useEditMode'
 import { observer } from 'mobx-react-lite'
-import Image from 'next/image'
-import Link from 'next/link'
 
 export const Edit = observer(() => {
   const {
@@ -52,23 +56,14 @@ export const Edit = observer(() => {
         <PostSlider />
         <div className={'flex flex-col w-full h-full p-6 justify-between'}>
           <div className={'flex flex-col gap-3 h-full'}>
-            <div className={'flex items-center gap-3'}>
-              <Link
-                href={PathService.generatePath(PublicPaths.userProfile, {
-                  userId: post?.ownerId,
-                })}
-              >
-                <Image
-                  alt={`Post owner avatar`}
-                  className={'rounded-full pr-0'}
-                  height={36}
-                  priority
-                  src={post?.avatarOwner || anonymous}
-                  width={36}
-                />
-              </Link>
-              <Typography variant={'reg16'}>{post?.userName}</Typography>
-            </div>
+            <UserMiniLink
+              className={'flex items-center gap-3'}
+              href={PathService.generatePath(PublicPaths.userProfile, {
+                userId: post?.ownerId,
+              })}
+              name={post?.userName!}
+              src={post?.avatarOwner || anonymous}
+            />
             <form
               className={'flex flex-col justify-between h-full'}
               onSubmit={onSubmit}

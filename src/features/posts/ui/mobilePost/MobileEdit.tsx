@@ -1,12 +1,16 @@
 import React from 'react'
 
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import { Button, PathService, PublicPaths, Typography } from '@/common'
+import {
+  Button,
+  PathService,
+  PublicPaths,
+  Typography,
+  UserMiniLink,
+} from '@/common'
 import { CancelEditModal, PostSlider } from '@/features/posts'
 import { EditDescription } from '@/features/posts/ui/EditModal/EditDescription'
 import { useEditMode } from '@/features/posts/ui/EditModal/useEditMode'
-import Image from 'next/image'
-import Link from 'next/link'
 
 export const MobileEdit = () => {
   const {
@@ -49,23 +53,14 @@ export const MobileEdit = () => {
         </Button>
       </div>
       <PostSlider className={'mt-[19px] mb-3 px-9'} />
-      <div className={'flex items-center gap-3 w-full mb-6'}>
-        <Link
-          href={PathService.generatePath(PublicPaths.userProfile, {
-            userId: post?.ownerId,
-          })}
-        >
-          <Image
-            alt={`Post owner avatar`}
-            className={'rounded-full pr-0'}
-            height={36}
-            priority
-            src={post?.avatarOwner || anonymous}
-            width={36}
-          />
-        </Link>
-        <Typography variant={'h3'}>{post?.userName}</Typography>
-      </div>
+      <UserMiniLink
+        className={'flex items-center gap-3 w-full mb-6'}
+        href={PathService.generatePath(PublicPaths.userProfile, {
+          userId: post?.ownerId,
+        })}
+        name={post?.userName!}
+        src={post?.avatarOwner || anonymous}
+      />
       <EditDescription
         control={control}
         description={description}
