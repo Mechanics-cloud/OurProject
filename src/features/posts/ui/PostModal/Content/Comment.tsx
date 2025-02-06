@@ -42,7 +42,7 @@ const Template = (
       <Link href={href}>
         <Avatar
           alt={alt || `user ${name} photo`}
-          className={'mt-1'}
+          className={'mt-2'}
           priority={src !== undefined}
           size={36}
           src={src}
