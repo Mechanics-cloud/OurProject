@@ -24,7 +24,7 @@ export const PostContent = observer(() => {
   return (
     <ScrollArea className={'border-b border-dark-100 box-border h-full'}>
       <div
-        className={'flex-col overflow-y-hidden grow justify-end py-5 px-6 '}
+        className={'flex-col overflow-y-hidden grow justify-end py-5 pl-6 '}
         ref={startRef}
       >
         {postStore.post?.description && (

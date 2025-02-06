@@ -1,6 +1,6 @@
 import React, { MouseEvent, Ref, forwardRef } from 'react'
 
-import { Avatar, Like, Nullable, Typography, cn } from '@/common'
+import { Avatar, Like, Nullable, TextUnfolding, Typography, cn } from '@/common'
 import { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
@@ -42,18 +42,28 @@ const Template = (
       <Link href={href}>
         <Avatar
           alt={alt || `user ${name} photo`}
-          className={'mt-0'}
+          className={'mt-1'}
           priority={src !== undefined}
           size={36}
           src={src}
         />
       </Link>
 
-      <div className={'flex-col'}>
-        <p>
-          <b className={'mr-2'}>{name}</b>
-          {text}
-        </p>
+      <div className={'flex-col w-[345px]'}>
+        <TextUnfolding
+          className={'!pb-1'}
+          link={
+            <Link
+              className={'font-bold leading-[24px] text-[14px]'}
+              href={href}
+            >
+              {name}
+            </Link>
+          }
+        >
+          {text as string}
+        </TextUnfolding>
+
         <div className={'flex items-center gap-2'}>
           {time && (
             <Typography
@@ -82,12 +92,13 @@ const Template = (
         </div>
       </div>
       {isLike !== null && (
-        <div
-          className={'w-10 mt-4 ml-auto'}
+        <button
+          className={'w-6 mt-4 ml-auto'}
           onClick={onLike}
+          type={'button'}
         >
           <Like active={!!isLike} />
-        </div>
+        </button>
       )}
     </div>
   )
