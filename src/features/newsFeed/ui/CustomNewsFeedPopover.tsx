@@ -11,14 +11,14 @@ export const CustomNewsFeedPopover = () => {
         <ul>
           <Link
             className={'flex items-center gap-2 mb-3  hover:text-accent-500'}
-            href={'/'}
+            href={'#'}
           >
             <PersonRemoveOutline className={'size-6'} />
             <span className={'text-sm'}>{t.menu.unfollow}</span>
           </Link>
           <Link
             className={'flex items-center gap-2  hover:text-accent-500'}
-            href={'/'}
+            href={'#'}
           >
             <CopyOutline className={'size-6 flex-shrink-0'} />
             <span className={'text-sm'}>{t.menu.copyLink}</span>

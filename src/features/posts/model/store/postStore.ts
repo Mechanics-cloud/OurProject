@@ -1,10 +1,17 @@
 import { toast } from 'react-toastify'
 
-import { BasicPost, Nullable, responseErrorHandler } from '@/common'
+import {
+  BasicPost,
+  Nullable,
+  PathService,
+  PublicPaths,
+  responseErrorHandler,
+} from '@/common'
 import { translationForStore } from '@/common/utils/setTranslation'
 import { postsApi } from '@/features/posts'
 import { action, makeObservable, observable, runInAction } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
+import router from 'next/router'
 
 enableStaticRendering(typeof window === 'undefined')
 
@@ -44,9 +51,15 @@ export class PostStore {
     this.startDeleting = this.startDeleting.bind(this)
   }
 
-  async deletePost(postId: number) {
+  async deletePost(postId: number, userId: number) {
     try {
       await postsApi.deletePost(postId)
+      await router.push(
+        PathService.generatePath(PublicPaths.userProfile, {
+          userId,
+        })
+      )
+
       runInAction(() => {
         this.post = null
         this.stopDeleting()

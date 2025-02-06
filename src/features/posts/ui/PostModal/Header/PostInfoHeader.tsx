@@ -1,25 +1,12 @@
 import React from 'react'
 
-import {
-  CopyOutline,
-  Edit2Outline,
-  PersonRemoveOutline,
-  TrashOutline,
-} from '@/assets/icons'
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import {
-  PathService,
-  PublicPaths,
-  Typography,
-  useModal,
-  useTranslation,
-} from '@/common'
-import { generalStore } from '@/core/store'
-import { PostHeaderPopover, usePostStore } from '@/features/posts'
+import { PathService, PublicPaths, Typography } from '@/common'
+import { PostHeaderPopover } from '@/features/posts'
 import { DeleteModal } from '@/features/posts/ui/PostModal/DeleteModal/DeleteModal'
+import { usePostInfoHeader } from '@/features/posts/ui/PostModal/Header/usePostInfoHeader'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 export type MappedData = {
   display: boolean
@@ -30,75 +17,14 @@ export type MappedData = {
 }
 
 export const PostInfoHeader = () => {
-  const { t } = useTranslation()
-  const { postStore } = usePostStore()
-  const { user } = generalStore
-  const router = useRouter()
-
   const {
+    closeDeleteModal,
+    infoHeaderData,
     isModalOpen,
-    onModalClose: closeDeleteModal,
-    openModal: openDeleteModal,
-  } = useModal()
-
-  const onEditClick = () => {
-    postStore.startEditing()
-  }
-
-  const onDeleteClick = () => {
-    openDeleteModal()
-    postStore.startDeleting()
-  }
-
-  const onDeletePost = async () => {
-    try {
-      if (postStore?.post) {
-        await postStore.deletePost(postStore?.post?.id)
-        await router.push(
-          PathService.generatePath(PublicPaths.userProfile, {
-            userId: user?.userId,
-          })
-        )
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  const infoHeaderData: MappedData[] = [
-    {
-      display: user?.userId === postStore.post?.ownerId,
-      icon: <Edit2Outline className={'flex-shrink-0 size-6'} />,
-      id: 'edit',
-      onClick: onEditClick,
-      text: t.post.editPost,
-    },
-    {
-      display: user?.userId === postStore.post?.ownerId,
-      icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
-      id: 'delete',
-      onClick: onDeleteClick,
-      text: t.post.deletePostTitle,
-    },
-    {
-      display: user?.userId !== postStore.post?.ownerId,
-      icon: <PersonRemoveOutline className={'flex-shrink-0 size-6'} />,
-      id: 'remove',
-      onClick: () => {
-        alert('remove')
-      },
-      text: t.post.unfollow,
-    },
-    {
-      display: user?.userId !== postStore.post?.ownerId,
-      icon: <CopyOutline className={'flex-shrink-0 size-6'} />,
-      id: 'copy',
-      onClick: () => {
-        alert('copy')
-      },
-      text: t.post.copyLink,
-    },
-  ]
+    onDeletePost,
+    postStore,
+    user,
+  } = usePostInfoHeader()
 
   return (
     <div

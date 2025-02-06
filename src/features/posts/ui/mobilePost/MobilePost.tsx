@@ -11,9 +11,7 @@ type Props = { screenSize?: number } & ProfileData &
 export const MobilePost = ({ comments, post }: Props) => {
   return (
     <PostStoreProvider initialState={{ comments, post }}>
-      <div className={'w-full h-full flex flex-col items-center'}>
-        <MobileContent />
-      </div>
+      <MobileContent />
     </PostStoreProvider>
   )
 }

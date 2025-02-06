@@ -30,7 +30,7 @@ export const Post = observer(({ userId }: Props) => {
   const onClose = async () => {
     setIsLoading(true)
     await router.push(
-      PathService.generatePath(PublicPaths.userProfile, { userId: userId })
+      PathService.generatePath(PublicPaths.userProfile, { userId })
     )
     setIsLoading(false)
   }

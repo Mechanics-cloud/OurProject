@@ -15,12 +15,12 @@ export const MobileContent = observer(() => {
   const { isEditing } = postStore
 
   return !isEditing ? (
-    <>
+    <div className={'flex flex-col items-center'}>
       <PostInfoHeader />
       <PostSlider />
       <SocialGroup />
       <PostContent />
-    </>
+    </div>
   ) : (
     <MobileEdit />
   )
