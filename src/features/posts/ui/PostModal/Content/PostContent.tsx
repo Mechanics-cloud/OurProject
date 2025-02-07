@@ -16,18 +16,17 @@ type Props = {
 export const PostContent = observer(({ screenSize }: Props) => {
   const {
     endRef,
+    isAvatarHidden,
+    isMobile,
     items: comments,
+    mapComments,
     onChangeCommentLike,
     postStore,
     router,
     startRef,
     t,
     user,
-  } = usePostContent()
-  const isAvatarHidden = !!screenSize && screenSize <= 768
-  const isMobile = !!screenSize && screenSize <= 768
-  const mapComments =
-    comments?.length && isMobile ? comments.slice(0, 2) : comments
+  } = usePostContent(screenSize)
 
   return (
     <ScrollArea className={'border-b border-dark-100 box-border h-full'}>
@@ -66,13 +65,12 @@ export const PostContent = observer(({ screenSize }: Props) => {
         )}
         {isMobile && (
           <Button
-            className={'w-full h-6 mb-4 text-light-900 text-left'}
+            className={'w-full h-6 mb-4 text-light-900 justify-start px-0'}
             variant={'text'}
           >
             {`View all comments (${comments?.length})`}
           </Button>
         )}
-
         <div ref={endRef} />
       </div>
     </ScrollArea>

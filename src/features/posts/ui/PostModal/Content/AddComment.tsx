@@ -30,7 +30,7 @@ export const AddComment = observer(() => {
     <div className={'flex items-center w-full'}>
       <input
         className={
-          'bg-transparent focus:outline-none text-[14px] font-400 leading-[24px] w-full py-4 px-6'
+          'bg-transparent focus:outline-none text-[14px] font-400 leading-[24px] w-full py-4 md:px-6'
         }
         maxLength={300}
         onChange={onChange}

@@ -6,10 +6,12 @@ import { generalStore } from '@/core/store'
 import { Comment, usePostStore } from '@/features/posts'
 import { useRouter } from 'next/router'
 
-export const usePostContent = () => {
+export const usePostContent = (screenSize?: number) => {
   const { t } = useTranslation()
   const router = useRouter()
   const { commentStore, postStore } = usePostStore()
+  const isAvatarHidden = !!screenSize && screenSize <= 768
+  const isMobile = !!screenSize && screenSize <= 768
   const {
     getComments,
     items: comments,
@@ -20,6 +22,9 @@ export const usePostContent = () => {
     updateCommentLike,
   } = commentStore
   const { user } = generalStore
+
+  const mapComments =
+    comments?.length && isMobile ? comments.slice(0, 2) : comments
 
   const startRef = useRef<HTMLDivElement>(null)
   const { ref: endRef, visible } = useElementOnScreen<HTMLDivElement>()
@@ -54,7 +59,10 @@ export const usePostContent = () => {
   return {
     endRef,
     getComments,
+    isAvatarHidden,
+    isMobile,
     items: comments,
+    mapComments,
     onChangeCommentLike,
     pageNumber,
     pagesCount,
