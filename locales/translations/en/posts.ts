@@ -22,7 +22,9 @@ export const post = {
   addComment: 'Add comment...',
   cancelEdit:
     'Do you really want to close the edition of the publication? If you close changes won’t be saved',
+  closePost: 'Close Post',
   copyLink: 'Copy link',
+  createTime: 'Just now',
   deletePost: 'Delete post',
   editDescription: 'EditI description',
   editPost: 'Edit post',
@@ -30,6 +32,11 @@ export const post = {
     few: '{{value}} "Likes"',
     many: '{{value}} "Likes"',
     one: '{{value}} "Like"',
+  },
+  likesComments: {
+    few: 'Likes: {{value}}',
+    many: 'Likes: {{value}}',
+    one: 'Like: {{value}}',
   },
   maxLengthMessage: 'The description cannot be longer than 500 symbols',
   modalText: 'Are you sure you want to delete this post?',

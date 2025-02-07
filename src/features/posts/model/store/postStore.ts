@@ -1,10 +1,17 @@
 import { toast } from 'react-toastify'
 
-import { BasicPost, Nullable, responseErrorHandler } from '@/common'
+import {
+  BasicPost,
+  Nullable,
+  PathService,
+  PublicPaths,
+  responseErrorHandler,
+} from '@/common'
 import { translationForStore } from '@/common/utils/setTranslation'
 import { postsApi } from '@/features/posts'
 import { action, makeObservable, observable, runInAction } from 'mobx'
 import { enableStaticRendering } from 'mobx-react-lite'
+import router from 'next/router'
 
 enableStaticRendering(typeof window === 'undefined')
 
@@ -13,12 +20,12 @@ export class PostStore {
     this.post = data || null
   }
   isEditing: boolean
-  isLoading: boolean
+  isLoading: boolean = false
 
   post: Nullable<BasicPost>
 
   constructor() {
-    this.isLoading = true
+    this.isLoading
     this.post = null
     this.isEditing = false
 
@@ -37,18 +44,26 @@ export class PostStore {
     this.stopEditing = this.stopEditing.bind(this)
   }
 
-  async deletePost(postId: number) {
+  async deletePost(postId: number, userId: number) {
     try {
+      this.isLoading = true
       await postsApi.deletePost(postId)
+      await router.push(
+        PathService.generatePath(PublicPaths.userProfile, {
+          userId: userId,
+        })
+      )
+
       runInAction(() => {
         this.post = null
       })
 
-      //todo: отфильтровать удаленный пост из стора
       toast.success(translationForStore.t.post.successMessage)
     } catch (error) {
       responseErrorHandler(error)
       throw error
+    } finally {
+      this.isLoading = false
     }
   }
 

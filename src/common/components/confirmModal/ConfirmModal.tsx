@@ -18,6 +18,7 @@ type Props = {
   children: ReactNode
   onClick: () => void
   onClose: () => void
+  title: string
 } & DialogProps
 
 export const ConfirmModal = ({
@@ -25,6 +26,7 @@ export const ConfirmModal = ({
   onClick,
   onClose,
   open,
+  title,
   ...rest
 }: Props) => {
   const { t } = useTranslation()
@@ -37,7 +39,7 @@ export const ConfirmModal = ({
     >
       <DialogContent className={'gap-[30px] max-w-[440px]'}>
         <DialogHeader>
-          <DialogTitle>Close Post</DialogTitle>
+          <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
         <DialogDescription className={'text-left my-0'}>
           {children}

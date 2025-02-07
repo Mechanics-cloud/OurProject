@@ -1,7 +1,7 @@
 import React from 'react'
 
 import anonymous from '@/assets/images/user-avatar-placeholder.jpg'
-import { Typography } from '@/common'
+import { TextUnfolding } from '@/common'
 import { observer } from 'mobx-react-lite'
 import Image, { StaticImageData } from 'next/image'
 
@@ -25,7 +25,7 @@ export const Description = observer(({ avatarOwner, description }: Props) => {
         width={36}
       />
 
-      <Typography variant={'reg16'}>{description}</Typography>
+      <TextUnfolding>{description as string}</TextUnfolding>
     </div>
   )
 })

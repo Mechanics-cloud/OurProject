@@ -50,7 +50,7 @@ const Slider = ({ className, images }: ImagesTypes) => {
     >
       {images.map((image, index) => (
         <SwiperSlide
-          className={'w-full'}
+          className={'w-full bg-dark-700'}
           key={index}
         >
           <Image

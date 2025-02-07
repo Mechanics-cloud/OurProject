@@ -22,7 +22,9 @@ export const post = {
   addComment: 'Добавить комментарий...',
   cancelEdit:
     'Вы действительно хотите отменить редактирование публикации? Если вы закроете, изменения не будут сохранены',
+  closePost: 'Закрыть',
   copyLink: 'Копировать ссылку',
+  createTime: 'Только что',
   deletePost: 'Удалить пост',
   editDescription: 'Редактировать публикацию',
   editPost: 'Редактировать пост',
@@ -30,6 +32,11 @@ export const post = {
     few: '{{value}} "Лайка"',
     many: '{{value}} "Лайков"',
     one: '{{value}} "Лайк"',
+  },
+  likesComments: {
+    few: '"{{value}} Лайка"',
+    many: '"{{value}} Лайков"',
+    one: '"{{value}} Лайк"',
   },
   maxLengthMessage: 'Описание не может быть длиннее 500 символов',
   modalText: 'Вы уверены, что хотите удалить этот пост?',

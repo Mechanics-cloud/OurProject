@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { PathService, PublicPaths, ScrollArea, timeAgo } from '@/common'
+import {
+  PathService,
+  PublicPaths,
+  ScrollArea,
+  getPluralForm,
+  timeAgo,
+} from '@/common'
 import {
   Comment,
   CommentItem,
@@ -24,7 +30,7 @@ export const PostContent = observer(() => {
   return (
     <ScrollArea className={'border-b border-dark-100 box-border h-full'}>
       <div
-        className={'flex-col overflow-y-hidden grow justify-end py-5 px-6 '}
+        className={'flex-col overflow-y-hidden grow justify-end py-5 pl-6 '}
         ref={startRef}
       >
         {postStore.post?.description && (
@@ -43,7 +49,14 @@ export const PostContent = observer(() => {
               })}
               isLike={user ? comment.isLiked : null}
               key={comment.id}
-              likes={comment.likeCount ? `Likes: ${comment.likeCount}` : ''}
+              likes={
+                comment.likeCount
+                  ? getPluralForm({
+                      key: t.post.likesComments,
+                      value: comment.likeCount,
+                    })
+                  : ''
+              }
               name={comment.from.username}
               onLike={() => onChangeCommentLike(comment)}
               src={comment.from.avatars[0]?.url}

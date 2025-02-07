@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Close } from '@/assets/icons'
 import { Loader, PathService, PublicPaths, useTranslation } from '@/common'
+import { Stub } from '@/common/components/stub/Stub'
 import { PostInfo, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
@@ -16,16 +17,6 @@ export const Post = observer(({ userId }: Props) => {
   const { postStore } = usePostStore()
   const { post } = postStore
   const router = useRouter()
-
-  if (!post) {
-    return (
-      <div
-        className={'flex justify-center items-center w-full h-full bg-dark-300'}
-      >
-        {t.post.notFound}
-      </div>
-    )
-  }
 
   const onClose = async () => {
     setIsLoading(true)
@@ -46,7 +37,24 @@ export const Post = observer(({ userId }: Props) => {
           className={'relative container mx-auto w-[972px] h-[564px]'}
           onClick={(e) => e.stopPropagation()}
         >
-          <PostInfo />
+          {!post?.id || !post ? (
+            <div
+              className={
+                'w-full h-full bg-dark-500 flex items-center justify-center'
+              }
+            >
+              <Stub
+                alt={''}
+                className={'w-[70%] h-[70%]'}
+                textClassName={
+                  'font-bold leading-[36px] text-[20px] mt-5 text-inherit'
+                }
+                title={t.post.notFound}
+              />
+            </div>
+          ) : (
+            <PostInfo />
+          )}
           <Close
             className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
             onClick={onClose}
