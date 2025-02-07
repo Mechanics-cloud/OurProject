@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import { Close } from '@/assets/icons'
 import { Loader, PathService, PublicPaths, useTranslation } from '@/common'
+import { Stub } from '@/common/components/stub/Stub'
 import { PostInfo, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
@@ -39,10 +40,17 @@ export const Post = observer(({ userId }: Props) => {
           {!post?.id || !post ? (
             <div
               className={
-                'w-full h-full bg-dark-300 flex items-center justify-center'
+                'w-full h-full bg-dark-500 flex items-center justify-center'
               }
             >
-              {t.post.notFound}
+              <Stub
+                alt={''}
+                className={'w-[70%] h-[70%]'}
+                textClassName={
+                  'font-bold leading-[36px] text-[20px] mt-5 text-inherit'
+                }
+                title={t.post.notFound}
+              />
             </div>
           ) : (
             <PostInfo />
