@@ -27,10 +27,15 @@ export const getServerSideProps: GetServerSideProps = async (
       notFound: true,
     }
   }
+
   try {
-    const userProfile = await publicProfileAPi.getPublicUser(params.id[0])
-    const postsData = await publicProfileAPi.getPublicPosts(userProfile.id)
-    const { comments, post } = await getPublicPostInfo(Number(params.id[1]))
+    const [userProfile, postsData, postInfo] = await Promise.all([
+      publicProfileAPi.getPublicUser(params.id[0]),
+      publicProfileAPi.getPublicPosts(+params.id[0]),
+      getPublicPostInfo(Number(params.id[1])),
+    ])
+
+    const { comments, post } = postInfo
 
     return { props: { comments, post, postsData, screenSize, userProfile } }
   } catch {
