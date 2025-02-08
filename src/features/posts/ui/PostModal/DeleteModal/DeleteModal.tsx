@@ -15,10 +15,10 @@ export const DeleteModal = ({ onClose, onDelete, ...rest }: Props) => {
     <ConfirmModal
       onClick={onDelete}
       onClose={onClose}
-      title={t.post.deletePostTitle}
+      title={t.post.deletePost}
       {...rest}
     >
-      {t.post.deletePost}
+      {t.post.deletePostDescription}
     </ConfirmModal>
   )
 }

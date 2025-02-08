@@ -26,6 +26,7 @@ export const post = {
   copyLink: 'Копировать ссылку',
   createTime: 'Только что',
   deletePost: 'Удалить пост',
+  deletePostDescription: 'Вы действительно хотите удалить этот пост?',
   editDescription: 'Редактировать публикацию',
   editPost: 'Редактировать пост',
   likes: {

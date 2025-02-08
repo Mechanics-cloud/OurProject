@@ -52,7 +52,7 @@ export const usePostInfoHeader = () => {
       icon: <TrashOutline className={'flex-shrink-0 size-6'} />,
       id: 'delete',
       onClick: onDeleteClick,
-      text: t.post.deletePostTitle,
+      text: t.post.deletePost,
     },
     {
       display: user?.userId !== postStore.post?.ownerId,

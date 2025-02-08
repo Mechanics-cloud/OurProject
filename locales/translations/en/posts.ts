@@ -26,6 +26,7 @@ export const post = {
   copyLink: 'Copy link',
   createTime: 'Just now',
   deletePost: 'Delete post',
+  deletePostDescription: 'Are you sure you want to delete this post?',
   editDescription: 'EditI description',
   editPost: 'Edit post',
   likes: {
