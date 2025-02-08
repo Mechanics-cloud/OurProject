@@ -9,5 +9,7 @@ export const paymentTypeConverter = (day: string, t: LocaleType) => {
       return t.profileMyPayments.monthly
     case PaymentType.Weekly:
       return t.profileMyPayments.weekly
+    default:
+      return day
   }
 }
