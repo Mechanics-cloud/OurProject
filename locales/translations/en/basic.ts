@@ -22,6 +22,8 @@ export const basic = {
   pagination: {
     goBack: 'Go back',
     goForward: 'Go forward',
+    onPage: 'on page',
+    show: 'Show',
   },
   textFolding: {
     less: 'Hide',

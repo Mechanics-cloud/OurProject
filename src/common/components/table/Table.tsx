@@ -8,7 +8,10 @@ const Root = ({
 }: ComponentPropsWithoutRef<'table'>) => {
   return (
     <table
-      className={cn('border-spacing-[0] border-collapse w-full ', className)}
+      className={cn(
+        'border-spacing-[0] border-collapse w-full text-sm',
+        className
+      )}
       {...restProps}
     />
   )
@@ -49,7 +52,7 @@ const HeaderCell = ({
 }: ComponentPropsWithoutRef<'th'>) => {
   return (
     <th
-      className={cn('text-left', className)}
+      className={cn('text-left py-3 px-6', className)}
       {...restProps}
     />
   )
@@ -57,7 +60,7 @@ const HeaderCell = ({
 const Cell = ({ className, ...restProps }: ComponentPropsWithoutRef<'td'>) => {
   return (
     <td
-      className={cn(className)}
+      className={cn('py-3 px-6', className)}
       {...restProps}
     />
   )

@@ -14,7 +14,7 @@ type Story = StoryObj<typeof meta>
 export const BasicTable: Story = {
   args: {
     children: (
-      <>
+      <Table.Root>
         <Table.Head>
           <Table.Row>
             <Table.HeaderCell>Date of Payment</Table.HeaderCell>
@@ -47,7 +47,7 @@ export const BasicTable: Story = {
             <Table.Cell>1</Table.Cell>
           </Table.Row>
         </Table.Body>
-      </>
+      </Table.Root>
     ),
   },
 }
