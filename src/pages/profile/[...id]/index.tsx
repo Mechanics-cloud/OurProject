@@ -64,10 +64,12 @@ const ProfilePage = ({
     hydrateProfileStore?.setNewData({ postsData, userProfile })
   }, [postsData, userProfile])
 
-  const mobileWidth = 768
-  const isMobile = screenSize && screenSize <= mobileWidth
+  /*const mobileWidth = 768*/
+  const tabletWidth = 1024
+  /*const isMobile = screenSize && screenSize < mobileWidth*/
+  const isTablet = screenSize && screenSize < tabletWidth
 
-  if (params.id && params.id[1] && isMobile) {
+  if (params.id && params.id[1] && isTablet) {
     return (
       <MobilePost
         comments={comments}

@@ -87,7 +87,7 @@ const Template = (
       </div>
       {isLike !== null && (
         <div
-          className={'w-10 mt-4 ml-auto'}
+          className={'mt-4 ml-auto'}
           onClick={onLike}
         >
           <Like active={!!isLike} />

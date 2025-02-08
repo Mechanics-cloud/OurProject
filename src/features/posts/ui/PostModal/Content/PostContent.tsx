@@ -17,7 +17,6 @@ type Props = {
 export const PostContent = observer(({ screenSize }: Props) => {
   const {
     endRef,
-    isAvatarHidden,
     isMobile,
     items: comments,
     mapComments,
@@ -39,7 +38,7 @@ export const PostContent = observer(({ screenSize }: Props) => {
           <Description
             avatarOwner={postStore.post.avatarOwner}
             description={postStore.post.description}
-            isAvatarHidden={isAvatarHidden}
+            isAvatarHidden={isMobile}
           />
         )}
         {mapComments ? (
@@ -50,7 +49,7 @@ export const PostContent = observer(({ screenSize }: Props) => {
               href={PathService.generatePath(PublicPaths.userProfile, {
                 userId: comment.from.id,
               })}
-              isAvatarHidden={isAvatarHidden}
+              isAvatarHidden={isMobile}
               isLike={user ? comment.isLiked : null}
               key={comment.id}
               likes={comment.likeCount ? `Likes: ${comment.likeCount}` : ''}

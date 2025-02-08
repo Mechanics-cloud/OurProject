@@ -10,8 +10,7 @@ export const usePostContent = (screenSize?: number) => {
   const { t } = useTranslation()
   const router = useRouter()
   const { commentStore, postStore } = usePostStore()
-  const isAvatarHidden = !!screenSize && screenSize <= 768
-  const isMobile = !!screenSize && screenSize <= 768
+  const isMobile = !!screenSize && screenSize < 768
   const {
     getComments,
     items: comments,
@@ -59,7 +58,6 @@ export const usePostContent = (screenSize?: number) => {
   return {
     endRef,
     getComments,
-    isAvatarHidden,
     isMobile,
     items: comments,
     mapComments,

@@ -19,7 +19,7 @@ export const MobileContent = observer(({ screenSize }: Props) => {
   const { isEditing } = postStore
 
   return !isEditing ? (
-    <div className={'flex flex-col items-center'}>
+    <div className={'flex flex-col'}>
       <PostInfoHeader />
       <PostSlider />
       <SocialGroup />

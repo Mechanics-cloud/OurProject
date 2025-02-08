@@ -42,33 +42,33 @@ export const ViewAllComments = ({ comments, onLike, user }: Props) => {
         }`}
       >
         <Typography
-          className={'mb-6 flex items-center justify-center w-full'}
+          className={'flex items-center justify-center w-full fixed right-0'}
+          onClick={() => setIsCommentsVisible(false)}
           variant={'h2'}
         >
-          <ArrowBackOutline
-            className={'absolute left-6 w-6 h-6 md:left-10'}
-            onClick={() => setIsCommentsVisible(false)}
-          />
+          <ArrowBackOutline className={'absolute left-6 w-6 h-6 md:left-10'} />
           Comments
         </Typography>
-        {comments?.map((comment: Comment) => (
-          <CommentItem
-            alt={`${comment.from.username} photo image`}
-            className={'mb-4'}
-            href={PathService.generatePath(PublicPaths.userProfile, {
-              userId: comment.from.id,
-            })}
-            isAvatarHidden={false}
-            isLike={user ? comment.isLiked : null}
-            key={comment.id}
-            likes={comment.likeCount ? `Likes: ${comment.likeCount}` : ''}
-            name={comment.from.username}
-            onLike={() => onLike(comment)}
-            src={comment.from.avatars[0]?.url}
-            text={comment.content}
-            time={timeAgo(comment.createdAt, router.locale) || t.post.now}
-          />
-        ))}
+        <div className={'mt-12'}>
+          {comments?.map((comment: Comment) => (
+            <CommentItem
+              alt={`${comment.from.username} photo image`}
+              className={'mb-4'}
+              href={PathService.generatePath(PublicPaths.userProfile, {
+                userId: comment.from.id,
+              })}
+              isAvatarHidden={false}
+              isLike={user ? comment.isLiked : null}
+              key={comment.id}
+              likes={comment.likeCount ? `Likes: ${comment.likeCount}` : ''}
+              name={comment.from.username}
+              onLike={() => onLike(comment)}
+              src={comment.from.avatars[0]?.url}
+              text={comment.content}
+              time={timeAgo(comment.createdAt, router.locale) || t.post.now}
+            />
+          ))}
+        </div>
       </div>
     </>
   )
