@@ -15,7 +15,7 @@ export const CancelEditModal = ({ onCancelEdit, onClose, ...rest }: Props) => {
     <ConfirmModal
       onClick={onCancelEdit}
       onClose={onClose}
-      title={t.post.cancelEditTitle}
+      title={t.post.closePost}
       {...rest}
     >
       {t.post.cancelEdit}

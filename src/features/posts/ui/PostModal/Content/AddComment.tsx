@@ -39,8 +39,8 @@ export const AddComment = observer(() => {
         value={value}
       />
       <Button
-        className={cn(typographyVariants({ variant: 'h3' }), 'px-2 mx-1')}
-        disabled={!value}
+        className={cn(typographyVariants({ variant: 'h3' }), 'px-3 mx-4')}
+        disabled={!value || commentStore.isLoading}
         onClick={onSubmitForm}
         type={'submit'}
         variant={'text'}

@@ -20,12 +20,12 @@ export class PostStore {
     this.post = data || null
   }
   isEditing: boolean
-  isLoading: boolean
+  isLoading: boolean = false
 
   post: Nullable<BasicPost>
 
   constructor() {
-    this.isLoading = true
+    this.isLoading
     this.post = null
     this.isEditing = false
 
@@ -46,6 +46,7 @@ export class PostStore {
 
   async deletePost(postId: number, userId: number) {
     try {
+      this.isLoading = true
       await postsApi.deletePost(postId)
       await router.push(
         PathService.generatePath(PublicPaths.userProfile, {
@@ -57,11 +58,12 @@ export class PostStore {
         this.post = null
       })
 
-      //todo: отфильтровать удаленный пост из стора
       toast.success(translationForStore.t.post.successMessage)
     } catch (error) {
       responseErrorHandler(error)
       throw error
+    } finally {
+      this.isLoading = false
     }
   }
 

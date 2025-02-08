@@ -14,8 +14,7 @@ import {
 
 class PostsApi {
   public getPostIdComments = (params: PostInfoParamsRequest) => {
-    const { postId, ...query } = params
-    const queryParams = PathService.getQueryParams(query)
+    const { postId, queryParams } = this.getQueryParamsFromRequest(params)
 
     return this.instance
       .get<PostComments>(PostsRequestEndpoints.idComments(postId, queryParams))
@@ -23,8 +22,7 @@ class PostsApi {
   }
 
   public getPostLikes = (params: PostInfoParamsRequest) => {
-    const { postId, ...query } = params
-    const queryParams = PathService.getQueryParams(query)
+    const { postId, queryParams } = this.getQueryParamsFromRequest(params)
 
     return this.instance
       .get<PostsLikes>(PostsRequestEndpoints.idLikes(postId, queryParams))
@@ -32,8 +30,7 @@ class PostsApi {
   }
 
   public getPublicComments = (params: PostInfoParamsRequest) => {
-    const { postId, ...query } = params
-    const queryParams = PathService.getQueryParams(query)
+    const { postId, queryParams } = this.getQueryParamsFromRequest(params)
 
     return this.instance
       .get<PostComments>(PublicPostsEndpoints.idComments(postId, queryParams))
@@ -58,6 +55,13 @@ class PostsApi {
   }
 
   constructor(private instance: AxiosInstance) {}
+
+  private getQueryParamsFromRequest(params: PostInfoParamsRequest) {
+    const { postId, ...query } = params
+    const queryParams = PathService.getQueryParams(query)
+
+    return { postId, queryParams }
+  }
 
   public addComment({ comment, postId }: { comment: string; postId: number }) {
     return this.instance

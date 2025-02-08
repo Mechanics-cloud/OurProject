@@ -1,6 +1,12 @@
 import React from 'react'
 
-import { PathService, PublicPaths, ScrollArea, timeAgo } from '@/common'
+import {
+  PathService,
+  PublicPaths,
+  ScrollArea,
+  getPluralForm,
+  timeAgo,
+} from '@/common'
 import {
   Comment,
   CommentItem,
@@ -52,7 +58,14 @@ export const PostContent = observer(({ screenSize }: Props) => {
               isAvatarHidden={isMobile}
               isLike={user ? comment.isLiked : null}
               key={comment.id}
-              likes={comment.likeCount ? `Likes: ${comment.likeCount}` : ''}
+              likes={
+                comment.likeCount
+                  ? getPluralForm({
+                      key: t.post.likesComments,
+                      value: comment.likeCount,
+                    })
+                  : ''
+              }
               name={comment.from.username}
               onLike={() => onChangeCommentLike(comment)}
               src={comment.from.avatars[0]?.url}
