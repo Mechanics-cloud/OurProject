@@ -21,7 +21,7 @@ export const ProtectedPaths = {
   generalInfo: '/settings',
   home: '/home',
   messenger: '/messenger',
-  profileSettings: '/profile/settings',
+  profileSettings: '/profile/settings/[tab]',
   publication: '/publication',
   search: '/search',
   statistics: '/statistics',
