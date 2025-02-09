@@ -2,12 +2,11 @@ import React from 'react'
 
 import { Chrome, CreditCard, Person, Settings } from '@/assets/icons'
 import { TabsType, Typography } from '@/common'
-// import { GeneralInfoPage } from '@/features/profile'
 import { Devices } from '@/features/profile/settings/devices'
-import Management from '@/features/profile/settings/management/ui/management'
 import { LocaleType } from '@locales/ru'
 
 import { GeneralInfoPage } from './generalInfo'
+import { Management } from './management/ui/management'
 
 export const getSettingsTabs = (
   t: LocaleType,
@@ -33,7 +32,7 @@ export const getSettingsTabs = (
       ),
     },
     {
-      content: <Typography variant={'reg16'}>Account Management</Typography>,
+      content: <Management />,
       id: 'management',
       title: isMobile ? (
         <Person className={'w-full'} />
