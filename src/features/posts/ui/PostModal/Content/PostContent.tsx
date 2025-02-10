@@ -11,9 +11,9 @@ import {
   Comment,
   CommentItem,
   Description,
+  ViewAllComments,
   usePostContent,
 } from '@/features/posts'
-import { ViewAllComments } from '@/features/posts/ui/Mobile/ViewAllComments'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
