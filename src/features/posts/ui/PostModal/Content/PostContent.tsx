@@ -23,7 +23,6 @@ type Props = {
 export const PostContent = observer(({ screenSize }: Props) => {
   const {
     endRef,
-    isMobile,
     isTablet,
     items: comments,
     mapComments,
@@ -38,14 +37,20 @@ export const PostContent = observer(({ screenSize }: Props) => {
   return (
     <ScrollArea className={'border-b border-dark-100 box-border h-full block'}>
       <div
-        className={'flex-col overflow-y-hidden grow justify-end py-5 lg:px-6 '}
+        className={
+          'flex-col overflow-y-hidden grow justify-end lg:py-5 lg:px-6 '
+        }
         ref={startRef}
       >
         {postStore.post?.description && (
           <Description
             avatarOwner={postStore.post.avatarOwner}
             description={postStore.post.description}
-            isAvatarHidden={isMobile}
+            href={PathService.generatePath(PublicPaths.userProfile, {
+              userId: user?.userId,
+            })}
+            isAvatarHidden={isTablet}
+            userName={postStore.post.userName}
           />
         )}
         {mapComments ? (
@@ -56,7 +61,7 @@ export const PostContent = observer(({ screenSize }: Props) => {
               href={PathService.generatePath(PublicPaths.userProfile, {
                 userId: comment.from.id,
               })}
-              isAvatarHidden={isMobile}
+              isAvatarHidden={isTablet}
               isLike={user ? comment.isLiked : null}
               key={comment.id}
               likes={
