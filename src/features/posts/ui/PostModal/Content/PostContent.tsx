@@ -24,6 +24,7 @@ export const PostContent = observer(({ screenSize }: Props) => {
   const {
     endRef,
     isMobile,
+    isTablet,
     items: comments,
     mapComments,
     onChangeCommentLike,
@@ -35,9 +36,9 @@ export const PostContent = observer(({ screenSize }: Props) => {
   } = usePostContent(screenSize)
 
   return (
-    <ScrollArea className={'border-b border-dark-100 box-border h-full'}>
+    <ScrollArea className={'border-b border-dark-100 box-border h-full block'}>
       <div
-        className={'flex-col overflow-y-hidden grow justify-end py-5 md:px-6 '}
+        className={'flex-col overflow-y-hidden grow justify-end py-5 lg:px-6 '}
         ref={startRef}
       >
         {postStore.post?.description && (
@@ -76,7 +77,7 @@ export const PostContent = observer(({ screenSize }: Props) => {
         ) : (
           <p>{t.post.noComments}</p>
         )}
-        {isMobile && (
+        {isTablet && (
           <ViewAllComments
             comments={comments}
             onLike={onChangeCommentLike}

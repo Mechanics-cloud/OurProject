@@ -29,7 +29,7 @@ export const PostInfoHeader = () => {
   return (
     <div
       className={
-        'flex items-center gap-3 py-3 md:px-6 border-b border-dark-100 box-border w-full justify-between'
+        'flex items-center gap-3 py-3 lg:px-6 border-b border-dark-100 box-border w-full justify-between'
       }
     >
       <UserMiniLink

@@ -11,6 +11,7 @@ export const usePostContent = (screenSize?: number) => {
   const router = useRouter()
   const { commentStore, postStore } = usePostStore()
   const isMobile = !!screenSize && screenSize < 768
+  const isTablet = !!screenSize && screenSize < 1024
   const {
     getComments,
     items: comments,
@@ -23,7 +24,7 @@ export const usePostContent = (screenSize?: number) => {
   const { user } = generalStore
 
   const mapComments =
-    comments?.length && isMobile ? comments.slice(0, 2) : comments
+    comments?.length && isTablet ? comments.slice(0, 2) : comments
 
   const startRef = useRef<HTMLDivElement>(null)
   const { ref: endRef, visible } = useElementOnScreen<HTMLDivElement>()
@@ -59,6 +60,7 @@ export const usePostContent = (screenSize?: number) => {
     endRef,
     getComments,
     isMobile,
+    isTablet,
     items: comments,
     mapComments,
     onChangeCommentLike,
