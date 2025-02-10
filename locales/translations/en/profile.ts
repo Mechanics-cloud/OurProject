@@ -15,6 +15,18 @@ export const profileSettings = {
   userName: 'User name',
 }
 
+export const profileMyPayments = {
+  dateOfPayment: 'Date of Payment',
+  day: '1 day',
+  endDateOfSubscription: 'End date of subscription',
+  monthly: '1 month',
+  noPayments: "You don't have any transactions yet",
+  paymentType: 'Payment Type',
+  price: 'Price',
+  subscriptionType: 'Subscription Type',
+  weekly: '7 days',
+}
+
 export const profileSessions = {
   activeSessions: 'Active sessions',
   currentSession: 'Current device',

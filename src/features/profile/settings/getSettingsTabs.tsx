@@ -7,6 +7,7 @@ import { LocaleType } from '@locales/ru'
 
 import { GeneralInfoPage } from './generalInfo'
 import { Management } from './management/ui/management'
+import { PaymentTable } from './payments'
 
 export const getSettingsTabs = (
   t: LocaleType,
@@ -41,7 +42,7 @@ export const getSettingsTabs = (
       ),
     },
     {
-      content: <Typography variant={'reg16'}>My payments</Typography>,
+      content: <PaymentTable />,
       id: 'payments',
       title: isMobile ? (
         <CreditCard className={'w-full'} />

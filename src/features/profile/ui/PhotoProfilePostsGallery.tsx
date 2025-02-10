@@ -2,8 +2,7 @@ import React from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { ImageOutline } from '@/assets/icons'
-import Loader from '@/assets/images/loader.svg'
-import { PathService, PublicPaths, Skeleton, cn } from '@/common'
+import { CircleLoader, PathService, PublicPaths, Skeleton, cn } from '@/common'
 import { HydrateProfileStore, useFetchPosts } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -72,19 +71,11 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
             ref={skeletonRef}
           >
             {isLoading && (
-              <div
+              <CircleLoader
                 className={
                   'w-full h-[228px] mt-3 flex justify-center items-start'
                 }
-              >
-                <Image
-                  alt={'Loader'}
-                  className={'mt-3'}
-                  height={50}
-                  src={Loader}
-                  width={50}
-                />
-              </div>
+              />
             )}
           </div>
         </>

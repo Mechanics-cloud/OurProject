@@ -14,7 +14,18 @@ export const profileSettings = {
   updateStatusMessages: 'Ваши данные сохранены',
   userName: 'Имя пользователя',
 }
+export const profileMyPayments = {
+  dateOfPayment: 'Дата платежа',
 
+  day: '1 день',
+  endDateOfSubscription: 'Дата окончания подписки',
+  monthly: '1 месяц',
+  noPayments: 'У вас пока нет транзакций',
+  paymentType: 'Тип платежа',
+  price: 'Цена',
+  subscriptionType: 'Тип подписки',
+  weekly: '7 дней',
+}
 export const profileSessions = {
   activeSessions: 'Активные сессии',
   currentSession: 'Текущее устройство',
