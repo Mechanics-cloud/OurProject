@@ -39,7 +39,7 @@ export const MobileEdit = () => {
           type={'button'}
           variant={'text'}
         >
-          Cancel
+          {t.post.cancel}
         </Button>
         <Typography
           className={'text-center'}
@@ -52,7 +52,7 @@ export const MobileEdit = () => {
           type={'submit'}
           variant={'text'}
         >
-          Save
+          {t.post.save}
         </Button>
       </div>
       <PostSlider className={'mt-[19px] mb-3 px-9'} />

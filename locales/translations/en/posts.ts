@@ -20,9 +20,11 @@ export const actionIconsGroup = {
 
 export const post = {
   addComment: 'Add comment...',
+  cancel: 'Cancel',
   cancelEdit:
     'Do you really want to close the edition of the publication? If you close changes won’t be saved',
   closePost: 'Close Post',
+  comment: 'Comments',
   copyLink: 'Copy link',
   createTime: 'Just now',
   deletePost: 'Delete post',
@@ -45,9 +47,11 @@ export const post = {
   notFound: 'Not Found Post',
   now: 'Now',
   publish: 'Publish',
+  save: 'Save',
   saveChanges: 'Save changes',
   successMessage: 'The post was successfully deleted',
   successPostUpdate: 'The post was successfully updated',
   unfollow: 'Unfollow',
+  viewAllComments: 'View all comments',
   yes: 'Yes',
 }

@@ -33,7 +33,7 @@ export const ViewAllComments = ({ comments, onLike, user }: Props) => {
         onClick={() => setIsCommentsVisible(true)}
         variant={'text'}
       >
-        {`View all comments (${comments?.length})`}
+        {`${t.post.viewAllComments} (${comments?.length})`}
       </Button>
       <div
         className={`fixed bottom-0 left-0 w-full h-full bg-dark-900 transition-all duration-500 ease-in-out z-10 py-20 px-6 md:px-10 ${
@@ -48,7 +48,7 @@ export const ViewAllComments = ({ comments, onLike, user }: Props) => {
           variant={'h2'}
         >
           <ArrowBackOutline className={'absolute left-6 w-6 h-6 md:left-10'} />
-          Comments
+          {t.post.comment}
         </Typography>
 
         <ScrollArea className={'mt-12 h-full overflow-auto'}>
