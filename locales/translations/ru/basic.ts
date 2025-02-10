@@ -23,6 +23,8 @@ export const basic = {
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',
+    onPage: 'на странице',
+    show: 'Показать',
   },
   textFolding: {
     less: 'Свернуть',

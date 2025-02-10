@@ -6,6 +6,8 @@ import { GeneralInfoPage } from '@/features/profile'
 import { Devices } from '@/features/profile/settings/devices'
 import { LocaleType } from '@locales/ru'
 
+import { PaymentTable } from './payments'
+
 export const getSettingsTabs = (
   t: LocaleType,
   isMobile: boolean
@@ -39,7 +41,7 @@ export const getSettingsTabs = (
       ),
     },
     {
-      content: <Typography variant={'reg16'}>My payments</Typography>,
+      content: <PaymentTable />,
       id: 'tab4',
       title: isMobile ? (
         <CreditCard className={'w-full'} />
