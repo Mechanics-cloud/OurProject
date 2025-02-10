@@ -6,6 +6,7 @@ import {
   Nullable,
   PathService,
   PublicPaths,
+  ScrollArea,
   Typography,
   timeAgo,
   useTranslation,
@@ -49,7 +50,8 @@ export const ViewAllComments = ({ comments, onLike, user }: Props) => {
           <ArrowBackOutline className={'absolute left-6 w-6 h-6 md:left-10'} />
           Comments
         </Typography>
-        <div className={'mt-12'}>
+
+        <ScrollArea className={'mt-12 h-full overflow-auto'}>
           {comments?.map((comment: Comment) => (
             <CommentItem
               alt={`${comment.from.username} photo image`}
@@ -68,7 +70,7 @@ export const ViewAllComments = ({ comments, onLike, user }: Props) => {
               time={timeAgo(comment.createdAt, router.locale) || t.post.now}
             />
           ))}
-        </div>
+        </ScrollArea>
       </div>
     </>
   )

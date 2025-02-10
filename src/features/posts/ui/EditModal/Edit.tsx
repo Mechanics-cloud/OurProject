@@ -9,6 +9,7 @@ import {
   Typography,
   UserMiniLink,
 } from '@/common'
+import { maxDescriptionLength } from '@/common/constants'
 import {
   CancelEditModal,
   EditDescription,
@@ -25,7 +26,6 @@ export const Edit = observer(() => {
     isDirty,
     isModalOpen,
     isSubmitting,
-    maxDescriptionLength,
     onCloseClick,
     onSubmit,
     post,

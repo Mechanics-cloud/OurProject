@@ -1,12 +1,13 @@
 import React, { PropsWithChildren, useEffect } from 'react'
 
 import { getDeviceScreenWidth, withLoader } from '@/common'
+import { tabletWidth } from '@/common/constants'
 import {
   ContentModal,
+  MobilePost,
   PublicPostInfo,
   getPublicPostInfo,
 } from '@/features/posts'
-import { MobilePost } from '@/features/posts/ui/Mobile/MobilePost'
 import {
   ProfileData,
   hydrateProfileStore,
@@ -69,9 +70,6 @@ const ProfilePage = ({
     hydrateProfileStore?.setNewData({ postsData, userProfile })
   }, [postsData, userProfile])
 
-  /*const mobileWidth = 768*/
-  const tabletWidth = 1024
-  /*const isMobile = screenSize && screenSize < mobileWidth*/
   const isTablet = screenSize && screenSize < tabletWidth
 
   if (params.id && params.id[1] && isTablet) {

@@ -1,17 +1,17 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode } from 'react'
 
 import { MoreHorizontalOutline } from '@/assets/icons/outlineIcons'
-import { Popover, PopoverContent, PopoverTrigger } from '@/common'
+import { Popover, PopoverContent, PopoverTrigger, useToggle } from '@/common'
 
 type Props = {
   children: ReactNode
 }
 export const UserHeaderPopover = ({ children }: Props) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const { state: isOpen, toggle } = useToggle()
 
   return (
     <Popover
-      onOpenChange={setIsOpen}
+      onOpenChange={toggle}
       open={isOpen}
     >
       <PopoverTrigger asChild>

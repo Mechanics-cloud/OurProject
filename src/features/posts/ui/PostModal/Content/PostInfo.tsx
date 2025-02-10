@@ -11,14 +11,12 @@ import {
 export const PostInfo = () => {
   return (
     <div className={'flex w-full h-full border border-dark-100'}>
-      <div className={'flex w-full h-full'}>
-        <PostSlider />
-        <div className={'flex flex-col w-full h-full bg-dark-300'}>
-          <PostInfoHeader />
-          <PostContent />
-          <SocialGroup />
-          <AddComment />
-        </div>
+      <PostSlider />
+      <div className={'flex flex-col w-full h-full bg-dark-300'}>
+        <PostInfoHeader />
+        <PostContent />
+        <SocialGroup />
+        <AddComment />
       </div>
     </div>
   )

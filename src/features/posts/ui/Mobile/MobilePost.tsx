@@ -1,7 +1,10 @@
 import React, { PropsWithChildren } from 'react'
 
-import { PostStoreProvider, PublicPostInfo } from '@/features/posts'
-import { MobileContent } from '@/features/posts/ui/Mobile/MobileContent'
+import {
+  MobileContent,
+  PostStoreProvider,
+  PublicPostInfo,
+} from '@/features/posts'
 import { ProfileData } from '@/features/profile'
 
 type Props = { screenSize?: number } & ProfileData &

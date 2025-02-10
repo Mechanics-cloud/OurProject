@@ -8,7 +8,6 @@ export const useEditMode = () => {
   const { postStore } = usePostStore()
   const { post, stopEditing } = postStore
   const { t } = useTranslation()
-  const maxDescriptionLength = 500
 
   const {
     control,
@@ -54,7 +53,6 @@ export const useEditMode = () => {
     isDirty,
     isModalOpen,
     isSubmitting,
-    maxDescriptionLength,
     onCloseClick,
     onSubmit: handleSubmit(onSaveClick),
     post,
