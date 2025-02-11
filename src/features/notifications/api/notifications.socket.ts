@@ -15,15 +15,6 @@ export class NotificationsSocketApi {
       Environments.SOCKET_URL || 'https://inctagram.work',
       socketOptions
     )
-
-    //todo delete
-    this.socket.on('connect', () => {
-      console.log('connect socket')
-    })
-
-    this.socket.on('disconnect', (e) => {
-      console.log('disconnect socket', e)
-    })
   }
 
   static disconnect() {

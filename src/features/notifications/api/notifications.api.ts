@@ -2,7 +2,10 @@ import { instance } from '@/common/api'
 import { AxiosInstance } from 'axios'
 
 import { NotificationsEndpoints } from './notifications.endpoints'
-import { GetAllNotificationsType, NotificationsDTO } from './notifications.type'
+import {
+  GetAllNotificationsType,
+  NotificationsApiDTO,
+} from './notifications.type'
 
 class NotificationsApi {
   constructor(private instance: AxiosInstance) {}
@@ -23,7 +26,7 @@ class NotificationsApi {
     sortBy,
     sortDirection,
   }: GetAllNotificationsType) {
-    const res = await this.instance.get<NotificationsDTO>(
+    const res = await this.instance.get<NotificationsApiDTO>(
       NotificationsEndpoints.getAllNotifications(cursor),
       {
         params: {

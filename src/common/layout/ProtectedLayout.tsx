@@ -1,5 +1,4 @@
 import { ReactNode } from 'react'
-import { toast } from 'react-toastify'
 
 import {
   BaseLayoutWithStore,
@@ -11,7 +10,6 @@ import {
 } from '@/common'
 import { setTranslation } from '@/common/utils/setTranslation'
 import { authStore } from '@/features/auth'
-import { useNotificationsSocket } from '@/features/notifications/model'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
@@ -25,13 +23,6 @@ export const ProtectedLayout = observer(({ children, className }: Props) => {
 
   useMe()
   setTranslation(t)
-
-  const { error, notification, setError } = useNotificationsSocket()
-
-  if (error) {
-    toast.error(error)
-    setError(null)
-  }
 
   return (
     <BaseLayoutWithStore

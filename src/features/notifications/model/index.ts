@@ -1,1 +1,2 @@
-export * from './useNotificationsSocket'
+export * from './NotificationsSocketContext'
+export * from './NotificationsStore'

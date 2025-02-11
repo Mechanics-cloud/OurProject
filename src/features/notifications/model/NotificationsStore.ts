@@ -1,13 +1,19 @@
 import { Nullable, responseErrorHandler } from '@/common'
 import {
   GetAllNotificationsType,
-  NotificationsDTO,
+  NotificationSocketDTO,
+  NotificationsApiDTO,
   notificationsApi,
 } from '@/features/notifications/api'
 import { runInAction } from 'mobx'
 
 class NotificationsStore {
-  notificationsDTO: Nullable<NotificationsDTO> = null
+  newNotificationDTO: Nullable<NotificationSocketDTO> = null
+  notificationsDTO: Nullable<NotificationsApiDTO> = null
+
+  addNewNotification(notification: NotificationSocketDTO) {
+    this.newNotificationDTO = notification
+  }
 
   async deleteNotification(id: number) {
     try {
@@ -15,6 +21,10 @@ class NotificationsStore {
     } catch (error) {
       responseErrorHandler(error)
     }
+  }
+
+  getNewNotification() {
+    return this.newNotificationDTO
   }
 
   async getNotifications({ cursor, signal }: GetAllNotificationsType) {

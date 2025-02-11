@@ -1,19 +1,26 @@
+import { toast } from 'react-toastify'
+
 import { OutlineBell } from '@/assets/icons'
-import { notificationsApi } from '@/features/notifications/api'
-import { notificationsStore } from '@/features/notifications/model/NotificationsStore'
+import { useNotificationsSocket } from '@/features/notifications/model'
+
+import { notificationsStore } from './model/NotificationsStore'
 
 export const NotificationRing = () => {
-  const onClickRing = async () => {
-    await notificationsStore.markAsReadNotifications([7089])
-    await notificationsStore.getNotifications({})
-    console.log(notificationsStore.notificationsDTO)
+  const { clearError, error, notification } = useNotificationsSocket()
+
+  if (notification) {
+    notificationsStore.addNewNotification(notification)
+  }
+
+  if (error) {
+    toast.error(error)
+    clearError()
   }
 
   return (
     <button
       className={'cursor-pointer mr-12 hidden lg:block'}
-      // onClick={() => alert('notification' ?? 'empty')}
-      onClick={onClickRing}
+      onClick={() => alert('notification' ?? 'empty')}
       type={'button'}
     >
       <OutlineBell className={'size-6'} />

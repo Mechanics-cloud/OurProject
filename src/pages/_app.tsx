@@ -2,11 +2,9 @@ import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 
 import { ReactElement, ReactNode } from 'react'
-import { toast } from 'react-toastify'
 
-import { Environments, ProtectedLayout, useMe, useTranslation } from '@/common'
-import { setTranslation } from '@/common/utils/setTranslation'
-import { useNotificationsSocket } from '@/features/notifications/model'
+import { Environments, ProtectedLayout } from '@/common'
+import { NotificationsSocketProvider } from '@/features/notifications'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import '@/common/components/swiper/customStylesForSwiper.css'
@@ -29,10 +27,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return getLayout(
-    <GoogleOAuthProvider clientId={Environments.CLIENT_ID!}>
-      <ProtectedLayout>
-        <Component {...pageProps} />
-      </ProtectedLayout>
-    </GoogleOAuthProvider>
+    <NotificationsSocketProvider>
+      <GoogleOAuthProvider clientId={Environments.CLIENT_ID!}>
+        <ProtectedLayout>
+          <Component {...pageProps} />
+        </ProtectedLayout>
+      </GoogleOAuthProvider>
+    </NotificationsSocketProvider>
   )
 }
