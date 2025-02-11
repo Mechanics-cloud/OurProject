@@ -4,7 +4,7 @@ import type { AppProps } from 'next/app'
 import { ReactElement, ReactNode } from 'react'
 import { toast } from 'react-toastify'
 
-import { Environments, useMe, useTranslation } from '@/common'
+import { Environments, ProtectedLayout, useMe, useTranslation } from '@/common'
 import { setTranslation } from '@/common/utils/setTranslation'
 import { useNotificationsSocket } from '@/features/notifications/model'
 import { GoogleOAuthProvider } from '@react-oauth/google'
@@ -27,23 +27,12 @@ type AppPropsWithLayout = {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
-  const { t } = useTranslation()
-
-  useMe()
-  setTranslation(t)
-
-  const { error, notification, setError } = useNotificationsSocket()
-
-  //console.log(notification)
-
-  if (error) {
-    toast.error(error)
-    setError(null)
-  }
 
   return getLayout(
     <GoogleOAuthProvider clientId={Environments.CLIENT_ID!}>
-      <Component {...pageProps} />
+      <ProtectedLayout>
+        <Component {...pageProps} />
+      </ProtectedLayout>
     </GoogleOAuthProvider>
   )
 }

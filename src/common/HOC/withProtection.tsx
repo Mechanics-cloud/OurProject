@@ -1,11 +1,6 @@
 import React, { useEffect } from 'react'
 
-import {
-  FullScreenLoader,
-  ProtectedLayout,
-  ProtectedPaths,
-  PublicPaths,
-} from '@/common'
+import { FullScreenLoader, ProtectedPaths, PublicPaths } from '@/common'
 import { NextPageWithLayout } from '@/common/HOC/types'
 import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
@@ -49,8 +44,8 @@ export const withProtection = <P extends object>(
     ])
 
     return (
-      <ProtectedLayout>
+      <>
         {loadingCondition ? <FullScreenLoader /> : <PageComponent {...props} />}
-      </ProtectedLayout>
+      </>
     )
   })
