@@ -1,17 +1,17 @@
 import { Nullable, responseErrorHandler } from '@/common'
 import {
   GetAllNotificationsType,
-  NotificationSocketDTO,
+  NotificationEventDTO,
   NotificationsApiDTO,
   notificationsApi,
 } from '@/features/notifications/api'
 import { runInAction } from 'mobx'
 
 class NotificationsStore {
-  newNotificationDTO: Nullable<NotificationSocketDTO> = null
+  newNotificationDTO: Nullable<NotificationEventDTO> = null
   notificationsDTO: Nullable<NotificationsApiDTO> = null
 
-  addNewNotification(notification: NotificationSocketDTO) {
+  addNewNotification(notification: NotificationEventDTO) {
     this.newNotificationDTO = notification
   }
 

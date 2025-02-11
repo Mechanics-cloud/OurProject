@@ -2,10 +2,10 @@ import { createContext, useContext, useEffect, useState } from 'react'
 
 import { Nullable } from '@/common'
 import {
-  NotificationSocketDTO,
+  EventError,
+  NotificationEventDTO,
   NotificationsSocketApi,
   SocketEvents,
-  WebSocketError,
 } from '@/features/notifications/api'
 
 type NotificationsSocketContextType = {
@@ -13,7 +13,7 @@ type NotificationsSocketContextType = {
   connectNotifications: () => void
   disconnectNotifications: () => void
   error: Nullable<string>
-  notification: NotificationSocketDTO | undefined
+  notification: NotificationEventDTO | undefined
 }
 
 const NotificationsSocketContext =
@@ -24,7 +24,7 @@ export const NotificationsSocketProvider = ({
 }: {
   children: React.ReactNode
 }) => {
-  const [notification, setNotification] = useState<NotificationSocketDTO>()
+  const [notification, setNotification] = useState<NotificationEventDTO>()
   const [error, setError] = useState<Nullable<string>>('')
 
   const clearError = () => {
@@ -36,17 +36,14 @@ export const NotificationsSocketProvider = ({
 
     NotificationsSocketApi.socket?.on(
       SocketEvents.NOTIFICATIONS,
-      (notificationDTO: NotificationSocketDTO) => {
+      (notificationDTO: NotificationEventDTO) => {
         setNotification(notificationDTO)
       }
     )
 
-    NotificationsSocketApi.socket?.on(
-      SocketEvents.ERROR,
-      (err: WebSocketError) => {
-        setError(err.message)
-      }
-    )
+    NotificationsSocketApi.socket?.on(SocketEvents.ERROR, (err: EventError) => {
+      setError(err.message)
+    })
   }
 
   const disconnectNotifications = () => {

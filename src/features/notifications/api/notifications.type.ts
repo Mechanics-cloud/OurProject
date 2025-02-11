@@ -3,7 +3,7 @@ export enum SocketEvents {
   NOTIFICATIONS = 'notifications',
 }
 
-export type NotificationSocketDTO = {
+export type NotificationEventDTO = {
   clientId: string
   id: number
   isRead: boolean
@@ -11,7 +11,7 @@ export type NotificationSocketDTO = {
   notifyAt: string
 }
 
-export type WebSocketError = {
+export type EventError = {
   error: SocketEvents
   message: string
 }
@@ -26,7 +26,7 @@ export type GetAllNotificationsType = {
 }
 
 type NotificationDTO = { createdAt: string } & Omit<
-  NotificationSocketDTO,
+  NotificationEventDTO,
   'clientId' | 'notifyAt'
 >
 
