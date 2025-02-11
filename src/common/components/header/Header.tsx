@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-import { OutlineBell } from '@/assets/icons'
 import {
   Button,
   LangSelect,
@@ -12,6 +11,7 @@ import {
 import { MobilePopover } from '@/common/components/header/mobilePopover'
 import { Typography } from '@/common/components/typography'
 import { generalStore } from '@/core/store'
+import { NotificationRing } from '@/features/notifications'
 import Link from 'next/link'
 
 const Header = () => {
@@ -42,15 +42,7 @@ const Header = () => {
         </Typography>
 
         <div className={'flex items-center'}>
-          {isAuth && (
-            <button
-              className={'cursor-pointer mr-12 hidden lg:block'}
-              onClick={() => alert('Картинка нажата!')}
-              type={'button'}
-            >
-              <OutlineBell className={'size-6'} />
-            </button>
-          )}
+          {isAuth && <NotificationRing />}
           <LangSelect />
           {isAuth && <MobilePopover className={'ml-3'} />}
           {!isAuth && (
