@@ -7,20 +7,20 @@ import { cn } from '@/common/utils/cn'
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group'
 import { clsx } from 'clsx'
 
-type Option = {
+export type RadioOption = {
   label: string
   value: string
 }
-type Props = {
+export type RadioGroupType = {
   classNamesForGroup?: string
   classNamesForItem?: string
   disabled?: boolean
-  options: Option[]
+  options: RadioOption[]
 } & React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 
 export const RadioGroup = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  Props
+  RadioGroupType
 >(
   (
     { classNamesForGroup, classNamesForItem, disabled, options, ...props },

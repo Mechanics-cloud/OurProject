@@ -4,15 +4,10 @@ import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons'
 import { ConfirmModal, Loader, Nullable, useTranslation } from '@/common'
 import { useRouter } from 'next/router'
 
-import { managementStore } from '../model/managementStore'
+import { nameBank, subscriptionStore } from '../..'
 import { PaymentStatusModal } from './PaymentStatusModal'
 
-//TODO
-// data: DataSubscription - передать при вызове оплаты или взять из store
-// https://docs.stripe.com/testing#cards-responses
-type nameBank = 'PAYPAL' | 'STRIPE'
-
-export const Management = () => {
+export const BankRedirectButtons = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoad, setIsLoad] = useState(true)
   const [selectedBank, setSelectedBank] = useState<Nullable<nameBank>>(null)
@@ -24,12 +19,10 @@ export const Management = () => {
   const { t } = useTranslation()
   const router = useRouter()
 
-  const { success } = router.query
-
   const onConfirm = () => {
     setIsModalOpen(false)
     if (selectedBank) {
-      managementStore.processPayment(selectedBank)
+      subscriptionStore.processPayment(selectedBank)
       setIsLoad(true)
     }
   }
