@@ -1,8 +1,15 @@
+import { toast } from 'react-toastify'
+
 import { OutlineBell } from '@/assets/icons'
 import { useNotificationsSocket } from '@/features/notifications/model'
 
 export const NotificationRing = () => {
-  const { error, notification } = useNotificationsSocket()
+  const { error, notification, setError } = useNotificationsSocket()
+
+  if (error) {
+    toast.error(error)
+    setError(null)
+  }
 
   return (
     <button
