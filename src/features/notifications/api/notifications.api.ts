@@ -2,7 +2,7 @@ import { instance } from '@/common/api'
 import { AxiosInstance } from 'axios'
 
 import { NotificationsEndpoints } from './notifications.endpoints'
-import { NotificationsDTO, getAllNotificationsType } from './notifications.type'
+import { GetAllNotificationsType, NotificationsDTO } from './notifications.type'
 
 class NotificationsApi {
   constructor(private instance: AxiosInstance) {}
@@ -22,13 +22,14 @@ class NotificationsApi {
     signal,
     sortBy,
     sortDirection,
-  }: getAllNotificationsType) {
+  }: GetAllNotificationsType) {
     const res = await this.instance.get<NotificationsDTO>(
       NotificationsEndpoints.getAllNotifications(cursor),
       {
         params: {
           isRead,
           pageSize,
+          sortBy,
           sortDirection,
         },
         signal,
@@ -38,8 +39,10 @@ class NotificationsApi {
     return res.data
   }
 
-  public async markAsRead(ids: number[]) {
-    const res = await this.instance.put(NotificationsEndpoints.markAsRead, ids)
+  public async markAsRead(idsToDelete: number[]) {
+    const res = await this.instance.put(NotificationsEndpoints.markAsRead, {
+      ids: idsToDelete,
+    })
 
     return res.data
   }

@@ -16,8 +16,8 @@ export type WebSocketError = {
   message: string
 }
 
-export type getAllNotificationsType = {
-  cursor: number
+export type GetAllNotificationsType = {
+  cursor?: number
   isRead?: boolean
   pageSize?: number
   signal?: AbortSignal
