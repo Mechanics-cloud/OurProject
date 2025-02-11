@@ -14,34 +14,23 @@ export const useNotificationsSocket = () => {
   const connectNotifications = () => {
     NotificationsSocketApi.createConnection()
 
-    // NotificationsSocketApi.socket?.on(
-    //   SocketEvents.NOTIFICATIONS,
-    //   (notificationDTO: any) => {
-    //     console.log('notificationDTO', notificationDTO)
-    //     setNotification(notificationDTO)
-    //   }
-    // )
-    //
-    // NotificationsSocketApi.socket?.on('open', () => {
-    //   console.log('WebSocket connection opened')
-    // })
-    //
+    NotificationsSocketApi.socket?.on(
+      SocketEvents.NOTIFICATIONS,
+      (notificationDTO: any) => {
+        setNotification(notificationDTO)
+      }
+    )
+
+    NotificationsSocketApi.socket?.on('open', () => {
+      console.log('WebSocket connection opened')
+    })
+
     NotificationsSocketApi.socket?.on(
       SocketEvents.ERROR,
       (err: WebSocketError) => {
-        console.log({ err })
         setError(err.message)
       }
     )
-    //
-    // NotificationsSocketApi.socket?.onAny((event, ...args) => {
-    //   console.log('event', event)
-    //   console.log('args', args)
-    // })
-
-    // NotificationsSocketApi.socket?.on('connect_error', (err) => {
-    //   console.error('Socket connection error:', err);
-    // });
   }
 
   useEffect(() => {
