@@ -1,4 +1,9 @@
-import { Nullable, RadioOption, responseErrorHandler } from '@/common'
+import {
+  Environments,
+  Nullable,
+  RadioOption,
+  responseErrorHandler,
+} from '@/common'
 import { PaymentType } from '@/common/enums'
 import { translationForStore } from '@/common/utils/setTranslation'
 import { makeAutoObservable, runInAction } from 'mobx'
@@ -49,18 +54,19 @@ class SubscriptionStore {
     }
   }
 
-  onPay() {
+  processPayment() {
     const obj = this.price?.find(
       (el) => el.typeDescription === this.paymentValue
     )
-    const paymentRequest = { ...obj, baseUrl: 'baseUrl' }
+    const paymentRequest = {
+      ...obj,
+      baseUrl: `${Environments.BASE_URL}/profile/settings/management`,
+    }
 
-    console.log(paymentRequest)
+    // todo: добавить логику оплаты
   }
 
   setPaymentValue(value: PaymentType) {
-    console.log(value)
-
     this.paymentValue = value
   }
 }

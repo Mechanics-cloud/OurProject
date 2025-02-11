@@ -38,7 +38,7 @@ export const Subscription = observer(() => {
             accountValue={accountValue}
             defaultValue={paymentValue}
             label={t.profileMyPayments.subscriptionCosts}
-            onPay={subscriptionStore.onPay}
+            onPay={subscriptionStore.processPayment}
             onValueChange={setPaymentValue}
             options={priceOptions}
           />
