@@ -62,3 +62,12 @@ export const avatarModal = {
   saveButton: 'Save',
   title: 'Add a Profile Photo',
 }
+
+export const profileManagement = {
+  error: 'Error',
+  errorButton: 'Back to payment',
+  errorDescription: 'Transaction failed. Please, write to support.',
+  success: 'Success',
+  successButton: 'OK',
+  successDescription: 'Payment was successful!',
+}

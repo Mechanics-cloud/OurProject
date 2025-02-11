@@ -61,3 +61,12 @@ export const avatarModal = {
   saveButton: 'Сохранить',
   title: 'Добавить фотографию профиля',
 }
+
+export const profileManagement = {
+  error: 'Ошибка',
+  errorButton: 'Вернуться к оплате',
+  errorDescription: 'Транзакция не удалась. Пожалуйста, напишите в поддержку.',
+  success: 'Успех',
+  successButton: 'ОК',
+  successDescription: 'Оплата прошла успешно!',
+}

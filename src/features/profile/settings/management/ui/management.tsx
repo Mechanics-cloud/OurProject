@@ -1,74 +1,35 @@
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons'
-import { ConfirmModal, Loader, useTranslation } from '@/common'
+import { ConfirmModal, Loader, Nullable, useTranslation } from '@/common'
 import { useRouter } from 'next/router'
 
-import { DataSubscription } from '../api/management.types.api'
-import { subscriptionsApi } from '../api/profile.management.api'
+import { managementStore } from '../model/managementStore'
+import { PaymentStatusModal } from './PaymentStatusModal'
+
+//TODO
+// data: DataSubscription - передать при вызове оплаты или взять из store
+// https://docs.stripe.com/testing#cards-responses
+type nameBank = 'PAYPAL' | 'STRIPE'
 
 export const Management = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isLoad, setIsLoad] = useState(false)
-  const [selectedBank, setSelectedBank] = useState<'paypal' | 'stripe' | null>(
-    null
-  )
+  const [isLoad, setIsLoad] = useState(true)
+  const [selectedBank, setSelectedBank] = useState<Nullable<nameBank>>(null)
+  const [isPaymentStatusModalOpen, setIsPaymentStatusModalOpen] =
+    useState(false)
+  const [paymentStatus, setPaymentStatus] = useState<
+    'error' | 'success' | null
+  >(null)
   const { t } = useTranslation()
   const router = useRouter()
 
-  // data: DataSubscription - передать при вызове оплаты
-  // https://docs.stripe.com/testing#cards-responses
-
   const { success } = router.query
-
-  // STRIPE
-  const data: DataSubscription = {
-    amount: 10,
-    baseUrl: 'http://localhost:3000/profile/settings/management',
-    typeSubscription: 'DAY',
-  } as const
-
-  const onStripe = async () => {
-    const dataSTRIPE = { ...data, paymentType: 'STRIPE' as const }
-
-    try {
-      const response = await subscriptionsApi.subscriptions(dataSTRIPE)
-      const redirectUrl = response.data?.url
-
-      if (redirectUrl) {
-        window.location.href = redirectUrl
-      } else {
-        console.error('URL для перенаправления не найден в ответе')
-      }
-    } catch (error) {
-      console.error('Ошибка при выполнении запроса:', error)
-    }
-  }
-  const onPayPal = async () => {
-    const dataPAYPAL = { ...data, paymentType: 'PAYPAL' as const }
-
-    try {
-      const response = await subscriptionsApi.subscriptions(dataPAYPAL)
-      const redirectUrl = response.data?.url
-
-      if (redirectUrl) {
-        window.location.href = redirectUrl
-      } else {
-        console.error('URL для перенаправления не найден в ответе')
-      }
-    } catch (error) {
-      console.error('Ошибка при выполнении запроса:', error)
-    }
-  }
 
   const onConfirm = () => {
     setIsModalOpen(false)
-    if (selectedBank === 'paypal') {
-      onPayPal()
-      setIsLoad(true)
-    } else if (selectedBank === 'stripe') {
-      onStripe()
+    if (selectedBank) {
+      managementStore.processPayment(selectedBank)
       setIsLoad(true)
     }
   }
@@ -83,37 +44,20 @@ export const Management = () => {
   }, [])
 
   useEffect(() => {
-    if (success === 'true') {
-      toast.success('Оплата прошла успешно!')
-      const { success: _, ...restQuery } = router.query
+    const { success } = router.query
 
-      router.replace(
-        { pathname: router.pathname, query: restQuery },
-        undefined,
-        { shallow: true }
-      )
-    } else if (success === 'false') {
-      toast.error('Оплата не прошла!')
-      const { success: _, ...restQuery } = router.query
-
-      router.replace(
-        { pathname: router.pathname, query: restQuery },
-        undefined,
-        { shallow: true }
-      )
+    if (success === 'true' || success === 'false') {
+      setPaymentStatus(success === 'true' ? 'success' : 'error')
+      setIsPaymentStatusModalOpen(true)
     }
-  }, [success, router])
-
-  if (isLoad) {
-    return <Loader />
-  }
+  }, [router.query])
 
   return (
     <div className={'mt-8 w-full flex justify-end items-center'}>
       <button
         className={'w-[96px] h-[60px]'}
         onClick={() => {
-          setSelectedBank('paypal')
+          setSelectedBank('PAYPAL')
           setIsModalOpen(true)
         }}
         type={'button'}
@@ -124,7 +68,7 @@ export const Management = () => {
       <button
         className={'w-[96px] h-[60px]'}
         onClick={() => {
-          setSelectedBank('stripe')
+          setSelectedBank('STRIPE')
           setIsModalOpen(true)
         }}
         type={'button'}
@@ -139,6 +83,12 @@ export const Management = () => {
       >
         Вы будете перенаправлены на сайт банка для оплаты. Продолжить?
       </ConfirmModal>
+      <PaymentStatusModal
+        onClose={() => setIsPaymentStatusModalOpen(false)}
+        open={isPaymentStatusModalOpen}
+        status={paymentStatus}
+      />
+      {isLoad && <Loader />}
     </div>
   )
 }

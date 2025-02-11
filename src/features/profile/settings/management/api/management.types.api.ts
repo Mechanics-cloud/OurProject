@@ -1,11 +1,10 @@
-import { instance } from '@/common/api'
-import { AxiosInstance, AxiosResponse } from 'axios'
+import { PaymentType } from '@/common/enums'
 
 export type DataSubscriptionApi = {
   amount: number
   baseUrl: string
   paymentType: 'PAYPAL' | 'STRIPE'
-  typeSubscription: 'DAY' | 'MONTHLY' | 'WEEKLY'
+  typeSubscription: PaymentType
 }
 
 export type DataSubscription = Omit<DataSubscriptionApi, 'paymentType'>
