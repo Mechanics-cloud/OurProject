@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 
 import { Nullable } from '@/common'
 import {
+  Notification,
   NotificationsSocketApi,
   SocketEvents,
   WebSocketError,
 } from '@/features/notifications/api'
 
 export const useNotificationsSocket = () => {
+  // todo store
   const [notification, setNotification] = useState<Notification>()
   const [error, setError] = useState<Nullable<string>>('')
 
@@ -16,14 +18,10 @@ export const useNotificationsSocket = () => {
 
     NotificationsSocketApi.socket?.on(
       SocketEvents.NOTIFICATIONS,
-      (notificationDTO: any) => {
+      (notificationDTO: Notification) => {
         setNotification(notificationDTO)
       }
     )
-
-    NotificationsSocketApi.socket?.on('open', () => {
-      console.log('WebSocket connection opened')
-    })
 
     NotificationsSocketApi.socket?.on(
       SocketEvents.ERROR,
