@@ -49,6 +49,11 @@ class NotificationsStore {
       responseErrorHandler(error)
     }
   }
+
+  resetData() {
+    this.newNotificationDTO = null
+    this.notificationsDTO = null
+  }
 }
 
 export const notificationsStore = new NotificationsStore()

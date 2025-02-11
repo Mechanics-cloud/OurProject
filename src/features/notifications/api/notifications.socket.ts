@@ -1,5 +1,5 @@
 import { Environments, Nullable, getFromLocalStorage } from '@/common'
-import io, { Socket } from 'socket.io-client'
+import { Socket, io } from 'socket.io-client'
 
 export class NotificationsSocketApi {
   static socket: Nullable<Socket> = null
