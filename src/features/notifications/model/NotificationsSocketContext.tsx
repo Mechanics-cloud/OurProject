@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 
 import { Nullable } from '@/common'
 import {
@@ -10,8 +10,6 @@ import {
 
 type NotificationsSocketContextType = {
   clearError: () => void
-  connectNotifications: () => void
-  disconnectNotifications: () => void
   error: Nullable<string>
   notification: NotificationEventDTO | undefined
 }
@@ -62,8 +60,6 @@ export const NotificationsSocketProvider = ({
     <NotificationsSocketContext.Provider
       value={{
         clearError,
-        connectNotifications,
-        disconnectNotifications,
         error,
         notification,
       }}
