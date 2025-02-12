@@ -29,3 +29,7 @@ export enum PaymentType {
   Monthly = 'MONTHLY',
   Weekly = 'WEEKLY',
 }
+export enum AccountTypeValue {
+  Business = 'business',
+  Personal = 'personal',
+}

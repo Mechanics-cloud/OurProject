@@ -15,14 +15,19 @@ export const profileSettings = {
   userName: 'Имя пользователя',
 }
 export const profileMyPayments = {
+  accountType: 'Тип учетной записи:',
+  business: 'Бизнес',
   dateOfPayment: 'Дата платежа',
-
   day: '1 день',
+
   endDateOfSubscription: 'Дата окончания подписки',
   monthly: '1 месяц',
   noPayments: 'У вас пока нет транзакций',
   paymentType: 'Тип платежа',
+  per: 'за',
+  personal: 'Личный',
   price: 'Цена',
+  subscriptionCosts: 'Стоимость подписки:',
   subscriptionType: 'Тип подписки',
   weekly: '7 дней',
 }
@@ -60,4 +65,13 @@ export const avatarModal = {
   noFile: 'Файл не выбран',
   saveButton: 'Сохранить',
   title: 'Добавить фотографию профиля',
+}
+
+export const profileManagement = {
+  error: 'Ошибка',
+  errorButton: 'Вернуться к оплате',
+  errorDescription: 'Транзакция не удалась. Пожалуйста, напишите в поддержку.',
+  success: 'Успех',
+  successButton: 'ОК',
+  successDescription: 'Оплата прошла успешно!',
 }
