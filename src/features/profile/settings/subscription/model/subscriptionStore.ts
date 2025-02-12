@@ -10,7 +10,7 @@ import { makeAutoObservable, runInAction } from 'mobx'
 
 import { paymentTypeConverter } from '../../payments'
 import { subscriptionAPi } from '../api'
-import { DataSubscriptionApi, Price } from './types'
+import { DataSubscriptionApi, Price, namesOfBanks } from './types'
 
 class SubscriptionStore {
   isLoading: boolean = false
@@ -54,7 +54,7 @@ class SubscriptionStore {
     }
   }
 
-  async processPayment(paymentType: 'PAYPAL' | 'STRIPE') {
+  async processPayment(paymentType: namesOfBanks) {
     const obj = this.price?.find(
       (el) => el.typeDescription === this.paymentValue
     )

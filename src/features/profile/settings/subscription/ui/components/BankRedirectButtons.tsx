@@ -4,13 +4,13 @@ import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons'
 import { ConfirmModal, Loader, Nullable, useTranslation } from '@/common'
 import { useRouter } from 'next/router'
 
-import { nameBank, subscriptionStore } from '../..'
+import { namesOfBanks, subscriptionStore } from '../..'
 import { PaymentStatusModal } from './PaymentStatusModal'
 
 export const BankRedirectButtons = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoad, setIsLoad] = useState(true)
-  const [selectedBank, setSelectedBank] = useState<Nullable<nameBank>>(null)
+  const [selectedBank, setSelectedBank] = useState<Nullable<namesOfBanks>>(null)
   const [isPaymentStatusModalOpen, setIsPaymentStatusModalOpen] =
     useState(false)
   const [paymentStatus, setPaymentStatus] = useState<

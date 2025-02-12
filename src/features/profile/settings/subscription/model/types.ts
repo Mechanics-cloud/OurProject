@@ -5,13 +5,13 @@ export type Price = {
   typeDescription: PaymentType
 }
 
+export type namesOfBanks = 'PAYPAL' | 'STRIPE'
+
 export type DataSubscriptionApi = {
   amount: number
   baseUrl: string
-  paymentType: 'PAYPAL' | 'STRIPE'
+  paymentType: namesOfBanks
   typeSubscription: PaymentType
 }
 
 export type DataSubscription = Omit<DataSubscriptionApi, 'paymentType'>
-
-export type nameBank = 'PAYPAL' | 'STRIPE'
