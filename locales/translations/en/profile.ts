@@ -72,7 +72,10 @@ export const profileManagement = {
   error: 'Error',
   errorButton: 'Back to payment',
   errorDescription: 'Transaction failed. Please, write to support.',
+  redirectMessage:
+    'You will be redirected to the {{bank}} website for payment. Continue?',
   success: 'Success',
   successButton: 'OK',
   successDescription: 'Payment was successful!',
+  titleModal: 'Redirect Confirmation',
 }

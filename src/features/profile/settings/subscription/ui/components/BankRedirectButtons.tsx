@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react'
 
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons'
-import { ConfirmModal, Loader, Nullable, useTranslation } from '@/common'
+import {
+  ConfirmModal,
+  Loader,
+  Nullable,
+  Typography,
+  useTranslation,
+} from '@/common'
 import { useRouter } from 'next/router'
 
 import { namesOfBanks, subscriptionStore } from '../..'
@@ -9,7 +15,7 @@ import { PaymentStatusModal } from './PaymentStatusModal'
 
 export const BankRedirectButtons = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isLoad, setIsLoad] = useState(true)
+  const [isLoad, setIsLoad] = useState(false)
   const [selectedBank, setSelectedBank] = useState<Nullable<namesOfBanks>>(null)
   const [isPaymentStatusModalOpen, setIsPaymentStatusModalOpen] =
     useState(false)
@@ -18,6 +24,11 @@ export const BankRedirectButtons = () => {
   >(null)
   const { t } = useTranslation()
   const router = useRouter()
+
+  const redirectMessage = t.profileManagement.redirectMessage.replace(
+    '{{bank}}',
+    String(selectedBank)
+  )
 
   const onConfirm = () => {
     setIsModalOpen(false)
@@ -33,10 +44,6 @@ export const BankRedirectButtons = () => {
   }
 
   useEffect(() => {
-    return setIsLoad(false)
-  }, [])
-
-  useEffect(() => {
     const { success } = router.query
 
     if (success === 'true' || success === 'false') {
@@ -48,7 +55,8 @@ export const BankRedirectButtons = () => {
   return (
     <div className={'mt-8 w-full flex justify-end items-center'}>
       <button
-        className={'w-[96px] h-[60px]'}
+        className={`w-[96px] h-[60px] ${isLoad ? 'opacity-50' : ''}`}
+        disabled={isLoad}
         onClick={() => {
           setSelectedBank('PAYPAL')
           setIsModalOpen(true)
@@ -59,7 +67,8 @@ export const BankRedirectButtons = () => {
       </button>
       <span className={'m-2'}>OR</span>
       <button
-        className={'w-[96px] h-[60px]'}
+        className={`w-[96px] h-[60px] ${isLoad ? 'opacity-50' : ''}`}
+        disabled={isLoad}
         onClick={() => {
           setSelectedBank('STRIPE')
           setIsModalOpen(true)
@@ -72,9 +81,9 @@ export const BankRedirectButtons = () => {
         onClick={onConfirm}
         onClose={onCancel}
         open={isModalOpen}
-        title={'Подтверждение перехода'}
+        title={t.profileManagement.titleModal}
       >
-        Вы будете перенаправлены на сайт банка для оплаты. Продолжить?
+        <Typography>{redirectMessage}</Typography>
       </ConfirmModal>
       <PaymentStatusModal
         onClose={() => setIsPaymentStatusModalOpen(false)}
