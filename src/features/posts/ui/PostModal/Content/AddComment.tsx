@@ -23,23 +23,24 @@ export const AddComment = observer(() => {
     setValue('')
   }
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
     setValue(e.currentTarget.value)
 
   return user ? (
-    <div className={'flex items-center w-full'}>
-      <input
-        className={
-          'bg-transparent focus:outline-none text-[14px] font-400 leading-[24px] w-full py-4 lg:px-6'
-        }
-        maxLength={300}
-        onChange={onChange}
-        placeholder={t.post.addComment}
-        type={'text'}
-        value={value}
-      />
+    <div className={'h-[100px] flex justify-between'}>
+      <div className={'flex items-center w-full gap-2 relative'}>
+        <textarea
+          className={
+            'bg-transparent focus:outline-none text-[14px] font-400  w-full py-2 lg:px-6 resize-none absolute top-0.5'
+          }
+          maxLength={300}
+          onChange={onChange}
+          placeholder={t.post.addComment}
+          value={value}
+        />
+      </div>
       <Button
-        className={cn(typographyVariants({ variant: 'h3' }), 'px-3 mx-4')}
+        className={cn(typographyVariants({ variant: 'h3' }), 'px-3 ml-auto')}
         disabled={!value || commentStore.isLoading}
         onClick={onSubmitForm}
         type={'submit'}
