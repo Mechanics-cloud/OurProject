@@ -1,22 +1,17 @@
 import { useEffect, useState } from 'react'
 
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons'
-import {
-  ConfirmModal,
-  Loader,
-  Nullable,
-  Typography,
-  useTranslation,
-} from '@/common'
+import { ConfirmModal, Loader, Nullable, useTranslation } from '@/common'
+import { PaymentBanks } from '@/common/enums'
 import { useRouter } from 'next/router'
 
-import { namesOfBanks, subscriptionStore } from '../..'
+import { subscriptionStore } from '../..'
 import { PaymentStatusModal } from './PaymentStatusModal'
 
 export const BankRedirectButtons = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoad, setIsLoad] = useState(false)
-  const [selectedBank, setSelectedBank] = useState<Nullable<namesOfBanks>>(null)
+  const [selectedBank, setSelectedBank] = useState<Nullable<PaymentBanks>>(null)
   const [isPaymentStatusModalOpen, setIsPaymentStatusModalOpen] =
     useState(false)
   const [paymentStatus, setPaymentStatus] = useState<
@@ -58,19 +53,19 @@ export const BankRedirectButtons = () => {
         className={`w-[96px] h-[60px] ${isLoad ? 'opacity-50' : ''}`}
         disabled={isLoad}
         onClick={() => {
-          setSelectedBank('PAYPAL')
+          setSelectedBank(PaymentBanks.Paypal)
           setIsModalOpen(true)
         }}
         type={'button'}
       >
         <PaypalSvgrepoCom4 className={'w-full h-full'} />
       </button>
-      <span className={'m-2'}>OR</span>
+      <span className={'m-2'}>{t.profileManagement.or}</span>
       <button
         className={`w-[96px] h-[60px] ${isLoad ? 'opacity-50' : ''}`}
         disabled={isLoad}
         onClick={() => {
-          setSelectedBank('STRIPE')
+          setSelectedBank(PaymentBanks.Stripe)
           setIsModalOpen(true)
         }}
         type={'button'}
@@ -83,7 +78,7 @@ export const BankRedirectButtons = () => {
         open={isModalOpen}
         title={t.profileManagement.titleModal}
       >
-        <Typography>{redirectMessage}</Typography>
+        {redirectMessage}
       </ConfirmModal>
       <PaymentStatusModal
         onClose={() => setIsPaymentStatusModalOpen(false)}

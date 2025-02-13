@@ -72,6 +72,7 @@ export const profileManagement = {
   error: 'Error',
   errorButton: 'Back to payment',
   errorDescription: 'Transaction failed. Please, write to support.',
+  or: 'OR',
   redirectMessage:
     'You will be redirected to the {{bank}} website for payment. Continue?',
   success: 'Success',

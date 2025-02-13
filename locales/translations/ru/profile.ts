@@ -71,6 +71,7 @@ export const profileManagement = {
   error: 'Ошибка',
   errorButton: 'Вернуться к оплате',
   errorDescription: 'Транзакция не удалась. Пожалуйста, напишите в поддержку.',
+  or: 'ИЛИ',
   redirectMessage:
     'Вы будете перенаправлены на сайт банка {{bank}} для оплаты. Продолжить?',
   success: 'Успех',
