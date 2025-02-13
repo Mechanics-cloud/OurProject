@@ -20,7 +20,7 @@ export const NotificationRing = () => {
   return (
     <button
       className={'cursor-pointer mr-12 hidden lg:block'}
-      onClick={() => alert('notification' ?? 'empty')}
+      onClick={() => alert(notification?.message ?? 'empty')}
       type={'button'}
     >
       <OutlineBell className={'size-6'} />

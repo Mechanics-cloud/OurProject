@@ -1,18 +1,39 @@
-import { Nullable, responseErrorHandler } from '@/common'
+import {
+  Environments,
+  Nullable,
+  getFromLocalStorage,
+  responseErrorHandler,
+} from '@/common'
 import {
   GetAllNotificationsType,
   NotificationEventDTO,
   NotificationsApiDTO,
   notificationsApi,
 } from '@/features/notifications/api'
-import { runInAction } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
+import { Socket, io } from 'socket.io-client'
 
 class NotificationsStore {
   newNotificationDTO: Nullable<NotificationEventDTO> = null
   notificationsDTO: Nullable<NotificationsApiDTO> = null
+  socket: Nullable<Socket> = null
+
+  constructor() {
+    makeAutoObservable(this)
+  }
 
   addNewNotification(notification: NotificationEventDTO) {
     this.newNotificationDTO = notification
+  }
+
+  connect() {
+    const socketOptions = {
+      query: {
+        accessToken: getFromLocalStorage('accessToken'),
+      },
+    }
+
+    this.socket = io(Environments.SOCKET_URL || '', socketOptions)
   }
 
   async deleteNotification(id: number) {
@@ -20,6 +41,13 @@ class NotificationsStore {
       await notificationsApi.deleteNotification(id)
     } catch (error) {
       responseErrorHandler(error)
+    }
+  }
+
+  disconnect() {
+    if (this.socket) {
+      this.socket.disconnect()
+      this.socket = null
     }
   }
 
@@ -53,6 +81,7 @@ class NotificationsStore {
   resetData() {
     this.newNotificationDTO = null
     this.notificationsDTO = null
+    this.disconnect()
   }
 }
 

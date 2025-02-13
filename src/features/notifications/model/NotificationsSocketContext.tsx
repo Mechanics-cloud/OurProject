@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-import { Nullable } from '@/common'
+import { Nullable, getFromLocalStorage } from '@/common'
+import { generalStore } from '@/core/store'
+import { notificationsStore } from '@/features/notifications'
 import {
   EventError,
   NotificationEventDTO,
-  NotificationsSocketApi,
   SocketEvents,
 } from '@/features/notifications/api'
 
@@ -24,37 +25,37 @@ export const NotificationsSocketProvider = ({
 }) => {
   const [notification, setNotification] = useState<NotificationEventDTO>()
   const [error, setError] = useState<Nullable<string>>('')
+  const isUser = generalStore.user?.userId
 
   const clearError = () => {
     setError('')
   }
 
   const connectNotifications = () => {
-    NotificationsSocketApi.createConnection()
+    notificationsStore.connect()
 
-    NotificationsSocketApi.socket?.on(
+    notificationsStore.socket?.on(
       SocketEvents.NOTIFICATIONS,
       (notificationDTO: NotificationEventDTO) => {
         setNotification(notificationDTO)
       }
     )
 
-    NotificationsSocketApi.socket?.on(SocketEvents.ERROR, (err: EventError) => {
+    notificationsStore.socket?.on(SocketEvents.ERROR, (err: EventError) => {
       setError(err.message)
     })
   }
 
-  const disconnectNotifications = () => {
-    NotificationsSocketApi.disconnect()
-  }
-
   useEffect(() => {
+    if (!isUser && !getFromLocalStorage('accessToken')) {
+      return
+    }
     connectNotifications()
 
     return () => {
-      disconnectNotifications()
+      notificationsStore.disconnect()
     }
-  }, [])
+  }, [isUser])
 
   return (
     <NotificationsSocketContext.Provider
