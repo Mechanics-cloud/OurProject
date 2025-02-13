@@ -11,10 +11,7 @@ export class NotificationsSocketApi {
       },
     }
 
-    this.socket = io(
-      Environments.SOCKET_URL || 'https://inctagram.work',
-      socketOptions
-    )
+    this.socket = io(Environments.SOCKET_URL || '', socketOptions)
   }
 
   static disconnect() {
