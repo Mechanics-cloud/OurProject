@@ -4,15 +4,14 @@ import Slider from '@/common/components/slider/Slider'
 import { usePostStore } from '@/features/posts/model/postStoreProvider'
 import { observer } from 'mobx-react-lite'
 
-type Props = {
-  className?: string
-}
-export const PostSlider = observer(({ className }: Props) => {
+export const PostSlider = observer(() => {
   const { postStore } = usePostStore()
 
   return (
     <Slider
-      className={className}
+      className={
+        'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
+      }
       images={postStore.post?.images ?? []}
     />
   )

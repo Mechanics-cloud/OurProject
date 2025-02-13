@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {
-  AddComment,
+  AddCommentInView,
   MobileEdit,
   PostContent,
   PostInfoHeader,
@@ -24,7 +24,7 @@ export const MobileContent = observer(({ screenSize }: Props) => {
       <PostSlider />
       <SocialGroup />
       <PostContent screenSize={screenSize} />
-      <AddComment />
+      <AddCommentInView />
     </div>
   ) : (
     <MobileEdit />

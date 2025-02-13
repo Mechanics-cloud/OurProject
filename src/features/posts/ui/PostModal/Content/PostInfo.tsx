@@ -1,7 +1,7 @@
 import React from 'react'
 
 import {
-  AddComment,
+  AddCommentInView,
   PostContent,
   PostInfoHeader,
   PostSlider,
@@ -16,7 +16,7 @@ export const PostInfo = () => {
         <PostInfoHeader />
         <PostContent />
         <SocialGroup />
-        <AddComment />
+        <AddCommentInView />
       </div>
     </div>
   )

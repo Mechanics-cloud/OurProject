@@ -57,7 +57,7 @@ export const MobileEdit = () => {
           {t.post.save}
         </Button>
       </div>
-      <PostSlider className={'mt-[19px] mb-3 px-9'} />
+      <PostSlider />
       <UserMiniLink
         className={'flex items-center gap-3 w-full mb-6'}
         href={PathService.generatePath(PublicPaths.userProfile, {

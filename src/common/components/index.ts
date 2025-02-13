@@ -1,3 +1,4 @@
+export * from './addComment'
 export * from './asyncComponent'
 export * from './avatar'
 export * from './baseModal'
