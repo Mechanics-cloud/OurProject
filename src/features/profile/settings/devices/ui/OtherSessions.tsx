@@ -44,7 +44,7 @@ export const OtherSessions = observer(
               browserName={device.browserName}
               className={'mt-1.5 mb-6'}
               ip={device.ip}
-              key={device.browserVersion}
+              key={device.deviceId}
               lastActive={device.lastActive}
               onLogoutClick={() => onLogoutDeviceClick(device.deviceId)}
             />
