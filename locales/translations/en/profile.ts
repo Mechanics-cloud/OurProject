@@ -16,13 +16,18 @@ export const profileSettings = {
 }
 
 export const profileMyPayments = {
+  accountType: 'Account type:',
+  business: 'Business',
   dateOfPayment: 'Date of Payment',
   day: '1 day',
   endDateOfSubscription: 'End date of subscription',
   monthly: '1 month',
   noPayments: "You don't have any transactions yet",
   paymentType: 'Payment Type',
+  per: 'per',
+  personal: 'Personal',
   price: 'Price',
+  subscriptionCosts: 'Your subscription costs:',
   subscriptionType: 'Subscription Type',
   weekly: '7 days',
 }

@@ -15,14 +15,19 @@ export const profileSettings = {
   userName: 'Имя пользователя',
 }
 export const profileMyPayments = {
+  accountType: 'Тип учетной записи:',
+  business: 'Бизнес',
   dateOfPayment: 'Дата платежа',
-
   day: '1 день',
+
   endDateOfSubscription: 'Дата окончания подписки',
   monthly: '1 месяц',
   noPayments: 'У вас пока нет транзакций',
   paymentType: 'Тип платежа',
+  per: 'за',
+  personal: 'Личный',
   price: 'Цена',
+  subscriptionCosts: 'Стоимость подписки:',
   subscriptionType: 'Тип подписки',
   weekly: '7 дней',
 }

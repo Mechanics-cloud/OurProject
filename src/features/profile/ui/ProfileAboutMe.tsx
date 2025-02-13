@@ -14,7 +14,7 @@ export const ProfileAboutMe = ({
 }: Props) => {
   return (
     <div
-      className={cn('break-words', className)}
+      className={cn('break-all', className)}
       {...props}
     >
       {aboutMe && (
