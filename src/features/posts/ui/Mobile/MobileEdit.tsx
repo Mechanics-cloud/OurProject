@@ -35,6 +35,7 @@ export const MobileEdit = () => {
     <form onSubmit={onSubmit}>
       <div className={'flex items-center justify-between w-full'}>
         <Button
+          className={'px-0'}
           onClick={onCloseClick}
           type={'button'}
           variant={'text'}
@@ -43,11 +44,12 @@ export const MobileEdit = () => {
         </Button>
         <Typography
           className={'text-center'}
-          variant={'h2'}
+          variant={'reg16'}
         >
           {t.post.editPost}
         </Typography>
         <Button
+          className={'px-0'}
           disabled={!isDirty || isSubmitting}
           type={'submit'}
           variant={'text'}
