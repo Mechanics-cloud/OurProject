@@ -1,24 +1,25 @@
 import { RadioGroupType, cn } from '@/common'
 import { AccountTypeValue } from '@/common/enums'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { PaymentRadioGroup } from './PaymentRadioGroup'
 
 type Props = {
-  accountValue: string
+  isShow: boolean
   label: string
   onPay: () => void
 } & RadioGroupType
 
-export const PriceList = ({ accountValue, label, onPay, ...rest }: Props) => {
+export const PriceList = ({ isShow, label, onPay, ...rest }: Props) => {
   return (
-    <div
-      className={cn(
-        `transition-opacity duration-300 ease-in opacity-0 `,
-        accountValue === AccountTypeValue.Business && ' opacity-100'
-      )}
-    >
-      {accountValue === AccountTypeValue.Business && (
-        <>
+    <AnimatePresence>
+      {isShow && (
+        <motion.div
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          initial={{ height: 0, opacity: 0 }}
+          style={{ opacity: 0, overflow: 'hidden' }}
+        >
           <PaymentRadioGroup
             label={label}
             {...rest}
@@ -30,8 +31,8 @@ export const PriceList = ({ accountValue, label, onPay, ...rest }: Props) => {
           >
             Pay
           </button>
-        </>
+        </motion.div>
       )}
-    </div>
+    </AnimatePresence>
   )
 }

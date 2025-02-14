@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { RadioOption } from '@/common'
 import { AccountTypeValue } from '@/common/enums'
@@ -18,11 +18,18 @@ export const useAccountOptions = (
       value: AccountTypeValue.Business,
     },
   ]
-  const defaultAccountValue = isPaidAccount
-    ? accountOptions[1].value
-    : accountOptions[0].value
 
-  const [accountValue, setAccountValue] = useState(defaultAccountValue)
+  useEffect(() => {
+    if (isPaidAccount) {
+      setAccountValue(accountOptions[1].value)
+    } else {
+      setAccountValue(accountOptions[0].value)
+    }
+  }, [isPaidAccount])
 
-  return { accountOptions, accountValue, defaultAccountValue, setAccountValue }
+  const [accountValue, setAccountValue] = useState('')
+
+  const isBusiness = accountValue === AccountTypeValue.Business
+
+  return { accountOptions, accountValue, isBusiness, setAccountValue }
 }
