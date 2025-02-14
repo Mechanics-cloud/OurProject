@@ -44,10 +44,14 @@ export const ConfirmModal = ({
         <DialogDescription className={'text-left my-0'}>
           {children}
         </DialogDescription>
-        <DialogFooter className={'flex justify-end gap-6'}>
+        <DialogFooter
+          className={
+            'flex flex-col items-center lg:flex-row lg:justify-end gap-6'
+          }
+        >
           <DialogClose asChild>
             <Button
-              className={'w-[96px]'}
+              className={'lg:w-[96px] w-full'}
               onClick={onClick}
               type={'button'}
               variant={'outline'}
@@ -57,7 +61,7 @@ export const ConfirmModal = ({
           </DialogClose>
           <DialogClose asChild>
             <Button
-              className={'w-[96px]'}
+              className={'lg:w-[96px] w-full'}
               type={'button'}
             >
               {t.basic.no}

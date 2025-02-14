@@ -1,2 +1,3 @@
 export * from './Edit'
-export * from './EditInfo/EditInfo'
+export * from './EditDescription'
+export * from './useEditMode'
