@@ -1,13 +1,12 @@
 import React from 'react'
 
 import { Chrome, CreditCard, Person, Settings } from '@/assets/icons'
-import { TabsType, Typography } from '@/common'
+import { TabsType } from '@/common'
 import { GeneralInfoPage, Subscription } from '@/features/profile'
 import { Devices } from '@/features/profile/settings/devices'
 import { LocaleType } from '@locales/ru'
 
 import { PaymentTable } from './payments'
-import { BankRedirectButtons } from './subscription/ui/components/BankRedirectButtons'
 
 export const getSettingsTabs = (
   t: LocaleType,

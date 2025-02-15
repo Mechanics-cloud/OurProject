@@ -19,12 +19,7 @@ const Settings = () => {
 
   const tabsData: TabsType[] = getSettingsTabs(t, isMobile)
 
-  const [currentTab, setCurrentTab] = useState<string | undefined>(
-    Array.isArray(tab) ? tab[0] : tab
-  )
-
   const onChangeTab = (newTab: string | undefined) => {
-    setCurrentTab(newTab)
     router.push(`/profile/settings/${newTab}`)
   }
 
@@ -33,7 +28,7 @@ const Settings = () => {
       <Tabs
         onValueChange={onChangeTab}
         tabsData={tabsData}
-        value={currentTab}
+        value={tab as string}
       />
     </div>
   )
