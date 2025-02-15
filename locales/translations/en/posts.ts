@@ -20,12 +20,15 @@ export const actionIconsGroup = {
 
 export const post = {
   addComment: 'Add comment...',
+  cancel: 'Cancel',
   cancelEdit:
     'Do you really want to close the edition of the publication? If you close changes won’t be saved',
   closePost: 'Close Post',
+  comment: 'Comments',
   copyLink: 'Copy link',
   createTime: 'Just now',
   deletePost: 'Delete post',
+  deletePostDescription: 'Are you sure you want to delete this post?',
   editDescription: 'EditI description',
   editPost: 'Edit post',
   likes: {
@@ -39,16 +42,16 @@ export const post = {
     one: 'Like: {{value}}',
   },
   maxLengthMessage: 'The description cannot be longer than 500 symbols',
-  modalText: 'Are you sure you want to delete this post?',
-  modalTitle: 'Delete Post',
   no: 'No',
   noComments: 'No comments',
   notFound: 'Not Found Post',
   now: 'Now',
   publish: 'Publish',
+  save: 'Save',
   saveChanges: 'Save changes',
   successMessage: 'The post was successfully deleted',
   successPostUpdate: 'The post was successfully updated',
   unfollow: 'Unfollow',
+  viewAllComments: 'View all comments',
   yes: 'Yes',
 }

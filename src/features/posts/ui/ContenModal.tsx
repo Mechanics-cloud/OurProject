@@ -11,7 +11,12 @@ import { ProfileData } from '@/features/profile'
 type Props = { screenSize?: number } & ProfileData &
   PropsWithChildren &
   PublicPostInfo
-export const ContentModal = ({ comments, post, userProfile }: Props) => {
+export const ContentModal = ({
+  comments,
+  post,
+  screenSize,
+  userProfile,
+}: Props) => {
   return (
     <Overlay
       className={'flex items-center justify-center'}
