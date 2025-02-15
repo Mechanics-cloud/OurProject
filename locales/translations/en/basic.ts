@@ -2,6 +2,7 @@ const errors = {
   emptyImages:
     'Failed to display post photos. Please contact support or try again later!',
   emptySwiper: 'No pictures',
+  error: 'Error',
   server: 'Something went wrong on our end. Please try again later.',
   tooBigFile: (size: number) =>
     `File is too big. Photo size must be less than ${size}MB`,
@@ -25,6 +26,7 @@ export const basic = {
     onPage: 'on page',
     show: 'Show',
   },
+  success: 'Success',
   textFolding: {
     less: 'Hide',
     more: 'Show more',

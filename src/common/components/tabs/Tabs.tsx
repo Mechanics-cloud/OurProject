@@ -21,11 +21,13 @@ export type TabsData = {
 const Tabs = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   TabsData
->(({ className, tabsData }, ref) => {
+>(({ className, onValueChange, tabsData, value }, ref) => {
   return (
     <TabsPrimitive.Root
       defaultValue={tabsData[0].id}
+      onValueChange={onValueChange}
       ref={ref}
+      value={value}
     >
       <TabsPrimitive.List className={clsx('flex w-full')}>
         {tabsData.map(({ disabled, id, title }) => (

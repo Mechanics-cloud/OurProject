@@ -71,7 +71,12 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                     className={'hidden md:block'}
                     variant={'secondary'}
                   >
-                    <Link href={ProtectedPaths.profileSettings}>
+                    <Link
+                      href={{
+                        pathname: ProtectedPaths.profileSettings,
+                        query: { tab: 'general' },
+                      }}
+                    >
                       {settingsButton}
                     </Link>
                   </Button>
