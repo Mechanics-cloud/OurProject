@@ -69,13 +69,11 @@ export const avatarModal = {
 }
 
 export const profileManagement = {
-  error: 'Error',
   errorButton: 'Back to payment',
   errorDescription: 'Transaction failed. Please, write to support.',
   or: 'OR',
-  redirectMessage:
-    'You will be redirected to the {{bank}} website for payment. Continue?',
-  success: 'Success',
+  redirectMessage: (bank: string) =>
+    `You will be redirected to the ${bank} website for payment. Continue?`,
   successButton: 'OK',
   successDescription: 'Payment was successful!',
   titleModal: 'Redirect Confirmation',

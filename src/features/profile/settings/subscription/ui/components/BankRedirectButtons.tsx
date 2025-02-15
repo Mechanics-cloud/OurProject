@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react'
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons'
 import { ConfirmModal, Loader, Nullable, useTranslation } from '@/common'
 import { PaymentBanks } from '@/common/enums'
+import { PaymentStatusModal, subscriptionStore } from '@/features/profile'
 import { useRouter } from 'next/router'
 
-import { subscriptionStore } from '../..'
-import { PaymentStatusModal } from './PaymentStatusModal'
-
 export const BankRedirectButtons = () => {
+  const { t } = useTranslation()
+
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isLoad, setIsLoad] = useState(false)
   const [selectedBank, setSelectedBank] = useState<Nullable<PaymentBanks>>(null)
@@ -17,18 +17,13 @@ export const BankRedirectButtons = () => {
   const [paymentStatus, setPaymentStatus] = useState<
     'error' | 'success' | null
   >(null)
-  const { t } = useTranslation()
-  const router = useRouter()
 
-  const redirectMessage = t.profileManagement.redirectMessage.replace(
-    '{{bank}}',
-    String(selectedBank)
-  )
+  const router = useRouter()
 
   const onConfirm = () => {
     setIsModalOpen(false)
     if (selectedBank) {
-      subscriptionStore.processPayment(selectedBank)
+      subscriptionStore.processPayment(selectedBank, router.locale as string)
       setIsLoad(true)
     }
   }
@@ -78,7 +73,7 @@ export const BankRedirectButtons = () => {
         open={isModalOpen}
         title={t.profileManagement.titleModal}
       >
-        {redirectMessage}
+        {t.profileManagement.redirectMessage(String(selectedBank))}
       </ConfirmModal>
       <PaymentStatusModal
         onClose={() => setIsPaymentStatusModalOpen(false)}
