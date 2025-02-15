@@ -54,14 +54,14 @@ class SubscriptionStore {
     }
   }
 
-  async processPayment(paymentType: PaymentBanks) {
+  async processPayment(paymentType: PaymentBanks, locale: string) {
     const priceDetails = this.price?.find(
       (el) => el.typeDescription === this.paymentValue
     )
 
     const paymentDetails = {
       ...priceDetails,
-      baseUrl: `${Environments.BASE_URL}/profile/settings/management`,
+      baseUrl: `${Environments.BASE_URL}/${locale}/profile/settings/management`,
       paymentType,
     }
 
