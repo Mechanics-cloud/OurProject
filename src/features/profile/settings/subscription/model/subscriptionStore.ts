@@ -4,13 +4,13 @@ import {
   RadioOption,
   responseErrorHandler,
 } from '@/common'
-import { PaymentType } from '@/common/enums'
+import { PaymentBanks, PaymentType } from '@/common/enums'
 import { translationForStore } from '@/common/utils/setTranslation'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { paymentTypeConverter } from '../../payments'
 import { subscriptionAPi } from '../api'
-import { Price } from './types'
+import { DataSubscriptionApi, Price } from './types'
 
 class SubscriptionStore {
   isLoading: boolean = false
@@ -54,16 +54,32 @@ class SubscriptionStore {
     }
   }
 
-  processPayment() {
-    const obj = this.price?.find(
+  async processPayment(paymentType: PaymentBanks, locale: string) {
+    const priceDetails = this.price?.find(
       (el) => el.typeDescription === this.paymentValue
     )
-    const paymentRequest = {
-      ...obj,
-      baseUrl: `${Environments.BASE_URL}/profile/settings/management`,
+
+    const paymentDetails = {
+      ...priceDetails,
+      baseUrl: `${Environments.BASE_URL}/${locale}/profile/settings/management`,
+      paymentType,
     }
 
-    // todo: добавить логику оплаты
+    const { typeDescription: typeSubscription, ...paymentData } = paymentDetails
+    const subscriptionRequest = { ...paymentData, typeSubscription }
+
+    try {
+      const response = await subscriptionAPi.subscriptions(
+        subscriptionRequest as DataSubscriptionApi
+      )
+      const redirectUrl = response.data?.url
+
+      if (redirectUrl) {
+        window.location.href = redirectUrl
+      }
+    } catch (error) {
+      responseErrorHandler(error)
+    }
   }
 
   setPaymentValue(value: PaymentType) {

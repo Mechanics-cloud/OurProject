@@ -1,7 +1,7 @@
 import { instance } from '@/common/api'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
-import { Price } from '../model'
+import { DataSubscriptionApi, Price } from '../model'
 import { SubscriptionEndpoints } from './subscription.endpoints'
 
 class SubscriptionApi {
@@ -11,6 +11,10 @@ class SubscriptionApi {
     const res = await this.instance.get(SubscriptionEndpoints.getPrice)
 
     return res.data.data
+  }
+
+  subscriptions(data: DataSubscriptionApi): Promise<AxiosResponse> {
+    return this.instance.post(SubscriptionEndpoints.subscribe, data)
   }
 }
 

@@ -15,7 +15,7 @@ export const Subscription = observer(() => {
   const { t } = useTranslation()
 
   const { accountOptions, accountValue, defaultAccountValue, setAccountValue } =
-    useAccountOptions(t)
+    useAccountOptions(t, true)
 
   useEffect(() => {
     subscriptionStore.getPrice()
@@ -37,7 +37,6 @@ export const Subscription = observer(() => {
         accountValue={accountValue}
         defaultValue={paymentValue}
         label={t.profileMyPayments.subscriptionCosts}
-        onPay={subscriptionStore.processPayment}
         onValueChange={setPaymentValue}
         options={priceOptions}
       />

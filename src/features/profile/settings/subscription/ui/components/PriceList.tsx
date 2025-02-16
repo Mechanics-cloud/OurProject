@@ -1,15 +1,15 @@
 import { RadioGroupType, cn } from '@/common'
 import { AccountTypeValue } from '@/common/enums'
 
+import { BankRedirectButtons } from './BankRedirectButtons'
 import { PaymentRadioGroup } from './PaymentRadioGroup'
 
 type Props = {
   accountValue: string
   label: string
-  onPay: () => void
 } & RadioGroupType
 
-export const PriceList = ({ accountValue, label, onPay, ...rest }: Props) => {
+export const PriceList = ({ accountValue, label, ...rest }: Props) => {
   return (
     <div
       className={cn(
@@ -23,13 +23,7 @@ export const PriceList = ({ accountValue, label, onPay, ...rest }: Props) => {
             label={label}
             {...rest}
           />
-
-          <button
-            onClick={onPay}
-            type={'button'}
-          >
-            Pay
-          </button>
+          <BankRedirectButtons />
         </>
       )}
     </div>
