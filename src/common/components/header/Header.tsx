@@ -60,7 +60,10 @@ const Header = () => {
               onClick={onToggleNotification}
               type={'button'}
             >
-              <OutlineBell className={'size-6'} />
+              <OutlineBell
+                className={'size-6'}
+                fill={isModalOpen ? '#397DF6' : 'currentColor'}
+              />
               {isModalOpen && <Notification />}
             </button>
           )}
