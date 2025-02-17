@@ -29,7 +29,7 @@ export const Notification = () => {
           {t.notification.title}
         </Typography>
 
-        <div className={'py-3 border-t-[1px] border-t-dark-100  text-left'}>
+        <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
           <Typography variant={'bold14'}>
             {t.notification.item}{' '}
             <b className={'text-accent-900'}>{t.notification.new}</b>
@@ -48,9 +48,7 @@ export const Notification = () => {
           </Typography>
         </div>
 
-        <div
-          className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
-        >
+        <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
           <Typography variant={'bold14'}>
             {t.notification.item}{' '}
             <b className={'text-accent-900'}>{t.notification.new}</b>
@@ -69,9 +67,7 @@ export const Notification = () => {
           </Typography>
         </div>
 
-        <div
-          className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
-        >
+        <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
           <Typography variant={'bold14'}>{t.notification.item}</Typography>
           <Typography
             className={'mt-2'}
@@ -86,9 +82,7 @@ export const Notification = () => {
             {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
-        <div
-          className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
-        >
+        <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
           <Typography variant={'bold14'}>{t.notification.item}</Typography>
           <Typography
             className={'mt-2'}
@@ -103,9 +97,7 @@ export const Notification = () => {
             {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
-        <div
-          className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
-        >
+        <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
           <Typography variant={'bold14'}>{t.notification.item}</Typography>
           <Typography
             className={'mt-2'}
@@ -120,9 +112,7 @@ export const Notification = () => {
             {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
-        <div
-          className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
-        >
+        <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
           <Typography variant={'bold14'}>{t.notification.item}</Typography>
           <Typography
             className={'mt-2'}
