@@ -65,15 +65,15 @@ export const AutoRenewal = observer(({ isShow }: Props) => {
                 </Typography>
               </div>
             </Card>
-            <div className={'mt-3'}>
-              <Checkbox
-                checked={currentPayments?.hasAutoRenewal}
-                disabled={!currentPayments?.hasAutoRenewal}
-                label={t.profileMyPayments.autoRenewal}
-                onCheckedChange={subscriptionStore.canceledAutoRenewal}
-              ></Checkbox>
-            </div>
           </label>
+          <div className={'mt-3'}>
+            <Checkbox
+              checked={currentPayments?.hasAutoRenewal}
+              disabled={!currentPayments?.hasAutoRenewal}
+              label={t.profileMyPayments.autoRenewal}
+              onCheckedChange={subscriptionStore.canceledAutoRenewal}
+            ></Checkbox>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

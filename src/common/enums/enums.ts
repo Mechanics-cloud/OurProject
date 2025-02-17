@@ -33,3 +33,7 @@ export enum AccountTypeValue {
   Business = 'business',
   Personal = 'personal',
 }
+export enum ManualAccountType {
+  AccountType = 'accountType',
+  paymentCookies = 'payment=',
+}

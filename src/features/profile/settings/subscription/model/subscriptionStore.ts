@@ -4,9 +4,16 @@ import {
   Environments,
   Nullable,
   RadioOption,
+  getFromLocalStorage,
+  removeFromLocalStorage,
   responseErrorHandler,
+  setToLocalStorage,
 } from '@/common'
-import { PaymentType } from '@/common/enums'
+import {
+  AccountTypeValue,
+  ManualAccountType,
+  PaymentType,
+} from '@/common/enums'
 import { translationForStore } from '@/common/utils/setTranslation'
 import { makeAutoObservable, runInAction } from 'mobx'
 
@@ -18,6 +25,7 @@ class SubscriptionStore {
   currentPayments: Nullable<CurrentPayments> = null
   isLoading: boolean = false
   isPaidAccount: boolean = false
+  lastPaymentDate: Nullable<Date> = null
   paymentValue: '' | PaymentType = ''
   price: Nullable<Price[]> = null
   priceOptions: Nullable<RadioOption[]> = null
@@ -57,6 +65,7 @@ class SubscriptionStore {
     this.paymentValue = ''
     this.price = null
     this.priceOptions = null
+    document.cookie = `${ManualAccountType.paymentCookies}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
   }
   convertOptions() {
     const priceOptions = this.price?.map((el) => ({
@@ -77,13 +86,27 @@ class SubscriptionStore {
       runInAction(() => {
         this.currentPayments = res
         if (res.data.length) {
+          const personalType = getFromLocalStorage(
+            ManualAccountType.AccountType
+          )
+
           const currentDate = new Date()
 
           const lastPaymentDate = new Date(
             res.data.at(-1)?.endDateOfSubscription!
           )
 
-          this.isPaidAccount = currentDate < lastPaymentDate
+          this.lastPaymentDate = lastPaymentDate
+
+          const paid = currentDate < lastPaymentDate
+
+          this.isPaidAccount = paid
+
+          if (!personalType) {
+            document.cookie = `${
+              ManualAccountType.paymentCookies
+            }; expires=${this.lastPaymentDate.toUTCString()}; path=/`
+          }
         }
       })
     } catch (error) {
@@ -107,6 +130,20 @@ class SubscriptionStore {
       runInAction(() => {
         this.isLoading = false
       })
+    }
+  }
+
+  manualChangeAccountType(value: string, resetCookie: () => void) {
+    if (value === AccountTypeValue.Business) {
+      removeFromLocalStorage(ManualAccountType.AccountType)
+      if (this.lastPaymentDate) {
+        document.cookie = `${
+          ManualAccountType.paymentCookies
+        }; expires=${this.lastPaymentDate.toUTCString()}; path=/`
+      }
+    } else {
+      setToLocalStorage(ManualAccountType.AccountType, value)
+      resetCookie()
     }
   }
 

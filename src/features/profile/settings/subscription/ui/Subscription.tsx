@@ -1,6 +1,11 @@
 import { useEffect } from 'react'
 
-import { AsyncComponent, Skeleton, useTranslation } from '@/common'
+import {
+  AsyncComponent,
+  Skeleton,
+  usePaidAccount,
+  useTranslation,
+} from '@/common'
 import { observer } from 'mobx-react-lite'
 
 import { subscriptionStore, useAccountOptions } from '../model'
@@ -18,6 +23,8 @@ export const Subscription = observer(() => {
   const { accountOptions, accountValue, isBusiness, setAccountValue } =
     useAccountOptions(t, isPaidAccount)
 
+  const { resetPaidStatus } = usePaidAccount()
+
   useEffect(() => {
     subscriptionStore.getPrice()
   }, [])
@@ -27,6 +34,7 @@ export const Subscription = observer(() => {
   }, [t.profileMyPayments.business])
 
   const onAccountTypeHandler = (value: string) => {
+    subscriptionStore.manualChangeAccountType(value, resetPaidStatus)
     setAccountValue(value)
   }
 
