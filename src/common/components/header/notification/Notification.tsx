@@ -8,7 +8,7 @@ export const Notification = () => {
   return (
     <div
       className={
-        'absolute -right-[10px] top-10 z-40 w-[355px] h-[424px] p-3 bg-dark-900 border border-light-900 rounded-lg shadow-lg'
+        'absolute -right-[10px] top-10 z-40 w-[355px] h-[424px] p-3 bg-dark-500 border border-light-900 rounded-lg shadow-lg'
       }
     >
       <div
@@ -29,9 +29,7 @@ export const Notification = () => {
           {t.notification.title}
         </Typography>
 
-        <div
-          className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
-        >
+        <div className={'py-3 border-t-[1px] border-t-dark-100  text-left'}>
           <Typography variant={'bold14'}>
             {t.notification.item}{' '}
             <b className={'text-accent-900'}>{t.notification.new}</b>
@@ -40,7 +38,7 @@ export const Notification = () => {
             className={'mt-2'}
             variant={'reg14'}
           >
-            The next payment will be withdrawn in 1 hours
+            Hello, hello! The next payment will be withdrawn in 1 hours
           </Typography>
           <Typography
             className={'text-light-900'}
