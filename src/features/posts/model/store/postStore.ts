@@ -50,7 +50,7 @@ export class PostStore {
       await postsApi.deletePost(postId)
       await router.push(
         PathService.generatePath(PublicPaths.userProfile, {
-          userId: userId,
+          userId,
         })
       )
 

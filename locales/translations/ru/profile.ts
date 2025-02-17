@@ -68,10 +68,12 @@ export const avatarModal = {
 }
 
 export const profileManagement = {
-  error: 'Ошибка',
   errorButton: 'Вернуться к оплате',
   errorDescription: 'Транзакция не удалась. Пожалуйста, напишите в поддержку.',
-  success: 'Успех',
+  or: 'ИЛИ',
+  redirectMessage: (bank: string) =>
+    `Вы будете перенаправлены на сайт банка ${bank} для оплаты. Продолжить?`,
   successButton: 'ОК',
   successDescription: 'Оплата прошла успешно!',
+  titleModal: 'Подтверждение перехода',
 }

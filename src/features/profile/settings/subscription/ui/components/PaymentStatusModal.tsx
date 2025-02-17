@@ -44,12 +44,10 @@ export const PaymentStatusModal = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>
-            {status === 'success'
-              ? t.profileManagement.success
-              : t.profileManagement.error}
+            {status === 'success' ? t.basic.success : t.basic.errors.error}
           </DialogTitle>
         </DialogHeader>
-        <DialogDescription className={'text-center'}>
+        <DialogDescription>
           {status === 'success'
             ? t.profileManagement.successDescription
             : t.profileManagement.errorDescription}

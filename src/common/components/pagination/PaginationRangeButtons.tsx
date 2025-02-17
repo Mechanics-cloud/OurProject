@@ -1,8 +1,9 @@
 import * as React from 'react'
 
 import { Tooltip } from '@/common'
-import { PageButton } from '@/common/components/pagination/PageButton'
-import { DOTS } from '@/common/components/pagination/hooks/usePaginationRange'
+
+import { PageButton } from './PageButton'
+import { DOTS } from './hooks/usePaginationRange'
 
 type Props = {
   currentPage: number

@@ -4,7 +4,7 @@ import { AxiosInstance, AxiosResponse } from 'axios'
 import { DataSubscriptionApi, Price } from '../model'
 import { SubscriptionEndpoints } from './subscription.endpoints'
 
-class SubscriptionAPi {
+class SubscriptionApi {
   constructor(private instance: AxiosInstance) {}
 
   async getPrice(): Promise<Price[]> {
@@ -18,4 +18,4 @@ class SubscriptionAPi {
   }
 }
 
-export const subscriptionAPi = new SubscriptionAPi(instance)
+export const subscriptionAPi = new SubscriptionApi(instance)

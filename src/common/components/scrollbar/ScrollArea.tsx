@@ -23,10 +23,12 @@ export const ScrollArea = forwardRef<
   const scrollableRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const element = document.querySelector('.viewport > div')
+    if (typeof window !== 'undefined') {
+      const element = scrollableRef.current?.querySelector('.viewport > div')
 
-    if (element instanceof HTMLElement) {
-      element.style.display = 'block'
+      if (element instanceof HTMLElement) {
+        element.style.display = 'block'
+      }
     }
   }, [])
 

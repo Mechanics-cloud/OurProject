@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Skeleton, useTranslation } from '@/common'
+import { AsyncComponent, Skeleton, useTranslation } from '@/common'
 import { observer } from 'mobx-react-lite'
 
 import { subscriptionStore, useAccountOptions } from '../model'
@@ -22,27 +22,24 @@ export const Subscription = observer(() => {
   }, [])
 
   return (
-    <>
-      {isLoading ? (
-        <Skeleton className={'w-full h-[130px] mt-10'} />
-      ) : (
-        <>
-          <PaymentRadioGroup
-            defaultValue={defaultAccountValue}
-            label={t.profileMyPayments.accountType}
-            onValueChange={setAccountValue}
-            options={accountOptions}
-          />
+    <AsyncComponent
+      isLoading={isLoading}
+      loader={<Skeleton className={'w-full h-[130px] mt-10'} />}
+    >
+      <PaymentRadioGroup
+        defaultValue={defaultAccountValue}
+        label={t.profileMyPayments.accountType}
+        onValueChange={setAccountValue}
+        options={accountOptions}
+      />
 
-          <PriceList
-            accountValue={accountValue}
-            defaultValue={paymentValue}
-            label={t.profileMyPayments.subscriptionCosts}
-            onValueChange={setPaymentValue}
-            options={priceOptions}
-          />
-        </>
-      )}
-    </>
+      <PriceList
+        accountValue={accountValue}
+        defaultValue={paymentValue}
+        label={t.profileMyPayments.subscriptionCosts}
+        onValueChange={setPaymentValue}
+        options={priceOptions}
+      />
+    </AsyncComponent>
   )
 })
