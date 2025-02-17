@@ -1,6 +1,10 @@
-import { ScrollArea, Typography } from '@/common'
+import { ScrollArea, Typography, timeAgo, useTranslation } from '@/common'
+import { useRouter } from 'next/router'
 
 export const Notification = () => {
+  const { t } = useTranslation()
+  const router = useRouter()
+
   return (
     <div
       className={
@@ -22,14 +26,15 @@ export const Notification = () => {
           className={'text-left py-3'}
           variant={'bold16'}
         >
-          Notifications
+          {t.notification.title}
         </Typography>
 
         <div
           className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
         >
           <Typography variant={'bold14'}>
-            New Notification! <b className={'text-accent-900'}>New</b>
+            {t.notification.item}{' '}
+            <b className={'text-accent-900'}>{t.notification.new}</b>
           </Typography>
           <Typography
             className={'mt-2'}
@@ -41,7 +46,7 @@ export const Notification = () => {
             className={'text-light-900'}
             variant={'small'}
           >
-            1 hour ago
+            {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
 
@@ -49,7 +54,8 @@ export const Notification = () => {
           className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
         >
           <Typography variant={'bold14'}>
-            New Notification! <b className={'text-accent-900'}>New</b>
+            {t.notification.item}{' '}
+            <b className={'text-accent-900'}>{t.notification.new}</b>
           </Typography>
           <Typography
             className={'mt-2'}
@@ -61,14 +67,14 @@ export const Notification = () => {
             className={'text-light-900'}
             variant={'small'}
           >
-            1 hour ago
+            {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
 
         <div
           className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
         >
-          <Typography variant={'bold14'}>New Notification!</Typography>
+          <Typography variant={'bold14'}>{t.notification.item}</Typography>
           <Typography
             className={'mt-2'}
             variant={'reg14'}
@@ -79,13 +85,13 @@ export const Notification = () => {
             className={'text-light-900'}
             variant={'small'}
           >
-            1 hour ago
+            {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
         <div
           className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
         >
-          <Typography variant={'bold14'}>New Notification!</Typography>
+          <Typography variant={'bold14'}>{t.notification.item}</Typography>
           <Typography
             className={'mt-2'}
             variant={'reg14'}
@@ -96,13 +102,13 @@ export const Notification = () => {
             className={'text-light-900'}
             variant={'small'}
           >
-            1 hour ago
+            {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
         <div
           className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
         >
-          <Typography variant={'bold14'}>New Notification!</Typography>
+          <Typography variant={'bold14'}>{t.notification.item}</Typography>
           <Typography
             className={'mt-2'}
             variant={'reg14'}
@@ -113,13 +119,13 @@ export const Notification = () => {
             className={'text-light-900'}
             variant={'small'}
           >
-            1 hour ago
+            {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
         <div
           className={'py-3 border-t-[1px] border-t-dark-100 h-[85px] text-left'}
         >
-          <Typography variant={'bold14'}>New Notification!</Typography>
+          <Typography variant={'bold14'}>{t.notification.item}</Typography>
           <Typography
             className={'mt-2'}
             variant={'reg14'}
@@ -130,7 +136,7 @@ export const Notification = () => {
             className={'text-light-900'}
             variant={'small'}
           >
-            1 hour ago
+            {timeAgo(new Date(), router.locale)}
           </Typography>
         </div>
       </ScrollArea>
