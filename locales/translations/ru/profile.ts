@@ -71,3 +71,14 @@ export const avatarModal = {
   saveButton: 'Сохранить',
   title: 'Добавить фотографию профиля',
 }
+
+export const profileManagement = {
+  errorButton: 'Вернуться к оплате',
+  errorDescription: 'Транзакция не удалась. Пожалуйста, напишите в поддержку.',
+  or: 'ИЛИ',
+  redirectMessage: (bank: string) =>
+    `Вы будете перенаправлены на сайт банка ${bank} для оплаты. Продолжить?`,
+  successButton: 'ОК',
+  successDescription: 'Оплата прошла успешно!',
+  titleModal: 'Подтверждение перехода',
+}

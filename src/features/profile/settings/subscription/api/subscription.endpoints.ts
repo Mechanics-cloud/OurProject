@@ -3,4 +3,5 @@ export const SubscriptionEndpoints = {
   currentPaymentSubscriptions:
     '/v1/subscriptions/current-payment-subscriptions',
   getPrice: '/v1/subscriptions/cost-of-payment-subscriptions',
+  subscribe: '/v1/subscriptions',
 }

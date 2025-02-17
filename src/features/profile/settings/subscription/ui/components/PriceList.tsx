@@ -1,16 +1,15 @@
-import { RadioGroupType, cn } from '@/common'
-import { AccountTypeValue } from '@/common/enums'
+import { RadioGroupType } from '@/common'
 import { AnimatePresence, motion } from 'framer-motion'
 
+import { BankRedirectButtons } from './BankRedirectButtons'
 import { PaymentRadioGroup } from './PaymentRadioGroup'
 
 type Props = {
   isShow: boolean
   label: string
-  onPay: () => void
 } & RadioGroupType
 
-export const PriceList = ({ isShow, label, onPay, ...rest }: Props) => {
+export const PriceList = ({ isShow, label, ...rest }: Props) => {
   return (
     <AnimatePresence>
       {isShow && (
@@ -24,13 +23,7 @@ export const PriceList = ({ isShow, label, onPay, ...rest }: Props) => {
             label={label}
             {...rest}
           />
-
-          <button
-            onClick={onPay}
-            type={'button'}
-          >
-            Pay
-          </button>
+          <BankRedirectButtons />
         </motion.div>
       )}
     </AnimatePresence>

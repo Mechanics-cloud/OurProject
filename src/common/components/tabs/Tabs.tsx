@@ -16,16 +16,18 @@ export type TabsType = {
 
 export type TabsData = {
   tabsData: TabsType[]
+  triggerClassName?: string
 } & React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root>
 
 const Tabs = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.List>,
   TabsData
->(({ className, tabsData }, ref) => {
+>(({ tabsData, triggerClassName, ...rest }, ref) => {
   return (
     <TabsPrimitive.Root
       defaultValue={tabsData[0].id}
       ref={ref}
+      {...rest}
     >
       <TabsPrimitive.List className={clsx('flex w-full')}>
         {tabsData.map(({ disabled, id, title }) => (
@@ -41,7 +43,7 @@ const Tabs = React.forwardRef<
               'focus:z-10 focus:outline-none focus-visible:ring focus-visible:rounded focus-visible:ring-accent-300',
               'enabled:hover:radix-state-active:bg-accent-900/[.15] enabled:hover:radix-state-inactive:bg-accent-900/[.15]',
               'active:bg-accent-100/[.15]',
-              className
+              triggerClassName
             )}
             disabled={disabled ?? false}
             key={`tab-trigger-${id}`}

@@ -55,7 +55,6 @@ export const Subscription = observer(() => {
         <PriceList
           isShow={isBusiness}
           label={t.profileMyPayments.subscriptionCosts}
-          onPay={subscriptionStore.processPayment}
           onValueChange={setPaymentValue}
           options={priceOptions}
           value={paymentValue}

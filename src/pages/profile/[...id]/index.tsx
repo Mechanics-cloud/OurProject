@@ -1,8 +1,10 @@
-import { PropsWithChildren, useEffect } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 
 import { getDeviceScreenWidth, withLoader } from '@/common'
+import { tabletWidth } from '@/common/constants'
 import {
   ContentModal,
+  MobilePost,
   PublicPostInfo,
   getPublicPostInfo,
 } from '@/features/posts'
@@ -37,7 +39,9 @@ export const getServerSideProps: GetServerSideProps = async (
 
     const { comments, post } = postInfo
 
-    return { props: { comments, post, postsData, screenSize, userProfile } }
+    return {
+      props: { comments, params, post, postsData, screenSize, userProfile },
+    }
   } catch {
     return {
       notFound: true,
@@ -45,12 +49,16 @@ export const getServerSideProps: GetServerSideProps = async (
   }
 }
 
-type Props = { screenSize?: number } & ProfileData &
+type Props = {
+  params: { id?: string | string[] }
+  screenSize?: number
+} & ProfileData &
   PropsWithChildren &
   PublicPostInfo
 
 const ProfilePage = ({
   comments,
+  params,
   post,
   postsData,
   screenSize,
@@ -62,6 +70,20 @@ const ProfilePage = ({
     hydrateProfileStore?.setNewData({ postsData, userProfile })
   }, [postsData, userProfile])
 
+  const isTablet = screenSize && screenSize < tabletWidth
+
+  if (params.id && params.id[1] && isTablet) {
+    return (
+      <MobilePost
+        comments={comments}
+        post={post}
+        postsData={postsData}
+        screenSize={screenSize}
+        userProfile={userProfile}
+      />
+    )
+  }
+
   return (
     <>
       <Profile
@@ -72,6 +94,7 @@ const ProfilePage = ({
         comments={comments}
         post={post}
         postsData={postsData}
+        screenSize={screenSize}
         userProfile={userProfile}
       />
     </>

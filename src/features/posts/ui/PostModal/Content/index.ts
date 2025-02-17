@@ -1,4 +1,4 @@
-export * from './AddComment'
+export * from './AddCommentInView'
 export * from './Comment'
 export * from './Description'
 export * from './LikesGroup'
