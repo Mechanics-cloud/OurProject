@@ -43,9 +43,9 @@ export const withProtection = <P extends object>(
       router,
     ])
 
-    return (
-      <>
-        {loadingCondition ? <FullScreenLoader /> : <PageComponent {...props} />}
-      </>
+    return loadingCondition ? (
+      <FullScreenLoader />
+    ) : (
+      <PageComponent {...props} />
     )
   })

@@ -3,9 +3,7 @@ import type { AppProps } from 'next/app'
 
 import { ReactElement, ReactNode } from 'react'
 
-import { Environments, ProtectedLayout } from '@/common'
-import { NotificationsSocketProvider } from '@/features/notifications'
-import { GoogleOAuthProvider } from '@react-oauth/google'
+import { ProvidersLayout } from '@/common'
 
 import '@/common/components/swiper/customStylesForSwiper.css'
 import '@/styles/globals.css'
@@ -27,12 +25,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page)
 
   return getLayout(
-    <NotificationsSocketProvider>
-      <GoogleOAuthProvider clientId={Environments.CLIENT_ID!}>
-        <ProtectedLayout>
-          <Component {...pageProps} />
-        </ProtectedLayout>
-      </GoogleOAuthProvider>
-    </NotificationsSocketProvider>
+    <ProvidersLayout>
+      <Component {...pageProps} />
+    </ProvidersLayout>
   )
 }

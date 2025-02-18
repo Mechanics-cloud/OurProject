@@ -12,5 +12,5 @@ export const withLoader = <P extends object>(
   observer((props) => {
     const loading = generalStore.isLoading
 
-    return <>{loading ? <FullScreenLoader /> : <PageComponent {...props} />}</>
+    return loading ? <FullScreenLoader /> : <PageComponent {...props} />
   })
