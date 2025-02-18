@@ -30,7 +30,7 @@ export const Notification = () => {
         {t.notification.title}
       </Typography>
 
-      <ScrollArea className={'overflow-y-scroll h-[calc(100%-60px)]'}>
+      <ScrollArea className={'h-[calc(100%-60px)]'}>
         <div>
           <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
             <Typography variant={'bold14'}>
