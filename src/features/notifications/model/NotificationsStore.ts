@@ -4,6 +4,7 @@ import {
   getFromLocalStorage,
   responseErrorHandler,
 } from '@/common'
+import { StorageKeys } from '@/common/enums'
 import {
   GetAllNotificationsType,
   NotificationEventDTO,
@@ -29,7 +30,7 @@ class NotificationsStore {
   connect() {
     const socketOptions = {
       query: {
-        accessToken: getFromLocalStorage('accessToken'),
+        accessToken: getFromLocalStorage(StorageKeys.AccessToken),
       },
     }
 

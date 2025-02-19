@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
 import { Nullable, getFromLocalStorage } from '@/common'
+import { StorageKeys } from '@/common/enums'
 import { generalStore } from '@/core/store'
 import { notificationsStore } from '@/features/notifications'
 import {
@@ -47,7 +48,7 @@ export const NotificationsSocketProvider = ({
   }
 
   useEffect(() => {
-    if (!isUser && !getFromLocalStorage('accessToken')) {
+    if (!isUser && !getFromLocalStorage(StorageKeys.AccessToken)) {
       return
     }
     connectNotifications()
