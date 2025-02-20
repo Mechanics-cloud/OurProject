@@ -1,12 +1,12 @@
 import { ArrowIosForward } from '@/assets/icons/filledIcons'
 import { ArrowIosBackOutline } from '@/assets/icons/outlineIcons'
 import { Tooltip, useTranslation } from '@/common'
-import { CountToShow } from '@/common/components/pagination/CountToShow'
-import { PaginationRangeButtons } from '@/common/components/pagination/PaginationRangeButtons'
-import { usePaginationRange } from '@/common/components/pagination/hooks/usePaginationRange'
 import { cn } from '@/common/utils/cn'
 
+import { CountToShow } from './CountToShow'
 import { PageButton } from './PageButton'
+import { PaginationRangeButtons } from './PaginationRangeButtons'
+import { usePaginationRange } from './hooks/usePaginationRange'
 
 type Props = {
   currentPage: number

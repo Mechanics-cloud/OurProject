@@ -11,7 +11,7 @@ import {
   UserProfile,
   profileAPi,
 } from '@/features/profile'
-import { format } from 'date-fns'
+import { format, parse } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { makeAutoObservable, runInAction } from 'mobx'
 
@@ -63,12 +63,18 @@ export class ProfileStore {
   }
 
   async updateProfile(data: UserInfo) {
+    const date =
+      data.dateOfBirth &&
+      parse(data.dateOfBirth, 'dd.MM.yyyy', new Date(), {
+        locale: ru,
+      }).toISOString()
+
     try {
       const updatedData: UpdatedProfile = {
         aboutMe: data.aboutMe ?? '',
         city: data.city ?? '',
         country: data.country ?? '',
-        dateOfBirth: data.dateOfBirth ?? '',
+        dateOfBirth: date ?? '',
         firstName: data.firstName,
         lastName: data.lastName,
         region: '',

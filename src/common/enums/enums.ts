@@ -24,3 +24,19 @@ export enum LikeStatus {
   Like = 'LIKE',
   None = 'NONE',
 }
+
+export enum PaymentType {
+  Day = 'DAY',
+  Monthly = 'MONTHLY',
+  Weekly = 'WEEKLY',
+}
+
+export enum AccountTypeValue {
+  Business = 'business',
+  Personal = 'personal',
+}
+
+export enum PaymentBanks {
+  Paypal = 'PAYPAL',
+  Stripe = 'STRIPE',
+}

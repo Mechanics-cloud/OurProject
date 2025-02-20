@@ -15,6 +15,23 @@ export const profileSettings = {
   userName: 'User name',
 }
 
+export const profileMyPayments = {
+  accountType: 'Account type:',
+  business: 'Business',
+  dateOfPayment: 'Date of Payment',
+  day: '1 day',
+  endDateOfSubscription: 'End date of subscription',
+  monthly: '1 month',
+  noPayments: "You don't have any transactions yet",
+  paymentType: 'Payment Type',
+  per: 'per',
+  personal: 'Personal',
+  price: 'Price',
+  subscriptionCosts: 'Your subscription costs:',
+  subscriptionType: 'Subscription Type',
+  weekly: '7 days',
+}
+
 export const profileSessions = {
   activeSessions: 'Active sessions',
   currentSession: 'Current device',
@@ -49,4 +66,15 @@ export const avatarModal = {
   noFile: 'File not selected',
   saveButton: 'Save',
   title: 'Add a Profile Photo',
+}
+
+export const profileManagement = {
+  errorButton: 'Back to payment',
+  errorDescription: 'Transaction failed. Please, write to support.',
+  or: 'OR',
+  redirectMessage: (bank: string) =>
+    `You will be redirected to the ${bank} website for payment. Continue?`,
+  successButton: 'OK',
+  successDescription: 'Payment was successful!',
+  titleModal: 'Redirect Confirmation',
 }

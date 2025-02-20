@@ -2,6 +2,7 @@ const errors = {
   emptyImages:
     'Не удалось отобразить фотографии поста. Пожайлуста обратитесь в поддержку или повторите попытку позже!',
   emptySwiper: 'Нет картинок',
+  error: 'Ошибка',
   server:
     'Что-то пошло не так с нашей стороны. Пожалуйста, повторите попытку позже.',
   tooBigFile: (size: number) =>
@@ -13,6 +14,7 @@ const errors = {
 export const basic = {
   discard: 'Отмена',
   errors: { ...errors },
+  gallery: 'Картинка в карусели',
   goToTop: 'Вверх',
   logOut: 'Выход',
   next: 'Дальше',
@@ -22,7 +24,10 @@ export const basic = {
   pagination: {
     goBack: 'Назад',
     goForward: 'Вперед',
+    onPage: 'на странице',
+    show: 'Показать',
   },
+  success: 'Успех',
   textFolding: {
     less: 'Свернуть',
     more: 'Развернуть',

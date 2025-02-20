@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Close } from '@/assets/icons'
-import { PathService, PublicPaths, useTranslation } from '@/common'
+import { Loader, PathService, PublicPaths, useTranslation } from '@/common'
+import { Stub } from '@/common/components/stub/Stub'
 import { PostInfo, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
@@ -11,34 +12,57 @@ type Props = {
 }
 
 export const Post = observer(({ userId }: Props) => {
+  const [isLoading, setIsLoading] = useState(false)
   const { t } = useTranslation()
   const { postStore } = usePostStore()
   const { post } = postStore
   const router = useRouter()
 
-  if (!post) {
-    return (
-      <div
-        className={'flex justify-center items-center w-full h-full bg-dark-300'}
-      >
-        {t.post.notFound}
-      </div>
-    )
-  }
-
   const onClose = async () => {
+    setIsLoading(true)
     await router.push(
-      PathService.generatePath(PublicPaths.userProfile, { userId: userId })
+      PathService.generatePath(PublicPaths.userProfile, { userId })
     )
+    setIsLoading(false)
   }
 
   return (
-    <div className={'relative container mx-auto w-[972px] h-[564px]'}>
-      <PostInfo />
-      <Close
-        className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
+    <>
+      {isLoading && <Loader />}
+      <div
+        className={'w-full h-full flex items-center '}
         onClick={onClose}
-      />
-    </div>
+      >
+        <div
+          className={
+            'relative container mx-auto xl:w-[972px] xl:h-[564px] lg:w-[872px] lg:h-[464px]'
+          }
+          onClick={(e) => e.stopPropagation()}
+        >
+          {!post?.id || !post ? (
+            <div
+              className={
+                'w-full h-full bg-dark-500 flex items-center justify-center'
+              }
+            >
+              <Stub
+                alt={''}
+                className={'w-[70%] h-[70%]'}
+                textClassName={
+                  'font-bold leading-[36px] text-[20px] mt-5 text-inherit'
+                }
+                title={t.post.notFound}
+              />
+            </div>
+          ) : (
+            <PostInfo />
+          )}
+          <Close
+            className={'absolute w-6 h-6 -top-6 -right-6 cursor-pointer'}
+            onClick={onClose}
+          />
+        </div>
+      </div>
+    </>
   )
 })

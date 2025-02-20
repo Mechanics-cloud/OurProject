@@ -1,3 +1,6 @@
+import { en } from '@locales/en'
+import { ru } from '@locales/ru'
+
 type TimeRangeKey =
   | 'days'
   | 'hours'
@@ -31,6 +34,9 @@ export function timeAgo(
   }
   const secondsElapsed = (date.getTime() - Date.now()) / 1000
 
+  if (Math.abs(secondsElapsed) < 60) {
+    return locale === 'en' ? en.post.createTime : ru.post.createTime
+  }
   for (const key in ranges) {
     if (ranges[key as TimeRangeKey] < Math.abs(secondsElapsed)) {
       const delta = secondsElapsed / ranges[key as TimeRangeKey]

@@ -23,7 +23,7 @@ export const SocialGroup = observer(() => {
   return (
     <div
       className={
-        'flex flex-col gap-4 pt-3 px-6 pb-2 border-b border-dark-100 box-border'
+        'flex flex-col gap-4 pt-3 lg:px-6 px-1 pb-2 lg:border-b border-dark-100 box-border w-full'
       }
     >
       {user && (

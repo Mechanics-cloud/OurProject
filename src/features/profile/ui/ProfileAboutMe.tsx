@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react'
 
-import { Typography } from '@/common'
+import { Typography, cn } from '@/common'
 
 type Props = {
   aboutMe?: string
@@ -14,7 +14,7 @@ export const ProfileAboutMe = ({
 }: Props) => {
   return (
     <div
-      className={className}
+      className={cn('break-all', className)}
       {...props}
     >
       {aboutMe && (

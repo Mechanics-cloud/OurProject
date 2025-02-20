@@ -118,27 +118,36 @@ type Props = {
   className?: string
   label?: string
   placeholder?: number | string
+  triggerClassname?: string
 } & ComponentPropsWithoutRef<typeof SelectPrimitive.Root>
 
 const Select = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Root>,
   Props
->(({ children, className, label, placeholder, ...props }, ref) => {
-  return (
-    <SelectBasic {...props}>
-      <SelectGroup
-        className={className}
-        ref={ref}
-      >
-        {label && <SelectLabel>{label}</SelectLabel>}
-        <SelectTrigger ref={ref}>
-          <SelectValue placeholder={placeholder} />
-        </SelectTrigger>
-        <SelectContent>{children}</SelectContent>
-      </SelectGroup>
-    </SelectBasic>
-  )
-})
+>(
+  (
+    { children, className, label, placeholder, triggerClassname, ...props },
+    ref
+  ) => {
+    return (
+      <SelectBasic {...props}>
+        <SelectGroup
+          className={className}
+          ref={ref}
+        >
+          {label && <SelectLabel>{label}</SelectLabel>}
+          <SelectTrigger
+            className={triggerClassname}
+            ref={ref}
+          >
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+          <SelectContent>{children}</SelectContent>
+        </SelectGroup>
+      </SelectBasic>
+    )
+  }
+)
 
 Select.displayName = 'Select'
 

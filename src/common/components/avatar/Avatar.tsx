@@ -1,6 +1,6 @@
 import React from 'react'
 
-import avatarPlaceholder from '@/assets/images/avatar.jpg'
+import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
 import { Nullable, cn } from '@/common'
 import Image, { StaticImageData } from 'next/image'
 
@@ -24,7 +24,7 @@ export const Avatar = ({
 }: Props) => (
   <Image
     alt={alt || ''}
-    className={cn('shrink-0', className)}
+    className={cn('shrink-0 rounded-full', className)}
     height={size}
     priority={priority}
     src={src || placeholder || avatarPlaceholder}

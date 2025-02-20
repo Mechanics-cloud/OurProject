@@ -1,11 +1,11 @@
-import { ImageUrl, Typography, cn, useTranslation } from '@/common'
+import { ImageUrl, cn, useTranslation } from '@/common'
 import Image from 'next/image'
 import { EffectFade, Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperProps, SwiperSlide } from 'swiper/react'
 
 import 'swiper/swiper-bundle.css'
 
-import noPostImage from '/src/assets/images/noUserPosts.svg'
+import { useSwiper } from './useSwiper'
 
 type ImagesTypes = {
   images: Array<{ url: ImageUrl }>
@@ -13,6 +13,7 @@ type ImagesTypes = {
 
 const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
   const { t } = useTranslation()
+  const { swiperRef } = useSwiper()
 
   return (
     <Swiper
@@ -21,6 +22,7 @@ const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
       keyboard={{
         enabled: true,
       }}
+      loop
       modules={[Navigation, Pagination, EffectFade]}
       navigation
       noSwiping
@@ -28,6 +30,7 @@ const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
       pagination={{
         clickable: true,
       }}
+      ref={swiperRef}
       {...restProps}
       spaceBetween={30}
       watchSlidesProgress
@@ -38,7 +41,7 @@ const CustomSwiper = ({ className, images, ...restProps }: ImagesTypes) => {
           key={String(image.url)}
         >
           <Image
-            alt={'picture from post'}
+            alt={t.basic.gallery}
             className={'absolute inset-0 h-full w-full object-cover'}
             fill
             priority

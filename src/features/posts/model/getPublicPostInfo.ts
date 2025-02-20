@@ -12,7 +12,6 @@ export const getPublicPostInfo = async (
   if (!id) {
     return defaultValues
   }
-
   const postEndpoint = PublicPostsEndpoints.idPost(id)
   const postResponse = await fetch(PathService.generateServerPath(postEndpoint))
   const post = await postResponse.json()

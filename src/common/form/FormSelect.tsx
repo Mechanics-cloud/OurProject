@@ -13,6 +13,7 @@ type Props<T extends FieldValues> = {
 
 export const FormSelect = <T extends FieldValues>({
   children,
+  className,
   control,
   label,
   name,
@@ -26,6 +27,7 @@ export const FormSelect = <T extends FieldValues>({
   return (
     <Select
       {...props}
+      className={className}
       label={label}
       onValueChange={onChange}
       placeholder={placeholder}

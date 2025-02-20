@@ -30,7 +30,7 @@ const Slider = ({ className, images }: ImagesTypes) => {
 
   return (
     <Swiper
-      className={cn('h-full w-full', className)}
+      className={cn('w-full', className)}
       effect={'fade'}
       hashNavigation={{
         watchState: true,
@@ -50,7 +50,7 @@ const Slider = ({ className, images }: ImagesTypes) => {
     >
       {images.map((image, index) => (
         <SwiperSlide
-          className={'w-full'}
+          className={'w-full bg-dark-700'}
           key={index}
         >
           <Image

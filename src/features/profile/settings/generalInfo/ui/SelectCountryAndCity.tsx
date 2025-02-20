@@ -24,6 +24,9 @@ export const SelectCountryAndCity = <T extends FieldValues>({
         label={t.profileSettings.country}
         name={'country' as Path<T>}
         placeholder={t.profileSettings.placeholders.country}
+        triggerClassname={
+          'bg-dark-500 outline outline-1 outline-light-900 hover:outline-dark-100'
+        }
       >
         {countriesData?.map((country) => (
           <SelectItem
@@ -41,6 +44,9 @@ export const SelectCountryAndCity = <T extends FieldValues>({
         label={t.profileSettings.city}
         name={'city' as Path<T>}
         placeholder={t.profileSettings.placeholders.city}
+        triggerClassname={
+          'bg-dark-500 outline outline-1 outline-light-900 hover:outline-dark-100'
+        }
       >
         {cities?.map((city) => (
           <SelectItem
