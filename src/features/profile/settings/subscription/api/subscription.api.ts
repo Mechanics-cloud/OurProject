@@ -19,8 +19,8 @@ class SubscriptionApi {
     return res.data
   }
 
-  async getPrice(): Promise<Price[]> {
-    const res = await this.instance.get(SubscriptionEndpoints.getPrice)
+  async getPrices(): Promise<Price[]> {
+    const res = await this.instance.get(SubscriptionEndpoints.getPrices)
 
     return res.data.data
   }

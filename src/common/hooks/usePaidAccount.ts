@@ -4,25 +4,25 @@ import { ManualAccountType } from '../enums'
 
 export const usePaidAccount = () => {
   const [isPaid, setIsPaid] = useState(false)
-  const [deleteCookie, setDeleteCookie] = useState(false)
+  const [isDeleteCookie, setIsDeleteCookie] = useState(false)
 
   useEffect(() => {
-    if (deleteCookie) {
+    if (isDeleteCookie) {
       document.cookie = `${ManualAccountType.paymentCookies}; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
     }
-    const cookie = document.cookie.split('; ')
+    const cookies = document.cookie.split('; ')
 
-    const isPaidCookie = cookie.some((cookie) => cookie.startsWith(`payment=`))
+    const isPaidCookie = cookies.some((cookie) => cookie.startsWith(`payment=`))
 
     setIsPaid(isPaidCookie)
 
     return () => {
-      setDeleteCookie(false)
+      setIsDeleteCookie(false)
     }
-  }, [deleteCookie])
+  }, [isDeleteCookie])
 
   const resetPaidStatus = () => {
-    setDeleteCookie(true)
+    setIsDeleteCookie(true)
   }
 
   return { isPaid, resetPaidStatus }

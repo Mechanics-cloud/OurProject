@@ -8,10 +8,6 @@ export const useAccountOptions = (
   t: LocaleType,
   isPaidAccount: boolean = false
 ) => {
-  const manualChangeAccountType = getFromLocalStorage(
-    ManualAccountType.AccountType
-  )
-
   const accountOptions: RadioOption[] = [
     {
       label: t.profileMyPayments.personal,
@@ -24,6 +20,10 @@ export const useAccountOptions = (
   ]
 
   useEffect(() => {
+    const manualChangeAccountType = getFromLocalStorage(
+      ManualAccountType.AccountType
+    )
+
     if (manualChangeAccountType) {
       setAccountValue(manualChangeAccountType)
     } else if (isPaidAccount) {

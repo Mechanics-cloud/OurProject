@@ -26,7 +26,7 @@ export const Subscription = observer(() => {
   const { resetPaidStatus } = usePaidAccount()
 
   useEffect(() => {
-    subscriptionStore.getPrice()
+    subscriptionStore.getPrices()
   }, [])
 
   useEffect(() => {

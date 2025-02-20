@@ -114,10 +114,10 @@ class SubscriptionStore {
       responseErrorHandler(error)
     }
   }
-  async getPrice() {
+  async getPrices() {
     try {
       this.isLoading = true
-      const res = await subscriptionAPi.getPrice()
+      const res = await subscriptionAPi.getPrices()
 
       await this.getCurrentPayment()
       runInAction(() => {
