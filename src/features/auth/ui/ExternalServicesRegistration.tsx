@@ -5,7 +5,7 @@ import {
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
 import { Tooltip, useTranslation } from '@/common'
-import withAuthGoogle from '@/common/layout/AuthGoogleLayout'
+import withAuthGoogle from '@/common/HOC/withAuthGoogle'
 import { useOAuth } from '@/features/auth/model/useOAuth'
 
 const ExternalServicesRegistration = () => {
