@@ -5,9 +5,10 @@ import {
   GoogleSvgrepoCom1,
 } from '@/assets/icons/filledIcons'
 import { Tooltip, useTranslation } from '@/common'
+import withAuthGoogle from '@/common/HOC/withAuthGoogle'
 import { useOAuth } from '@/features/auth/model/useOAuth'
 
-export const ExternalServicesRegistration = () => {
+const ExternalServicesRegistration = () => {
   const { t } = useTranslation()
   const { githubLogin, googleLogin } = useOAuth()
 
@@ -39,3 +40,7 @@ export const ExternalServicesRegistration = () => {
     </div>
   )
 }
+
+export const ExternalServicesRegistrationWithProvider = withAuthGoogle(
+  ExternalServicesRegistration
+)
