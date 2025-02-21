@@ -55,7 +55,8 @@ const Header = () => {
         </Typography>
 
         <div className={'flex items-center'}>
-          {isAuth && <NotificationRing />}
+          {/*todo или вынести колокольчик в NotificationRing, или удалить этот код :)  */}
+          {/*{isAuth && <NotificationRing />}*/}
           {isAuth && (
             <button
               className={'cursor-pointer mr-12 hidden lg:block relative'}
