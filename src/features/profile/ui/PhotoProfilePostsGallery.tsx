@@ -1,8 +1,15 @@
-import React from 'react'
 import { useInView } from 'react-intersection-observer'
 
 import { ImageOutline } from '@/assets/icons'
-import { CircleLoader, PathService, PublicPaths, Skeleton, cn } from '@/common'
+import {
+  CircleLoader,
+  PathService,
+  PublicPaths,
+  Skeleton,
+  Stub,
+  cn,
+  useTranslation,
+} from '@/common'
 import { HydrateProfileStore, useFetchPosts } from '@/features/profile'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -20,6 +27,8 @@ const options = {
 }
 
 export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
+  const { t } = useTranslation()
+
   const { isLoading, isUpdatePost, postsData, stopRequest } = store
   const { inView, ref: skeletonRef } = useInView(options)
   const { ref: containerRef } = useFetchPosts(inView, stopRequest)
@@ -37,6 +46,7 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
             {isUpdatePost && <Skeleton className={'rounded-none'} />}
             {postsData.items.map((post) => (
               <Link
+                className={'flex justify-center items-center'}
                 href={PathService.generatePath(PublicPaths.userPost, {
                   postId: post.id,
                   userId: post.ownerId,
@@ -44,23 +54,34 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
                 key={post.id}
               >
                 <div className={'relative'}>
-                  <Image
-                    alt={'image'}
-                    className={'w-full h-auto object-cover'}
-                    height={228}
-                    priority
-                    src={post.images[0]?.url || ''}
-                    width={342}
-                  />
-                  {post.images.length > 1 && (
-                    <div
-                      className={
-                        'absolute bottom-1 left-1 bg-dark-700 text-white px-1.5 py-[2px] text-sm flex items-center gap-1 rounded-sm opacity-60'
-                      }
-                    >
-                      <ImageOutline className={'size-3.5'} />
-                      {post.images.length}
-                    </div>
+                  {post.images.length > 0 ? (
+                    <>
+                      <Image
+                        alt={'image'}
+                        className={'w-full h-auto object-cover'}
+                        height={228}
+                        priority
+                        src={post.images[0]?.url || ''}
+                        width={342}
+                      />
+                      {post.images.length > 1 && (
+                        <div
+                          className={
+                            'absolute bottom-1 left-1 bg-dark-700 text-white px-1.5 py-[2px] text-sm flex items-center gap-1 rounded-sm opacity-60'
+                          }
+                        >
+                          <ImageOutline className={'size-3.5'} />
+                          {post.images.length}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Stub
+                      alt={t.profilePage.noPosts.alt}
+                      imageClassName={'w-20 sm500:w-40 md:w-full'}
+                      textClassName={'text-center'}
+                      title={t.basic.errors.emptyImages}
+                    />
                   )}
                 </div>
               </Link>
