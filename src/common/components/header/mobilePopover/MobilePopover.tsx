@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { ComponentProps } from 'react'
+import { ComponentProps, useState } from 'react'
 
 import {
   BookmarkOutline,
@@ -23,6 +22,7 @@ import { generalStore } from '@/core/store'
 
 export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
   const { t } = useTranslation()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const {
     isModalOpen: isLogOutModalOpen,
@@ -30,9 +30,16 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
     openModal: openLogOutModal,
   } = useModal()
 
+  const onLinkClick = () => {
+    setIsOpen(false)
+  }
+
   return (
     <>
-      <Popover>
+      <Popover
+        onOpenChange={setIsOpen}
+        open={isOpen}
+      >
         <PopoverTrigger
           asChild
           className={className}
@@ -56,6 +63,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                   DefaultIcon={SettingsOutline}
                   className={'py-2'}
                   href={ProtectedPaths.profileSettings}
+                  onClick={onLinkClick}
                 >
                   <Typography variant={'reg14'}>
                     {t.menu.profileSettings}
