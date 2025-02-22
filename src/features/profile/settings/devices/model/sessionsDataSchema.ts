@@ -1,4 +1,3 @@
-import { IP_REGEXP } from '@/common/constants'
 import { z } from 'zod'
 
 export const sessionsDataSchema = z.object({
@@ -12,9 +11,7 @@ export const sessionsDataSchema = z.object({
   ]),
   browserVersion: z.string(),
   deviceId: z.number(),
-  ip: z.string().regex(IP_REGEXP, {
-    message: 'Something went wrong',
-  }),
+  ip: z.string(),
   lastActive: z.string().datetime(),
   osName: z.string(),
   osVersion: z.string(),

@@ -1,6 +1,14 @@
 import { ReactNode } from 'react'
 
-import { BaseLayoutWithStore, Menu, SideBar, cn } from '@/common'
+import {
+  BaseLayoutWithStore,
+  Menu,
+  SideBar,
+  cn,
+  useMe,
+  useTranslation,
+} from '@/common'
+import { setTranslation } from '@/common/utils/setTranslation'
 import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 
@@ -11,6 +19,10 @@ type Props = {
 
 export const ProtectedLayout = observer(({ children, className }: Props) => {
   const currentAuthState = authStore.isAuthenticated
+  const { t } = useTranslation()
+
+  useMe()
+  setTranslation(t)
 
   return (
     <BaseLayoutWithStore

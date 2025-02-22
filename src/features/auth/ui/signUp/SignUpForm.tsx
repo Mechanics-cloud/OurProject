@@ -11,7 +11,7 @@ import { cn } from '@/common/utils/cn'
 import {
   AgreementWithTheTerms,
   ConfirmSignUpModal,
-  ExternalServicesRegistration,
+  ExternalServicesRegistrationWithProvider,
 } from '@/features/auth'
 import { useSignUp } from '@/features/auth/model'
 import { observer } from 'mobx-react-lite'
@@ -43,7 +43,7 @@ export const SignUpForm = observer(() => {
         >
           {t.signUp.title}
         </Typography>
-        <ExternalServicesRegistration />
+        <ExternalServicesRegistrationWithProvider />
 
         <form
           className={'min-w-80'}
