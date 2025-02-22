@@ -9,6 +9,7 @@ import {
   UserMiniLink,
   calculateCharactersToShow,
   timeAgo,
+  useScreenWidth,
   useTranslation,
 } from '@/common'
 import { Stub } from '@/common/components/stub/Stub'
@@ -32,6 +33,12 @@ type Props = {
 
 const PostItem = ({ item, router }: Props) => {
   const { t } = useTranslation()
+
+  const { isMobile, isTablet } = useScreenWidth()
+
+  const mobileSwiperStyles = isMobile
+    ? 'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
+    : ''
 
   return (
     <div
@@ -72,7 +79,10 @@ const PostItem = ({ item, router }: Props) => {
           className={'relative w-full aspect-square overflow-hidden mb-3'}
         >
           {item.images.length > 0 ? (
-            <CustomSwiper images={item.images} />
+            <CustomSwiper
+              className={mobileSwiperStyles}
+              images={item.images}
+            />
           ) : (
             <Stub
               alt={t.profilePage.noPosts.alt}

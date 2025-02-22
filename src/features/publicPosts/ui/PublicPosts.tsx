@@ -15,8 +15,6 @@ import {
 import Link from 'next/link'
 import CustomSwiper from 'src/common/components/swiper/CustomSwiper'
 
-import 'swiper/swiper-bundle.css'
-
 type Props = {
   posts: PublicPostsDto
 }
