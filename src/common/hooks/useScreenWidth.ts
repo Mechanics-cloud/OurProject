@@ -14,7 +14,7 @@ export const useScreenWidth = (serverScreenSize?: number) => {
   const debouncedWidth = useDebounce(width)
 
   const isTablet = debouncedWidth < breakpoint
-  const isMobile = debouncedWidth < smallBreakpoint
+  const isMobile = debouncedWidth - 1 < smallBreakpoint
 
   useEffect(() => {
     const onWindowResize = () => setWidth(window.innerWidth)
