@@ -1,8 +1,8 @@
 import { instance } from '@/common/api'
+import { SubscriptionEndpoints } from '@/features/profile'
 import { AxiosInstance, AxiosResponse } from 'axios'
 
 import { DataSubscriptionApi, Price } from '../model'
-import { SubscriptionEndpoints } from './subscription.endpoints'
 
 class SubscriptionApi {
   constructor(private instance: AxiosInstance) {}

@@ -6,13 +6,12 @@ import {
   ProtectedPaths,
   PublicPaths,
   cn,
-  useModal,
   useTranslation,
 } from '@/common'
 import { MobilePopover } from '@/common/components/header/mobilePopover'
 import { Typography } from '@/common/components/typography'
 import { generalStore } from '@/core/store'
-import { NotificationRing, Notifications } from '@/features/notifications'
+import { NotificationRing } from '@/features/notifications'
 import Link from 'next/link'
 
 const Header = () => {
