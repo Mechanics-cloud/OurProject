@@ -34,7 +34,7 @@ type Props = {
 const PostItem = ({ item, router }: Props) => {
   const { t } = useTranslation()
 
-  const { isMobile, isTablet } = useScreenWidth()
+  const { isMobile } = useScreenWidth()
 
   const mobileSwiperStyles = isMobile
     ? 'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
