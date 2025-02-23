@@ -5,7 +5,7 @@ import {
   MobileEdit,
   PostContent,
   PostInfoHeader,
-  PostSlider,
+  PostSwiper,
   SocialGroup,
   usePostStore,
 } from '@/features/posts'
@@ -21,7 +21,7 @@ export const MobileContent = observer(({ screenSize }: Props) => {
   return !isEditing ? (
     <div className={'flex flex-col'}>
       <PostInfoHeader />
-      <PostSlider />
+      <PostSwiper />
       <SocialGroup />
       <PostContent screenSize={screenSize} />
       <AddCommentInView />

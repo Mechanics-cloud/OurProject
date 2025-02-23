@@ -4,7 +4,7 @@ import { CustomSwiper } from '@/common/components/swiper'
 import { usePostStore } from '@/features/posts/model/postStoreProvider'
 import { observer } from 'mobx-react-lite'
 
-export const PostSlider = observer(() => {
+export const PostSwiper = observer(() => {
   const { postStore } = usePostStore()
 
   return (

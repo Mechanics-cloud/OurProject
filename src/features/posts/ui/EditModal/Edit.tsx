@@ -13,7 +13,7 @@ import { maxDescriptionLength } from '@/common/constants'
 import {
   CancelEditModal,
   EditDescription,
-  PostSlider,
+  PostSwiper,
   useEditMode,
 } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
@@ -56,7 +56,7 @@ export const Edit = observer(() => {
         />
       </div>
       <div className={'flex w-full h-full'}>
-        <PostSlider />
+        <PostSwiper />
         <div className={'flex flex-col w-full h-full p-6 justify-between'}>
           <div className={'flex flex-col gap-3 h-full'}>
             <UserMiniLink

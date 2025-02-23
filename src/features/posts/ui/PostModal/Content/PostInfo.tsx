@@ -4,14 +4,14 @@ import {
   AddCommentInView,
   PostContent,
   PostInfoHeader,
-  PostSlider,
+  PostSwiper,
   SocialGroup,
 } from '@/features/posts'
 
 export const PostInfo = () => {
   return (
     <div className={'flex w-full h-full border border-dark-100'}>
-      <PostSlider />
+      <PostSwiper />
       <div className={'flex flex-col w-full h-full bg-dark-300'}>
         <PostInfoHeader />
         <PostContent />
