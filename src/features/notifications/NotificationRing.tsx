@@ -40,10 +40,24 @@ export const NotificationRing = () => {
         <Loader />
       ) : (
         <OutlineBell
-          className={'size-6'}
+          className={'size-6 relative'}
           fill={isModalOpen ? '#397DF6' : 'currentColor'}
-        />
+        >
+          {notifications?.items && notifications?.items.length && (
+            <>
+              <circle
+                cx={17.5}
+                cy={6.5}
+                fill={'#CC1439'}
+                r={7.0}
+              />
+            </>
+          )}
+        </OutlineBell>
       )}
+      <span className={'absolute text-[10px] right-0.5 bottom-2.5'}>
+        {notifications?.items.length}
+      </span>
       {isModalOpen && <Notifications notifications={notifications} />}
     </button>
   )
