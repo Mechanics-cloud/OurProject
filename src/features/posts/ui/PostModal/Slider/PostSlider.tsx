@@ -10,7 +10,7 @@ export const PostSlider = observer(() => {
   return (
     <CustomSwiper
       className={
-        'swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small w-full aspect-[4/3]'
+        'aspect-[4/4] swiper-bullet-auto swiper-nav-auto swiper-btn-bg-auto swiper-pagination-bottom-auto'
       }
       images={postStore.post?.images ?? []}
     />
