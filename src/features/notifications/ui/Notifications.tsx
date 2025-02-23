@@ -1,7 +1,7 @@
 import { ScrollArea, Typography, timeAgo, useTranslation } from '@/common'
 import { useRouter } from 'next/router'
 
-export const Notification = () => {
+export const Notifications = () => {
   const { t } = useTranslation()
   const router = useRouter()
 
