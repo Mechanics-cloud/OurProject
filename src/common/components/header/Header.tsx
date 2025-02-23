@@ -1,6 +1,5 @@
 import * as React from 'react'
 
-import { OutlineBell } from '@/assets/icons'
 import {
   Button,
   LangSelect,
@@ -13,14 +12,12 @@ import {
 import { MobilePopover } from '@/common/components/header/mobilePopover'
 import { Typography } from '@/common/components/typography'
 import { generalStore } from '@/core/store'
-import { Notifications } from '@/features/notifications'
+import { NotificationRing, Notifications } from '@/features/notifications'
 import Link from 'next/link'
 
 const Header = () => {
   const { t } = useTranslation()
   const isAuth = !!generalStore.user
-
-  const { isModalOpen, toggleModal } = useModal()
 
   return (
     <header
@@ -46,21 +43,7 @@ const Header = () => {
         </Typography>
 
         <div className={'flex items-center'}>
-          {/*todo или вынести колокольчик в NotificationRing, или удалить этот код :)  */}
-          {/*{isAuth && <NotificationRing />}*/}
-          {isAuth && (
-            <button
-              className={'cursor-pointer mr-12 hidden lg:block relative'}
-              onClick={toggleModal}
-              type={'button'}
-            >
-              <OutlineBell
-                className={'size-6'}
-                fill={isModalOpen ? '#397DF6' : 'currentColor'}
-              />
-              {isModalOpen && <Notifications />}
-            </button>
-          )}
+          {isAuth && <NotificationRing />}
           <LangSelect />
           {isAuth && <MobilePopover className={'ml-3'} />}
           {!isAuth && (
