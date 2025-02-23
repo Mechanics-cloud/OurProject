@@ -1,3 +1,4 @@
+import { Close } from '@/assets/icons'
 import {
   Nullable,
   ScrollArea,
@@ -47,7 +48,22 @@ export const Notifications = ({
             <div
               className={'py-3 border-t-[1px] border-t-dark-100 text-left'}
               key={item.id}
+              onClick={(e) => e.stopPropagation()}
             >
+              <div className={'flex justify-between'}>
+                {!item.isRead && (
+                  <Typography variant={'bold14'}>
+                    {t.notification.item}{' '}
+                    <b className={'text-accent-900'}>{t.notification.new}</b>
+                  </Typography>
+                )}
+                <Close
+                  className={'ml-auto'}
+                  onClick={() =>
+                    alert('This notification will be deleted ' + item.id)
+                  }
+                />
+              </div>
               <Typography
                 className={'mt-2'}
                 variant={'reg14'}
@@ -62,106 +78,6 @@ export const Notifications = ({
               </Typography>
             </div>
           ))}
-          {/* <div>
-          <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
-            <Typography variant={'bold14'}>
-              {t.notification.item}{' '}
-              <b className={'text-accent-900'}>{t.notification.new}</b>
-            </Typography>
-            <Typography
-              className={'mt-2'}
-              variant={'reg14'}
-            >
-              Hello, hello! The next payment will be withdrawn in 1 hours
-            </Typography>
-            <Typography
-              className={'text-light-900'}
-              variant={'small'}
-            >
-              {timeAgo(new Date(), router.locale)}
-            </Typography>
-          </div>
-
-          <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
-            <Typography variant={'bold14'}>
-              {t.notification.item}{' '}
-              <b className={'text-accent-900'}>{t.notification.new}</b>
-            </Typography>
-            <Typography
-              className={'mt-2'}
-              variant={'reg14'}
-            >
-              The next payment will be withdrawn in 1 hours
-            </Typography>
-            <Typography
-              className={'text-light-900'}
-              variant={'small'}
-            >
-              {timeAgo(new Date(), router.locale)}
-            </Typography>
-          </div>
-
-          <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
-            <Typography variant={'bold14'}>{t.notification.item}</Typography>
-            <Typography
-              className={'mt-2'}
-              variant={'reg14'}
-            >
-              The next payment will be withdrawn in 1 hours
-            </Typography>
-            <Typography
-              className={'text-light-900'}
-              variant={'small'}
-            >
-              {timeAgo(new Date(), router.locale)}
-            </Typography>
-          </div>
-          <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
-            <Typography variant={'bold14'}>{t.notification.item}</Typography>
-            <Typography
-              className={'mt-2'}
-              variant={'reg14'}
-            >
-              The next payment will be withdrawn in 1 hours
-            </Typography>
-            <Typography
-              className={'text-light-900'}
-              variant={'small'}
-            >
-              {timeAgo(new Date(), router.locale)}
-            </Typography>
-          </div>
-          <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
-            <Typography variant={'bold14'}>{t.notification.item}</Typography>
-            <Typography
-              className={'mt-2'}
-              variant={'reg14'}
-            >
-              The next payment will be withdrawn in 1 hours
-            </Typography>
-            <Typography
-              className={'text-light-900'}
-              variant={'small'}
-            >
-              {timeAgo(new Date(), router.locale)}
-            </Typography>
-          </div>
-          <div className={'py-3 border-t-[1px] border-t-dark-100 text-left'}>
-            <Typography variant={'bold14'}>{t.notification.item}</Typography>
-            <Typography
-              className={'mt-2'}
-              variant={'reg14'}
-            >
-              The next payment will be withdrawn in 1 hours
-            </Typography>
-            <Typography
-              className={'text-light-900'}
-              variant={'small'}
-            >
-              {timeAgo(new Date(), router.locale)}
-            </Typography>
-          </div>
-        </div>*/}
         </ScrollArea>
       </div>
     )
