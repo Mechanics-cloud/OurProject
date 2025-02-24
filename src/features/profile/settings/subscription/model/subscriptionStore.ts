@@ -26,6 +26,7 @@ class SubscriptionStore {
   currentPayments: Nullable<CurrentPayments> = null
   isLoading: boolean = false
   isPaidAccount: boolean = false
+  isRedirect: boolean = false
   lastPaymentDate: Nullable<Date> = null
   paymentValue: '' | PaymentType = ''
   price: Nullable<Price[]> = null
@@ -149,6 +150,7 @@ class SubscriptionStore {
   }
 
   async processPayment(paymentType: PaymentBanks, locale: string) {
+    this.isRedirect = true
     const priceDetails = this.price?.find(
       (el) => el.typeDescription === this.paymentValue
     )
@@ -173,6 +175,10 @@ class SubscriptionStore {
       }
     } catch (error) {
       responseErrorHandler(error)
+    } finally {
+      runInAction(() => {
+        this.isRedirect = true
+      })
     }
   }
 

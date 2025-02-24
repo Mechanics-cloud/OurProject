@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { RadioOption, getFromLocalStorage } from '@/common'
 import { AccountTypeValue, ManualAccountType } from '@/common/enums'
@@ -8,16 +8,19 @@ export const useAccountOptions = (
   t: LocaleType,
   isPaidAccount: boolean = false
 ) => {
-  const accountOptions: RadioOption[] = [
-    {
-      label: t.profileMyPayments.personal,
-      value: AccountTypeValue.Personal,
-    },
-    {
-      label: t.profileMyPayments.business,
-      value: AccountTypeValue.Business,
-    },
-  ]
+  const accountOptions: RadioOption[] = useMemo(
+    () => [
+      {
+        label: t.profileMyPayments.personal,
+        value: AccountTypeValue.Personal,
+      },
+      {
+        label: t.profileMyPayments.business,
+        value: AccountTypeValue.Business,
+      },
+    ],
+    [t.profileMyPayments.personal, t.profileMyPayments.business]
+  )
 
   useEffect(() => {
     const manualChangeAccountType = getFromLocalStorage(
@@ -31,7 +34,7 @@ export const useAccountOptions = (
     } else {
       setAccountValue(accountOptions[0].value)
     }
-  }, [isPaidAccount])
+  }, [isPaidAccount, accountOptions])
 
   const [accountValue, setAccountValue] = useState('')
 
