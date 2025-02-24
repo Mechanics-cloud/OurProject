@@ -7,16 +7,29 @@ import {
   ProtectedPaths,
   PublicPaths,
   cn,
+  useModal,
   useTranslation,
 } from '@/common'
 import { MobilePopover } from '@/common/components/header/mobilePopover'
+import { Notification } from '@/common/components/header/notification/Notification'
 import { Typography } from '@/common/components/typography'
 import { generalStore } from '@/core/store'
+import { NotificationRing } from '@/features/notifications'
 import Link from 'next/link'
 
 const Header = () => {
   const { t } = useTranslation()
   const isAuth = !!generalStore.user
+
+  const { isModalOpen, onModalClose, openModal } = useModal()
+
+  const onToggleNotification = () => {
+    if (isModalOpen) {
+      onModalClose()
+    } else {
+      openModal()
+    }
+  }
 
   return (
     <header
@@ -42,13 +55,19 @@ const Header = () => {
         </Typography>
 
         <div className={'flex items-center'}>
+          {/*todo или вынести колокольчик в NotificationRing, или удалить этот код :)  */}
+          {/*{isAuth && <NotificationRing />}*/}
           {isAuth && (
             <button
-              className={'cursor-pointer mr-12 hidden lg:block'}
-              onClick={() => alert('Картинка нажата!')}
+              className={'cursor-pointer mr-12 hidden lg:block relative'}
+              onClick={onToggleNotification}
               type={'button'}
             >
-              <OutlineBell className={'size-6'} />
+              <OutlineBell
+                className={'size-6'}
+                fill={isModalOpen ? '#397DF6' : 'currentColor'}
+              />
+              {isModalOpen && <Notification />}
             </button>
           )}
           <LangSelect />

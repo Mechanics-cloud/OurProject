@@ -28,6 +28,7 @@ export const AddCommentInView = observer(() => {
         'bg-transparent focus:outline-none text-[14px] font-400 leading-[24px] w-full py-4 lg:px-6'
       }
       comment={comment}
+      disabled={!comment}
       onBlur={onBlur}
       onChange={onChange}
       onSubmit={onSubmit}

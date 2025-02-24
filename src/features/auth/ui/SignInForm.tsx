@@ -1,6 +1,6 @@
 import { Button, Card, PublicPaths, Typography, useTranslation } from '@/common'
 import { FormTextField } from '@/common/form'
-import { ExternalServicesRegistration } from '@/features/auth'
+import { ExternalServicesRegistrationWithProvider } from '@/features/auth'
 import { useSignIn } from '@/features/auth/model/signIn/useSignIn'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
@@ -23,7 +23,7 @@ const SignIn = observer(() => {
         >
           {t.signIn.title}
         </Typography>
-        <ExternalServicesRegistration />
+        <ExternalServicesRegistrationWithProvider />
         <form
           className={'flex flex-col w-full h-full'}
           noValidate
