@@ -3,6 +3,7 @@ import {
   Button,
   ProtectedPaths,
   Typography,
+  usePaidAccount,
   useScreenWidth,
   useTranslation,
 } from '@/common'
@@ -30,12 +31,11 @@ export const Profile = observer(({ screenSize, store }: Props) => {
   const { t } = useTranslation()
   const { query } = useRouter()
   const { followers, following, publications, settingsButton } = t.profilePage
-
   const avatar = store.userProfile?.avatars[0]?.url
 
   const { isMobile } = useScreenWidth(screenSize)
+  const { isPaid } = usePaidAccount()
 
-  // TODO: Заменить работу хука useScreenWidth
   return (
     <UserIdProvider ctx={query.id ? +query.id[0] : null}>
       <div className={'flex w-full'}>
@@ -64,7 +64,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                   variant={'h1'}
                 >
                   {store.userProfile?.userName ?? 'URL Profile'}
-                  <Paid />
+                  {isPaid && <Paid />}
                 </Typography>
                 {profileStore.userProfile?.id === store.userProfile.id && (
                   <Button
