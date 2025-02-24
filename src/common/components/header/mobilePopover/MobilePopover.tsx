@@ -57,13 +57,15 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
 
         <PopoverContent className={'z-50 block lg:hidden mr-4 py-3 px-4'}>
           <nav>
-            <ul className={'flex flex-col gap-3'}>
+            <ul
+              className={'flex flex-col gap-3'}
+              onClick={onLinkClick}
+            >
               <li>
                 <LinkWithIcon
                   DefaultIcon={SettingsOutline}
                   className={'py-2'}
                   href={ProtectedPaths.profileSettings}
-                  onClick={onLinkClick}
                 >
                   <Typography variant={'reg14'}>
                     {t.menu.profileSettings}
@@ -75,6 +77,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                 <LinkWithIcon
                   DefaultIcon={TrendingUpOutline}
                   className={'py-2'}
+                  disabled
                   href={ProtectedPaths.statistics}
                 >
                   <Typography variant={'reg14'}>{t.menu.statistics}</Typography>
@@ -85,6 +88,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                 <LinkWithIcon
                   DefaultIcon={BookmarkOutline}
                   className={'py-2'}
+                  disabled
                   href={ProtectedPaths.favorites}
                 >
                   <Typography variant={'reg14'}>{t.menu.favorites}</Typography>
