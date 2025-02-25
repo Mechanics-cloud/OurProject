@@ -13,3 +13,14 @@ export type DataSubscriptionApi = {
 }
 
 export type DataSubscription = Omit<DataSubscriptionApi, 'paymentType'>
+export type CurrentPayments = {
+  data: Array<CurrentPayment>
+  hasAutoRenewal: boolean
+}
+type CurrentPayment = {
+  autoRenewal: boolean
+  dateOfPayment: string
+  endDateOfSubscription: string
+  subscriptionId: string
+  userId: number
+}

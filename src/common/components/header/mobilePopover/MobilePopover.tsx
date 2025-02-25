@@ -1,5 +1,4 @@
-import * as React from 'react'
-import { ComponentProps } from 'react'
+import { ComponentProps, useState } from 'react'
 
 import {
   BookmarkOutline,
@@ -23,6 +22,7 @@ import { generalStore } from '@/core/store'
 
 export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
   const { t } = useTranslation()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const {
     isModalOpen: isLogOutModalOpen,
@@ -30,9 +30,16 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
     openModal: openLogOutModal,
   } = useModal()
 
+  const onLinkClick = () => {
+    setIsOpen(false)
+  }
+
   return (
     <>
-      <Popover>
+      <Popover
+        onOpenChange={setIsOpen}
+        open={isOpen}
+      >
         <PopoverTrigger
           asChild
           className={className}
@@ -50,7 +57,10 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
 
         <PopoverContent className={'z-50 block lg:hidden mr-4 py-3 px-4'}>
           <nav>
-            <ul className={'flex flex-col gap-3'}>
+            <ul
+              className={'flex flex-col gap-3'}
+              onClick={onLinkClick}
+            >
               <li>
                 <LinkWithIcon
                   DefaultIcon={SettingsOutline}
@@ -67,6 +77,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                 <LinkWithIcon
                   DefaultIcon={TrendingUpOutline}
                   className={'py-2'}
+                  disabled
                   href={ProtectedPaths.statistics}
                 >
                   <Typography variant={'reg14'}>{t.menu.statistics}</Typography>
@@ -77,6 +88,7 @@ export const MobilePopover = ({ className }: ComponentProps<'button'>) => {
                 <LinkWithIcon
                   DefaultIcon={BookmarkOutline}
                   className={'py-2'}
+                  disabled
                   href={ProtectedPaths.favorites}
                 >
                   <Typography variant={'reg14'}>{t.menu.favorites}</Typography>

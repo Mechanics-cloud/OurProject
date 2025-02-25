@@ -40,3 +40,7 @@ export enum PaymentBanks {
   Paypal = 'PAYPAL',
   Stripe = 'STRIPE',
 }
+export enum ManualAccountType {
+  AccountType = 'accountType',
+  paymentCookies = 'payment=',
+}

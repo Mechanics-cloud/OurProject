@@ -17,11 +17,17 @@ export const profileSettings = {
 
 export const profileMyPayments = {
   accountType: 'Account type:',
+
+  autoRenewal: 'Auto-Renewal',
   business: 'Business',
+  currentSubscription: 'Current Subscription:',
   dateOfPayment: 'Date of Payment',
   day: '1 day',
+  disabledAutoRenewal: 'Auto-renewal is disabled',
   endDateOfSubscription: 'End date of subscription',
+  expireAt: 'Expire at',
   monthly: '1 month',
+  nextPayment: 'Next payment',
   noPayments: "You don't have any transactions yet",
   paymentType: 'Payment Type',
   per: 'per',
