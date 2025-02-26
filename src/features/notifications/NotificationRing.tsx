@@ -6,16 +6,19 @@ import { OutlineBell } from '@/assets/icons'
 import { Loader, useModal } from '@/common'
 import { useNotificationsSocket } from '@/features/notifications/model'
 import { Notifications } from '@/features/notifications/ui'
-import { toJS } from 'mobx'
+import { observer } from 'mobx-react-lite'
 
 import { notificationsStore } from './model/NotificationsStore'
 
-export const NotificationRing = () => {
+export const NotificationRing = observer(() => {
   const { clearError, error, notification } = useNotificationsSocket()
   const [isLoading, setIsLoading] = useState(true)
   const { isModalOpen, toggleModal } = useModal()
-  const { notificationsDTO } = notificationsStore
-  const notifications = toJS(notificationsDTO)
+  const { notifications } = notificationsStore
+
+  const unreadNotifications = notifications?.filter(
+    (notification) => notification.isRead === false
+  )
 
   if (notification) {
     notificationsStore.addNewNotification(notification)
@@ -43,7 +46,7 @@ export const NotificationRing = () => {
           className={'size-6 relative'}
           fill={isModalOpen ? '#397DF6' : 'currentColor'}
         >
-          {notifications?.items && notifications?.items.length && (
+          {unreadNotifications && unreadNotifications.length > 0 && (
             <>
               <circle
                 cx={17.5}
@@ -56,9 +59,11 @@ export const NotificationRing = () => {
         </OutlineBell>
       )}
       <span className={'absolute text-[10px] right-0.5 bottom-2.5'}>
-        {notifications?.items.length}
+        {unreadNotifications &&
+          unreadNotifications.length > 0 &&
+          unreadNotifications.length}
       </span>
       {isModalOpen && <Notifications notifications={notifications} />}
     </button>
   )
-}
+})

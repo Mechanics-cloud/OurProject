@@ -25,7 +25,7 @@ export type GetAllNotificationsType = {
   sortDirection?: 'asc' | 'desc'
 }
 
-type NotificationDTO = { createdAt: string } & Omit<
+export type NotificationDTO = { createdAt: string } & Omit<
   NotificationEventDTO,
   'clientId' | 'notifyAt'
 >

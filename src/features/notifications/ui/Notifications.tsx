@@ -1,3 +1,5 @@
+import { useEffect, useRef, useState } from 'react'
+
 import { Close } from '@/assets/icons'
 import {
   Nullable,
@@ -6,19 +8,53 @@ import {
   timeAgo,
   useTranslation,
 } from '@/common'
-import { NotificationsApiDTO } from '@/features/notifications/api'
+import { NotificationDTO } from '@/features/notifications/api'
+import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
-export const Notifications = ({
-  notifications,
-}: {
-  notifications: Nullable<NotificationsApiDTO>
-}) => {
-  const { t } = useTranslation()
-  const router = useRouter()
+export const Notifications = observer(
+  ({ notifications }: { notifications: Nullable<NotificationDTO[]> }) => {
+    const { t } = useTranslation()
+    const router = useRouter()
+    const observer = useRef<Nullable<IntersectionObserver>>(null)
+    const elementsRef = useRef<Map<number, Nullable<HTMLDivElement>>>(new Map())
+    const [_, setVisibleNotifications] = useState<number[]>([])
 
-  return (
-    notifications && (
+    useEffect(() => {
+      if (!notifications || notifications.length === 0) {
+        return
+      }
+
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && entry.target?.id) {
+              const notification = notifications.find(
+                (notification) => notification.id === Number(entry.target.id)
+              )
+
+              if (notification && !notification.isRead) {
+                notification.isRead = true
+                setVisibleNotifications((prev) => [...prev, notification.id])
+              }
+            }
+          })
+        },
+        { root: null, rootMargin: '0px', threshold: 1 }
+      )
+
+      elementsRef.current.forEach((el) => {
+        if (el) {
+          observer.current?.observe(el)
+        }
+      })
+
+      return () => {
+        observer.current?.disconnect()
+      }
+    }, [notifications])
+
+    return (
       <div
         className={
           'absolute -right-[10px] top-10 z-40 w-[355px] h-[424px] p-3 bg-dark-500 border border-light-900 rounded-lg shadow-lg'
@@ -43,43 +79,56 @@ export const Notifications = ({
           {t.notification.title}
         </Typography>
 
-        <ScrollArea className={'h-[calc(100%-60px)]'}>
-          {notifications?.items.map((item) => (
-            <div
-              className={'py-3 border-t-[1px] border-t-dark-100 text-left'}
-              key={item.id}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className={'flex justify-between'}>
-                {!item.isRead && (
-                  <Typography variant={'bold14'}>
-                    {t.notification.item}{' '}
-                    <b className={'text-accent-900'}>{t.notification.new}</b>
-                  </Typography>
-                )}
-                <Close
-                  className={'ml-auto'}
-                  onClick={() =>
-                    alert('This notification will be deleted ' + item.id)
-                  }
-                />
+        {notifications?.length && notifications.length > 0 ? (
+          <ScrollArea className={'h-[calc(100%-60px)]'}>
+            {notifications?.map((item) => (
+              <div
+                className={'py-3 border-t-[1px] border-t-dark-100 text-left'}
+                id={String(item.id)}
+                key={item.id}
+                onClick={(e) => e.stopPropagation()}
+                ref={(elem) => {
+                  elem && elementsRef.current.set(item.id, elem)
+                }}
+              >
+                <div className={'flex justify-between'}>
+                  {!item.isRead && (
+                    <Typography variant={'bold14'}>
+                      {t.notification.item}{' '}
+                      <b className={'text-accent-900'}>{t.notification.new}</b>
+                    </Typography>
+                  )}
+                  <Close
+                    className={'ml-auto'}
+                    onClick={() =>
+                      alert('This notification will be deleted ' + item.id)
+                    }
+                  />
+                </div>
+                <Typography
+                  className={'mt-2'}
+                  variant={'reg14'}
+                >
+                  {item.message}
+                </Typography>
+                <Typography
+                  className={'text-light-900'}
+                  variant={'small'}
+                >
+                  {timeAgo(item.createdAt, router.locale)}
+                </Typography>
               </div>
-              <Typography
-                className={'mt-2'}
-                variant={'reg14'}
-              >
-                {item.message}
-              </Typography>
-              <Typography
-                className={'text-light-900'}
-                variant={'small'}
-              >
-                {timeAgo(item.createdAt, router.locale)}
-              </Typography>
-            </div>
-          ))}
-        </ScrollArea>
+            ))}
+          </ScrollArea>
+        ) : (
+          <Typography
+            className={'text-left'}
+            variant={'reg14'}
+          >
+            You have no notifications
+          </Typography>
+        )}
       </div>
     )
-  )
-}
+  }
+)

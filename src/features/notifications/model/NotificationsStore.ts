@@ -7,6 +7,7 @@ import {
 import { StorageKeys } from '@/common/enums'
 import {
   GetAllNotificationsType,
+  NotificationDTO,
   NotificationEventDTO,
   NotificationsApiDTO,
   notificationsApi,
@@ -16,6 +17,7 @@ import { Socket, io } from 'socket.io-client'
 
 class NotificationsStore {
   newNotificationDTO: Nullable<NotificationEventDTO> = null
+  notifications: Nullable<NotificationDTO[]> = null
   notificationsDTO: Nullable<NotificationsApiDTO> = null
   socket: Nullable<Socket> = null
 
@@ -65,6 +67,7 @@ class NotificationsStore {
 
       runInAction(() => {
         this.notificationsDTO = listOfNotifications
+        this.notifications = listOfNotifications.items
       })
     } catch (error) {
       responseErrorHandler(error)
@@ -82,6 +85,7 @@ class NotificationsStore {
   resetData() {
     this.newNotificationDTO = null
     this.notificationsDTO = null
+    this.notifications = null
     this.disconnect()
   }
 }
