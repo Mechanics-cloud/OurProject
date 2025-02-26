@@ -9,7 +9,6 @@ import {
   UserMiniLink,
   calculateCharactersToShow,
   timeAgo,
-  useScreenWidth,
   useTranslation,
 } from '@/common'
 import { Stub } from '@/common/components/stub/Stub'
