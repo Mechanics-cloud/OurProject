@@ -1,3 +1,4 @@
+import { responseErrorHandler } from '@/common'
 import { instance } from '@/common/api'
 import { AxiosInstance } from 'axios'
 
@@ -7,12 +8,21 @@ import { NewsFeedRequestEndpoints } from './newsFeed.endpoints'
 class NewsFeedApi {
   constructor(private instance: AxiosInstance) {}
 
-  public getFollowersPublications(data: NewsFeedQuery) {
-    return this.instance
-      .get<NewsFeedRoot>(NewsFeedRequestEndpoints.followersPublications, {
-        params: data,
-      })
-      .then((res) => res.data)
+  async getFollowersPublications(data: NewsFeedQuery, signal?: AbortSignal) {
+    try {
+      const res = await this.instance.get<NewsFeedRoot>(
+        NewsFeedRequestEndpoints.followersPublications,
+        {
+          params: data,
+          signal,
+        }
+      )
+
+      return res.data
+    } catch (error) {
+      responseErrorHandler(error)
+      throw error
+    }
   }
 }
 
