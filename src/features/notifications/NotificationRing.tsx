@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { OutlineBell } from '@/assets/icons'
 import { Loader, useModal } from '@/common'
 import { useNotificationsSocket } from '@/features/notifications/model'
-import { Notifications } from '@/features/notifications/ui'
+import { NotificationsWindow } from '@/features/notifications/ui'
 import { observer } from 'mobx-react-lite'
 
 import { notificationsStore } from './model/NotificationsStore'
@@ -63,7 +63,7 @@ export const NotificationRing = observer(() => {
           unreadNotifications.length > 0 &&
           unreadNotifications.length}
       </span>
-      {isModalOpen && <Notifications notifications={notifications} />}
+      {isModalOpen && <NotificationsWindow />}
     </button>
   )
 })
