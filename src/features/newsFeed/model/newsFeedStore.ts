@@ -1,66 +1,58 @@
 import { Nullable } from '@/common'
-import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
-import { PostsLikes } from '@/features/posts'
 import { makeAutoObservable, runInAction } from 'mobx'
+import { FULFILLED, IPromiseBasedObservable, fromPromise } from 'mobx-utils'
 
 import { newsFeedApi } from '../api'
 import { NewsFeedRoot } from './newsFeed.types'
 
 class NewsFeedStore {
-  isLoading: boolean = true
-  likes: Nullable<PostsLikes> = null
-  loadingRequestFlag: boolean = false
-  publicationsFollowers: Nullable<NewsFeedRoot> = null
+  publicationsFollowers: Nullable<IPromiseBasedObservable<NewsFeedRoot>> = null
 
   constructor() {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
   changeLikesCount(id: number, isLikedValue: boolean) {
-    if (!this.publicationsFollowers?.items) {
+    if (
+      !this.publicationsFollowers ||
+      this.publicationsFollowers.state !== FULFILLED
+    ) {
       return
     }
 
-    this.publicationsFollowers.items = this.publicationsFollowers.items.map(
-      (item) => {
-        if (item.id === id) {
-          item.isLiked = isLikedValue
-          item.likesCount += isLikedValue ? 1 : -1
-        }
+    runInAction(() => {
+      const currentData = this.publicationsFollowers!.value as NewsFeedRoot
+      const updatedItems = currentData.items.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              isLiked: isLikedValue,
+              likesCount: item.likesCount + (isLikedValue ? 1 : -1),
+            }
+          : item
+      )
 
-        return item
-      }
-    )
+      const newData = { ...currentData, items: updatedItems }
+
+      this.publicationsFollowers = fromPromise.resolve(newData)
+    })
   }
 
   cleanUp() {
     this.publicationsFollowers = null
-    this.likes = null
   }
 
-  async getPostsPublicationsFollowers() {
-    if (this.loadingRequestFlag) {
-      return
-    }
-    try {
-      this.loadingRequestFlag = true
-      const response = await newsFeedApi.getFollowersPublications({
-        endCursorPostId: 0,
-        pageNumber: 1,
-        pageSize: 10,
-      })
-
-      runInAction(() => {
-        this.publicationsFollowers = response
-        this.isLoading = false
-        this.loadingRequestFlag = false
-      })
-    } catch (error) {
-      responseErrorHandler(error)
-      runInAction(() => {
-        this.isLoading = false
-      })
-    }
+  async getPostsPublicationsFollowers(signal?: AbortSignal) {
+    this.publicationsFollowers = fromPromise<NewsFeedRoot>(
+      newsFeedApi.getFollowersPublications(
+        {
+          endCursorPostId: 0,
+          pageNumber: 1,
+          pageSize: 3,
+        },
+        signal
+      )
+    )
   }
 }
 
