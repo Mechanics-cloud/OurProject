@@ -21,7 +21,7 @@ export const MobileContent = observer(({ screenSize }: Props) => {
   return !isEditing ? (
     <div className={'flex flex-col'}>
       <PostInfoHeader />
-      <PostSwiper />
+      <PostSwiper isMobile />
       <SocialGroup />
       <PostContent screenSize={screenSize} />
       <AddCommentInView />

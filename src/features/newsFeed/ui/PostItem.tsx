@@ -34,12 +34,6 @@ type Props = {
 const PostItem = ({ item, router }: Props) => {
   const { t } = useTranslation()
 
-  const { isMobile } = useScreenWidth()
-
-  const mobileSwiperStyles = isMobile
-    ? 'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
-    : ''
-
   return (
     <div
       className={
@@ -80,7 +74,9 @@ const PostItem = ({ item, router }: Props) => {
         >
           {item.images.length > 0 ? (
             <CustomSwiper
-              className={mobileSwiperStyles}
+              className={
+                'aspect-[4/4] swiper-bullet-auto swiper-nav-auto swiper-btn-bg-auto swiper-pagination-bottom-auto'
+              }
               images={item.images}
             />
           ) : (

@@ -67,7 +67,7 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
                       {post.images.length > 1 && (
                         <div
                           className={
-                            'absolute bottom-1 left-1 bg-dark-700 text-white px-1.5 py-[2px] text-sm flex items-center gap-1 rounded-sm opacity-60'
+                            'absolute bottom-1 left-1 bg-dark-700 text-white px-1.5 py-0.5 text-sm flex items-center gap-1 rounded-sm opacity-60'
                           }
                         >
                           <ImageOutline className={'size-3.5'} />
@@ -78,7 +78,7 @@ export const PhotoProfilePostsGallery = observer(({ store }: Props) => {
                   ) : (
                     <Stub
                       alt={t.profilePage.noPosts.alt}
-                      imageClassName={'w-20 sm500:w-40 md:w-full'}
+                      imageClassName={'w-20 sm-500:w-40 md:w-full'}
                       textClassName={'text-center'}
                       title={t.basic.errors.emptyImages}
                     />

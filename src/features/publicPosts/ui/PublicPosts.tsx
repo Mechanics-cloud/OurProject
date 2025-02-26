@@ -37,7 +37,7 @@ export const PublicPosts = ({ posts }: Props) => {
               className={'flex flex-col gap-3'}
               key={post.id}
             >
-              <div className={'relative h-auto w-full'}>
+              <div className={'relative h-60 w-full'}>
                 {post.images.length > 0 ? (
                   <Link
                     href={PathService.generatePath(PublicPaths.userPost, {
@@ -47,7 +47,7 @@ export const PublicPosts = ({ posts }: Props) => {
                   >
                     <CustomSwiper
                       className={
-                        'aspect-[4/4] swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
+                        'swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
                       }
                       images={post.images}
                     />
