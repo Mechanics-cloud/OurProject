@@ -12,7 +12,7 @@ import { maxDescriptionLength } from '@/common/constants'
 import {
   CancelEditModal,
   EditDescription,
-  PostSlider,
+  PostSwiper,
   useEditMode,
 } from '@/features/posts'
 
@@ -57,7 +57,7 @@ export const MobileEdit = () => {
           {t.post.save}
         </Button>
       </div>
-      <PostSlider />
+      <PostSwiper />
       <UserMiniLink
         className={'flex items-center gap-3 w-full mb-6'}
         href={PathService.generatePath(PublicPaths.userProfile, {

@@ -12,6 +12,7 @@ import { PostSkeleton } from './PostSkeleton'
 export const NewsFeed = observer(() => {
   const state = newsFeedStore.publicationsFollowers?.items
   const router: NextRouter = useRouter()
+
   const Component = state?.map((item) => (
     <PostItem
       item={item}

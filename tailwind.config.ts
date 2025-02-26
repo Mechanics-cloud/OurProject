@@ -99,6 +99,7 @@ const config: Config = {
         },
       },
       screens: {
+        'sm-500': '31.5rem',
         xs: '22.5rem',
       },
 
