@@ -10,7 +10,9 @@ export const useNotifications = () => {
   const { notifications } = notificationsStore
   const observer = useRef<Nullable<IntersectionObserver>>(null)
   const elementsRef = useRef<Map<number, Nullable<HTMLDivElement>>>(new Map())
-  const [_, setVisibleNotifications] = useState<number[]>([])
+  const [visibleNotificationsIds, setVisibleNotificationsIds] = useState<
+    number[]
+  >([])
 
   useEffect(() => {
     if (!notifications || notifications.length === 0) {
@@ -26,8 +28,7 @@ export const useNotifications = () => {
             )
 
             if (notification && !notification.isRead) {
-              notification.isRead = true
-              setVisibleNotifications((prev) => [...prev, notification.id])
+              setVisibleNotificationsIds((prev) => [...prev, notification.id])
             }
           }
         })
@@ -45,6 +46,12 @@ export const useNotifications = () => {
       observer.current?.disconnect()
     }
   }, [notifications])
+
+  useEffect(() => {
+    if (visibleNotificationsIds.length > 0) {
+      notificationsStore.markAsReadNotifications(visibleNotificationsIds)
+    }
+  }, [visibleNotificationsIds])
 
   return { elementsRef, notifications, router, t }
 }

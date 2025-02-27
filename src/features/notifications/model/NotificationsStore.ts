@@ -77,6 +77,15 @@ class NotificationsStore {
   async markAsReadNotifications(idsToDelete: number[]) {
     try {
       await notificationsApi.markAsRead(idsToDelete)
+      runInAction(() => {
+        if (this.notifications) {
+          this.notifications = this.notifications?.map((notification) =>
+            idsToDelete.includes(notification.id)
+              ? { ...notification, isRead: true }
+              : notification
+          )
+        }
+      })
     } catch (error) {
       responseErrorHandler(error)
     }
