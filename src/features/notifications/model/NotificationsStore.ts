@@ -42,6 +42,13 @@ class NotificationsStore {
   async deleteNotification(id: number) {
     try {
       await notificationsApi.deleteNotification(id)
+      runInAction(() => {
+        if (this.notifications) {
+          this.notifications = this.notifications.filter(
+            (notification) => notification.id !== id
+          )
+        }
+      })
     } catch (error) {
       responseErrorHandler(error)
     }

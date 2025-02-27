@@ -53,5 +53,9 @@ export const useNotifications = () => {
     }
   }, [visibleNotificationsIds])
 
-  return { elementsRef, notifications, router, t }
+  const deleteNotification = async (id: number) => {
+    await notificationsStore.deleteNotification(id)
+  }
+
+  return { deleteNotification, elementsRef, notifications, router, t }
 }

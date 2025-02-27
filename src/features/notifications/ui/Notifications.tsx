@@ -4,7 +4,8 @@ import { useNotifications } from '@/features/notifications'
 import { observer } from 'mobx-react-lite'
 
 export const Notifications = observer(() => {
-  const { elementsRef, notifications, router, t } = useNotifications()
+  const { deleteNotification, elementsRef, notifications, router, t } =
+    useNotifications()
 
   return notifications?.length && notifications.length > 0 ? (
     <ScrollArea className={'h-[calc(100%-60px)]'}>
@@ -27,9 +28,7 @@ export const Notifications = observer(() => {
             )}
             <Close
               className={'ml-auto'}
-              onClick={() =>
-                alert('This notification will be deleted ' + item.id)
-              }
+              onClick={() => deleteNotification(item.id)}
             />
           </div>
           <Typography
