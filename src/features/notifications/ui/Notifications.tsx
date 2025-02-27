@@ -51,7 +51,7 @@ export const Notifications = observer(() => {
       className={'text-left'}
       variant={'reg14'}
     >
-      You have no notifications
+      {t.notification.noNotifications}
     </Typography>
   )
 })
