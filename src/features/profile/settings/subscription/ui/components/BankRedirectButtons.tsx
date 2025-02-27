@@ -3,12 +3,17 @@ import { useEffect, useState } from 'react'
 import { PaypalSvgrepoCom4, StripeSvgrepoCom4 } from '@/assets/icons'
 import { ConfirmModal, Loader, useTranslation } from '@/common'
 import { PaymentBanks } from '@/common/enums'
-import { PaymentStatusModal, usePayment } from '@/features/profile'
+import {
+  PaymentStatusModal,
+  subscriptionStore,
+  usePayment,
+} from '@/features/profile'
+import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
-export const BankRedirectButtons = () => {
+export const BankRedirectButtons = observer(() => {
   const { t } = useTranslation()
-
+  const isRedirect = subscriptionStore.isRedirect
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isPaymentStatusModalOpen, setIsPaymentStatusModalOpen] =
     useState(false)
@@ -18,14 +23,12 @@ export const BankRedirectButtons = () => {
 
   const router = useRouter()
 
-  const { isLoad, processPayment, selectedBank, setIsLoad, setSelectedBank } =
-    usePayment()
+  const { processPayment, selectedBank, setSelectedBank } = usePayment()
 
   const onConfirm = () => {
     setIsModalOpen(false)
     if (selectedBank) {
       processPayment(router.locale as string)
-      setIsLoad(true)
     }
   }
 
@@ -51,8 +54,8 @@ export const BankRedirectButtons = () => {
   return (
     <div className={'mt-8 w-full flex justify-end items-center'}>
       <button
-        className={`w-[96px] h-[60px] ${isLoad ? 'opacity-50' : ''}`}
-        disabled={isLoad}
+        className={`w-[96px] h-[60px] ${isRedirect ? 'opacity-50' : ''}`}
+        disabled={isRedirect}
         onClick={() => {
           onSelectedBank(PaymentBanks.Paypal)
         }}
@@ -62,8 +65,8 @@ export const BankRedirectButtons = () => {
       </button>
       <span className={'m-2'}>{t.profileManagement.or}</span>
       <button
-        className={`w-[96px] h-[60px] ${isLoad ? 'opacity-50' : ''}`}
-        disabled={isLoad}
+        className={`w-[96px] h-[60px] ${isRedirect ? 'opacity-50' : ''}`}
+        disabled={isRedirect}
         onClick={() => {
           onSelectedBank(PaymentBanks.Stripe)
         }}
@@ -84,7 +87,6 @@ export const BankRedirectButtons = () => {
         open={isPaymentStatusModalOpen}
         status={paymentStatus}
       />
-      {isLoad && <Loader />}
     </div>
   )
-}
+})

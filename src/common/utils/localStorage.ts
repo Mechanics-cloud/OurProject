@@ -1,4 +1,4 @@
-type Key = 'accessToken'
+type Key = 'accessToken' | 'accountType'
 
 export const setToLocalStorage = (key: Key, value: string) => {
   localStorage.setItem(key, value)

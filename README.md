@@ -36,49 +36,62 @@ Before you begin, ensure you have met the following requirements:
 ### Installation
 
 1. Clone the repository:
-  ```sh
-    git clone https://github.com/Mechanics-cloud/OurProject.git
-  ```
+
+```sh
+  git clone https://github.com/Mechanics-cloud/OurProject.git
+```
+
 2. Navigate to the project directory:
-  ```sh
-    cd OurProject
-  ```
+
+```sh
+  cd OurProject
+```
+
 3. Install dependencies:
-  ```sh
-    npm install
-    # or
-    yarn install
-    # or
-    pnpm install
- ```
+
+```sh
+  npm install
+  # or
+  yarn install
+  # or
+  pnpm install
+```
+
 4. Run the script to create a file with local environment variables
-  ```sh
-    cp .env.example .env.local
- ```
+
+```sh
+  cp .env.example .env.local
+```
+
 5. Run the script to create a file with environment variables for deploying the application (running is necessary when deploying the application to hosting)
-  ```sh
-    cp .env.example .env.production
- ```
+
+```sh
+  cp .env.example .env.production
+```
 
 ### Usage
+
 1. Start the development server:
- ```sh
-    npm run dev
-    # or
-    yarn dev
-    # or
-    pnpm run
- ```
+
+```sh
+   npm run dev
+   # or
+   yarn dev
+   # or
+   pnpm run
+```
+
 2. Open http://localhost:3000 with your browser to see the result.
 
 3. You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
 ## Folder Structure
+
 ```
 /OurProject
 ├── public/                 # Static files (images, fonts, etc.)
 ├── src/
-│   └── common/             
+│   └── common/
 │       ├── components      # Reusable React components
 │       ├── enums           # Common enums
 │       ├── form            # Wrappers for form elements
