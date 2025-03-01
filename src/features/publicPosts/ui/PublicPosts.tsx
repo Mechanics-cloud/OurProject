@@ -15,8 +15,6 @@ import {
 import Link from 'next/link'
 import CustomSwiper from 'src/common/components/swiper/CustomSwiper'
 
-import 'swiper/swiper-bundle.css'
-
 type Props = {
   posts: PublicPostsDto
 }
@@ -49,7 +47,7 @@ export const PublicPosts = ({ posts }: Props) => {
                   >
                     <CustomSwiper
                       className={
-                        'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
+                        'swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
                       }
                       images={post.images}
                     />

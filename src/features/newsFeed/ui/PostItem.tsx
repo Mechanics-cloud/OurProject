@@ -72,7 +72,12 @@ const PostItem = ({ item, router }: Props) => {
           className={'relative w-full aspect-square overflow-hidden mb-3'}
         >
           {item.images.length > 0 ? (
-            <CustomSwiper images={item.images} />
+            <CustomSwiper
+              className={
+                'aspect-[4/4] swiper-bullet-auto swiper-nav-auto swiper-btn-bg-auto swiper-pagination-bottom-auto'
+              }
+              images={item.images}
+            />
           ) : (
             <Stub
               alt={t.profilePage.noPosts.alt}

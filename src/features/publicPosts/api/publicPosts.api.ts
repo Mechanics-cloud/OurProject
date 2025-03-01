@@ -6,6 +6,7 @@ import { PublicPostsDto, RequestQueries } from './publicPosts.types'
 
 class PublicPostsApi {
   constructor(private instance: AxiosInstance) {}
+
   public async fetchPublicPosts<T = PublicPostsDto>(
     queries: RequestQueries
   ): Promise<T> {

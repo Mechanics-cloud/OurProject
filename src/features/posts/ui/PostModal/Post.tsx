@@ -35,7 +35,7 @@ export const Post = observer(({ userId }: Props) => {
       >
         <div
           className={
-            'relative container mx-auto xl:w-[972px] xl:h-[564px] lg:w-[872px] lg:h-[464px]'
+            'relative container mx-auto w-[70%] h-[60%] xl:w-[972px] xl:h-[564px] lg:w-[872px] lg:h-[464px]'
           }
           onClick={(e) => e.stopPropagation()}
         >
