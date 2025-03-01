@@ -37,7 +37,7 @@ export const PublicPosts = ({ posts }: Props) => {
               className={'flex flex-col gap-3'}
               key={post.id}
             >
-              <div className={'relative h-60 w-full'}>
+              <div className={'relative h-80 md:h-60 w-full'}>
                 {post.images.length > 0 ? (
                   <Link
                     href={PathService.generatePath(PublicPaths.userPost, {
