@@ -3,6 +3,7 @@ import * as React from 'react'
 import { OutlineBell } from '@/assets/icons'
 import {
   Button,
+  DefaultPaths,
   LangSelect,
   ProtectedPaths,
   PublicPaths,
@@ -47,7 +48,7 @@ const Header = () => {
           variant={'large'}
         >
           <Link
-            href={isAuth ? ProtectedPaths.home : PublicPaths.publicMainPage}
+            href={isAuth ? ProtectedPaths.home : DefaultPaths.publicMainPage}
             title={'Go Home'}
           >
             Inctagram

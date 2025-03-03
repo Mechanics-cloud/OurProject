@@ -1,4 +1,4 @@
-import { ComponentProps, useState } from 'react'
+import { ComponentProps } from 'react'
 
 import {
   BookmarkOutline,
@@ -10,13 +10,12 @@ import {
   Like,
   Tooltip,
   cn,
+  responseErrorHandler,
   useOptimistic,
   useTranslation,
 } from '@/common'
 import { LikeStatus } from '@/common/enums'
 import { newsFeedStore } from '@/features/newsFeed'
-import { postsApi } from '@/features/posts'
-import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
@@ -27,7 +26,6 @@ type Props = {
 export const LinksGroup = observer(({ className, item }: Props) => {
   const { changeLikesCount } = newsFeedStore
   const { t } = useTranslation()
-  const [loadingRequestFlag, setLoadingRequestFlag] = useState<boolean>(false)
 
   const [optimisticItem, addOptimisticLikeStatus, rollbackItem] = useOptimistic<
     BasicPost,
@@ -38,25 +36,15 @@ export const LinksGroup = observer(({ className, item }: Props) => {
   }))
 
   const onLiked = async () => {
-    if (loadingRequestFlag) {
-      return
-    }
     try {
-      setLoadingRequestFlag(true)
-
       const newLikeStatus = item.isLiked ? LikeStatus.None : LikeStatus.Like
 
       addOptimisticLikeStatus(!item.isLiked)
 
-      await postsApi.updateLikeStatus({ newLikeStatus, postId: item.id })
-
-      runInAction(() => {
-        changeLikesCount(item.id, !item.isLiked)
-        setLoadingRequestFlag(false)
-      })
+      await changeLikesCount(item.id, !item.isLiked, newLikeStatus)
     } catch (error) {
       rollbackItem()
-      setLoadingRequestFlag(false)
+      responseErrorHandler(error)
     }
   }
 

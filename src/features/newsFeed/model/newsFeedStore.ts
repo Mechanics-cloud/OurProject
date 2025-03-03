@@ -1,4 +1,6 @@
 import { Nullable } from '@/common'
+import { LikeStatus } from '@/common/enums'
+import { postsApi } from '@/features/posts'
 import { makeAutoObservable, runInAction } from 'mobx'
 import { FULFILLED, IPromiseBasedObservable, fromPromise } from 'mobx-utils'
 
@@ -12,13 +14,18 @@ class NewsFeedStore {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
-  changeLikesCount(id: number, isLikedValue: boolean) {
+  async changeLikesCount(
+    id: number,
+    isLikedValue: boolean,
+    newLikeStatus: LikeStatus
+  ) {
     if (
       !this.publicationsFollowers ||
       this.publicationsFollowers.state !== FULFILLED
     ) {
       return
     }
+    await postsApi.updateLikeStatus({ newLikeStatus, postId: id })
 
     runInAction(() => {
       const currentData = this.publicationsFollowers!.value as NewsFeedRoot
