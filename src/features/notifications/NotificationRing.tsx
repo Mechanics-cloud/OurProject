@@ -45,24 +45,18 @@ export const NotificationRing = observer(() => {
         <OutlineBell
           className={'size-6 relative'}
           fill={isModalOpen ? '#397DF6' : 'currentColor'}
-        >
-          {unreadNotifications && unreadNotifications.length > 0 && (
-            <>
-              <circle
-                cx={17.5}
-                cy={6.5}
-                fill={'#CC1439'}
-                r={7.0}
-              />
-            </>
-          )}
-        </OutlineBell>
+        />
       )}
-      <span className={'absolute text-[10px] right-0.5 bottom-2.5'}>
-        {unreadNotifications &&
-          unreadNotifications.length > 0 &&
-          unreadNotifications.length}
-      </span>
+      {unreadNotifications && unreadNotifications.length > 0 && (
+        <div
+          className={
+            'absolute text-[10px] right-0.5 bottom-2.5 rounded-full bg-red-700 w-3.5 h-3.5'
+          }
+        >
+          <span>{unreadNotifications.length}</span>
+        </div>
+      )}
+
       {isModalOpen && <NotificationsWindow />}
     </button>
   )
