@@ -13,6 +13,7 @@ export const useNotifications = () => {
   const [visibleNotificationsIds, setVisibleNotificationsIds] = useState<
     number[]
   >([])
+  const [cursor, setCursor] = useState(0)
 
   useEffect(() => {
     if (!notifications || notifications.length === 0) {
@@ -28,7 +29,18 @@ export const useNotifications = () => {
             )
 
             if (notification && !notification.isRead) {
-              setVisibleNotificationsIds((prev) => [...prev, notification.id])
+              setVisibleNotificationsIds((prev) => [
+                ...new Set([...prev, notification.id]),
+              ])
+            }
+
+            if (
+              notifications.length > 0 &&
+              Number(entry.target.id) ===
+                notifications[notifications.length - 1]?.id &&
+              Number(entry.target.id) !== cursor
+            ) {
+              setCursor(Number(entry.target.id))
             }
           }
         })
@@ -45,7 +57,15 @@ export const useNotifications = () => {
     return () => {
       observer.current?.disconnect()
     }
-  }, [notifications])
+  }, [cursor, notifications, visibleNotificationsIds])
+
+  useEffect(() => {
+    if (cursor) {
+      notificationsStore.getNotifications({
+        cursor,
+      })
+    }
+  }, [cursor])
 
   useEffect(() => {
     if (visibleNotificationsIds.length > 0) {

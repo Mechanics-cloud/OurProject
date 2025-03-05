@@ -74,8 +74,23 @@ class NotificationsStore {
 
       runInAction(() => {
         this.notificationsDTO = listOfNotifications
-        this.notifications = listOfNotifications.items
+        this.notifications = this.notifications || []
+
+        const allNotifications = [
+          ...this.notifications,
+          ...listOfNotifications.items.filter(
+            (newNotification) =>
+              !this.notifications?.some(
+                (existingNotification) =>
+                  existingNotification.id === newNotification.id
+              )
+          ),
+        ]
+
+        this.notifications = [...allNotifications]
       })
+
+      return this.notifications
     } catch (error) {
       responseErrorHandler(error)
     }
