@@ -14,7 +14,6 @@ export const Notifications = observer(() => {
           className={'py-3 border-t-[1px] border-t-dark-100 text-left'}
           id={String(item.id)}
           key={item.id}
-          onClick={(e) => e.stopPropagation()}
           ref={(elem) => {
             elem && elementsRef.current.set(item.id, elem)
           }}

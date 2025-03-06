@@ -9,6 +9,7 @@ export const NotificationsWindow = () => {
       className={
         'absolute -right-[10px] top-10 z-40 w-[355px] h-[424px] p-3 bg-dark-500 border border-light-900 rounded-lg shadow-lg'
       }
+      onClick={(e) => e.stopPropagation()}
     >
       <div
         className={
