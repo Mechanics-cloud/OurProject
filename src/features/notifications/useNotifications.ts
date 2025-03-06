@@ -60,15 +60,17 @@ export const useNotifications = () => {
   }, [cursor, notifications, visibleNotificationsIds])
 
   useEffect(() => {
-    if (cursor) {
-      notificationsStore.getNotifications({
-        cursor,
-      })
-    }
+    notificationsStore.getNotifications({
+      cursor,
+    })
   }, [cursor])
 
   useEffect(() => {
     if (visibleNotificationsIds.length > 0) {
+      notificationsStore.changeNotificationStatus({
+        idsToDelete: visibleNotificationsIds,
+        isRead: true,
+      })
       notificationsStore.markAsReadNotifications(visibleNotificationsIds)
     }
   }, [visibleNotificationsIds])

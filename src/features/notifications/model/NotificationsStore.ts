@@ -29,6 +29,22 @@ class NotificationsStore {
     this.newNotificationDTO = notification
   }
 
+  changeNotificationStatus({
+    idsToDelete,
+    isRead,
+  }: {
+    idsToDelete: number[]
+    isRead: boolean
+  }) {
+    if (this.notifications) {
+      this.notifications = this.notifications?.map((notification) =>
+        idsToDelete.includes(notification.id)
+          ? { ...notification, isRead }
+          : notification
+      )
+    }
+  }
+
   connect() {
     const socketOptions = {
       query: {
@@ -76,21 +92,15 @@ class NotificationsStore {
         this.notificationsDTO = listOfNotifications
         this.notifications = this.notifications || []
 
-        const allNotifications = [
+        const existingIds = new Set(this.notifications.map((n) => n.id))
+
+        this.notifications = [
           ...this.notifications,
           ...listOfNotifications.items.filter(
-            (newNotification) =>
-              !this.notifications?.some(
-                (existingNotification) =>
-                  existingNotification.id === newNotification.id
-              )
+            (notification) => !existingIds.has(notification.id)
           ),
         ]
-
-        this.notifications = [...allNotifications]
       })
-
-      return this.notifications
     } catch (error) {
       responseErrorHandler(error)
     }
@@ -99,17 +109,12 @@ class NotificationsStore {
   async markAsReadNotifications(idsToDelete: number[]) {
     try {
       await notificationsApi.markAsRead(idsToDelete)
-      runInAction(() => {
-        if (this.notifications) {
-          this.notifications = this.notifications?.map((notification) =>
-            idsToDelete.includes(notification.id)
-              ? { ...notification, isRead: true }
-              : notification
-          )
-        }
-      })
     } catch (error) {
       responseErrorHandler(error)
+      this.changeNotificationStatus({
+        idsToDelete,
+        isRead: false,
+      })
     }
   }
 
