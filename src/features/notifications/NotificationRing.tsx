@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 import { OutlineBell } from '@/assets/icons'
-import { Loader, useModal } from '@/common'
+import { Loader, useClickOutside, useModal } from '@/common'
 import { useNotificationsSocket } from '@/features/notifications/model'
 import { NotificationsWindow } from '@/features/notifications/ui'
 import { observer } from 'mobx-react-lite'
@@ -13,8 +13,10 @@ import { notificationsStore } from './model/NotificationsStore'
 export const NotificationRing = observer(() => {
   const { clearError, error, notification } = useNotificationsSocket()
   const [isLoading, setIsLoading] = useState(true)
-  const { isModalOpen, toggleModal } = useModal()
+  const { isModalOpen, onModalClose, toggleModal } = useModal()
   const { notifications } = notificationsStore
+
+  const ref = useClickOutside<HTMLButtonElement>(onModalClose)
 
   const unreadNotifications = notifications?.filter(
     (notification) => notification.isRead === false
@@ -37,6 +39,7 @@ export const NotificationRing = observer(() => {
     <button
       className={'cursor-pointer mr-12 hidden lg:block relative'}
       onClick={toggleModal}
+      ref={ref}
       type={'button'}
     >
       {isLoading ? (
