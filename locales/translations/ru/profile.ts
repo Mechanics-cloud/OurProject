@@ -16,12 +16,17 @@ export const profileSettings = {
 }
 export const profileMyPayments = {
   accountType: 'Тип учетной записи:',
+  autoRenewal: 'Автоматическое продление',
   business: 'Бизнес',
+  currentSubscription: 'Текущая подписка:',
+
   dateOfPayment: 'Дата платежа',
   day: '1 день',
-
+  disabledAutoRenewal: 'Автоматическое продление отключено',
   endDateOfSubscription: 'Дата окончания подписки',
+  expireAt: 'Истекает',
   monthly: '1 месяц',
+  nextPayment: 'Следующий платеж',
   noPayments: 'У вас пока нет транзакций',
   paymentType: 'Тип платежа',
   per: 'за',

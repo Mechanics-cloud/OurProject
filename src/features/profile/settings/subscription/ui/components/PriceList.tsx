@@ -1,31 +1,38 @@
-import { RadioGroupType, cn } from '@/common'
-import { AccountTypeValue } from '@/common/enums'
+import { Loader, RadioGroupType } from '@/common'
+import { AnimatePresence, motion } from 'framer-motion'
+import { observer } from 'mobx-react-lite'
 
+import { subscriptionStore } from '../../model'
 import { BankRedirectButtons } from './BankRedirectButtons'
 import { PaymentRadioGroup } from './PaymentRadioGroup'
 
 type Props = {
-  accountValue: string
+  isShow: boolean
   label: string
 } & RadioGroupType
 
-export const PriceList = ({ accountValue, label, ...rest }: Props) => {
+export const PriceList = observer(({ isShow, label, ...rest }: Props) => {
+  const isRedirect = subscriptionStore.isRedirect
+
   return (
-    <div
-      className={cn(
-        `transition-opacity duration-300 ease-in opacity-0 `,
-        accountValue === AccountTypeValue.Business && ' opacity-100'
-      )}
-    >
-      {accountValue === AccountTypeValue.Business && (
-        <>
-          <PaymentRadioGroup
-            label={label}
-            {...rest}
-          />
-          <BankRedirectButtons />
-        </>
-      )}
-    </div>
+    <>
+      <AnimatePresence>
+        {isShow && (
+          <motion.div
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            initial={{ height: 0, opacity: 0 }}
+            style={{ opacity: 0, overflow: 'hidden' }}
+          >
+            <PaymentRadioGroup
+              label={label}
+              {...rest}
+            />
+            <BankRedirectButtons />
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {isRedirect && <Loader />}
+    </>
   )
-}
+})

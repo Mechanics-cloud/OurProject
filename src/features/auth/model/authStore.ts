@@ -4,7 +4,7 @@ import { setToLocalStorage } from '@/common/utils/localStorage'
 import { generalStore } from '@/core/store'
 import { authApi } from '@/features/auth'
 import { SignInFields } from '@/features/auth/model/signIn/singInSchema'
-import { profileStore } from '@/features/profile'
+import { profileStore, subscriptionStore } from '@/features/profile'
 import { isAxiosError } from 'axios'
 import { makeAutoObservable, runInAction } from 'mobx'
 
@@ -44,6 +44,7 @@ class AuthStore {
       setToLocalStorage(StorageKeys.AccessToken, accessToken)
 
       await this.me()
+      await subscriptionStore.getCurrentPayment()
     } catch (error) {
       responseErrorHandler(error)
       runInAction(() => {

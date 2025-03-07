@@ -15,8 +15,6 @@ import {
 import Link from 'next/link'
 import CustomSwiper from 'src/common/components/swiper/CustomSwiper'
 
-import 'swiper/swiper-bundle.css'
-
 type Props = {
   posts: PublicPostsDto
 }
@@ -39,7 +37,7 @@ export const PublicPosts = ({ posts }: Props) => {
               className={'flex flex-col gap-3'}
               key={post.id}
             >
-              <div className={'relative h-60 w-full'}>
+              <div className={'relative h-80 md:h-60 w-full'}>
                 {post.images.length > 0 ? (
                   <Link
                     href={PathService.generatePath(PublicPaths.userPost, {
@@ -49,7 +47,7 @@ export const PublicPosts = ({ posts }: Props) => {
                   >
                     <CustomSwiper
                       className={
-                        'publicPost swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
+                        'swiper-nav-top-55 swiper-nav-small swiper-btn-bg-small swiper-pagination-bottom-8 swiper-bullet-small'
                       }
                       images={post.images}
                     />

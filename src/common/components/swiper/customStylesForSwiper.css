@@ -172,9 +172,85 @@
   height: 12px;
 }
 
+@media screen and (width <= 1024px) {
+  .swiper-nav-auto .swiper-button-next,
+  .swiper-nav-auto .swiper-button-prev {
+    width: 36px;
+    height: 36px;
+  }
+
+  .swiper-btn-bg-auto .swiper-button-prev::after,
+  .swiper-btn-bg-auto .swiper-button-next::after {
+    background-size: 10px;
+  }
+
+  .swiper-bullet-auto .swiper-pagination-bullet {
+    top: 5px;
+    width: var(
+      --swiper-pagination-bullet-width,
+      var(--swiper-pagination-bullet-size, 8px)
+    );
+    height: var(
+      --swiper-pagination-bullet-height,
+      var(--swiper-pagination-bullet-size, 8px)
+    );
+  }
+
+  .swiper-bullet-auto .swiper-pagination-bullet::before {
+    width: 20px;
+    height: 16px;
+  }
+
+  .swiper-bullet-auto .swiper-pagination-bullet:first-child::after,
+  .swiper-bullet-auto .swiper-pagination-bullet:last-child::after {
+    width: 4px;
+    height: 16px;
+  }
+}
+
 @media screen and (width <= 768px) {
   .swiper-pagination-mobile-hidden .swiper-pagination {
     display: none;
     opacity: 0;
+  }
+}
+
+@media screen and (width <= 640px) {
+  .swiper-bullet-auto .swiper-pagination-bullet {
+    top: 4px;
+    width: var(
+      --swiper-pagination-bullet-width,
+      var(--swiper-pagination-bullet-size, 6px)
+    );
+    height: var(
+      --swiper-pagination-bullet-height,
+      var(--swiper-pagination-bullet-size, 6px)
+    );
+  }
+
+  .swiper-bullet-auto .swiper-pagination-bullet::before {
+    width: 18px;
+    height: 12px;
+  }
+
+  .swiper-bullet-auto .swiper-pagination-bullet:first-child::after,
+  .swiper-bullet-auto .swiper-pagination-bullet:last-child::after {
+    width: 4px;
+    height: 12px;
+  }
+
+  .swiper-nav-auto .swiper-button-next,
+  .swiper-nav-auto .swiper-button-prev {
+    width: 24px;
+    height: 24px;
+  }
+
+  .swiper-btn-bg-auto .swiper-button-prev::after,
+  .swiper-btn-bg-auto .swiper-button-next::after {
+    background-size: 7px;
+  }
+
+  .swiper-pagination-bottom-auto .swiper-pagination {
+    bottom: var(--swiper-pagination-bottom, 8px) !important;
   }
 }
