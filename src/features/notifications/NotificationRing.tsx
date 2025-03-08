@@ -32,7 +32,7 @@ export const NotificationRing = observer(() => {
   }
 
   useEffect(() => {
-    notificationsStore.getNotifications({}).then(() => setIsLoading(false))
+    notificationsStore.getNotifications({}).finally(() => setIsLoading(false))
   }, [])
 
   return (

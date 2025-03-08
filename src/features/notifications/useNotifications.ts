@@ -37,7 +37,7 @@ export const useNotifications = () => {
             if (
               notifications.length > 0 &&
               Number(entry.target.id) ===
-                notifications[notifications.length - 1]?.id &&
+                notifications[notifications.length - 1].id &&
               Number(entry.target.id) !== cursor
             ) {
               setCursor(Number(entry.target.id))
@@ -45,7 +45,7 @@ export const useNotifications = () => {
           }
         })
       },
-      { root: null, rootMargin: '0px', threshold: 1 }
+      { root: null, rootMargin: '0px', threshold: 0.8 }
     )
 
     elementsRef.current.forEach((el) => {
@@ -60,9 +60,11 @@ export const useNotifications = () => {
   }, [cursor, notifications, visibleNotificationsIds])
 
   useEffect(() => {
-    notificationsStore.getNotifications({
-      cursor,
-    })
+    if (cursor !== 0) {
+      notificationsStore.getNotifications({
+        cursor,
+      })
+    }
   }, [cursor])
 
   useEffect(() => {

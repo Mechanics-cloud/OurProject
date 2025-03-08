@@ -94,13 +94,16 @@ class NotificationsStore {
 
         const existingIds = new Set(this.notifications.map((n) => n.id))
 
-        this.notifications = [
-          ...this.notifications,
-          ...listOfNotifications.items.filter(
-            (notification) => !existingIds.has(notification.id)
-          ),
-        ]
+        const newNotifications = listOfNotifications.items.filter(
+          (notification) => !existingIds.has(notification.id)
+        )
+
+        if (newNotifications.length > 0) {
+          this.notifications = [...this.notifications, ...newNotifications]
+        }
       })
+
+      return this.notificationsDTO
     } catch (error) {
       responseErrorHandler(error)
     }
