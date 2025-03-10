@@ -1,15 +1,21 @@
-import { ComponentProps, useState } from 'react'
+import { ComponentProps } from 'react'
 
 import {
   BookmarkOutline,
   MessageCircleOutline,
   PaperPlaneOutline,
 } from '@/assets/icons/outlineIcons'
-import { BasicPost, Like, Tooltip, cn, useTranslation } from '@/common'
+import {
+  BasicPost,
+  Like,
+  Tooltip,
+  cn,
+  responseErrorHandler,
+  useOptimistic,
+  useTranslation,
+} from '@/common'
 import { LikeStatus } from '@/common/enums'
 import { newsFeedStore } from '@/features/newsFeed'
-import { postsApi } from '@/features/posts'
-import { runInAction } from 'mobx'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
@@ -18,30 +24,27 @@ type Props = {
 } & ComponentProps<'div'>
 //TODO to change (in progress) вынести логику, добавить логику на кнопки
 export const LinksGroup = observer(({ className, item }: Props) => {
+  const { changeLikesCount } = newsFeedStore
   const { t } = useTranslation()
-  const [isChangeLike, setIsChangeLike] = useState<boolean>(false)
-  const [loadingRequestFlag, setLoadingRequestFlag] = useState<boolean>(false)
+
+  const [optimisticItem, addOptimisticLikeStatus, rollbackItem] = useOptimistic<
+    BasicPost,
+    boolean
+  >(item, (state, optimisticLikeStatus) => ({
+    ...state,
+    isLiked: optimisticLikeStatus,
+  }))
 
   const onLiked = async () => {
-    if (loadingRequestFlag) {
-      return
-    }
     try {
-      setIsChangeLike(true)
-      setLoadingRequestFlag(true)
-
       const newLikeStatus = item.isLiked ? LikeStatus.None : LikeStatus.Like
 
-      await postsApi.updateLikeStatus({ newLikeStatus, postId: item.id })
+      addOptimisticLikeStatus(!item.isLiked)
 
-      runInAction(() => {
-        newsFeedStore.changeLikesCount(item.id, !item.isLiked)
-        setIsChangeLike(false)
-        setLoadingRequestFlag(false)
-      })
+      await changeLikesCount(item.id, !item.isLiked, newLikeStatus)
     } catch (error) {
-      setIsChangeLike(false)
-      setLoadingRequestFlag(false)
+      rollbackItem()
+      responseErrorHandler(error)
     }
   }
 
@@ -51,13 +54,16 @@ export const LinksGroup = observer(({ className, item }: Props) => {
     >
       <div className={'flex items-center gap-5'}>
         <button
-          disabled={isChangeLike}
+          className={
+            optimisticItem.isLiked !== item.isLiked ? 'opacity-50' : ''
+          }
+          disabled={optimisticItem.isLiked !== item.isLiked}
           onClick={onLiked}
           type={'button'}
         >
           <Tooltip title={t.actionIconsGroup.isLiked}>
             <Like
-              active={item.isLiked}
+              active={optimisticItem.isLiked}
               className={'size-6'}
             />
           </Tooltip>

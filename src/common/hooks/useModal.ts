@@ -12,9 +12,14 @@ export const useModal = (onClose?: () => void) => {
     setIsModalOpen(false)
   }
 
+  const toggleModal = () => {
+    setIsModalOpen((prev) => !prev)
+  }
+
   return {
     isModalOpen,
     onModalClose,
     openModal,
+    toggleModal,
   }
 }

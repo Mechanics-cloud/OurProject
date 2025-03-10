@@ -1,3 +1,9 @@
+export const DefaultPaths = {
+  clientError: '/404',
+  publicMainPage: '/',
+  serverError: '/500',
+}
+
 export const PublicPaths = {
   expiredSession: '/auth/expired-session',
   forgotPassword: '/auth/forgot-password',
@@ -6,7 +12,6 @@ export const PublicPaths = {
   profileLink: (userId: number | undefined) => {
     return `/profile/${userId}`
   },
-  publicMainPage: '/',
   recoveryPassword: '/auth/recovery',
   registrationEmailResending: '/auth/registration-email-resending',
   signIn: '/auth/sign-in',
