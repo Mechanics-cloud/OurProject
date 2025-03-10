@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { Paid } from '@/assets/icons'
 import {
   Button,
@@ -8,6 +10,8 @@ import {
   useTranslation,
 } from '@/common'
 import { ScreenWidths } from '@/common/enums'
+import { followSystemAPi } from '@/features/followSystem/api/followSystem.api'
+import { followSystemStore } from '@/features/followSystem/model/followSystemStore'
 import {
   HydrateProfileStore,
   PhotoProfilePostsGallery,
@@ -32,9 +36,21 @@ export const Profile = observer(({ screenSize, store }: Props) => {
   const { query } = useRouter()
   const { followers, following, publications, settingsButton } = t.profilePage
   const avatar = store.userProfile?.avatars[0]?.url
+  const hasProfile = !!profileStore.userProfile
+  const isOwnProfile = profileStore.userProfile?.id === store.userProfile?.id
 
   const { isMobile } = useScreenWidth(screenSize)
   const { isPaid } = usePaidAccount()
+
+  //TODO
+  //убрать логи и any
+  // добавить перевод и условный рендеринг для кнопок !!!
+  //вынести кнопки в отдельный к-т
+  useEffect(() => {
+    if (hasProfile) {
+      followSystemStore.getFollowing(profileStore.userProfile!.userName)
+    }
+  }, [hasProfile])
 
   return (
     <UserIdProvider ctx={query.id ? +query.id[0] : null}>
@@ -66,7 +82,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                   {store.userProfile?.userName ?? 'URL Profile'}
                   {isPaid && <Paid />}
                 </Typography>
-                {profileStore.userProfile?.id === store.userProfile.id && (
+                {isOwnProfile && (
                   <Button
                     className={'hidden md:block'}
                     variant={'secondary'}
@@ -76,6 +92,29 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                     </Link>
                   </Button>
                 )}
+                {hasProfile &&
+                  !isOwnProfile &&
+                  (followSystemStore.isFollowingUser(store.userProfile?.id) ? (
+                    <Button
+                      className={''}
+                      onClick={() =>
+                        followSystemAPi.deleteFollower(store.userProfile?.id)
+                      }
+                      variant={'secondary'}
+                    >
+                      Отписаться
+                    </Button>
+                  ) : (
+                    <Button
+                      className={''}
+                      onClick={() =>
+                        followSystemAPi.postFollowing(store.userProfile?.id)
+                      }
+                      variant={'primary'}
+                    >
+                      Подписаться
+                    </Button>
+                  ))}
               </div>
               <ProfileStatistics
                 followers={followers}
