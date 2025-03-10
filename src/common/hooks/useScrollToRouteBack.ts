@@ -1,5 +1,11 @@
 import { useEffect } from 'react'
 
+import {
+  getFromLocalStorage,
+  removeFromLocalStorage,
+  setToLocalStorage,
+} from '@/common'
+import { StorageKeys } from '@/common/enums'
 import { NextRouter, useRouter } from 'next/router'
 
 export const useScrollToRouteBack = () => {
@@ -7,11 +13,11 @@ export const useScrollToRouteBack = () => {
 
   useEffect(() => {
     const handleRouteChangeStart = () => {
-      localStorage.setItem('scrollPosition', window.scrollY.toString())
+      setToLocalStorage(StorageKeys.ScrollPosition, window.scrollY.toString())
     }
 
     const handleRouteChangeComplete = () => {
-      const savedPosition = localStorage.getItem('scrollPosition')
+      const savedPosition = getFromLocalStorage(StorageKeys.ScrollPosition)
 
       if (savedPosition) {
         const targetPosition = parseInt(savedPosition, 10)
@@ -19,7 +25,7 @@ export const useScrollToRouteBack = () => {
         const restoreScroll = () => {
           window.scrollTo({ behavior: 'auto', top: targetPosition })
           if (window.scrollY === targetPosition) {
-            localStorage.removeItem('scrollPosition')
+            removeFromLocalStorage(StorageKeys.ScrollPosition)
           }
         }
 
