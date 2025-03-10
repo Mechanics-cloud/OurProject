@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { RadioOption, getFromLocalStorage } from '@/common'
 import { AccountTypeValue, ManualAccountType } from '@/common/enums'
-import { LocaleType } from '@locales/index'
+import { LocaleType } from '@locales/ru'
 
 export const useAccountOptions = (
   t: LocaleType,
