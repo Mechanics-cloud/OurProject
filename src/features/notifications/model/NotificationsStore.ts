@@ -99,7 +99,10 @@ class NotificationsStore {
         )
 
         if (newNotifications.length > 0) {
-          this.notifications = [...this.notifications, ...newNotifications]
+          this.notifications = [
+            ...this.notifications,
+            ...newNotifications,
+          ].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
         }
       })
 

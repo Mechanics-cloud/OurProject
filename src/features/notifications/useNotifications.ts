@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-import { Nullable, useTranslation } from '@/common'
+import { Nullable, useDebounce, useTranslation } from '@/common'
 import { notificationsStore } from '@/features/notifications/model'
 import { useRouter } from 'next/router'
 
@@ -27,20 +27,20 @@ export const useNotifications = () => {
             const notification = notifications.find(
               (notification) => notification.id === Number(entry.target.id)
             )
+            const notificationId = Number(entry.target.id)
 
             if (notification && !notification.isRead) {
               setVisibleNotificationsIds((prev) => [
-                ...new Set([...prev, notification.id]),
+                ...new Set([...prev, notificationId]),
               ])
             }
 
             if (
               notifications.length > 0 &&
-              Number(entry.target.id) ===
-                notifications[notifications.length - 1].id &&
-              Number(entry.target.id) !== cursor
+              notificationId === notifications[notifications.length - 1].id &&
+              notificationId !== cursor
             ) {
-              setCursor(Number(entry.target.id))
+              setCursor(notificationId)
             }
           }
         })
@@ -54,28 +54,32 @@ export const useNotifications = () => {
       }
     })
 
-    return () => {
-      observer.current?.disconnect()
-    }
-  }, [cursor, notifications, visibleNotificationsIds])
+    return () => observer.current?.disconnect()
+  }, [cursor, notifications])
 
   useEffect(() => {
     if (cursor !== 0) {
-      notificationsStore.getNotifications({
-        cursor,
-      })
+      notificationsStore.getNotifications({ cursor })
     }
   }, [cursor])
 
+  const debouncedVisibleNotificationsIds = useDebounce(
+    visibleNotificationsIds,
+    1000
+  )
+
   useEffect(() => {
-    if (visibleNotificationsIds.length > 0) {
+    if (debouncedVisibleNotificationsIds.length > 0) {
       notificationsStore.changeNotificationStatus({
-        idsToDelete: visibleNotificationsIds,
+        idsToDelete: debouncedVisibleNotificationsIds,
         isRead: true,
       })
-      notificationsStore.markAsReadNotifications(visibleNotificationsIds)
+
+      notificationsStore.markAsReadNotifications(
+        debouncedVisibleNotificationsIds
+      )
     }
-  }, [visibleNotificationsIds])
+  }, [debouncedVisibleNotificationsIds])
 
   const deleteNotification = async (id: number) => {
     await notificationsStore.deleteNotification(id)
