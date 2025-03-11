@@ -10,7 +10,6 @@ import {
   useTranslation,
 } from '@/common'
 import { ScreenWidths } from '@/common/enums'
-import { followSystemAPi } from '@/features/followSystem/api/followSystem.api'
 import { followSystemStore } from '@/features/followSystem/model/followSystemStore'
 import {
   HydrateProfileStore,
@@ -26,6 +25,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import avatarPlaceholder from '../../../assets/images/user-avatar-placeholder.jpg'
+import { FollowButtons } from './FollowButtons'
 
 type Props = {
   screenSize?: ScreenWidths
@@ -44,8 +44,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
 
   //TODO
   //убрать логи и any
-  // добавить перевод и условный рендеринг для кнопок !!!
-  //вынести кнопки в отдельный к-т
+
   useEffect(() => {
     if (hasProfile) {
       followSystemStore.getFollowing(profileStore.userProfile!.userName)
@@ -92,29 +91,14 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                     </Link>
                   </Button>
                 )}
-                {hasProfile &&
-                  !isOwnProfile &&
-                  (followSystemStore.isFollowingUser(store.userProfile?.id) ? (
-                    <Button
-                      className={''}
-                      onClick={() =>
-                        followSystemAPi.deleteFollower(store.userProfile?.id)
-                      }
-                      variant={'secondary'}
-                    >
-                      Отписаться
-                    </Button>
-                  ) : (
-                    <Button
-                      className={''}
-                      onClick={() =>
-                        followSystemAPi.postFollowing(store.userProfile?.id)
-                      }
-                      variant={'primary'}
-                    >
-                      Подписаться
-                    </Button>
-                  ))}
+                {hasProfile && !isOwnProfile && (
+                  <FollowButtons
+                    isFollowing={followSystemStore.isFollowingUser(
+                      store.userProfile?.id
+                    )}
+                    userId={store.userProfile?.id}
+                  />
+                )}
               </div>
               <ProfileStatistics
                 followers={followers}

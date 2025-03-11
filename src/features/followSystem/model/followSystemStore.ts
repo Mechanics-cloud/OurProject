@@ -1,16 +1,18 @@
 import { toast } from 'react-toastify'
 
+import { Nullable } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { followSystemAPi } from '../api/followSystem.api'
+import { dataFollowingUsers } from './types'
 
 //TODO
-//добавить типы и методы подписки-отписки
-//убрать логи и any
+//запросить всех на кого подписан
+//убрать логи и any и toast.success('ВСЕ ГУД')
 
 class FollowSystemStore {
-  followingUsers: any = null
+  followingUsers: Nullable<dataFollowingUsers> = null
   isLoading: boolean = true
 
   loadingRequestFlag: boolean = false
@@ -31,10 +33,10 @@ class FollowSystemStore {
       this.loadingRequestFlag = true
       const response = await followSystemAPi.getFollowing(userName)
 
-      console.log(response.data)
+      console.log(response)
 
       runInAction(() => {
-        this.followingUsers = response.data
+        this.followingUsers = response
         this.isLoading = false
         this.loadingRequestFlag = false
       })
@@ -58,6 +60,21 @@ class FollowSystemStore {
     )
 
     return hasMatchingId
+  }
+
+  async subscribeToUser(userId: number) {
+    try {
+      followSystemAPi.subscribeToUser(userId)
+    } catch (error) {
+      responseErrorHandler(error)
+    }
+  }
+  async unsubscribeFromUser(userId: number) {
+    try {
+      followSystemAPi.unsubscribeFromUser(userId)
+    } catch (error) {
+      responseErrorHandler(error)
+    }
   }
 }
 

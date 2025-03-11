@@ -1,26 +1,30 @@
 import { instance } from '@/common/api'
 import { AxiosInstance } from 'axios'
 
+import { dataFollowingUsers } from '../model/types'
 import { followSystemEndpoints } from './followSystem.endpoints'
-
-//TODO
-//убрать логи и any
 
 class FollowSystemAPi {
   constructor(private instance: AxiosInstance) {}
 
-  public deleteFollower(data: number) {
-    return this.instance.delete<any>(followSystemEndpoints.deleteFollower(data))
+  public async getFollowing(userName: string): Promise<dataFollowingUsers> {
+    const res = await this.instance.get(
+      followSystemEndpoints.getFollowing(userName)
+    )
+
+    return res.data
   }
 
-  public getFollowing(userName: string) {
-    return this.instance.get<any>(followSystemEndpoints.getFollowing(userName))
-  }
-
-  public postFollowing(data: number) {
-    return this.instance.post<any>(followSystemEndpoints.following, {
-      selectedUserId: data,
+  public subscribeToUser(userId: number) {
+    return this.instance.post<void>(followSystemEndpoints.following, {
+      selectedUserId: userId,
     })
+  }
+
+  public unsubscribeFromUser(userId: number) {
+    return this.instance.delete<void>(
+      followSystemEndpoints.deleteFollower(userId)
+    )
   }
 }
 
