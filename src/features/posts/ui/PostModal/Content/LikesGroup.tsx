@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {
   Avatar,
   Button,
+  Nullable,
   PathService,
   PublicPaths,
   Search,
@@ -14,7 +15,7 @@ import {
   useTranslation,
 } from '@/common'
 import { generalStore } from '@/core/store'
-import { usePostStore } from '@/features/posts'
+import { Likes, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
@@ -25,12 +26,31 @@ export const LikesGroup = observer(() => {
   const { user } = generalStore
   const { isModalOpen, onModalClose, openModal } = useModal()
   const [search, setSearch] = useState('')
+  const [likeUsers, setLikeUsers] = useState<Nullable<Likes[]>>(items)
 
   useEffect(() => {
     if (postStore.post?.id && user) {
       getLikes(postStore.post.id)
     }
   }, [postStore.post?.id, user, getLikes])
+
+  useEffect(() => {
+    if (items) {
+      setLikeUsers(items)
+    }
+  }, [items])
+
+  useEffect(() => {
+    if (search) {
+      const filteredLikesUsers = likeUsers?.filter((users) =>
+        users.userName.startsWith(search)
+      )
+
+      filteredLikesUsers && setLikeUsers(filteredLikesUsers)
+    } else {
+      setLikeUsers(items)
+    }
+  }, [items, likeUsers, search])
 
   return (
     <div className={'flex items-center min-h-9'}>
@@ -77,7 +97,7 @@ export const LikesGroup = observer(() => {
             search={search}
             setSearch={setSearch}
           />
-          {items?.map((item) => (
+          {likeUsers?.map((item) => (
             <div
               className={'flex items-center justify-between mb-6 px-3'}
               key={item.userId}
