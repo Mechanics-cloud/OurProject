@@ -5,6 +5,7 @@ import {
   Button,
   PathService,
   PublicPaths,
+  Search,
   SimpleModal,
   Typography,
   UserMiniLink,
@@ -70,7 +71,8 @@ export const LikesGroup = observer(() => {
             open={isModalOpen}
             title={'Likes'}
           >
-            {items?.map((item, index) => (
+            <Search />
+            {items?.map((item) => (
               <div
                 className={'flex items-center justify-between'}
                 key={item.userId}
