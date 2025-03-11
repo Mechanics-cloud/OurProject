@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   Avatar,
@@ -24,6 +24,7 @@ export const LikesGroup = observer(() => {
   const { getLikes, items, totalCount } = likeStore
   const { user } = generalStore
   const { isModalOpen, onModalClose, openModal } = useModal()
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
     if (postStore.post?.id && user) {
@@ -65,35 +66,37 @@ export const LikesGroup = observer(() => {
         {getPluralForm({ key: t.post.likes, value: totalCount })}
       </Typography>
       {isModalOpen && (
-        <div className={'w-[640px] absolute'}>
-          <SimpleModal
-            onOpenChange={onModalClose}
-            open={isModalOpen}
-            title={'Likes'}
-          >
-            <Search />
-            {items?.map((item) => (
-              <div
-                className={'flex items-center justify-between'}
-                key={item.userId}
-              >
-                <UserMiniLink
-                  className={'mb-6'}
-                  name={item.userName}
-                  src={item.avatars[0]?.url}
-                />
-                {item.userId !== user?.userId && (
-                  <Button
-                    className={'w-[117px]'}
-                    variant={item.isFollowing ? 'outline' : 'primary'}
-                  >
-                    {item.isFollowing ? 'Unfollow' : 'Follow'}
-                  </Button>
-                )}
-              </div>
-            ))}
-          </SimpleModal>
-        </div>
+        <SimpleModal
+          className={'w-[640px]'}
+          onOpenChange={onModalClose}
+          open={isModalOpen}
+          title={'Likes'}
+        >
+          <Search
+            className={'px-3'}
+            search={search}
+            setSearch={setSearch}
+          />
+          {items?.map((item) => (
+            <div
+              className={'flex items-center justify-between mb-6 px-3'}
+              key={item.userId}
+            >
+              <UserMiniLink
+                name={item.userName}
+                src={item.avatars[0]?.url}
+              />
+              {item.userId !== user?.userId && (
+                <Button
+                  className={'w-[117px]'}
+                  variant={item.isFollowing ? 'outline' : 'primary'}
+                >
+                  {item.isFollowing ? 'Unfollow' : 'Follow'}
+                </Button>
+              )}
+            </div>
+          ))}
+        </SimpleModal>
       )}
     </div>
   )

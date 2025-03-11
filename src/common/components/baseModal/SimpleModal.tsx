@@ -33,7 +33,7 @@ export const SimpleModal = ({
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-        <DialogDescription className={className}>{children}</DialogDescription>
+        {children}
       </DialogContent>
     </Dialog>
   )
