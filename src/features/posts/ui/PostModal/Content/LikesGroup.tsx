@@ -2,10 +2,14 @@ import React, { useEffect } from 'react'
 
 import {
   Avatar,
+  Button,
   PathService,
   PublicPaths,
+  SimpleModal,
   Typography,
+  UserMiniLink,
   getPluralForm,
+  useModal,
   useTranslation,
 } from '@/common'
 import { generalStore } from '@/core/store'
@@ -18,6 +22,7 @@ export const LikesGroup = observer(() => {
   const { likeStore, postStore } = usePostStore()
   const { getLikes, items, totalCount } = likeStore
   const { user } = generalStore
+  const { isModalOpen, onModalClose, openModal } = useModal()
 
   useEffect(() => {
     if (postStore.post?.id && user) {
@@ -52,11 +57,42 @@ export const LikesGroup = observer(() => {
         </div>
       )}
       <Typography
-        className={'ml-2'}
+        className={'ml-2 cursor-pointer'}
+        onClick={openModal}
         variant={'reg14'}
       >
         {getPluralForm({ key: t.post.likes, value: totalCount })}
       </Typography>
+      {isModalOpen && (
+        <div className={'w-[640px] absolute'}>
+          <SimpleModal
+            onOpenChange={onModalClose}
+            open={isModalOpen}
+            title={'Likes'}
+          >
+            {items?.map((item, index) => (
+              <div
+                className={'flex items-center justify-between'}
+                key={item.userId}
+              >
+                <UserMiniLink
+                  className={'mb-6'}
+                  name={item.userName}
+                  src={item.avatars[0]?.url}
+                />
+                {item.userId !== user?.userId && (
+                  <Button
+                    className={'w-[117px]'}
+                    variant={item.isFollowing ? 'outline' : 'primary'}
+                  >
+                    {item.isFollowing ? 'Unfollow' : 'Follow'}
+                  </Button>
+                )}
+              </div>
+            ))}
+          </SimpleModal>
+        </div>
+      )}
     </div>
   )
 })

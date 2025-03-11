@@ -29,7 +29,7 @@ export const SimpleModal = ({
       open={open}
       {...rest}
     >
-      <DialogContent className={'max-w-[378px]'}>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
