@@ -12,11 +12,11 @@ export const useScrollToRouteBack = () => {
   const router: NextRouter = useRouter()
 
   useEffect(() => {
-    const handleRouteChangeStart = () => {
+    const onRouteChangeStart = () => {
       setToLocalStorage(StorageKeys.ScrollPosition, window.scrollY.toString())
     }
 
-    const handleRouteChangeComplete = () => {
+    const onRouteChangeComplete = () => {
       const savedPosition = getFromLocalStorage(StorageKeys.ScrollPosition)
 
       if (savedPosition) {
@@ -46,12 +46,12 @@ export const useScrollToRouteBack = () => {
       }
     }
 
-    router.events.on('routeChangeStart', handleRouteChangeStart)
-    router.events.on('routeChangeComplete', handleRouteChangeComplete)
+    router.events.on('routeChangeStart', onRouteChangeStart)
+    router.events.on('routeChangeComplete', onRouteChangeComplete)
 
     return () => {
-      router.events.off('routeChangeStart', handleRouteChangeStart)
-      router.events.off('routeChangeComplete', handleRouteChangeComplete)
+      router.events.off('routeChangeStart', onRouteChangeStart)
+      router.events.off('routeChangeComplete', onRouteChangeComplete)
     }
   }, [router.events])
 }
