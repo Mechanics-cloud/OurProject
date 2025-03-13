@@ -6,6 +6,7 @@ export enum StatusCode {
 
 export enum StorageKeys {
   AccessToken = 'accessToken',
+  ScrollPosition = 'scrollPosition',
 }
 
 export enum ScreenWidths {

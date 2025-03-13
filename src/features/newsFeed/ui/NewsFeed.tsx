@@ -1,6 +1,11 @@
 import React, { useEffect } from 'react'
 
-import { DefaultPaths, Loader, Typography } from '@/common'
+import {
+  DefaultPaths,
+  Loader,
+  Typography,
+  useScrollToRouteBack,
+} from '@/common'
 import { newsFeedStore } from '@/features/newsFeed'
 import { EmptyFeed } from '@/features/newsFeed/ui/EmptyFeed'
 import { AxiosError } from 'axios'
@@ -13,6 +18,8 @@ import { PostSkeleton } from './PostSkeleton'
 export const NewsFeed = observer(() => {
   const { getPostsPublicationsFollowers, publicationsFollowers } = newsFeedStore
   const router: NextRouter = useRouter()
+
+  useScrollToRouteBack()
 
   useEffect(() => {
     const controller = new AbortController()
