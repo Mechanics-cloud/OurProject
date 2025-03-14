@@ -1,18 +1,10 @@
-import { toast } from 'react-toastify'
-
-import { Nullable } from '@/common'
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
 import { makeAutoObservable, runInAction } from 'mobx'
 
 import { followSystemAPi } from '../api/followSystem.api'
-import { dataFollowingUsers } from './types'
-
-//TODO
-//запросить всех на кого подписан
-//убрать логи и any и toast.success('ВСЕ ГУД')
 
 class FollowSystemStore {
-  followingUsers: Nullable<dataFollowingUsers> = null
+  followingUsers: Map<number, string> = new Map()
   isLoading: boolean = true
 
   loadingRequestFlag: boolean = false
@@ -21,59 +13,77 @@ class FollowSystemStore {
     makeAutoObservable(this, undefined, { autoBind: true })
   }
 
+  addUserToFollowingUsers(userId: number) {
+    this.followingUsers.set(userId, '')
+  }
+
   cleanUp() {
-    this.followingUsers = null
+    this.followingUsers.clear()
   }
 
   async getFollowing(userName: string) {
-    if (this.loadingRequestFlag || this.followingUsers) {
+    if (this.loadingRequestFlag) {
       return
     }
     try {
       this.loadingRequestFlag = true
       const response = await followSystemAPi.getFollowing(userName)
 
-      console.log(response)
-
       runInAction(() => {
-        this.followingUsers = response
-        this.isLoading = false
+        response.items.forEach((el) => {
+          this.followingUsers.set(el.userId, '')
+        })
         this.loadingRequestFlag = false
       })
     } catch (error) {
       responseErrorHandler(error)
+    } finally {
       runInAction(() => {
         this.isLoading = false
       })
-    } finally {
-      toast.success('ВСЕ ГУД')
     }
   }
 
   isFollowingUser(userId: number) {
-    if (!this.followingUsers || this.followingUsers.items.length === 0) {
+    if (this.followingUsers.size === 0) {
       return false
     }
 
-    const hasMatchingId = this.followingUsers.items.some(
-      (item: any) => item.userId === userId
-    )
+    return this.followingUsers.has(userId)
+  }
 
-    return hasMatchingId
+  removeUserFromFollowingUsers(userId: number) {
+    this.followingUsers.delete(userId)
   }
 
   async subscribeToUser(userId: number) {
     try {
-      followSystemAPi.subscribeToUser(userId)
+      this.isLoading = true
+      await followSystemAPi.subscribeToUser(userId)
+      runInAction(() => {
+        this.followingUsers.set(userId, '')
+      })
     } catch (error) {
       responseErrorHandler(error)
+    } finally {
+      runInAction(() => {
+        this.isLoading = false
+      })
     }
   }
   async unsubscribeFromUser(userId: number) {
     try {
-      followSystemAPi.unsubscribeFromUser(userId)
+      this.isLoading = true
+      await followSystemAPi.unsubscribeFromUser(userId)
+      runInAction(() => {
+        this.removeUserFromFollowingUsers(userId)
+      })
     } catch (error) {
       responseErrorHandler(error)
+    } finally {
+      runInAction(() => {
+        this.isLoading = false
+      })
     }
   }
 }

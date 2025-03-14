@@ -42,9 +42,6 @@ export const Profile = observer(({ screenSize, store }: Props) => {
   const { isMobile } = useScreenWidth(screenSize)
   const { isPaid } = usePaidAccount()
 
-  //TODO
-  //убрать логи и any
-
   useEffect(() => {
     if (hasProfile) {
       followSystemStore.getFollowing(profileStore.userProfile!.userName)

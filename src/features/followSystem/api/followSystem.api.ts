@@ -9,7 +9,12 @@ class FollowSystemAPi {
 
   public async getFollowing(userName: string): Promise<dataFollowingUsers> {
     const res = await this.instance.get(
-      followSystemEndpoints.getFollowing(userName)
+      followSystemEndpoints.getFollowing(userName),
+      {
+        params: {
+          pageSize: 1000,
+        },
+      }
     )
 
     return res.data
