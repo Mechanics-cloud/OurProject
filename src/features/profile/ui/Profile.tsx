@@ -42,6 +42,19 @@ export const Profile = observer(({ screenSize, store }: Props) => {
   const { isMobile } = useScreenWidth(screenSize)
   const { isPaid } = usePaidAccount()
 
+  const followButtons = (className = '') => {
+    return (
+      hasProfile &&
+      !isOwnProfile && (
+        <FollowButtons
+          className={className}
+          isFollowing={followSystemStore.isFollowingUser(store.userProfile?.id)}
+          userId={store.userProfile?.id}
+        />
+      )
+    )
+  }
+
   useEffect(() => {
     if (hasProfile) {
       followSystemStore.getFollowing(profileStore.userProfile!.userName)
@@ -88,14 +101,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                     </Link>
                   </Button>
                 )}
-                {hasProfile && !isOwnProfile && (
-                  <FollowButtons
-                    isFollowing={followSystemStore.isFollowingUser(
-                      store.userProfile?.id
-                    )}
-                    userId={store.userProfile?.id}
-                  />
-                )}
+                {followButtons()}
               </div>
               <ProfileStatistics
                 followers={followers}
@@ -118,6 +124,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
             {store.userProfile?.userName ?? 'URL Profile'}
             <Paid />
           </Typography>
+          {followButtons('md:hidden')}
           <ProfileAboutMe
             aboutMe={store.userProfile?.aboutMe}
             className={'lg:hidden block mt-7'}
