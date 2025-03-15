@@ -1,7 +1,6 @@
 import { responseErrorHandler } from '@/common/utils/responseErrorHandler'
+import { followSystemAPi } from '@/features/followSystem'
 import { makeAutoObservable, runInAction } from 'mobx'
-
-import { followSystemAPi } from '../api/followSystem.api'
 
 class FollowSystemStore {
   followingUsers: Map<number, string> = new Map()

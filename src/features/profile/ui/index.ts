@@ -1,3 +1,4 @@
+export * from './FollowButtons'
 export * from './GeneralInfoLoading'
 export * from './PhotoProfilePostsGallery'
 export * from './ProfileAboutMe'

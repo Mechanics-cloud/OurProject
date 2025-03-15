@@ -1,8 +1,9 @@
 import { instance } from '@/common/api'
+import {
+  dataFollowingUsers,
+  followSystemEndpoints,
+} from '@/features/followSystem'
 import { AxiosInstance } from 'axios'
-
-import { dataFollowingUsers } from '../model/types'
-import { followSystemEndpoints } from './followSystem.endpoints'
 
 class FollowSystemAPi {
   constructor(private instance: AxiosInstance) {}

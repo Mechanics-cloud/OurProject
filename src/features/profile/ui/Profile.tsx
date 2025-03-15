@@ -10,8 +10,9 @@ import {
   useTranslation,
 } from '@/common'
 import { ScreenWidths } from '@/common/enums'
-import { followSystemStore } from '@/features/followSystem/model/followSystemStore'
+import { followSystemStore } from '@/features/followSystem'
 import {
+  FollowButtons,
   HydrateProfileStore,
   PhotoProfilePostsGallery,
   ProfileAboutMe,
@@ -25,7 +26,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import avatarPlaceholder from '../../../assets/images/user-avatar-placeholder.jpg'
-import { FollowButtons } from './FollowButtons'
 
 type Props = {
   screenSize?: ScreenWidths
