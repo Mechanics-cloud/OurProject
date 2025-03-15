@@ -10,9 +10,9 @@ import {
   useTranslation,
 } from '@/common'
 import { ScreenWidths } from '@/common/enums'
-import { followSystemAPi } from '@/features/followSystem/api/followSystem.api'
-import { followSystemStore } from '@/features/followSystem/model/followSystemStore'
+import { followSystemStore } from '@/features/followSystem'
 import {
+  FollowButtons,
   HydrateProfileStore,
   PhotoProfilePostsGallery,
   ProfileAboutMe,
@@ -42,10 +42,19 @@ export const Profile = observer(({ screenSize, store }: Props) => {
   const { isMobile } = useScreenWidth(screenSize)
   const { isPaid } = usePaidAccount()
 
-  //TODO
-  //убрать логи и any
-  // добавить перевод и условный рендеринг для кнопок !!!
-  //вынести кнопки в отдельный к-т
+  const followButtons = (className = '') => {
+    return (
+      hasProfile &&
+      !isOwnProfile && (
+        <FollowButtons
+          className={className}
+          isFollowing={followSystemStore.isFollowingUser(store.userProfile?.id)}
+          userId={store.userProfile?.id}
+        />
+      )
+    )
+  }
+
   useEffect(() => {
     if (hasProfile) {
       followSystemStore.getFollowing(profileStore.userProfile!.userName)
@@ -92,29 +101,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                     </Link>
                   </Button>
                 )}
-                {hasProfile &&
-                  !isOwnProfile &&
-                  (followSystemStore.isFollowingUser(store.userProfile?.id) ? (
-                    <Button
-                      className={''}
-                      onClick={() =>
-                        followSystemAPi.deleteFollower(store.userProfile?.id)
-                      }
-                      variant={'secondary'}
-                    >
-                      Отписаться
-                    </Button>
-                  ) : (
-                    <Button
-                      className={''}
-                      onClick={() =>
-                        followSystemAPi.postFollowing(store.userProfile?.id)
-                      }
-                      variant={'primary'}
-                    >
-                      Подписаться
-                    </Button>
-                  ))}
+                {followButtons()}
               </div>
               <ProfileStatistics
                 followers={followers}
@@ -137,6 +124,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
             {store.userProfile?.userName ?? 'URL Profile'}
             <Paid />
           </Typography>
+          {followButtons('md:hidden')}
           <ProfileAboutMe
             aboutMe={store.userProfile?.aboutMe}
             className={'lg:hidden block mt-7'}
