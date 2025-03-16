@@ -20,10 +20,12 @@ export const FollowButtons = observer(
       followSystemStore.subscribeToUser(userId)
     }
 
+    const isLoading = followSystemStore.isLoading
+
     return isFollowing ? (
       <Button
-        className={className}
-        disabled={followSystemStore.isLoading}
+        className={`${className} ${isLoading ? 'animate-pulse' : ''}`}
+        disabled={isLoading}
         onClick={onUnsubscribeFromUser}
         variant={'outline'}
       >
@@ -31,8 +33,10 @@ export const FollowButtons = observer(
       </Button>
     ) : (
       <Button
-        className={`${className} border border-accent-700 `}
-        disabled={followSystemStore.isLoading}
+        className={`${className} border border-accent-700 ${
+          isLoading ? 'animate-pulse' : ''
+        }`}
+        disabled={isLoading}
         onClick={onSubscribeFromUser}
         variant={'primary'}
       >

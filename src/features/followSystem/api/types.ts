@@ -1,6 +1,6 @@
 import { ImageFile, Nullable } from '@/common'
 
-export type infoFollowingUser = {
+export type InfoFollowingUser = {
   avatars: ImageFile[]
   createdAt: string
   id: number
@@ -8,8 +8,8 @@ export type infoFollowingUser = {
   userName: string
 }
 
-export type dataFollowingUsers = {
-  items: infoFollowingUser[]
+export type DataFollowingUsers = {
+  items: InfoFollowingUser[]
   nextCursor: Nullable<number>
   page: number
   pageSize: number

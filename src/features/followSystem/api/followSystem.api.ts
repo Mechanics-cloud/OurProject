@@ -1,6 +1,6 @@
 import { instance } from '@/common/api'
 import {
-  dataFollowingUsers,
+  DataFollowingUsers,
   followSystemEndpoints,
 } from '@/features/followSystem'
 import { AxiosInstance } from 'axios'
@@ -8,7 +8,7 @@ import { AxiosInstance } from 'axios'
 class FollowSystemAPi {
   constructor(private instance: AxiosInstance) {}
 
-  public async getFollowing(userName: string): Promise<dataFollowingUsers> {
+  public async getFollowing(userName: string): Promise<DataFollowingUsers> {
     const res = await this.instance.get(
       followSystemEndpoints.getFollowing(userName),
       {
