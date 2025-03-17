@@ -46,6 +46,7 @@ export const profileSessions = {
 }
 
 export const profilePage = {
+  follow: 'Подписаться',
   followers: 'Подписчики',
   following: 'Подписки',
   noPosts: {
@@ -56,6 +57,7 @@ export const profilePage = {
   },
   publications: 'Публикации',
   settingsButton: 'Настройки профиля',
+  unfollow: 'Отписаться',
 }
 
 export const profileSettingsTabs = {

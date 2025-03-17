@@ -48,6 +48,7 @@ export const profileSessions = {
 }
 
 export const profilePage = {
+  follow: 'Follow',
   followers: 'Followers',
   following: 'Following',
   noPosts: {
@@ -58,6 +59,7 @@ export const profilePage = {
   },
   publications: 'Publications',
   settingsButton: 'Profile settings',
+  unfollow: 'Unfollow',
 }
 
 export const profileSettingsTabs = {

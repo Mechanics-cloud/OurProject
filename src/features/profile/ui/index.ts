@@ -1,4 +1,4 @@
-export * from './FollowButtons'
+export * from './FollowButtonsContainer'
 export * from './GeneralInfoLoading'
 export * from './PhotoProfilePostsGallery'
 export * from './ProfileAboutMe'

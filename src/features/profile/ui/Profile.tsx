@@ -12,7 +12,7 @@ import {
 import { ScreenWidths } from '@/common/enums'
 import { followSystemStore } from '@/features/followSystem'
 import {
-  FollowButtons,
+  FollowButtonsContainer,
   HydrateProfileStore,
   PhotoProfilePostsGallery,
   ProfileAboutMe,
@@ -36,30 +36,19 @@ export const Profile = observer(({ screenSize, store }: Props) => {
   const { query } = useRouter()
   const { followers, following, publications, settingsButton } = t.profilePage
   const avatar = store.userProfile?.avatars[0]?.url
-  const hasProfile = !!profileStore.userProfile
+  const isAuthenticated = !!profileStore.userProfile
   const isOwnProfile = profileStore.userProfile?.id === store.userProfile?.id
 
   const { isMobile } = useScreenWidth(screenSize)
   const { isPaid } = usePaidAccount()
 
-  const followButtons = (className = '') => {
-    return (
-      hasProfile &&
-      !isOwnProfile && (
-        <FollowButtons
-          className={className}
-          isFollowing={followSystemStore.isFollowingUser(store.userProfile?.id)}
-          userId={store.userProfile?.id}
-        />
-      )
-    )
-  }
-
   useEffect(() => {
-    if (hasProfile) {
+    if (isAuthenticated) {
       followSystemStore.getFollowing(profileStore.userProfile!.userName)
     }
-  }, [hasProfile])
+  }, [isAuthenticated])
+
+  //TODO проверить типы, попробовать сделать гридами
 
   return (
     <UserIdProvider ctx={query.id ? +query.id[0] : null}>
@@ -91,7 +80,7 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                   {store.userProfile?.userName ?? 'URL Profile'}
                   {isPaid && <Paid />}
                 </Typography>
-                {isOwnProfile && (
+                {isOwnProfile ? (
                   <Button
                     className={'hidden md:block'}
                     variant={'secondary'}
@@ -100,8 +89,9 @@ export const Profile = observer(({ screenSize, store }: Props) => {
                       {settingsButton}
                     </Link>
                   </Button>
+                ) : (
+                  <FollowButtonsContainer userId={store.userProfile?.id} />
                 )}
-                {followButtons()}
               </div>
               <ProfileStatistics
                 followers={followers}
@@ -124,7 +114,10 @@ export const Profile = observer(({ screenSize, store }: Props) => {
             {store.userProfile?.userName ?? 'URL Profile'}
             <Paid />
           </Typography>
-          {followButtons('md:hidden')}
+          <FollowButtonsContainer
+            className={'md:hidden flex-1'}
+            userId={store.userProfile?.id}
+          />
           <ProfileAboutMe
             aboutMe={store.userProfile?.aboutMe}
             className={'lg:hidden block mt-7'}

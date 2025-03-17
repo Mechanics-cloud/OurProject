@@ -29,7 +29,7 @@ export const FollowButtons = observer(
         onClick={onUnsubscribeFromUser}
         variant={'outline'}
       >
-        {t.post.unfollow}
+        {t.profilePage.unfollow}
       </Button>
     ) : (
       <Button
@@ -40,7 +40,7 @@ export const FollowButtons = observer(
         onClick={onSubscribeFromUser}
         variant={'primary'}
       >
-        {t.post.follow}
+        {t.profilePage.follow}
       </Button>
     )
   }
