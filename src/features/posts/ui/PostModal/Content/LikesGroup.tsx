@@ -2,20 +2,16 @@ import React, { useEffect, useState } from 'react'
 
 import {
   Avatar,
-  Button,
   Nullable,
   PathService,
   PublicPaths,
-  Search,
-  SimpleModal,
   Typography,
-  UserMiniLink,
   getPluralForm,
   useModal,
   useTranslation,
 } from '@/common'
 import { generalStore } from '@/core/store'
-import { Likes, usePostStore } from '@/features/posts'
+import { Likes, LikesModal, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
@@ -86,37 +82,13 @@ export const LikesGroup = observer(() => {
         {getPluralForm({ key: t.post.likes, value: totalCount })}
       </Typography>
       {isModalOpen && (
-        <SimpleModal
-          className={'w-[640px]'}
-          onOpenChange={onModalClose}
-          open={isModalOpen}
-          title={'Likes'}
-        >
-          <Search
-            className={'px-3'}
-            search={search}
-            setSearch={setSearch}
-          />
-          {likeUsers?.map((item) => (
-            <div
-              className={'flex items-center justify-between mb-6 px-3'}
-              key={item.userId}
-            >
-              <UserMiniLink
-                name={item.userName}
-                src={item.avatars[0]?.url}
-              />
-              {item.userId !== user?.userId && (
-                <Button
-                  className={'w-[117px]'}
-                  variant={item.isFollowing ? 'outline' : 'primary'}
-                >
-                  {item.isFollowing ? 'Unfollow' : 'Follow'}
-                </Button>
-              )}
-            </div>
-          ))}
-        </SimpleModal>
+        <LikesModal
+          isModalOpen={isModalOpen}
+          likeUsers={likeUsers}
+          onModalClose={onModalClose}
+          search={search}
+          setSearch={setSearch}
+        />
       )}
     </div>
   )
