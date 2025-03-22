@@ -1,6 +1,10 @@
 export const FullScreenLoader = () => {
   return (
-    <div className={'w-full h-headCalc flex items-center justify-center'}>
+    <div
+      className={
+        'w-full h-[calc(theme(height.headCalc)-82px)] flex items-center justify-center'
+      }
+    >
       <div
         className={
           'loader text-gray-500 font-medium text-[25px] box-content h-10 px-[10px] py-[10px] flex rounded-[8px]'

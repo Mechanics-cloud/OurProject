@@ -12,6 +12,7 @@ export type PolymorphicRef<T extends ElementType = 'input'> =
 
 export type TextFieldProps<T extends ElementType = 'input'> = {
   as?: T
+  bottomMarginForError?: boolean
   error?: string
   errorMode?: ErrorMode
   label: string

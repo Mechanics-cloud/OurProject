@@ -1,6 +1,7 @@
 export * from './auth'
 export * from './basic'
 export * from './createPost'
+export * from './messenger'
 export * from './navigation'
 export * from './notification'
 export * from './posts'

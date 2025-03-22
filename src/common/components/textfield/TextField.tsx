@@ -20,6 +20,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
   const [open, setOpen] = useState(false)
 
   const {
+    bottomMarginForError = true,
     className,
     disabled,
     error,
@@ -32,7 +33,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     ...rest
   } = props
 
-  let marginForError = '24px'
+  let marginForError = bottomMarginForError ? '24px' : '0'
 
   if (error && errorMode === 'text') {
     const margin = `${Math.ceil(error.length / 50) * 24}px`
