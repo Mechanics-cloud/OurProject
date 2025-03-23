@@ -1,3 +1,4 @@
+import { Button } from '@/common'
 import { FollowButtons, followSystemStore } from '@/features/followSystem'
 import { profileStore } from '@/features/profile/model/profileStore'
 import { observer } from 'mobx-react-lite'
@@ -7,21 +8,21 @@ type Props = {
   userId: number
 }
 
-export const FollowButtonsContainer = observer(
-  ({ className, userId }: Props) => {
-    const isAuthenticated = !!profileStore.userProfile
-    const isOwnProfile = profileStore.userProfile?.id === userId
+export const ButtonsContainer = observer(({ className, userId }: Props) => {
+  const isAuthenticated = !!profileStore.userProfile
 
-    if (!isAuthenticated || isOwnProfile) {
-      return null
-    }
+  if (!isAuthenticated) {
+    return null
+  }
 
-    return (
+  return (
+    <div className={'flex gap-3 flex-col flex-wrap md:flex-row'}>
       <FollowButtons
         className={className}
         isFollowing={followSystemStore.isFollowingUser(userId)}
         userId={userId}
       />
-    )
-  }
-)
+      <Button variant={'secondary'}>Send Message</Button>
+    </div>
+  )
+})

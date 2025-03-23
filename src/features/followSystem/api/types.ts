@@ -1,19 +1,12 @@
-import { ImageFile, Nullable } from '@/common'
+import { ImageFile, Nullable, PagesInfo } from '@/common'
+import { Likes } from '@/features/posts'
 
 export type InfoFollowingUser = {
   avatars: ImageFile[]
-  createdAt: string
-  id: number
-  userId: number
-  userName: string
-}
+} & Omit<Likes, 'avatars'>
 
 export type DataFollowingUsers = {
   items: InfoFollowingUser[]
   nextCursor: Nullable<number>
-  page: number
-  pageSize: number
-  pagesCount: number
-  prevCursor: number
-  totalCount: number
-}
+  prevCursor: Nullable<number>
+} & PagesInfo
