@@ -1,0 +1,37 @@
+import { instance } from '@/common/api'
+import {
+  DataFollowingUsers,
+  followSystemEndpoints,
+} from '@/features/followSystem'
+import { AxiosInstance } from 'axios'
+
+class FollowSystemAPi {
+  constructor(private instance: AxiosInstance) {}
+
+  public async getFollowing(userName: string): Promise<DataFollowingUsers> {
+    const res = await this.instance.get(
+      followSystemEndpoints.getFollowing(userName),
+      {
+        params: {
+          pageSize: 1000,
+        },
+      }
+    )
+
+    return res.data
+  }
+
+  public subscribeToUser(userId: number) {
+    return this.instance.post<void>(followSystemEndpoints.following, {
+      selectedUserId: userId,
+    })
+  }
+
+  public unsubscribeFromUser(userId: number) {
+    return this.instance.delete<void>(
+      followSystemEndpoints.deleteFollower(userId)
+    )
+  }
+}
+
+export const followSystemAPi = new FollowSystemAPi(instance)

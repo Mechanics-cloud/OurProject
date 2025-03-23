@@ -51,7 +51,6 @@ export const post = {
   saveChanges: 'Сохранить',
   successMessage: 'Публикация была успешно удалена',
   successPostUpdate: 'Публикация была успешно отредактирована',
-  unfollow: 'Отписаться',
   viewAllComments: 'Посмотреть все комментарии',
   yes: 'Да',
 }

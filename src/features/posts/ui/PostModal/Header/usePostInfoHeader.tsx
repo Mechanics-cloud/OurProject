@@ -61,7 +61,7 @@ export const usePostInfoHeader = () => {
       onClick: () => {
         alert('unfollow')
       },
-      text: t.post.unfollow,
+      text: t.profilePage.unfollow,
     },
     {
       display: user?.userId !== postStore.post?.ownerId,
