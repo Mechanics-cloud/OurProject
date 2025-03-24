@@ -1,18 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
 
-import { Nullable, getFromLocalStorage } from '@/common'
-import { StorageKeys } from '@/common/enums'
+import { Nullable } from '@/common'
+import { WebSocketApi } from '@/common/api'
 import { generalStore } from '@/core/store'
-import { notificationsStore } from '@/features/notifications'
 import {
-  EventError,
   NotificationEventDTO,
-  SocketEvents,
+  NotificationSocketEvents,
 } from '@/features/notifications/api'
 
 type NotificationsSocketContextType = {
-  clearError: () => void
-  error: Nullable<string>
   notification: NotificationEventDTO | undefined
 }
 
@@ -25,44 +21,24 @@ export const NotificationsSocketProvider = ({
   children: React.ReactNode
 }) => {
   const [notification, setNotification] = useState<NotificationEventDTO>()
-  const [error, setError] = useState<Nullable<string>>('')
-  const isUser = generalStore.user?.userId
-
-  const clearError = () => {
-    setError('')
-  }
-
-  const connectNotifications = () => {
-    notificationsStore.connect()
-
-    notificationsStore.socket?.on(
-      SocketEvents.NOTIFICATIONS,
-      (notificationDTO: NotificationEventDTO) => {
-        setNotification(notificationDTO)
-      }
-    )
-
-    notificationsStore.socket?.on(SocketEvents.ERROR, (err: EventError) => {
-      setError(err.message)
-    })
-  }
 
   useEffect(() => {
-    if (!isUser && !getFromLocalStorage(StorageKeys.AccessToken)) {
-      return
-    }
-    connectNotifications()
+    WebSocketApi.on({
+      callback: (notificationDTO: NotificationEventDTO) => {
+        setNotification(notificationDTO)
+      },
+      eventName: NotificationSocketEvents.NOTIFICATIONS,
+      feature: 'notification',
+    })
 
     return () => {
-      notificationsStore.disconnect()
+      WebSocketApi.off({ feature: 'notification' })
     }
-  }, [isUser])
+  }, [])
 
   return (
     <NotificationsSocketContext.Provider
       value={{
-        clearError,
-        error,
         notification,
       }}
     >

@@ -1,5 +1,4 @@
-export enum SocketEvents {
-  ERROR = 'error',
+export enum NotificationSocketEvents {
   NOTIFICATIONS = 'notifications',
 }
 
@@ -9,11 +8,6 @@ export type NotificationEventDTO = {
   isRead: boolean
   message: string
   notifyAt: string
-}
-
-export type EventError = {
-  error: SocketEvents
-  message: string
 }
 
 export type GetAllNotificationsType = {

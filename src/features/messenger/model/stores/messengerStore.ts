@@ -15,7 +15,6 @@ import { makeAutoObservable, runInAction } from 'mobx'
 
 class MessengerStore {
   // isLoading: boolean = false
-  private isRegistered: boolean = false
   chatsListData: Nullable<ChatsListDTO> = null
   dialogPartnerInfo: Nullable<PartnerInfoDTO> = null
   dialogPartnerMessages: Nullable<PartnerMessagesDTO> = null
@@ -28,7 +27,6 @@ class MessengerStore {
     this.dialogPartnerInfo = null
     this.dialogPartnerMessages = null
     this.chatsListData = null
-    this.isRegistered = false
   }
 
   private handleMessageSend(
@@ -52,10 +50,6 @@ class MessengerStore {
   }
 
   connectMessengerWSEvents() {
-    if (this.isRegistered) {
-      return
-    }
-
     WebSocketApi.on({
       callback: this.handleReceiveMessage,
       eventName: MessengerSocketEvents.RECEIVE_MESSAGE,
@@ -74,12 +68,11 @@ class MessengerStore {
     // this.socket.on(GlobalSocketEvents.MESSAGE_DELETED, (...message) => {
     //   console.log('MESSAGE_DELETED', message)
     // })
-    this.isRegistered = true
   }
 
   disconnectMessengerWSEvents() {
+    WebSocketApi.off({ feature: 'messenger' })
     this.clearMessengerStore()
-    WebSocketApi.offFeature({ feature: 'messenger' })
   }
 
   async getDialogPartnerInfo(dialogPartnerId: number, signal?: AbortSignal) {

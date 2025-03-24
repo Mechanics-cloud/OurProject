@@ -18,15 +18,10 @@ export const Messenger = observer(() => {
   useEffect(() => {
     const controller = new AbortController()
 
-    WebSocketApi.onceConnected(() => {
-      console.log('messenger WS connected')
-      connectMessengerWSEvents()
-      getMessengerData({ signal: controller.signal })
-    })
+    connectMessengerWSEvents()
+    getMessengerData({ signal: controller.signal })
 
     return () => {
-      console.log('messenger WS disconnected')
-
       disconnectMessengerWSEvents()
       controller.abort()
     }
