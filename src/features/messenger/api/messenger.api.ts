@@ -1,12 +1,13 @@
 import { instance } from '@/common/api'
-import { MessengerEndpoints } from '@/features/messenger/api/messenger.endpoints'
+import { AxiosInstance } from 'axios'
+
+import { MessengerEndpoints } from './messenger.endpoints'
 import {
   ChatsListDTO,
   GetDialogPartnerMessagesByIdArgs,
   GetMessengerDataArgs,
   PartnerMessagesDTO,
-} from '@/features/messenger/api/messenger.types'
-import { AxiosInstance } from 'axios'
+} from './messenger.types'
 
 class MessengerApi {
   constructor(private instance: AxiosInstance) {}
@@ -33,7 +34,7 @@ class MessengerApi {
     const res = await this.instance.get(MessengerEndpoints.getMessengerData, {
       params: {
         cursor: args?.cursor,
-        pageSize: args?.pageSize || 10,
+        pageSize: args?.pageSize || 100,
       },
       signal: args?.signal,
     })

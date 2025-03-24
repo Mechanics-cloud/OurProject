@@ -1,5 +1,8 @@
 import { Nullable, responseErrorHandler, tryCatch } from '@/common'
 import { WebSocketApi } from '@/common/api'
+import { publicProfileAPi } from '@/features/profile'
+import { makeAutoObservable, runInAction } from 'mobx'
+
 import {
   ChatsListDTO,
   GetDialogPartnerMessagesByIdArgs,
@@ -9,12 +12,10 @@ import {
   PartnerMessage,
   PartnerMessagesDTO,
   messengerApi,
-} from '@/features/messenger/api'
-import { publicProfileAPi } from '@/features/profile'
-import { makeAutoObservable, runInAction } from 'mobx'
+} from '../../api'
 
 class MessengerStore {
-  // isLoading: boolean = false
+  private partnerId: Nullable<number> = null
   chatsListData: Nullable<ChatsListDTO> = null
   dialogPartnerInfo: Nullable<PartnerInfoDTO> = null
   dialogPartnerMessages: Nullable<PartnerMessagesDTO> = null
@@ -50,13 +51,13 @@ class MessengerStore {
   }
 
   connectMessengerWSEvents() {
-    WebSocketApi.on({
+    WebSocketApi.on<MessengerSocketEvents>({
       callback: this.handleReceiveMessage,
       eventName: MessengerSocketEvents.RECEIVE_MESSAGE,
       feature: 'messenger',
     })
 
-    WebSocketApi.on({
+    WebSocketApi.on<MessengerSocketEvents>({
       callback: this.handleMessageSend,
       eventName: MessengerSocketEvents.MESSAGE_SEND,
       feature: 'messenger',
@@ -71,11 +72,17 @@ class MessengerStore {
   }
 
   disconnectMessengerWSEvents() {
-    WebSocketApi.off({ feature: 'messenger' })
+    WebSocketApi.offByFeature({ feature: 'messenger' })
     this.clearMessengerStore()
   }
 
   async getDialogPartnerInfo(dialogPartnerId: number, signal?: AbortSignal) {
+    if (
+      this.dialogPartnerInfo &&
+      this.dialogPartnerInfo.partnerId === dialogPartnerId
+    ) {
+      return
+    }
     const { data, error } = await tryCatch(
       publicProfileAPi
         .getPublicUser(String(dialogPartnerId), signal)
@@ -102,13 +109,29 @@ class MessengerStore {
 
     runInAction(() => {
       if (data) {
-        this.dialogPartnerMessages = data
+        if (!args.cursor) {
+          this.dialogPartnerMessages = data
+          this.partnerId = args.dialogPartnerId
+
+          return
+        }
+
+        if (
+          this.dialogPartnerMessages &&
+          this.partnerId === args.dialogPartnerId
+        ) {
+          this.dialogPartnerMessages = {
+            ...data,
+            items: this.dialogPartnerMessages.items.concat(data.items),
+          }
+        } else {
+          this.dialogPartnerMessages = data
+        }
       } else {
         responseErrorHandler(error)
       }
     })
   }
-
   async getMessengerData(args: GetMessengerDataArgs | void) {
     const { data, error } = await tryCatch(messengerApi.getMessengerData(args))
 
@@ -130,6 +153,8 @@ class MessengerStore {
 
   setDialogPartnerInfo(info: PartnerInfoDTO) {
     this.dialogPartnerInfo = info
+    this.dialogPartnerMessages = null
+    this.partnerId = null
   }
 }
 

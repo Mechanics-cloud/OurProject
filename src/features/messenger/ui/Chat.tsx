@@ -1,4 +1,10 @@
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, {
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 
 import {
   CheckmarkOutline,
@@ -6,14 +12,15 @@ import {
   PaperPlaneOutline,
 } from '@/assets/icons'
 import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
-import { Button, Typography, cn, useTranslation } from '@/common'
+import { Button, Nullable, Typography, cn, useTranslation } from '@/common'
 import { getTextAreaClasses } from '@/common/components/textarea/helper'
 import { formatIsoDateToShortDate } from '@/common/utils/formateChatDate'
 import { generalStore } from '@/core/store'
-import { messengerStore } from '@/features/messenger/model/stores/messengerStore'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
+
+import { messengerStore } from '../model/stores/messengerStore'
 
 export const Chat = observer(() => {
   const dialogPartnerMessages = messengerStore.dialogPartnerMessages
@@ -23,13 +30,82 @@ export const Chat = observer(() => {
   const userId = generalStore.user?.userId
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const [message, setMessage] = useState<string>('')
+
   const router = useRouter()
+  const dialogPartnerId = router.query.dialogPartnerId
+    ? Number(router.query.dialogPartnerId)
+    : null
+
+  const getDialogPartnerMessagesById =
+    messengerStore.getDialogPartnerMessagesById
+  const observer = useRef<Nullable<IntersectionObserver>>(null)
+  const [cursor, setCursor] = useState<number | undefined>()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isNoMoreMessages, setIsNoMoreMessages] = useState<boolean>(false)
 
   useEffect(() => {
+    setCursor(undefined)
+    setIsNoMoreMessages(false)
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight
     }
-  }, [])
+  }, [dialogPartnerId])
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    if (dialogPartnerId) {
+      const fetchMessages = async () => {
+        setIsLoading(true)
+        await getDialogPartnerMessagesById({
+          cursor,
+          dialogPartnerId,
+        })
+        setIsLoading(false)
+      }
+
+      fetchMessages()
+    }
+
+    return () => {
+      controller.abort()
+    }
+  }, [getDialogPartnerMessagesById, dialogPartnerId, cursor])
+
+  const lastPostElementRef = useCallback(
+    (node: HTMLDivElement) => {
+      if (isLoading) {
+        return
+      }
+      if (observer.current) {
+        observer.current.disconnect()
+      }
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          const totalCount =
+            messengerStore.dialogPartnerMessages?.totalCount ?? 0
+          const currentLength =
+            messengerStore.dialogPartnerMessages?.items.length ?? 0
+          const hasMore = currentLength < totalCount
+
+          if (hasMore) {
+            const cursor =
+              messengerStore.dialogPartnerMessages?.items.at(-1)?.id
+
+            setCursor(cursor)
+          } else {
+            setIsNoMoreMessages(true)
+          }
+        }
+      })
+
+      if (node) {
+        observer.current.observe(node)
+      }
+    },
+    [isLoading]
+  )
 
   const avatar =
     dialogPartnerInfo && dialogPartnerInfo?.avatars.length !== 0
@@ -58,7 +134,7 @@ export const Chat = observer(() => {
             ref={messagesEndRef}
             style={{ scrollbarGutter: 'stable both-edges' }}
           >
-            {dialogPartnerMessages.items.map((message) => {
+            {dialogPartnerMessages.items.map((message, index) => {
               const isPartnerMessage = userId === message.receiverId
               const createdAt = formatIsoDateToShortDate(
                 message.createdAt,
@@ -72,6 +148,11 @@ export const Chat = observer(() => {
                     ' w-full flex items-end'
                   )}
                   key={message.id}
+                  ref={
+                    index === dialogPartnerMessages.items.length - 1
+                      ? lastPostElementRef
+                      : null
+                  }
                 >
                   {isPartnerMessage && (
                     <Image
@@ -109,6 +190,19 @@ export const Chat = observer(() => {
                 </div>
               )
             })}
+            {(isLoading || isNoMoreMessages) && (
+              <div
+                className={'w-full flex flex-col items-center justify-center'}
+              >
+                <Typography
+                  className={cn(!isNoMoreMessages && 'animate-pulse')}
+                >
+                  {isNoMoreMessages
+                    ? t.messenger.noMoreMessages
+                    : t.basic.loading}
+                </Typography>
+              </div>
+            )}
           </div>
           <form
             className={'flex w-full'}
@@ -146,66 +240,3 @@ export const Chat = observer(() => {
     </div>
   )
 })
-
-// import React, { useEffect, useRef, useState } from 'react'
-//
-// export const Chat = () => {
-//   const [messages, setMessages] = useState([
-//     'Сообщение 1',
-//     'Сообщение 2',
-//     'Сообщение 3',
-//     'Сообщение 4',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//     'Сообщение 5',
-//   ])
-//
-//   const chatRef = useRef<HTMLDivElement | null>(null)
-//
-//   useEffect(() => {
-//     if (chatRef.current) {
-//       chatRef.current.scrollTop = chatRef.current.scrollHeight
-//     }
-//   }, []) // Скролл только при первом рендере
-//
-//   const addMessage = () => {
-//     setMessages((prev) => [`Новое сообщение ${prev.length + 1}`, ...prev]) // Добавляем в начало массива
-//   }
-//
-//   return (
-//     <div>
-//       <button onClick={addMessage}>Добавить сообщение</button>
-//       <div
-//         ref={chatRef}
-//         style={{
-//           border: '1px solid black',
-//           display: 'flex',
-//           flexDirection: 'column-reverse', // Инвертируем порядок рендера
-//           height: '200px',
-//           overflowY: 'auto',
-//           padding: '10px',
-//         }}
-//       >
-//         {messages.map((msg, index) => (
-//           <div
-//             key={index}
-//             style={{ borderBottom: '1px solid #ddd', padding: '5px' }}
-//           >
-//             {msg}
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   )
-// }

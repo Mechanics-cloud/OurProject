@@ -1,19 +1,37 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { TextField, Typography, useTranslation } from '@/common'
-import { WebSocketApi } from '@/common/api'
 import { observer } from 'mobx-react-lite'
 
 import { messengerStore } from '../model/stores/messengerStore'
 import { Chat } from './Chat'
-import { ChatsList } from './ChatsList'
 import { PartnerInfo } from './PartnerInfo'
+import { ChatsList } from './chatsList/ChatsList'
 
 export const Messenger = observer(() => {
   const connectMessengerWSEvents = messengerStore.connectMessengerWSEvents
   const disconnectMessengerWSEvents = messengerStore.disconnectMessengerWSEvents
   const getMessengerData = messengerStore.getMessengerData
   const { t } = useTranslation()
+  const chatsList = messengerStore.chatsListData
+  const [searchName, setSearchName] = useState('')
+
+  const filteredChatsList = useMemo(() => {
+    if (!chatsList) {
+      return null
+    }
+
+    if (!searchName.trim()) {
+      return chatsList
+    }
+
+    return {
+      ...chatsList,
+      items: chatsList.items.filter((item) =>
+        item.userName.toLowerCase().includes(searchName.toLowerCase())
+      ),
+    }
+  }, [chatsList, searchName])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -53,13 +71,17 @@ export const Messenger = observer(() => {
             <TextField
               bottomMarginForError={false}
               label={''}
+              onChange={(e) => {
+                setSearchName(e.currentTarget.value)
+              }}
               placeholder={t.messenger.searchPlaceholder}
               type={'search'}
+              value={searchName}
             />
           </div>
 
           <PartnerInfo />
-          <ChatsList />
+          <ChatsList chatsList={filteredChatsList} />
           <Chat />
         </div>
       </div>

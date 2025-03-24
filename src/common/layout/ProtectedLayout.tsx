@@ -8,7 +8,6 @@ import {
   useMe,
   useTranslation,
 } from '@/common'
-import { WebSocketComponent } from '@/common/api'
 import { setTranslation } from '@/common/utils/setTranslation'
 import { authStore } from '@/features/auth'
 import { observer } from 'mobx-react-lite'
@@ -34,7 +33,6 @@ export const ProtectedLayout = observer(({ children, className }: Props) => {
     >
       {currentAuthState === 'authenticated' ? (
         <>
-          <WebSocketComponent />
           <SideBar />
           <Menu className={'lg:hidden'} />
           <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>{children}</div>

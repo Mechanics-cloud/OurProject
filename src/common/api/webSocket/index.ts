@@ -1,2 +1,1 @@
-export * from './WebSocketComponent'
-export * from './webSocketApi'
+export * from './webSocket.api'

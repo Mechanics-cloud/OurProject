@@ -1,48 +1,69 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
-import { Typography } from '@/common'
-import { messengerStore } from '@/features/messenger/model/stores/messengerStore'
+import { PublicPaths, Typography } from '@/common'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import { messengerStore } from '../model/stores/messengerStore'
 
 export const PartnerInfo = observer(() => {
+  const router = useRouter()
+  const dialogPartnerId = router.query.dialogPartnerId
+    ? Number(router.query.dialogPartnerId)
+    : null
   const dialogPartnerInfo = messengerStore.dialogPartnerInfo
   const avatar =
-    dialogPartnerInfo && dialogPartnerInfo?.avatars.length !== 0
-      ? dialogPartnerInfo?.avatars[1].url
+    dialogPartnerInfo && dialogPartnerInfo.avatars.length !== 0
+      ? dialogPartnerInfo.avatars[1].url
       : avatarPlaceholder
+  const getDialogPartnerInfo = messengerStore.getDialogPartnerInfo
+
+  useEffect(() => {
+    const controller = new AbortController()
+
+    if (dialogPartnerId) {
+      getDialogPartnerInfo(dialogPartnerId, controller.signal)
+    }
+
+    return () => {
+      controller.abort()
+    }
+  }, [getDialogPartnerInfo, dialogPartnerId])
 
   return (
     <div
-      className={'col-span-1 row-span-1 border-b border-dark-300 bg-dark-500 '}
+      className={
+        'col-span-1 row-span-1 border-b border-dark-300 bg-dark-500 flex px-3'
+      }
     >
-      <div className={'flex gap-3 items-center justify-start px-3 h-full'}>
-        {dialogPartnerInfo ? (
-          <>
-            <div
-              className={
-                'h-[48px] aspect-square relative rounded-full overflow-hidden'
-              }
-            >
-              <Image
-                alt={dialogPartnerInfo?.userName || 'partners avatar'}
-                height={48}
-                src={avatar}
-                width={48}
-              />
-            </div>
-            <Typography
-              className={'whitespace-nowrap overflow-hidden text-ellipsis'}
-              variant={'reg14'}
-            >
-              {dialogPartnerInfo?.userName || 'Dialog Partner'}
-            </Typography>
-          </>
-        ) : (
-          <div>Empty</div>
-        )}
-      </div>
+      {dialogPartnerInfo ? (
+        <Link
+          className={'flex gap-3 items-center justify-start h-full'}
+          href={PublicPaths.profileLink(dialogPartnerInfo.partnerId)}
+        >
+          <div
+            className={
+              'h-[48px] aspect-square relative rounded-full overflow-hidden'
+            }
+          >
+            <Image
+              alt={dialogPartnerInfo.userName || 'partners avatar'}
+              height={48}
+              src={avatar}
+              width={48}
+            />
+          </div>
+          <Typography
+            className={'whitespace-nowrap overflow-hidden text-ellipsis'}
+            variant={'reg14'}
+          >
+            {dialogPartnerInfo.userName || 'Dialog Partner'}
+          </Typography>
+        </Link>
+      ) : null}
     </div>
   )
 })
