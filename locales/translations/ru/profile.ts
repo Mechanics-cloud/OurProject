@@ -56,7 +56,7 @@ export const profilePage = {
     userText: 'Ваша лента пуста. Опубликуйте ваш первый пост',
   },
   publications: 'Публикации',
-  sendMessage: 'Написать сообщение',
+  sendMessage: 'Чат',
   settingsButton: 'Настройки профиля',
   unfollow: 'Отписаться',
 }

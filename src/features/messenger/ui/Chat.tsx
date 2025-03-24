@@ -129,7 +129,7 @@ export const Chat = observer(() => {
         >
           <div
             className={
-              'flex flex-col-reverse gap-5 py-5 overflow-y-auto w-full'
+              'flex flex-col-reverse justify-between gap-5 py-5 overflow-y-auto w-full h-full'
             }
             ref={messagesEndRef}
             style={{ scrollbarGutter: 'stable both-edges' }}

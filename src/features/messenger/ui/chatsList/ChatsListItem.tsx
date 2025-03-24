@@ -3,6 +3,7 @@ import React from 'react'
 import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
 import { Nullable, ProtectedPaths, Typography, cn } from '@/common'
 import { formatIsoDateToShortDate } from '@/common/utils/formateChatDate'
+import { generalStore } from '@/core/store'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -23,14 +24,12 @@ export const ChatsListItem = ({
   onGetDialogPartnerMessagesById,
 }: Props) => {
   const router = useRouter()
-  const dialogPartnerId = router.query.dialogPartnerId
-    ? Number(router.query.dialogPartnerId)
-    : null
+  const userId = generalStore.user?.userId
   const { avatars, createdAt, messageText, ownerId, receiverId, userName } =
     item
   const createdDateAt = formatIsoDateToShortDate(createdAt, router.locale)
   const avatar = avatars.length === 0 ? avatarPlaceholder : avatars[1].url
-  const partnerId = dialogPartnerId === ownerId ? ownerId : receiverId
+  const partnerId = ownerId === userId ? receiverId : ownerId
 
   const ItemContent = (
     <>

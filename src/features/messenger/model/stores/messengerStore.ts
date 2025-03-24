@@ -36,16 +36,18 @@ class MessengerStore {
   ) {
     runInAction(() => {
       acknowledge({ message, receiverId: message.receiverId })
-      if (messengerStore.dialogPartnerMessages) {
-        messengerStore.dialogPartnerMessages.items.unshift(message)
+      if (this.dialogPartnerMessages) {
+        this.dialogPartnerMessages.items.unshift(message)
+        this.getMessengerData()
       }
     })
   }
 
   private handleReceiveMessage(message: PartnerMessage) {
     runInAction(() => {
-      if (messengerStore.dialogPartnerMessages) {
-        messengerStore.dialogPartnerMessages.items.unshift(message)
+      if (this.dialogPartnerMessages) {
+        this.dialogPartnerMessages.items.unshift(message)
+        this.getMessengerData()
       }
     })
   }
@@ -63,11 +65,20 @@ class MessengerStore {
       feature: 'messenger',
     })
 
-    // this.socket.on(GlobalSocketEvents.UPDATE_MESSAGE, (...message) => {
-    //   console.log('UPDATE_MESSAGE', message)
+    // WebSocketApi.on<MessengerSocketEvents>({
+    //   callback: (...message) => {
+    //     console.log('UPDATE_MESSAGE', message)
+    //   },
+    //   eventName: MessengerSocketEvents.UPDATE_MESSAGE,
+    //   feature: 'messenger',
     // })
-    // this.socket.on(GlobalSocketEvents.MESSAGE_DELETED, (...message) => {
-    //   console.log('MESSAGE_DELETED', message)
+    //
+    // WebSocketApi.on<MessengerSocketEvents>({
+    //   callback: (...message) => {
+    //     console.log('MESSAGE_DELETED', message)
+    //   },
+    //   eventName: MessengerSocketEvents.MESSAGE_DELETED,
+    //   feature: 'messenger',
     // })
   }
 
