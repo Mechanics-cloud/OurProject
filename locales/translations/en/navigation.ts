@@ -10,5 +10,4 @@ export const menu = {
   profileSettings: 'Profile settings',
   search: 'Search',
   statistics: 'Statistics',
-  unfollow: 'Unfollow',
 }

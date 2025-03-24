@@ -3,6 +3,7 @@ import {
   PublicPaths,
   TextUnfolding,
   calculateCharactersToShow,
+  useScrollToRouteBack,
   useTranslation,
 } from '@/common'
 import { Stub } from '@/common/components/stub/Stub'
@@ -20,6 +21,8 @@ type Props = {
 }
 export const PublicPosts = ({ posts }: Props) => {
   const { t } = useTranslation()
+
+  useScrollToRouteBack()
 
   return (
     <div

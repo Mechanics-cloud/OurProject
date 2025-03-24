@@ -52,7 +52,6 @@ export const post = {
   saveChanges: 'Save changes',
   successMessage: 'The post was successfully deleted',
   successPostUpdate: 'The post was successfully updated',
-  unfollow: 'Unfollow',
   viewAllComments: 'View all comments',
   yes: 'Yes',
 }
