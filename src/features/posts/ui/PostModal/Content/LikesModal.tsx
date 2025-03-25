@@ -33,6 +33,7 @@ export const LikesModal = observer(
             key={item.userId}
           >
             <UserMiniLink
+              href={`/profile/${item.userId}`}
               name={item.userName}
               src={item.avatars[0]?.url}
             />
