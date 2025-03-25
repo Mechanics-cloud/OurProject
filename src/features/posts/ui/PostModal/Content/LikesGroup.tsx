@@ -18,23 +18,22 @@ import Link from 'next/link'
 export const LikesGroup = observer(() => {
   const { t } = useTranslation()
   const { likeStore, postStore } = usePostStore()
-  const { getLikes, items, totalCount } = likeStore
   const { user } = generalStore
   const { isModalOpen, onModalClose, openModal } = useModal()
   const [search, setSearch] = useState('')
-  const [likeUsers, setLikeUsers] = useState<Nullable<Likes[]>>(items)
+  const [likeUsers, setLikeUsers] = useState<Nullable<Likes[]>>(likeStore.items)
 
   useEffect(() => {
     if (postStore.post?.id && user) {
-      getLikes(postStore.post.id)
+      likeStore.getLikes(postStore.post.id)
     }
-  }, [postStore.post?.id, user, getLikes])
+  }, [postStore.post?.id, user, likeStore.getLikes, likeStore])
 
   useEffect(() => {
-    if (items) {
-      setLikeUsers(items)
+    if (likeStore.items) {
+      setLikeUsers(likeStore.items)
     }
-  }, [items])
+  }, [likeStore.items])
 
   useEffect(() => {
     if (search) {
@@ -44,15 +43,15 @@ export const LikesGroup = observer(() => {
 
       filteredLikesUsers && setLikeUsers(filteredLikesUsers)
     } else {
-      setLikeUsers(items)
+      setLikeUsers(likeStore.items)
     }
-  }, [items, likeUsers, search])
+  }, [likeStore.items, likeUsers, search])
 
   return (
     <div className={'flex items-center min-h-9'}>
-      {items && !!items.length && (
+      {likeStore.items && !!likeStore.items.length && (
         <div className={'relative flex items-center'}>
-          {items?.slice(0, 3).map((item, index, array) => (
+          {likeStore.items?.slice(0, 3).map((item, index, array) => (
             <Link
               className={`relative z-${(array.length - index) * 10}`}
               href={PathService.generatePath(PublicPaths.userProfile, {
@@ -79,7 +78,7 @@ export const LikesGroup = observer(() => {
         onClick={openModal}
         variant={'reg14'}
       >
-        {getPluralForm({ key: t.post.likes, value: totalCount })}
+        {getPluralForm({ key: t.post.likes, value: likeStore.totalCount })}
       </Typography>
       {isModalOpen && (
         <LikesModal

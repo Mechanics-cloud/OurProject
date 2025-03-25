@@ -15,9 +15,6 @@ type Props = {
 }
 export const LikesModal = observer(
   ({ isModalOpen, likeUsers, onModalClose, search, setSearch }: Props) => {
-    const { user } = generalStore
-    const { isFollowingUser } = followSystemStore
-
     return (
       <SimpleModal
         className={'w-[640px]'}
@@ -39,10 +36,10 @@ export const LikesModal = observer(
               name={item.userName}
               src={item.avatars[0]?.url}
             />
-            {item.userId !== user?.userId && (
+            {item.userId !== generalStore.user?.userId && (
               <FollowButtons
                 className={'w-[117px]'}
-                isFollowing={isFollowingUser(item.userId)}
+                isFollowing={followSystemStore.isFollowingUser(item.userId)}
                 userId={item.userId}
               />
             )}
