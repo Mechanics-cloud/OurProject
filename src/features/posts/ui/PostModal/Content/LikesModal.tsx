@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Button, Nullable, Search, SimpleModal, UserMiniLink } from '@/common'
+import { Nullable, Search, SimpleModal, UserMiniLink } from '@/common'
 import { generalStore } from '@/core/store'
-import { followSystemStore } from '@/features/followSystem'
+import { FollowButtons, followSystemStore } from '@/features/followSystem'
 import { Likes } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 
@@ -16,16 +16,7 @@ type Props = {
 export const LikesModal = observer(
   ({ isModalOpen, likeUsers, onModalClose, search, setSearch }: Props) => {
     const { user } = generalStore
-    const { followingUsers, subscribeToUser, unsubscribeFromUser } =
-      followSystemStore
-
-    const onButtonClick = async (user: Likes) => {
-      if (followingUsers.has(user.userId)) {
-        await unsubscribeFromUser(user.userId)
-      } else {
-        await subscribeToUser(user.userId)
-      }
-    }
+    const { isFollowingUser } = followSystemStore
 
     return (
       <SimpleModal
@@ -49,15 +40,11 @@ export const LikesModal = observer(
               src={item.avatars[0]?.url}
             />
             {item.userId !== user?.userId && (
-              <Button
+              <FollowButtons
                 className={'w-[117px]'}
-                onClick={() => onButtonClick(item)}
-                variant={
-                  followingUsers.has(item.userId) ? 'outline' : 'primary'
-                }
-              >
-                {followingUsers.has(item.userId) ? 'Unfollow' : 'Follow'}
-              </Button>
+                isFollowing={isFollowingUser(item.userId)}
+                userId={item.userId}
+              />
             )}
           </div>
         ))}
