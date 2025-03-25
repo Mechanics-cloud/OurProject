@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import {
   Avatar,
-  Nullable,
   PathService,
   PublicPaths,
   Typography,
@@ -11,41 +10,21 @@ import {
   useTranslation,
 } from '@/common'
 import { generalStore } from '@/core/store'
-import { Likes, LikesModal, usePostStore } from '@/features/posts'
+import { LikesModal, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 export const LikesGroup = observer(() => {
   const { t } = useTranslation()
   const { likeStore, postStore } = usePostStore()
-  const { user } = generalStore
   const { isModalOpen, onModalClose, openModal } = useModal()
-  const [search, setSearch] = useState('')
-  const [likeUsers, setLikeUsers] = useState<Nullable<Likes[]>>(likeStore.items)
+  const { user } = generalStore
 
   useEffect(() => {
     if (postStore.post?.id && user) {
       likeStore.getLikes(postStore.post.id)
     }
   }, [postStore.post?.id, user, likeStore.getLikes, likeStore])
-
-  useEffect(() => {
-    if (likeStore.items) {
-      setLikeUsers(likeStore.items)
-    }
-  }, [likeStore.items])
-
-  useEffect(() => {
-    if (search) {
-      const filteredLikesUsers = likeUsers?.filter((users) =>
-        users.userName.startsWith(search)
-      )
-
-      filteredLikesUsers && setLikeUsers(filteredLikesUsers)
-    } else {
-      setLikeUsers(likeStore.items)
-    }
-  }, [likeStore.items, likeUsers, search])
 
   return (
     <div className={'flex items-center min-h-9'}>
@@ -83,10 +62,7 @@ export const LikesGroup = observer(() => {
       {isModalOpen && (
         <LikesModal
           isModalOpen={isModalOpen}
-          likeUsers={likeUsers}
           onModalClose={onModalClose}
-          search={search}
-          setSearch={setSearch}
         />
       )}
     </div>
