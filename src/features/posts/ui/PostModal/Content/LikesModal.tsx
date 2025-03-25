@@ -23,15 +23,15 @@ export const LikesModal = observer(({ isModalOpen, onModalClose }: Props) => {
 
   useEffect(() => {
     if (search) {
-      const filteredLikesUsers = likeUsers?.filter((users) =>
-        users.userName.startsWith(search)
+      const filteredLikesUsers = likeStore.items?.filter((user) =>
+        user.userName.toLowerCase().startsWith(search.toLowerCase())
       )
 
-      filteredLikesUsers && setLikeUsers(filteredLikesUsers)
+      setLikeUsers(filteredLikesUsers || [])
     } else {
       setLikeUsers(likeStore.items)
     }
-  }, [likeStore.items, likeUsers, search])
+  }, [search, likeStore.items])
 
   return (
     <SimpleModal

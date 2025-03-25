@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, memo, useEffect } from 'react'
 
 import { SearchOutline } from '@/assets/icons'
 import { cn } from '@/common'
@@ -8,10 +8,16 @@ type Props = {
   search: string
   setSearch: (search: string) => void
 }
-export const Search = ({ className, search, setSearch }: Props) => {
+export const Search = memo(({ className, search, setSearch }: Props) => {
   const onValueChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.currentTarget.value)
+    setSearch(e.currentTarget.value.toLowerCase())
   }
+
+  useEffect(() => {
+    return () => {
+      setSearch('')
+    }
+  }, [setSearch])
 
   return (
     <div className={cn('relative flex items-center mb-6', className)}>
@@ -26,4 +32,4 @@ export const Search = ({ className, search, setSearch }: Props) => {
       />
     </div>
   )
-}
+})
