@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Nullable, Search, SimpleModal, UserMiniLink } from '@/common'
+import { Nullable, SimpleModal, TextField, UserMiniLink } from '@/common'
 import { generalStore } from '@/core/store'
 import { FollowButtons, followSystemStore } from '@/features/followSystem'
 import { Likes, usePostStore } from '@/features/posts'
@@ -40,10 +40,12 @@ export const LikesModal = observer(({ isModalOpen, onModalClose }: Props) => {
       open={isModalOpen}
       title={'Likes'}
     >
-      <Search
-        className={'px-3'}
-        search={search}
-        setSearch={setSearch}
+      <TextField
+        className={'bg-transparent px-3'}
+        label={''}
+        onChange={(e) => setSearch(e.target.value)}
+        type={'search'}
+        value={search}
       />
       {likeUsers?.map((item) => (
         <div
