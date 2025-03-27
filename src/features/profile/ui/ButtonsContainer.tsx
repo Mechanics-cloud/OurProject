@@ -26,7 +26,6 @@ export const ButtonsContainer = observer(({ className, userId }: Props) => {
       >
         {t.profilePage.unfollow}
       </FollowButtons>
-      {/*<Button variant={'secondary'}>Send Message</Button>*/}
       <Button
         asChild
         variant={'secondary'}

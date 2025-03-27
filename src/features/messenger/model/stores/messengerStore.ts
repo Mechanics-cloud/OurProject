@@ -19,6 +19,9 @@ class MessengerStore {
   chatsListData: Nullable<ChatsListDTO> = null
   dialogPartnerInfo: Nullable<PartnerInfoDTO> = null
   dialogPartnerMessages: Nullable<PartnerMessagesDTO> = null
+  isChatLoading: boolean = true
+  isLoading: boolean = true
+  searchName: string = ''
 
   constructor() {
     makeAutoObservable(this, {}, { autoBind: true })
@@ -28,6 +31,39 @@ class MessengerStore {
     this.dialogPartnerInfo = null
     this.dialogPartnerMessages = null
     this.chatsListData = null
+    this.partnerId = null
+    this.isLoading = true
+    this.isChatLoading = true
+  }
+
+  private async getDialogPartnerInfo(
+    dialogPartnerId: number,
+    signal?: AbortSignal
+  ) {
+    if (
+      this.dialogPartnerInfo &&
+      this.dialogPartnerInfo.partnerId === dialogPartnerId
+    ) {
+      return
+    }
+    debugger
+    const { data, error } = await tryCatch(
+      publicProfileAPi
+        .getPublicUser(String(dialogPartnerId), signal)
+        .then((res) => ({
+          avatars: res.avatars,
+          partnerId: res.id,
+          userName: res.userName,
+        }))
+    )
+
+    runInAction(() => {
+      if (data) {
+        this.dialogPartnerInfo = data
+      } else {
+        responseErrorHandler(error)
+      }
+    })
   }
 
   private handleMessageSend(
@@ -51,7 +87,6 @@ class MessengerStore {
       }
     })
   }
-
   connectMessengerWSEvents() {
     WebSocketApi.on<MessengerSocketEvents>({
       callback: this.handleReceiveMessage,
@@ -87,33 +122,14 @@ class MessengerStore {
     this.clearMessengerStore()
   }
 
-  async getDialogPartnerInfo(dialogPartnerId: number, signal?: AbortSignal) {
-    if (
-      this.dialogPartnerInfo &&
-      this.dialogPartnerInfo.partnerId === dialogPartnerId
-    ) {
+  async getDialogPartnerMessagesById(args: GetDialogPartnerMessagesByIdArgs) {
+    if (!args.dialogPartnerId) {
+      this.isChatLoading = false
+
       return
     }
-    const { data, error } = await tryCatch(
-      publicProfileAPi
-        .getPublicUser(String(dialogPartnerId), signal)
-        .then((res) => ({
-          avatars: res.avatars,
-          partnerId: res.id,
-          userName: res.userName,
-        }))
-    )
+    await this.getDialogPartnerInfo(args.dialogPartnerId, args.signal)
 
-    runInAction(() => {
-      if (data) {
-        this.dialogPartnerInfo = data
-      } else {
-        responseErrorHandler(error)
-      }
-    })
-  }
-
-  async getDialogPartnerMessagesById(args: GetDialogPartnerMessagesByIdArgs) {
     const { data, error } = await tryCatch(
       messengerApi.getDialogPartnerMessagesById(args)
     )
@@ -122,7 +138,8 @@ class MessengerStore {
       if (data) {
         if (!args.cursor) {
           this.dialogPartnerMessages = data
-          this.partnerId = args.dialogPartnerId
+          this.partnerId = args.dialogPartnerId!
+          this.isChatLoading = false
 
           return
         }
@@ -141,8 +158,10 @@ class MessengerStore {
       } else {
         responseErrorHandler(error)
       }
+      this.isChatLoading = false
     })
   }
+
   async getMessengerData(args: GetMessengerDataArgs | void) {
     const { data, error } = await tryCatch(messengerApi.getMessengerData(args))
 
@@ -152,9 +171,9 @@ class MessengerStore {
       } else {
         responseErrorHandler(error)
       }
+      this.isLoading = false
     })
   }
-
   sendWSMessage(message: string, receiverId: number) {
     WebSocketApi.emit(MessengerSocketEvents.RECEIVE_MESSAGE, {
       message,
@@ -163,9 +182,24 @@ class MessengerStore {
   }
 
   setDialogPartnerInfo(info: PartnerInfoDTO) {
+    this.isChatLoading = true
     this.dialogPartnerInfo = info
     this.dialogPartnerMessages = null
     this.partnerId = null
+  }
+
+  get getFilteredChatList() {
+    if (!this.chatsListData) {
+      return null
+    }
+
+    if (!this.searchName.trim()) {
+      return this.chatsListData.items
+    }
+
+    return this.chatsListData.items.filter((item) =>
+      item.userName.toLowerCase().includes(this.searchName.toLowerCase())
+    )
   }
 }
 

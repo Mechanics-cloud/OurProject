@@ -1,19 +1,17 @@
 import React, { useState } from 'react'
 
-import { Nullable, useTranslation } from '@/common'
+import { CircleLoader, Nullable, useTranslation } from '@/common'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
 
-import { ChatsListDTO, PartnerInfoDTO } from '../../api'
+import { PartnerInfoDTO } from '../../api'
 import { messengerStore } from '../../model/stores/messengerStore'
 import { ChatsListItem } from './ChatsListItem'
 
-type Props = {
-  chatsList: Nullable<ChatsListDTO>
-}
-
-export const ChatsList = observer(({ chatsList }: Props) => {
+export const ChatsList = observer(() => {
   const router = useRouter()
+  const filteredChatList = messengerStore.getFilteredChatList
+  const isLoading = messengerStore.isLoading
   const dialogPartnerId = router.query.dialogPartnerId
     ? Number(router.query.dialogPartnerId)
     : null
@@ -29,6 +27,32 @@ export const ChatsList = observer(({ chatsList }: Props) => {
     setChosenChat(partnerId)
     setDialogPartnerInfo(info)
   }
+  const ChatList =
+    filteredChatList?.length === 0 ? (
+      <div
+        className={
+          'w-full h-full flex justify-center flex-col gap-5 items-center px-2'
+        }
+      >
+        <span className={'text-pretty text-center'}>
+          {t.messenger.noMessages}
+        </span>
+        <span className={'text-pretty text-center'}>
+          {t.messenger.shouldUseSearch}
+        </span>
+      </div>
+    ) : (
+      filteredChatList?.map((item) => {
+        return (
+          <ChatsListItem
+            chosenChat={chosenChat}
+            item={item}
+            key={item.id}
+            onGetDialogPartnerMessagesById={onGetDialogPartnerMessagesById}
+          />
+        )
+      })
+    )
 
   return (
     <div
@@ -36,30 +60,16 @@ export const ChatsList = observer(({ chatsList }: Props) => {
         'col-span-1 row-span-1 border-r flex justify-start items-center flex-col border-dark-300 bg-dark-500'
       }
     >
-      {!chatsList || chatsList.items.length === 0 ? (
+      {!filteredChatList || isLoading ? (
         <div
           className={
             'w-full h-full flex justify-center flex-col gap-5 items-center px-2'
           }
         >
-          <span className={'text-pretty text-center'}>
-            {t.messenger.noMessages}
-          </span>
-          <span className={'text-pretty text-center'}>
-            {t.messenger.shouldUseSearch}
-          </span>
+          <CircleLoader className={'pt-0'} />
         </div>
       ) : (
-        chatsList.items.map((item) => {
-          return (
-            <ChatsListItem
-              chosenChat={chosenChat}
-              item={item}
-              key={item.id}
-              onGetDialogPartnerMessagesById={onGetDialogPartnerMessagesById}
-            />
-          )
-        })
+        ChatList
       )}
     </div>
   )

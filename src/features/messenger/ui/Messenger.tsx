@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect } from 'react'
 
-import { TextField, Typography, useTranslation } from '@/common'
+import { Typography, useTranslation } from '@/common'
+import { FindChat } from '@/features/messenger/ui/FindChat'
 import { observer } from 'mobx-react-lite'
 
 import { messengerStore } from '../model/stores/messengerStore'
@@ -13,25 +14,6 @@ export const Messenger = observer(() => {
   const disconnectMessengerWSEvents = messengerStore.disconnectMessengerWSEvents
   const getMessengerData = messengerStore.getMessengerData
   const { t } = useTranslation()
-  const chatsList = messengerStore.chatsListData
-  const [searchName, setSearchName] = useState('')
-
-  const filteredChatsList = useMemo(() => {
-    if (!chatsList) {
-      return null
-    }
-
-    if (!searchName.trim()) {
-      return chatsList
-    }
-
-    return {
-      ...chatsList,
-      items: chatsList.items.filter((item) =>
-        item.userName.toLowerCase().includes(searchName.toLowerCase())
-      ),
-    }
-  }, [chatsList, searchName])
 
   useEffect(() => {
     const controller = new AbortController()
@@ -63,25 +45,9 @@ export const Messenger = observer(() => {
             'border border-dark-300 grid grid-cols-[minmax(0,270px)_1fr] grid-rows-[72px_calc(theme(height.headCalc)-82px-151px)] flex-1'
           }
         >
-          <div
-            className={
-              'px-3 col-span-1 row-span-1 border-r border-b border-dark-300 bg-dark-500 flex items-center'
-            }
-          >
-            <TextField
-              bottomMarginForError={false}
-              label={''}
-              onChange={(e) => {
-                setSearchName(e.currentTarget.value)
-              }}
-              placeholder={t.messenger.searchPlaceholder}
-              type={'search'}
-              value={searchName}
-            />
-          </div>
-
+          <FindChat />
           <PartnerInfo />
-          <ChatsList chatsList={filteredChatsList} />
+          <ChatsList />
           <Chat />
         </div>
       </div>

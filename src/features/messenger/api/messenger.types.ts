@@ -47,7 +47,7 @@ export type GetMessengerDataArgs = {
 
 export type GetDialogPartnerMessagesByIdArgs = {
   cursor?: number
-  dialogPartnerId: number
+  dialogPartnerId?: number
   pageSize?: number
   signal?: AbortSignal
 }
