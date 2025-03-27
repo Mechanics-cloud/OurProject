@@ -1,12 +1,6 @@
 import { PropsWithChildren } from 'react'
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from '@/common'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/common'
 import { DialogProps } from '@radix-ui/react-dialog'
 
 type Props = {
@@ -29,11 +23,11 @@ export const SimpleModal = ({
       open={open}
       {...rest}
     >
-      <DialogContent className={'max-w-[378px]'}>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>
-        <DialogDescription className={className}>{children}</DialogDescription>
+        {children}
       </DialogContent>
     </Dialog>
   )

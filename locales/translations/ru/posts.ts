@@ -31,6 +31,7 @@ export const post = {
   deletePostDescription: 'Вы действительно хотите удалить этот пост?',
   editDescription: 'Редактировать публикацию',
   editPost: 'Редактировать пост',
+  follow: 'Подписаться',
   likes: {
     few: '{{value}} "Лайка"',
     many: '{{value}} "Лайков"',

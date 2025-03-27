@@ -25,8 +25,10 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     error,
     errorMode = 'text',
     label,
+    onChange,
     required = false,
     type = 'text',
+    value,
     ...rest
   } = props
 
@@ -74,11 +76,13 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           title={error ?? ''}
         >
           <input
-            className={cls.input}
+            className={cn(cls.input, type === 'search' && 'bg-transparent')}
             disabled={disabled}
+            onChange={onChange}
             ref={ref}
             required={required}
             type={type === 'search' || open ? 'text' : type}
+            value={value}
             {...rest}
           />
         </Tooltip>

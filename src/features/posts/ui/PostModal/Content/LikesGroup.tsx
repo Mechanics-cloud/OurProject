@@ -6,30 +6,31 @@ import {
   PublicPaths,
   Typography,
   getPluralForm,
+  useModal,
   useTranslation,
 } from '@/common'
 import { generalStore } from '@/core/store'
-import { usePostStore } from '@/features/posts'
+import { LikesModal, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 export const LikesGroup = observer(() => {
   const { t } = useTranslation()
   const { likeStore, postStore } = usePostStore()
-  const { getLikes, items, totalCount } = likeStore
+  const { isModalOpen, onModalClose, openModal } = useModal()
   const { user } = generalStore
 
   useEffect(() => {
     if (postStore.post?.id && user) {
-      getLikes(postStore.post.id)
+      likeStore.getLikes(postStore.post.id)
     }
-  }, [postStore.post?.id, user, getLikes])
+  }, [postStore.post?.id, user, likeStore.getLikes, likeStore])
 
   return (
     <div className={'flex items-center min-h-9'}>
-      {items && !!items.length && (
+      {likeStore.items && !!likeStore.items.length && (
         <div className={'relative flex items-center'}>
-          {items?.slice(0, 3).map((item, index, array) => (
+          {likeStore.items?.slice(0, 3).map((item, index, array) => (
             <Link
               className={`relative z-${(array.length - index) * 10}`}
               href={PathService.generatePath(PublicPaths.userProfile, {
@@ -52,11 +53,18 @@ export const LikesGroup = observer(() => {
         </div>
       )}
       <Typography
-        className={'ml-2'}
+        className={'ml-2 cursor-pointer'}
+        onClick={openModal}
         variant={'reg14'}
       >
-        {getPluralForm({ key: t.post.likes, value: totalCount })}
+        {getPluralForm({ key: t.post.likes, value: likeStore.totalCount })}
       </Typography>
+      {isModalOpen && (
+        <LikesModal
+          isModalOpen={isModalOpen}
+          onModalClose={onModalClose}
+        />
+      )}
     </div>
   )
 })
