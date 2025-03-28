@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import { Button, useTranslation } from '@/common'
 import { followSystemStore } from '@/features/followSystem/model/followSystemStore'
@@ -13,14 +13,20 @@ export const FollowButtons = observer(
   ({ className, isFollowing, userId }: Props) => {
     const { t } = useTranslation()
 
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+
     const onUnsubscribeFromUser = () => {
-      followSystemStore.unsubscribeFromUser(userId)
+      setIsLoading(true)
+      followSystemStore.unsubscribeFromUser(userId).then((res) => {
+        setIsLoading(false)
+      })
     }
     const onSubscribeFromUser = () => {
-      followSystemStore.subscribeToUser(userId)
+      setIsLoading(true)
+      followSystemStore.subscribeToUser(userId).then((res) => {
+        setIsLoading(false)
+      })
     }
-
-    const isLoading = followSystemStore.isLoading
 
     return isFollowing ? (
       <Button

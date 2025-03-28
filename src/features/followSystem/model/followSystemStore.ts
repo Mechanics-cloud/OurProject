@@ -57,32 +57,28 @@ class FollowSystemStore {
 
   async subscribeToUser(userId: number) {
     try {
-      this.isLoading = true
-      await followSystemAPi.subscribeToUser(userId)
+      const promise = await followSystemAPi.subscribeToUser(userId)
+
       runInAction(() => {
         this.followingUsers.set(userId, '')
       })
+
+      return promise
     } catch (error) {
       responseErrorHandler(error)
-    } finally {
-      runInAction(() => {
-        this.isLoading = false
-      })
     }
   }
   async unsubscribeFromUser(userId: number) {
     try {
-      this.isLoading = true
-      await followSystemAPi.unsubscribeFromUser(userId)
+      const promise = await followSystemAPi.unsubscribeFromUser(userId)
+
       runInAction(() => {
         this.removeUserFromFollowingUsers(userId)
       })
+
+      return promise
     } catch (error) {
       responseErrorHandler(error)
-    } finally {
-      runInAction(() => {
-        this.isLoading = false
-      })
     }
   }
 }
