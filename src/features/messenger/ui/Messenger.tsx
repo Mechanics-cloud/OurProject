@@ -1,31 +1,16 @@
-import { useEffect } from 'react'
-
 import { Typography, useTranslation } from '@/common'
-import { FindChat } from '@/features/messenger/ui/FindChat'
 import { observer } from 'mobx-react-lite'
 
-import { messengerStore } from '../model/stores/messengerStore'
+import { useMessenger } from '../model/useMessenger'
 import { Chat } from './Chat'
+import { FindChat } from './FindChat'
 import { PartnerInfo } from './PartnerInfo'
 import { ChatsList } from './chatsList/ChatsList'
 
 export const Messenger = observer(() => {
-  const connectMessengerWSEvents = messengerStore.connectMessengerWSEvents
-  const disconnectMessengerWSEvents = messengerStore.disconnectMessengerWSEvents
-  const getMessengerData = messengerStore.getMessengerData
   const { t } = useTranslation()
 
-  useEffect(() => {
-    const controller = new AbortController()
-
-    connectMessengerWSEvents()
-    getMessengerData({ signal: controller.signal })
-
-    return () => {
-      disconnectMessengerWSEvents()
-      controller.abort()
-    }
-  }, [connectMessengerWSEvents, disconnectMessengerWSEvents, getMessengerData])
+  useMessenger()
 
   return (
     <div className={'flex justify-center items-center'}>

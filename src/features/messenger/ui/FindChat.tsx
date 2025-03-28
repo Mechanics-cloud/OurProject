@@ -1,24 +1,10 @@
-import { ChangeEvent, useEffect, useState } from 'react'
-
-import { TextField, useDebounce, useTranslation } from '@/common'
-import { messengerStore } from '@/features/messenger/model/stores/messengerStore'
-import { runInAction } from 'mobx'
+import { TextField } from '@/common'
 import { observer } from 'mobx-react-lite'
 
+import { useFindChat } from '../model/useFindChat'
+
 export const FindChat = observer(() => {
-  const [inputText, setInputText] = useState('')
-  const { t } = useTranslation()
-  const debounceValue = useDebounce(inputText)
-
-  const onFindChat = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputText(e.currentTarget.value)
-  }
-
-  useEffect(() => {
-    runInAction(() => {
-      messengerStore.searchName = debounceValue
-    })
-  }, [debounceValue])
+  const { inputText, onFindChat, searchPlaceholder } = useFindChat()
 
   return (
     <div
@@ -30,7 +16,7 @@ export const FindChat = observer(() => {
         bottomMarginForError={false}
         label={''}
         onChange={onFindChat}
-        placeholder={t.messenger.searchPlaceholder}
+        placeholder={searchPlaceholder}
         type={'search'}
         value={inputText}
       />

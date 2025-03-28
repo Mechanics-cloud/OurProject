@@ -51,11 +51,6 @@ export type GetDialogPartnerMessagesByIdArgs = {
   signal?: AbortSignal
 }
 
-export type DeleteMessageByMessageIdArgs = {
-  messageId: number
-  signal?: AbortSignal
-}
-
 export type SendWSMessagesPayload = {
   message: string
   receiverId: number

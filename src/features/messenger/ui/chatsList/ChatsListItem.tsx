@@ -1,38 +1,51 @@
-import React from 'react'
-
-import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
-import { Nullable, ProtectedPaths, Typography, cn } from '@/common'
-import { formatIsoDateToShortDate } from '@/common/utils/formateChatDate'
-import { generalStore } from '@/core/store'
+import { Nullable, Typography, cn } from '@/common'
 import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
 
-import { Message, PartnerInfoDTO } from '../../api'
+import { Message } from '../../api'
+import { useChatsListItem } from '../../model/useChatsListItem'
+import { Wrapper } from './Wrapper'
 
 type Props = {
-  chosenChat: Nullable<number>
+  chosenChatId: Nullable<number>
+  className?: string
   item: Message
-  onGetDialogPartnerMessagesById: (
-    partnerId: number,
-    info: PartnerInfoDTO
-  ) => void
+  setChosenChatId: (partnerId: number) => void
 }
-export const ChatsListItem = ({
-  chosenChat,
-  item,
-  onGetDialogPartnerMessagesById,
-}: Props) => {
-  const router = useRouter()
-  const userId = generalStore.user?.userId
-  const { avatars, createdAt, messageText, ownerId, receiverId, userName } =
-    item
-  const createdDateAt = formatIsoDateToShortDate(createdAt, router.locale)
-  const avatar = avatars.length === 0 ? avatarPlaceholder : avatars[1].url
-  const partnerId = ownerId === userId ? receiverId : ownerId
 
-  const ItemContent = (
-    <>
+export const ChatsListItem = ({
+  chosenChatId,
+  className,
+  item,
+  setChosenChatId,
+}: Props) => {
+  const {
+    Component,
+    avatar,
+    createdDateAt,
+    isChosen,
+    isLoading,
+    messageText,
+    userName,
+    wrapperProps,
+  } = useChatsListItem({
+    chosenChatId,
+    item,
+    setChosenChatId,
+  })
+
+  return (
+    <Wrapper
+      as={Component}
+      className={cn(
+        'flex w-full p-3 gap-3 border-b border-dark-300 transition-colors duration-500',
+        isChosen
+          ? 'bg-dark-100'
+          : !isLoading && 'hover:bg-dark-100 cursor-pointer',
+        isLoading && 'animate-pulse',
+        className
+      )}
+      {...wrapperProps}
+    >
       <div
         className={
           'h-[48px] aspect-square relative rounded-full overflow-hidden'
@@ -62,35 +75,6 @@ export const ChatsListItem = ({
           {messageText}
         </Typography>
       </div>
-    </>
-  )
-
-  const commonClasses = cn(
-    'flex w-full p-3 gap-3 border-b border-dark-300 transition-colors duration-500',
-    chosenChat === partnerId
-      ? 'bg-dark-100'
-      : 'hover:bg-dark-100 cursor-pointer'
-  )
-
-  return chosenChat === partnerId ? (
-    <div className={commonClasses}>{ItemContent}</div>
-  ) : (
-    <Link
-      className={commonClasses}
-      href={{
-        pathname: ProtectedPaths.messenger,
-        query: { dialogPartnerId: partnerId },
-      }}
-      onClick={() =>
-        onGetDialogPartnerMessagesById(partnerId, {
-          avatars: avatars,
-          partnerId,
-          userName: userName,
-        })
-      }
-      shallow
-    >
-      {ItemContent}
-    </Link>
+    </Wrapper>
   )
 }

@@ -1,10 +1,4 @@
-import React, {
-  FormEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { FormEvent, useCallback, useEffect, useRef, useState } from 'react'
 
 import {
   CheckmarkOutline,
@@ -17,12 +11,14 @@ import {
   Button,
   CircleLoader,
   Nullable,
+  SimpleModal,
   Typography,
   cn,
+  formatIsoDateToShortDate,
+  getTextAreaClasses,
+  useModal,
   useTranslation,
 } from '@/common'
-import { getTextAreaClasses } from '@/common/components/textarea/helper'
-import { formatIsoDateToShortDate } from '@/common/utils/formateChatDate'
 import { generalStore } from '@/core/store'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
@@ -32,11 +28,13 @@ import { messengerStore } from '../model/stores/messengerStore'
 
 type ChosenMessage = {
   id: number
+  isDelete: boolean
   message: string
 }
 
 export const Chat = observer(() => {
   const dialogPartnerMessages = messengerStore.dialogPartnerMessages
+  const deleteMessageByMessageId = messengerStore.deleteMessageByMessageId
   const isChatLoading = messengerStore.isChatLoading
   const updateWSMessage = messengerStore.updateWSMessage
   const dialogPartnerInfo = messengerStore.dialogPartnerInfo
@@ -45,7 +43,7 @@ export const Chat = observer(() => {
   const userId = generalStore.user?.userId
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const textFieldRef = useRef<HTMLTextAreaElement>(null)
-  const [textAreaMessage, setTextAreaMessage] = useState<string>('')
+  const { isModalOpen, onModalClose, openModal } = useModal()
 
   const router = useRouter()
   const dialogPartnerId = router.query.dialogPartnerId
@@ -56,10 +54,20 @@ export const Chat = observer(() => {
     messengerStore.getDialogPartnerMessagesById
   const observer = useRef<Nullable<IntersectionObserver>>(null)
   const [cursor, setCursor] = useState<number | undefined>()
+  const [textAreaMessage, setTextAreaMessage] = useState<string>('')
   const [isMessageLoading, setIsMessageLoading] = useState<boolean>(false)
   const [isNoMoreMessages, setIsNoMoreMessages] = useState<boolean>(false)
   const [chosenMessages, setChosenMessages] = useState<ChosenMessage[]>([])
   const [isEditMessage, setIsEditMessage] = useState<boolean>(false)
+  const [isDeleteMessage, setIsDeleteMessage] = useState<boolean>(false)
+
+  useEffect(() => {
+    setChosenMessages([])
+    setIsMessageLoading(false)
+    setIsNoMoreMessages(false)
+    setIsEditMessage(false)
+    setIsDeleteMessage(false)
+  }, [isChatLoading])
 
   useEffect(() => {
     setCursor(undefined)
@@ -87,6 +95,15 @@ export const Chat = observer(() => {
       controller.abort()
     }
   }, [getDialogPartnerMessagesById, dialogPartnerId, cursor])
+
+  useEffect(() => {
+    if (textFieldRef.current) {
+      textFieldRef.current.style.height = '0px'
+      const scrollHeight = textFieldRef.current.scrollHeight
+
+      textFieldRef.current.style.height = scrollHeight + 'px'
+    }
+  }, [textFieldRef, textAreaMessage])
 
   const lastPostElementRef = useCallback(
     (node: HTMLDivElement) => {
@@ -146,14 +163,20 @@ export const Chat = observer(() => {
     setTextAreaMessage('')
   }
 
-  useEffect(() => {
-    if (textFieldRef.current) {
-      textFieldRef.current.style.height = '0px'
-      const scrollHeight = textFieldRef.current.scrollHeight
+  const onDeleteMessageById = async () => {
+    const idsArray = chosenMessages.map((el) => el.id)
 
-      textFieldRef.current.style.height = scrollHeight + 'px'
-    }
-  }, [textFieldRef, textAreaMessage])
+    setIsDeleteMessage(true)
+    setChosenMessages((prev) => {
+      return prev.map((el) =>
+        idsArray.includes(el.id) ? { ...el, isDelete: true } : el
+      )
+    })
+    onModalClose()
+    await deleteMessageByMessageId(idsArray)
+    setChosenMessages([])
+    setIsDeleteMessage(false)
+  }
 
   const Chat = dialogPartnerMessages ? (
     <div className={'w-full h-full flex flex-col items-center justify-end '}>
@@ -202,9 +225,13 @@ export const Chat = observer(() => {
                     ? 'bg-dark-300'
                     : 'bg-accent-900 cursor-pointer',
                   isChosenMessage && 'bg-accent-300',
+                  isChosenMessage?.isDelete && 'animate-pulse',
                   'rounded-lg py-[7px] px-3 flex flex-col items-end justify-center'
                 )}
                 onClick={() => {
+                  if (isEditMessage || isDeleteMessage) {
+                    return
+                  }
                   setChosenMessages((prev) => {
                     const containIndex = prev.findIndex(
                       (el) => el.id === message.id
@@ -216,7 +243,11 @@ export const Chat = observer(() => {
 
                     return [
                       ...prev,
-                      { id: message.id, message: message.messageText },
+                      {
+                        id: message.id,
+                        isDelete: false,
+                        message: message.messageText,
+                      },
                     ]
                   })
                 }}
@@ -326,28 +357,50 @@ export const Chat = observer(() => {
         >
           {chosenMessages.length === 1 ? (
             <Button
-              disabled={isEditMessage}
+              disabled={isEditMessage || isDeleteMessage}
               onClick={() => {
                 setIsEditMessage(true)
                 setTextAreaMessage(chosenMessages[0].message)
                 textFieldRef.current?.focus()
               }}
             >
-              Изменить
+              {t.messenger.change}
             </Button>
           ) : null}
           <Button
-            disabled={isEditMessage}
-            // onClick={() => {
-            //   setTextAreaMessage('vibrano')
-            //   textFieldRef.current?.focus()
-            // }}
+            disabled={isEditMessage || isDeleteMessage}
+            onClick={openModal}
           >
-            Удалить
+            {t.messenger.delete}
           </Button>
         </div>
       ) : null}
       {isChatLoading ? <CircleLoader className={'pt-0'} /> : Chat}
+      <SimpleModal
+        className={'w-40'}
+        onOpenChange={onModalClose}
+        open={isModalOpen}
+        title={t.messenger.delete}
+      >
+        <div
+          className={
+            'w-full h-full flex flex-col items-center justify-center pt-2 pb-6 px-4 gap-7'
+          }
+        >
+          <Typography variant={'bold16'}>
+            {t.messenger.deleteConfirm(chosenMessages.length)}
+          </Typography>
+          <div className={'flex items-center justify-end w-full h-full gap-6'}>
+            <Button
+              onClick={onDeleteMessageById}
+              variant={'outline'}
+            >
+              {t.basic.yes}
+            </Button>
+            <Button onClick={onModalClose}>{t.basic.no}</Button>
+          </div>
+        </div>
+      </SimpleModal>
     </div>
   )
 })

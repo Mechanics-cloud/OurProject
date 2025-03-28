@@ -4,7 +4,6 @@ import { AxiosInstance } from 'axios'
 import { MessengerEndpoints } from './messenger.endpoints'
 import {
   ChatsListDTO,
-  DeleteMessageByMessageIdArgs,
   GetDialogPartnerMessagesByIdArgs,
   GetMessengerDataArgs,
   PartnerMessagesDTO,
@@ -13,11 +12,8 @@ import {
 class MessengerApi {
   constructor(private instance: AxiosInstance) {}
 
-  async deleteMessageByMessageId(args: DeleteMessageByMessageIdArgs) {
-    await this.instance.delete(
-      MessengerEndpoints.deleteMessageByMessageId(args.messageId),
-      { signal: args.signal }
-    )
+  async deleteMessageByMessageId(id: number) {
+    await this.instance.delete(MessengerEndpoints.deleteMessageByMessageId(id))
   }
 
   async getDialogPartnerMessagesById(
