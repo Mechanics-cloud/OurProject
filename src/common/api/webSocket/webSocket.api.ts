@@ -55,7 +55,7 @@ export class WebSocketApi {
     }
   }
 
-  static emit(eventName: string, ...args: any[]) {
+  static emit<T = any>(eventName: string, ...args: T[]) {
     if (this.socket && this.socket.connected) {
       console.log(`${eventName} emitted`)
       this.socket.emit(eventName, ...args)

@@ -5,12 +5,15 @@ import { makeAutoObservable, runInAction } from 'mobx'
 
 import {
   ChatsListDTO,
+  DeleteMessageByMessageIdArgs,
   GetDialogPartnerMessagesByIdArgs,
   GetMessengerDataArgs,
   MessengerSocketEvents,
   PartnerInfoDTO,
   PartnerMessage,
   PartnerMessagesDTO,
+  SendWSMessagesPayload,
+  UpdateWSMessagesPayload,
   messengerApi,
 } from '../../api'
 
@@ -46,7 +49,6 @@ class MessengerStore {
     ) {
       return
     }
-    debugger
     const { data, error } = await tryCatch(
       publicProfileAPi
         .getPublicUser(String(dialogPartnerId), signal)
@@ -66,27 +68,53 @@ class MessengerStore {
     })
   }
 
+  private handleMessageDelete(messageId: number) {
+    runInAction(() => {
+      if (!this.dialogPartnerMessages) {
+        return
+      }
+      debugger
+      this.dialogPartnerMessages.items =
+        this.dialogPartnerMessages.items.filter(
+          (message) => message.id !== messageId
+        )
+    })
+  }
+
   private handleMessageSend(
     message: PartnerMessage,
     acknowledge: (arg: { message: PartnerMessage; receiverId: number }) => void
   ) {
     runInAction(() => {
       acknowledge({ message, receiverId: message.receiverId })
-      if (this.dialogPartnerMessages) {
-        this.dialogPartnerMessages.items.unshift(message)
-        this.getMessengerData()
+      if (!this.dialogPartnerMessages) {
+        return
       }
+      this.dialogPartnerMessages.items.unshift(message)
+      this.getMessengerData()
     })
   }
 
   private handleReceiveMessage(message: PartnerMessage) {
     runInAction(() => {
-      if (this.dialogPartnerMessages) {
-        this.dialogPartnerMessages.items.unshift(message)
-        this.getMessengerData()
+      if (!this.dialogPartnerMessages) {
+        return
       }
+      const containIndex = this.dialogPartnerMessages.items.findIndex(
+        (el) => el.id === message.id
+      )
+
+      if (containIndex !== -1) {
+        this.dialogPartnerMessages.items[containIndex] = message
+
+        return
+      }
+
+      this.dialogPartnerMessages.items.unshift(message)
+      this.getMessengerData()
     })
   }
+
   connectMessengerWSEvents() {
     WebSocketApi.on<MessengerSocketEvents>({
       callback: this.handleReceiveMessage,
@@ -100,21 +128,21 @@ class MessengerStore {
       feature: 'messenger',
     })
 
-    // WebSocketApi.on<MessengerSocketEvents>({
-    //   callback: (...message) => {
-    //     console.log('UPDATE_MESSAGE', message)
-    //   },
-    //   eventName: MessengerSocketEvents.UPDATE_MESSAGE,
-    //   feature: 'messenger',
-    // })
-    //
-    // WebSocketApi.on<MessengerSocketEvents>({
-    //   callback: (...message) => {
-    //     console.log('MESSAGE_DELETED', message)
-    //   },
-    //   eventName: MessengerSocketEvents.MESSAGE_DELETED,
-    //   feature: 'messenger',
-    // })
+    WebSocketApi.on<MessengerSocketEvents>({
+      callback: this.handleMessageDelete,
+      eventName: MessengerSocketEvents.MESSAGE_DELETED,
+      feature: 'messenger',
+    })
+  }
+
+  async deleteMessageByMessageId(args: DeleteMessageByMessageIdArgs) {
+    const { error } = await tryCatch(
+      messengerApi.deleteMessageByMessageId(args)
+    )
+
+    if (error) {
+      responseErrorHandler(error)
+    }
   }
 
   disconnectMessengerWSEvents() {
@@ -122,7 +150,9 @@ class MessengerStore {
     this.clearMessengerStore()
   }
 
-  async getDialogPartnerMessagesById(args: GetDialogPartnerMessagesByIdArgs) {
+  async getDialogPartnerMessagesById(
+    args: { dialogPartnerId?: number } & GetDialogPartnerMessagesByIdArgs
+  ) {
     if (!args.dialogPartnerId) {
       this.isChatLoading = false
 
@@ -131,7 +161,10 @@ class MessengerStore {
     await this.getDialogPartnerInfo(args.dialogPartnerId, args.signal)
 
     const { data, error } = await tryCatch(
-      messengerApi.getDialogPartnerMessagesById(args)
+      messengerApi.getDialogPartnerMessagesById({
+        ...args,
+        dialogPartnerId: args.dialogPartnerId,
+      })
     )
 
     runInAction(() => {
@@ -161,7 +194,6 @@ class MessengerStore {
       this.isChatLoading = false
     })
   }
-
   async getMessengerData(args: GetMessengerDataArgs | void) {
     const { data, error } = await tryCatch(messengerApi.getMessengerData(args))
 
@@ -175,10 +207,13 @@ class MessengerStore {
     })
   }
   sendWSMessage(message: string, receiverId: number) {
-    WebSocketApi.emit(MessengerSocketEvents.RECEIVE_MESSAGE, {
-      message,
-      receiverId,
-    })
+    WebSocketApi.emit<SendWSMessagesPayload>(
+      MessengerSocketEvents.RECEIVE_MESSAGE,
+      {
+        message,
+        receiverId,
+      }
+    )
   }
 
   setDialogPartnerInfo(info: PartnerInfoDTO) {
@@ -186,6 +221,15 @@ class MessengerStore {
     this.dialogPartnerInfo = info
     this.dialogPartnerMessages = null
     this.partnerId = null
+  }
+  updateWSMessage(messageText: string, messageId: number) {
+    WebSocketApi.emit<UpdateWSMessagesPayload>(
+      MessengerSocketEvents.UPDATE_MESSAGE,
+      {
+        id: messageId,
+        message: messageText,
+      }
+    )
   }
 
   get getFilteredChatList() {

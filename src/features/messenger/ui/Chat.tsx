@@ -8,6 +8,7 @@ import React, {
 
 import {
   CheckmarkOutline,
+  Close,
   DoneAllOutline,
   PaperPlaneOutline,
 } from '@/assets/icons'
@@ -29,15 +30,22 @@ import { useRouter } from 'next/router'
 
 import { messengerStore } from '../model/stores/messengerStore'
 
+type ChosenMessage = {
+  id: number
+  message: string
+}
+
 export const Chat = observer(() => {
   const dialogPartnerMessages = messengerStore.dialogPartnerMessages
   const isChatLoading = messengerStore.isChatLoading
+  const updateWSMessage = messengerStore.updateWSMessage
   const dialogPartnerInfo = messengerStore.dialogPartnerInfo
   const sendMessageWS = messengerStore.sendWSMessage
   const { t } = useTranslation()
   const userId = generalStore.user?.userId
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const [message, setMessage] = useState<string>('')
+  const textFieldRef = useRef<HTMLTextAreaElement>(null)
+  const [textAreaMessage, setTextAreaMessage] = useState<string>('')
 
   const router = useRouter()
   const dialogPartnerId = router.query.dialogPartnerId
@@ -50,6 +58,8 @@ export const Chat = observer(() => {
   const [cursor, setCursor] = useState<number | undefined>()
   const [isMessageLoading, setIsMessageLoading] = useState<boolean>(false)
   const [isNoMoreMessages, setIsNoMoreMessages] = useState<boolean>(false)
+  const [chosenMessages, setChosenMessages] = useState<ChosenMessage[]>([])
+  const [isEditMessage, setIsEditMessage] = useState<boolean>(false)
 
   useEffect(() => {
     setCursor(undefined)
@@ -120,12 +130,30 @@ export const Chat = observer(() => {
 
   const onSendMessage = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!message.trim()) {
+    if (isEditMessage) {
+      updateWSMessage(textAreaMessage, chosenMessages[0].id)
+      setTextAreaMessage('')
+      setIsEditMessage(false)
+      setChosenMessages([])
+
       return
     }
-    sendMessageWS(message.trim(), dialogPartnerInfo!.partnerId)
-    setMessage('')
+
+    if (!textAreaMessage.trim()) {
+      return
+    }
+    sendMessageWS(textAreaMessage.trim(), dialogPartnerInfo!.partnerId)
+    setTextAreaMessage('')
   }
+
+  useEffect(() => {
+    if (textFieldRef.current) {
+      textFieldRef.current.style.height = '0px'
+      const scrollHeight = textFieldRef.current.scrollHeight
+
+      textFieldRef.current.style.height = scrollHeight + 'px'
+    }
+  }, [textFieldRef, textAreaMessage])
 
   const Chat = dialogPartnerMessages ? (
     <div className={'w-full h-full flex flex-col items-center justify-end '}>
@@ -141,6 +169,9 @@ export const Chat = observer(() => {
           const createdAt = formatIsoDateToShortDate(
             message.createdAt,
             router.locale
+          )
+          const isChosenMessage = chosenMessages.find(
+            (el) => el.id === message.id
           )
 
           return (
@@ -167,9 +198,28 @@ export const Chat = observer(() => {
               )}
               <div
                 className={cn(
-                  isPartnerMessage ? 'bg-dark-300' : 'bg-accent-900',
+                  isPartnerMessage
+                    ? 'bg-dark-300'
+                    : 'bg-accent-900 cursor-pointer',
+                  isChosenMessage && 'bg-accent-300',
                   'rounded-lg py-[7px] px-3 flex flex-col items-end justify-center'
                 )}
+                onClick={() => {
+                  setChosenMessages((prev) => {
+                    const containIndex = prev.findIndex(
+                      (el) => el.id === message.id
+                    )
+
+                    if (containIndex !== -1) {
+                      return prev.toSpliced(containIndex, 1)
+                    }
+
+                    return [
+                      ...prev,
+                      { id: message.id, message: message.messageText },
+                    ]
+                  })
+                }}
               >
                 <Typography variant={'reg14'}>{message.messageText}</Typography>
                 <Typography
@@ -199,12 +249,41 @@ export const Chat = observer(() => {
         )}
       </div>
       <form
-        className={'flex w-full'}
+        className={'flex w-full relative'}
         onSubmit={onSendMessage}
       >
+        {isEditMessage ? (
+          <div className={'absolute -top-9 w-full h-9 bg-accent-300 '}>
+            <div
+              className={
+                'flex items-center justify-between w-full h-full relative'
+              }
+            >
+              <Typography
+                className={
+                  'whitespace-nowrap overflow-hidden text-ellipsis px-3'
+                }
+              >
+                {chosenMessages[0].message}
+              </Typography>
+              <Button
+                className={
+                  'h-full flex justify-center items-center text-light-100 py-0 px-3'
+                }
+                onClick={() => {
+                  setIsEditMessage(false)
+                  setTextAreaMessage('')
+                }}
+                variant={'text'}
+              >
+                <Close />
+              </Button>
+            </div>
+          </div>
+        ) : null}
         <textarea
-          className={cn(getTextAreaClasses(false), 'resize-none')}
-          onChange={(e) => setMessage(e.currentTarget.value)}
+          className={cn(getTextAreaClasses(false), 'resize-none max-h-[108px]')}
+          onChange={(e) => setTextAreaMessage(e.currentTarget.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter' && !e.shiftKey) {
               e.preventDefault()
@@ -212,14 +291,15 @@ export const Chat = observer(() => {
             }
           }}
           placeholder={t.messenger.typeMessage}
+          ref={textFieldRef}
           rows={1}
-          value={message}
+          value={textAreaMessage}
         />
         <Button
           className={
             'h-full flex justify-center items-center text-light-100 py-0 px-3'
           }
-          disabled={!message.trim()}
+          disabled={!textAreaMessage.trim()}
           variant={'text'}
         >
           <PaperPlaneOutline />
@@ -233,7 +313,40 @@ export const Chat = observer(() => {
   )
 
   return (
-    <div className={'col-span-1 row-span-1 flex items-center justify-center'}>
+    <div
+      className={
+        'col-span-1 row-span-1 flex items-center justify-center relative'
+      }
+    >
+      {chosenMessages.length ? (
+        <div
+          className={
+            'absolute w-full top-0 flex items-center justify-end bg-dark-500 p-3 gap-2'
+          }
+        >
+          {chosenMessages.length === 1 ? (
+            <Button
+              disabled={isEditMessage}
+              onClick={() => {
+                setIsEditMessage(true)
+                setTextAreaMessage(chosenMessages[0].message)
+                textFieldRef.current?.focus()
+              }}
+            >
+              Изменить
+            </Button>
+          ) : null}
+          <Button
+            disabled={isEditMessage}
+            // onClick={() => {
+            //   setTextAreaMessage('vibrano')
+            //   textFieldRef.current?.focus()
+            // }}
+          >
+            Удалить
+          </Button>
+        </div>
+      ) : null}
       {isChatLoading ? <CircleLoader className={'pt-0'} /> : Chat}
     </div>
   )

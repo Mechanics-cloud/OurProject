@@ -47,7 +47,21 @@ export type GetMessengerDataArgs = {
 
 export type GetDialogPartnerMessagesByIdArgs = {
   cursor?: number
-  dialogPartnerId?: number
   pageSize?: number
   signal?: AbortSignal
+}
+
+export type DeleteMessageByMessageIdArgs = {
+  messageId: number
+  signal?: AbortSignal
+}
+
+export type SendWSMessagesPayload = {
+  message: string
+  receiverId: number
+}
+
+export type UpdateWSMessagesPayload = {
+  id: number
+  message: string
 }
