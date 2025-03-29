@@ -8,56 +8,46 @@ export const ChatsList = observer(() => {
   const { chosenChatId, filteredChatList, setChosenChatId, text } =
     useChatList()
 
-  const renderContent = () => {
-    if (!filteredChatList) {
-      return (
-        <div
-          className={
-            'w-full h-full flex justify-center flex-col gap-5 items-center px-2'
-          }
-        >
-          <CircleLoader className={'pt-0'} />
-        </div>
-      )
-    }
-
-    if (filteredChatList.length === 0) {
-      return (
-        <div
-          className={
-            'w-full h-full flex justify-center flex-col gap-5 items-center px-2'
-          }
-        >
-          <span className={'text-pretty text-center'}>{text.noMessages}</span>
-          <span className={'text-pretty text-center'}>
-            {text.shouldUseSearch}
-          </span>
-        </div>
-      )
-    }
-
+  if (!filteredChatList) {
     return (
-      <ScrollArea
-        className={'h-full'}
-        isPaddingRight={false}
+      <div
+        className={
+          'w-full h-full flex justify-center flex-col gap-5 items-center px-2'
+        }
       >
-        {filteredChatList.map((item) => (
-          <ChatsListItem
-            chosenChatId={chosenChatId}
-            item={item}
-            key={item.id}
-            setChosenChatId={setChosenChatId}
-          />
-        ))}
-      </ScrollArea>
+        <CircleLoader className={'pt-0'} />
+      </div>
+    )
+  }
+
+  if (filteredChatList.length === 0) {
+    return (
+      <div
+        className={
+          'w-full h-full flex justify-center flex-col gap-5 items-center px-2'
+        }
+      >
+        <span className={'text-pretty text-center'}>{text.noMessages}</span>
+        <span className={'text-pretty text-center'}>
+          {text.shouldUseSearch}
+        </span>
+      </div>
     )
   }
 
   return (
-    <div
-      className={'col-span-1 row-span-1 border-r border-dark-300 bg-dark-500'}
+    <ScrollArea
+      className={'h-full'}
+      isPaddingRight={false}
     >
-      {renderContent()}
-    </div>
+      {filteredChatList.map((item) => (
+        <ChatsListItem
+          chosenChatId={chosenChatId}
+          item={item}
+          key={item.id}
+          setChosenChatId={setChosenChatId}
+        />
+      ))}
+    </ScrollArea>
   )
 })

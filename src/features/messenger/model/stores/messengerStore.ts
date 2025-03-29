@@ -29,14 +29,6 @@ class MessengerStore {
     makeAutoObservable(this, {}, { autoBind: true })
   }
 
-  private clearMessengerStore() {
-    this.dialogPartnerInfo = null
-    this.dialogPartnerMessages = null
-    this.chatsListData = null
-    this.partnerId = null
-    this.isLoading = true
-    this.isChatLoading = true
-  }
   private async getDialogPartnerInfo(
     dialogPartnerId: number,
     signal?: AbortSignal
@@ -65,7 +57,6 @@ class MessengerStore {
       }
     })
   }
-
   private handleMessageDelete(messageId: number) {
     runInAction(() => {
       if (!this.dialogPartnerMessages) {
@@ -110,6 +101,15 @@ class MessengerStore {
 
       this.getMessengerData()
     })
+  }
+
+  clearMessengerStore() {
+    this.dialogPartnerInfo = null
+    this.dialogPartnerMessages = null
+    this.chatsListData = null
+    this.partnerId = null
+    this.isLoading = true
+    this.isChatLoading = true
   }
 
   connectMessengerWSEvents() {

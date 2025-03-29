@@ -45,7 +45,7 @@ export const NotificationsSocketProvider = observer(
         disconnectMessengerWSEvents()
         WebSocketApi.disconnectGlobalWS()
       }
-    }, [isAuthenticated])
+    }, [connectMessengerWSEvents, disconnectMessengerWSEvents, isAuthenticated])
 
     return (
       <NotificationsSocketContext.Provider

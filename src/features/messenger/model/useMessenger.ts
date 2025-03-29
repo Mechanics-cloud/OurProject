@@ -4,6 +4,7 @@ import { messengerStore } from '../model/stores/messengerStore'
 
 export const useMessenger = () => {
   const getMessengerData = messengerStore.getMessengerData
+  const clearMessengerStore = messengerStore.clearMessengerStore
 
   useEffect(() => {
     const controller = new AbortController()
@@ -11,7 +12,8 @@ export const useMessenger = () => {
     getMessengerData({ signal: controller.signal })
 
     return () => {
+      clearMessengerStore()
       controller.abort()
     }
-  }, [getMessengerData])
+  }, [clearMessengerStore, getMessengerData])
 }
