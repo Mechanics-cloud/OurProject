@@ -1,8 +1,6 @@
-import { Nullable, responseErrorHandler, tryCatch } from '@/common'
+import { Nullable, tryCatch } from '@/common'
 import { WebSocketApi } from '@/common/api'
-import { publicProfileAPi } from '@/features/profile'
-import { makeAutoObservable, runInAction } from 'mobx'
-
+import { generalStore } from '@/core/store'
 import {
   ChatsListDTO,
   GetDialogPartnerMessagesByIdArgs,
@@ -14,13 +12,16 @@ import {
   SendWSMessagesPayload,
   UpdateWSMessagesPayload,
   messengerApi,
-} from '../../api'
+} from '@/features/messenger/api'
+import { publicProfileAPi } from '@/features/profile'
+import { makeAutoObservable, runInAction } from 'mobx'
 
 class MessengerStore {
   private partnerId: Nullable<number> = null
   chatsListData: Nullable<ChatsListDTO> = null
   dialogPartnerInfo: Nullable<PartnerInfoDTO> = null
   dialogPartnerMessages: Nullable<PartnerMessagesDTO> = null
+  hasNewMessage: Nullable<number> = null
   isChatLoading: boolean = true
   isLoading: boolean = true
   searchName: string = ''
@@ -39,7 +40,7 @@ class MessengerStore {
     ) {
       return
     }
-    const { data, error } = await tryCatch(
+    const { data } = await tryCatch(
       publicProfileAPi
         .getPublicUser(String(dialogPartnerId), signal)
         .then((res) => ({
@@ -52,21 +53,20 @@ class MessengerStore {
     runInAction(() => {
       if (data) {
         this.dialogPartnerInfo = data
-      } else {
-        responseErrorHandler(error)
       }
     })
   }
+
   private handleMessageDelete(messageId: number) {
     runInAction(() => {
       if (!this.dialogPartnerMessages) {
         return
       }
+      this.getMessengerData()
       this.dialogPartnerMessages.items =
         this.dialogPartnerMessages.items.filter(
           (message) => message.id !== messageId
         )
-      this.getMessengerData()
     })
   }
 
@@ -76,37 +76,54 @@ class MessengerStore {
   ) {
     runInAction(() => {
       acknowledge({ message, receiverId: message.receiverId })
-      if (!this.dialogPartnerMessages) {
+      this.getMessengerData()
+      this.hasNewMessage = message.ownerId
+      const ownerId = this.dialogPartnerMessages?.items[0].ownerId
+      const receiverId = this.dialogPartnerMessages?.items[0].receiverId
+
+      if (
+        !this.dialogPartnerMessages ||
+        (message.ownerId !== ownerId && message.ownerId !== receiverId)
+      ) {
         return
       }
       this.dialogPartnerMessages.items.unshift(message)
-      this.getMessengerData()
+      this.hasNewMessage = null
     })
   }
 
-  private handleReceiveMessage(message: PartnerMessage) {
+  private handleReceiveMessage(message: PartnerMessage | PartnerMessage[]) {
     runInAction(() => {
       if (!this.dialogPartnerMessages) {
         return
       }
-      const containIndex = this.dialogPartnerMessages.items.findIndex(
-        (el) => el.id === message.id
-      )
-
-      if (containIndex !== -1) {
-        this.dialogPartnerMessages.items[containIndex] = message
-      } else {
-        this.dialogPartnerMessages.items.unshift(message)
-      }
-
       this.getMessengerData()
+      if (Array.isArray(message)) {
+        const ids = message.map((item) => item.id)
+
+        this.dialogPartnerMessages.items = this.dialogPartnerMessages.items.map(
+          (item) => (ids.includes(item.id) ? { ...item, status: 'READ' } : item)
+        )
+        this.hasNewMessage = null
+
+        return
+      } else {
+        const containIndex = this.dialogPartnerMessages.items.findIndex(
+          (el) => el.id === message.id
+        )
+
+        if (containIndex !== -1) {
+          this.dialogPartnerMessages.items[containIndex] = message
+        } else {
+          this.dialogPartnerMessages.items.unshift(message)
+        }
+      }
     })
   }
 
   clearMessengerStore() {
     this.dialogPartnerInfo = null
     this.dialogPartnerMessages = null
-    this.chatsListData = null
     this.partnerId = null
     this.isLoading = true
     this.isChatLoading = true
@@ -139,27 +156,27 @@ class MessengerStore {
 
     const result = await Promise.all(
       messagesIds.map(async (id) => {
-        const { error } = await tryCatch(
+        const { data } = await tryCatch(
           messengerApi.deleteMessageByMessageId(id)
         )
 
-        if (error) {
-          responseErrorHandler(error)
-
-          return error
+        if (!data) {
+          return null
         }
 
-        return id
+        return data
       })
     )
 
     await this.getMessengerData()
 
     runInAction(() => {
-      this.dialogPartnerMessages!.items =
-        this.dialogPartnerMessages!.items.filter(
-          (el) => !result.includes(el.id)
-        )
+      if (this.dialogPartnerMessages) {
+        this.dialogPartnerMessages.items =
+          this.dialogPartnerMessages.items.filter(
+            (el) => !result.includes(el.id)
+          )
+      }
     })
   }
 
@@ -178,12 +195,26 @@ class MessengerStore {
     }
     await this.getDialogPartnerInfo(args.dialogPartnerId, args.signal)
 
-    const { data, error } = await tryCatch(
+    const { data } = await tryCatch(
       messengerApi.getDialogPartnerMessagesById({
         ...args,
         dialogPartnerId: args.dialogPartnerId,
       })
     )
+
+    if (data) {
+      const ids = data.items.reduce<number[]>((acc, item) => {
+        if (item.ownerId === args.dialogPartnerId && item.status !== 'READ') {
+          acc.push(item.id)
+        }
+
+        return acc
+      }, [])
+
+      if (ids.length) {
+        await this.markMessagesAsRead(ids)
+      }
+    }
 
     runInAction(() => {
       if (data) {
@@ -206,8 +237,6 @@ class MessengerStore {
         } else {
           this.dialogPartnerMessages = data
         }
-      } else {
-        responseErrorHandler(error)
       }
       this.isChatLoading = false
     })
@@ -215,17 +244,37 @@ class MessengerStore {
 
   async getMessengerData(args: GetMessengerDataArgs | void) {
     this.isLoading = true
-    const { data, error } = await tryCatch(messengerApi.getMessengerData(args))
+    const { data } = await tryCatch(messengerApi.getMessengerData(args))
 
     runInAction(() => {
       if (data) {
+        if (args?.isInitialRequest) {
+          const userId = generalStore.user?.userId
+          const newMessage = data.items.find(
+            (item) => item.status !== 'READ' && item.ownerId !== userId
+          )
+
+          if (newMessage) {
+            this.hasNewMessage = newMessage.ownerId
+          }
+        }
+
         this.chatsListData = data
-      } else {
-        responseErrorHandler(error)
       }
       this.isLoading = false
     })
   }
+
+  async markMessagesAsRead(ids?: number[]) {
+    if (!ids) {
+      return
+    }
+    await tryCatch(messengerApi.markMessagesAsRead(ids))
+    runInAction(() => {
+      this.hasNewMessage = null
+    })
+  }
+
   sendWSMessage(message: string, receiverId: number) {
     WebSocketApi.emit<SendWSMessagesPayload>(
       MessengerSocketEvents.RECEIVE_MESSAGE,
@@ -241,10 +290,10 @@ class MessengerStore {
     this.dialogPartnerMessages = null
     this.partnerId = null
   }
-
   setSearchName(name: string) {
     this.searchName = name
   }
+
   updateWSMessage(messageText: string, messageId: number) {
     WebSocketApi.emit<UpdateWSMessagesPayload>(
       MessengerSocketEvents.UPDATE_MESSAGE,

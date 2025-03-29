@@ -15,6 +15,7 @@ import {
   SearchOutline,
 } from '@/assets/icons/outlineIcons'
 import {
+  Nullable,
   PathService,
   ProtectedPaths,
   PublicPaths,
@@ -27,10 +28,15 @@ import { NavLink } from '@/common/components/navLink'
 import { Tooltip } from '@/common/components/tooltip'
 import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
+import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
+type Props = {
+  hasNewMessage?: Nullable<number>
+} & ComponentPropsWithoutRef<'nav'>
+
+export const Menu = observer(({ className, hasNewMessage }: Props) => {
   const router = useRouter()
   const { t } = useTranslation()
   const href = router.asPath
@@ -81,7 +87,13 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
             </button>
           </Tooltip>
         </li>
-        <li>
+        <li
+          className={cn(
+            'relative',
+            hasNewMessage &&
+              'after:absolute after:w-2 after:h-2 after:bg-accent-300 after:left-5 after:rounded-full after:top-0'
+          )}
+        >
           <Tooltip title={t.menu.messenger}>
             <Link href={ProtectedPaths.messenger}>
               {matchesPathname(href, ProtectedPaths.messenger) ? (
@@ -125,4 +137,4 @@ export const Menu = ({ className }: ComponentPropsWithoutRef<'nav'>) => {
       />
     </nav>
   )
-}
+})

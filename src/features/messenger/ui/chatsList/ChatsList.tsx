@@ -1,12 +1,13 @@
-import { CircleLoader, ScrollArea } from '@/common'
+import { CircleLoader, ScrollArea, useTranslation } from '@/common'
+import { useChatList } from '@/features/messenger/model/useChatList'
 import { observer } from 'mobx-react-lite'
 
-import { useChatList } from '../../model/useChatList'
 import { ChatsListItem } from './ChatsListItem'
 
 export const ChatsList = observer(() => {
-  const { chosenChatId, filteredChatList, setChosenChatId, text } =
-    useChatList()
+  const { t } = useTranslation()
+
+  const { chosenChatId, filteredChatList, setChosenChatId } = useChatList()
 
   if (!filteredChatList) {
     return (
@@ -27,9 +28,11 @@ export const ChatsList = observer(() => {
           'w-full h-full flex justify-center flex-col gap-5 items-center px-2'
         }
       >
-        <span className={'text-pretty text-center'}>{text.noMessages}</span>
         <span className={'text-pretty text-center'}>
-          {text.shouldUseSearch}
+          {t.messenger.noMessages}
+        </span>
+        <span className={'text-pretty text-center'}>
+          {t.messenger.shouldUseSearch}
         </span>
       </div>
     )
@@ -45,6 +48,7 @@ export const ChatsList = observer(() => {
           chosenChatId={chosenChatId}
           item={item}
           key={item.id}
+          ownerMessagePrefixText={t.messenger.you}
           setChosenChatId={setChosenChatId}
         />
       ))}

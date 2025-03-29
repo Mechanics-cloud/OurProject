@@ -8,9 +8,11 @@ export const messenger = {
     return `Вы действительно хотите удалить сообщени${number}?`
   },
   mainTitle: 'Мессенджер',
+  messageEdited: 'изменено',
   noMessages: 'Сообщений нет.',
   noMoreMessages: 'Сообщений больше нет.',
   searchPlaceholder: 'Найти чат...',
   shouldUseSearch: 'Используйте поиск, чтобы найти собеседника.',
   typeMessage: 'Введите сообщение',
+  you: 'Вы: ',
 }

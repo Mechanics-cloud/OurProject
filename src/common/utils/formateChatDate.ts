@@ -2,7 +2,6 @@
  * Форматирует дату из ISO-строки в локализованный короткий формат.
  *
  * Форматирование происходит по следующим правилам:
- * - Если прошло менее 1 минуты, возвращает "Now" (для локали, отличной от "ru-RU") или "Только что" (для "ru-RU").
  * - Если дата за последние 24 часа (и находится в пределах текущей календарной даты), возвращает только время (например, "10:15").
  * - Если дата в пределах текущей недели, возвращает сокращённое название дня недели и время (например, "Вт 10:15").
  * - Если дата старше недели, возвращает число, сокращённое название месяца и время (например, "11 мар 10:15").
@@ -18,10 +17,6 @@
  * @example
  * // Если дата в пределах текущей недели:
  * formatIsoDateToShortDate("2025-03-13T13:04:38.567Z"); // "Чт 13:04" (для "ru-RU")
- *
- * @example
- * // Если прошло менее 1 минуты:
- * formatIsoDateToShortDate(new Date().toISOString()); // "Только что" или "Now"
  */
 
 export function formatIsoDateToShortDate(
@@ -32,12 +27,7 @@ export function formatIsoDateToShortDate(
   const now = new Date()
 
   const diffInMs = now.getTime() - date.getTime()
-  const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
   const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60))
-
-  if (diffInMinutes < 1) {
-    return locale === 'ru-RU' ? 'Только что' : 'Now'
-  }
 
   if (diffInHours < 24 && date.getDate() === now.getDate()) {
     return new Intl.DateTimeFormat(locale, {

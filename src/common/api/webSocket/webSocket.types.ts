@@ -22,6 +22,10 @@ export type OffArgsByEventName<E> = {
   eventName: GlobalCustomEventsType<E>
 }
 
+export type DisconnectGlobalWSArgsType = {
+  shouldSaveEventRegistry: boolean
+} | void
+
 type GlobalCustomEventsType<T> = GlobalSocketEvents | T
 
 export type OnArgsType<E> = {

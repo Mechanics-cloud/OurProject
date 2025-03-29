@@ -1,9 +1,8 @@
 import { CircleLoader, PublicPaths, Typography } from '@/common'
+import { usePartnerInfo } from '@/features/messenger/model/usePartnerInfo'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import Link from 'next/link'
-
-import { usePartnerInfo } from '../model/usePartnerInfo'
 
 export const PartnerInfo = observer(() => {
   const { avatar, dialogPartnerInfo, isChatLoading } = usePartnerInfo()
@@ -18,9 +17,7 @@ export const PartnerInfo = observer(() => {
       href={PublicPaths.profileLink(dialogPartnerInfo.partnerId)}
     >
       <div
-        className={
-          'h-[48px] aspect-square relative rounded-full overflow-hidden'
-        }
+        className={'h-12 aspect-square relative rounded-full overflow-hidden'}
       >
         <Image
           alt={dialogPartnerInfo.userName || 'partners avatar'}

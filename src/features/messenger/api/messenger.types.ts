@@ -1,26 +1,23 @@
-import { ImageFile } from '@/common'
+import { BaseData, ImageFile } from '@/common'
 
 export type ChatsListDTO = {
-  items: Message[]
+  items: MessageDTO[]
   pageSize: number
   totalCount: number
 }
 
-export type Message = {
+type MessageStatus = 'READ' | 'RECEIVED' | 'SEND'
+
+export type MessageDTO = {
   avatars: ImageFile[]
-  createdAt: string
-  id: number
   messageText: string
   messageType: string
-  ownerId: number
   receiverId: number
-  status: string
-  updatedAt: string
-  userName: string
-}
+  status: MessageStatus
+} & BaseData
 
 export type PartnerInfoDTO = { partnerId: number } & Pick<
-  Message,
+  MessageDTO,
   'avatars' | 'userName'
 >
 
@@ -30,7 +27,7 @@ export type PartnerMessagesDTO = {
   totalCount: number
 }
 
-export type PartnerMessage = Omit<Message, 'avatars' | 'userName'>
+export type PartnerMessage = Omit<MessageDTO, 'avatars' | 'userName'>
 
 export enum MessengerSocketEvents {
   MESSAGE_DELETED = 'message-deleted',
@@ -41,6 +38,7 @@ export enum MessengerSocketEvents {
 
 export type GetMessengerDataArgs = {
   cursor?: number
+  isInitialRequest?: boolean
   pageSize?: number
   signal?: AbortSignal
 }

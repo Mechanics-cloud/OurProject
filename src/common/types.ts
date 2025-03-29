@@ -38,21 +38,24 @@ export type FullName = {
   lastName: string
 }
 
+export type BaseData = {
+  createdAt: string
+  id: number
+  ownerId: number
+  updatedAt: string
+  userName: string
+}
+
 export type BasicPost = {
   avatarOwner: string
   avatarWhoLikes?: boolean
-  createdAt: string
   description: string
-  id: number
   images: UploadImage[]
   isLiked: boolean
   likesCount: number
   location: Nullable<string>
   owner: FullName
-  ownerId: number
-  updatedAt: string
-  userName: string
-}
+} & BaseData
 
 export type PagesInfo = {
   page: number

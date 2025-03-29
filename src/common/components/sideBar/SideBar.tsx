@@ -21,6 +21,7 @@ import {
 } from '@/assets/icons/outlineIcons'
 import {
   LinkWithIcon,
+  Nullable,
   ProtectedPaths,
   PublicPaths,
   cn,
@@ -32,9 +33,11 @@ import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
 import { observer } from 'mobx-react-lite'
 
-type Props = ComponentProps<'aside'>
+type Props = {
+  hasNewMessage?: Nullable<number>
+} & ComponentProps<'aside'>
 
-export const SideBar = observer(({ className }: Props) => {
+export const SideBar = observer(({ className, hasNewMessage }: Props) => {
   const { t } = useTranslation()
   const {
     isModalOpen: isLogOutModalOpen,
@@ -98,7 +101,13 @@ export const SideBar = observer(({ className }: Props) => {
               </LinkWithIcon>
             </li>
 
-            <li>
+            <li
+              className={cn(
+                'relative',
+                hasNewMessage &&
+                  'after:absolute after:w-2 after:h-2 after:bg-accent-300 after:right-16 after:rounded-full after:top-[50%] after:translate-y-[-35%]'
+              )}
+            >
               <LinkWithIcon
                 ActiveIcon={MessageCircle}
                 DefaultIcon={MessageCircleOutline}

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { messengerStore } from '../model/stores/messengerStore'
+import { messengerStore } from './stores/messengerStore'
 
 export const useMessenger = () => {
   const getMessengerData = messengerStore.getMessengerData

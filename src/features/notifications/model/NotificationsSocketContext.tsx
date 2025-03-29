@@ -22,11 +22,15 @@ export const NotificationsSocketProvider = observer(
     const [notification, setNotification] = useState<NotificationEventDTO>()
     const isAuthenticated = authStore.isAuthenticated === 'authenticated'
     const connectMessengerWSEvents = messengerStore.connectMessengerWSEvents
+    const getMessengerData = messengerStore.getMessengerData
     const disconnectMessengerWSEvents =
       messengerStore.disconnectMessengerWSEvents
 
     useEffect(() => {
+      const controller = new AbortController()
+
       if (isAuthenticated) {
+        getMessengerData({ isInitialRequest: true, signal: controller.signal })
         WebSocketApi.connectGlobalWS()
         connectMessengerWSEvents()
         WebSocketApi.on<NotificationSocketEvents>({
@@ -39,13 +43,19 @@ export const NotificationsSocketProvider = observer(
       }
 
       return () => {
+        controller.abort()
         WebSocketApi.offByEventName<NotificationSocketEvents>({
           eventName: NotificationSocketEvents.NOTIFICATIONS,
         })
         disconnectMessengerWSEvents()
         WebSocketApi.disconnectGlobalWS()
       }
-    }, [connectMessengerWSEvents, disconnectMessengerWSEvents, isAuthenticated])
+    }, [
+      connectMessengerWSEvents,
+      disconnectMessengerWSEvents,
+      getMessengerData,
+      isAuthenticated,
+    ])
 
     return (
       <NotificationsSocketContext.Provider

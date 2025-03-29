@@ -3,10 +3,10 @@ import { ElementType } from 'react'
 import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
 import { Nullable, ProtectedPaths, formatIsoDateToShortDate } from '@/common'
 import { generalStore } from '@/core/store'
+import { MessageDTO } from '@/features/messenger/api'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Message } from '../api'
 import { messengerStore } from './stores/messengerStore'
 
 export const useChatsListItem = ({
@@ -15,7 +15,7 @@ export const useChatsListItem = ({
   setChosenChatId,
 }: {
   chosenChatId: Nullable<number>
-  item: Message
+  item: MessageDTO
   setChosenChatId: (partnerId: number) => void
 }) => {
   const router = useRouter()
@@ -28,6 +28,7 @@ export const useChatsListItem = ({
   const createdDateAt = formatIsoDateToShortDate(createdAt, router.locale)
   const avatar = avatars.length === 0 ? avatarPlaceholder : avatars[1].url
   const partnerId = ownerId === userId ? receiverId : ownerId
+  const isPartnerMessage = receiverId === userId
   const linkHref = {
     pathname: ProtectedPaths.messenger,
     query: { dialogPartnerId: partnerId },
@@ -50,12 +51,16 @@ export const useChatsListItem = ({
 
   const Component: ElementType = isClickable ? Link : 'div'
 
+  const hasNewMessage = messengerStore.hasNewMessage === ownerId
+
   return {
     Component,
     avatar,
     createdDateAt,
+    hasNewMessage,
     isChosen,
     isLoading,
+    isPartnerMessage,
     messageText,
     userName,
     wrapperProps,

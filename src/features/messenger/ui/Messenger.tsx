@@ -1,7 +1,7 @@
 import { Typography, useTranslation } from '@/common'
+import { useMessenger } from '@/features/messenger/model/useMessenger'
 import { observer } from 'mobx-react-lite'
 
-import { useMessenger } from '../model/useMessenger'
 import { FindChat } from './FindChat'
 import { PartnerInfo } from './PartnerInfo'
 import { Chat } from './chat/Chat'

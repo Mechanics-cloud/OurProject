@@ -14,6 +14,8 @@ class MessengerApi {
 
   async deleteMessageByMessageId(id: number) {
     await this.instance.delete(MessengerEndpoints.deleteMessageByMessageId(id))
+
+    return id
   }
 
   async getDialogPartnerMessagesById(
@@ -32,6 +34,7 @@ class MessengerApi {
 
     return res.data
   }
+
   async getMessengerData(
     args: GetMessengerDataArgs | void
   ): Promise<ChatsListDTO> {
@@ -44,6 +47,9 @@ class MessengerApi {
     })
 
     return res.data
+  }
+  async markMessagesAsRead(ids: number[]) {
+    await this.instance.put(MessengerEndpoints.markMessagesAsRead, { ids })
   }
 }
 

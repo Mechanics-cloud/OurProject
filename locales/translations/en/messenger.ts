@@ -8,9 +8,11 @@ export const messenger = {
     return `Are you sure you want to delete message${number}?`
   },
   mainTitle: 'Messenger',
+  messageEdited: 'edited',
   noMessages: 'No messages.',
   noMoreMessages: 'No more messages.',
   searchPlaceholder: 'Find a chat...',
   shouldUseSearch: 'Use search to find a conversation partner.',
   typeMessage: 'Type message',
+  you: 'You: ',
 }

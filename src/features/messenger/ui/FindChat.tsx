@@ -1,7 +1,6 @@
 import { TextField } from '@/common'
+import { useFindChat } from '@/features/messenger/model/useFindChat'
 import { observer } from 'mobx-react-lite'
-
-import { useFindChat } from '../model/useFindChat'
 
 export const FindChat = observer(() => {
   const { inputText, onFindChat, searchPlaceholder } = useFindChat()
