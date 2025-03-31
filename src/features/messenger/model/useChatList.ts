@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
 import { Nullable } from '@/common'
+import { messengerStore } from '@/features/messenger/model/store/store'
 import { useRouter } from 'next/router'
-
-import { messengerStore } from './stores/messengerStore'
 
 export const useChatList = () => {
   const router = useRouter()

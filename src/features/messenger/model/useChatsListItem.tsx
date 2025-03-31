@@ -4,10 +4,9 @@ import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
 import { Nullable, ProtectedPaths, formatIsoDateToShortDate } from '@/common'
 import { generalStore } from '@/core/store'
 import { MessageDTO } from '@/features/messenger/api'
+import { messengerStore } from '@/features/messenger/model/store/store'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-
-import { messengerStore } from './stores/messengerStore'
 
 export const useChatsListItem = ({
   chosenChatId,

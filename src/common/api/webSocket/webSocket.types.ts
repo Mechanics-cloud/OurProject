@@ -1,7 +1,4 @@
-export enum GlobalSocketEvents {
-  CONNECT = 'connect',
-  ERROR = 'error',
-}
+import { WebSocketEvents } from '@/common/enums'
 
 type Listener = (...args: any[]) => void
 
@@ -18,19 +15,17 @@ export type OffArgsByFeatureType = {
   feature: FeatureType
 }
 
-export type OffArgsByEventName<E> = {
-  eventName: GlobalCustomEventsType<E>
+export type OffArgsByEventName = {
+  eventName: WebSocketEvents
 }
 
 export type DisconnectGlobalWSArgsType = {
   shouldSaveEventRegistry: boolean
 } | void
 
-type GlobalCustomEventsType<T> = GlobalSocketEvents | T
-
-export type OnArgsType<E> = {
+export type OnArgsType = {
   callback: Listener
-  eventName: GlobalCustomEventsType<E>
+  eventName: WebSocketEvents
   feature: FeatureType
 }
 

@@ -10,7 +10,6 @@ import {
 } from '@/common'
 import { setTranslation } from '@/common/utils/setTranslation'
 import { authStore } from '@/features/auth'
-import { messengerStore } from '@/features/messenger/model/stores/messengerStore'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
@@ -20,7 +19,6 @@ type Props = {
 
 export const ProtectedLayout = observer(({ children, className }: Props) => {
   const currentAuthState = authStore.isAuthenticated
-  const hasNewMessage = messengerStore.hasNewMessage
   const { t } = useTranslation()
 
   useMe()
@@ -35,11 +33,8 @@ export const ProtectedLayout = observer(({ children, className }: Props) => {
     >
       {currentAuthState === 'authenticated' ? (
         <>
-          <SideBar hasNewMessage={hasNewMessage} />
-          <Menu
-            className={'lg:hidden'}
-            hasNewMessage={hasNewMessage}
-          />
+          <SideBar />
+          <Menu className={'lg:hidden'} />
           <div className={'lg:pl-9 w-full lg:ml-56 pb-20'}>{children}</div>
         </>
       ) : (

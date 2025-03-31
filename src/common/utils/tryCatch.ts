@@ -1,17 +1,27 @@
 import { responseErrorHandler } from '@/common'
 
-type Result<T> = {
-  data: T | null
+type Success<T> = {
+  data: T
+  error: null
 }
 
-export async function tryCatch<T>(promise: Promise<T>): Promise<Result<T>> {
+type Failure<E> = {
+  data: null
+  error: E
+}
+
+type Result<T, E = Error> = Failure<E> | Success<T>
+
+export async function tryCatch<T, E = Error>(
+  promise: Promise<T>
+): Promise<Result<T, E>> {
   try {
     const data = await promise
 
-    return { data }
+    return { data, error: null }
   } catch (error) {
     responseErrorHandler(error)
 
-    return { data: null }
+    return { data: null, error: error as E }
   }
 }

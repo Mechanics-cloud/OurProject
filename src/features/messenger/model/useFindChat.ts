@@ -1,8 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react'
 
 import { useDebounce, useTranslation } from '@/common'
-
-import { messengerStore } from './stores/messengerStore'
+import { messengerStore } from '@/features/messenger/model/store/store'
 
 export const useFindChat = () => {
   const [inputText, setInputText] = useState('')

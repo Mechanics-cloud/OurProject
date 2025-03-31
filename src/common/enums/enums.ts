@@ -45,3 +45,13 @@ export enum ManualAccountType {
   AccountType = 'accountType',
   paymentCookies = 'payment=',
 }
+
+export enum WebSocketEvents {
+  CONNECT = 'connect',
+  ERROR = 'error',
+  MESSAGE_DELETED = 'message-deleted',
+  MESSAGE_SEND = 'message-sent',
+  NOTIFICATIONS = 'notifications',
+  RECEIVE_MESSAGE = 'receive-message',
+  UPDATE_MESSAGE = 'update-message',
+}

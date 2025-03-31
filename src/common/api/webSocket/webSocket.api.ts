@@ -4,14 +4,13 @@ import {
   getFromLocalStorage,
   responseErrorHandler,
 } from '@/common'
-import { StorageKeys } from '@/common/enums'
+import { StorageKeys, WebSocketEvents } from '@/common/enums'
 import { ManagerOptions, Socket, SocketOptions, io } from 'socket.io-client'
 
 import {
   DisconnectGlobalWSArgsType,
   EventError,
   EventsRegistry,
-  GlobalSocketEvents,
   OffArgsByEventName,
   OffArgsByFeatureType,
   OnArgsType,
@@ -35,10 +34,10 @@ export class WebSocketApi {
     }
 
     this.socket = io(baseUrl, socketOptions)
-    this.socket.on(GlobalSocketEvents.CONNECT, () => {
+    this.socket.on(WebSocketEvents.CONNECT, () => {
       this.reregisterEvents()
     })
-    this.socket.on(GlobalSocketEvents.ERROR, (err: EventError) => {
+    this.socket.on(WebSocketEvents.ERROR, (err: EventError) => {
       responseErrorHandler(new Error(err.message))
     })
   }
@@ -51,7 +50,7 @@ export class WebSocketApi {
     }
   }
 
-  static emit<T = any>(eventName: string, ...args: T[]) {
+  static emit<T = any>(eventName: WebSocketEvents, ...args: T[]) {
     if (this.socket && this.socket.connected) {
       this.socket.emit(eventName, ...args)
     } else {
@@ -61,9 +60,7 @@ export class WebSocketApi {
     }
   }
 
-  static offByEventName<T extends string>({
-    eventName,
-  }: OffArgsByEventName<T>) {
+  static offByEventName({ eventName }: OffArgsByEventName) {
     if (!this.socket) {
       return
     }
@@ -87,7 +84,7 @@ export class WebSocketApi {
     })
   }
 
-  static on<T extends string>({ callback, eventName, feature }: OnArgsType<T>) {
+  static on({ callback, eventName, feature }: OnArgsType) {
     if (this.socket && this.socket.connected) {
       this.socket.on(eventName, callback)
     }
@@ -100,8 +97,8 @@ export class WebSocketApi {
   }
 
   private static offAllListeners(args: DisconnectGlobalWSArgsType) {
-    this.socket!.off(GlobalSocketEvents.CONNECT)
-    this.socket!.off(GlobalSocketEvents.ERROR)
+    this.socket!.off(WebSocketEvents.CONNECT)
+    this.socket!.off(WebSocketEvents.ERROR)
     Object.entries(this.eventsRegistry).forEach(([eventName, _]) => {
       this.socket!.off(eventName)
     })

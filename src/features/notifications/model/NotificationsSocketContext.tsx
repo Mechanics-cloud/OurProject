@@ -2,12 +2,10 @@ import React, { createContext, useContext, useEffect, useState } from 'react'
 
 import { Nullable } from '@/common'
 import { WebSocketApi } from '@/common/api'
+import { WebSocketEvents } from '@/common/enums'
 import { authStore } from '@/features/auth'
-import { messengerStore } from '@/features/messenger/model/stores/messengerStore'
-import {
-  NotificationEventDTO,
-  NotificationSocketEvents,
-} from '@/features/notifications/api'
+import { messengerStore } from '@/features/messenger/model/store/store'
+import { NotificationEventDTO } from '@/features/notifications/api'
 import { observer } from 'mobx-react-lite'
 
 type NotificationsSocketContextType = {
@@ -33,19 +31,19 @@ export const NotificationsSocketProvider = observer(
         getMessengerData({ isInitialRequest: true, signal: controller.signal })
         WebSocketApi.connectGlobalWS()
         connectMessengerWSEvents()
-        WebSocketApi.on<NotificationSocketEvents>({
+        WebSocketApi.on({
           callback: (notificationDTO: NotificationEventDTO) => {
             setNotification(notificationDTO)
           },
-          eventName: NotificationSocketEvents.NOTIFICATIONS,
+          eventName: WebSocketEvents.NOTIFICATIONS,
           feature: 'notification',
         })
       }
 
       return () => {
         controller.abort()
-        WebSocketApi.offByEventName<NotificationSocketEvents>({
-          eventName: NotificationSocketEvents.NOTIFICATIONS,
+        WebSocketApi.offByEventName({
+          eventName: WebSocketEvents.NOTIFICATIONS,
         })
         disconnectMessengerWSEvents()
         WebSocketApi.disconnectGlobalWS()

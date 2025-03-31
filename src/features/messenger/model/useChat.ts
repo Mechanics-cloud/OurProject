@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { Nullable, useElementOnScreen, useModal } from '@/common'
+import { Nullable, useModal } from '@/common'
+import { messengerStore } from '@/features/messenger/model/store/store'
 import { useRouter } from 'next/router'
-
-import { messengerStore } from './stores/messengerStore'
 
 type ChosenMessage = {
   id: number
@@ -58,25 +57,6 @@ export const useChat = () => {
       controller.abort()
     }
   }, [getDialogPartnerMessagesById, dialogPartnerId, cursor])
-  // const { ref: lastMessageRef, visible } = useElementOnScreen<HTMLDivElement>()
-  // const a = visible && !!dialogPartnerMessages
-  //
-  // useEffect(() => {
-  //   if (isLoadMoreMessages || !dialogPartnerMessages) {
-  //     return
-  //   }
-  //   const totalCount = dialogPartnerMessages.totalCount
-  //   const currentLength = dialogPartnerMessages.items.length
-  //   const hasMore = currentLength < totalCount
-  //
-  //   if (hasMore) {
-  //     const cursor = dialogPartnerMessages.items.at(-1)?.id
-  //
-  //     setCursor(cursor)
-  //   } else {
-  //     setIsNoMoreMessages(true)
-  //   }
-  // }, [isLoadMoreMessages, a])
 
   const lastMessageRef = useCallback(
     (node: HTMLDivElement) => {

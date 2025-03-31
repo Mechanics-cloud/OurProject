@@ -29,13 +29,6 @@ export type PartnerMessagesDTO = {
 
 export type PartnerMessage = Omit<MessageDTO, 'avatars' | 'userName'>
 
-export enum MessengerSocketEvents {
-  MESSAGE_DELETED = 'message-deleted',
-  MESSAGE_SEND = 'message-sent',
-  RECEIVE_MESSAGE = 'receive-message',
-  UPDATE_MESSAGE = 'update-message',
-}
-
 export type GetMessengerDataArgs = {
   cursor?: number
   isInitialRequest?: boolean

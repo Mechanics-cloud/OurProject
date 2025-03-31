@@ -5,7 +5,7 @@ import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
 import { Typography, cn, formatIsoDateToShortDate } from '@/common'
 import { generalStore } from '@/core/store'
 import { PartnerMessage } from '@/features/messenger/api'
-import { messengerStore } from '@/features/messenger/model/stores/messengerStore'
+import { messengerStore } from '@/features/messenger/model/store/store'
 import { observer } from 'mobx-react-lite'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -84,19 +84,26 @@ const _ChatMessage = forwardRef<ElementRef<'div'>, Props>(
           )}
           onClick={onClick}
         >
-          <Typography variant={'reg14'}>{messageText}</Typography>
           <Typography
-            className={cn(
-              isPartnerMessage ? 'text-light-900' : 'text-accent-100'
-            )}
-            variant={'small'}
+            className={'break-all'}
+            variant={'reg14'}
           >
-            {actualMessageDate === createdDate
-              ? createdAt
-              : `${messageEditedText} ${createdAt}`}
+            {messageText}
           </Typography>
-          {!isPartnerMessage &&
-            (status === 'READ' ? <DoneAllOutline /> : <CheckmarkOutline />)}
+          <div className={'flex gap-1'}>
+            <Typography
+              className={cn(
+                isPartnerMessage ? 'text-light-900' : 'text-accent-100'
+              )}
+              variant={'small'}
+            >
+              {actualMessageDate === createdDate
+                ? createdAt
+                : `${messageEditedText} ${createdAt}`}
+            </Typography>
+            {!isPartnerMessage &&
+              (status === 'READ' ? <DoneAllOutline /> : <CheckmarkOutline />)}
+          </div>
         </div>
       </div>
     )

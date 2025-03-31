@@ -21,7 +21,6 @@ import {
 } from '@/assets/icons/outlineIcons'
 import {
   LinkWithIcon,
-  Nullable,
   ProtectedPaths,
   PublicPaths,
   cn,
@@ -31,14 +30,15 @@ import {
 import { LogOutModal } from '@/common/components/logOutModal'
 import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
+import { messengerStore } from '@/features/messenger/model/store/store'
 import { observer } from 'mobx-react-lite'
 
-type Props = {
-  hasNewMessage?: Nullable<number>
-} & ComponentProps<'aside'>
+type Props = ComponentProps<'aside'>
 
-export const SideBar = observer(({ className, hasNewMessage }: Props) => {
+export const SideBar = observer(({ className }: Props) => {
   const { t } = useTranslation()
+  const hasNewMessage = messengerStore.hasNewMessage
+
   const {
     isModalOpen: isLogOutModalOpen,
     onModalClose: onLogOutModalClose,

@@ -1,15 +1,6 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  KeyboardEvent,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
-
 import { Close, PaperPlaneOutline } from '@/assets/icons'
 import { Button, Typography, cn, getTextAreaClasses } from '@/common'
-import { messengerStore } from '@/features/messenger/model/stores/messengerStore'
+import { useChatInput } from '@/features/messenger/model/useChatInput'
 import { observer } from 'mobx-react-lite'
 
 type Props = {
@@ -27,63 +18,19 @@ export const ChatInput = observer(
     onRefreshEdit,
     placeholder,
   }: Props) => {
-    const [textAreaMessage, setTextAreaMessage] = useState<string>('')
-    const textAreaRef = useRef<HTMLTextAreaElement>(null)
-    const updateWSMessage = messengerStore.updateWSMessage
-    const sendMessageWS = messengerStore.sendWSMessage
-    const dialogPartnerInfo = messengerStore.dialogPartnerInfo
-
-    const onTextAreaKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault()
-        e.currentTarget.form?.requestSubmit()
-      }
-    }
-
-    const onTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) =>
-      setTextAreaMessage(e.currentTarget.value)
-
-    const onCancelEditMessage = () => {
-      onRefreshEdit() // здесь нужно только отменить редактирование
-      setTextAreaMessage('')
-    }
-
-    const onSendMessage = (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault()
-      if (isEditMessage && chosenMessageId) {
-        updateWSMessage(textAreaMessage, chosenMessageId)
-        setTextAreaMessage('')
-        const cleanChosenMessages = onRefreshEdit() // здесь нужно, в том числе зачистить стейт сообщений
-
-        cleanChosenMessages() // зачистка стейта chosenMessages
-
-        return
-      }
-
-      if (!textAreaMessage.trim()) {
-        return
-      }
-      sendMessageWS(textAreaMessage.trim(), dialogPartnerInfo!.partnerId)
-      setTextAreaMessage('')
-    }
-
-    useEffect(() => {
-      if (textAreaRef.current) {
-        textAreaRef.current.style.height = '0px'
-        const scrollHeight = textAreaRef.current.scrollHeight
-
-        textAreaRef.current.style.height = scrollHeight + 'px'
-      }
-    }, [textAreaRef, textAreaMessage])
-
-    useEffect(() => {
-      if (isEditMessage && chosenMessageText) {
-        setTextAreaMessage(chosenMessageText)
-      }
-      setTimeout(() => {
-        textAreaRef.current?.focus()
-      }, 0)
-    }, [chosenMessageText, isEditMessage])
+    const {
+      onCancelEditMessage,
+      onSendMessage,
+      onTextAreaChange,
+      onTextAreaKeyDown,
+      textAreaMessage,
+      textAreaRef,
+    } = useChatInput({
+      chosenMessageId,
+      chosenMessageText,
+      isEditMessage,
+      onRefreshEdit,
+    })
 
     return (
       <form

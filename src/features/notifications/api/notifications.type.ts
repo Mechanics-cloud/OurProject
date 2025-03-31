@@ -1,7 +1,3 @@
-export enum NotificationSocketEvents {
-  NOTIFICATIONS = 'notifications',
-}
-
 export type NotificationEventDTO = {
   clientId: string
   id: number

@@ -1,6 +1,5 @@
 import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
-
-import { messengerStore } from './stores/messengerStore'
+import { messengerStore } from '@/features/messenger/model/store/store'
 
 export const usePartnerInfo = () => {
   const dialogPartnerInfo = messengerStore.dialogPartnerInfo
