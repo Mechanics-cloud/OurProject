@@ -7,9 +7,9 @@ import { ChatsListItem } from './ChatsListItem'
 export const ChatsList = observer(() => {
   const { t } = useTranslation()
 
-  const { chosenChatId, filteredChatList, setChosenChatId } = useChatList()
+  const { chatsListData, chosenChatId, setChosenChatId } = useChatList()
 
-  if (!filteredChatList) {
+  if (!chatsListData) {
     return (
       <div
         className={
@@ -21,7 +21,7 @@ export const ChatsList = observer(() => {
     )
   }
 
-  if (filteredChatList.length === 0) {
+  if (chatsListData.items.length === 0) {
     return (
       <div
         className={
@@ -43,7 +43,7 @@ export const ChatsList = observer(() => {
       className={'h-full'}
       isPaddingRight={false}
     >
-      {filteredChatList.map((item) => (
+      {chatsListData.items.map((item) => (
         <ChatsListItem
           chosenChatId={chosenChatId}
           item={item}

@@ -30,7 +30,7 @@ export class ChatWSStore extends BaseMessengerStore {
       if (!this.dialogPartnerMessages) {
         return
       }
-      this.getMessengerData()
+      this.getMessengerData({ searchName: this.searchName })
       this.dialogPartnerMessages.items =
         this.dialogPartnerMessages.items.filter(
           (message) => message.id !== messageId
@@ -44,7 +44,7 @@ export class ChatWSStore extends BaseMessengerStore {
   ) {
     runInAction(() => {
       acknowledge({ message, receiverId: message.receiverId })
-      this.getMessengerData()
+      this.getMessengerData({ searchName: this.searchName })
       this.hasNewMessage = message.ownerId
       const ownerId = this.dialogPartnerMessages?.items[0].ownerId
       const receiverId = this.dialogPartnerMessages?.items[0].receiverId
@@ -67,7 +67,7 @@ export class ChatWSStore extends BaseMessengerStore {
       if (!this.dialogPartnerMessages) {
         return
       }
-      this.getMessengerData()
+      this.getMessengerData({ searchName: this.searchName })
       if (Array.isArray(message)) {
         const ids = message.map((item) => item.id)
 

@@ -9,7 +9,7 @@ import {
   messengerApi,
 } from '@/features/messenger/api'
 import { publicProfileAPi } from '@/features/profile'
-import { action, computed, makeObservable, observable, runInAction } from 'mobx'
+import { action, makeObservable, observable, runInAction } from 'mobx'
 
 export class BaseMessengerStore {
   private partnerId: Nullable<number> = null
@@ -32,7 +32,6 @@ export class BaseMessengerStore {
         dialogPartnerMessages: observable,
         getDialogPartnerInfo: action.bound,
         getDialogPartnerMessagesById: action.bound,
-        getFilteredChatList: computed,
         getMessengerData: action.bound,
         hasNewMessage: observable,
         isChatLoading: observable,
@@ -100,7 +99,7 @@ export class BaseMessengerStore {
       })
     )
 
-    await this.getMessengerData()
+    await this.getMessengerData({ searchName: this.searchName })
 
     runInAction(() => {
       if (this.dialogPartnerMessages) {
@@ -211,19 +210,5 @@ export class BaseMessengerStore {
 
   setSearchName(name: string) {
     this.searchName = name
-  }
-
-  get getFilteredChatList() {
-    if (!this.chatsListData) {
-      return null
-    }
-
-    if (!this.searchName.trim()) {
-      return this.chatsListData.items
-    }
-
-    return this.chatsListData.items.filter((item) =>
-      item.userName.toLowerCase().includes(this.searchName.toLowerCase())
-    )
   }
 }

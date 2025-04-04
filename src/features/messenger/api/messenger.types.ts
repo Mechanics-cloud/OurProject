@@ -33,6 +33,7 @@ export type GetMessengerDataArgs = {
   cursor?: number
   isInitialRequest?: boolean
   pageSize?: number
+  searchName?: string
   signal?: AbortSignal
 }
 

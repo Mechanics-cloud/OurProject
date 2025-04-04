@@ -42,6 +42,7 @@ class MessengerApi {
       params: {
         cursor: args?.cursor,
         pageSize: args?.pageSize || 100,
+        searchName: args?.searchName,
       },
       signal: args?.signal,
     })

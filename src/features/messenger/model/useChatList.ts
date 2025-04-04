@@ -10,10 +10,10 @@ export const useChatList = () => {
     ? Number(router.query.dialogPartnerId)
     : null
 
-  const filteredChatList = messengerStore.getFilteredChatList
+  const chatsListData = messengerStore.chatsListData
   const [chosenChatId, setChosenChatId] = useState<Nullable<number>>(
     dialogPartnerIdFromQueryParams
   )
 
-  return { chosenChatId, filteredChatList, setChosenChatId }
+  return { chatsListData, chosenChatId, setChosenChatId }
 }
