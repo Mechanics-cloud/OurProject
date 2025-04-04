@@ -8,7 +8,7 @@ export const PartnerInfo = observer(() => {
   const { avatar, dialogPartnerInfo, isChatLoading } = usePartnerInfo()
 
   if (isChatLoading) {
-    return <CircleLoader className={'pt-0'} />
+    return <CircleLoader className={'pt-0 w-full'} />
   }
 
   return dialogPartnerInfo ? (
@@ -17,7 +17,9 @@ export const PartnerInfo = observer(() => {
       href={PublicPaths.profileLink(dialogPartnerInfo.partnerId)}
     >
       <div
-        className={'h-12 aspect-square relative rounded-full overflow-hidden'}
+        className={
+          'h-12 aspect-square relative rounded-full overflow-hidden shrink-0'
+        }
       >
         <Image
           alt={dialogPartnerInfo.userName || 'partners avatar'}
@@ -27,7 +29,7 @@ export const PartnerInfo = observer(() => {
         />
       </div>
       <Typography
-        className={'whitespace-nowrap overflow-hidden text-ellipsis'}
+        className={'break-all flex-1 min-w-0'}
         variant={'reg14'}
       >
         {dialogPartnerInfo.userName || 'Dialog Partner'}

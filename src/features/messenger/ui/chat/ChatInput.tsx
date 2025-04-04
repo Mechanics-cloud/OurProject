@@ -44,11 +44,7 @@ export const ChatInput = observer(
                 'flex items-center justify-between w-full h-full relative'
               }
             >
-              <Typography
-                className={
-                  'whitespace-nowrap overflow-hidden text-ellipsis px-3'
-                }
-              >
+              <Typography className={'truncate px-3'}>
                 {chosenMessageText}
               </Typography>
               <Button

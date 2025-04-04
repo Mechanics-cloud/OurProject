@@ -6,7 +6,6 @@ import { ChatsListItem } from './ChatsListItem'
 
 export const ChatsList = observer(() => {
   const { t } = useTranslation()
-
   const { chatsListData, chosenChatId, setChosenChatId } = useChatList()
 
   if (!chatsListData) {

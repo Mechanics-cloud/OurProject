@@ -4,6 +4,7 @@ import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
 import { Nullable, ProtectedPaths, formatIsoDateToShortDate } from '@/common'
 import { generalStore } from '@/core/store'
 import { MessageDTO } from '@/features/messenger/api'
+import { useMessengerContext } from '@/features/messenger/model/MessengerContext'
 import { messengerStore } from '@/features/messenger/model/store/store'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -21,6 +22,7 @@ export const useChatsListItem = ({
   const userId = generalStore.user?.userId
   const setDialogPartnerInfo = messengerStore.setDialogPartnerInfo
   const isLoading = messengerStore.isLoading
+  const { setChatAsOpenedTab } = useMessengerContext()
 
   const { avatars, createdAt, messageText, ownerId, receiverId, userName } =
     item
@@ -42,6 +44,7 @@ export const useChatsListItem = ({
       partnerId,
       userName: userName,
     })
+    setChatAsOpenedTab()
   }
 
   const wrapperProps = isClickable

@@ -8,6 +8,7 @@ export const FindChat = observer(() => {
   return (
     <TextField
       bottomMarginForError={false}
+      className={'w-full'}
       label={''}
       onChange={onFindChat}
       placeholder={searchPlaceholder}

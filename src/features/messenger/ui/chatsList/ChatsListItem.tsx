@@ -65,7 +65,7 @@ export const ChatsListItem = observer(
         <div className={'flex flex-col flex-1 min-w-0 gap-1'}>
           <div className={'flex justify-between w-full gap-2'}>
             <Typography
-              className={'whitespace-nowrap overflow-hidden text-ellipsis'}
+              className={'truncate'}
               variant={'reg14'}
             >
               {userName}
@@ -74,7 +74,7 @@ export const ChatsListItem = observer(
           </div>
           <Typography
             className={cn(
-              'whitespace-nowrap overflow-hidden text-ellipsis pr-6 relative',
+              'truncate pr-6 relative',
               hasNewMessage &&
                 'after:absolute after:w-2 after:h-2 after:bg-accent-300 after:right-1 after:rounded-full after:top-[15%]'
             )}

@@ -1,5 +1,5 @@
 import { withProtection } from '@/common'
-import { Messenger } from '@/features/messenger'
+import { MessengerWithProvider as Messenger } from '@/features/messenger'
 
 function MessengerPage() {
   return <Messenger />
