@@ -1,4 +1,4 @@
-type Key = 'accessToken' | 'accountType' | 'scrollPosition'
+type Key = 'accessToken' | 'accountType' | 'scrollPosition' | 'searchQueries'
 
 export const setToLocalStorage = (key: Key, value: string) => {
   localStorage.setItem(key, value)

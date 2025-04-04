@@ -25,6 +25,7 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
     disabled,
     error,
     errorMode = 'text',
+    innerInputClassName,
     label,
     onChange,
     required = false,
@@ -77,7 +78,11 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           title={error ?? ''}
         >
           <input
-            className={cn(cls.input, type === 'search' && 'bg-transparent')}
+            className={cn(
+              cls.input,
+              type === 'search' && 'bg-transparent',
+              innerInputClassName
+            )}
             disabled={disabled}
             onChange={onChange}
             ref={ref}
