@@ -23,12 +23,26 @@ export function addSearchQueryToLocalStorage(
     : []
 
   if (queries[ownerId].length >= MAX_SEARCHES_PER_USER) {
-    queries[ownerId].shift()
+    queries[ownerId].pop()
   }
 
-  queries[ownerId].push(newQuery)
+  queries[ownerId].unshift(newQuery)
 
   setToLocalStorage('searchQueries', JSON.stringify(queries))
 
-  return queries[ownerId].toReversed()
+  return queries[ownerId]
+}
+
+export const deleteSearchQueryFromLocalStorage = (ownerId: number) => {
+  const storedSearches = getFromLocalStorage('searchQueries')
+
+  const queries: Record<string, string[]> = storedSearches
+    ? JSON.parse(storedSearches)
+    : {}
+
+  if (queries[ownerId]) {
+    delete queries[ownerId]
+  }
+
+  setToLocalStorage('searchQueries', JSON.stringify(queries))
 }
