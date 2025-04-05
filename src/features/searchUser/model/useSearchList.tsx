@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Nullable, getFromLocalStorage, tryCatch, useDebounce } from '@/common'
 import { generalStore } from '@/core/store'
@@ -10,19 +10,21 @@ import {
 import { SearchHistory } from '@/features/searchUser/ui/searchHistory/SearchHistory'
 import { UsersList } from '@/features/searchUser/ui/usersList/UsersList'
 
+const defaultPageSize = 10
+const defaultCurrentPage = 1
+
 export const useSearchList = () => {
   const [inputText, setInputText] = useState('')
   const [loading, setLoading] = useState<boolean>(false)
   const [usersInfo, setUsersInfo] = useState<Nullable<UsersInfoDTO>>(null)
   const [historyQueries, setHistoryQueries] = useState<string[]>([])
-  const [pageSize, setPageSize] = useState(10)
-  const [currentPage, setCurrentPage] = useState(1)
+  const [pageSize, setPageSize] = useState(defaultPageSize)
+  const [currentPage, setCurrentPage] = useState(defaultCurrentPage)
 
-  const debouncedValue = useDebounce(inputText, 1000)
+  const debouncedValue = useDebounce(inputText)
   const userId = generalStore.user?.userId
 
   const inputRef = useRef<HTMLInputElement>(null)
-  const isReset = useRef<boolean>(false)
 
   const onPageChange = (page: number) => {
     setCurrentPage(page)
@@ -37,35 +39,32 @@ export const useSearchList = () => {
     setLoading(true)
   }
 
+  const resetPagination = useCallback(() => {
+    setPageSize(defaultPageSize)
+    setCurrentPage(defaultCurrentPage)
+  }, [])
+
   const deleteHistory = () => {
     if (!userId) {
       return
     }
     setHistoryQueries([])
     deleteSearchQueryFromLocalStorage(userId)
-    setPageSize(10)
-    setCurrentPage(1)
+    resetPagination()
     inputRef.current?.focus()
   }
 
-  const resetUsersInfo = () => {
-    setUsersInfo(null)
-    if (pageSize !== 10 || currentPage !== 1) {
-      isReset.current = true
-      setPageSize(10)
-      setCurrentPage(1)
+  useEffect(() => {
+    resetPagination()
+    if (!debouncedValue) {
+      setUsersInfo(null)
     }
-  }
+  }, [debouncedValue, resetPagination])
 
   useEffect(() => {
+    const controller = new AbortController()
     const fetchUserInfo = async () => {
       if (!debouncedValue) {
-        return
-      }
-
-      if (isReset.current) {
-        isReset.current = false
-
         return
       }
 
@@ -76,6 +75,7 @@ export const useSearchList = () => {
             pageNumber: currentPage,
             pageSize,
             search: debouncedValue,
+            signal: controller.signal,
           })
         )
 
@@ -91,12 +91,13 @@ export const useSearchList = () => {
         }
       }
       setLoading(false)
-      setTimeout(() => {
-        inputRef.current?.focus()
-      }, 0)
     }
 
     fetchUserInfo()
+
+    return () => {
+      controller.abort()
+    }
   }, [currentPage, debouncedValue, pageSize, userId])
 
   useEffect(() => {
@@ -131,7 +132,6 @@ export const useSearchList = () => {
     onPageChange,
     onPageSize,
     pageSize,
-    resetUsersInfo,
     setInputText,
     usersInfo,
   }

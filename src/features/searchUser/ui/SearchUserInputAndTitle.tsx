@@ -5,17 +5,13 @@ import { TextField, Typography, useTranslation } from '@/common'
 type Props = {
   inputText: string
   loading: boolean
-  resetUsersInfo: () => void
   setInputText: (value: string) => void
 }
 export const SearchUserInputAndTitle = forwardRef<ElementRef<'input'>, Props>(
-  ({ inputText, loading, resetUsersInfo, setInputText }, inputRef) => {
+  ({ inputText, loading, setInputText }, inputRef) => {
     const { t } = useTranslation()
 
     const onInputText = (e: ChangeEvent<HTMLInputElement>) => {
-      if (!e.currentTarget.value) {
-        resetUsersInfo()
-      }
       setInputText(e.currentTarget.value)
     }
 

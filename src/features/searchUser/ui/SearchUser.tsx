@@ -13,7 +13,6 @@ export const SearchUser = observer(() => {
     onPageChange,
     onPageSize,
     pageSize,
-    resetUsersInfo,
     setInputText,
     usersInfo,
   } = useSearchList()
@@ -28,7 +27,6 @@ export const SearchUser = observer(() => {
         inputText={inputText}
         loading={loading}
         ref={inputRef}
-        resetUsersInfo={resetUsersInfo}
         setInputText={setInputText}
       />
       {loading ? (
