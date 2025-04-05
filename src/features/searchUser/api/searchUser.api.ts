@@ -11,8 +11,8 @@ class SearchUserApi {
     const res = await this.instance.get(searchUserEndpoints.getProfile, {
       params: {
         cursor: args?.cursor,
-        pageNumber: args?.pageNumber,
-        pageSize: args?.pageSize || 1000,
+        pageNumber: args?.pageNumber || 1,
+        pageSize: args?.pageSize || 10,
         search: args?.search,
       },
       signal: args?.signal,

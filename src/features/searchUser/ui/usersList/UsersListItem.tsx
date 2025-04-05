@@ -8,10 +8,9 @@ import Link from 'next/link'
 type Props = {
   className?: string
   item: UserItemInfoDTO
-  set: () => void
 }
 
-export const UserListItem = observer(({ className, item, set }: Props) => {
+export const UsersListItem = observer(({ className, item }: Props) => {
   const { avatars, firstName, id, lastName, userName } = item
 
   const avatar = avatars.length === 0 ? avatarPlaceholder : avatars[1].url
@@ -23,7 +22,6 @@ export const UserListItem = observer(({ className, item, set }: Props) => {
         className
       )}
       href={PublicPaths.profileLink(id)}
-      onClick={set}
       shallow
     >
       <div
