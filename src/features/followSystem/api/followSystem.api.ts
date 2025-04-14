@@ -21,16 +21,14 @@ class FollowSystemAPi {
     return res.data
   }
 
-  public subscribeToUser(userId: number) {
-    return this.instance.post<void>(followSystemEndpoints.following, {
+  public subscribeToUser(userId: number): Promise<void> {
+    return this.instance.post(followSystemEndpoints.following, {
       selectedUserId: userId,
     })
   }
 
-  public unsubscribeFromUser(userId: number) {
-    return this.instance.delete<void>(
-      followSystemEndpoints.deleteFollower(userId)
-    )
+  public unsubscribeFromUser(userId: number): Promise<void> {
+    return this.instance.delete(followSystemEndpoints.deleteFollower(userId))
   }
 }
 

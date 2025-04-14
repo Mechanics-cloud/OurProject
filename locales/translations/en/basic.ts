@@ -26,11 +26,13 @@ export const basic = {
     onPage: 'on page',
     show: 'Show',
   },
+  subscribeMessage: `Yay! Now you're in the loop!`,
   success: 'Success',
   textFolding: {
     less: 'Hide',
     more: 'Show more',
   },
+  unsubscribeMessage: `We'll miss you!`,
   userCounter: 'Registered users:',
   welcome: 'Welcome! Please sign in.',
   yes: 'Yes',

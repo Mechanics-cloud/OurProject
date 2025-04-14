@@ -27,11 +27,13 @@ export const basic = {
     onPage: 'на странице',
     show: 'Показать',
   },
+  subscribeMessage: 'Ура! Теперь вы с нами!',
   success: 'Успех',
   textFolding: {
     less: 'Свернуть',
     more: 'Развернуть',
   },
+  unsubscribeMessage: 'Нам будет вас не хватать!',
   userCounter: 'Зарегистрированных пользователей:',
   welcome: 'Добро пожаловать! Пожалуйста, войдите.',
   yes: 'Да',
