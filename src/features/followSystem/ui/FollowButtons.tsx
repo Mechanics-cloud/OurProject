@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 
 import { Button, useTranslation } from '@/common'
 import { followSystemStore } from '@/features/followSystem/model/followSystemStore'
@@ -18,12 +19,14 @@ export const FollowButtons = observer(
     const onUnsubscribeFromUser = () => {
       setIsLoading(true)
       followSystemStore.unsubscribeFromUser(userId).then((res) => {
+        toast.success(t.basic.unsubscribeMessage)
         setIsLoading(false)
       })
     }
     const onSubscribeFromUser = () => {
       setIsLoading(true)
       followSystemStore.subscribeToUser(userId).then((res) => {
+        toast.success(t.basic.subscribeMessage)
         setIsLoading(false)
       })
     }
