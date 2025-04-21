@@ -77,7 +77,7 @@ export const LinksGroup = observer(({ className, item }: Props) => {
         >
           <Tooltip title={t.actionIconsGroup.message}>
             <MessageCircleOutline className={'size-6'} />
-          </Tooltip>{' '}
+          </Tooltip>
         </Link>
         <Link href={'/'}>
           <Tooltip title={t.actionIconsGroup.share}>

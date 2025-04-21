@@ -35,7 +35,7 @@ export const Notifications = observer(() => {
             <div className={'flex justify-between'}>
               {!item.isRead && (
                 <Typography variant={'bold14'}>
-                  {t.notification.item}{' '}
+                  {t.notification.item}
                   <b className={'text-accent-900'}>{t.notification.new}</b>
                 </Typography>
               )}
