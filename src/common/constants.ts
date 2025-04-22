@@ -10,3 +10,5 @@ export const CYRILLIC_PATTERN = /[а-яА-Я]/
 
 export const maxDescriptionLength = 500
 export const tabletWidth = 1024
+export const MAX_SEARCHES_PER_USER = 5
+export const MAX_SEARCH_HISTORY_ACCOUNTS = 10
