@@ -15,6 +15,7 @@ export type TextFieldProps<T extends ElementType = 'input'> = {
   bottomMarginForError?: boolean
   error?: string
   errorMode?: ErrorMode
+  innerInputClassName?: string
   label: string
   required?: boolean
   type?: TextFieldType
