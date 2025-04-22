@@ -9,7 +9,6 @@ import { PaginationRangeButtons } from './PaginationRangeButtons'
 import { usePaginationRange } from './hooks/usePaginationRange'
 
 type Props = {
-  className?: string
   currentPage: number
   onPageChange: (page: number) => void
   onPageSize: (value: number) => void
@@ -19,7 +18,6 @@ type Props = {
 }
 
 export const Pagination = ({
-  className,
   currentPage,
   onPageChange,
   onPageSize,
@@ -57,7 +55,7 @@ export const Pagination = ({
   const isForwardArrowDisabled = currentPage === lastPage
 
   return (
-    <div className={cn('flex gap-8', className)}>
+    <div className={'flex gap-8'}>
       <ul className={'flex gap-x-3 align-middle'}>
         <li className={'flex align-middle'}>
           <Tooltip title={t.basic.pagination.goBack}>
