@@ -30,12 +30,15 @@ import {
 import { LogOutModal } from '@/common/components/logOutModal'
 import { generalStore } from '@/core/store'
 import { NewPostDialog } from '@/features/createPost/ui/NewPostDialog'
+import { messengerStore } from '@/features/messenger/model/store/store'
 import { observer } from 'mobx-react-lite'
 
 type Props = ComponentProps<'aside'>
 
 export const SideBar = observer(({ className }: Props) => {
   const { t } = useTranslation()
+  const hasNewMessage = messengerStore.hasNewMessage
+
   const {
     isModalOpen: isLogOutModalOpen,
     onModalClose: onLogOutModalClose,
@@ -98,7 +101,13 @@ export const SideBar = observer(({ className }: Props) => {
               </LinkWithIcon>
             </li>
 
-            <li>
+            <li
+              className={cn(
+                'relative',
+                hasNewMessage &&
+                  'after:absolute after:w-2 after:h-2 after:bg-accent-300 after:right-16 after:rounded-full after:top-[50%] after:translate-y-[-35%]'
+              )}
+            >
               <LinkWithIcon
                 ActiveIcon={MessageCircle}
                 DefaultIcon={MessageCircleOutline}

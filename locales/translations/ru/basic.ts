@@ -16,6 +16,7 @@ export const basic = {
   errors: { ...errors },
   gallery: 'Картинка в карусели',
   goToTop: 'Вверх',
+  loading: 'Загрузка...',
   logOut: 'Выход',
   next: 'Дальше',
   no: 'Нет',

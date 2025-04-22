@@ -8,6 +8,7 @@ import {
 import {
   BasicPost,
   Like,
+  ProtectedPaths,
   Tooltip,
   cn,
   responseErrorHandler,
@@ -68,7 +69,12 @@ export const LinksGroup = observer(({ className, item }: Props) => {
             />
           </Tooltip>
         </button>
-        <Link href={'/'}>
+        <Link
+          href={{
+            pathname: ProtectedPaths.messenger,
+            query: { dialogPartnerId: item.ownerId },
+          }}
+        >
           <Tooltip title={t.actionIconsGroup.message}>
             <MessageCircleOutline className={'size-6'} />
           </Tooltip>

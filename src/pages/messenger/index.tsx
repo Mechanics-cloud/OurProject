@@ -1,11 +1,8 @@
 import { withProtection } from '@/common'
+import { MessengerWithProvider as Messenger } from '@/features/messenger'
 
-function Messenger() {
-  return (
-    <div className={'flex flex-col justify-center items-center h-screen'}>
-      Messenger
-    </div>
-  )
+function MessengerPage() {
+  return <Messenger />
 }
 
-export default withProtection(Messenger)
+export default withProtection(MessengerPage)

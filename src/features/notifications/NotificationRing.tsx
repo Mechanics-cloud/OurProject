@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 
 import { OutlineBell } from '@/assets/icons'
 import { Loader, useClickOutside, useModal } from '@/common'
@@ -11,7 +10,7 @@ import { observer } from 'mobx-react-lite'
 import { notificationsStore } from './model/NotificationsStore'
 
 export const NotificationRing = observer(() => {
-  const { clearError, error, notification } = useNotificationsSocket()
+  const { notification } = useNotificationsSocket()
   const [isLoading, setIsLoading] = useState(true)
   const { isModalOpen, onModalClose, toggleModal } = useModal()
   const { notifications } = notificationsStore
@@ -24,11 +23,6 @@ export const NotificationRing = observer(() => {
 
   if (notification) {
     notificationsStore.addNewNotification(notification)
-  }
-
-  if (error) {
-    toast.error(error)
-    clearError()
   }
 
   useEffect(() => {

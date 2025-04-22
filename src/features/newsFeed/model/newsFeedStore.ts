@@ -55,7 +55,7 @@ class NewsFeedStore {
         {
           endCursorPostId: 0,
           pageNumber: 1,
-          pageSize: 3,
+          pageSize: 20,
         },
         signal
       )

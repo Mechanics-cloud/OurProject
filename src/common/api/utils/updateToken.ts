@@ -1,5 +1,5 @@
 import { Nullable, setToLocalStorage } from '@/common'
-import { instance } from '@/common/api'
+import { WebSocketApi, instance } from '@/common/api'
 import { CommonEndpoints } from '@/common/api/common.endpoints'
 import { StorageKeys } from '@/common/enums'
 import { InternalAxiosRequestConfig } from 'axios'
@@ -32,6 +32,8 @@ export const updateToken = async (params?: InternalAxiosRequestConfig) => {
     })
 
     const newToken = await refreshPromise
+
+    WebSocketApi.reinitializeWS()
 
     if (params) {
       params.headers.Authorization = `Bearer ${newToken}`

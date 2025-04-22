@@ -1,7 +1,8 @@
-import { Button } from '@/common'
+import { Button, ProtectedPaths, useTranslation } from '@/common'
 import { FollowButtons, followSystemStore } from '@/features/followSystem'
 import { profileStore } from '@/features/profile/model/profileStore'
 import { observer } from 'mobx-react-lite'
+import Link from 'next/link'
 
 type Props = {
   className?: string
@@ -10,6 +11,7 @@ type Props = {
 
 export const ButtonsContainer = observer(({ className, userId }: Props) => {
   const isAuthenticated = !!profileStore.userProfile
+  const { t } = useTranslation()
 
   if (!isAuthenticated) {
     return null
@@ -21,8 +23,22 @@ export const ButtonsContainer = observer(({ className, userId }: Props) => {
         className={className}
         isFollowing={followSystemStore.isFollowingUser(userId)}
         userId={userId}
-      />
-      <Button variant={'secondary'}>Send Message</Button>
+      >
+        {t.profilePage.unfollow}
+      </FollowButtons>
+      <Button
+        asChild
+        variant={'secondary'}
+      >
+        <Link
+          href={{
+            pathname: ProtectedPaths.messenger,
+            query: { dialogPartnerId: userId },
+          }}
+        >
+          {t.profilePage.sendMessage}
+        </Link>
+      </Button>
     </div>
   )
 })

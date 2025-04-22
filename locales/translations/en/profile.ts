@@ -58,6 +58,7 @@ export const profilePage = {
     userText: 'Your feed is empty. Publish your first post',
   },
   publications: 'Publications',
+  sendMessage: 'Chat',
   settingsButton: 'Profile settings',
   unfollow: 'Unfollow',
 }

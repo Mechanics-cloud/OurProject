@@ -15,6 +15,7 @@ export const basic = {
   errors: { ...errors },
   gallery: 'Image in gallery',
   goToTop: 'Go to top',
+  loading: 'Loading...',
   logOut: 'Log Out',
   next: 'Next',
   no: 'No',

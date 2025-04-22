@@ -27,9 +27,13 @@ class PublicProfileAPi {
 
     return res.data
   }
-  public async getPublicUser(profileId: string): Promise<PublicProfile> {
+  public async getPublicUser(
+    profileId: string,
+    signal?: AbortSignal
+  ): Promise<PublicProfile> {
     const res = await axios(
-      Environments.API_URL + PublicProfileEndpoints.publicProfile(profileId)
+      Environments.API_URL + PublicProfileEndpoints.publicProfile(profileId),
+      { signal }
     )
 
     return res.data
