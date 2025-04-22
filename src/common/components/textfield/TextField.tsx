@@ -20,17 +20,21 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
   const [open, setOpen] = useState(false)
 
   const {
+    bottomMarginForError = true,
     className,
     disabled,
     error,
     errorMode = 'text',
+    innerInputClassName,
     label,
+    onChange,
     required = false,
     type = 'text',
+    value,
     ...rest
   } = props
 
-  let marginForError = '24px'
+  let marginForError = bottomMarginForError ? '24px' : '0'
 
   if (error && errorMode === 'text') {
     const margin = `${Math.ceil(error.length / 50) * 24}px`
@@ -74,11 +78,17 @@ const TextFieldTemplate = <T extends ElementType = 'input'>(
           title={error ?? ''}
         >
           <input
-            className={cls.input}
+            className={cn(
+              cls.input,
+              type === 'search' && 'bg-transparent',
+              innerInputClassName
+            )}
             disabled={disabled}
+            onChange={onChange}
             ref={ref}
             required={required}
             type={type === 'search' || open ? 'text' : type}
+            value={value}
             {...rest}
           />
         </Tooltip>

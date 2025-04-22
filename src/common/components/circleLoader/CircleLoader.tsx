@@ -9,12 +9,11 @@ export const CircleLoader = ({
 }: ComponentPropsWithoutRef<'div'>) => {
   return (
     <div
-      className={cn(className)}
+      className={cn('pt-3', className)}
       {...rest}
     >
       <Image
         alt={'Loader'}
-        className={'mt-3'}
         height={50}
         src={Loader}
         width={50}

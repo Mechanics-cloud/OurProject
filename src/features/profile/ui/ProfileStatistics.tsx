@@ -1,8 +1,9 @@
-import { Typography } from '@/common'
+import { Typography, cn } from '@/common'
 
 import { UserStats } from '../settings'
 
 type Props = {
+  className?: string
   followers: string
   following: string
   isMobile: boolean
@@ -10,6 +11,7 @@ type Props = {
   userMetadata: UserStats
 }
 export const ProfileStatistics = ({
+  className,
   followers,
   following,
   isMobile,
@@ -18,9 +20,10 @@ export const ProfileStatistics = ({
 }: Props) => {
   return (
     <div
-      className={
-        'flex gap-2 justify-between sm:gap-12 sm:justify-start lg:gap-25'
-      }
+      className={cn(
+        'flex gap-2 justify-between sm:gap-12 sm:justify-start lg:gap-25',
+        className
+      )}
     >
       <div className={'flex flex-col text-center'}>
         <Typography variant={isMobile ? 'small' : 'reg14'}>

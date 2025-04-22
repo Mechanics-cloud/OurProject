@@ -99,8 +99,8 @@ const config: Config = {
         },
       },
       screens: {
-        'sm-500': '31.5rem',
-        xs: '22.5rem',
+        'sm-500': '500px',
+        xs: '360px',
       },
 
       spacing: {

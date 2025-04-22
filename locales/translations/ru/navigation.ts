@@ -10,5 +10,4 @@ export const menu = {
   profileSettings: 'Настройки профиля',
   search: 'Поиск',
   statistics: 'Статистика',
-  unfollow: 'Отписаться',
 }

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
+import { generalStore } from '@/core/store'
+import { followSystemStore } from '@/features/followSystem'
 import {
   AddCommentInView,
   MobileEdit,
@@ -17,6 +19,13 @@ type Props = {
 export const MobileContent = observer(({ screenSize }: Props) => {
   const { postStore } = usePostStore()
   const { isEditing } = postStore
+  const user = generalStore.user
+
+  useEffect(() => {
+    if (user) {
+      followSystemStore.getFollowing(user?.userName)
+    }
+  }, [user])
 
   return !isEditing ? (
     <div className={'flex flex-col'}>

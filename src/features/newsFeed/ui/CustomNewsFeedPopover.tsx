@@ -14,7 +14,7 @@ export const CustomNewsFeedPopover = () => {
             href={'#'}
           >
             <PersonRemoveOutline className={'size-6'} />
-            <span className={'text-sm'}>{t.menu.unfollow}</span>
+            <span className={'text-sm'}>{t.profilePage.unfollow}</span>
           </Link>
           <Link
             className={'flex items-center gap-2  hover:text-accent-500'}
