@@ -1,34 +1,34 @@
 import * as React from 'react'
 
-import avatarPlaceholder from '@/assets/images/user-avatar-placeholder.jpg'
-import { PublicPaths, Typography } from '@/common'
+import placeholder from '@/assets/images/user-avatar-placeholder.jpg'
+import { Typography } from '@/common'
 import Image from 'next/image'
 import Link from 'next/link'
 
 type Props = {
-  avatarOwner: string
-  userId: number
-  userName: string
+  href: string
+  src: string
+  text: string
 }
 
-export const LinkProfile = ({ avatarOwner, userId, userName }: Props) => {
+export const LinkProfile = ({ href, src = placeholder, text }: Props) => {
   return (
     <Link
       className={'flex gap-3 items-center'}
-      href={`${PublicPaths.profileLink(userId)}`}
+      href={href}
     >
       <Image
         alt={'Avatar'}
         className={'size-9 rounded-full'}
         height={36}
-        src={avatarOwner ? avatarOwner : avatarPlaceholder}
+        src={src}
         width={36}
       />
       <Typography
-        className={'inline'}
+        className={'inline truncate'}
         variant={'bold16'}
       >
-        {userName}
+        {text}
       </Typography>
     </Link>
   )
