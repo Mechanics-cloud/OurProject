@@ -7,11 +7,11 @@ import Link from 'next/link'
 
 type Props = {
   href: string
-  src: string
-  text: string
+  name: string
+  src?: string
 }
 
-export const LinkProfile = ({ href, src = placeholder, text }: Props) => {
+export const LinkProfile = ({ href, name, src }: Props) => {
   return (
     <Link
       className={'flex gap-3 items-center'}
@@ -21,14 +21,14 @@ export const LinkProfile = ({ href, src = placeholder, text }: Props) => {
         alt={'Avatar'}
         className={'size-9 rounded-full'}
         height={36}
-        src={src}
+        src={src || placeholder}
         width={36}
       />
       <Typography
         className={'inline truncate'}
         variant={'bold16'}
       >
-        {text}
+        {name}
       </Typography>
     </Link>
   )

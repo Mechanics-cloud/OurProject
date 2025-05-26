@@ -65,8 +65,8 @@ export const PublicPosts = ({ posts }: Props) => {
               <div className={'w-60 flex flex-col gap-2'}>
                 <LinkProfile
                   href={`${PublicPaths.profileLink(post.ownerId)}`}
+                  name={post.userName}
                   src={post.avatarOwner}
-                  text={post.userName}
                 />
                 <TimeAgo createdAt={post.createdAt} />
                 <TextUnfolding
