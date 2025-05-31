@@ -50,7 +50,7 @@ export enum WebSocketEvents {
   CONNECT = 'connect',
   ERROR = 'error',
   MESSAGE_DELETED = 'message-deleted',
-  MESSAGE_SEND = 'message-sent',
+  MESSAGE_SEND = 'message-send',
   NOTIFICATIONS = 'notifications',
   RECEIVE_MESSAGE = 'receive-message',
   UPDATE_MESSAGE = 'update-message',
