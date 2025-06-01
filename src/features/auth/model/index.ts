@@ -1,6 +1,7 @@
 export * from './authStore'
 export * from './forgotPassword/forgotPasswordSchema'
 export * from './forgotPassword/useForgotPassword'
+export * from './signIn/useSignIn'
 export * from './signUp/singUpSchema'
 export * from './signUp/useSignUp'
 export * from './types'

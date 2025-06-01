@@ -36,9 +36,6 @@ class AuthStore {
 
   async login(data: SignInFields) {
     try {
-      runInAction(() => {
-        this.isAuthenticated = 'pending'
-      })
       const accessToken = await authApi.login(data)
 
       setToLocalStorage(StorageKeys.AccessToken, accessToken)
@@ -47,9 +44,6 @@ class AuthStore {
       await subscriptionStore.getCurrentPayment()
     } catch (error) {
       responseErrorHandler(error)
-      runInAction(() => {
-        this.isAuthenticated = 'error'
-      })
 
       return Promise.reject(error)
     }
