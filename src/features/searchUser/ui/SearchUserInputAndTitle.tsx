@@ -4,11 +4,10 @@ import { TextField, Typography, useTranslation } from '@/common'
 
 type Props = {
   inputText: string
-  loading: boolean
   setInputText: (value: string) => void
 }
 export const SearchUserInputAndTitle = forwardRef<ElementRef<'input'>, Props>(
-  ({ inputText, loading, setInputText }, inputRef) => {
+  ({ inputText, setInputText }, inputRef) => {
     const { t } = useTranslation()
 
     const onInputText = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +26,6 @@ export const SearchUserInputAndTitle = forwardRef<ElementRef<'input'>, Props>(
           autoFocus
           bottomMarginForError={false}
           className={'w-full mt-3 '}
-          disabled={loading}
           innerInputClassName={'pr-8'}
           label={''}
           onChange={onInputText}

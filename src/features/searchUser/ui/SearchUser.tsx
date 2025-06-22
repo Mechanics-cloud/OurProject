@@ -25,7 +25,6 @@ export const SearchUser = observer(() => {
     >
       <SearchUserInputAndTitle
         inputText={inputText}
-        loading={loading}
         ref={inputRef}
         setInputText={setInputText}
       />
