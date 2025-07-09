@@ -1,14 +1,16 @@
 import { Button, Card, PublicPaths, Typography, useTranslation } from '@/common'
 import { FormTextField } from '@/common/form'
-import { ExternalServicesRegistrationWithProvider } from '@/features/auth'
-import { useSignIn } from '@/features/auth/model/signIn/useSignIn'
+import {
+  ExternalServicesRegistrationWithProvider,
+  useSignIn,
+} from '@/features/auth'
 import { observer } from 'mobx-react-lite'
 import Link from 'next/link'
 
 const SignIn = observer(() => {
   const { t } = useTranslation()
 
-  const { control, isLoading, isValid, onSubmit } = useSignIn(t)
+  const { control, isSubmitting, isValid, onSubmit } = useSignIn(t)
 
   return (
     <div
@@ -31,7 +33,7 @@ const SignIn = observer(() => {
         >
           <FormTextField
             control={control}
-            disabled={isLoading}
+            disabled={isSubmitting}
             label={t.signIn.labelEmail}
             name={'email'}
             placeholder={'epam@epam.com'}
@@ -39,7 +41,7 @@ const SignIn = observer(() => {
           />
           <FormTextField
             control={control}
-            disabled={isLoading}
+            disabled={isSubmitting}
             label={t.signIn.labelPassword}
             name={'password'}
             placeholder={t.signIn.placeholderPassword}
@@ -54,7 +56,7 @@ const SignIn = observer(() => {
           </Link>
 
           <Button
-            disabled={!isValid || isLoading}
+            disabled={!isValid || isSubmitting}
             type={'submit'}
           >
             {t.signIn.title}

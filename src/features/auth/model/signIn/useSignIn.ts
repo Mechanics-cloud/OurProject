@@ -1,6 +1,5 @@
 import { useForm } from 'react-hook-form'
 
-import { generalStore } from '@/core/store'
 import { authStore } from '@/features/auth'
 import {
   SignInFields,
@@ -12,36 +11,30 @@ import { LocaleType } from '@locales/ru'
 export const useSignIn = (t: LocaleType) => {
   const {
     control,
-    formState: { isValid },
+    formState: { isSubmitting, isValid },
     handleSubmit,
     setError,
     setFocus,
   } = useForm<SignInFields>({
     defaultValues: { email: '', password: '' },
-    mode: 'onTouched',
+    mode: 'all',
     resolver: zodResolver(signInSchema(t)),
   })
-  const isLoadingStore = generalStore
 
   const onSubmit = handleSubmit(async (data: SignInFields) => {
-    isLoadingStore.turnOnLoading()
     data.email = data.email.toLowerCase()
     try {
       await authStore.login(data)
     } catch (error: unknown) {
-      setError('email', {
-        message: t.signIn.errorResponse,
-        type: 'manual',
-      })
+      setError('email', { message: t.signIn.errorResponse })
+      setError('password', { message: t.signIn.errorResponse })
       setFocus('email')
-    } finally {
-      isLoadingStore.turnOffLoading()
     }
   })
 
   return {
     control,
-    isLoading: isLoadingStore.isLoading,
+    isSubmitting,
     isValid,
     onSubmit,
     t,
