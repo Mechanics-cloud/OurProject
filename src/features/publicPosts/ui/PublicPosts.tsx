@@ -2,13 +2,13 @@ import {
   PathService,
   PublicPaths,
   TextUnfolding,
+  UserMiniLink,
   calculateCharactersToShow,
   useScrollToRouteBack,
   useTranslation,
 } from '@/common'
 import { Stub } from '@/common/components/stub/Stub'
 import {
-  LinkProfile,
   PublicPostsDto,
   RegisteredUsersCounter,
   TimeAgo,
@@ -63,10 +63,11 @@ export const PublicPosts = ({ posts }: Props) => {
                 )}
               </div>
               <div className={'w-60 flex flex-col gap-2'}>
-                <LinkProfile
+                <UserMiniLink
                   href={`${PublicPaths.profileLink(post.ownerId)}`}
                   name={post.userName}
                   src={post.avatarOwner}
+                  variant={'bold16'}
                 />
                 <TimeAgo createdAt={post.createdAt} />
                 <TextUnfolding

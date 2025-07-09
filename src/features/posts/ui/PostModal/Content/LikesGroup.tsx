@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 
 import {
-  Avatar,
   PathService,
   PublicPaths,
   Typography,
+  UserMiniLink,
   getPluralForm,
   useModal,
   useTranslation,
@@ -12,7 +12,6 @@ import {
 import { generalStore } from '@/core/store'
 import { LikesModal, usePostStore } from '@/features/posts'
 import { observer } from 'mobx-react-lite'
-import Link from 'next/link'
 
 export const LikesGroup = observer(() => {
   const { t } = useTranslation()
@@ -31,24 +30,17 @@ export const LikesGroup = observer(() => {
       {likeStore.items && !!likeStore.items.length && (
         <div className={'relative flex items-center'}>
           {likeStore.items?.slice(0, 3).map((item, index, array) => (
-            <Link
+            <UserMiniLink
               className={`relative z-${(array.length - index) * 10}`}
               href={PathService.generatePath(PublicPaths.userProfile, {
                 userId: item.userId,
               })}
               key={item.id}
+              src={item.avatars[0]?.url}
               style={{
                 left: `-${index * 18}px`,
               }}
-            >
-              <Avatar
-                alt={`${item.userName} avatar`}
-                key={index}
-                priority
-                size={36}
-                src={item.avatars[0]?.url}
-              />
-            </Link>
+            />
           ))}
         </div>
       )}

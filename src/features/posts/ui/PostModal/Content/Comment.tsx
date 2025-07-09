@@ -1,6 +1,13 @@
 import React, { MouseEvent, Ref, forwardRef } from 'react'
 
-import { Avatar, Like, Nullable, TextUnfolding, Typography, cn } from '@/common'
+import {
+  Like,
+  Nullable,
+  TextUnfolding,
+  Typography,
+  UserMiniLink,
+  cn,
+} from '@/common'
 import { StaticImageData } from 'next/image'
 import Link from 'next/link'
 
@@ -42,17 +49,13 @@ const Template = (
       ref={ref}
     >
       {!isAvatarHidden && (
-        <Link href={href}>
-          <Avatar
-            alt={alt || `user ${name} photo`}
-            className={'rounded-full mt-0'}
-            priority={src !== undefined}
-            size={36}
-            src={src}
-          />
-        </Link>
+        <UserMiniLink
+          alt={alt || `user ${name} photo`}
+          href={href}
+          size={36}
+          src={src}
+        />
       )}
-
       <div className={'flex-col w-[345px]'}>
         <TextUnfolding
           className={'!pb-1'}

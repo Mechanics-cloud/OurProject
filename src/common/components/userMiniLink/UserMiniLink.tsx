@@ -1,26 +1,30 @@
 import { ComponentPropsWithoutRef } from 'react'
 
 import { Person } from '@/assets/icons'
-import { ImageUrl, cn, typographyVariants } from '@/common'
+import { ImageUrl, Nullable, cn, typographyVariants } from '@/common'
 import Image from 'next/image'
 import Link from 'next/link'
 
 import { Variant } from '../typography/Typography'
 
 type Props = {
+  alt?: string
   href?: string
-  name: string
-  src: ImageUrl
+  name?: string
+  size?: number
+  src?: Nullable<ImageUrl>
   variant?: Variant
 } & ComponentPropsWithoutRef<'a'>
 
 export const UserMiniLink = ({
+  alt = '',
   className,
   href = '',
   name,
-  onClick,
+  size = 36,
   src,
   variant = 'reg16',
+  ...rest
 }: Props) => {
   return (
     <Link
@@ -29,15 +33,15 @@ export const UserMiniLink = ({
         className
       )}
       href={href}
-      onClick={onClick}
+      {...rest}
     >
       {src ? (
         <Image
-          alt={name}
-          className={'w-9 h-9 rounded-full'}
-          height={36}
+          alt={alt || name || ''}
+          className={'rounded-full'}
+          height={size}
           src={src}
-          width={36}
+          width={size}
         />
       ) : (
         <span className={'relative bg-dark-100 w-9 h-9 rounded-full'}>
@@ -50,7 +54,13 @@ export const UserMiniLink = ({
           />
         </span>
       )}
-      <span className={typographyVariants({ variant: variant })}>{name}</span>
+      {name && (
+        <span
+          className={cn(typographyVariants({ variant: variant }), 'truncate')}
+        >
+          {name}
+        </span>
+      )}
     </Link>
   )
 }
